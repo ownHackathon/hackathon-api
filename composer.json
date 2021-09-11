@@ -1,0 +1,53 @@
+{
+    "name": "bibaltik/blackjam",
+    "description": "Evaluation project for the JAM on the Discord server from BlackScorp",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "BlackScorp",
+        "JAM",
+        "Discord"
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "composer/package-versions-deprecated": "^1.10.99",
+        "envms/fluentpdo": "^2.2.0",
+        "firebase/php-jwt": "^5.4",
+        "laminas/laminas-component-installer": "^2.5.0",
+        "laminas/laminas-config-aggregator": "^1.5.0",
+        "laminas/laminas-diactoros": "^2.6.0",
+        "laminas/laminas-hydrator": "^4.2",
+        "laminas/laminas-inputfilter": "^2.12",
+        "laminas/laminas-servicemanager": "^3.4",
+        "laminas/laminas-stdlib": "^3.3.1",
+        "laminas/laminas-validator": "^2.14",
+        "laminas/laminas-zendframework-bridge": "^1.2.0",
+        "mezzio/mezzio": "^3.5.0",
+        "mezzio/mezzio-fastroute": "^3.0.3",
+        "mezzio/mezzio-flash": "^1.2",
+        "mezzio/mezzio-helpers": "^5.6.0",
+        "mezzio/mezzio-laminasviewrenderer": "^2.2",
+        "mezzio/mezzio-session": "^1.4",
+        "mezzio/mezzio-session-ext": "^1.11"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Administration\\": "src/Administration",
+            "App\\": "src/App/",
+            "Authentication\\": "src/Authentication"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AppTest\\": "test/AppTest/"
+        }
+    }
+}

@@ -1,0 +1,79 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('./assets/css/default.css')
+    ->prependStylesheet('./assets/vendor/fontawesome/css/solid.min.css')
+    ->prependStylesheet('./assets/vendor/fontawesome/css/brands.min.css')
+    ->prependStylesheet('./assets/vendor/fontawesome/css/fontawesome.min.css')
+    ->prependStylesheet('./assets/vendor/bootstrap-icons/bootstrap-icons.css')
+    ->prependStylesheet('./assets/vendor/bootstrap/css/bootstrap.min.css');
+$this->inlineScript()
+    ->prependFile('./assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+    ->prependFile('./assets/vendor/jquery/jquery.min.js');
+?>
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="robots" content="noindex" />
+        <meta name ="description" content = "Project for the evaluation of the held JAM on the Discord server of BlackScorp." />
+        <meta name="theme-color" content="#1a1e21" />
+        <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon" />
+        <?=$this->headMeta()?>
+        <?=$this->headLink()?>
+        <title>(Black) Hackathon - Project for the evaluation of the held Hackathon Events</title>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">(Black) Hackathon</a>
+                    <button class="navbar-toggler text-white-50 fas fa-bars" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#jam">Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#Team">Team</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#blog">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#about">Über uns</a>
+                            </li>
+                        </ul>
+
+                                <?php
+                                if ($this->isLoggedIn):
+                                    echo $this->partial('app::/partial/usernavigation',[
+                                            'userName' => $this->userName,
+                                    ]);
+                                else:
+                                    echo $this->partial('app::/partial/guestnavigation', [
+                                            'userName' => $this->userName,
+                                    ]);
+                                endif;
+                                ?>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-fluid content">
+            <?=$this->content?>
+        </main>
+
+        <footer class="footer">
+
+        </footer>
+
+        <?=$this->inlineScript()?>
+    </body>
+</html>
+
+

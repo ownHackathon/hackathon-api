@@ -1,0 +1,53 @@
+html, body {
+    font-family: "Open Sans", sans-serif;
+    color: #f0f0f0;
+    background-color: #1a1e21;
+    height: 100%;
+}
+
+a {
+    color: #e43c5c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ea6981;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Nunito", sans-serif;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+.nav-link {
+    color: #f0f0f0;
+}
+
+.nav-item > a:hover, .nav-item > a:focus, .nav-item > a > span:hover, .nav-item > a > span:focus {
+    color: #f0f0f0;
+    text-decoration-color: #a52834;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+}
+
+.content {
+    width: 100%;
+    background-color: #2c3034;
+    color: #f0f0f0;
+    padding: 10px;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
