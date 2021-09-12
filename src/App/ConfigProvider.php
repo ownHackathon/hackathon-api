@@ -28,6 +28,7 @@ class ConfigProvider
 
             ],
             'factories' => [
+                Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
@@ -43,6 +44,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            Handler\EventHandler::class => [
+                TemplateRendererInterface::class,
+            ],
             Handler\IndexHandler::class => [
                 TemplateRendererInterface::class,
             ],

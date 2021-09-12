@@ -9,6 +9,14 @@ return static function (Mezzio\Application $app): void {
         App\Handler\IndexHandler::class
     );
     $app->get(
+        '/event[/]',
+        [
+            App\Handler\EventHandler::class,
+        ],
+        App\Handler\EventHandler::class
+    );
+
+    $app->get(
         '/login',
         [
             Mezzio\Flash\FlashMessageMiddleware::class,

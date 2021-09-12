@@ -4,6 +4,9 @@ html, body {
     background-color: #1a1e21;
     height: 100%;
 }
+.footer {
+    margin-top: 50px;
+}
 
 a {
     color: #e43c5c;

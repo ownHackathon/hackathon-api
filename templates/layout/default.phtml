@@ -35,7 +35,7 @@ $this->inlineScript()
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#jam">Event</a>
+                                <a class="nav-link active" aria-current="page" href="/event">Event</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#Team">Team</a>
@@ -68,8 +68,19 @@ $this->inlineScript()
             <?=$this->content?>
         </main>
 
-        <footer class="footer">
-
+        <footer class="footer row">
+            <div class="col-md-4 text-start small">
+                Lizenz:
+                <a href="https://github.com/BibaltiK/Hackathon/blob/master/LICENSE" target="_blank">
+                    BSD 3-Clause
+                </a>
+            </div>
+            <div class="col-md-4 text-center small">
+                Hackathon auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server</a> von BlackScorp
+            </div>
+            <div class="col-md-4 text-end small">
+                Hackathon @ <a href="https://github.com/BibaltiK/Hackathon" target="_blank">GitHub</a>
+            </div>
         </footer>
 
         <?=$this->inlineScript()?>
