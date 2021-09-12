@@ -3,33 +3,12 @@
 namespace App\Table;
 
 use Administration\Table\AbstractTable;
+use Envms\FluentPDO\Query;
 
 class UserTable extends AbstractTable
 {
-    public function findById(int $id): ?array
+    public function __construct(Query $query)
     {
-        $user = $this->query->from('User')
-            ->where('id', $id)
-            ->fetch();
-
-        if ($user) {
-            return $user;
-        }
-
-        return null;
+        parent::__construct($query, 'User');
     }
-
-    public function findByName(string $name): ?array
-    {
-        $user = $this->query->from('User')
-            ->where('name', $name)
-            ->fetch();
-
-        if ($user) {
-            return $user;
-        }
-
-        return null;
-    }
-
 }

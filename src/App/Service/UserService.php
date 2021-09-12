@@ -19,7 +19,7 @@ class UserService
     {
         $user = $this->table->findById($id);
 
-        if (!isset($user)) {
+        if (!$user) {
             throw new InvalidArgumentException('Could not find user', 400);
         }
 
@@ -30,7 +30,7 @@ class UserService
     {
         $user = $this->table->findByName($name);
 
-        if (!isset($user)) {
+        if (!$user) {
             return null;
         }
 
