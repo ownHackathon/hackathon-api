@@ -31,7 +31,7 @@ class LoginHandler implements RequestHandlerInterface
         if (isset($user) && ($user instanceof User)) {
             /** @var SessionInterface $session */
             $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-            $session->set('userId', $user->getUserId());
+            $session->set('userId', $user->getId());
 
             return new RedirectResponse('/');
         }

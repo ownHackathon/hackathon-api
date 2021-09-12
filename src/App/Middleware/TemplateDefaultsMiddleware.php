@@ -26,7 +26,7 @@ class TemplateDefaultsMiddleware implements MiddlewareInterface
 
         if (isset($user)) {
             $isLoggedIn = true;
-            $userName = $user->getUserName();
+            $userName = $user->getName();
         }
 
         $this->templateRenderer->addDefaultParam(

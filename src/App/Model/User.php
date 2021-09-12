@@ -4,23 +4,23 @@ namespace App\Model;
 
 class User
 {
-    protected int $userId;
+    protected int $id;
     protected int $roleId;
-    protected string $userName;
+    protected string $name;
     protected string $password;
     protected ?string $email;
     protected string $registrationTime;
     protected ?string $lastLogin;
-    protected bool $activ;
+    protected bool $active;
 
-    public function getUserId(): int
+    public function getId(): int
     {
-        return $this->userId;
+        return $this->id;
     }
 
-    public function setUserId(int $userId): self
+    public function setId(int $id): self
     {
-        $this->userId = $userId;
+        $this->id = $id;
 
         return $this;
     }
@@ -37,14 +37,14 @@ class User
         return $this;
     }
 
-    public function getUserName(): string
+    public function getName(): string
     {
-        return $this->userName;
+        return $this->name;
     }
 
-    public function setUserName(string $userName): self
+    public function setName(string $name): self
     {
-        $this->userName = $userName;
+        $this->name = $name;
 
         return $this;
     }
@@ -97,14 +97,14 @@ class User
         return $this;
     }
 
-    public function isActiv(): bool
+    public function isActive(): bool
     {
-        return $this->activ;
+        return $this->active;
     }
 
-    public function setActiv(bool $activ): self
+    public function setActive(bool $active): self
     {
-        $this->activ = $activ;
+        $this->active = $active;
 
         return $this;
     }

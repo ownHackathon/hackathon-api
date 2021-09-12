@@ -15,9 +15,9 @@ class UserService
     ) {
     }
 
-    public function findById(int $userId): User
+    public function findById(int $id): User
     {
-        $user = $this->table->findByUserId($userId);
+        $user = $this->table->findById($id);
 
         if (!isset($user)) {
             throw new InvalidArgumentException('Could not find user', 400);
@@ -26,9 +26,9 @@ class UserService
         return $this->hydrator->hydrate($user, new User());
     }
 
-    public function findByUserName(string $userName): ?User
+    public function findByName(string $name): ?User
     {
-        $user = $this->table->findByUserName($userName);
+        $user = $this->table->findByName($name);
 
         if (!isset($user)) {
             return null;

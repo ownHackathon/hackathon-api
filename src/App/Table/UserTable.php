@@ -6,10 +6,10 @@ use Administration\Table\AbstractTable;
 
 class UserTable extends AbstractTable
 {
-    public function findByUserId(int $userId): ?array
+    public function findById(int $id): ?array
     {
         $user = $this->query->from('User')
-            ->where('userId', $userId)
+            ->where('id', $id)
             ->fetch();
 
         if ($user) {
@@ -19,10 +19,10 @@ class UserTable extends AbstractTable
         return null;
     }
 
-    public function findByUserName(string $userName): ?array
+    public function findByName(string $name): ?array
     {
         $user = $this->query->from('User')
-            ->where('userName', $userName)
+            ->where('name', $name)
             ->fetch();
 
         if ($user) {

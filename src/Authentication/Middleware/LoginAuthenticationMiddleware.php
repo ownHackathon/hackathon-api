@@ -27,10 +27,10 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
         /** @var FlashMessagesInterface $flashMessage */
         $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
-        $userName = $data['userName'];
+        $name = $data['name'];
         $password = $data['password'];
 
-        $user = $this->userService->findByUserName($userName);
+        $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
             $flashMessage->flashNow('error', 'Benutzername und/oder Passwort nicht korrekt.', 0);
