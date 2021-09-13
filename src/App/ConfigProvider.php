@@ -28,14 +28,18 @@ class ConfigProvider
 
             ],
             'factories' => [
-                Handler\EventHandler::class => ConfigAbstractFactory::class,
+                Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
+                Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
 
+                Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
+                Service\EventListService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
+                Table\EventTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -44,13 +48,19 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Handler\EventHandler::class => [
+            Handler\EventAboutHandler::class => [
+                TemplateRendererInterface::class,
+            ],
+            Handler\EventListHandler::class => [
                 TemplateRendererInterface::class,
             ],
             Handler\IndexHandler::class => [
                 TemplateRendererInterface::class,
             ],
 
+            Middleware\EventListMiddleware::class => [
+                Service\EventListService::class,
+            ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
             ],
@@ -58,11 +68,18 @@ class ConfigProvider
                 Service\UserService::class,
             ],
 
+            Service\EventListService::class => [
+                Table\EventTable::class,
+                ReflectionHydrator::class,
+            ],
             Service\UserService::class => [
                 Table\UserTable::class,
                 ReflectionHydrator::class,
             ],
 
+            Table\EventTable::class => [
+                Query::class,
+            ],
             Table\UserTable::class => [
                 Query::class,
             ],

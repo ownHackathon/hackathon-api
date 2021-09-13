@@ -1,0 +1,33 @@
+<?php $this->headTitle('Event.List'); ?>
+
+<div class="container-fluid">
+    <p>Hier bekommt ihr eine Übersicht über alle derzeit laufenden Events und bereits abgeschlossenen<p>
+    <p>
+        <h4 class="text-decoration-underline">Aktive Events</h4>
+        <?php
+        /** @var \App\Model\Event $event */
+        foreach ($this->activeEvents as $event):
+            ?>
+        <p class="fw-bolder">
+            <a href="/event/<?= $event->getId(); ?>"><?= $event->getName(); ?></a>
+            - <?= $event->getDescription(); ?>
+        </p>
+        <?php
+        endforeach;
+        ?>
+    </p>
+    <p>
+        <h4 class="text-decoration-underline">Abgeschlossene Events</h4>
+        <?php
+        /** @var \App\Model\Event $event */
+        foreach ($this->notActiveEvents as $event):
+            ?>
+            <p class="fw-bolder">
+                <a href="/event/<?= $event->getId(); ?>"><?= $event->getName(); ?></a>
+                - <?= $event->getDescription(); ?>
+            </p>
+        <?php
+        endforeach;
+        ?>
+    </p>
+</div>

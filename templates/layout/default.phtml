@@ -1,14 +1,14 @@
 <?php
 $this->headLink()
-    ->prependStylesheet('./assets/css/default.css')
-    ->prependStylesheet('./assets/vendor/fontawesome/css/solid.min.css')
-    ->prependStylesheet('./assets/vendor/fontawesome/css/brands.min.css')
-    ->prependStylesheet('./assets/vendor/fontawesome/css/fontawesome.min.css')
-    ->prependStylesheet('./assets/vendor/bootstrap-icons/bootstrap-icons.css')
-    ->prependStylesheet('./assets/vendor/bootstrap/css/bootstrap.min.css');
+    ->prependStylesheet('/assets/css/default.css')
+    ->prependStylesheet('/assets/vendor/fontawesome/css/solid.min.css')
+    ->prependStylesheet('/assets/vendor/fontawesome/css/brands.min.css')
+    ->prependStylesheet('/assets/vendor/fontawesome/css/fontawesome.min.css')
+    ->prependStylesheet('/assets/vendor/bootstrap-icons/bootstrap-icons.css')
+    ->prependStylesheet('/assets/vendor/bootstrap/css/bootstrap.min.css');
 $this->inlineScript()
-    ->prependFile('./assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-    ->prependFile('./assets/vendor/jquery/jquery.min.js');
+    ->prependFile('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+    ->prependFile('/assets/vendor/jquery/jquery.min.js');
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -34,9 +34,17 @@ $this->inlineScript()
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/event">Event</a>
-                            </li>
+                            <ul class="navbar-nav d-flex">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>Event </span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="/event">Allgemeine Informationen</a></li>
+                                        <li><a class="dropdown-item" href="/event/list">Event Übersicht</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#Team">Team</a>
                             </li>

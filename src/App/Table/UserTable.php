@@ -11,4 +11,11 @@ class UserTable extends AbstractTable
     {
         parent::__construct($query, 'User');
     }
+
+    public function findByName(string $name): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('name', $name)
+            ->fetch();
+    }
 }

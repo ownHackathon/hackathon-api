@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventHandler implements RequestHandlerInterface
+class EventListHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template,
@@ -17,6 +17,8 @@ class EventHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new HtmlResponse($this->template->render('app::event', []));
+        $data['activeEvents'] = $request->getAttribute('ActiveEvents');
+        $data['notActiveEvents'] = $request->getAttribute('NotActiveEvents');
+        return new HtmlResponse($this->template->render('app::event_list', $data));
     }
 }
