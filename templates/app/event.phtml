@@ -1,11 +1,12 @@
 <?php $this->headTitle('Event'); ?>
+<?= $this->partial('app::/partial/event.navigation.phtml',[]); ?>
 
 <div class="container-fluid">
     <h3>Hackathon</h3>
     <h5>Worum geht es überhaupt?</h5>
 
     <p>
-    Um einen Web-Application Wettbewerb im Zuge eines Hackathon (https://de.wikipedia.org/wiki/Hackathon).<br>
+    Um einen Web-Application Wettbewerb im Zuge eines Hackathon (<a href="https://de.wikipedia.org/wiki/Hackathon" target="_blank">Wikipedia</a>).<br>
     Zu einem vorgegebenen Thema entwickelt ihr ein eigenes Projekt.<br>
     Hier in der Form einer Web-Application realisiert mit PHP und den dazugehörigen Webtechniken (Frameworks und andere Abhängigkeiten wie zum Beispiel swiftmailer etc. pp. sind explizit erlaubt).
     </p>
@@ -44,7 +45,7 @@
     Zu bedenken ist, das die Punktewertung nicht zwingend die fachliche Qualität widerspiegelt, da ggf. bei der Bewertung der jeweilige Kenntnisstand des Teilnehmers mit berücksichtigt wurde.
     </p>
     <p>
-        Anmeldung zu einem Event erfolgt mittels <span class="fa fa-thumbs-up"></span> Reaktion im entsprechenden Info Thread.<br>
+    Anmeldung zu einem Event erfolgt mittels <span class="fa fa-thumbs-up"></span> Reaktion im entsprechenden Info Thread.<br>
     Dies muss vor Bekanntgabe vom Thema erfolgen.
     </p>
 </div>
