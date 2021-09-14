@@ -2,6 +2,7 @@
 
 namespace Administration;
 
+use App\Service\UserService;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 class ConfigProvider
@@ -21,7 +22,7 @@ class ConfigProvider
 
             ],
             'factories' => [
-
+                Middleware\SessionUserMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -29,7 +30,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-
+            Middleware\SessionUserMiddleware::class => [
+                UserService::class,
+            ]
         ];
     }
 }

@@ -34,6 +34,15 @@ return static function (Mezzio\Application $app): void {
     );
 
     $app->get(
+        '/user/{userId:\d+}[/]',
+        [
+            App\Middleware\UserMiddleware::class,
+            App\Handler\UserHandler::class,
+        ],
+        App\Handler\UserHandler::class
+    );
+
+    $app->get(
         '/login',
         [
             Mezzio\Flash\FlashMessageMiddleware::class,

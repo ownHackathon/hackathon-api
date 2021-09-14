@@ -1,8 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
+use Administration\Middleware\SessionUserMiddleware;
 use App\Middleware\TemplateDefaultsMiddleware;
-use App\Middleware\UserMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
@@ -28,7 +29,7 @@ return function (Application $app): void {
 
     $app->pipe(UrlHelperMiddleware::class);
 
-    $app->pipe(UserMiddleware::class);
+    $app->pipe(SessionUserMiddleware::class);
     $app->pipe(TemplateDefaultsMiddleware::class);
 
     $app->pipe(DispatchMiddleware::class);

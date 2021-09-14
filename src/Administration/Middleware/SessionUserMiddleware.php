@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware;
+namespace Administration\Middleware;
 
 use App\Model\User;
 use App\Service\UserService;
@@ -11,7 +11,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserMiddleware implements MiddlewareInterface
+class SessionUserMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private UserService $userService
@@ -20,10 +20,15 @@ class UserMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $userId = (int)$request->getAttribute('userId');
+        /** @var Session $session */
+        $session = $request->getAttribute(SessionInterface::class);
 
-        $user = $this->userService->findById($userId);
+        $user = null;
 
-        return $handler->handle($request->withAttribute('user', $user));
+        if ($session->has('userId')) {
+            $user = $this->userService->findById($session->get('userId'));
+        }
+
+        return $handler->handle($request->withAttribute(User::class, $user));
     }
 }

@@ -32,6 +32,7 @@ class ConfigProvider
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
+                Handler\UserHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
@@ -61,6 +62,9 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\IndexHandler::class => [
+                TemplateRendererInterface::class,
+            ],
+            Handler\UserHandler::class => [
                 TemplateRendererInterface::class,
             ],
 

@@ -1,5 +1,10 @@
-<?php $this->headTitle('User'); ?>
+<?php $this->headTitle('User');
+?>
 
-<div class="jumbotron">
-    <h6>Benutzer zum Test: <?= $this->userName;?> mit ID: <?= $this->userId;?></h6>
+<div class="container-fluid">
+    <ul>
+        <li>Benutzername: <?= $this->name ?></li>
+        <li>Letzer Login <?= $this->lastLogin ?></li>
+        <li>Aktiviert: <?= $this->active ?></li>
+    </ul>
 </div>
