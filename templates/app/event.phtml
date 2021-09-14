@@ -12,5 +12,15 @@
         <li>Endet am: <?= $this->endTime ?></li>
         <li>Aktiv: <?= $this->active ?></li>
         <li>Erstellt von: <a href="/user/<?= $this->eventUserId ?>"> <?= $this->eventUser ?></a></li>
+        <li>Teilnehmer:
+            <?php
+
+            foreach ($this->participants as $partipicant):
+            ?>
+            <a href="/user/<?= $partipicant->getId() ?>"><?= $partipicant->getName() ?></a>,
+            <?php
+                endforeach;
+            ?>
+        </li>
     </ul>
 </div>

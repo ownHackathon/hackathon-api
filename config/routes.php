@@ -20,6 +20,7 @@ return static function (Mezzio\Application $app): void {
         [
             App\Middleware\EventMiddleware::class,
             App\Middleware\EventUserMiddleware::class,
+            App\Middleware\EventActiveParticipantMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class

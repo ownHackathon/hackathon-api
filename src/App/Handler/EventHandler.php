@@ -27,6 +27,7 @@ class EventHandler implements RequestHandlerInterface
         /** @var User $user */
         $user = $request->getAttribute('eventUser');
 
+        $participants = $request->getAttribute('participants');
         $time = new DateTime($event->getStartTime());
         $time->add(new DateInterval('P' . $event->getDuration() . 'D'));
         $time = $time->format('Y-m-d H:i:s');
@@ -44,6 +45,7 @@ class EventHandler implements RequestHandlerInterface
             'active' => $active,
             'eventUser' => $user->getName(),
             'eventUserId' => $user->getId(),
+            'participants' => $participants,
         ];
 
         return new HtmlResponse($this->template->render('app::event', $data));

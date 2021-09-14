@@ -34,6 +34,7 @@ class ConfigProvider
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
+                Middleware\EventActiveParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventUserMiddleware::class => ConfigAbstractFactory::class,
@@ -41,9 +42,11 @@ class ConfigProvider
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\EventService::class => ConfigAbstractFactory::class,
+                Service\ParticipantService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
                 Table\EventTable::class => ConfigAbstractFactory::class,
+                Table\ParticipantTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -68,6 +71,10 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
 
+            Middleware\EventActiveParticipantMiddleware::class => [
+                Service\ParticipantService::class,
+                Service\UserService::class,
+            ],
             Middleware\EventMiddleware::class => [
                 Service\EventService::class,
             ],
@@ -88,12 +95,19 @@ class ConfigProvider
                 Table\EventTable::class,
                 ReflectionHydrator::class,
             ],
+            Service\ParticipantService::class => [
+                Table\ParticipantTable::class,
+                ReflectionHydrator::class,
+            ],
             Service\UserService::class => [
                 Table\UserTable::class,
                 ReflectionHydrator::class,
             ],
 
             Table\EventTable::class => [
+                Query::class,
+            ],
+            Table\ParticipantTable::class => [
                 Query::class,
             ],
             Table\UserTable::class => [
