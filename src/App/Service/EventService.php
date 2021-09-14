@@ -7,7 +7,7 @@ use App\Table\EventTable;
 use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
-class EventListService
+class EventService
 {
     public function __construct(
         private EventTable $table,

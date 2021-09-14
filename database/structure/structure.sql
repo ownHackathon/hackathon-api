@@ -6,8 +6,8 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 
 DROP TABLE IF EXISTS `Comment`;
 DROP TABLE IF EXISTS `ProjectBlog`;
-DROP TABLE IF EXISTS `Project`;
 DROP TABLE IF EXISTS `Rating`;
+DROP TABLE IF EXISTS `Project`;
 DROP TABLE IF EXISTS `Participant`;
 DROP TABLE IF EXISTS `Event`;
 DROP TABLE IF EXISTS `User`;
@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `Event`
     `description` VARCHAR(255)        NULL,
     `eventText`   VARCHAR(8192)       NOT NULL,
     `createTime`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    `startTime`   DATETIME            NOT NULL,
     `duration`    SMALLINT UNSIGNED   NOT NULL DEFAULT 7,
     `active`      TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`),

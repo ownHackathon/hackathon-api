@@ -36,7 +36,7 @@ class ConfigProvider
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
-                Service\EventListService::class => ConfigAbstractFactory::class,
+                Service\EventService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
                 Table\EventTable::class => ConfigAbstractFactory::class,
@@ -59,7 +59,7 @@ class ConfigProvider
             ],
 
             Middleware\EventListMiddleware::class => [
-                Service\EventListService::class,
+                Service\EventService::class,
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
@@ -68,7 +68,7 @@ class ConfigProvider
                 Service\UserService::class,
             ],
 
-            Service\EventListService::class => [
+            Service\EventService::class => [
                 Table\EventTable::class,
                 ReflectionHydrator::class,
             ],
