@@ -16,6 +16,15 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventAboutHandler::class
     );
     $app->get(
+        '/event/{eventId:\d+}[/]',
+        [
+            App\Middleware\EventMiddleware::class,
+            App\Middleware\EventUserMiddleware::class,
+            App\Handler\EventHandler::class,
+        ],
+        App\Handler\EventHandler::class
+    );
+    $app->get(
         '/event/list[/]',
         [
             App\Middleware\EventListMiddleware::class,

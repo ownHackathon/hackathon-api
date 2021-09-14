@@ -28,11 +28,14 @@ class ConfigProvider
 
             ],
             'factories' => [
+                Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
 
+                Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventUserMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
@@ -48,6 +51,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            Handler\EventHandler::class => [
+                TemplateRendererInterface::class,
+            ],
             Handler\EventAboutHandler::class => [
                 TemplateRendererInterface::class,
             ],
@@ -58,8 +64,14 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
 
+            Middleware\EventMiddleware::class => [
+                Service\EventService::class,
+            ],
             Middleware\EventListMiddleware::class => [
                 Service\EventService::class,
+            ],
+            Middleware\EventUserMiddleware::class => [
+                Service\UserService::class,
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,

@@ -1,0 +1,16 @@
+<?php $this->headTitle('Event');
+?>
+
+<div class="container-fluid">
+    <ul>
+        <li>Name: <?= $this->name ?></li>
+        <li>Kurzbeschreibung: <?= $this->description ?></li>
+        <li>Beschreibung: <?= $this->eventText ?></li>
+        <li>Erstellt am: <?= $this->createTime ?></li>
+        <li>Start am: <?= $this->startTime ?></li>
+        <li>Laufzeit: <?= $this->duration ?></li>
+        <li>Endet am: <?= $this->endTime ?></li>
+        <li>Aktiv: <?= $this->active ?></li>
+        <li>Erstellt von: <a href="/user/<?= $this->userId ?>"> <?= $this->user ?></a></li>
+    </ul>
+</div>
