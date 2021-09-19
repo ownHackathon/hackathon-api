@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -37,6 +38,17 @@ class EventService
         return $this->convertArrayToEventsArray($events);
     }
 
+    private function convertArrayToEventsArray(array $events): array
+    {
+        $eventsArray = [];
+
+        foreach ($events as $event) {
+            $eventsArray[] = $this->hydrator->hydrate($event, new Event());
+        }
+
+        return $eventsArray;
+    }
+
     public function findAllActive(): ?array
     {
         $events = $this->table->findAllActive();
@@ -57,16 +69,5 @@ class EventService
         }
 
         return $this->convertArrayToEventsArray($events);
-    }
-
-    private function convertArrayToEventsArray(array $events): array
-    {
-        $eventsArray = [];
-
-        foreach ($events as $event) {
-            $eventsArray[] = $this->hydrator->hydrate($event, new Event());
-        }
-
-        return $eventsArray;
     }
 }

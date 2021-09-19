@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Administration;
 
@@ -32,7 +33,7 @@ class ConfigProvider
         return [
             Middleware\SessionUserMiddleware::class => [
                 UserService::class,
-            ]
+            ],
         ];
     }
 }

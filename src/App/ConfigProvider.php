@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace App;
 
@@ -56,6 +57,7 @@ class ConfigProvider
     {
         return [
             Handler\EventHandler::class => [
+                ReflectionHydrator::class,
                 TemplateRendererInterface::class,
             ],
             Handler\EventAboutHandler::class => [
