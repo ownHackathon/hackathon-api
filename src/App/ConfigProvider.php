@@ -33,20 +33,25 @@ class ConfigProvider
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
+                Handler\ProjectHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\EventActiveParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventUserMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\EventService::class => ConfigAbstractFactory::class,
                 Service\ParticipantService::class => ConfigAbstractFactory::class,
+                Service\ProjectService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
                 Table\EventTable::class => ConfigAbstractFactory::class,
+                Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\ParticipantTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
             ],
@@ -69,10 +74,13 @@ class ConfigProvider
             Handler\IndexHandler::class => [
                 TemplateRendererInterface::class,
             ],
+            Handler\ProjectHandler::class => [
+                ReflectionHydrator::class,
+                TemplateRendererInterface::class,
+            ],
             Handler\UserHandler::class => [
                 TemplateRendererInterface::class,
             ],
-
             Middleware\EventActiveParticipantMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\UserService::class,
@@ -86,6 +94,12 @@ class ConfigProvider
             Middleware\EventUserMiddleware::class => [
                 Service\UserService::class,
             ],
+            Middleware\ProjectMiddleware::class => [
+                Service\ProjectService::class,
+            ],
+            Middleware\ProjectParticipantMiddleware::class => [
+                Service\ProjectService::class,
+            ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
             ],
@@ -95,6 +109,10 @@ class ConfigProvider
 
             Service\EventService::class => [
                 Table\EventTable::class,
+                ReflectionHydrator::class,
+            ],
+            Service\ProjectService::class => [
+                Table\ProjectTable::class,
                 ReflectionHydrator::class,
             ],
             Service\ParticipantService::class => [
@@ -107,6 +125,9 @@ class ConfigProvider
             ],
 
             Table\EventTable::class => [
+                Query::class,
+            ],
+            Table\ProjectTable::class => [
                 Query::class,
             ],
             Table\ParticipantTable::class => [

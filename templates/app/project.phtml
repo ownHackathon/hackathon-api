@@ -1,0 +1,17 @@
+<?php $this->headTitle('Project');
+?>
+<h1 class="text-center"><?= $this->title; ?></h1>
+<p><?= $this->description; ?></p>
+<div class="container-fluid"
+    <u>
+        <li>
+            git Repository: <a href="<?= $this->gitRepoUri; ?>" target="_blank"><?= $this->gitRepoUri; ?></a>
+        </li>
+        <li>
+            Demo Seite: <a href="<?= $this->demoPageUri; ?>" target="_blank"><?= $this->demoPageUri; ?></a>
+        </li>
+        <li>
+            erstellt am: <?= $this->createTime; ?>
+        </li>
+    </u>
+</div>

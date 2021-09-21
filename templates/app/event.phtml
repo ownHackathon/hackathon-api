@@ -12,15 +12,29 @@
         <li>Endet am: <?= $this->endTime ?></li>
         <li>Aktiv: <?= $this->active ?></li>
         <li>Erstellt von: <a href="/user/<?= $this->eventUserId ?>"> <?= $this->eventUser ?></a></li>
-        <li>Teilnehmer:
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Teilnehmer
+                </div>
+                <div class="col">
+                    Projekt
+                </div>
+            </div>
             <?php
-
-            foreach ($this->participants as $partipicant):
+                foreach ($this->participants as $partipicant):
             ?>
-            <a href="/user/<?= $partipicant->getId() ?>"><?= $partipicant->getName() ?></a>,
+            <div class="row">
+                <div class="col">
+                    <a href="/user/<?= $partipicant[\App\Model\User::class]->getId() ?>"><?= $partipicant[\App\Model\User::class]->getName() ?></a>
+                </div>
+                <div class="col">
+                    <a href="/project/<?= $partipicant[\App\Model\Project::class]->getId() ?>"><?= $partipicant[\App\Model\Project::class]->getTitle() ?></a>
+                </div>
+            </div>
             <?php
                 endforeach;
             ?>
-        </li>
+        </div>
     </ul>
 </div>
