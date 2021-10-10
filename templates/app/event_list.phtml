@@ -9,8 +9,8 @@
         foreach ($this->activeEvents as $event):
             ?>
         <p class="fw-bolder">
-            <a href="/event/<?= $event->getId(); ?>"><?= $event->getName(); ?></a>
-            - <?= $event->getDescription(); ?>
+            <a href="/event/<?= $event->getId(); ?>"><?= $this->escapeHtml($event->getName()); ?></a>
+            - <?= $this->escapeHtml($event->getDescription()); ?>
         </p>
         <?php
         endforeach;
@@ -23,8 +23,8 @@
         foreach ($this->notActiveEvents as $event):
             ?>
             <p class="fw-bolder">
-                <a href="/event/<?= $event->getId(); ?>"><?= $event->getName(); ?></a>
-                - <?= $event->getDescription(); ?>
+                <a href="/event/<?= $event->getId(); ?>"><?= $this->escapeHtml($event->getName()); ?></a>
+                - <?= $this->escapeHtml($event->getDescription()); ?>
             </p>
         <?php
         endforeach;

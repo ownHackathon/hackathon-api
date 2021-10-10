@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
     <ul>
-        <li>Benutzername: <?= $this->name ?></li>
+        <li>Benutzername: <?= $this->escapeHtml($this->name) ?></li>
         <li>Letzer Login <?= $this->lastLogin ?></li>
         <li>Aktiviert: <?= $this->active ? 'Ja' : 'Nein'; ?></li>
     </ul>
