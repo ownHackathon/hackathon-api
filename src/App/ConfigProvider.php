@@ -79,6 +79,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\UserHandler::class => [
+                ReflectionHydrator::class,
                 TemplateRendererInterface::class,
             ],
             Middleware\EventActiveParticipantMiddleware::class => [

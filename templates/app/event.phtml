@@ -23,15 +23,7 @@
     </div>
     <div class="row">
         <div class="col">Aktiv</div>
-        <div class="col text-smaller">
-        <?php
-            if ($this->active):
-                echo 'Ja';
-            else:
-                echo 'Nein';
-            endif;
-        ?>
-        </div>
+        <div class="col text-smaller"><?= $this->active ? 'Ja' : 'Nein'; ?></div>
     </div>
 </div>
 <div class="container-fluid defaultbox">
