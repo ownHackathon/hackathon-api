@@ -38,7 +38,7 @@ class EventHandler implements RequestHandlerInterface
 
         $data['createTime'] = $createTime;
         $data['startTime'] = clone $startTime;
-        $data['endTime'] = $startTime->add(new DateInterval('P' . $event->getDuration() . 'D'));;
+        $data['endTime'] = $startTime->add(new DateInterval('P' . $event->getDuration() . 'D'));
         $data['eventUser'] = $user->getName();
         $data['eventUserId'] = $user->getId();
         $data['participants'] = $participants;
