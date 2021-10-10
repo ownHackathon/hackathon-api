@@ -1,40 +1,57 @@
 <?php $this->headTitle('Event');
 ?>
-
-<div class="container-fluid">
-    <ul>
-        <li>Name: <?= $this->name ?></li>
-        <li>Kurzbeschreibung: <?= $this->description ?></li>
-        <li>Beschreibung: <?= $this->eventText ?></li>
-        <li>Erstellt am: <?= $this->createTime ?></li>
-        <li>Start am: <?= $this->startTime ?></li>
-        <li>Laufzeit: <?= $this->duration ?></li>
-        <li>Endet am: <?= $this->endTime ?></li>
-        <li>Aktiv: <?= $this->active ?></li>
-        <li>Erstellt von: <a href="/user/<?= $this->eventUserId ?>"> <?= $this->eventUser ?></a></li>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    Teilnehmer
-                </div>
-                <div class="col">
-                    Projekt
-                </div>
-            </div>
-            <?php
-                foreach ($this->participants as $partipicant):
-            ?>
-            <div class="row">
-                <div class="col">
-                    <a href="/user/<?= $partipicant[\App\Model\User::class]->getId() ?>"><?= $partipicant[\App\Model\User::class]->getName() ?></a>
-                </div>
-                <div class="col">
-                    <a href="/project/<?= $partipicant[\App\Model\Project::class]->getId() ?>"><?= $partipicant[\App\Model\Project::class]->getTitle() ?></a>
-                </div>
-            </div>
-            <?php
-                endforeach;
-            ?>
+<div class="container-fluid defaultbox">
+    <h3 class="text-center"><?= $this->name; ?></h3>
+    <h5 class="text-center"><?= $this->description; ?></h5>
+    <p class="text-small text-justify">
+        <?= $this->eventText; ?>
+    </p>
+    <div class="text-end text-xx-small text-white-50">Event erstellt am <?= $this->createTime->format('j.m.Y-G:i'); ?> Uhr</div>
+</div>
+<div class="container-fluid defaultbox">
+    <div class="row">
+        <div class="col">Start</div>
+        <div class="col text-smaller"><?= $this->startTime->format('j.m.Y-G:i'); ?> Uhr</div>
+    </div>
+    <div class="row">
+        <div class="col">Laufzeit</div>
+        <div class="col text-smaller"><?= $this->duration; ?> Tage</div>
+    </div>
+    <div class="row">
+        <div class="col">Ende</div>
+        <div class="col text-smaller"><?= $this->endTime->format('j.m.Y-G:i'); ?> Uhr</div>
+    </div>
+    <div class="row">
+        <div class="col">Aktiv</div>
+        <div class="col text-smaller">
+        <?php
+            if ($this->active):
+                echo 'Ja';
+            else:
+                echo 'Nein';
+            endif;
+        ?>
         </div>
-    </ul>
+    </div>
+</div>
+<div class="container-fluid defaultbox">
+    <div class="row">
+        <div class="col-4">Teilnehmer</div>
+        <div class="col-8">Projekt</div>
+    </div>
+    <?php
+        foreach ($this->participants as $partipicant):
+    ?>
+        <div class="row text-small">
+            <div class="col-4">
+                <a href="/user/<?= $partipicant[App\Model\User::class]->getId() ?>"><?= $partipicant[App\Model\User::class]->getName() ?></a>
+            </div>
+            <div class="col-8">
+                <a href="/project/<?= $partipicant[App\Model\Project::class]->getId() ?>"><?= $partipicant[App\Model\Project::class]->getTitle() ?></a>
+            </div>
+        </div>
+    <?php
+        endforeach;
+    ?>
+
 </div>

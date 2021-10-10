@@ -39,9 +39,39 @@ header {
     text-decoration-thickness: 3px;
 }
 
+.defaultbox {
+    border: 1px dotted #dee2e6 !important;
+    background-color: #373a3e;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.text-justify {
+    hyphens: auto;
+    text-align: justify;
+}
+
+.text-small {
+    font-size: small;
+}
+
+.text-smaller {
+    font-size: smaller;
+}
+
+.text-xx-small {
+    font-size: xx-small;
+}
+
 .content {
     width: 100%;
     background-color: #2c3034;
     color: #f0f0f0;
     padding: 10px;
+}
+
+.external {
+    font-size: xx-small;
+    font-variant-position: super;
+    color: lightgray;
 }

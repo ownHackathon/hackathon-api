@@ -6,13 +6,13 @@ namespace App\Handler;
 use App\Model\Event;
 use App\Model\User;
 use DateInterval;
+use DateTime;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Hydrator\ReflectionHydrator;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use DateTime;
 
 class EventHandler implements RequestHandlerInterface
 {
@@ -31,12 +31,14 @@ class EventHandler implements RequestHandlerInterface
         $user = $request->getAttribute('eventUser');
 
         $participants = $request->getAttribute('participants');
-        $time = new DateTime($event->getStartTime());
-        $time->add(new DateInterval('P' . $event->getDuration() . 'D'));
-
         $data = $this->hydrator->extract($event);
-        $data['endTime'] = $time->format('Y-m-d H:i:s');
-        $data['active'] = $event->isActive() ? 'Ja' : 'Nein';
+
+        $createTime = new DateTime($event->getCreateTime());
+        $startTime = new DateTime($event->getStartTime());
+
+        $data['createTime'] = $createTime;
+        $data['startTime'] = clone $startTime;
+        $data['endTime'] = $startTime->add(new DateInterval('P' . $event->getDuration() . 'D'));;
         $data['eventUser'] = $user->getName();
         $data['eventUserId'] = $user->getId();
         $data['participants'] = $participants;
