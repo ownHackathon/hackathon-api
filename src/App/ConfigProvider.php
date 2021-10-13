@@ -36,12 +36,11 @@ class ConfigProvider
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
-                Middleware\EventActiveParticipantMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventUserMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
@@ -82,7 +81,7 @@ class ConfigProvider
                 ReflectionHydrator::class,
                 TemplateRendererInterface::class,
             ],
-            Middleware\EventActiveParticipantMiddleware::class => [
+            Middleware\EventParticipantMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\UserService::class,
             ],
@@ -92,13 +91,10 @@ class ConfigProvider
             Middleware\EventListMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventUserMiddleware::class => [
-                Service\UserService::class,
-            ],
             Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
-            Middleware\ProjectParticipantMiddleware::class => [
+            Middleware\ParticipantProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
             Middleware\TemplateDefaultsMiddleware::class => [

@@ -20,9 +20,9 @@ return static function (Mezzio\Application $app): void {
         '/event/{eventId:\d+}[/]',
         [
             App\Middleware\EventMiddleware::class,
-            App\Middleware\EventUserMiddleware::class,
-            App\Middleware\EventActiveParticipantMiddleware::class,
-            App\Middleware\ProjectParticipantMiddleware::class,
+            App\Middleware\UserMiddleware::class,
+            App\Middleware\EventParticipantMiddleware::class,
+            App\Middleware\ParticipantProjectMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class
@@ -39,7 +39,7 @@ return static function (Mezzio\Application $app): void {
         '/project/{projectId:\d+}[/]',
         [
             App\Middleware\ProjectMiddleware::class,
-            App\Middleware\EventUserMiddleware::class,
+            App\Middleware\UserMiddleware::class,
             App\Handler\ProjectHandler::class,
         ],
         App\Handler\ProjectHandler::class
