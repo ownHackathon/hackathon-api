@@ -1,10 +1,10 @@
 .idea/
-
 /build/
 phpcs.xml
 /tests/behat.yml
 /tests/.phpunit.result.cache
 /tests/phpunit.xml
-
 /vendor/
 /node_modules/
+phpunit.xml
+*.cache
