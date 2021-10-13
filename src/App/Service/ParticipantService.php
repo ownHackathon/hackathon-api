@@ -21,7 +21,7 @@ class ParticipantService
         $participant = $this->table->findById($id);
 
         if (!$participant) {
-            throw new InvalidArgumentException('Could not find Event', 400);
+            throw new InvalidArgumentException('Could not find Participant', 400);
         }
 
         return $this->hydrator->hydrate($participant, new Participant());

@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
     $app->get(
@@ -37,10 +38,10 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/project/{projectId:\d+}[/]',
         [
-            \App\Middleware\ProjectMiddleware::class,
+            App\Middleware\ProjectMiddleware::class,
             App\Handler\ProjectHandler::class,
         ],
-        \App\Handler\ProjectHandler::class
+        App\Handler\ProjectHandler::class
     );
 
     $app->get(

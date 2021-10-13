@@ -13,5 +13,8 @@
         <li>
             erstellt am: <?= $this->createTime; ?>
         </li>
+        <li>
+            Besitzer: <a href="/user/<?= $this->participantId; ?>"><?= $this->escapeHtml($this->name); ?></a>
+        </li>
     </u>
 </div>
