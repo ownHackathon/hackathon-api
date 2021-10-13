@@ -22,7 +22,7 @@ class ProjectHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $project = $request->getAttribute(Project::class);
-        $participant = $request->getAttribute('participant');
+        $participant = $request->getAttribute('user');
 
         $data = array_merge($this->hydrator->extract($project), $this->hydrator->extract($participant));
 

@@ -97,7 +97,6 @@ class ConfigProvider
             ],
             Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
-                Service\UserService::class,
             ],
             Middleware\ProjectParticipantMiddleware::class => [
                 Service\ProjectService::class,

@@ -22,6 +22,6 @@ class EventUserMiddleware implements MiddlewareInterface
 
         $user = $this->userService->findById($userId);
 
-        return $handler->handle($request->withAttribute('eventUser', $user));
+        return $handler->handle($request->withAttribute('user', $user));
     }
 }

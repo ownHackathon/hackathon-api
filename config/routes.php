@@ -39,6 +39,7 @@ return static function (Mezzio\Application $app): void {
         '/project/{projectId:\d+}[/]',
         [
             App\Middleware\ProjectMiddleware::class,
+            App\Middleware\EventUserMiddleware::class,
             App\Handler\ProjectHandler::class,
         ],
         App\Handler\ProjectHandler::class
