@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use DateTime;
+
 class User
 {
     protected int $id;
@@ -10,8 +12,8 @@ class User
     protected string $name;
     protected string $password;
     protected ?string $email;
-    protected string $registrationTime;
-    protected ?string $lastLogin;
+    protected DateTime $registrationTime;
+    protected ?DateTime $lastLogin;
     protected bool $active;
 
     public function getId(): int
@@ -74,38 +76,38 @@ class User
         return $this;
     }
 
-    public function getRegistrationTime(): string
+    public function getRegistrationTime(): DateTime
     {
         return $this->registrationTime;
     }
 
     public function setRegistrationTime(string $registrationTime): self
     {
-        $this->registrationTime = $registrationTime;
+        $this->registrationTime = new DateTime($registrationTime);
 
         return $this;
     }
 
-    public function getLastLogin(): ?string
+    public function getLastLogin(): ?DateTime
     {
         return $this->lastLogin;
     }
 
     public function setLastLogin(?string $lastLogin): self
     {
-        $this->lastLogin = $lastLogin;
+        $this->lastLogin = $lastLogin ? new DateTime($lastLogin) : $lastLogin;
 
         return $this;
     }
 
     public function isActive(): bool
     {
-        return $this->active;
+        return (bool)$this->active;
     }
 
-    public function setActive(bool $active): self
+    public function setActive(int|bool $active): self
     {
-        $this->active = $active;
+        $this->active = (bool)$active;
 
         return $this;
     }

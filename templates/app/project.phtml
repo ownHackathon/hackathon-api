@@ -11,7 +11,7 @@
             Demo Seite: <a href="<?= $this->escapeHtml($this->demoPageUri); ?>" target="_blank"><?= $this->escapeHtml($this->demoPageUri); ?> <i class="fas fa-external-link-alt external"></i></a>
         </li>
         <li>
-            erstellt am: <?= $this->createTime; ?>
+            erstellt am: <?= $this->createTime->format('j.m.Y'); ?>
         </li>
         <li>
             Besitzer: <a href="/user/<?= $this->participantId; ?>"><?= $this->escapeHtml($this->name); ?></a>

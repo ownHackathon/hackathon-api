@@ -5,14 +5,14 @@ namespace App\Service;
 
 use App\Model\Event;
 use App\Table\EventTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventService
 {
     public function __construct(
         private EventTable $table,
-        private ReflectionHydrator $hydrator
+        private ClassMethodsHydrator $hydrator
     ) {
     }
 

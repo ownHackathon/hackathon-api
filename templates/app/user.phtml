@@ -4,7 +4,8 @@
 <div class="container-fluid">
     <ul>
         <li>Benutzername: <?= $this->escapeHtml($this->name) ?></li>
-        <li>Letzer Login <?= $this->lastLogin ?></li>
+        <li>Registriert am: <?= $this->registrationTime->format('j.m.Y'); ?></li>
+        <li>Letzer Login: <?= $this->lastLogin ? $this->lastLogin->format('j.m.Y-G:i') : "unbekannt"; ?></li>
         <li>Aktiviert: <?= $this->active ? 'Ja' : 'Nein'; ?></li>
     </ul>
 </div>

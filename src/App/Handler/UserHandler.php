@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ReflectionHydrator $hydrator,
+        private ClassMethodsHydrator $hydrator,
         private TemplateRendererInterface $template,
     ) {
     }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use DateTime;
+
 class Project
 {
     protected int $id;
@@ -11,7 +13,7 @@ class Project
     protected string $description;
     protected string $gitRepoUri;
     protected string $demoPageUri;
-    protected string $createTime;
+    protected DateTime $createTime;
 
     public function getId(): int
     {
@@ -85,14 +87,14 @@ class Project
         return $this;
     }
 
-    public function getCreateTime(): string
+    public function getCreateTime(): DateTime
     {
         return $this->createTime;
     }
 
     public function setCreateTime(string $createTime): self
     {
-        $this->createTime = $createTime;
+        $this->createTime = new DateTime($createTime);
 
         return $this;
     }

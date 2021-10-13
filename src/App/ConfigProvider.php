@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Hydrator\ClassMethodsHydratorFactory;
 use Envms\FluentPDO\Query;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Template\TemplateRendererInterface;
@@ -23,12 +25,10 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                ReflectionHydrator::class,
-
                 Handler\PingHandler::class,
-
             ],
             'factories' => [
+                ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
@@ -61,7 +61,7 @@ class ConfigProvider
     {
         return [
             Handler\EventHandler::class => [
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
             ],
             Handler\EventAboutHandler::class => [
@@ -74,11 +74,11 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\ProjectHandler::class => [
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
             ],
             Handler\UserHandler::class => [
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
             ],
             Middleware\EventParticipantMiddleware::class => [
@@ -106,19 +106,19 @@ class ConfigProvider
 
             Service\EventService::class => [
                 Table\EventTable::class,
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
             ],
             Service\ProjectService::class => [
                 Table\ProjectTable::class,
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
             ],
             Service\ParticipantService::class => [
                 Table\ParticipantTable::class,
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
             ],
             Service\UserService::class => [
                 Table\UserTable::class,
-                ReflectionHydrator::class,
+                ClassMethodsHydrator::class,
             ],
 
             Table\EventTable::class => [

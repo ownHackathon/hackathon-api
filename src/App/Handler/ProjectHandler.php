@@ -5,7 +5,7 @@ namespace App\Handler;
 
 use App\Model\Project;
 use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ProjectHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ReflectionHydrator $hydrator,
+        private ClassMethodsHydrator $hydrator,
         private TemplateRendererInterface $template,
     ) {
     }

@@ -3,16 +3,15 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Model\Participant;
 use App\Model\Project;
 use App\Table\ProjectTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class ProjectService
 {
     public function __construct(
         private ProjectTable $table,
-        private ReflectionHydrator $hydrator
+        private ClassMethodsHydrator $hydrator
     ) {
     }
 

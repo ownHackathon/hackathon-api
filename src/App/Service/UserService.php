@@ -5,14 +5,14 @@ namespace App\Service;
 
 use App\Model\User;
 use App\Table\UserTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class UserService
 {
     public function __construct(
         private UserTable $table,
-        private ReflectionHydrator $hydrator
+        private ClassMethodsHydrator $hydrator
     ) {
     }
 

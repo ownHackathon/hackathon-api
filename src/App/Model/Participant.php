@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use DateTime;
+
 class Participant
 {
     protected int $id;
     protected int $userId;
     protected int $eventId;
-    protected string $requestTime;
+    protected DateTime $requestTime;
     protected bool $approved;
     protected bool $disqualified;
 
@@ -48,38 +50,38 @@ class Participant
         return $this;
     }
 
-    public function getRequestTime(): string
+    public function getRequestTime(): DateTime
     {
         return $this->requestTime;
     }
 
     public function setRequestTime(string $requestTime): self
     {
-        $this->requestTime = $requestTime;
+        $this->requestTime = new DateTime($requestTime);
 
         return $this;
     }
 
     public function isApproved(): bool
     {
-        return $this->approved;
+        return (bool)$this->approved;
     }
 
-    public function setApproved(bool $approved): self
+    public function setApproved(int|bool $approved): self
     {
-        $this->approved = $approved;
+        $this->approved = (bool)$approved;
 
         return $this;
     }
 
     public function isDisqualified(): bool
     {
-        return $this->disqualified;
+        return (bool)$this->disqualified;
     }
 
-    public function setDisqualified(bool $disqualified): self
+    public function setDisqualified(int|bool $disqualified): self
     {
-        $this->disqualified = $disqualified;
+        $this->disqualified = (bool)$disqualified;
 
         return $this;
     }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use DateTime;
+
 class Event
 {
     protected int $id;
@@ -10,9 +12,9 @@ class Event
     protected string $name;
     protected ?string $description;
     protected string $eventText;
-    protected string $createTime;
-    protected string $startTime;
-    protected string $duration;
+    protected DateTime $createTime;
+    protected DateTime $startTime;
+    protected int $duration;
     protected bool $active;
 
     public function getId(): int
@@ -75,36 +77,36 @@ class Event
         return $this;
     }
 
-    public function getCreateTime(): string
+    public function getCreateTime(): DateTime
     {
         return $this->createTime;
     }
 
     public function setCreateTime(string $createTime): self
     {
-        $this->createTime = $createTime;
+        $this->createTime = new DateTime($createTime);
 
         return $this;
     }
 
-    public function getStartTime(): string
+    public function getStartTime(): DateTime
     {
         return $this->startTime;
     }
 
     public function setStartTime(string $startTime): self
     {
-        $this->startTime = $startTime;
+        $this->startTime = new DateTime($startTime);
 
         return $this;
     }
 
-    public function getDuration(): string
+    public function getDuration(): int
     {
         return $this->duration;
     }
 
-    public function setDuration(string $duration): self
+    public function setDuration(int $duration): self
     {
         $this->duration = $duration;
 
@@ -113,12 +115,12 @@ class Event
 
     public function isActive(): bool
     {
-        return $this->active;
+        return (bool)$this->active;
     }
 
-    public function setActive(bool $active): self
+    public function setActive(int|bool $active): self
     {
-        $this->active = $active;
+        $this->active = (bool)$active;
 
         return $this;
     }

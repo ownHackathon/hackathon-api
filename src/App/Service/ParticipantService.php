@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Model\Participant;
 use App\Table\ParticipantTable;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
@@ -12,7 +13,7 @@ class ParticipantService
 {
     public function __construct(
         private ParticipantTable $table,
-        private ReflectionHydrator $hydrator
+        private ClassMethodsHydrator $hydrator
     ) {
     }
 
