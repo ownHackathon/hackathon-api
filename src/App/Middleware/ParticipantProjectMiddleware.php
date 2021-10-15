@@ -2,9 +2,11 @@
 
 namespace App\Middleware;
 
+use App\Model\Participant;
 use App\Model\Project;
 use App\Model\User;
 use App\Service\ProjectService;
+use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -13,7 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ParticipantProjectMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ProjectService $projectService
+        private ProjectService $projectService,
+        private UserService $userService
     ) {
     }
 
@@ -23,11 +26,12 @@ class ParticipantProjectMiddleware implements MiddlewareInterface
 
         $projects = [];
 
-        /** @var User $participant */
+        /** @var Participant $participant */
         foreach ($participants as $participant) {
+            $user = $this->userService->findById($participant->getUserId());
             $project = $this->projectService->findByParticipantId($participant->getId());
             $projects[] = [
-                User::class => $participant,
+                User::class => $user,
                 Project::class => $project,
             ];
         }

@@ -38,6 +38,7 @@ class ConfigProvider
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ParticipantUserMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
@@ -89,7 +90,6 @@ class ConfigProvider
             ],
             Middleware\EventParticipantMiddleware::class => [
                 Service\ParticipantService::class,
-                Service\UserService::class,
             ],
             Middleware\EventMiddleware::class => [
                 Service\EventService::class,
@@ -100,8 +100,12 @@ class ConfigProvider
             Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
+            Middleware\ParticipantUserMiddleware::class => [
+                Service\ParticipantService::class,
+            ],
             Middleware\ParticipantProjectMiddleware::class => [
                 Service\ProjectService::class,
+                Service\UserService::class,
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,

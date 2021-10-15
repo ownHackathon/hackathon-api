@@ -24,7 +24,7 @@ class ProjectMiddleware implements MiddlewareInterface
 
         return $handler->handle(
             $request->withAttribute(Project::class, $project)
-                ->withAttribute('userId', $project->getParticipantId())
+                ->withAttribute('participantId', $project->getParticipantId())
         );
     }
 }
