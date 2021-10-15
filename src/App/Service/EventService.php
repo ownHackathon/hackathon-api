@@ -10,6 +10,8 @@ use Psr\Log\InvalidArgumentException;
 
 class EventService
 {
+    use ConvertArrayToClassArrayTrait;
+
     public function __construct(
         private EventTable $table,
         private ClassMethodsHydrator $hydrator
@@ -35,18 +37,7 @@ class EventService
             return null;
         }
 
-        return $this->convertArrayToEventsArray($events);
-    }
-
-    private function convertArrayToEventsArray(array $events): array
-    {
-        $eventsArray = [];
-
-        foreach ($events as $event) {
-            $eventsArray[] = $this->hydrator->hydrate($event, new Event());
-        }
-
-        return $eventsArray;
+        return $this->convertArrayToClassArray($events, Event::class);
     }
 
     public function findAllActive(): ?array
@@ -57,7 +48,7 @@ class EventService
             return null;
         }
 
-        return $this->convertArrayToEventsArray($events);
+        return $this->convertArrayToClassArray($events, Event::class);
     }
 
     public function findAllNotActive(): ?array
@@ -68,6 +59,6 @@ class EventService
             return null;
         }
 
-        return $this->convertArrayToEventsArray($events);
+        return $this->convertArrayToClassArray($events, Event::class);
     }
 }

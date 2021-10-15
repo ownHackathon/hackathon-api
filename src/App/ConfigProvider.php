@@ -6,7 +6,6 @@ namespace App;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Template\TemplateRendererInterface;
 
@@ -17,7 +16,6 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             ConfigAbstractFactory::class => $this->getAbstractFactoryConfig(),
-
         ];
     }
 
@@ -29,6 +27,7 @@ class ConfigProvider
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
+
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
@@ -44,14 +43,22 @@ class ConfigProvider
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
+                Service\EventRatingCategoryService::class => ConfigAbstractFactory::class,
+                Service\EventRatingService::class => ConfigAbstractFactory::class,
                 Service\EventService::class => ConfigAbstractFactory::class,
                 Service\ParticipantService::class => ConfigAbstractFactory::class,
                 Service\ProjectService::class => ConfigAbstractFactory::class,
+                Service\RatingCategoryService::class => ConfigAbstractFactory::class,
+                Service\RatingService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
+                Table\EventRatingCategoryTable::class => ConfigAbstractFactory::class,
+                Table\EventRatingTable::class => ConfigAbstractFactory::class,
                 Table\EventTable::class => ConfigAbstractFactory::class,
-                Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\ParticipantTable::class => ConfigAbstractFactory::class,
+                Table\ProjectTable::class => ConfigAbstractFactory::class,
+                Table\RatingCategoryTable::class => ConfigAbstractFactory::class,
+                Table\RatingTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -104,6 +111,14 @@ class ConfigProvider
                 Service\UserService::class,
             ],
 
+            Service\EventRatingCategoryService::class => [
+                Table\EventRatingCategoryTable::class,
+                ClassMethodsHydrator::class,
+            ],
+            Service\EventRatingService::class => [
+                Table\EventRatingTable::class,
+                ClassMethodsHydrator::class,
+            ],
             Service\EventService::class => [
                 Table\EventTable::class,
                 ClassMethodsHydrator::class,
@@ -116,18 +131,38 @@ class ConfigProvider
                 Table\ParticipantTable::class,
                 ClassMethodsHydrator::class,
             ],
+            Service\RatingCategoryService::class => [
+                Table\RatingCategoryTable::class,
+                ClassMethodsHydrator::class,
+            ],
+            Service\RatingService::class => [
+                Table\RatingTable::class,
+                ClassMethodsHydrator::class,
+            ],
             Service\UserService::class => [
                 Table\UserTable::class,
                 ClassMethodsHydrator::class,
             ],
 
+            Table\EventRatingCategoryTable::class => [
+                Query::class,
+            ],
+            Table\EventRatingTable::class => [
+                Query::class,
+            ],
             Table\EventTable::class => [
+                Query::class,
+            ],
+            Table\ParticipantTable::class => [
                 Query::class,
             ],
             Table\ProjectTable::class => [
                 Query::class,
             ],
-            Table\ParticipantTable::class => [
+            Table\RatingCategoryTable::class => [
+                Query::class,
+            ],
+            Table\RatingTable::class => [
                 Query::class,
             ],
             Table\UserTable::class => [

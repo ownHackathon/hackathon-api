@@ -6,6 +6,7 @@ namespace App\Service;
 use App\Model\Project;
 use App\Table\ProjectTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Psr\Log\InvalidArgumentException;
 
 class ProjectService
 {

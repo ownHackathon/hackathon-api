@@ -11,6 +11,8 @@ use Psr\Log\InvalidArgumentException;
 
 class ParticipantService
 {
+    use ConvertArrayToClassArrayTrait;
+
     public function __construct(
         private ParticipantTable $table,
         private ClassMethodsHydrator $hydrator
@@ -36,17 +38,6 @@ class ParticipantService
             return null;
         }
 
-        return $this->convertArrayToEventsArray($participants);
-    }
-
-    private function convertArrayToEventsArray(array $events): array
-    {
-        $eventsArray = [];
-
-        foreach ($events as $event) {
-            $eventsArray[] = $this->hydrator->hydrate($event, new Participant());
-        }
-
-        return $eventsArray;
+        return $this->convertArrayToClassArray($participants, Participant::class);
     }
 }

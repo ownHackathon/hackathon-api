@@ -7,6 +7,9 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 DROP TABLE IF EXISTS `Comment`;
 DROP TABLE IF EXISTS `ProjectBlog`;
 DROP TABLE IF EXISTS `Rating`;
+DROP TABLE IF EXISTS `EventRatingCategory`;
+DROP TABLE IF EXISTS `EventRating`;
+DROP TABLE IF EXISTS `RatingCategory`;
 DROP TABLE IF EXISTS `Project`;
 DROP TABLE IF EXISTS `Participant`;
 DROP TABLE IF EXISTS `Event`;
@@ -153,20 +156,60 @@ CREATE TABLE IF NOT EXISTS `ProjectBlog`
 )
     ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `RatingCategory`
+(
+    `id`          INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+    `title`       VARCHAR(255)  NOT NULL,
+    `description` VARCHAR(2048) NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `EventRating`
+(
+    `id`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `minPoints` INT UNSIGNED NOT NULL DEFAULT 0,
+    `maxPoints` INT UNSIGNED NOT NULL DEFAULT 6,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `EventRatingCategory`
+(
+    `id`               INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `eventId`          INT UNSIGNED NOT NULL,
+    `ratingCategoryId` INT UNSIGNED NOT NULL,
+    `weighting`        INT UNSIGNED NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`),
+    INDEX `fk_EventRatingCategory_Event_idx` (`eventId` DESC),
+    INDEX `fk_EventRatingCategory_RatingCategory_idx` (`ratingCategoryId` DESC),
+    CONSTRAINT `fk_EventRatingCategory_Event`
+        FOREIGN KEY (`eventId`)
+            REFERENCES `Event` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE,
+    CONSTRAINT `fk_EventRatingCategory_RatingCategory`
+        FOREIGN KEY (`ratingCategoryId`)
+            REFERENCES `RatingCategory` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE
+)
+    ENGINE = InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS `Rating`
 (
-    `id`             INT UNSIGNED        NOT NULL AUTO_INCREMENT,
-    `userId`         INT UNSIGNED        NOT NULL,
-    `projectId`      INT UNSIGNED        NOT NULL,
-    `creativity`     TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-    `implementation` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-    `structure`      TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-    `technology`     TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-    `scope`          TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-    `submitTime`     DATETIME            NULL,
+    `id`                    INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `userId`                INT UNSIGNED NOT NULL,
+    `projectId`             INT UNSIGNED NOT NULL,
+    `eventRatingId`         INT UNSIGNED NOT NULL,
+    `eventRatingCategoryId` INT UNSIGNED NOT NULL,
+    `rating`                INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_Rating_User_idx` (`userId` ASC),
-    INDEX `fk_Rating_Project_idx` (`projectId` ASC),
+    INDEX `fk_Rating_User_idx` (`userId` DESC),
+    INDEX `fk_Rating_Project_idx` (`projectId` DESC),
+    INDEX `fk_Rating_EventRating_idx` (`eventRatingId` DESC),
+    INDEX `fk_Rating_EventRatingCategory_idx` (`eventRatingCategoryId` DESC),
     CONSTRAINT `fk_Rating_User`
         FOREIGN KEY (`userId`)
             REFERENCES `User` (`id`)
@@ -175,6 +218,16 @@ CREATE TABLE IF NOT EXISTS `Rating`
     CONSTRAINT `fk_Rating_Project`
         FOREIGN KEY (`projectId`)
             REFERENCES `Project` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE,
+    CONSTRAINT `fk_Rating_EventRating`
+        FOREIGN KEY (`eventRatingId`)
+            REFERENCES `EventRating` (`id`)
+            ON UPDATE NO ACTION
+            ON DELETE CASCADE,
+    CONSTRAINT `fk_Rating_EventRatingCategory`
+        FOREIGN KEY (`eventRatingCategoryId`)
+            REFERENCES `EventRatingCategory` (`id`)
             ON DELETE NO ACTION
             ON UPDATE CASCADE
 )
