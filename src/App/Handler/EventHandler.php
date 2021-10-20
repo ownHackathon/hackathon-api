@@ -32,7 +32,7 @@ class EventHandler implements RequestHandlerInterface
         $data = $this->hydrator->extract($event);
 
         $endTime = clone $event->getStartTime();
-
+        // TODO: Move To Model
         $data['endTime'] = $endTime->add(new DateInterval('P' . $event->getDuration() . 'D'));
         $data['eventUser'] = $user->getName();
         $data['eventUserId'] = $user->getId();

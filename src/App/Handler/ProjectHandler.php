@@ -3,6 +3,7 @@
 namespace App\Handler;
 
 use App\Model\Project;
+use App\Model\ProjectCategoryRating;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Template\TemplateRendererInterface;
@@ -22,8 +23,16 @@ class ProjectHandler implements RequestHandlerInterface
     {
         $project = $request->getAttribute(Project::class);
         $participant = $request->getAttribute('user');
+        $projectCategoryRating = $request->getAttribute(ProjectCategoryRating::class);
+        $projectCategoryRatingResult = $request->getAttribute('projectCategoryRatingResult');
 
-        $data = array_merge($this->hydrator->extract($project), $this->hydrator->extract($participant));
+        $data = array_merge(
+            $this->hydrator->extract($project),
+            $this->hydrator->extract($participant),
+        );
+        $data['categoryRating'] = $projectCategoryRating;
+        $data['ratingResult'] = $projectCategoryRatingResult;
+
 
         return new HtmlResponse($this->template->render('app::project', $data));
     }

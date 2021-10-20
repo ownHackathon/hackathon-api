@@ -41,6 +41,7 @@ return static function (Mezzio\Application $app): void {
             App\Middleware\ProjectMiddleware::class,
             App\Middleware\ParticipantUserMiddleware::class,
             App\Middleware\UserMiddleware::class,
+            App\Middleware\ProjectCategoryRatingMiddleware::class,
             App\Handler\ProjectHandler::class,
         ],
         App\Handler\ProjectHandler::class

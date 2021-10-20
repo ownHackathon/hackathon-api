@@ -1,14 +1,16 @@
 <?php $this->headTitle('Project');
 ?>
-<h1 class="text-center"><?= $this->escapeHtml($this->title); ?></h1>
-<p><?= $this->escapeHtml($this->description); ?></p>
-<div class="container-fluid"
+    <h1 class="text-center"><?= $this->escapeHtml($this->title); ?></h1>
+    <p><?= $this->escapeHtml($this->description); ?></p>
+    <div class="container-fluid"
     <u>
         <li>
-            git Repository: <a href="<?= $this->escapeHtml($this->gitRepoUri); ?>" target="_blank"><?= $this->escapeHtml($this->gitRepoUri); ?> <i class="fas fa-external-link-alt external"></i></a>
+            git Repository: <a href="<?= $this->escapeHtml($this->gitRepoUri); ?>" target="_blank"><?= $this->escapeHtml($this->gitRepoUri); ?> <i
+                        class="fas fa-external-link-alt external"></i></a>
         </li>
         <li>
-            Demo Seite: <a href="<?= $this->escapeHtml($this->demoPageUri); ?>" target="_blank"><?= $this->escapeHtml($this->demoPageUri); ?> <i class="fas fa-external-link-alt external"></i></a>
+            Demo Seite: <a href="<?= $this->escapeHtml($this->demoPageUri); ?>" target="_blank"><?= $this->escapeHtml($this->demoPageUri); ?> <i
+                        class="fas fa-external-link-alt external"></i></a>
         </li>
         <li>
             erstellt am: <?= $this->createTime->format('j.m.Y'); ?>
@@ -17,4 +19,26 @@
             Besitzer: <a href="/user/<?= $this->participantId; ?>"><?= $this->escapeHtml($this->name); ?></a>
         </li>
     </u>
-</div>
+    </div>
+<?php
+if ($this->categoryRating):
+    ?>
+    <div class="container-sm">
+        <?php
+        foreach ($this->categoryRating as $rating):
+            ?>
+            <div class="row">
+                <div class="col-2"><?= $rating->getTitle(); ?>:</div>
+                <div class="col-2"><?= $rating->getRatingResult(); ?></div>
+            </div>
+        <?php
+        endforeach;
+        ?>
+        <div class="row">
+            <div class="col-2">Gesamt:</div>
+            <div class="col-2"><?= $this->ratingResult; ?></div>
+        </div>
+    </div>
+<?php
+endif;
+?>

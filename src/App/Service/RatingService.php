@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Model\ProjectCategoryRating;
 use App\Model\Rating;
 use App\Table\RatingTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -25,6 +26,17 @@ class RatingService
             throw new InvalidArgumentException('Could not find Rating', 400);
         }
         return $this->hydrator->hydrate($rating, new Rating());
+    }
+
+    public function findProjectCategoryRatingByProjectId(int $projectId): ?array
+    {
+        $projectCategoryRating = $this->table->findProjectCategoryRatingByProjectId($projectId);
+
+        if (!$projectCategoryRating) {
+            return null;
+        }
+
+        return $this->convertArrayToClassArray($projectCategoryRating, ProjectCategoryRating::class);
     }
 
     public function findAll(): ?array

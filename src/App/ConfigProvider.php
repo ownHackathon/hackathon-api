@@ -23,6 +23,7 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\PingHandler::class,
+                Rating\ProjectRatingCalculator::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
@@ -38,6 +39,7 @@ class ConfigProvider
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantUserMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
@@ -99,6 +101,10 @@ class ConfigProvider
             ],
             Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
+            ],
+            Middleware\ProjectCategoryRatingMiddleware::class => [
+                Service\RatingService::class,
+                Rating\ProjectRatingCalculator::class,
             ],
             Middleware\ParticipantUserMiddleware::class => [
                 Service\ParticipantService::class,
