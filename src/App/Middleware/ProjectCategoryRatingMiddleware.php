@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use App\Model\Project;
 use App\Model\ProjectCategoryRating;
 use App\Rating\ProjectRatingCalculator;
 use App\Service\RatingService;
@@ -20,18 +21,21 @@ class ProjectCategoryRatingMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $projectId = (int)$request->getAttribute('projectId');
+        $isRatingReleased = $request->getAttribute('isRatingReleased');
 
-        $projectCategoryRating = $this->ratingService->findProjectCategoryRatingByProjectId($projectId);
-
-        $projectCategoryRatingResult = null;
-
-        if ($projectCategoryRating) {
-            $projectCategoryRatingResult = $this->projectRatingCalculator->calculateProjectRating($projectCategoryRating);
+        if (!$isRatingReleased) {
+            return $handler->handle($request);
         }
 
-        return $handler->handle($request->withAttribute(ProjectCategoryRating::class, $projectCategoryRating)
-                                        ->withAttribute('projectCategoryRatingResult', $projectCategoryRatingResult)
-        );
+        /** @var Project $project */
+        $project =  $request->getAttribute(Project::class);
+
+        $projectCategoryRating = $this->ratingService->findProjectCategoryRatingByProjectId($project->getId());
+
+        if ($projectCategoryRating) {
+            $request->withAttribute('projectCategoryRatingResult', $this->projectRatingCalculator->calculateProjectRating($projectCategoryRating));
+        }
+
+        return $handler->handle($request->withAttribute(ProjectCategoryRating::class, $projectCategoryRating));
     }
 }

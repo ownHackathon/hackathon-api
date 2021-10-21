@@ -60,4 +60,11 @@ class EventService
 
         return $this->convertArrayToClassArray($events, Event::class);
     }
+
+    public function isRatingCompleted(int $id): bool
+    {
+        $event = $this->findById($id);
+
+        return $event->isRatingCompleted();
+    }
 }

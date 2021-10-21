@@ -22,14 +22,15 @@ class ProjectHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $project = $request->getAttribute(Project::class);
-        $participant = $request->getAttribute('user');
+        $projectOwner = $request->getAttribute('projectOwner');
         $projectCategoryRating = $request->getAttribute(ProjectCategoryRating::class);
         $projectCategoryRatingResult = $request->getAttribute('projectCategoryRatingResult');
 
         $data = array_merge(
             $this->hydrator->extract($project),
-            $this->hydrator->extract($participant),
+            $this->hydrator->extract($projectOwner),
         );
+
         $data['categoryRating'] = $projectCategoryRating;
         $data['ratingResult'] = $projectCategoryRatingResult;
 

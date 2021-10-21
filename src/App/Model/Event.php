@@ -15,6 +15,7 @@ class Event
     protected DateTime $startTime;
     protected int $duration;
     protected bool $active;
+    protected bool $ratingCompleted;
 
     public function getId(): int
     {
@@ -114,12 +115,24 @@ class Event
 
     public function isActive(): bool
     {
-        return (bool)$this->active;
+        return $this->active;
     }
 
     public function setActive(int|bool $active): self
     {
         $this->active = (bool)$active;
+
+        return $this;
+    }
+
+    public function isRatingCompleted(): bool
+    {
+        return $this->ratingCompleted;
+    }
+
+    public function setRatingCompleted(int|bool $ratingCompleted): self
+    {
+        $this->ratingCompleted = (bool)$ratingCompleted;
 
         return $this;
     }

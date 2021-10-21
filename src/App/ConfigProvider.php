@@ -38,10 +38,13 @@ class ConfigProvider
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ParticipantUserMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectEventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
@@ -90,28 +93,37 @@ class ConfigProvider
                 ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
             ],
-            Middleware\EventParticipantMiddleware::class => [
-                Service\ParticipantService::class,
+            Middleware\EventListMiddleware::class => [
+                Service\EventService::class,
             ],
             Middleware\EventMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventListMiddleware::class => [
+            Middleware\EventParticipantMiddleware::class => [
+                Service\ParticipantService::class,
+            ],
+            Middleware\EventRatingReleasedMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\ProjectMiddleware::class => [
+            Middleware\ParticipantProjectMiddleware::class => [
                 Service\ProjectService::class,
+                Service\UserService::class,
             ],
             Middleware\ProjectCategoryRatingMiddleware::class => [
                 Service\RatingService::class,
                 Rating\ProjectRatingCalculator::class,
             ],
-            Middleware\ParticipantUserMiddleware::class => [
-                Service\ParticipantService::class,
+            Middleware\ProjectEventRatingReleasedMiddleware::class => [
+                Service\EventService::class,
             ],
-            Middleware\ParticipantProjectMiddleware::class => [
+            Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
+            ],
+            Middleware\ProjectOwnerMiddleware::class => [
                 Service\UserService::class,
+            ],
+            Middleware\ProjectParticipantMiddleware::class => [
+                Service\ParticipantService::class,
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
@@ -119,7 +131,6 @@ class ConfigProvider
             Middleware\UserMiddleware::class => [
                 Service\UserService::class,
             ],
-
             Service\EventRatingCategoryService::class => [
                 Table\EventRatingCategoryTable::class,
                 ClassMethodsHydrator::class,
@@ -152,7 +163,6 @@ class ConfigProvider
                 Table\UserTable::class,
                 ClassMethodsHydrator::class,
             ],
-
             Table\EventRatingCategoryTable::class => [
                 Query::class,
             ],
@@ -176,7 +186,7 @@ class ConfigProvider
             ],
             Table\UserTable::class => [
                 Query::class,
-            ],
+            ]
         ];
     }
 }
