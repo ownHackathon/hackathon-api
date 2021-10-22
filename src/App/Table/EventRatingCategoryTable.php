@@ -11,11 +11,4 @@ class EventRatingCategoryTable extends AbstractTable
     {
         parent::__construct($query, 'EventRatingCategory');
     }
-
-    public function findAll(): bool|array
-    {
-        return $this->query->from($this->table)
-            ->fetchAll();
-    }
-
 }

@@ -18,4 +18,9 @@ class AbstractTable
             ->where('id', $id)
             ->fetch();
     }
+
+    public function findAll(): bool|array
+    {
+        return $this->query->from($this->table)->fetchAll();
+    }
 }

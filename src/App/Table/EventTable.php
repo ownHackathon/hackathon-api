@@ -12,11 +12,6 @@ class EventTable extends AbstractTable
         parent::__construct($query, 'Event');
     }
 
-    public function findAll(): bool|array
-    {
-        return $this->query->from($this->table)->fetchAll();
-    }
-
     public function findAllActive(): bool|array
     {
         return $this->query->from($this->table)

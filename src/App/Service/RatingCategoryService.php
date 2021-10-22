@@ -24,7 +24,7 @@ class RatingCategoryService
         if (!$ratingCategory) {
             throw new InvalidArgumentException('Could not find RatingCategory', 400);
         }
-        return $this->hydrator->hydrate($ratingCategory, new Rating());
+        return $this->hydrator->hydrate($ratingCategory, new RatingCategory());
     }
 
     public function findAll(): ?array

@@ -3,8 +3,6 @@
 namespace App\Middleware;
 
 use App\Model\Participant;
-use App\Model\Project;
-use App\Service\ParticipantService;
 use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +18,7 @@ class ProjectOwnerMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Project $project */
+        /** @var Participant $participant */
         $participant = $request->getAttribute(Participant::class);
 
         $projectOwner = $this->userService->findById($participant->getUserId());
