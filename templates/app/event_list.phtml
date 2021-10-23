@@ -1,11 +1,13 @@
-<?php $this->headTitle('Event.List'); ?>
+<?php use App\Model\Event;
+
+$this->headTitle('Event.List'); ?>
 
 <div class="container-fluid">
     <p>Hier bekommt ihr eine Übersicht über alle derzeit laufenden und bereits abgeschlossenen Events<p>
     <p>
         <h4 class="text-decoration-underline">Aktive Events</h4>
         <?php
-        /** @var \App\Model\Event $event */
+        /** @var Event $event */
         foreach ($this->activeEvents as $event):
             ?>
         <p class="fw-bolder">
@@ -19,7 +21,7 @@
     <p>
         <h4 class="text-decoration-underline">Abgeschlossene Events</h4>
         <?php
-        /** @var \App\Model\Event $event */
+        /** @var Event $event */
         foreach ($this->notActiveEvents as $event):
             ?>
             <p class="fw-bolder">
