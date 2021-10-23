@@ -24,7 +24,7 @@ class TemplateDefaultsMiddleware implements MiddlewareInterface
         $isLoggedIn = false;
         $userName = 'Gast';
 
-        if (isset($user)) {
+        if (null !== $user) {
             $isLoggedIn = true;
             $userName = $user->getName();
         }
