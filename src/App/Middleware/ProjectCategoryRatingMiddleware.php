@@ -28,7 +28,7 @@ class ProjectCategoryRatingMiddleware implements MiddlewareInterface
         }
 
         /** @var Project $project */
-        $project =  $request->getAttribute(Project::class);
+        $project = $request->getAttribute(Project::class);
 
         $projectCategoryRating = $this->ratingService->findProjectCategoryRatingByProjectId($project->getId());
 
