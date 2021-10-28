@@ -20,10 +20,10 @@ class LogoutHandler implements RequestHandlerInterface
 
         /** @var SessionInterface $session */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-        $session->clear();
+        $session->unset('token');
 
         $flashMessage->flash('logout', 'Sitzung abgemeldet');
 
-        return new RedirectResponse('/');
+        return new RedirectResponse('/', 303);
     }
 }

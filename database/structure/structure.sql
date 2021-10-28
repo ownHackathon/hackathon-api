@@ -234,6 +234,19 @@ CREATE TABLE IF NOT EXISTS `Rating`
 )
     ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `TopicPool`
+(
+    `id`          INT UNSIGNED        NOT NULL AUTO_INCREMENT,
+    `eventId`     INT UNSIGNED        NULL,
+    `topic`       VARCHAR(1024)       NOT NULL,
+    `description` VARCHAR(8096)       NULL,
+    `accepted`    TINYINT(1) UNSIGNED NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_TopicPool_Event_idx` (`eventId` DESC),
+    INDEX `fk_TopicPool_accepted_idx` (`accepted` DESC)
+)
+    ENGINE = InnoDB;
+
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;

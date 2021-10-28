@@ -28,13 +28,12 @@ class LoginHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var User $user */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         /** @var FlashMessagesInterface $flashMessage */
         $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
-        if (null !== $user) {
+        if ($user instanceof User) {
             $token = $this->generateToken(
                 $user->getId(),
                 $user->getName(),

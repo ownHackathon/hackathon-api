@@ -8,7 +8,7 @@ class LoginAuthenticationService
 {
     public function isUserDataCorrect(?User $user, string $password): bool
     {
-        if (!isset($user)) {
+        if (null === $user) {
             return false;
         }
 

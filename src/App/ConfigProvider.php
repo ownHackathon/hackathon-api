@@ -55,6 +55,7 @@ class ConfigProvider
                 Service\ProjectService::class => ConfigAbstractFactory::class,
                 Service\RatingCategoryService::class => ConfigAbstractFactory::class,
                 Service\RatingService::class => ConfigAbstractFactory::class,
+                Service\TopicPoolService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => ConfigAbstractFactory::class,
 
                 Table\EventRatingCategoryTable::class => ConfigAbstractFactory::class,
@@ -64,6 +65,7 @@ class ConfigProvider
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\RatingCategoryTable::class => ConfigAbstractFactory::class,
                 Table\RatingTable::class => ConfigAbstractFactory::class,
+                Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -159,6 +161,10 @@ class ConfigProvider
                 Table\RatingTable::class,
                 ClassMethodsHydrator::class,
             ],
+            Service\TopicPoolService::class => [
+                Table\TopicPoolTable::class,
+                ClassMethodsHydrator::class,
+            ],
             Service\UserService::class => [
                 Table\UserTable::class,
                 ClassMethodsHydrator::class,
@@ -184,9 +190,12 @@ class ConfigProvider
             Table\RatingTable::class => [
                 Query::class,
             ],
+            Table\TopicPoolTable::class => [
+                Query::class,
+            ],
             Table\UserTable::class => [
                 Query::class,
-            ]
+            ],
         ];
     }
 }
