@@ -19,7 +19,7 @@ class TemplateDefaultsMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var User $user */
-        $user = $request->getAttribute(User::class);
+        $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         $isLoggedIn = false;
         $userName = 'Gast';

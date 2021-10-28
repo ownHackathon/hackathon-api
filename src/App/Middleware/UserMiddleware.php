@@ -24,6 +24,6 @@ class UserMiddleware implements MiddlewareInterface
 
         $user = $this->userService->findById($userId);
 
-        return $handler->handle($request->withAttribute('user', $user));
+        return $handler->handle($request->withAttribute(User::class, $user));
     }
 }

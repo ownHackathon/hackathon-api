@@ -39,7 +39,7 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
 
         $flashMessage->flash('info', 'Erfolgreich angemeldet');
         return $handler->handle(
-            $request->withAttribute(User::class, $user)
+            $request->withAttribute(User::USER_ATTRIBUTE, $user)
         );
     }
 }

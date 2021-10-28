@@ -3,6 +3,8 @@
 namespace Authentication;
 
 use App\Service\UserService;
+use Authentication\Handler\LoginHandlerFactory;
+use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Template\TemplateRendererInterface;
 
@@ -23,8 +25,9 @@ class ConfigProvider
                 Service\LoginAuthenticationService::class,
             ],
             'factories' => [
-                Handler\LoginHandler::class => ConfigAbstractFactory::class,
+                Handler\LoginHandler::class => LoginHandlerFactory::class,
 
+                Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -33,10 +36,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Handler\LoginHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-
             Middleware\LoginAuthenticationMiddleware::class => [
                 UserService::class,
                 Service\LoginAuthenticationService::class,

@@ -26,7 +26,7 @@ class EventHandler implements RequestHandlerInterface
         $event = $request->getAttribute(Event::class);
 
         /** @var User $user */
-        $user = $request->getAttribute('user');
+        $user = $request->getAttribute(User::class);
 
         $participants = $request->getAttribute('participants');
         $data = $this->hydrator->extract($event);

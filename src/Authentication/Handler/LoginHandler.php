@@ -3,6 +3,7 @@
 namespace Authentication\Handler;
 
 use App\Model\User;
+use Authentication\Service\JwtTokenGeneratorTrait;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Flash\FlashMessageMiddleware;
@@ -16,24 +17,36 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LoginHandler implements RequestHandlerInterface
 {
+    use JwtTokenGeneratorTrait;
+
     public function __construct(
         private TemplateRendererInterface $template,
+        private string $tokenSecret,
+        private int $tokenDuration
     ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $user = $request->getAttribute(User::class);
+        /** @var User $user */
+        $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         /** @var FlashMessagesInterface $flashMessage */
         $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
-        if (isset($user) && ($user instanceof User)) {
+        if (null !== $user) {
+            $token = $this->generateToken(
+                $user->getId(),
+                $user->getName(),
+                $this->tokenSecret,
+                $this->tokenDuration
+            );
+
             /** @var SessionInterface $session */
             $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-            $session->set('userId', $user->getId());
+            $session->set('token', $token);
 
-            return new RedirectResponse('/');
+            return new RedirectResponse('/', 303);
         }
 
         $data['loginerror'] = $flashMessage->getFlash('error');

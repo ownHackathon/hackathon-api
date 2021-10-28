@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Administration\Middleware\SessionUserMiddleware;
 use App\Middleware\TemplateDefaultsMiddleware;
+use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
@@ -21,6 +21,7 @@ return function (Application $app): void {
     $app->pipe(ServerUrlMiddleware::class);
 
     $app->pipe(SessionMiddleware::class);
+    $app->pipe(JwtAuthenticationMiddleware::class);
     $app->pipe(RouteMiddleware::class);
 
     $app->pipe(ImplicitHeadMiddleware::class);
@@ -29,7 +30,6 @@ return function (Application $app): void {
 
     $app->pipe(UrlHelperMiddleware::class);
 
-    $app->pipe(SessionUserMiddleware::class);
     $app->pipe(TemplateDefaultsMiddleware::class);
 
     $app->pipe(DispatchMiddleware::class);

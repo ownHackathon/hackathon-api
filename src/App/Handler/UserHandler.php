@@ -2,6 +2,7 @@
 
 namespace App\Handler;
 
+use App\Model\User;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Template\TemplateRendererInterface;
@@ -19,7 +20,7 @@ class UserHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $user = $request->getAttribute('user');
+        $user = $request->getAttribute(User::class);
 
         $data = $this->hydrator->extract($user);
 

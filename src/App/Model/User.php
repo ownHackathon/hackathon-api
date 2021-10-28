@@ -6,6 +6,8 @@ use DateTime;
 
 class User
 {
+    public const USER_ATTRIBUTE = 'user';
+
     protected int $id;
     protected int $roleId;
     protected string $name;

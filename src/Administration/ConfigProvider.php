@@ -22,7 +22,7 @@ class ConfigProvider
 
             ],
             'factories' => [
-                Middleware\SessionUserMiddleware::class => ConfigAbstractFactory::class,
+
             ],
         ];
     }
@@ -30,9 +30,7 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Middleware\SessionUserMiddleware::class => [
-                UserService::class,
-            ],
+
         ];
     }
 }
