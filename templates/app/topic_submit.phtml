@@ -1,0 +1,22 @@
+<?php $this->headTitle('Topic Submit');
+?>
+
+<div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+
+        <div class="card-body  text-center">
+            <h4 style="padding-bottom: 20px;">Themenvorschlag einreichen</h4>
+            <form name="loginBox" action="/topic/submit" method="post">
+                <div class="form-outline form-white" style="padding-bottom: 50px;">
+                    <label class="form-label text-white-50" for="topic">Thema</label>
+                    <input type="text" id="topic" name="topic" value="<?= $this->topic; ?>" class="form-control form-control-sg"/>
+                </div>
+                <div class="form-outline form-white" style="padding-bottom: 50px;">
+                    <label class="form-label text-white-50" for="description">Beschreibung</label>
+                    <textarea id="description" name="description" class="form-control form-control-sg"><?= $this->description; ?></textarea>
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Thema einreichen</button>
+            </form>
+        </div>
+    </div>
+</div>

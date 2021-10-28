@@ -33,6 +33,8 @@ class ConfigProvider
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
+                Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
+                Handler\TopicSubmitPostHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
@@ -89,6 +91,12 @@ class ConfigProvider
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,
+                TemplateRendererInterface::class,
+            ],
+            Handler\TopicSubmitHandler::class => [
+                TemplateRendererInterface::class,
+            ],
+            Handler\TopicSubmitPostHandler::class => [
                 TemplateRendererInterface::class,
             ],
             Handler\UserHandler::class => [

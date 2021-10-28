@@ -85,6 +85,22 @@ return static function (Mezzio\Application $app): void {
     );
 
     $app->get(
+        '/topic/submit',
+        [
+            App\Handler\TopicSubmitHandler::class,
+        ],
+        App\Handler\TopicSubmitHandler::class
+    );
+
+    $app->post(
+        '/topic/submit',
+        [
+            App\Handler\TopicSubmitPostHandler::class,
+        ],
+        App\Handler\TopicSubmitPostHandler::class
+    );
+
+    $app->get(
         '/api/ping',
         [
             App\Handler\PingHandler::class,
