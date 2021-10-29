@@ -33,8 +33,8 @@ class ConfigProvider
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
+                Handler\TopicHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicSubmitPostHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
@@ -48,6 +48,7 @@ class ConfigProvider
                 Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\EventRatingCategoryService::class => ConfigAbstractFactory::class,
@@ -93,10 +94,10 @@ class ConfigProvider
                 ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
             ],
-            Handler\TopicSubmitHandler::class => [
+            Handler\TopicHandler::class => [
                 TemplateRendererInterface::class,
             ],
-            Handler\TopicSubmitPostHandler::class => [
+            Handler\TopicSubmitHandler::class => [
                 TemplateRendererInterface::class,
             ],
             Handler\UserHandler::class => [
@@ -137,6 +138,10 @@ class ConfigProvider
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
+            ],
+            Middleware\TopicSubmitMiddleware::class => [
+                Service\TopicPoolService::class,
+                ClassMethodsHydrator::class,
             ],
             Middleware\UserMiddleware::class => [
                 Service\UserService::class,

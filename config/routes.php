@@ -87,17 +87,19 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/topic/submit',
         [
-            App\Handler\TopicSubmitHandler::class,
+            App\Handler\TopicHandler::class,
         ],
-        App\Handler\TopicSubmitHandler::class
+        App\Handler\TopicHandler::class
     );
 
     $app->post(
         '/topic/submit',
         [
-            App\Handler\TopicSubmitPostHandler::class,
+            Mezzio\Flash\FlashMessageMiddleware::class,
+            App\Middleware\TopicSubmitMiddleware::class,
+            App\Handler\TopicSubmitHandler::class,
         ],
-        App\Handler\TopicSubmitPostHandler::class
+        App\Handler\TopicSubmitHandler::class
     );
 
     $app->get(

@@ -17,6 +17,13 @@ class TopicPoolService
     ) {
     }
 
+    public function insert(TopicPool $topic): self
+    {
+        $this->table->insert($topic);
+
+        return $this;
+    }
+
     public function findById(int $id): TopicPool
     {
         $event = $this->table->findById($id);

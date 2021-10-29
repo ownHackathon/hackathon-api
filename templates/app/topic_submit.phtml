@@ -2,7 +2,30 @@
 ?>
 
 <div class="container py-5">
+    <p class="text-justify">
+    <h5 class="text-center">Hier ist Kreativität gefragt</h5>
+    Reicht uns eure Themenideen für die Hackathon ein.
+    Wünschenswert sind hier allgemeine Themen die sich aber auf eine Richtung festlegen.
+    So in der Art wie das Thema beim ersten Event <span class="fw-bold text-decoration-underline">Single Form Application</span>, denkbar sind auch Themenvorschläge basierend auf unserer
+    <a href="https://github.com/pdaus1405/project-ideas" target="_blank">Projektideen <i class="fas fa-external-link-alt external"></i></a> Sammlung.<br>
+    Anti-Themen sind dann eher sowas wie:<br>
+    <ul>
+        <li>Login</li>
+        <li>Adminpanel</li>
+    </ul>
+    </p>
     <div class="row d-flex justify-content-center align-items-center">
+        <?php if (isset($this->error)): ?>
+            <p class="text-danger text-center">
+                <?= $this->error ?>
+            </p>
+        <?php endif; ?>
+
+        <?php if (isset($this->info)): ?>
+            <p class="text-info text-center">
+                <?= $this->info ?>
+            </p>
+        <?php endif; ?>
 
         <div class="card-body  text-center">
             <h4 style="padding-bottom: 20px;">Themenvorschlag einreichen</h4>

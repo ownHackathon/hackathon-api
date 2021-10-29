@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicSubmitPostHandler implements RequestHandlerInterface
+class TopicHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template,
