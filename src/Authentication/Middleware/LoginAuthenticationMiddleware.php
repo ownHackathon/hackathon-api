@@ -34,7 +34,7 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            return $handler->handle($request->withAttribute('validationFailure', 'Benutzername und/oder Passwort nicht korrekt.'));
+            return $handler->handle($request->withAttribute('validationMessages', 'Benutzername und/oder Passwort nicht korrekt.'));
         }
 
         return $handler->handle(
