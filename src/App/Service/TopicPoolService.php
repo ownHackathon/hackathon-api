@@ -45,4 +45,33 @@ class TopicPoolService
 
         return $this->convertArrayToClassArray($events, TopicPool::class);
     }
+
+    public function isTopic(string $topic): bool
+    {
+        if (null === $this->findByTopic($topic)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function findByTopic(string $topic): ?TopicPool
+    {
+        $topic = $this->table->findByTopic($topic);
+
+        if (!$topic) {
+            return null;
+        }
+
+        return $this->hydrator->hydrate($topic, new TopicPool());
+    }
+
+    public function getEntriesStatistic(): array
+    {
+        return [
+            'allEntries' => $this->table->getCountEntries(),
+            'allAcceptedEntries' => $this->table->getCountEntriesAccepted(),
+            'allSelectionAvailableEntries' => $this->table->getCountEntriesSelectionAvailable(),
+        ];
+    }
 }

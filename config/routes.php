@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
@@ -49,6 +50,22 @@ return static function (Mezzio\Application $app): void {
     );
 
     $app->get(
+        '/user/register[/]',
+        [
+            Administration\Handler\UserRegisterHandler::class,
+        ],
+        Administration\Handler\UserRegisterHandler::class
+    );
+    $app->post(
+        '/user/register[/]',
+        [
+            Administration\Middleware\UserRegisterValidationMiddleware::class,
+            Administration\Middleware\UserRegisterMiddleware::class,
+            Administration\Handler\UserRegisterSubmitHandler::class,
+        ],
+        Administration\Handler\UserRegisterSubmitHandler::class
+    );
+    $app->get(
         '/user/{userId:\d+}[/]',
         [
             App\Middleware\UserMiddleware::class,
@@ -58,17 +75,16 @@ return static function (Mezzio\Application $app): void {
     );
 
     $app->get(
-        '/login',
+        '/login[/]',
         [
-            Mezzio\Flash\FlashMessageMiddleware::class,
             Authentication\Handler\LoginHandler::class,
         ],
         Authentication\Handler\LoginHandler::class
     );
     $app->post(
-        '/login',
+        '/login[/]',
         [
-            Mezzio\Flash\FlashMessageMiddleware::class,
+            Authentication\Middleware\LoginValidationMiddleware::class,
             Authentication\Middleware\LoginAuthenticationMiddleware::class,
             Authentication\Handler\LoginHandler::class,
         ],
@@ -76,27 +92,28 @@ return static function (Mezzio\Application $app): void {
     );
 
     $app->get(
-        '/logout',
+        '/logout[/]',
         [
-            Mezzio\Flash\FlashMessageMiddleware::class,
+
             Authentication\Handler\LogoutHandler::class,
         ],
         Authentication\Handler\LogoutHandler::class
     );
 
     $app->get(
-        '/topic/submit',
+        '/topic/submit[/]',
         [
+            App\Middleware\TopicEntryStatisticMiddleware::class,
             App\Handler\TopicHandler::class,
         ],
         App\Handler\TopicHandler::class
     );
 
     $app->post(
-        '/topic/submit',
+        '/topic/submit[/]',
         [
-            Mezzio\Flash\FlashMessageMiddleware::class,
             App\Middleware\TopicSubmitMiddleware::class,
+            App\Middleware\TopicEntryStatisticMiddleware::class,
             App\Handler\TopicSubmitHandler::class,
         ],
         App\Handler\TopicSubmitHandler::class

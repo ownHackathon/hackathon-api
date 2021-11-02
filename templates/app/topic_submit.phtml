@@ -28,6 +28,11 @@
         <?php endif; ?>
 
         <div class="card-body  text-center">
+            <p>
+                Es wurden insgesamt <?= $this->allEntries; ?> Themenvorschläge eingereicht.<br>
+                Davon sind <?= $this->allAcceptedEntries; ?> akzeptiert und <?= $this->allSelectionAvailableEntries; ?> davon
+                stehen für das nächste Event zur Verfügung.
+            </p>
             <h4 style="padding-bottom: 20px;">Themenvorschlag einreichen</h4>
             <form name="loginBox" action="/topic/submit" method="post">
                 <div class="form-outline form-white" style="padding-bottom: 50px;">

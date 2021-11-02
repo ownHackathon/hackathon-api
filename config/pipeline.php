@@ -6,6 +6,7 @@ use App\Middleware\TemplateDefaultsMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
+use Mezzio\Flash\FlashMessageMiddleware;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\ServerUrlMiddleware;
 use Mezzio\Helper\UrlHelperMiddleware;
@@ -21,6 +22,7 @@ return function (Application $app): void {
     $app->pipe(ServerUrlMiddleware::class);
 
     $app->pipe(SessionMiddleware::class);
+    $app->pipe(FlashMessageMiddleware::class);
     $app->pipe(JwtAuthenticationMiddleware::class);
     $app->pipe(RouteMiddleware::class);
 

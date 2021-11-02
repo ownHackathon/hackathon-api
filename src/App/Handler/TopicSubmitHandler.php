@@ -22,6 +22,7 @@ class TopicSubmitHandler implements RequestHandlerInterface
         /** @var FlashMessagesInterface $flashMessage */
         $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
+        $data = $request->getAttribute('topicEntriesStatistic');
         $data['error'] = $flashMessage->getFlash('error');
         $data['info'] = $flashMessage->getFlash('info');
 

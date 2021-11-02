@@ -5,8 +5,6 @@ namespace Authentication\Middleware;
 use App\Model\User;
 use App\Service\UserService;
 use Authentication\Service\LoginAuthenticationService;
-use Mezzio\Flash\FlashMessageMiddleware;
-use Mezzio\Flash\FlashMessagesInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -24,20 +22,21 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        /** @var FlashMessagesInterface $flashMessage */
-        $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+        $validation = $request->getAttribute('validationMessages');
 
-        $name = $data['name'];
+        if (null !== $validation) {
+            return $handler->handle($request);
+        }
+
+        $name = $data['userName'];
         $password = $data['password'];
 
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            $flashMessage->flashNow('error', 'Benutzername und/oder Passwort nicht korrekt.', 0);
-            return $handler->handle($request);
+            return $handler->handle($request->withAttribute('validationFailure', 'Benutzername und/oder Passwort nicht korrekt.'));
         }
 
-        $flashMessage->flash('info', 'Erfolgreich angemeldet');
         return $handler->handle(
             $request->withAttribute(User::USER_ATTRIBUTE, $user)
         );

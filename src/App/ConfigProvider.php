@@ -24,6 +24,9 @@ class ConfigProvider
             'invokables' => [
                 Handler\PingHandler::class,
                 Rating\ProjectRatingCalculator::class,
+                Validator\Input\UsernameInput::class,
+                Validator\Input\PasswordInput::class,
+                Validator\Input\EmailInput::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
@@ -48,6 +51,7 @@ class ConfigProvider
                 Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
@@ -138,6 +142,9 @@ class ConfigProvider
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
+            ],
+            Middleware\TopicEntryStatisticMiddleware::class => [
+                Service\TopicPoolService::class,
             ],
             Middleware\TopicSubmitMiddleware::class => [
                 Service\TopicPoolService::class,

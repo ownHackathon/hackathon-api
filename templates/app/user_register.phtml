@@ -1,0 +1,38 @@
+<?php $this->headTitle('User Register');
+
+?>
+<div class="container w-75">
+    <h4 class="fw-bold text-center">Account erstellen</h4>
+    <form name="registerBox" action="/user/register" method="post">
+        <div class="form-outline form-white py-2">
+            <label class="form-label text-white-50" for="userName">Benutzername</label>
+            <?php
+            if (!empty($this->validationMessages['userName'])):
+                ?>
+                <span class="text-danger text-smaller">Benutzername muss mindestens 3 Zeichen lang sein und darf höchsten 50 Zeichen betragen</span>
+            <?php endif; ?>
+            <input type="text" id="userName" name="userName" value="<?= $this->userName; ?>" class="form-control form-control-sg"/>
+        </div>
+        <div class="form-outline form-white py-2">
+            <label class="form-label text-white-50" for="password">Passwort</label>
+            <?php
+            if (!empty($this->validationMessages['password'])):
+                ?>
+                <span class="text-danger text-smaller">Passwort muss mindestens 6 Zeichen lang sein</span>
+            <?php endif; ?>
+            <input type="password" id="password" name="password" class="form-control form-control-sg"/>
+        </div>
+        <div class="form-outline form-white py-2">
+            <label class="form-label text-white-50" for="email">E-Mail <span class="text-smaller">(optional)</span> </label>
+            <?php
+            if (!empty($this->validationMessages['email'])):
+                ?>
+                <span class="text-danger text-smaller">Angegebene E-Mail bitte prüfen.</span>
+            <?php endif; ?>
+            <input type="email" id="email" name="email" value="<?= $this->email; ?>" class="form-control form-control-sg"/>
+        </div>
+        <div class="form-outline form-white py-2 text-center">
+            <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrieren</button>
+        </div>
+    </form>
+</div>

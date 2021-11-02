@@ -28,9 +28,10 @@ class TopicSubmitMiddleware implements MiddlewareInterface
         $data = $request->getParsedBody();
         $topic = $this->hydrator->hydrate($data, new TopicPool());
 
-
         if (empty($data['topic'])) {
             $flashMessage->flashNow('error', 'Thema darf nicht leer sein.', 0);
+        } elseif ($this->topicPoolService->isTopic($data['topic'])) {
+            $flashMessage->flashNow('error', 'Das Thema konnten wir leider nicht annehmen.', 0);
         } else {
             $this->topicPoolService->insert($topic);
             $flashMessage->flashNow('info', 'Danke für den Themenvorschlag', 0);

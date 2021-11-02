@@ -13,6 +13,13 @@ class TopicPoolTable extends AbstractTable
         parent::__construct($query, 'TopicPool');
     }
 
+    public function findByTopic(string $topic): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('`topic`', $topic)
+            ->fetch();
+    }
+
     public function insert(TopicPool $topic): self
     {
         $values = [
@@ -23,5 +30,32 @@ class TopicPoolTable extends AbstractTable
         $this->query->insertInto($this->table, $values)->execute();
 
         return $this;
+    }
+
+    public function getCountEntries(): int
+    {
+        $data = $this->query->from($this->table)
+            ->select('COUNT(`id`) AS countEntries')
+            ->fetch();
+        return $data['countEntries'];
+    }
+
+    public function getCountEntriesAccepted(): int
+    {
+        $data = $this->query->from($this->table)
+            ->select('COUNT(`id`) AS countEntries')
+            ->where('`accepted`', 1)
+            ->fetch();
+        return $data['countEntries'];
+    }
+
+    public function getCountEntriesSelectionAvailable(): int
+    {
+        $data = $this->query->from($this->table)
+            ->select('COUNT(`id`) AS countEntries')
+            ->where('`accepted`', 1)
+            ->where('`eventId`', null)
+            ->fetch();
+        return $data['countEntries'];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Table;
 
 use Administration\Table\AbstractTable;
+use App\Model\User;
 use Envms\FluentPDO\Query;
 
 class UserTable extends AbstractTable
@@ -17,5 +18,26 @@ class UserTable extends AbstractTable
         return $this->query->from($this->table)
             ->where('name', $name)
             ->fetch();
+    }
+
+    public function findByEMail(string $email): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('email', $email)
+            ->fetch();
+    }
+
+    public function insert(User $user): self
+    {
+        $values = [
+            'roleId' => $user->getRoleId(),
+            'name' => $user->getName(),
+            'password' => $user->getPassword(),
+            'email' => $user->getEmail(),
+        ];
+
+        $this->query->insertInto($this->table, $values)->execute();
+
+        return $this;
     }
 }

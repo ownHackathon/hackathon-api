@@ -6,8 +6,6 @@ use App\Model\User;
 use Authentication\Service\JwtTokenGeneratorTrait;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Flash\FlashMessageMiddleware;
-use Mezzio\Flash\FlashMessagesInterface;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionMiddleware;
 use Mezzio\Template\TemplateRendererInterface;
@@ -29,9 +27,7 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
-
-        /** @var FlashMessagesInterface $flashMessage */
-        $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+        $data['isErrorAtLogin'] = (null !== $request->getAttribute('validationMessages'));
 
         if ($user instanceof User) {
             $token = $this->generateToken(
@@ -48,7 +44,6 @@ class LoginHandler implements RequestHandlerInterface
             return new RedirectResponse('/', 303);
         }
 
-        $data['loginerror'] = $flashMessage->getFlash('error');
         return new HtmlResponse($this->template->render('app::loginbox', $data));
     }
 }

@@ -3,10 +3,10 @@
 namespace Authentication;
 
 use App\Service\UserService;
+use App\Validator\Input;
 use Authentication\Handler\LoginHandlerFactory;
-use Authentication\Middleware\JwtAuthenticationMiddleware;
+use Authentication\Validator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
 {
@@ -29,6 +29,9 @@ class ConfigProvider
 
                 Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\LoginValidationMiddleware::class => ConfigAbstractFactory::class,
+
+                Validator\LoginValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -39,6 +42,14 @@ class ConfigProvider
             Middleware\LoginAuthenticationMiddleware::class => [
                 UserService::class,
                 Service\LoginAuthenticationService::class,
+            ],
+            Middleware\LoginValidationMiddleware::class => [
+                Validator\LoginValidator::class,
+            ],
+
+            Validator\LoginValidator::class => [
+                Input\UsernameInput::class,
+                Input\PasswordInput::class,
             ],
         ];
     }
