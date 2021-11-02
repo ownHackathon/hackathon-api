@@ -4,11 +4,11 @@ namespace App\Model;
 
 class TopicPool
 {
-    private int $id;
-    private ?int $eventId;
-    private string $topic;
-    private ?string $description;
-    private ?bool $accepted;
+    protected int $id;
+    protected ?int $eventId;
+    protected string $topic;
+    protected ?string $description;
+    protected ?bool $accepted;
 
     public function getId(): int
     {
