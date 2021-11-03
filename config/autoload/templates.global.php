@@ -3,8 +3,9 @@
 return [
     'templates' => [
         'paths' => [
-            'app'    => [ROOT_DIR . 'templates' . DS . 'app'],
-            'error'  => [ROOT_DIR . 'templates' . DS . 'error'],
+            'app' => [ROOT_DIR . 'templates' . DS . 'app'],
+            'admin' => [ROOT_DIR . 'templates' . DS . 'admin'],
+            'error' => [ROOT_DIR . 'templates' . DS . 'error'],
             'layout' => [ROOT_DIR . 'templates' . DS . 'layout'],
         ],
     ],
@@ -12,7 +13,7 @@ return [
         'invokables' => [
 
         ],
-        'factories'  => [
+        'factories' => [
 
         ],
     ],

@@ -27,6 +27,7 @@ class ConfigProvider
 
             ],
             'factories' => [
+                Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\UserRegisterHandler::class => ConfigAbstractFactory::class,
                 Handler\UserRegisterSubmitHandler::class => ConfigAbstractFactory::class,
 
@@ -41,6 +42,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            Handler\IndexHandler::class => [
+                TemplateRendererInterface::class,
+            ],
             Handler\UserRegisterHandler::class => [
                 TemplateRendererInterface::class,
             ],

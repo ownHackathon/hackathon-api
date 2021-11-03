@@ -126,4 +126,13 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\PingHandler::class
     );
+
+    $app->get(
+        '/admin[/]',
+        [
+            Authentication\Middleware\AdministrationAuthenticationMiddleware::class,
+            Administration\Handler\IndexHandler::class,
+        ],
+        Administration\Handler\IndexHandler::class
+    );
 };
