@@ -32,30 +32,30 @@ class TopicPoolTable extends AbstractTable
         return $this;
     }
 
-    public function getCountEntries(): int
+    public function getCountTopic(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countEntries')
+            ->select('COUNT(`id`) AS countTopic')
             ->fetch();
-        return $data['countEntries'];
+        return $data['countTopic'];
     }
 
-    public function getCountEntriesAccepted(): int
+    public function getCountTopicAccepted(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countEntries')
+            ->select('COUNT(`id`) AS countTopic')
             ->where('`accepted`', 1)
             ->fetch();
-        return $data['countEntries'];
+        return $data['countTopic'];
     }
 
-    public function getCountEntriesSelectionAvailable(): int
+    public function getCountTopicSelectionAvailable(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countEntries')
+            ->select('COUNT(`id`) AS countTopic')
             ->where('`accepted`', 1)
             ->where('`eventId`', null)
             ->fetch();
-        return $data['countEntries'];
+        return $data['countTopic'];
     }
 }

@@ -69,9 +69,9 @@ class TopicPoolService
     public function getEntriesStatistic(): array
     {
         return [
-            'allEntries' => $this->table->getCountEntries(),
-            'allAcceptedEntries' => $this->table->getCountEntriesAccepted(),
-            'allSelectionAvailableEntries' => $this->table->getCountEntriesSelectionAvailable(),
+            'allTopic' => $this->table->getCountTopic(),
+            'allAcceptedTopic' => $this->table->getCountTopicAccepted(),
+            'allSelectionAvailableTopic' => $this->table->getCountTopicSelectionAvailable(),
         ];
     }
 }
