@@ -72,6 +72,8 @@ class UserService
 
     private function isEmailExist(?string $email): bool
     {
+        $isUser = null;
+
         if (null !== $email) {
             $isUser = $this->findByEMail($email);
         }
