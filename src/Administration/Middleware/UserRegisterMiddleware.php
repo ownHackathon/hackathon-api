@@ -33,7 +33,7 @@ class UserRegisterMiddleware implements MiddlewareInterface
         if (!$this->userService->create($user)) {
             $validationMessages = [
                 'userName' => [
-                    'message' => 'Ich weiß auch nicht. Aber dieser Benutzername oder E-Mail steht dir nicht zur Verfügung.',
+                    'message' => 'Invalid registration data',
                 ],
             ];
 
