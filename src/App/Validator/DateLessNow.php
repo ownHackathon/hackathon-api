@@ -9,8 +9,8 @@ class DateLessNow extends AbstractValidator
 {
     public const VALID_DATE = 'valid_date';
 
-    protected $messageTemplates = [
-        self::VALID_DATE => "Datum liegt in der Vergangenheit",
+    protected array $messageTemplates = [
+        self::VALID_DATE => "Date is in the past",
     ];
 
     public function isValid($value)
