@@ -2,21 +2,22 @@
 <div class="container py-5">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <?php if ($this->isErrorAtLogin): ?>
-                <p class="text-danger text-center">
-                    Benutzername und/oder Passwort nicht korrekt.
-                </p>
-            <?php endif; ?>
             <div class="card bg-dark text-white" style="border-radius: 1rem;">
                 <div class="card-body  text-center">
                     <form name="loginBox" action="/login" method="post">
                         <h4 class="fw-bold">Deine Anmeldedaten</h4>
                         <div class="form-outline form-white">
                             <label class="form-label text-white-50" for="userName">Benutzername</label>
-                            <input type="text" id="userName" name="userName" class="form-control form-control-sg"/>
+                            <?php if (isset($this->validationMessages['userName'])): ?>
+                                <?= "<br />" . $this->partial('app::/partial/validation_error_message', ['data' => $this->validationMessages['userName']]); ?>
+                            <?php endif; ?>
+                            <input type="text" id="userName" name="userName" value="<?= $this->userName; ?>" class="form-control form-control-sg"/>
                         </div>
                         <div class="form-outline form-white">
                             <label class="form-label text-white-50" for="password">Passwort</label>
+                            <?php if (isset($this->validationMessages['password'])): ?>
+                                <?= "<br />" . $this->partial('app::/partial/validation_error_message', ['data' => $this->validationMessages['password']]); ?>
+                            <?php endif; ?>
                             <input type="password" id="password" name="password" class="form-control form-control-sg"/>
                         </div>
                         <p class="small pb-lg-2 py-2"><a href="#!">Passwort vergessen?</a></p>

@@ -27,7 +27,7 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
-        $data['isErrorAtLogin'] = (null !== $request->getAttribute('validationMessages'));
+        $data['validationMessages'] = $request->getAttribute('validationMessages');
 
         if ($user instanceof User) {
             $token = $this->generateToken(
@@ -44,6 +44,8 @@ class LoginHandler implements RequestHandlerInterface
             return new RedirectResponse('/', 303);
         }
 
+        $postData = $request->getParsedBody();
+        $data['userName'] = $postData['userName'] ?? null;
         return new HtmlResponse($this->template->render('app::loginbox', $data));
     }
 }

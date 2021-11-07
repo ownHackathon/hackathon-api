@@ -7,7 +7,6 @@ use DateTime;
 class User
 {
     public const USER_ATTRIBUTE = 'loggedInUser';
-    public const USER_DEFAULT_ROLE = 3;
 
     protected int $id;
     protected int $roleId;

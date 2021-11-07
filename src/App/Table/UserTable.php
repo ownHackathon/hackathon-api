@@ -13,20 +13,6 @@ class UserTable extends AbstractTable
         parent::__construct($query, 'User');
     }
 
-    public function findByName(string $name): bool|array
-    {
-        return $this->query->from($this->table)
-            ->where('name', $name)
-            ->fetch();
-    }
-
-    public function findByEMail(string $email): bool|array
-    {
-        return $this->query->from($this->table)
-            ->where('email', $email)
-            ->fetch();
-    }
-
     public function insert(User $user): self
     {
         $values = [
@@ -39,5 +25,19 @@ class UserTable extends AbstractTable
         $this->query->insertInto($this->table, $values)->execute();
 
         return $this;
+    }
+
+    public function findByName(string $name): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('name', $name)
+            ->fetch();
+    }
+
+    public function findByEMail(string $email): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('email', $email)
+            ->fetch();
     }
 }

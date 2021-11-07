@@ -3,7 +3,7 @@
 namespace App\Table;
 
 use Administration\Table\AbstractTable;
-use App\Model\TopicPool;
+use App\Model\Topic;
 use Envms\FluentPDO\Query;
 
 class TopicPoolTable extends AbstractTable
@@ -20,7 +20,7 @@ class TopicPoolTable extends AbstractTable
             ->fetch();
     }
 
-    public function insert(TopicPool $topic): self
+    public function insert(Topic $topic): self
     {
         $values = [
             'topic' => $topic->getTopic(),

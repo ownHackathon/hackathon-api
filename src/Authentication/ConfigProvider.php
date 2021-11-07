@@ -22,6 +22,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Middleware\IsLoginAuthenticationMiddleware::class,
+                Middleware\LoginValidationMiddleware::class,
                 Service\LoginAuthenticationService::class,
             ],
             'factories' => [

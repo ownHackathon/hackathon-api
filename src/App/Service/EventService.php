@@ -17,6 +17,17 @@ class EventService
     ) {
     }
 
+    public function create(Event $event): bool
+    {
+        if ($this->isTopicExist($event->getName())) {
+            return false;
+        }
+
+        $this->table->insert($event);
+
+        return true;
+    }
+
     public function findById(int $id): Event
     {
         $event = $this->table->findById($id);
@@ -28,6 +39,18 @@ class EventService
         return $this->hydrator->hydrate($event, new Event());
     }
 
+    public function findByTopic(string $topic): ?Event
+    {
+        $event = $this->table->findByTopic($topic);
+
+        if (!$event) {
+            return null;
+        }
+
+        return $this->hydrator->hydrate($event, new Event());
+    }
+
+    /** @return null|Event[] */
     public function findAll(): ?array
     {
         $events = $this->table->findAll();
@@ -39,6 +62,7 @@ class EventService
         return $this->convertArrayToClassArray($events, Event::class);
     }
 
+    /** @return null|Event[] */
     public function findAllActive(): ?array
     {
         $events = $this->table->findAllActive();
@@ -50,6 +74,7 @@ class EventService
         return $this->convertArrayToClassArray($events, Event::class);
     }
 
+    /** @return null|Event[] */
     public function findAllNotActive(): ?array
     {
         $events = $this->table->findAllNotActive();
@@ -66,5 +91,16 @@ class EventService
         $event = $this->findById($id);
 
         return $event->isRatingCompleted();
+    }
+
+    public function isTopicExist(string $topic): bool
+    {
+        $isTopic = $this->findByTopic($topic);
+
+        if ($isTopic instanceof Event) {
+            return true;
+        }
+
+        return false;
     }
 }

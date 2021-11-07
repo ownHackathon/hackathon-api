@@ -1,35 +1,40 @@
 <?php use App\Model\Event;
 
 $this->headTitle('Event.List'); ?>
-
+<?php if ($this->isLoggedIn): ?>
+    <div class="container-fluid pb-3">
+        <a href="/event/create">Event erstellen</a>
+    </div>
+<?php endif; ?>
 <div class="container-fluid">
-    <p>Hier bekommt ihr eine Übersicht über alle derzeit laufenden und bereits abgeschlossenen Events<p>
+    <p>Hier bekommt ihr eine Übersicht über alle derzeit laufenden und bereits abgeschlossenen Events
     <p>
-        <h4 class="text-decoration-underline">Aktive Events</h4>
-        <?php
-        /** @var Event $event */
-        foreach ($this->activeEvents as $event):
-            ?>
+    <p>
+    <h4 class="text-decoration-underline">Aktive Events</h4>
+    <?php
+    /** @var Event $event */
+    foreach ($this->activeEvents as $event):
+        ?>
         <p class="fw-bolder">
             <a href="/event/<?= $event->getId(); ?>"><?= $this->escapeHtml($event->getName()); ?></a>
             - <?= $this->escapeHtml($event->getDescription()); ?>
         </p>
-        <?php
-        endforeach;
-        ?>
+    <?php
+    endforeach;
+    ?>
     </p>
     <p>
-        <h4 class="text-decoration-underline">Abgeschlossene Events</h4>
-        <?php
-        /** @var Event $event */
-        foreach ($this->notActiveEvents as $event):
-            ?>
-            <p class="fw-bolder">
-                <a href="/event/<?= $event->getId(); ?>"><?= $this->escapeHtml($event->getName()); ?></a>
-                - <?= $this->escapeHtml($event->getDescription()); ?>
-            </p>
-        <?php
-        endforeach;
+    <h4 class="text-decoration-underline">Abgeschlossene Events</h4>
+    <?php
+    /** @var Event $event */
+    foreach ($this->notActiveEvents as $event):
         ?>
+        <p class="fw-bolder">
+            <a href="/event/<?= $event->getId(); ?>"><?= $this->escapeHtml($event->getName()); ?></a>
+            - <?= $this->escapeHtml($event->getDescription()); ?>
+        </p>
+    <?php
+    endforeach;
+    ?>
     </p>
 </div>

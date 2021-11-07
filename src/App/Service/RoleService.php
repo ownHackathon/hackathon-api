@@ -28,6 +28,7 @@ class RoleService
         return $this->hydrator->hydrate($role, new Role());
     }
 
+    /** @return null|Role[] */
     public function findAll(): ?array
     {
         $roles = $this->table->findAll();

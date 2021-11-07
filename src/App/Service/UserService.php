@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Model\Role;
 use App\Model\User;
 use App\Table\UserTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -17,36 +18,45 @@ class UserService
     ) {
     }
 
-    public function create(User $user): bool
+    public function create(User $user, int $role = Role::USER): bool
     {
-        $isUser = $this->findByName($user->getName());
-
-        if ($isUser instanceof User) {
-            return false;
-        }
-
-        $email = $user->getEmail();
-
-        if (null !== $email) {
-            $isUser = $this->findByEMail($email);
-        }
-
-        if ($isUser instanceof User) {
+        if ($this->isUserExist($user->getName()) ||
+            $this->isEmailExist($user->getEmail())
+        ) {
             return false;
         }
 
         $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+
         $user->setPassword($hashedPassword);
-        $user->setRoleId(USER::USER_DEFAULT_ROLE);
+        $user->setRoleId($role);
 
         $this->table->insert($user);
 
         return true;
     }
 
+    public function findById(int $id): User
+    {
+        $user = $this->table->findById($id);
+
+        if (!$user) {
+            throw new InvalidArgumentException('Could not find user', 400);
+        }
+
+        return $this->hydrator->hydrate($user, new User());
+    }
+
     public function findByName(string $name): ?User
     {
         $user = $this->table->findByName($name);
+
+        return $this->generateUserObject($user);
+    }
+
+    public function findByEMail(string $email): ?User
+    {
+        $user = $this->table->findByEMail($email);
 
         return $this->generateUserObject($user);
     }
@@ -60,21 +70,27 @@ class UserService
         return $this->hydrator->hydrate($user, new User());
     }
 
-    public function findByEMail(string $email): ?User
+    private function isEmailExist(?string $email): bool
     {
-        $user = $this->table->findByEMail($email);
-
-        return $this->generateUserObject($user);
-    }
-
-    public function findById(int $id): User
-    {
-        $user = $this->table->findById($id);
-
-        if (!$user) {
-            throw new InvalidArgumentException('Could not find user', 400);
+        if (null !== $email) {
+            $isUser = $this->findByEMail($email);
         }
 
-        return $this->hydrator->hydrate($user, new User());
+        if ($isUser instanceof User) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function isUserExist(string $userName): bool
+    {
+        $isUser = $this->findByName($userName);
+
+        if ($isUser instanceof User) {
+            return true;
+        }
+
+        return false;
     }
 }

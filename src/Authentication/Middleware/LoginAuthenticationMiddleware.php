@@ -22,9 +22,9 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $validation = $request->getAttribute('validationMessages');
+        $validationMessages = $request->getAttribute('validationMessages');
 
-        if (null !== $validation) {
+        if (null !== $validationMessages) {
             return $handler->handle($request);
         }
 
@@ -34,7 +34,9 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            return $handler->handle($request->withAttribute('validationMessages', 'Benutzername und/oder Passwort nicht korrekt.'));
+            $validationMessages['userName']['userDataNotCorrect'] = 'Benutzername und/oder Passwort nicht korrekt.';
+
+            return $handler->handle($request->withAttribute('validationMessages', $validationMessages));
         }
 
         return $handler->handle(

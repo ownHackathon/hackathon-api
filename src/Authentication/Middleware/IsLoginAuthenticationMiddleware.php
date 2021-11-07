@@ -3,14 +3,13 @@
 namespace Authentication\Middleware;
 
 use App\Model\User;
-use App\Model\Role;
 use Authentication\Exception\InvalidAuthenticationException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class AdministrationAuthenticationMiddleware implements MiddlewareInterface
+class IsLoginAuthenticationMiddleware implements MiddlewareInterface
 {
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -18,7 +17,7 @@ class AdministrationAuthenticationMiddleware implements MiddlewareInterface
         /** @var null|User $user */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        if (null === $user || $user->getRoleId() !== Role::ADMINISTRATOR) {
+        if (null === $user) {
             throw new InvalidAuthenticationException();
         }
 

@@ -4,6 +4,10 @@ namespace App\Model;
 
 class Role
 {
+    public const ADMINISTRATOR = 1;
+    public const MODERATOR = 2;
+    public const USER = 3;
+
     protected int $id;
     protected string $name;
     protected ?string $description;

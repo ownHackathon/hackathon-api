@@ -3,6 +3,15 @@
 namespace App;
 
 use App\Hydrator\ClassMethodsHydratorFactory;
+use App\Validator\EventCreateValidator;
+use App\Validator\Input\EventDescriptionInput;
+use App\Validator\Input\EventDurationInput;
+use App\Validator\Input\EmailInput;
+use App\Validator\Input\EventTextInput;
+use App\Validator\Input\PasswordInput;
+use App\Validator\Input\EventStartTimeInput;
+use App\Validator\Input\EventNameInput;
+use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -23,15 +32,26 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\PingHandler::class,
+
                 Rating\ProjectRatingCalculator::class,
-                Validator\Input\UsernameInput::class,
-                Validator\Input\PasswordInput::class,
-                Validator\Input\EmailInput::class,
+
+                Service\TopicVoterService::class,
+
+                EventDescriptionInput::class,
+                EventDurationInput::class,
+                EmailInput::class,
+                EventTextInput::class,
+                PasswordInput::class,
+                EventStartTimeInput::class,
+                EventNameInput::class,
+                UsernameInput::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
+                Handler\EventCreateHandler::class => ConfigAbstractFactory::class,
+                Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
@@ -40,6 +60,8 @@ class ConfigProvider
                 Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
+                Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
@@ -76,6 +98,8 @@ class ConfigProvider
                 Table\RoleTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
+
+                Validator\EventCreateValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -85,6 +109,12 @@ class ConfigProvider
         return [
             Handler\EventHandler::class => [
                 ClassMethodsHydrator::class,
+                TemplateRendererInterface::class,
+            ],
+            Handler\EventCreateHandler::class => [
+                TemplateRendererInterface::class,
+            ],
+            Handler\EventCreateSubmitHandler::class => [
                 TemplateRendererInterface::class,
             ],
             Handler\EventAboutHandler::class => [
@@ -109,6 +139,13 @@ class ConfigProvider
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
                 TemplateRendererInterface::class,
+            ],
+            Middleware\EventCreateMiddleware::class => [
+                Service\EventService::class,
+                ClassMethodsHydrator::class,
+            ],
+            Middleware\EventCreateValidationMiddleware::class => [
+                EventCreateValidator::class,
             ],
             Middleware\EventListMiddleware::class => [
                 Service\EventService::class,
@@ -224,6 +261,14 @@ class ConfigProvider
             ],
             Table\UserTable::class => [
                 Query::class,
+            ],
+
+            Validator\EventCreateValidator::class => [
+                EventNameInput::class,
+                EventDescriptionInput::class,
+                EventTextInput::class,
+                EventStartTimeInput::class,
+                EventDurationInput::class,
             ],
         ];
     }

@@ -18,6 +18,24 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventAboutHandler::class
     );
     $app->get(
+        '/event/create[/]',
+        [
+            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            App\Handler\EventCreateHandler::class,
+        ],
+        App\Handler\EventCreateHandler::class
+    );
+    $app->post(
+        '/event/create[/]',
+        [
+            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            App\Middleware\EventCreateValidationMiddleware::class,
+            App\Middleware\EventCreateMiddleware::class,
+            App\Handler\EventCreateSubmitHandler::class,
+        ],
+        App\Handler\EventCreateSubmitHandler::class
+    );
+    $app->get(
         '/event/{eventId:\d+}[/]',
         [
             App\Middleware\EventMiddleware::class,

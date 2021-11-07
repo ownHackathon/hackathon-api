@@ -28,6 +28,7 @@ class EventRatingService
         return $this->hydrator->hydrate($event, new EventRating());
     }
 
+    /** @return null|EventRating[] */
     public function findAll(): ?array
     {
         $events = $this->table->findAll();

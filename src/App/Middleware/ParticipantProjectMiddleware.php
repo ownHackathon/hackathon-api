@@ -26,14 +26,16 @@ class ParticipantProjectMiddleware implements MiddlewareInterface
 
         $projects = [];
 
-        /** @var Participant $participant */
-        foreach ($participants as $participant) {
-            $user = $this->userService->findById($participant->getUserId());
-            $project = $this->projectService->findByParticipantId($participant->getId());
-            $projects[] = [
-                User::class => $user,
-                Project::class => $project,
-            ];
+        if (null !== $participants) {
+            /** @var Participant $participant */
+            foreach ($participants as $participant) {
+                $user = $this->userService->findById($participant->getUserId());
+                $project = $this->projectService->findByParticipantId($participant->getId());
+                $projects[] = [
+                    User::class => $user,
+                    Project::class => $project,
+                ];
+            }
         }
 
         return $handler->handle($request->withAttribute('participants', $projects));

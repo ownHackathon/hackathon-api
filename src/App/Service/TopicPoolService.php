@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Model\TopicPool;
+use App\Model\Topic;
 use App\Table\TopicPoolTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Log\InvalidArgumentException;
@@ -17,14 +17,14 @@ class TopicPoolService
     ) {
     }
 
-    public function insert(TopicPool $topic): self
+    public function insert(Topic $topic): self
     {
         $this->table->insert($topic);
 
         return $this;
     }
 
-    public function findById(int $id): TopicPool
+    public function findById(int $id): Topic
     {
         $event = $this->table->findById($id);
 
@@ -32,7 +32,7 @@ class TopicPoolService
             throw new InvalidArgumentException('Could not find Event', 400);
         }
 
-        return $this->hydrator->hydrate($event, new TopicPool());
+        return $this->hydrator->hydrate($event, new Topic());
     }
 
     public function findAll(): ?array
@@ -43,7 +43,7 @@ class TopicPoolService
             return null;
         }
 
-        return $this->convertArrayToClassArray($events, TopicPool::class);
+        return $this->convertArrayToClassArray($events, Topic::class);
     }
 
     public function isTopic(string $topic): bool
@@ -55,7 +55,7 @@ class TopicPoolService
         return true;
     }
 
-    public function findByTopic(string $topic): ?TopicPool
+    public function findByTopic(string $topic): ?Topic
     {
         $topic = $this->table->findByTopic($topic);
 
@@ -63,7 +63,7 @@ class TopicPoolService
             return null;
         }
 
-        return $this->hydrator->hydrate($topic, new TopicPool());
+        return $this->hydrator->hydrate($topic, new Topic());
     }
 
     public function getEntriesStatistic(): array

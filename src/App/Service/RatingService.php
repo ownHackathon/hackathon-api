@@ -28,6 +28,7 @@ class RatingService
         return $this->hydrator->hydrate($rating, new Rating());
     }
 
+    /** @return null|ProjectCategoryRating[] */
     public function findProjectCategoryRatingByProjectId(int $projectId): ?array
     {
         $projectCategoryRating = $this->table->findProjectCategoryRatingByProjectId($projectId);
@@ -39,6 +40,7 @@ class RatingService
         return $this->convertArrayToClassArray($projectCategoryRating, ProjectCategoryRating::class);
     }
 
+    /** @return null|Rating[] */
     public function findAll(): ?array
     {
         $ratings = $this->table->findAll();

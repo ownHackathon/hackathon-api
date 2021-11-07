@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class TopicPool
+class Topic
 {
     protected int $id;
     protected ?int $eventId;

@@ -16,5 +16,8 @@ return [
         'factories' => [
 
         ],
+        'aliases' => [
+
+        ]
     ],
 ];

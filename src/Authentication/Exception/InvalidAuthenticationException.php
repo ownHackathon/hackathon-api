@@ -7,8 +7,8 @@ use Throwable;
 
 class InvalidAuthenticationException extends Exception
 {
-    public function __construct($message = "", $code = 403, Throwable $previous = null)
+    public function __construct(string $message = "Invalid Authorization", int $code = 403, ?Throwable $previous = null)
     {
-        parent::__construct("Invalid Authorization", $code, $previous);
+        parent::__construct($message, $code, $previous);
     }
 }

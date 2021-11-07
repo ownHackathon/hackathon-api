@@ -4,9 +4,12 @@ namespace Authentication\Middleware;
 
 use App\Model\User;
 use App\Service\UserService;
+use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Session\Session;
 use Mezzio\Session\SessionInterface;
+use Mezzio\Session\SessionMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -31,7 +34,14 @@ class JwtAuthenticationMiddleware implements MiddlewareInterface
         if ($session->has('token')) {
             $token = $session->get('token');
 
-            $token = JWT::decode($token, $this->tokenSecrect, [$this->tokenAlgorithmus]);
+            try {
+                $token = JWT::decode($token, $this->tokenSecrect, [$this->tokenAlgorithmus]);
+            } catch (ExpiredException $exception) {
+                /** @var SessionInterface $session */
+                $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+                $session->unset('token');
+                return $handler->handle(($request->withAttribute(User::USER_ATTRIBUTE, null)));
+            }
 
             $user = $this->userService->findById($token->id);
         }

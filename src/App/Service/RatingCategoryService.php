@@ -27,6 +27,7 @@ class RatingCategoryService
         return $this->hydrator->hydrate($ratingCategory, new RatingCategory());
     }
 
+    /** @return null|RatingCategory[] */
     public function findAll(): ?array
     {
         $ratingCategories = $this->table->findAll();

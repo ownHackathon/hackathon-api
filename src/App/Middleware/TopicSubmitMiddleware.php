@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Model\TopicPool;
+use App\Model\Topic;
 use App\Service\TopicPoolService;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Flash\FlashMessageMiddleware;
@@ -26,7 +26,7 @@ class TopicSubmitMiddleware implements MiddlewareInterface
         $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
         $data = $request->getParsedBody();
-        $topic = $this->hydrator->hydrate($data, new TopicPool());
+        $topic = $this->hydrator->hydrate($data, new Topic());
 
         if (empty($data['topic'])) {
             $flashMessage->flashNow('error', 'Thema darf nicht leer sein.', 0);
@@ -37,6 +37,6 @@ class TopicSubmitMiddleware implements MiddlewareInterface
             $flashMessage->flashNow('info', 'Danke für den Themenvorschlag', 0);
         }
 
-        return $handler->handle($request->withAttribute(TopicPool::class, $topic));
+        return $handler->handle($request->withAttribute(Topic::class, $topic));
     }
 }
