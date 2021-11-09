@@ -15,18 +15,6 @@
     </ul>
     </p>
     <div class="row d-flex justify-content-center align-items-center">
-        <?php if (isset($this->error)): ?>
-            <p class="text-danger text-center">
-                <?= $this->error ?>
-            </p>
-        <?php endif; ?>
-
-        <?php if (isset($this->info)): ?>
-            <p class="text-info text-center">
-                <?= $this->info ?>
-            </p>
-        <?php endif; ?>
-
         <div class="card-body  text-center">
             <p>
                 Es wurden insgesamt <?= $this->allTopic; ?> Themenvorschläge eingereicht.<br>
@@ -37,12 +25,23 @@
             <form name="loginBox" action="/topic/submit" method="post">
                 <div class="form-outline form-white" style="padding-bottom: 50px;">
                     <label class="form-label text-white-50" for="topic">Thema</label>
+                    <?php if (isset($this->validationMessages['topic'])): ?>
+                        <?= "<br />" . $this->partial('app::/partial/validation_error_message', ['data' => $this->validationMessages['topic']]); ?>
+                    <?php endif; ?>
                     <input type="text" id="topic" name="topic" value="<?= $this->topic; ?>" class="form-control form-control-sg"/>
                 </div>
                 <div class="form-outline form-white pb-5">
                     <label class="form-label text-white-50" for="description">Beschreibung</label>
+                    <?php if (isset($this->validationMessages['description'])): ?>
+                        <?= "<br />" . $this->partial('app::/partial/validation_error_message', ['data' => $this->validationMessages['description']]); ?>
+                    <?php endif; ?>
                     <textarea id="description" name="description" class="form-control form-control-sg"><?= $this->description; ?></textarea>
                 </div>
+                <?php if (isset($this->info)): ?>
+                    <p class="text-info text-center">
+                        <?= $this->info ?>
+                    </p>
+                <?php endif; ?>
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Thema einreichen</button>
             </form>
         </div>

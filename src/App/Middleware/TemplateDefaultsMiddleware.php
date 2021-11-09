@@ -29,12 +29,13 @@ class TemplateDefaultsMiddleware implements MiddlewareInterface
             $userName = $user->getName();
         }
 
+        /**
         $this->templateRenderer->addDefaultParam(
             TemplateRendererInterface::TEMPLATE_ALL,
             'isLoggedIn',
             $isLoggedIn
         );
-
+        */
         $this->templateRenderer->addDefaultParam(
             TemplateRendererInterface::TEMPLATE_ALL,
             'userName',

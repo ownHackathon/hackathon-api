@@ -130,6 +130,7 @@ return static function (Mezzio\Application $app): void {
     $app->post(
         '/topic/submit[/]',
         [
+            App\Middleware\TopicCreateValidationMiddleware::class,
             App\Middleware\TopicSubmitMiddleware::class,
             App\Middleware\TopicEntryStatisticMiddleware::class,
             App\Handler\TopicSubmitHandler::class,

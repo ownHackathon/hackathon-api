@@ -12,14 +12,14 @@ use Laminas\InputFilter\InputFilter;
 class EventCreateValidator extends InputFilter
 {
     public function __construct(
-        private EventNameInput $topicInput,
+        private EventNameInput $eventNameInput,
         private EventDescriptionInput $descriptionInput,
         private EventTextInput $eventTextInput,
         private EventStartTimeInput $startTimeInput,
         private EventDurationInput $durationInput,
 
     ) {
-        $this->add($this->topicInput);
+        $this->add($this->eventNameInput);
         $this->add($this->descriptionInput);
         $this->add($this->eventTextInput);
         $this->add($this->startTimeInput);

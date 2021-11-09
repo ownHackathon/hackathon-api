@@ -3,8 +3,6 @@
 namespace App\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Flash\FlashMessageMiddleware;
-use Mezzio\Flash\FlashMessagesInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,12 +17,16 @@ class TopicSubmitHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var FlashMessagesInterface $flashMessage */
-        $flashMessage = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+        $data = $request->getParsedBody();
 
-        $data = $request->getAttribute('topicEntriesStatistic');
-        $data['error'] = $flashMessage->getFlash('error');
-        $data['info'] = $flashMessage->getFlash('info');
+        $topicEntriesStatistic = $request->getAttribute('topicEntriesStatistic');
+
+        $data = array_merge($data, $topicEntriesStatistic);
+        $data['validationMessages'] = $request->getAttribute('validationMessages');
+
+        if (null === $data['validationMessages']) {
+            $data['info'] = 'Vielen Dank für den Themenvorschalg.';
+        }
 
         return new HtmlResponse($this->template->render('app::topic_submit', $data));
     }

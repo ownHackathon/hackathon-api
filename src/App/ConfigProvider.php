@@ -4,13 +4,15 @@ namespace App;
 
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Validator\EventCreateValidator;
+use App\Validator\Input\EmailInput;
 use App\Validator\Input\EventDescriptionInput;
 use App\Validator\Input\EventDurationInput;
-use App\Validator\Input\EmailInput;
+use App\Validator\Input\EventNameInput;
+use App\Validator\Input\EventStartTimeInput;
 use App\Validator\Input\EventTextInput;
 use App\Validator\Input\PasswordInput;
-use App\Validator\Input\EventStartTimeInput;
-use App\Validator\Input\EventNameInput;
+use App\Validator\Input\TopicDescriptionInput;
+use App\Validator\Input\TopicInput;
 use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -22,8 +24,25 @@ class ConfigProvider
     public function __invoke(): array
     {
         return [
+            'view_helpers' => $this->getViewHelperConfig(),
             'dependencies' => $this->getDependencies(),
             ConfigAbstractFactory::class => $this->getAbstractFactoryConfig(),
+        ];
+    }
+
+    public function getViewHelperConfig()
+    {
+        return [
+            'invokables' => [
+                'isLoggedIn' => View\Helper\IsLoggedIn::class,
+            ],
+            'aliases' => [
+                'isParticipant' => View\Helper\IsParticipant::class,
+
+            ],
+            'factories' => [
+                View\Helper\IsParticipant::class => View\Helper\IsParticipantFactory::class,
+            ],
         ];
     }
 
@@ -37,13 +56,15 @@ class ConfigProvider
 
                 Service\TopicVoterService::class,
 
+                EmailInput::class,
                 EventDescriptionInput::class,
                 EventDurationInput::class,
-                EmailInput::class,
+                EventNameInput::class,
+                EventStartTimeInput::class,
                 EventTextInput::class,
                 PasswordInput::class,
-                EventStartTimeInput::class,
-                EventNameInput::class,
+                TopicDescriptionInput::class,
+                TopicInput::class,
                 UsernameInput::class,
             ],
             'factories' => [
@@ -73,6 +94,7 @@ class ConfigProvider
                 Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
@@ -100,6 +122,7 @@ class ConfigProvider
                 Table\UserTable::class => ConfigAbstractFactory::class,
 
                 Validator\EventCreateValidator::class => ConfigAbstractFactory::class,
+                Validator\TopicCreateValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -181,6 +204,9 @@ class ConfigProvider
             ],
             Middleware\TemplateDefaultsMiddleware::class => [
                 TemplateRendererInterface::class,
+            ],
+            Middleware\TopicCreateValidationMiddleware::class => [
+                Validator\TopicCreateValidator::class,
             ],
             Middleware\TopicEntryStatisticMiddleware::class => [
                 Service\TopicPoolService::class,
@@ -269,6 +295,10 @@ class ConfigProvider
                 EventTextInput::class,
                 EventStartTimeInput::class,
                 EventDurationInput::class,
+            ],
+            Validator\TopicCreateValidator::class => [
+                TopicInput::class,
+                TopicDescriptionInput::class,
             ],
         ];
     }

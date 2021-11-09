@@ -25,6 +25,17 @@
         <div class="col text-smaller"><?= $this->isActive ? 'Ja' : 'Nein'; ?></div>
     </div>
 </div>
+
+    <?php if (!$this->isParticipant()): ?>
+        <div class="container-fluid">
+            <a href="/event/participant/subscribe/eventId">Für das Event anmelden</a>
+        </div>
+    <?php elseif ($this->canEventUnsubscribe): ?>
+        <div class="container-fluid">
+            <a href="/event/participant/unsubscribe/eventId">Vom Event abmelden</a>
+        </div>
+    <?php endif; ?>
+
 <div class="container-fluid defaultbox">
     <div class="row">
         <div class="col-4">Teilnehmer</div>
