@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<?php if ($this->isLoggedIn): ?>
+<?php if ($this->isLoggedIn && $this->canEventSubscribe($this->startTime)): ?>
     <?php if (!$this->isParticipant($this->loggedInUser, $this->participants)): ?>
         <div class="container-fluid">
             <a href="/event/participant/subscribe/<?= $this->id; ?>">Für das Event anmelden</a>

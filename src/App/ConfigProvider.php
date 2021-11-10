@@ -38,10 +38,12 @@ class ConfigProvider
 
             ],
             'aliases' => [
+                'canEventSubscribe' => View\Helper\CanEventSubscribe::class,
                 'isParticipant' => View\Helper\IsParticipant::class,
 
             ],
             'factories' => [
+                View\Helper\CanEventSubscribe::class => InvokableFactory::class,
                 View\Helper\IsParticipant::class => InvokableFactory::class,
             ],
         ];
