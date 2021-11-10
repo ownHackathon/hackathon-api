@@ -33,6 +33,14 @@ class ParticipantTable extends AbstractTable
             ->fetch();
     }
 
+    public function findByUserIdAndEventId(int $userId, int $eventId): bool|array
+    {
+        return $this->query->from(($this->table))
+            ->where('userId', $userId)
+            ->where('eventId', $eventId)
+            ->fetch();
+    }
+
     public function findActiveParticipantByEvent(int $eventId): array
     {
         return $this->query->from($this->table)

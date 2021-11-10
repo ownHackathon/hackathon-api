@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Model\Participant;
 use App\Table\ParticipantTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class ParticipantService
@@ -20,7 +19,7 @@ class ParticipantService
 
     public function create(Participant $participant): bool
     {
-        if ($this->isParticipantExist($participant->getUserId())) {
+        if ($this->isParticipantInEventExist($participant->getUserId(), $participant->getEventId())) {
             return false;
         }
 
@@ -51,6 +50,17 @@ class ParticipantService
         return $this->hydrator->hydrate($participant, new Participant());
     }
 
+    public function findByUserIdAndEventId(int $userId, int $eventId): ?Participant
+    {
+        $participant = $this->table->findByUserIdAndEventId($userId, $eventId);
+
+        if (!$participant) {
+            return null;
+        }
+
+        return $this->hydrator->hydrate($participant, new Participant());
+    }
+
     /** @return null|Participant[] */
     public function findActiveParticipantByEvent(int $eventId): ?array
     {
@@ -70,4 +80,10 @@ class ParticipantService
         return $participant instanceof Participant;
     }
 
+    private function isParticipantInEventExist(int $userId, int $eventId): bool
+    {
+        $participant = $this->findByUserIdAndEventId($userId, $eventId);
+
+        return $participant instanceof Participant;
+    }
 }
