@@ -18,12 +18,34 @@ class ParticipantService
     ) {
     }
 
+    public function create(Participant $participant): bool
+    {
+        if ($this->isParticipantExist($participant->getUserId())) {
+            return false;
+        }
+
+        $this->table->insert($participant);
+
+        return true;
+    }
+
     public function findById(int $id): Participant
     {
         $participant = $this->table->findById($id);
 
         if (!$participant) {
             throw new InvalidArgumentException('Could not find Participant', 400);
+        }
+
+        return $this->hydrator->hydrate($participant, new Participant());
+    }
+
+    public function findByUserId(int $userId): ?Participant
+    {
+        $participant = $this->table->findByUserId($userId);
+
+        if (!$participant) {
+            return null;
         }
 
         return $this->hydrator->hydrate($participant, new Participant());
@@ -40,4 +62,12 @@ class ParticipantService
 
         return $this->convertArrayToClassArray($participants, Participant::class);
     }
+
+    private function isParticipantExist(int $userId): bool
+    {
+        $participant = $this->findByUserId($userId);
+
+        return $participant instanceof Participant;
+    }
+
 }

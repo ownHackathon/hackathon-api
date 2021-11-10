@@ -35,15 +35,26 @@ class TopicPoolService
         return $this->hydrator->hydrate($event, new Topic());
     }
 
-    public function findAll(): ?array
+    public function findAvailable(): ?array
     {
-        $events = $this->table->findAll();
+        $topics = $this->table->findAvailable();
 
-        if (!$events) {
+        if (!$topics) {
             return null;
         }
 
-        return $this->convertArrayToClassArray($events, Topic::class);
+        return $this->convertArrayToClassArray($topics, Topic::class);
+    }
+
+    public function findAll(): ?array
+    {
+        $topics = $this->table->findAll();
+
+        if (!$topics) {
+            return null;
+        }
+
+        return $this->convertArrayToClassArray($topics, Topic::class);
     }
 
     public function isTopic(string $topic): bool

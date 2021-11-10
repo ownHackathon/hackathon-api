@@ -28,15 +28,16 @@ class EventHandler implements RequestHandlerInterface
         /** @var User $user */
         $user = $request->getAttribute(User::class);
 
-        $participants = $request->getAttribute('participants');
-        $data = $this->hydrator->extract($event);
-
         $endTime = clone $event->getStartTime();
         // TODO: Move To Model
+
+        $data = $this->hydrator->extract($event);
         $data['endTime'] = $endTime->add(new DateInterval('P' . $event->getDuration() . 'D'));
         $data['eventUser'] = $user->getName();
         $data['eventUserId'] = $user->getId();
-        $data['participants'] = $participants;
+        $data['participants'] = $request->getAttribute('participants');
+        $data['loggedInUser'] = $request->getAttribute(User::USER_ATTRIBUTE);
+        $data['topics'] = $request->getAttribute('topics');
 
         return new HtmlResponse($this->template->render('app::event', $data));
     }

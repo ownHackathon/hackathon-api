@@ -42,6 +42,7 @@ return static function (Mezzio\Application $app): void {
             App\Middleware\UserMiddleware::class,
             App\Middleware\EventParticipantMiddleware::class,
             App\Middleware\ParticipantProjectMiddleware::class,
+            App\Middleware\TopicListAvailableMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class
@@ -53,6 +54,15 @@ return static function (Mezzio\Application $app): void {
             App\Handler\EventListHandler::class,
         ],
         App\Handler\EventListHandler::class
+    );
+    $app->get(
+        '/event/participant/subscribe/{eventId:\d+}[/]',
+        [
+            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            App\Middleware\EventParticipantSubscribeMiddleware::class,
+            App\Handler\EventParticipantSubscribeHandler::class,
+        ],
+        App\Handler\EventParticipantSubscribeHandler::class
     );
     $app->get(
         '/project/{projectId:\d+}[/]',

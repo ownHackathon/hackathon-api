@@ -17,6 +17,7 @@ use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
@@ -34,14 +35,14 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                'isLoggedIn' => View\Helper\IsLoggedIn::class,
+
             ],
             'aliases' => [
                 'isParticipant' => View\Helper\IsParticipant::class,
 
             ],
             'factories' => [
-                View\Helper\IsParticipant::class => View\Helper\IsParticipantFactory::class,
+                View\Helper\IsParticipant::class => InvokableFactory::class,
             ],
         ];
     }
@@ -50,6 +51,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Handler\EventParticipantSubscribeHandler::class,
                 Handler\PingHandler::class,
 
                 Rating\ProjectRatingCalculator::class,
@@ -75,6 +77,7 @@ class ConfigProvider
                 Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
+
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicHandler::class => ConfigAbstractFactory::class,
@@ -84,6 +87,7 @@ class ConfigProvider
                 Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
@@ -96,6 +100,8 @@ class ConfigProvider
                 Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\TopicListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
@@ -179,6 +185,9 @@ class ConfigProvider
             Middleware\EventParticipantMiddleware::class => [
                 Service\ParticipantService::class,
             ],
+            Middleware\EventParticipantSubscribeMiddleware::class => [
+                Service\ParticipantService::class,
+            ],
             Middleware\EventRatingReleasedMiddleware::class => [
                 Service\EventService::class,
             ],
@@ -209,6 +218,12 @@ class ConfigProvider
                 Validator\TopicCreateValidator::class,
             ],
             Middleware\TopicEntryStatisticMiddleware::class => [
+                Service\TopicPoolService::class,
+            ],
+            Middleware\TopicListAvailableMiddleware::class => [
+                Service\TopicPoolService::class,
+            ],
+            Middleware\TopicListMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
             Middleware\TopicSubmitMiddleware::class => [

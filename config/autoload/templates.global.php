@@ -9,15 +9,4 @@ return [
             'layout' => [ROOT_DIR . 'templates' . DS . 'layout'],
         ],
     ],
-    'view_helpers' => [
-        'invokables' => [
-
-        ],
-        'factories' => [
-
-        ],
-        'aliases' => [
-
-        ]
-    ],
 ];

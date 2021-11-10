@@ -13,13 +13,6 @@ class TopicPoolTable extends AbstractTable
         parent::__construct($query, 'TopicPool');
     }
 
-    public function findByTopic(string $topic): bool|array
-    {
-        return $this->query->from($this->table)
-            ->where('`topic`', $topic)
-            ->fetch();
-    }
-
     public function insert(Topic $topic): self
     {
         $values = [
@@ -30,6 +23,20 @@ class TopicPoolTable extends AbstractTable
         $this->query->insertInto($this->table, $values)->execute();
 
         return $this;
+    }
+
+    public function findAvailable(): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('eventId', null)
+            ->fetchAll();
+    }
+
+    public function findByTopic(string $topic): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('`topic`', $topic)
+            ->fetch();
     }
 
     public function getCountTopic(): int
