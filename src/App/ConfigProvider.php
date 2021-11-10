@@ -53,6 +53,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Handler\EventNameHandler::class,
                 Handler\EventParticipantSubscribeHandler::class,
                 Handler\PingHandler::class,
 
@@ -91,6 +92,7 @@ class ConfigProvider
                 Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
@@ -182,6 +184,9 @@ class ConfigProvider
                 Service\EventService::class,
             ],
             Middleware\EventMiddleware::class => [
+                Service\EventService::class,
+            ],
+            Middleware\EventNameMiddleware::class => [
                 Service\EventService::class,
             ],
             Middleware\EventParticipantMiddleware::class => [

@@ -29,7 +29,7 @@ class EventTable extends AbstractTable
         return $this;
     }
 
-    public function findByTopic(string $topic): bool|array
+    public function findByName(string $topic): bool|array
     {
         return $this->query->from($this->table)
             ->where('name', $topic)

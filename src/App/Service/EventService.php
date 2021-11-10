@@ -39,9 +39,9 @@ class EventService
         return $this->hydrator->hydrate($event, new Event());
     }
 
-    public function findByTopic(string $topic): ?Event
+    public function findByName(string $topic): ?Event
     {
-        $event = $this->table->findByTopic($topic);
+        $event = $this->table->findByName($topic);
 
         if (!$event) {
             return null;
@@ -95,7 +95,7 @@ class EventService
 
     public function isTopicExist(string $topic): bool
     {
-        $isTopic = $this->findByTopic($topic);
+        $isTopic = $this->findByName($topic);
 
         if ($isTopic instanceof Event) {
             return true;
