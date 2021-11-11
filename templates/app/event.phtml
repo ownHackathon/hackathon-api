@@ -51,8 +51,8 @@
 <?php endif ?>
 <?php if (!is_null($this->topic)): ?>
     <h4 class="text-center">Thema:</h4>
-    <h2 class="text-center text-danger text-decoration-underline"><?= $this->topic->getTopic(); ?></h2>
-    <div class="container-fluid container-sm defaultbox bg-transparent"><?= $this->topic->getDescription(); ?></div>
+    <h2 class="text-center text-danger text-decoration-underline"><?= $this->escapeHtml($this->topic->getTopic()); ?></h2>
+    <div class="container-fluid container-sm defaultbox bg-transparent"><?= $this->escapeHtml($this->topic->getDescription()); ?></div>
 <?php endif; ?>
 <div class="container-fluid defaultbox">
     <div class="row">
