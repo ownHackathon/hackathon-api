@@ -31,7 +31,7 @@ class ConfigProvider
         ];
     }
 
-    public function getViewHelperConfig()
+    public function getViewHelperConfig(): array
     {
         return [
             'invokables' => [
