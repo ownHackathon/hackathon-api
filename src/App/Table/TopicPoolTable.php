@@ -25,6 +25,23 @@ class TopicPoolTable extends AbstractTable
         return $this;
     }
 
+    public function updateEventId(Topic $topic): self
+    {
+        $values = [
+            'eventId' => $topic->getEventId(),
+        ];
+        $this->query->update($this->table, $values, $topic->getId())->execute();
+
+        return $this;
+    }
+
+    public function findByEventId(int $id): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('eventId', $id)
+            ->fetch();
+    }
+
     public function findAvailable(): bool|array
     {
         return $this->query->from($this->table)

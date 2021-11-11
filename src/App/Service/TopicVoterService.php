@@ -12,7 +12,6 @@ class TopicVoterService
     /**@param Topic[] $topics */
     public function getSelectRandomlyTopic(array $topics): Topic
     {
-        mt_srand((int)microtime());
         $randomKey = array_rand($topics);
 
         return $topics[$randomKey];

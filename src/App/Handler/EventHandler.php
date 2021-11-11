@@ -3,6 +3,7 @@
 namespace App\Handler;
 
 use App\Model\Event;
+use App\Model\Topic;
 use App\Model\User;
 use DateInterval;
 use Laminas\Diactoros\Response\HtmlResponse;
@@ -38,6 +39,7 @@ class EventHandler implements RequestHandlerInterface
         $data['participants'] = $request->getAttribute('participants');
         $data['loggedInUser'] = $request->getAttribute(User::USER_ATTRIBUTE);
         $data['topics'] = $request->getAttribute('topics');
+        $data['topic'] = $request->getAttribute(Topic::class);
 
         return new HtmlResponse($this->template->render('app::event', $data));
     }

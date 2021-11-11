@@ -43,6 +43,8 @@ return static function (Mezzio\Application $app): void {
             App\Middleware\EventParticipantMiddleware::class,
             App\Middleware\ParticipantProjectMiddleware::class,
             App\Middleware\TopicListAvailableMiddleware::class,
+            App\Middleware\EventTopicVoteMiddleware::class,
+            App\Middleware\EventTopicMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class

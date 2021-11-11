@@ -95,6 +95,8 @@ class ConfigProvider
                 Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventTopicMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventTopicVoteMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectEventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
@@ -197,6 +199,13 @@ class ConfigProvider
             ],
             Middleware\EventRatingReleasedMiddleware::class => [
                 Service\EventService::class,
+            ],
+            Middleware\EventTopicMiddleware::class => [
+                Service\TopicPoolService::class,
+            ],
+            Middleware\EventTopicVoteMiddleware::class => [
+                Service\TopicPoolService::class,
+                Service\TopicVoterService::class,
             ],
             Middleware\ParticipantProjectMiddleware::class => [
                 Service\ProjectService::class,

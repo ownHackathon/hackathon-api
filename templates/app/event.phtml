@@ -1,4 +1,4 @@
-<?php use App\Model\Topic;$this->headTitle('Event'); ?>
+<?php $this->headTitle('Event'); ?>
 <div class="container-fluid defaultbox">
     <h3 class="text-center"><?= $this->escapeHtml($this->name); ?></h3>
     <h5 class="text-center"><?= $this->escapeHtml($this->description); ?></h5>
@@ -35,21 +35,25 @@
         <div class="container-fluid">
             <a href="/event/participant/unsubscribe/<?= $this->id; ?>">Vom Event abmelden</a>
         </div>
-<div class="container defaultbox">
-        <?php
-        /** @var Topic $topic */
-        foreach ($this->topics as $topic): ?>
+        <div class="container defaultbox">
 
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col"><?= $topic->getTopic(); ?></div>
-                <div class="col"><?= $topic->getDescription(); ?></div>
-            </div>
-            <hr>
-        <?php endforeach;?>
-    </div>
+            <?php foreach ($this->topics as $topic): ?>
+
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col"><?= $topic->getTopic(); ?></div>
+                    <div class="col"><?= $topic->getDescription(); ?></div>
+                </div>
+                <hr>
+            <?php endforeach; ?>
+        </div>
 
     <?php endif ?>
 <?php endif ?>
+<?php if (!is_null($this->topic)): ?>
+    <h4 class="text-center">Thema:</h4>
+    <h2 class="text-center text-danger text-decoration-underline"><?= $this->topic->getTopic(); ?></h2>
+    <div class="container-fluid container-sm defaultbox bg-transparent"><?= $this->topic->getDescription(); ?></div>
+<?php endif; ?>
 <div class="container-fluid defaultbox">
     <div class="row">
         <div class="col-4">Teilnehmer</div>
@@ -64,9 +68,9 @@
             </div>
             <div class="col-8">
                 <?php if ($partipicant[App\Model\Project::class] instanceof App\Model\Project): ?>
-                <a href="/project/<?= $partipicant[App\Model\Project::class]->getId() ?>"><?= $this->escapeHtml(
-                        $partipicant[App\Model\Project::class]->getTitle()
-                    ) ?></a>
+                    <a href="/project/<?= $partipicant[App\Model\Project::class]->getId() ?>"><?= $this->escapeHtml(
+                            $partipicant[App\Model\Project::class]->getTitle()
+                        ) ?></a>
                 <?php endif; ?>
             </div>
         </div>

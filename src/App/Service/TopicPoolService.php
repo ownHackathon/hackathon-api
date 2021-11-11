@@ -24,6 +24,13 @@ class TopicPoolService
         return $this;
     }
 
+    public function updateEventId(Topic $topic): self
+    {
+        $this->table->updateEventId($topic);
+
+        return $this;
+    }
+
     public function findById(int $id): Topic
     {
         $event = $this->table->findById($id);
@@ -33,6 +40,17 @@ class TopicPoolService
         }
 
         return $this->hydrator->hydrate($event, new Topic());
+    }
+
+    public function findByEventId(int $id): ?Topic
+    {
+        $topic = $this->table->findByEventId($id);
+
+        if (!$topic) {
+            return null;
+        }
+
+        return $this->hydrator->hydrate($topic, new Topic());
     }
 
     public function findAvailable(): ?array
