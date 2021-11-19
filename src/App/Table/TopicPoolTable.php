@@ -46,6 +46,7 @@ class TopicPoolTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('eventId', null)
+            ->where('`accepted`', 1)
             ->fetchAll();
     }
 

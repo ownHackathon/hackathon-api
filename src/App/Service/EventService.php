@@ -19,7 +19,7 @@ class EventService
 
     public function create(Event $event): bool
     {
-        if ($this->isTopicExist($event->getName())) {
+        if ($this->isEventExist($event->getName())) {
             return false;
         }
 
@@ -93,7 +93,7 @@ class EventService
         return $event->isRatingCompleted();
     }
 
-    public function isTopicExist(string $topic): bool
+    public function isEventExist(string $topic): bool
     {
         $isTopic = $this->findByName($topic);
 
