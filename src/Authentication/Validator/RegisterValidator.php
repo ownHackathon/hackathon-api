@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Validator;
+namespace Authentication\Validator;
 
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\PasswordInput;

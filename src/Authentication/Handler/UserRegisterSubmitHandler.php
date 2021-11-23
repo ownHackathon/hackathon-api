@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Handler;
+namespace Authentication\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;

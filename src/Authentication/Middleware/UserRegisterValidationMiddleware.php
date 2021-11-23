@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Middleware;
+namespace Authentication\Middleware;
 
-use Administration\Validator\RegisterValidator;
+use Authentication\Validator\RegisterValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

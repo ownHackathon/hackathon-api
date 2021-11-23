@@ -90,18 +90,18 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/user/register[/]',
         [
-            Administration\Handler\UserRegisterHandler::class,
+            Authentication\Handler\UserRegisterHandler::class,
         ],
-        Administration\Handler\UserRegisterHandler::class
+        Authentication\Handler\UserRegisterHandler::class
     );
     $app->post(
         '/user/register[/]',
         [
-            Administration\Middleware\UserRegisterValidationMiddleware::class,
-            Administration\Middleware\UserRegisterMiddleware::class,
-            Administration\Handler\UserRegisterSubmitHandler::class,
+            Authentication\Middleware\UserRegisterValidationMiddleware::class,
+            Authentication\Middleware\UserRegisterMiddleware::class,
+            Authentication\Handler\UserRegisterSubmitHandler::class,
         ],
-        Administration\Handler\UserRegisterSubmitHandler::class
+        Authentication\Handler\UserRegisterSubmitHandler::class
     );
     $app->get(
         '/user/{userId:\d+}[/]',

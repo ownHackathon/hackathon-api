@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Middleware;
+namespace Authentication\Middleware;
 
 use App\Model\User;
 use App\Service\UserService;
