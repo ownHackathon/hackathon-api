@@ -40,6 +40,7 @@ class EventTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('active', 1)
+            ->orderBy('`startTime` DESC')
             ->fetchAll();
     }
 
@@ -47,6 +48,7 @@ class EventTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('active', 0)
+            ->orderBy('`startTime` DESC')
             ->fetchAll();
     }
 }
