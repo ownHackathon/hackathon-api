@@ -46,6 +46,7 @@ class LoginHandler implements RequestHandlerInterface
 
         $postData = $request->getParsedBody();
         $data['userName'] = $postData['userName'] ?? null;
+
         return new HtmlResponse($this->template->render('app::loginbox', $data));
     }
 }

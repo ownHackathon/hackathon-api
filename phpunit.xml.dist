@@ -9,14 +9,17 @@
          failOnRisky="true"
          failOnWarning="true"
          verbose="true"
-        colors="true">
+         colors="true">
     <testsuites>
         <testsuite name="default">
-            <directory suffix="Test.php">test</directory>
+            <directory suffix=".php">test</directory>
         </testsuite>
     </testsuites>
 
     <coverage processUncoveredFiles="true">
+        <report>
+            <html outputDirectory="../build/coverage"/>
+        </report>
         <include>
             <directory suffix=".php">src</directory>
         </include>

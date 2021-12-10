@@ -18,7 +18,7 @@ class AdministrationAuthenticationMiddleware implements MiddlewareInterface
         /** @var null|User $user */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        if (null === $user || $user->getRoleId() !== Role::ADMINISTRATOR) {
+        if (!($user instanceof User) || $user->getRoleId() !== Role::ADMINISTRATOR) {
             throw new InvalidAuthenticationException();
         }
 

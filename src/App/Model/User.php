@@ -8,14 +8,14 @@ class User
 {
     public const USER_ATTRIBUTE = 'loggedInUser';
 
-    protected int $id;
-    protected int $roleId;
-    protected string $name;
-    protected string $password;
-    protected ?string $email;
+    protected int $id = 0;
+    protected int $roleId = 0;
+    protected string $name = '';
+    protected string $password = '';
+    protected ?string $email = null;
     protected DateTime $registrationTime;
-    protected ?DateTime $lastLogin;
-    protected bool $active;
+    protected ?DateTime $lastLogin = null;
+    protected bool $active = false;
 
     public function getId(): int
     {
@@ -77,7 +77,7 @@ class User
         return $this;
     }
 
-    public function getRegistrationTime(): DateTime
+    public function getRegistrationTime(): ?DateTime
     {
         return $this->registrationTime;
     }
