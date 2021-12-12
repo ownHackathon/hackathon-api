@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Model\Role;
 use App\Model\User;
 use App\Table\UserTable;
+use DateTime;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Log\InvalidArgumentException;
 
@@ -44,7 +45,7 @@ class UserService
             throw new InvalidArgumentException('Could not find user', 400);
         }
 
-        return $this->hydrator->hydrate($user, new User());
+        return $this->generateUserObject($user);
     }
 
     public function findByName(string $name): ?User
@@ -66,6 +67,10 @@ class UserService
         if (!$user) {
             return null;
         }
+
+        $user['registrationTime'] = new DateTime($user['registrationTime']);
+        $user['lastLogin'] = is_null($user['lastLogin']) ?
+            new DateTime('1000-01-01 00:00:00') : new DateTime($user['lastLogin']);
 
         return $this->hydrator->hydrate($user, new User());
     }
