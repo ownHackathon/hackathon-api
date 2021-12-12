@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Model\Topic;
 
 use function array_rand;
-use function mt_srand;
 
 class TopicVoterService
 {

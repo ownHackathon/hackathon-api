@@ -17,6 +17,5 @@ class EventRatingReleasedMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-
     }
 }

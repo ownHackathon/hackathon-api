@@ -22,7 +22,7 @@ class IsParticipant extends AbstractHelper
         }
 
         foreach ($participants as $participant) {
-            if ($user->getId() === $participant[\App\Model\User::class]->getId()) {
+            if ($user->getId() === $participant[User::class]->getId()) {
                 return true;
             }
         }

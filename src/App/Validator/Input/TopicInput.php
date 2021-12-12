@@ -22,6 +22,5 @@ class TopicInput extends Input
                 'max' => 1024,
             ]
         );
-
     }
 }

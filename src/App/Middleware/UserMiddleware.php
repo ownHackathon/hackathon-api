@@ -4,8 +4,6 @@ namespace App\Middleware;
 
 use App\Model\User;
 use App\Service\UserService;
-use Mezzio\Session\Session;
-use Mezzio\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

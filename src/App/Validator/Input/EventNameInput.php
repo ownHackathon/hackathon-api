@@ -22,6 +22,5 @@ class EventNameInput extends Input
                 'max' => 255,
             ]
         );
-
     }
 }

@@ -3,12 +3,7 @@
 namespace App\Handler;
 
 use App\Model\Event;
-use App\Model\User;
-use DateInterval;
-use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

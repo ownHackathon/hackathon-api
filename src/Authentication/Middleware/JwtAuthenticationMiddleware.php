@@ -6,7 +6,6 @@ use App\Model\User;
 use App\Service\UserService;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Session\Session;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionMiddleware;

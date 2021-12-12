@@ -4,9 +4,9 @@ namespace App\Validator;
 
 use App\Validator\Input\EventDescriptionInput;
 use App\Validator\Input\EventDurationInput;
-use App\Validator\Input\EventTextInput;
-use App\Validator\Input\EventStartTimeInput;
 use App\Validator\Input\EventNameInput;
+use App\Validator\Input\EventStartTimeInput;
+use App\Validator\Input\EventTextInput;
 use Laminas\InputFilter\InputFilter;
 
 class EventCreateValidator extends InputFilter

@@ -34,7 +34,6 @@ class ProjectHandler implements RequestHandlerInterface
         $data['categoryRating'] = $projectCategoryRating;
         $data['ratingResult'] = $projectCategoryRatingResult;
 
-
         return new HtmlResponse($this->template->render('app::project', $data));
     }
 }

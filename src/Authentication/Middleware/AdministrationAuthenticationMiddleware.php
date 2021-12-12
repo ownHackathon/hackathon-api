@@ -2,8 +2,8 @@
 
 namespace Authentication\Middleware;
 
-use App\Model\User;
 use App\Model\Role;
+use App\Model\User;
 use Authentication\Exception\InvalidAuthenticationException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
