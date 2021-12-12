@@ -14,8 +14,14 @@ class User
     protected string $password = '';
     protected ?string $email = null;
     protected DateTime $registrationTime;
-    protected ?DateTime $lastLogin = null;
+    protected DateTime $lastLogin;
     protected bool $active = false;
+
+    public function __construct()
+    {
+        $this->registrationTime = new DateTime('1000-01-01');
+        $this->lastLogin = clone $this->registrationTime;
+    }
 
     public function getId(): int
     {
@@ -77,26 +83,26 @@ class User
         return $this;
     }
 
-    public function getRegistrationTime(): ?DateTime
+    public function getRegistrationTime(): DateTime
     {
         return $this->registrationTime;
     }
 
-    public function setRegistrationTime(string $registrationTime): self
+    public function setRegistrationTime(DateTime $registrationTime): self
     {
-        $this->registrationTime = new DateTime($registrationTime);
+        $this->registrationTime = $registrationTime;
 
         return $this;
     }
 
-    public function getLastLogin(): ?DateTime
+    public function getLastLogin(): DateTime
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?string $lastLogin): self
+    public function setLastLogin(DateTime $lastLogin): self
     {
-        $this->lastLogin = $lastLogin ? new DateTime($lastLogin) : $lastLogin;
+        $this->lastLogin = $lastLogin;
 
         return $this;
     }
