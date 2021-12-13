@@ -4,11 +4,9 @@ namespace App\Model;
 
 class ProjectCategoryRating
 {
-    protected string $title;
-
-    protected string $description;
-
-    protected int $ratingResult;
+    protected string $title = '';
+    protected string $description = '';
+    protected int $ratingResult = 0;
 
     public function getTitle(): string
     {

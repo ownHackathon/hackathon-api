@@ -4,12 +4,12 @@ namespace App\Model;
 
 class Rating
 {
-    protected int $id;
-    protected int $userId;
-    protected int $projectId;
-    protected int $eventRatingId;
-    protected int $eventRatingCategorie;
-    protected int $rating;
+    protected int $id = 0;
+    protected int $userId = 0;
+    protected int $projectId = 0;
+    protected int $eventRatingId = 0;
+    protected int $eventRatingCategory = 0;
+    protected int $rating = 0;
 
     public function getId(): int
     {
@@ -59,14 +59,14 @@ class Rating
         return $this;
     }
 
-    public function getEventRatingCategorie(): int
+    public function getEventRatingCategory(): int
     {
-        return $this->eventRatingCategorie;
+        return $this->eventRatingCategory;
     }
 
-    public function setEventRatingCategorie(int $eventRatingCategorie): self
+    public function setEventRatingCategory(int $eventRatingCategory): self
     {
-        $this->eventRatingCategorie = $eventRatingCategorie;
+        $this->eventRatingCategory = $eventRatingCategory;
 
         return $this;
     }

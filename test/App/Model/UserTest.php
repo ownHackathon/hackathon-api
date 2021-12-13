@@ -12,7 +12,17 @@ class UserTest extends TestCase
     protected function setUp(): void
     {
         $this->user = new User();
+
         parent::setUp();
+    }
+
+    public function testPropertiesIsByInitializeNull()
+    {
+        $email = $this->user->getEmail();
+        $lastLogin = $this->user->getLastLogin();
+
+        $this->assertNull($email);
+        $this->assertNull($lastLogin);
     }
 
     public function testCanSetAndGetId()
