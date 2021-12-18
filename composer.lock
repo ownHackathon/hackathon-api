@@ -1429,16 +1429,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.14.2",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "ced4133462b917c62d1efc26f982a62b5e319b4b"
+                "reference": "af2f714e45eea7f1b1fa6acca2124b824cab3b0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/ced4133462b917c62d1efc26f982a62b5e319b4b",
-                "reference": "ced4133462b917c62d1efc26f982a62b5e319b4b",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/af2f714e45eea7f1b1fa6acca2124b824cab3b0b",
+                "reference": "af2f714e45eea7f1b1fa6acca2124b824cab3b0b",
                 "shasum": ""
             },
             "require": {
@@ -1529,7 +1529,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-11-17T12:05:00+00:00"
+            "time": "2021-12-17T11:25:32+00:00"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
@@ -1929,40 +1929,39 @@
         },
         {
             "name": "mezzio/mezzio-laminasviewrenderer",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-laminasviewrenderer.git",
-                "reference": "6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8"
+                "reference": "d987bc1c104ca8da65f279e20a063f36b569908e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-laminasviewrenderer/zipball/6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8",
-                "reference": "6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8",
+                "url": "https://api.github.com/repos/mezzio/mezzio-laminasviewrenderer/zipball/d987bc1c104ca8da65f279e20a063f36b569908e",
+                "reference": "d987bc1c104ca8da65f279e20a063f36b569908e",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-servicemanager": "^2.7.8 || ^3.4",
                 "laminas/laminas-view": "^2.12.0",
-                "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-helpers": "^5.0",
                 "mezzio/mezzio-router": "^3.0",
                 "mezzio/mezzio-template": "^2.0",
-                "php": "^7.3 || ~8.0.0",
+                "php": "^7.3 || ~8.0.0 || ~8.1.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1"
             },
             "conflict": {
-                "container-interop/container-interop": "<1.2.0"
-            },
-            "replace": {
-                "zendframework/zend-expressive-zendviewrenderer": "^2.2.0"
+                "container-interop/container-interop": "<1.2.0",
+                "zendframework/zend-expressive-zendviewrenderer": "*"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~2.1.4",
-                "malukenho/docheader": "^0.1.5",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.5"
+                "laminas/laminas-coding-standard": "~2.3.0",
+                "phpspec/prophecy": "^1.14.0",
+                "phpspec/prophecy-phpunit": "^2.0.1",
+                "phpunit/phpunit": "^9.5.10",
+                "psalm/plugin-phpunit": "^0.16.1",
+                "vimeo/psalm": "^4.10"
             },
             "type": "library",
             "extra": {
@@ -2003,7 +2002,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-04-19T22:16:16+00:00"
+            "time": "2021-12-16T15:28:24+00:00"
         },
         {
             "name": "mezzio/mezzio-router",

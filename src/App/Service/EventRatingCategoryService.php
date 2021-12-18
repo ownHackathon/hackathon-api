@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Model\EventRatingCategory;
 use App\Table\EventRatingCategoryTable;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventRatingCategoryService
@@ -13,7 +13,7 @@ class EventRatingCategoryService
 
     public function __construct(
         private EventRatingCategoryTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator
     ) {
     }
 

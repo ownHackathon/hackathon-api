@@ -6,6 +6,7 @@ use App\Model\ProjectCategoryRating;
 use App\Model\Rating;
 use App\Table\RatingTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RatingService
@@ -14,7 +15,7 @@ class RatingService
 
     public function __construct(
         private RatingTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator
     ) {
     }
 

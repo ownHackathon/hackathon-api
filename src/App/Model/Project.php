@@ -6,13 +6,18 @@ use DateTime;
 
 class Project
 {
-    protected int $id;
-    protected int $participantId;
-    protected string $title;
-    protected string $description;
-    protected string $gitRepoUri;
-    protected string $demoPageUri;
+    protected int $id = 0;
+    protected int $participantId = 0;
+    protected string $title = '';
+    protected string $description = '';
+    protected string $gitRepoUri = '';
+    protected string $demoPageUri = '';
     protected DateTime $createTime;
+
+    public function __construct()
+    {
+        $this->createTime = new DateTime();
+    }
 
     public function getId(): int
     {
@@ -91,9 +96,9 @@ class Project
         return $this->createTime;
     }
 
-    public function setCreateTime(string $createTime): self
+    public function setCreateTime(DateTime $createTime): self
     {
-        $this->createTime = new DateTime($createTime);
+        $this->createTime = $createTime;
 
         return $this;
     }

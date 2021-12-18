@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Model\Role;
 use App\Table\RoleTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RoleService
@@ -13,7 +14,7 @@ class RoleService
 
     public function __construct(
         private RoleTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator
     ) {
     }
 

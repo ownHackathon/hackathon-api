@@ -4,7 +4,8 @@ namespace App\Service;
 
 use App\Model\Participant;
 use App\Table\ParticipantTable;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Log\InvalidArgumentException;
 
 class ParticipantService
@@ -13,8 +14,12 @@ class ParticipantService
 
     public function __construct(
         private ParticipantTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
+        $this->hydrator->addStrategy(
+            'requestTime',
+            new DateTimeFormatterStrategy('Y-m-d H:i:s')
+        );
     }
 
     public function create(Participant $participant): bool

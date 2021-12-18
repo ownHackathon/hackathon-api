@@ -6,12 +6,17 @@ use DateTime;
 
 class Participant
 {
-    protected int $id;
-    protected int $userId;
-    protected int $eventId;
+    protected int $id = 0;
+    protected int $userId = 0;
+    protected int $eventId = 0;
     protected DateTime $requestTime;
-    protected bool $approved;
-    protected bool $disqualified;
+    protected bool $approved = false;
+    protected bool $disqualified = true;
+
+    public function __construct()
+    {
+        $this->requestTime = new DateTime();
+    }
 
     public function getId(): int
     {
@@ -54,9 +59,9 @@ class Participant
         return $this->requestTime;
     }
 
-    public function setRequestTime(string $requestTime): self
+    public function setRequestTime(DateTime $requestTime): self
     {
-        $this->requestTime = new DateTime($requestTime);
+        $this->requestTime = $requestTime;
 
         return $this;
     }

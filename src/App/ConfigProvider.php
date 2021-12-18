@@ -3,6 +3,12 @@
 namespace App;
 
 use App\Hydrator\ClassMethodsHydratorFactory;
+use App\Hydrator\DateTimeFormatterStrategyFactory;
+use App\Hydrator\NullableStrategyFactory;
+use App\Service\EventServiceFactory;
+use App\Service\ParticipantServiceFactory;
+use App\Service\ProjectServiceFactory;
+use App\Service\UserServiceFactory;
 use App\Validator\EventCreateValidator;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\EventDescriptionInput;
@@ -16,6 +22,9 @@ use App\Validator\Input\TopicInput;
 use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Template\TemplateRendererInterface;
@@ -71,9 +80,13 @@ class ConfigProvider
                 TopicDescriptionInput::class,
                 TopicInput::class,
                 UsernameInput::class,
+
+                ReflectionHydrator::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
+                DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
+                NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventCreateHandler::class => ConfigAbstractFactory::class,
@@ -113,14 +126,14 @@ class ConfigProvider
 
                 Service\EventRatingCategoryService::class => ConfigAbstractFactory::class,
                 Service\EventRatingService::class => ConfigAbstractFactory::class,
-                Service\EventService::class => ConfigAbstractFactory::class,
-                Service\ParticipantService::class => ConfigAbstractFactory::class,
-                Service\ProjectService::class => ConfigAbstractFactory::class,
+                Service\EventService::class => EventServiceFactory::class,
+                Service\ParticipantService::class => ParticipantServiceFactory::class,
+                Service\ProjectService::class => ProjectServiceFactory::class,
                 Service\RatingCategoryService::class => ConfigAbstractFactory::class,
                 Service\RatingService::class => ConfigAbstractFactory::class,
                 Service\RoleService::class => ConfigAbstractFactory::class,
                 Service\TopicPoolService::class => ConfigAbstractFactory::class,
-                Service\UserService::class => ConfigAbstractFactory::class,
+                Service\UserService::class => UserServiceFactory::class,
 
                 Table\EventRatingCategoryTable::class => ConfigAbstractFactory::class,
                 Table\EventRatingTable::class => ConfigAbstractFactory::class,
@@ -251,43 +264,27 @@ class ConfigProvider
             ],
             Service\EventRatingCategoryService::class => [
                 Table\EventRatingCategoryTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Service\EventRatingService::class => [
                 Table\EventRatingTable::class,
-                ClassMethodsHydrator::class,
-            ],
-            Service\EventService::class => [
-                Table\EventTable::class,
-                ClassMethodsHydrator::class,
-            ],
-            Service\ProjectService::class => [
-                Table\ProjectTable::class,
-                ClassMethodsHydrator::class,
-            ],
-            Service\ParticipantService::class => [
-                Table\ParticipantTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Service\RatingCategoryService::class => [
                 Table\RatingCategoryTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Service\RatingService::class => [
                 Table\RatingTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Service\RoleService::class => [
                 Table\RoleTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Service\TopicPoolService::class => [
                 Table\TopicPoolTable::class,
-                ClassMethodsHydrator::class,
-            ],
-            Service\UserService::class => [
-                Table\UserTable::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Table\EventRatingCategoryTable::class => [
                 Query::class,

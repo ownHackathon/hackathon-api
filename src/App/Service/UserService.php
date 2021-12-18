@@ -7,6 +7,7 @@ use App\Model\User;
 use App\Table\UserTable;
 use DateTime;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 use function password_hash;
@@ -15,7 +16,7 @@ class UserService
 {
     public function __construct(
         private UserTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator
     ) {
     }
 
@@ -67,10 +68,6 @@ class UserService
         if (!$user) {
             return null;
         }
-
-        $user['registrationTime'] = new DateTime($user['registrationTime']);
-        $user['lastLogin'] = is_null($user['lastLogin']) ?
-            new DateTime('1000-01-01 00:00:00') : new DateTime($user['lastLogin']);
 
         return $this->hydrator->hydrate($user, new User());
     }

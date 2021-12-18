@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class TopicPoolService
@@ -13,7 +14,7 @@ class TopicPoolService
 
     public function __construct(
         private TopicPoolTable $table,
-        private ClassMethodsHydrator $hydrator
+        private ReflectionHydrator $hydrator
     ) {
     }
 
