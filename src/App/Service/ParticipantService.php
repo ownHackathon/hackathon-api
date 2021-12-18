@@ -16,10 +16,6 @@ class ParticipantService
         private ParticipantTable $table,
         private ReflectionHydrator $hydrator,
     ) {
-        $this->hydrator->addStrategy(
-            'requestTime',
-            new DateTimeFormatterStrategy('Y-m-d H:i:s')
-        );
     }
 
     public function create(Participant $participant): bool

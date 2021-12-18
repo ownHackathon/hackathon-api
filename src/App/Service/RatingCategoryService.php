@@ -14,7 +14,7 @@ class RatingCategoryService
 
     public function __construct(
         private RatingCategoryTable $table,
-        private ReflectionHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

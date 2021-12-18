@@ -13,7 +13,7 @@ class EventService
 
     public function __construct(
         private EventTable $table,
-        private ReflectionHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

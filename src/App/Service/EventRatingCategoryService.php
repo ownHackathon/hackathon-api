@@ -13,7 +13,7 @@ class EventRatingCategoryService
 
     public function __construct(
         private EventRatingCategoryTable $table,
-        private ReflectionHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

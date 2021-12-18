@@ -14,7 +14,7 @@ class TopicPoolService
 
     public function __construct(
         private TopicPoolTable $table,
-        private ReflectionHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

@@ -14,7 +14,7 @@ class RoleService
 
     public function __construct(
         private RoleTable $table,
-        private ReflectionHydrator $hydrator
+        private ReflectionHydrator $hydrator,
     ) {
     }
 
