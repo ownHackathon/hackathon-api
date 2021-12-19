@@ -4,9 +4,9 @@ namespace App\Model;
 
 class EventRating
 {
-    protected int $id;
-    protected int $minPoints;
-    protected int $maxPoints;
+    protected int $id = 0;
+    protected int $minPoints = 0;
+    protected int $maxPoints = 0;
 
     public function getId(): int
     {

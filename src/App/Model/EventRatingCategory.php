@@ -4,10 +4,10 @@ namespace App\Model;
 
 class EventRatingCategory
 {
-    protected int $id;
-    protected int $eventId;
-    protected int $ratingCategoryId;
-    protected int $weighting;
+    protected int $id = 0;
+    protected int $eventId = 0;
+    protected int $ratingCategoryId = 0;
+    protected int $weighting = 0;
 
     public function getId(): int
     {

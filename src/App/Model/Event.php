@@ -6,16 +6,22 @@ use DateTime;
 
 class Event
 {
-    protected int $id;
-    protected int $userId;
-    protected string $name;
-    protected ?string $description;
-    protected string $eventText;
+    protected int $id = 0;
+    protected int $userId = 0;
+    protected string $name = '';
+    protected ?string $description = null;
+    protected string $eventText = '';
     protected DateTime $createTime;
     protected DateTime $startTime;
-    protected int $duration;
-    protected bool $active;
-    protected bool $ratingCompleted;
+    protected int $duration = 0;
+    protected bool $active = false;
+    protected bool $ratingCompleted = false;
+
+    public function __construct()
+    {
+        $this->createTime = new DateTime();
+        $this->startTime = new DateTime();
+    }
 
     public function getId(): int
     {
@@ -82,9 +88,9 @@ class Event
         return $this->createTime;
     }
 
-    public function setCreateTime(string $createTime): self
+    public function setCreateTime(DateTime $createTime): self
     {
-        $this->createTime = new DateTime($createTime);
+        $this->createTime = $createTime;
 
         return $this;
     }
@@ -94,9 +100,9 @@ class Event
         return $this->startTime;
     }
 
-    public function setStartTime(string $startTime): self
+    public function setStartTime(DateTime $startTime): self
     {
-        $this->startTime = new DateTime($startTime);
+        $this->startTime = $startTime;
 
         return $this;
     }
