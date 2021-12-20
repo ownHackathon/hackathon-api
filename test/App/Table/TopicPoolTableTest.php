@@ -3,89 +3,80 @@
 namespace App\Table;
 
 use App\Model\Topic;
+use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
+use Envms\FluentPDO\Queries\Update;
 use Envms\FluentPDO\Query;
 use PHPUnit\Framework\TestCase;
 
 class TopicPoolTableTest extends TestCase
 {
-    private TopicPoolTable $table;
+    use TableTestMockTrait;
+
+    private Query $query;
+    private Select $select;
 
     protected function setUp(): void
     {
-        $query = $this->createMock(Query::class);
+        $this->query = $this->getMockBuilder(Query::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('select')->willReturnSelf();
-        $select->method('fetch')->willReturn(['countTopic' => 1]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new TopicPoolTable($query);
+        $this->select = $this->getMockBuilder(Select::class)
+            ->setConstructorArgs([$this->query, 'TopicPool'])
+            ->getMock();
 
         parent::setUp();
     }
 
-    public function testCanInsert()
+    public function testCanInsertTopic()
     {
-        $topicPool = new Topic();
+        $query = clone $this->query;
+        $insert = $this->createMock(Insert::class);
+        $topic = new Topic();
+        $values = [
+            'topic' => $topic->getTopic(),
+            'description' => $topic->getDescription(),
+        ];
 
-        $insertTopicPool = $this->table->insert($topicPool);
+        $query->expects($this->exactly(1))
+            ->method('insertInto')
+            ->with('TopicPool', $values)
+            ->willReturn($insert);
 
-        $this->assertInstanceOf(TopicPoolTable::class, $insertTopicPool);
+        $insert->expects($this->exactly(1))
+            ->method('execute')
+            ->willReturn('');
+
+        $table = new TopicPoolTable($query);
+
+        $insertTopic = $table->insert($topic);
+
+        $this->assertInstanceOf(TopicPoolTable::class, $insertTopic);
     }
 
     public function testCanUpdateEventId()
     {
-        $topicPool = new Topic();
+        $query = clone $this->query;
+        $update = $this->createMock(Update::class);
+        $topic = new Topic();
+        $values = [
+            'eventId' => $topic->getEventId(),
+        ];
 
-        $insertTopicPool = $this->table->updateEventId($topicPool);
+        $query->expects($this->exactly(1))
+            ->method('update')
+            ->with('TopicPool', $values, $topic->getId())
+            ->willReturn($update);
 
-        $this->assertInstanceOf(TopicPoolTable::class, $insertTopicPool);
-    }
+        $update->expects($this->exactly(1))
+            ->method('execute')
+            ->willReturn('');
 
-    public function testCanFindByEventId()
-    {
-        $topicPool = $this->table->findByEventId(1);
+        $table = new TopicPoolTable($query);
 
-        $this->assertIsArray($topicPool);
-    }
+        $updateTopic = $table->updateEventId($topic);
 
-    public function testCanFindAvaible()
-    {
-        $topicPool = $this->table->findAvailable();
-
-        $this->assertIsArray($topicPool);
-    }
-
-    public function testCanFindByTopic()
-    {
-        $topicPool = $this->table->findByTopic('Testtopic');
-
-        $this->assertIsArray($topicPool);
-    }
-
-    public function testCanGetCountTopic()
-    {
-        $topicPool = $this->table->getCountTopic();
-
-        $this->assertIsInt($topicPool);
-    }
-
-    public function testCanFetCountTopicAccepted()
-    {
-        $topicPool = $this->table->getCountTopicAccepted();
-
-        $this->assertIsInt($topicPool);
-    }
-
-    public function testCanGetCountTopicSelectionAvailable()
-    {
-        $topicPool = $this->table->getCountTopicSelectionAvailable();
-
-        $this->assertIsInt($topicPool);
+        $this->assertInstanceOf(TopicPoolTable::class, $updateTopic);
     }
 }

@@ -3,63 +3,126 @@
 namespace App\Table;
 
 use App\Model\User;
+use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
 use PHPUnit\Framework\TestCase;
 
 class UserTableTest extends TestCase
 {
-    private UserTable $table;
+    use TableTestMockTrait;
+
+    private Query $query;
+    private Select $select;
 
     protected function setUp(): void
     {
-        $query = $this->createMock(Query::class);
-
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new UserTable($query);
+        $this->query = $this->getQueryMock();
+        $this->select = $this->getSelectMockWithTable('User');
 
         parent::setUp();
     }
 
-    public function testCanInsert()
+    public function testCanInsertUser()
     {
+        $query = clone $this->query;
+        $insert = $this->createMock(Insert::class);
+
         $user = new User();
-        $insertUser = $this->table->insert($user);
+        $values = [
+            'roleId' => $user->getRoleId(),
+            'name' => $user->getName(),
+            'password' => $user->getPassword(),
+            'email' => $user->getEmail(),
+        ];
+
+        $query->expects($this->exactly(1))
+            ->method('insertInto')
+            ->with('User', $values)
+            ->willReturn($insert);
+
+        $insert->expects($this->exactly(1))
+            ->method('execute')
+            ->willReturn('');
+
+        $table = new UserTable($query);
+
+        $insertUser = $table->insert($user);
 
         $this->assertInstanceOf(UserTable::class, $insertUser);
     }
 
     public function testCanFindById()
     {
-        $user = $this->table->findById(1);
+        $select = clone $this->select;
+        $query = $this->getQueryMockFromTable('User', $select);
+
+        $select->expects($this->exactly(1))
+            ->method('where')
+            ->with('id', 1)
+            ->willReturnSelf();
+
+        $select->expects($this->exactly(1))
+            ->method('fetch')
+            ->willReturn([]);
+
+        $table = new UserTable($query);
+        $user = $table->findById(1);
 
         $this->assertIsArray($user);
     }
 
     public function testCanFindAll()
     {
-        $user = $this->table->findAll();
+        $select = clone $this->select;
+        $query = $this->getQueryMockFromTable('User', $select);
+
+        $select->expects($this->exactly(1))
+            ->method('fetchAll')
+            ->willReturn([]);
+
+        $table = new UserTable($query);
+        $user = $table->findAll();
 
         $this->assertIsArray($user);
     }
 
-    public function testFindByName()
+    public function testCanFindByName()
     {
-        $user = $this->table->findByName('Testname');
+        $select = clone $this->select;
+        $query = $this->getQueryMockFromTable('User', $select);
+
+        $select->expects($this->exactly(1))
+            ->method('where')
+            ->with('name', 'Testname')
+            ->willReturnSelf();
+
+        $select->expects($this->exactly(1))
+            ->method('fetch')
+            ->willReturn([]);
+
+        $table = new UserTable($query);
+        $user = $table->findByName('Testname');
 
         $this->assertIsArray($user);
     }
 
-    public function testCanFindByEmail()
+    public function testCanFindByEMail()
     {
-        $user = $this->table->findByEMail('test@excample.com');
+        $select = clone $this->select;
+        $query = $this->getQueryMockFromTable('User', $select);
+
+        $select->expects($this->exactly(1))
+            ->method('where')
+            ->with('email', 'test@example.com')
+            ->willReturnSelf();
+
+        $select->expects($this->exactly(1))
+            ->method('fetch')
+            ->willReturn([]);
+
+        $table = new UserTable($query);
+        $user = $table->findByEMail('test@example.com');
 
         $this->assertIsArray($user);
     }
