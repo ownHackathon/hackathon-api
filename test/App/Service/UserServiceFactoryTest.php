@@ -17,15 +17,16 @@ class UserServiceFactoryTest extends TestCase
         $strategy = $this->createMock(NullableStrategy::class);
         $container = $this->createMock(ContainerInterface::class);
 
-        $container->method('get')->will(
-            $this->returnValueMap(
-                [
-                    [UserTable::class, $userTable],
-                    [ReflectionHydrator::class, $hydrator],
-                    [NullableStrategy::class, $strategy],
-                ],
-            )
-        );
+        $container->expects($this->exactly(3))
+            ->method('get')->will(
+                $this->returnValueMap(
+                    [
+                        [UserTable::class, $userTable],
+                        [ReflectionHydrator::class, $hydrator],
+                        [NullableStrategy::class, $strategy],
+                    ],
+                )
+            );
 
         $userServiceFactory = new UserServiceFactory();
         $userService = $userServiceFactory($container);
