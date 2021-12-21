@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 
 class UserServiceFactoryTest extends TestCase
 {
-    public function testCanCreateUserService()
+    public function testCanCreateUserService(): void
     {
         $userTable = $this->createMock(UserTable::class);
         $hydrator = $this->createMock(ReflectionHydrator::class);
