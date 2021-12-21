@@ -4,15 +4,9 @@ namespace App\Table;
 
 use Administration\Table\AbstractTable;
 use App\Model\Event;
-use Envms\FluentPDO\Query;
 
 class EventTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'Event');
-    }
-
     public function insert(Event $event): self
     {
         $values = [
@@ -40,7 +34,7 @@ class EventTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('active', 1)
-            ->orderBy('`startTime` DESC')
+            ->orderBy('startTime DESC')
             ->fetchAll();
     }
 
@@ -48,7 +42,7 @@ class EventTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('active', 0)
-            ->orderBy('`startTime` DESC')
+            ->orderBy('startTime DESC')
             ->fetchAll();
     }
 }

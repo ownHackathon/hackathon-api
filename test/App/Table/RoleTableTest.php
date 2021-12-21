@@ -2,35 +2,30 @@
 
 namespace App\Table;
 
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
-
-class RoleTableTest extends TestCase
+/**
+ * @property RoleTable $table
+ */
+class RoleTableTest extends AbstractTableTest
 {
-    private RoleTable $table;
-
-    protected function setUp(): void
+    public function testCanFindById(): void
     {
-        $query = $this->createMock(Query::class);
+        $this->configureSelectWithOneWhere('id', 1);
 
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new RoleTable($query);
-
-        parent::setUp();
-    }
-
-    public function testCanFindById()
-    {
         $role = $this->table->findById(1);
 
-        $this->assertIsArray($role);
+        $this->assertSame($this->fetchResult, $role);
+    }
+
+    public function testCanFindAll(): void
+    {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $role = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $role);
     }
 }

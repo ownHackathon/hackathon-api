@@ -3,12 +3,7 @@
 namespace App\Table;
 
 use Administration\Table\AbstractTable;
-use Envms\FluentPDO\Query;
 
 class RoleTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'Role');
-    }
 }

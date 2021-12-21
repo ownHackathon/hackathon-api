@@ -3,59 +3,109 @@
 namespace App\Table;
 
 use App\Model\Event;
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
 
-class EventTableTest extends TestCase
+/**
+ * @property EventTable $table
+ */
+class EventTableTest extends AbstractTableTest
 {
-    private EventTable $table;
-
-    protected function setUp(): void
-    {
-        $query = $this->createMock(Query::class);
-
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('__call')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new EventTable($query);
-
-        parent::setUp();
-    }
-
-    public function testCanInsert()
+    public function testCanInsertEvent(): void
     {
         $event = new Event();
+        $values = [
+            'userId' => $event->getUserId(),
+            'name' => $event->getName(),
+            'description' => $event->getDescription(),
+            'eventText' => $event->getEventText(),
+            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
+            'duration' => $event->getDuration(),
+        ];
+
+        $insert = $this->createInsert($values);
+
+        $insert->expects($this->once())
+            ->method('execute')
+            ->willReturn('');
 
         $insertEvent = $this->table->insert($event);
 
         $this->assertInstanceOf(EventTable::class, $insertEvent);
     }
 
-    public function testCanFindByName()
+    public function testCanFindById(): void
     {
-        $event = $this->table->findByName('Testname');
+        $this->configureSelectWithOneWhere('id', 1);
 
-        $this->assertIsArray($event);
+        $event = $this->table->findById(1);
+
+        $this->assertSame($this->fetchResult, $event);
     }
 
-    public function testCanFindAllActive()
+    public function testCanFindAll(): void
     {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $event = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $event);
+    }
+
+    public function testCanfindByName(): void
+    {
+        $this->configureSelectWithOneWhere('name', 'fakeName');
+
+        $event = $this->table->findByName('fakeName');
+
+        $this->assertSame($this->fetchResult, $event);
+    }
+
+    public function testCanfindAllActive(): void
+    {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('where')
+            ->with('active', 1)
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('__call')
+            ->with('orderBy', ['startTime DESC'])
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
         $event = $this->table->findAllActive();
 
-        $this->assertIsArray($event);
+        $this->assertSame($this->fetchAllResult, $event);
     }
 
-    public function testCanFindAllNotActive()
+    public function testCanfindAllNotActive(): void
     {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('where')
+            ->with('active', 0)
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('__call')
+            ->with('orderBy', ['startTime DESC'])
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
         $event = $this->table->findAllNotActive();
 
-        $this->assertIsArray($event);
+        $this->assertSame($this->fetchAllResult, $event);
     }
 }

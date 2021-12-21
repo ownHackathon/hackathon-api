@@ -2,35 +2,39 @@
 
 namespace App\Table;
 
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
-
-class ProjectTableTest extends TestCase
+/**
+ * @property ProjectTable $table
+ */
+class ProjectTableTest extends AbstractTableTest
 {
-    private ProjectTable $table;
-
-    protected function setUp(): void
+    public function testCanFindById(): void
     {
-        $query = $this->createMock(Query::class);
+        $this->configureSelectWithOneWhere('id', 1);
 
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
+        $project = $this->table->findById(1);
 
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new ProjectTable($query);
-
-        parent::setUp();
+        $this->assertSame($this->fetchResult, $project);
     }
 
-    public function testCanFindByParticipantId()
+    public function testCanFindAll(): void
     {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $project = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $project);
+    }
+
+    public function testCanFindByParticipantId(): void
+    {
+        $this->configureSelectWithOneWhere('participantId', 1);
+
         $project = $this->table->findByParticipantId(1);
 
-        $this->assertIsArray($project);
+        $this->assertSame($this->fetchResult, $project);
     }
 }

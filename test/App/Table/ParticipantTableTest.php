@@ -3,58 +3,103 @@
 namespace App\Table;
 
 use App\Model\Participant;
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
 
-class ParticipantTableTest extends TestCase
+/**
+ * @property ParticipantTable $table
+ */
+class ParticipantTableTest extends AbstractTableTest
 {
-    private ParticipantTable $table;
-
-    protected function setUp(): void
-    {
-        $query = $this->createMock(Query::class);
-
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new ParticipantTable($query);
-
-        parent::setUp();
-    }
-
-    public function testCanInsert()
+    public function testCanInsertParticipant(): void
     {
         $participant = new Participant();
+        $values = [
+            'userId' => $participant->getUserId(),
+            'eventId' => $participant->getEventId(),
+            'approved' => $participant->isApproved(),
+        ];
+
+        $insert = $this->createInsert($values);
+
+        $insert->expects($this->once())
+            ->method('execute')
+            ->willReturn('');
 
         $insertParticipant = $this->table->insert($participant);
 
         $this->assertInstanceOf(ParticipantTable::class, $insertParticipant);
     }
 
-    public function testCanFindByUserId()
+    public function testCanFindById(): void
     {
+        $this->configureSelectWithOneWhere('id', 1);
+
+        $project = $this->table->findById(1);
+
+        $this->assertSame($this->fetchResult, $project);
+    }
+
+    public function testCanFindAll(): void
+    {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $project = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $project);
+    }
+
+    public function testCanFindByUserId(): void
+    {
+        $this->configureSelectWithOneWhere('userId', 1);
+
         $participant = $this->table->findByUserId(1);
 
-        $this->assertIsArray($participant);
+        $this->assertSame($this->fetchResult, $participant);
     }
 
-    public function testCanFindByUserIdAndEventId()
+    public function testCanFindByUserIdAndEventId(): void
     {
+        $select = $this->createSelect();
+
+        $select->expects($this->exactly(2))
+            ->method('where')
+            ->withConsecutive(
+                ['userId', 1],
+                ['eventId', 1],
+            )
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('fetch')
+            ->willReturn($this->fetchResult);
+
         $participant = $this->table->findByUserIdAndEventId(1, 1);
 
-        $this->assertIsArray($participant);
+        $this->assertSame($this->fetchResult, $participant);
     }
 
-    public function testCanFindActiveParticipantByEvent()
+    public function testCanFindActiveParticipantByEvent(): void
     {
+        $select = $this->createSelect();
+
+        $select->expects($this->exactly(3))
+            ->method('where')
+            ->withConsecutive(
+                ['eventId', 1],
+                ['approved', 1],
+                ['disqualified', 0]
+            )
+            ->willReturnSelf();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
         $participant = $this->table->findActiveParticipantByEvent(1);
 
-        $this->assertIsArray($participant);
+        $this->assertSame($this->fetchAllResult, $participant);
     }
 }

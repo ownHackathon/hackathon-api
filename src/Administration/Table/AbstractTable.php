@@ -3,13 +3,20 @@
 namespace Administration\Table;
 
 use Envms\FluentPDO\Query;
+use ReflectionClass;
 
 class AbstractTable
 {
-    public function __construct(
-        protected Query $query,
-        protected string $table
-    ) {
+    protected string $table;
+
+    public function __construct(protected Query $query)
+    {
+        $this->table = substr((new ReflectionClass($this))->getShortName(), 0, -5);
+    }
+
+    public function getTableName(): string
+    {
+        return $this->table;
     }
 
     public function findById(int $id): bool|array

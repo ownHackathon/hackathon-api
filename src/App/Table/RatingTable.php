@@ -3,15 +3,9 @@
 namespace App\Table;
 
 use Administration\Table\AbstractTable;
-use Envms\FluentPDO\Query;
 
 class RatingTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'Rating');
-    }
-
     public function findProjectCategoryRatingByProjectId(int $projectId): bool|array
     {
         return $this->query->from($this->table)

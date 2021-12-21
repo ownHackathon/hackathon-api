@@ -4,15 +4,9 @@ namespace App\Table;
 
 use Administration\Table\AbstractTable;
 use App\Model\User;
-use Envms\FluentPDO\Query;
 
 class UserTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'User');
-    }
-
     public function insert(User $user): self
     {
         $values = [

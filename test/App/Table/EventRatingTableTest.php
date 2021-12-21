@@ -2,33 +2,30 @@
 
 namespace App\Table;
 
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
-
-class EventRatingTableTest extends TestCase
+/**
+ * @property EventRatingTable $table
+ */
+class EventRatingTableTest extends AbstractTableTest
 {
-    private EventRatingTable $table;
-
-    protected function setUp(): void
+    public function testCanFindById(): void
     {
-        $query = $this->createMock(Query::class);
+        $this->configureSelectWithOneWhere('id', 1);
 
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
-
-        $query->method('from')->willReturn($select);
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-
-        $this->table = new EventRatingTable($query);
-
-        parent::setUp();
-    }
-
-    public function testCanFindById()
-    {
         $eventRating = $this->table->findById(1);
 
-        $this->assertIsArray($eventRating);
+        $this->assertSame($this->fetchResult, $eventRating);
+    }
+
+    public function testCanFindAll(): void
+    {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $eventRating = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $eventRating);
     }
 }

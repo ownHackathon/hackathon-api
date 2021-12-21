@@ -4,15 +4,9 @@ namespace App\Table;
 
 use Administration\Table\AbstractTable;
 use App\Model\Topic;
-use Envms\FluentPDO\Query;
 
 class TopicPoolTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'TopicPool');
-    }
-
     public function insert(Topic $topic): self
     {
         $values = [
@@ -46,21 +40,21 @@ class TopicPoolTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('eventId', null)
-            ->where('`accepted`', 1)
+            ->where('accepted', 1)
             ->fetchAll();
     }
 
     public function findByTopic(string $topic): bool|array
     {
         return $this->query->from($this->table)
-            ->where('`topic`', $topic)
+            ->where('topic', $topic)
             ->fetch();
     }
 
     public function getCountTopic(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countTopic')
+            ->select('COUNT(id) AS countTopic')
             ->fetch();
         return $data['countTopic'];
     }
@@ -68,8 +62,8 @@ class TopicPoolTable extends AbstractTable
     public function getCountTopicAccepted(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countTopic')
-            ->where('`accepted`', 1)
+            ->select('COUNT(id) AS countTopic')
+            ->where('accepted', 1)
             ->fetch();
         return $data['countTopic'];
     }
@@ -77,9 +71,9 @@ class TopicPoolTable extends AbstractTable
     public function getCountTopicSelectionAvailable(): int
     {
         $data = $this->query->from($this->table)
-            ->select('COUNT(`id`) AS countTopic')
-            ->where('`accepted`', 1)
-            ->where('`eventId`', null)
+            ->select('COUNT(id) AS countTopic')
+            ->where('accepted', 1)
+            ->where('eventId', null)
             ->fetch();
         return $data['countTopic'];
     }

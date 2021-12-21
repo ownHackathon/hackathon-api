@@ -4,15 +4,9 @@ namespace App\Table;
 
 use Administration\Table\AbstractTable;
 use App\Model\Participant;
-use Envms\FluentPDO\Query;
 
 class ParticipantTable extends AbstractTable
 {
-    public function __construct(Query $query)
-    {
-        parent::__construct($query, 'Participant');
-    }
-
     public function insert(Participant $participant): self
     {
         $values = [

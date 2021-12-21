@@ -2,34 +2,30 @@
 
 namespace App\Table;
 
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Query;
-use PHPUnit\Framework\TestCase;
-
-class RatingCategoryTableTest extends TestCase
+/**
+ * @property RatingCategoryTable $table
+ */
+class RatingCategoryTableTest extends AbstractTableTest
 {
-    private RatingCategoryTable $table;
-
-    protected function setUp(): void
+    public function testCanFindById(): void
     {
-        $query = $this->createMock(Query::class);
-        $select = $this->getMockBuilder(Select::class)->setConstructorArgs([$query, 'TestTable'])->getMock();
+        $this->configureSelectWithOneWhere('id', 1);
 
-        $query->method('from')->willReturn($select);
-
-        $select->method('where')->willReturnSelf();
-        $select->method('fetch')->willReturn([]);
-        $select->method('fetchAll')->willReturn([]);
-
-        $this->table = new RatingCategoryTable($query);
-
-        parent::setUp();
-    }
-
-    public function testCanFindById()
-    {
         $ratingCategory = $this->table->findById(1);
 
-        $this->assertIsArray($ratingCategory);
+        $this->assertSame($this->fetchResult, $ratingCategory);
+    }
+
+    public function testCanFindAll(): void
+    {
+        $select = $this->createSelect();
+
+        $select->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($this->fetchAllResult);
+
+        $ratingCategory = $this->table->findAll();
+
+        $this->assertSame($this->fetchAllResult, $ratingCategory);
     }
 }
