@@ -7,7 +7,7 @@ use App\Model\User;
 use App\Table\UserTable;
 use DateTime;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 use function password_hash;
@@ -46,28 +46,19 @@ class UserService
             throw new InvalidArgumentException('Could not find user', 400);
         }
 
-        return $this->generateUserObject($user);
+        return $this->hydrator->hydrate($user, new User());
     }
 
     public function findByName(string $name): ?User
     {
         $user = $this->table->findByName($name);
 
-        return $this->generateUserObject($user);
+        return $this->hydrator->hydrate($user, new User());
     }
 
     public function findByEMail(string $email): ?User
     {
         $user = $this->table->findByEMail($email);
-
-        return $this->generateUserObject($user);
-    }
-
-    private function generateUserObject(bool|array $user): ?User
-    {
-        if (!$user) {
-            return null;
-        }
 
         return $this->hydrator->hydrate($user, new User());
     }

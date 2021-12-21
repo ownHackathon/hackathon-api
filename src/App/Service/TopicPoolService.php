@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class TopicPoolService
@@ -47,10 +47,6 @@ class TopicPoolService
     {
         $topic = $this->table->findByEventId($id);
 
-        if (!$topic) {
-            return null;
-        }
-
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
@@ -58,20 +54,12 @@ class TopicPoolService
     {
         $topics = $this->table->findAvailable();
 
-        if (!$topics) {
-            return null;
-        }
-
         return $this->convertArrayToClassArray($topics, Topic::class);
     }
 
     public function findAll(): ?array
     {
         $topics = $this->table->findAll();
-
-        if (!$topics) {
-            return null;
-        }
 
         return $this->convertArrayToClassArray($topics, Topic::class);
     }
@@ -88,10 +76,6 @@ class TopicPoolService
     public function findByTopic(string $topic): ?Topic
     {
         $topic = $this->table->findByTopic($topic);
-
-        if (!$topic) {
-            return null;
-        }
 
         return $this->hydrator->hydrate($topic, new Topic());
     }

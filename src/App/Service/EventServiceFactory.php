@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Table\EventTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 

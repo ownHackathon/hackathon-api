@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Model\Event;
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
 

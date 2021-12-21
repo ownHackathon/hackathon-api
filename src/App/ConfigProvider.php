@@ -22,7 +22,7 @@ use App\Validator\Input\TopicInput;
 use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;

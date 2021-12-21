@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Table\UserTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Psr\Container\ContainerInterface;
 

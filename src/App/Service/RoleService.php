@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Model\Role;
 use App\Table\RoleTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RoleService

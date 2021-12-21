@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Model\EventRatingCategory;
 use App\Table\EventRatingCategoryTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventRatingCategoryService

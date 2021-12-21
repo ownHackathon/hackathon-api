@@ -6,7 +6,7 @@ use App\Model\ProjectCategoryRating;
 use App\Model\Rating;
 use App\Table\RatingTable;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RatingService

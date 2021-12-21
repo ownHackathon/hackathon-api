@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Model\Event;
 use App\Table\EventTable;
-use Laminas\Hydrator\ReflectionHydrator;
+use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventService
