@@ -2,17 +2,14 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\ProjectCategoryRating;
 use App\Model\Rating;
 use App\Table\RatingTable;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RatingService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private RatingTable $table,
         private ReflectionHydrator $hydrator,
@@ -34,11 +31,7 @@ class RatingService
     {
         $projectCategoryRating = $this->table->findProjectCategoryRatingByProjectId($projectId);
 
-        if (!$projectCategoryRating) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($projectCategoryRating, ProjectCategoryRating::class);
+        return $this->hydrator->hydrateList($projectCategoryRating, ProjectCategoryRating::class);
     }
 
     /** @return null|Rating[] */
@@ -46,10 +39,6 @@ class RatingService
     {
         $ratings = $this->table->findAll();
 
-        if (!$ratings) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($ratings, Rating::class);
+        return $this->hydrator->hydrateList($ratings, Rating::class);
     }
 }
