@@ -2,10 +2,9 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\RatingCategory;
 use App\Table\RatingCategoryTable;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class RatingCategoryService
@@ -33,10 +32,6 @@ class RatingCategoryService
     {
         $ratingCategories = $this->table->findAll();
 
-        if (!$ratingCategories) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($ratingCategories, RatingCategory::class);
+        return $this->hydrator->hydrateList($ratingCategories, RatingCategory::class);
     }
 }
