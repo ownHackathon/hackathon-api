@@ -3,9 +3,8 @@
 namespace App\Service;
 
 use App\Model\Topic;
-use PHPUnit\Framework\TestCase;
 
-class TopicVoterServiceTest extends TestCase
+class TopicVoterServiceTest extends AbstractServiceTest
 {
     public function testCanGetSelectRandomlyTopic(): void
     {

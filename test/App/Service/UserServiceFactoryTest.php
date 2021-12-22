@@ -2,18 +2,16 @@
 
 namespace App\Service;
 
-use App\Table\UserTable;
 use App\Hydrator\ReflectionHydrator;
+use App\Table\UserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
-use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-class UserServiceFactoryTest extends TestCase
+class UserServiceFactoryTest extends AbstractServiceTest
 {
     public function testCanCreateUserService(): void
     {
         $userTable = $this->createMock(UserTable::class);
-        $hydrator = $this->createMock(ReflectionHydrator::class);
         $strategy = $this->createMock(NullableStrategy::class);
         $container = $this->createMock(ContainerInterface::class);
 
@@ -22,7 +20,7 @@ class UserServiceFactoryTest extends TestCase
                 $this->returnValueMap(
                     [
                         [UserTable::class, $userTable],
-                        [ReflectionHydrator::class, $hydrator],
+                        [ReflectionHydrator::class, $this->hydrator],
                         [NullableStrategy::class, $strategy],
                     ],
                 )

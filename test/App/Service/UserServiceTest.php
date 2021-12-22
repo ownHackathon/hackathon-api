@@ -4,15 +4,12 @@ namespace App\Service;
 
 use App\Model\User;
 use App\Table\UserTable;
-use App\Hydrator\ReflectionHydrator;
-use PHPUnit\Framework\TestCase;
 
-class UserServiceTest extends TestCase
+class UserServiceTest extends AbstractServiceTest
 {
     public function testCanNotCreateUserWithExistUser(): void
     {
         $table = $this->createMock(UserTable::class);
-        $hydrator = new ReflectionHydrator();
 
         $user = new User();
         $user->setName('fakeName');
@@ -23,7 +20,7 @@ class UserServiceTest extends TestCase
             ->with('fakeName')
             ->willReturn(['name' => 'fakeName']);
 
-        $service = new UserService($table, $hydrator);
+        $service = new UserService($table, $this->hydrator);
 
         $insert = $service->create($user);
 
@@ -33,7 +30,6 @@ class UserServiceTest extends TestCase
     public function testCanNotCreateUserWithExistEmail(): void
     {
         $table = $this->createMock(UserTable::class);
-        $hydrator = new ReflectionHydrator();
 
         $user = new User();
         $user->setName('fakeName');
@@ -49,7 +45,7 @@ class UserServiceTest extends TestCase
             ->with('fake@example.com')
             ->willReturn(['email' => 'fake@example.com']);
 
-        $service = new UserService($table, $hydrator);
+        $service = new UserService($table, $this->hydrator);
 
         $insert = $service->create($user);
 
@@ -59,7 +55,6 @@ class UserServiceTest extends TestCase
     public function testCanCreateUser(): void
     {
         $table = $this->createMock(UserTable::class);
-        $hydrator = new ReflectionHydrator();
 
         $user = new User();
         $user->setName('fakeName');
@@ -74,7 +69,7 @@ class UserServiceTest extends TestCase
             ->method('findByEmail')
             ->willReturn(false);
 
-        $service = new UserService($table, $hydrator);
+        $service = new UserService($table, $this->hydrator);
 
         $insert = $service->create($user);
 
@@ -84,13 +79,12 @@ class UserServiceTest extends TestCase
     public function testFindByIdThrowException(): void
     {
         $table = $this->createMock(UserTable::class);
-        $hydrator = new ReflectionHydrator();
 
         $table->expects($this->once())
             ->method('findById')
             ->willReturn(false);
 
-        $service = new UserService($table, $hydrator);
+        $service = new UserService($table, $this->hydrator);
 
         $this->expectException('InvalidArgumentException');
 
@@ -100,16 +94,15 @@ class UserServiceTest extends TestCase
     public function testCanFindById(): void
     {
         $table = $this->createMock(UserTable::class);
-        $hydrator = new ReflectionHydrator();
         $user = new User();
         $user->setId(1);
 
         $table->expects($this->once())
             ->method('findById')
             ->with(1)
-            ->willReturn(['id' => 1]);
+            ->willReturn($this->fetchResult);
 
-        $service = new UserService($table, $hydrator);
+        $service = new UserService($table, $this->hydrator);
 
         $user = $service->findById(1);
 
