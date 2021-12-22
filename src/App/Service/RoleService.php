@@ -10,8 +10,6 @@ use Psr\Log\InvalidArgumentException;
 
 class RoleService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private RoleTable $table,
         private ReflectionHydrator $hydrator,
@@ -29,15 +27,11 @@ class RoleService
         return $this->hydrator->hydrate($role, new Role());
     }
 
-    /** @return null|Role[] */
-    public function findAll(): ?array
+    /** @return Role[] */
+    public function findAll(): array
     {
         $roles = $this->table->findAll();
 
-        if (!$roles) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($roles, Role::class);
+        return $this->hydrator->hydrateList($roles, Role::class);
     }
 }
