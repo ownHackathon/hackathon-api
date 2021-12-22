@@ -12,4 +12,17 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 
         return parent::hydrate($data, $object);
     }
+
+    public function hydrateList(array $values, string $className): array
+    {
+        $classList = [];
+
+        foreach ($values as $data) {
+            if ($data) {
+                $classList[] = $this->hydrate($data, new $className());
+            }
+        }
+
+        return $classList;
+    }
 }

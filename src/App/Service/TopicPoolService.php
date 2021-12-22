@@ -2,16 +2,13 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class TopicPoolService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private TopicPoolTable $table,
         private ReflectionHydrator $hydrator,
@@ -50,27 +47,33 @@ class TopicPoolService
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
+    /**
+     * @return null|Topic[]
+     */
     public function findAvailable(): ?array
     {
         $topics = $this->table->findAvailable();
 
-        return $this->convertArrayToClassArray($topics, Topic::class);
+        return $this->hydrator->hydrateList($topics, Topic::class);
     }
 
+    /**
+     * @return null|Topic[]
+     */
     public function findAll(): ?array
     {
         $topics = $this->table->findAll();
 
-        return $this->convertArrayToClassArray($topics, Topic::class);
+        return $this->hydrator->hydrateList($topics, Topic::class);
     }
 
     public function isTopic(string $topic): bool
     {
-        if (null === $this->findByTopic($topic)) {
-            return false;
+        if ($this->findByTopic($topic) instanceof Topic) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public function findByTopic(string $topic): ?Topic
