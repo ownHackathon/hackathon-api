@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\Project;
 use App\Table\ProjectTable;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class ProjectService
@@ -23,21 +23,12 @@ class ProjectService
             throw new InvalidArgumentException('Could not find Project', 400);
         }
 
-        return $this->generateProjectObject($project);
+        return $this->hydrator->hydrate($project, new Project());
     }
 
     public function findByParticipantId(int $id): ?Project
     {
         $project = $this->table->findByParticipantId($id);
-
-        return $this->generateProjectObject($project);
-    }
-
-    private function generateProjectObject(bool|array $project): ?Project
-    {
-        if (!$project) {
-            return null;
-        }
 
         return $this->hydrator->hydrate($project, new Project());
     }
