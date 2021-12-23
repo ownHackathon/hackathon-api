@@ -2,16 +2,13 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\Participant;
 use App\Table\ParticipantTable;
-use App\Hydrator\ReflectionHydrator;
-use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Log\InvalidArgumentException;
 
 class ParticipantService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private ParticipantTable $table,
         private ReflectionHydrator $hydrator,
@@ -44,20 +41,12 @@ class ParticipantService
     {
         $participant = $this->table->findByUserId($userId);
 
-        if (!$participant) {
-            return null;
-        }
-
         return $this->hydrator->hydrate($participant, new Participant());
     }
 
     public function findByUserIdAndEventId(int $userId, int $eventId): ?Participant
     {
         $participant = $this->table->findByUserIdAndEventId($userId, $eventId);
-
-        if (!$participant) {
-            return null;
-        }
 
         return $this->hydrator->hydrate($participant, new Participant());
     }
@@ -67,18 +56,7 @@ class ParticipantService
     {
         $participants = $this->table->findActiveParticipantByEvent($eventId);
 
-        if (!$participants) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($participants, Participant::class);
-    }
-
-    private function isParticipantExist(int $userId): bool
-    {
-        $participant = $this->findByUserId($userId);
-
-        return $participant instanceof Participant;
+        return $this->hydrator->hydrateList($participants, Participant::class);
     }
 
     private function isParticipantInEventExist(int $userId, int $eventId): bool
