@@ -2,15 +2,13 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\Event;
 use App\Table\EventTable;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private EventTable $table,
         private ReflectionHydrator $hydrator,
@@ -43,10 +41,6 @@ class EventService
     {
         $event = $this->table->findByName($topic);
 
-        if (!$event) {
-            return null;
-        }
-
         return $this->hydrator->hydrate($event, new Event());
     }
 
@@ -55,11 +49,7 @@ class EventService
     {
         $events = $this->table->findAll();
 
-        if (!$events) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($events, Event::class);
+        return $this->hydrator->hydrateList($events, Event::class);
     }
 
     /** @return null|Event[] */
@@ -67,11 +57,7 @@ class EventService
     {
         $events = $this->table->findAllActive();
 
-        if (!$events) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($events, Event::class);
+        return $this->hydrator->hydrateList($events, Event::class);
     }
 
     /** @return null|Event[] */
@@ -79,11 +65,7 @@ class EventService
     {
         $events = $this->table->findAllNotActive();
 
-        if (!$events) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($events, Event::class);
+        return $this->hydrator->hydrateList($events, Event::class);
     }
 
     public function isRatingCompleted(int $id): bool
