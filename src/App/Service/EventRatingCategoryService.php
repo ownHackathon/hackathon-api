@@ -2,15 +2,13 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\EventRatingCategory;
 use App\Table\EventRatingCategoryTable;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 class EventRatingCategoryService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private EventRatingCategoryTable $table,
         private ReflectionHydrator $hydrator,
@@ -33,10 +31,6 @@ class EventRatingCategoryService
     {
         $eventRatingCategories = $this->table->findAll();
 
-        if (!$eventRatingCategories) {
-            return null;
-        }
-
-        return $this->convertArrayToClassArray($eventRatingCategories, EventRatingCategory::class);
+        return $this->hydrator->hydrateList($eventRatingCategories, EventRatingCategory::class);
     }
 }

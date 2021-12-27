@@ -9,8 +9,6 @@ use Psr\Log\InvalidArgumentException;
 
 class RatingCategoryService
 {
-    use ConvertArrayToClassArrayTrait;
-
     public function __construct(
         private RatingCategoryTable $table,
         private ReflectionHydrator $hydrator,
