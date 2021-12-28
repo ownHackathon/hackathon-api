@@ -9,7 +9,11 @@
         "Discord"
     ],
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-component-installer": true
+        }
     },
     "scripts": {
         "phpcs": "phpcs --standard=phpcs.xml"
@@ -21,7 +25,7 @@
         "composer/package-versions-deprecated": "^1.11.99.4",
         "envms/fluentpdo": "^2.2.0",
         "firebase/php-jwt": "^5.4",
-        "laminas/laminas-component-installer": "^2.5.0",
+        "laminas/laminas-component-installer": "^2.6.0",
         "laminas/laminas-config-aggregator": "^1.6.0",
         "laminas/laminas-diactoros": "^2.8.0",
         "laminas/laminas-hydrator": "^4.3.1",
