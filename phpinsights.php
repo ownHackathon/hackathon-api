@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
 
 return [
 
@@ -66,6 +67,7 @@ return [
     'remove' => [
         ForbiddenPublicPropertySniff::class,
         ForbiddenSetterSniff::class,
+        DeclareStrictTypesSniff::class
     ],
 
     'config' => [
