@@ -12,11 +12,14 @@
         "sort-packages": true,
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
-            "laminas/laminas-component-installer": true
+            "laminas/laminas-component-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {
-        "phpcs": "phpcs --standard=phpcs.xml"
+        "phpcs": "phpcs --standard=phpcs.xml",
+        "phpinsights": "vendor/bin/phpinsights --config-path=phpinsights.php -s",
+        "fix-style": "vendor/bin/phpinsights --config-path=phpinsights.php -s --fix"
     },
     "require": {
         "php": "^8.0",
@@ -45,6 +48,7 @@
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",
+        "nunomaduro/phpinsights": "^2.1",
         "phpunit/phpunit": "^9"
     },
     "autoload": {
