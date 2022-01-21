@@ -22,7 +22,8 @@ class UserService
 
     public function create(User $user, int $role = Role::USER): bool
     {
-        if ($this->isUserExist($user->getName()) ||
+        if (
+            $this->isUserExist($user->getName()) ||
             $this->isEmailExist($user->getEmail())
         ) {
             return false;

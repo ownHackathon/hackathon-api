@@ -17,7 +17,6 @@ class EventCreateValidator extends InputFilter
         private EventTextInput $eventTextInput,
         private EventStartTimeInput $startTimeInput,
         private EventDurationInput $durationInput,
-
     ) {
         $this->add($this->eventNameInput);
         $this->add($this->descriptionInput);

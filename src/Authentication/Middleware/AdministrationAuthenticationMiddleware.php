@@ -12,7 +12,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AdministrationAuthenticationMiddleware implements MiddlewareInterface
 {
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var null|User $user */

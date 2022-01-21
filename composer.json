@@ -18,8 +18,7 @@
     },
     "scripts": {
         "phpcs": "phpcs --standard=phpcs.xml",
-        "phpinsights": "vendor/bin/phpinsights --config-path=phpinsights.php -s",
-        "fix-style": "vendor/bin/phpinsights --config-path=phpinsights.php -s --fix"
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
     },
     "require": {
         "php": "^8.0",
@@ -48,8 +47,9 @@
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",
-        "nunomaduro/phpinsights": "^2.1",
-        "phpunit/phpunit": "^9"
+        "phpstan/phpstan": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {

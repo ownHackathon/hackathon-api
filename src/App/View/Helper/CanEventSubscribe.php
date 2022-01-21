@@ -7,7 +7,6 @@ use Laminas\View\Helper\AbstractHelper;
 
 class CanEventSubscribe extends AbstractHelper
 {
-
     public function __invoke(DateTime $eventStartTime): bool
     {
         $time = new DateTime();

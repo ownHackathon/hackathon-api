@@ -9,7 +9,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class EventParticipantSubscribeHandler implements RequestHandlerInterface
 {
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $eventId = $request->getAttribute('eventId');

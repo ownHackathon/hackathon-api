@@ -11,7 +11,6 @@ class TopicCreateValidator extends InputFilter
     public function __construct(
         private TopicInput $topicInput,
         private TopicDescriptionInput $topicDescriptionInput,
-
     ) {
         $this->add($this->topicInput);
         $this->add($this->topicDescriptionInput);
