@@ -4,11 +4,11 @@ namespace App\Model;
 
 class Topic
 {
-    protected int $id = 0;
-    protected ?int $eventId = null;
-    protected string $topic = '';
-    protected ?string $description = null;
-    protected ?bool $accepted = null;
+    private int $id = 0;
+    private ?int $eventId = null;
+    private string $topic = '';
+    private ?string $description = null;
+    private ?bool $accepted = null;
 
     public function getId(): int
     {

@@ -4,12 +4,12 @@ namespace App\Model;
 
 class Rating
 {
-    protected int $id = 0;
-    protected int $userId = 0;
-    protected int $projectId = 0;
-    protected int $eventRatingId = 0;
-    protected int $eventRatingCategory = 0;
-    protected int $rating = 0;
+    private int $id = 0;
+    private int $userId = 0;
+    private int $projectId = 0;
+    private int $eventRatingId = 0;
+    private int $eventRatingCategory = 0;
+    private int $rating = 0;
 
     public function getId(): int
     {

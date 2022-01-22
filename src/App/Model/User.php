@@ -8,14 +8,14 @@ class User
 {
     public const USER_ATTRIBUTE = 'loggedInUser';
 
-    protected int $id = 0;
-    protected int $roleId = 0;
-    protected string $name = '';
-    protected string $password = '';
-    protected ?string $email = null;
-    protected DateTime $registrationTime;
-    protected ?DateTime $lastLogin = null;
-    protected bool $active = false;
+    private int $id = 0;
+    private int $roleId = 0;
+    private string $name = '';
+    private string $password = '';
+    private ?string $email = null;
+    private DateTime $registrationTime;
+    private ?DateTime $lastLogin = null;
+    private bool $active = false;
 
     public function __construct()
     {

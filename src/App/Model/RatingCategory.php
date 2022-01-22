@@ -4,9 +4,9 @@ namespace App\Model;
 
 class RatingCategory
 {
-    protected int $id = 0;
-    protected string $title = '';
-    protected ?string $description = null;
+    private int $id = 0;
+    private string $title = '';
+    private ?string $description = null;
 
     public function getId(): int
     {

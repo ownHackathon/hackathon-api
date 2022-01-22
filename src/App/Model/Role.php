@@ -8,9 +8,9 @@ class Role
     public const MODERATOR = 2;
     public const USER = 3;
 
-    protected int $id = 0;
-    protected string $name = '';
-    protected ?string $description = null;
+    private int $id = 0;
+    private string $name = '';
+    private ?string $description = null;
 
     public function getId(): int
     {

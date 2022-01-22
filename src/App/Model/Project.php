@@ -6,13 +6,13 @@ use DateTime;
 
 class Project
 {
-    protected int $id = 0;
-    protected int $participantId = 0;
-    protected string $title = '';
-    protected string $description = '';
-    protected string $gitRepoUri = '';
-    protected string $demoPageUri = '';
-    protected DateTime $createTime;
+    private int $id = 0;
+    private int $participantId = 0;
+    private string $title = '';
+    private string $description = '';
+    private string $gitRepoUri = '';
+    private string $demoPageUri = '';
+    private DateTime $createTime;
 
     public function __construct()
     {

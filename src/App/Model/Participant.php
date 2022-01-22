@@ -6,12 +6,12 @@ use DateTime;
 
 class Participant
 {
-    protected int $id = 0;
-    protected int $userId = 0;
-    protected int $eventId = 0;
-    protected DateTime $requestTime;
-    protected bool $approved = false;
-    protected bool $disqualified = true;
+    private int $id = 0;
+    private int $userId = 0;
+    private int $eventId = 0;
+    private DateTime $requestTime;
+    private bool $approved = false;
+    private bool $disqualified = true;
 
     public function __construct()
     {

@@ -6,16 +6,16 @@ use DateTime;
 
 class Event
 {
-    protected int $id = 0;
-    protected int $userId = 0;
-    protected string $name = '';
-    protected ?string $description = null;
-    protected string $eventText = '';
-    protected DateTime $createTime;
-    protected DateTime $startTime;
-    protected int $duration = 0;
-    protected bool $active = false;
-    protected bool $ratingCompleted = false;
+    private int $id = 0;
+    private int $userId = 0;
+    private string $name = '';
+    private ?string $description = null;
+    private string $eventText = '';
+    private DateTime $createTime;
+    private DateTime $startTime;
+    private int $duration = 0;
+    private bool $active = false;
+    private bool $ratingCompleted = false;
 
     public function __construct()
     {
