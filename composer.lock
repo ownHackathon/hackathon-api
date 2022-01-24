@@ -1708,16 +1708,16 @@
         },
         {
             "name": "mezzio/mezzio-fastroute",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-fastroute.git",
-                "reference": "c323692aa34eaca3e94311d5fcc5c5ca347ad401"
+                "reference": "1ee4c1f9d7f57c1de08e16e16cb4b7a46a950ecb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-fastroute/zipball/c323692aa34eaca3e94311d5fcc5c5ca347ad401",
-                "reference": "c323692aa34eaca3e94311d5fcc5c5ca347ad401",
+                "url": "https://api.github.com/repos/mezzio/mezzio-fastroute/zipball/1ee4c1f9d7f57c1de08e16e16cb4b7a46a950ecb",
+                "reference": "1ee4c1f9d7f57c1de08e16e16cb4b7a46a950ecb",
                 "shasum": ""
             },
             "require": {
@@ -1725,8 +1725,8 @@
                 "laminas/laminas-stdlib": "^2.0 || ^3.1",
                 "mezzio/mezzio-router": "^3.7",
                 "nikic/fast-route": "^1.2",
-                "php": "^7.3 || ~8.0.0 || ~8.1.0",
-                "psr/container": "^1.0",
+                "php": "^7.4 || ~8.0.0 || ~8.1.0",
+                "psr/container": "^1.0 || ^2.0",
                 "psr/http-message": "^1.0.1"
             },
             "conflict": {
@@ -1783,7 +1783,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-12-08T06:56:05+00:00"
+            "time": "2022-01-22T15:26:25+00:00"
         },
         {
             "name": "mezzio/mezzio-flash",
@@ -3848,16 +3848,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.12",
+            "version": "9.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256"
+                "reference": "597cb647654ede35e43b137926dfdfef0fb11743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93d4bf4c37aec6384bb9e5d390d9049a463a7256",
-                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/597cb647654ede35e43b137926dfdfef0fb11743",
+                "reference": "597cb647654ede35e43b137926dfdfef0fb11743",
                 "shasum": ""
             },
             "require": {
@@ -3935,7 +3935,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.12"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.13"
             },
             "funding": [
                 {
@@ -3947,7 +3947,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-21T05:54:47+00:00"
+            "time": "2022-01-24T07:33:35+00:00"
         },
         {
             "name": "psr/log",
