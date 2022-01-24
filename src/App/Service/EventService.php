@@ -44,7 +44,7 @@ class EventService
         return $this->hydrator->hydrate($event, new Event());
     }
 
-    /** @return null|Event[] */
+    /** @return array<Event>|null */
     public function findAll(): ?array
     {
         $events = $this->table->findAll();
@@ -52,7 +52,7 @@ class EventService
         return $this->hydrator->hydrateList($events, Event::class);
     }
 
-    /** @return null|Event[] */
+    /** @return array<Event>|null */
     public function findAllActive(): ?array
     {
         $events = $this->table->findAllActive();
@@ -60,7 +60,7 @@ class EventService
         return $this->hydrator->hydrateList($events, Event::class);
     }
 
-    /** @return null|Event[] */
+    /** @return array<Event>|null */
     public function findAllNotActive(): ?array
     {
         $events = $this->table->findAllNotActive();
@@ -77,12 +77,8 @@ class EventService
 
     public function isEventExist(string $topic): bool
     {
-        $isTopic = $this->findByName($topic);
+        $event = $this->findByName($topic);
 
-        if ($isTopic instanceof Event) {
-            return true;
-        }
-
-        return false;
+        return $event instanceof Event;
     }
 }

@@ -8,7 +8,7 @@ use function array_rand;
 
 class TopicVoterService
 {
-    /** @param Topic[] $topics */
+    /** @param array<Topic> $topics */
     public function getSelectRandomlyTopic(array $topics): Topic
     {
         $randomKey = array_rand($topics);

@@ -12,6 +12,7 @@ class EventParticipantSubscribeHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $eventId = $request->getAttribute('eventId');
+
         return new RedirectResponse('/event/' . $eventId, 303);
     }
 }

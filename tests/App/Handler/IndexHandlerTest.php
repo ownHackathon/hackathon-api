@@ -8,6 +8,6 @@ class IndexHandlerTest extends TestCase
 {
     public function testDoCan()
     {
-        $this->assertSame('1','1');
+        $this->assertSame('1', '1');
     }
 }

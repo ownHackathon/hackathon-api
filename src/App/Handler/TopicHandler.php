@@ -18,6 +18,7 @@ class TopicHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getAttribute('topicEntriesStatistic');
+
         return new HtmlResponse($this->template->render('app::topic_submit', $data));
     }
 }

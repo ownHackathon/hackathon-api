@@ -19,6 +19,7 @@ class EventListHandler implements RequestHandlerInterface
     {
         $data['activeEvents'] = $request->getAttribute('ActiveEvents') ?? [];
         $data['notActiveEvents'] = $request->getAttribute('NotActiveEvents') ?? [];
+
         return new HtmlResponse($this->template->render('app::event_list', $data));
     }
 }

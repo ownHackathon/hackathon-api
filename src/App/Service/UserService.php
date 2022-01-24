@@ -81,12 +81,8 @@ class UserService
 
     private function isUserExist(string $userName): bool
     {
-        $isUser = $this->findByName($userName);
+        $user = $this->findByName($userName);
 
-        if ($isUser instanceof User) {
-            return true;
-        }
-
-        return false;
+        return $user instanceof User;
     }
 }

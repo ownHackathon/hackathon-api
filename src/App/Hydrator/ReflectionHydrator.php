@@ -15,14 +15,14 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 
     public function hydrateList(array $values, string $className): array
     {
-        $classList = [];
+        $hydratedList = [];
 
         foreach ($values as $data) {
             if ($data) {
-                $classList[] = $this->hydrate($data, new $className());
+                $hydratedList[] = $this->hydrate($data, new $className());
             }
         }
 
-        return $classList;
+        return $hydratedList;
     }
 }

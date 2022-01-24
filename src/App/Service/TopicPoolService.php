@@ -47,7 +47,7 @@ class TopicPoolService
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
-    /** @return null|Topic[] */
+    /** @return array<Topic>|null */
     public function findAvailable(): ?array
     {
         $topics = $this->table->findAvailable();
@@ -55,7 +55,7 @@ class TopicPoolService
         return $this->hydrator->hydrateList($topics, Topic::class);
     }
 
-    /** @return null|Topic[] */
+    /** @return array<Topic>|null */
     public function findAll(): ?array
     {
         $topics = $this->table->findAll();
@@ -65,11 +65,9 @@ class TopicPoolService
 
     public function isTopic(string $topic): bool
     {
-        if ($this->findByTopic($topic) instanceof Topic) {
-            return true;
-        }
+        $topic = $this->findByTopic($topic);
 
-        return false;
+        return $topic instanceof Topic;
     }
 
     public function findByTopic(string $topic): ?Topic
@@ -79,6 +77,7 @@ class TopicPoolService
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
+    /** @return array<int> */
     public function getEntriesStatistic(): array
     {
         return [
