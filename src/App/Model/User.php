@@ -108,7 +108,7 @@ class User
 
     public function isActive(): bool
     {
-        return (bool)$this->active;
+        return $this->active;
     }
 
     public function setActive(int|bool $active): self
