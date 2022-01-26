@@ -2,6 +2,21 @@
   "name": "hackathon",
   "version": "1.0.0",
   "description": "Evaluation project for the Hackathon on the Discord server from BlackScorp",
+  "author": "bibaltik@exdrals.de",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "BlackScorp",
+    "Hackathon",
+    "Discord"
+  ],
+  "homepage": "https://github.com/BibaltiK/Hackathon#readme",
+  "bugs": {
+    "url": "https://github.com/BibaltiK/Hackathon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BibaltiK/Hackathon.git"
+  },
   "main": "./build/js/index.js",
   "directories": {
     "test": "tests"
@@ -12,21 +27,6 @@
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BibaltiK/Hackathon.git"
-  },
-  "keywords": [
-    "BlackScorp",
-    "Hackathon",
-    "Discord"
-  ],
-  "author": "bibaltik@exdrals.de",
-  "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/BibaltiK/Hackathon/issues"
-  },
-  "homepage": "https://github.com/BibaltiK/Hackathon#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "mustache": "^4.2.0",
