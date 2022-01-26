@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Evaluation project for the Hackathon on the Discord server from BlackScorp",
   "main": "./build/js/index.js",
+  "mode": "development",
   "directories": {
     "test": "tests"
   },
