@@ -1,11 +1,11 @@
 {
-    "name": "bibaltik/blackjam",
-    "description": "Evaluation project for the JAM on the Discord server from BlackScorp",
+    "name": "bibaltik/hackathon",
+    "description": "Evaluation project for the Hackathon on the Discord server from BlackScorp",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywords": [
         "BlackScorp",
-        "JAM",
+        "Hackathon",
         "Discord"
     ],
     "config": {
