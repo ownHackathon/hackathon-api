@@ -17,10 +17,6 @@
     "type": "git",
     "url": "git+https://github.com/BibaltiK/Hackathon.git"
   },
-  "main": "./build/js/index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",

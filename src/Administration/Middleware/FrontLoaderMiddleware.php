@@ -19,7 +19,7 @@ class FrontLoaderMiddleware implements MiddlewareInterface
     {
         $header = $request->getHeaders();
 
-        if (! array_key_exists('x-frontloader', $header)) {
+        if (!array_key_exists('x-frontloader', $header)) {
             return $this->indexHandler->handle($request);
         }
 

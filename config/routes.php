@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
     $app->get(
+        '/template/{templateName}[/]',
+        [
+            Administration\Handler\TemplateHandler::class,
+        ],
+        Administration\Handler\TemplateHandler::class
+    );
+    $app->get(
         '/',
         [
             App\Handler\IndexHandler::class,

@@ -24,6 +24,7 @@ class ConfigProvider
             ],
             'factories' => [
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
+                Handler\TemplateHandler::class => ConfigAbstractFactory::class,
                 Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -33,6 +34,9 @@ class ConfigProvider
     {
         return [
             Handler\IndexHandler::class => [
+                TemplateRendererInterface::class,
+            ],
+            Handler\TemplateHandler::class => [
                 TemplateRendererInterface::class,
             ],
             Middleware\FrontLoaderMiddleware::class => [
