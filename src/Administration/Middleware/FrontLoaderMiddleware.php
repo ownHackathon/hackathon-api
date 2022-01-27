@@ -23,6 +23,6 @@ class FrontLoaderMiddleware implements MiddlewareInterface
             return $this->indexHandler->handle($request);
         }
 
-        return $handler->handle($request->withRequestTarget('/'));
+        return $handler->handle($request);
     }
 }
