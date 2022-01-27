@@ -2,6 +2,7 @@
 
 namespace Administration;
 
+use App\Handler\IndexHandler;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Template\TemplateRendererInterface;
 
@@ -23,6 +24,7 @@ class ConfigProvider
             ],
             'factories' => [
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
+                Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -32,6 +34,9 @@ class ConfigProvider
         return [
             Handler\IndexHandler::class => [
                 TemplateRendererInterface::class,
+            ],
+            Middleware\FrontLoaderMiddleware::class => [
+                IndexHandler::class,
             ],
         ];
     }
