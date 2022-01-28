@@ -1,5 +1,5 @@
-import renderer from './../../system/renderer';
-import axios from './../../system/client';
+import renderer from 'system/renderer';
+import axios from 'system/client';
 
 const index_handler = function () {
     let instance = {}
