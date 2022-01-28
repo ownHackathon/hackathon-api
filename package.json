@@ -26,8 +26,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "mustache": "^4.2.0",
-    "navigo": "^8.11.1",
-    "system": "^2.0.1"
+    "navigo": "^8.11.1"
   },
   "devDependencies": {
     "core-js": "^3.1.4",
