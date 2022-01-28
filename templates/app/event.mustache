@@ -1,31 +1,30 @@
-<?php $this->headTitle('Event'); ?>
 <div class="container-fluid defaultbox">
     <h3 class="text-center"><?= $this->escapeHtml($this->name); ?></h3>
     <h5 class="text-center"><?= $this->escapeHtml($this->description); ?></h5>
     <p class="text-small text-justify">
-        <?= $this->escapeHtml($this->eventText); ?>
+        {{eventText}}
     </p>
-    <div class="text-end text-xx-small text-white-50">Event erstellt am <?= $this->createTime->format('j.m.Y-G:i'); ?> Uhr</div>
+    <div class="text-end text-xx-small text-white-50">Event erstellt am {{eventCreateTime}} Uhr</div>
 </div>
 <div class="container-fluid defaultbox">
     <div class="row">
         <div class="col">Start</div>
-        <div class="col text-smaller"><?= $this->startTime->format('j.m.Y-G:i'); ?> Uhr</div>
+        <div class="col text-smaller">{{eventStartTime}} Uhr</div>
     </div>
     <div class="row">
         <div class="col">Laufzeit</div>
-        <div class="col text-smaller"><?= $this->duration; ?> Tage</div>
+        <div class="col text-smaller">{{eventDuration}} Tage</div>
     </div>
     <div class="row">
         <div class="col">Ende</div>
-        <div class="col text-smaller"><?= $this->endTime->format('j.m.Y-G:i'); ?> Uhr</div>
+        <div class="col text-smaller">{{eventEndTime}} Uhr</div>
     </div>
     <div class="row">
         <div class="col">Aktiv</div>
-        <div class="col text-smaller"><?= $this->isActive ? 'Ja' : 'Nein'; ?></div>
+        <div class="col text-smaller">{{eventActiv}}</div>
     </div>
 </div>
-
+<!--
 <?php if ($this->isLoggedIn && $this->canEventSubscribe($this->startTime)): ?>
     <?php if (!$this->isParticipant($this->loggedInUser, $this->participants)): ?>
         <div class="container-fluid">
@@ -54,11 +53,13 @@
     <h2 class="text-center text-danger text-decoration-underline"><?= $this->escapeHtml($this->topic->getTopic()); ?></h2>
     <div class="container-fluid container-sm defaultbox bg-transparent"><?= $this->escapeHtml($this->topic->getDescription()); ?></div>
 <?php endif; ?>
+-->
 <div class="container-fluid defaultbox">
     <div class="row">
         <div class="col-4">Teilnehmer</div>
         <div class="col-8">Projekt</div>
     </div>
+<!--
     <?php
     foreach ($this->participants as $partipicant):
         ?>
@@ -77,5 +78,5 @@
     <?php
     endforeach;
     ?>
-
+-->
 </div>

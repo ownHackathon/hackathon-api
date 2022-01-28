@@ -28,6 +28,6 @@ class TemplateService
 
         $templateContent = ob_get_clean();
 
-        return $this->mustace->render($templateContent);
+        return $this->mustace->render($templateContent, []);
     }
 }
