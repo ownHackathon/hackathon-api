@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Administration\Service\TemplateService;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
@@ -172,7 +173,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\IndexHandler::class => [
-                TemplateRendererInterface::class,
+                TemplateService::class,
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,
