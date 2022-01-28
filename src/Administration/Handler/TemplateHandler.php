@@ -2,8 +2,8 @@
 
 namespace Administration\Handler;
 
+use Administration\Service\TemplateService;
 use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -11,14 +11,17 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TemplateHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $template
+        private TemplateService $service,
     ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $template = $request->getAttribute('templateName');
-        $response = file_get_contents(__DIR__ . '/../../../templates/app/' . $template . '.phtml');
-        return new HtmlResponse($response);
+        $section = $request->getAttribute('section');
+        $template = $request->getAttribute('template');
+
+        $templateContent = $this->service->getTemplateContent($section, $template);
+
+        return new HtmlResponse($templateContent);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
     $app->get(
-        '/template/{templateName}[/]',
+        '/template/{section}/{template}[/]',
         [
             Administration\Handler\TemplateHandler::class,
         ],

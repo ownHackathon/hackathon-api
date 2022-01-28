@@ -222,16 +222,16 @@
         },
         {
             "name": "envms/fluentpdo",
-            "version": "v2.2.3",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/envms/fluentpdo.git",
-                "reference": "787c8faa7c2132dfd657976a4cb0b655814822c4"
+                "reference": "1985e0e8406a56140f387bc9bec786b419cbeccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/envms/fluentpdo/zipball/787c8faa7c2132dfd657976a4cb0b655814822c4",
-                "reference": "787c8faa7c2132dfd657976a4cb0b655814822c4",
+                "url": "https://api.github.com/repos/envms/fluentpdo/zipball/1985e0e8406a56140f387bc9bec786b419cbeccc",
+                "reference": "1985e0e8406a56140f387bc9bec786b419cbeccc",
                 "shasum": ""
             },
             "require": {
@@ -274,9 +274,9 @@
             ],
             "support": {
                 "issues": "https://github.com/envms/fluentpdo/issues",
-                "source": "https://github.com/envms/fluentpdo/tree/v2.2.3"
+                "source": "https://github.com/envms/fluentpdo/tree/v2.2.4"
             },
-            "time": "2022-01-03T15:39:56+00:00"
+            "time": "2022-01-27T21:49:44+00:00"
         },
         {
             "name": "fig/http-message-util",

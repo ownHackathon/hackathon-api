@@ -26,6 +26,7 @@ class ConfigProvider
                 Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\TemplateHandler::class => ConfigAbstractFactory::class,
                 Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
+                Service\TemplateService::class => Service\TemplateServiceFactory::class,
             ],
         ];
     }
@@ -37,7 +38,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\TemplateHandler::class => [
-                TemplateRendererInterface::class,
+                Service\TemplateService::class,
             ],
             Middleware\FrontLoaderMiddleware::class => [
                 IndexHandler::class,
