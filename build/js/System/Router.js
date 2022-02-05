@@ -1,5 +1,5 @@
 import Navigo from 'navigo';
 
-const Router = new Navigo('/' , {hash: false, linksSelector: 'a'});
+const router = new Navigo('/' , {hash: false, linksSelector: 'a'});
 
-export default Router;
+export default router;

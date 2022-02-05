@@ -1,5 +1,5 @@
 import Mustache from "mustache";
-import Axios from './Client';
+import Axios from 'System/Client';
 
 const renderer = () => {
     let instance = {};

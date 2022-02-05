@@ -1,11 +1,9 @@
-import Renderer from '../../System/Renderer';
+import Renderer from 'System/Renderer';
 
-const errorHandler = () => {
-    let instance = {}
-    instance.handle = () => {
-        Renderer.renderTemplateContent('error/404', {});
+const errorHandler = {
+    handleNotFound: () => {
+        return Renderer.renderTemplateContent('error/404', {});
     }
-    return instance;
 }
 
-export default errorHandler();
+export default errorHandler;
