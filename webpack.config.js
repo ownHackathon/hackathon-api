@@ -4,8 +4,8 @@ module.exports = {
     entry: './build/js/main.js',
     resolve: {
         alias: {
-            app: path.resolve(__dirname,'build/js/app'),
-            system: path.resolve(__dirname,'build/js/system'),
+            App: path.resolve(__dirname,'build/js/App'),
+            System: path.resolve(__dirname,'build/js/System'),
         }
     },
     output: {

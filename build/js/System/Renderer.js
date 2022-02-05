@@ -1,21 +1,21 @@
 import Mustache from "mustache";
-import axios from 'system/client';
+import Axios from './Client';
 
-const renderer = function () {
+const renderer = () => {
     let instance = {};
 
     instance.renderTemplateContent = async function (template, data) {
         this.setContentById(await this.render(template, data), 'content');
     }
 
-    instance.setContentById = function (content, id) {
+    instance.setContentById = (content, id) => {
         document.getElementById(id).innerHTML = content;
     }
 
-    instance.render = function (template, data) {
-        return axios
+    instance.render = (template, data) => {
+        return Axios
             .get('/template/' + template)
-            .then(function (response) {
+            .then((response) => {
                 const templateContent = response.data;
                 return Mustache.render(templateContent, data);
             })
