@@ -2,7 +2,7 @@ import Renderer from 'System/Renderer';
 
 const errorHandler = {
     handleNotFound: () => {
-        return Renderer.renderTemplateContent('error/404', {});
+        Renderer.renderTemplateContent('error/404', {});
     },
 }
 
