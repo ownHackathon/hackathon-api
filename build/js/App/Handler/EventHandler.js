@@ -1,5 +1,5 @@
 import Renderer from 'System/Renderer';
-import Axios from "axios";
+import EventService from 'App/Service/EventService';
 
 const eventHandler = {
     handleAbout: () => {
@@ -7,13 +7,11 @@ const eventHandler = {
     },
 
     handleList: () => {
-        Axios
-            .get('/event/list')
-            .then(async function (response) {
-                const activeEvent = await Renderer.render('/partial/event_list_event', {})
-            })
-
-        Renderer.renderTemplateContent('app/event_list', {})
+        let data =  {
+            'activeEvents': '1',
+            'notActiveEvents': '2'
+        }
+        Renderer.renderTemplateContent('app/event_list', data)
     },
 }
 
