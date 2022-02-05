@@ -1,14 +1,12 @@
-import Renderer from '../../System/Renderer';
+import Renderer from 'System/Renderer';
 import Axios from "axios";
 
-const event_handler = () => {
-    let instance = {}
-
-    instance.about = () => {
+const eventHandler = {
+    handleAbout: () => {
         Renderer.renderTemplateContent('app/event_about', {});
-    }
+    },
 
-    instance.list = () => {
+    handleList: () => {
         Axios
             .get('/event/list')
             .then(async function (response) {
@@ -16,9 +14,7 @@ const event_handler = () => {
             })
 
         Renderer.renderTemplateContent('app/event_list', {})
-    }
-
-    return instance;
+    },
 }
 
-export default event_handler();
+export default eventHandler;

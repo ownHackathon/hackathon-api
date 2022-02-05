@@ -1,13 +1,13 @@
-import Router from './System/Router';
-import ErrorHandler from "./App/Handler/ErrorHandler";
-import login_handler from "./App/Handler/login_handler";
-import index_handler from './App/Handler/index_handler';
-import event_handler from "./App/Handler/event_handler";
+import Router from 'System/Router';
+import ErrorHandler from 'App/Handler/ErrorHandler';
+import LoginHandler from 'App/Handler/LoginHandler';
+import IndexHandler from 'App/Handler/IndexHandler';
+import EventHandler from "App/Handler/EventHandler";
 
 Router
     .notFound(() => {ErrorHandler.handleNotFound()})
-    .on('/login', () => {login_handler.handle()})
-    .on('/', () => {index_handler.handle()})
-    .on('/event', () => {event_handler.about()})
-    .on('/event/list', () => {event_handler.list()})
+    .on('/login', () => {LoginHandler.handle()})
+    .on('/', () => {IndexHandler.handle()})
+    .on('/event', () => {EventHandler.handleAbout()})
+    .on('/event/list', () => {EventHandler.handleList()})
     .resolve();
