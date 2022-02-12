@@ -24,6 +24,7 @@ class EventTest extends TestCase
         $this->assertInstanceOf(Event::class, $eventId);
         $this->assertIsInt($id);
         $this->assertSame(1, $id);
+        $this->assertNull();
     }
 
     public function testCanSetAndGetUserId()
