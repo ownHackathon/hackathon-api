@@ -1,9 +1,9 @@
-import Renderer from 'System/Renderer';
+import IndexView from "App/View/IndexView";
 
 class IndexController {
-    handle()
+    index()
     {
-        Renderer.renderTemplateContent('app/index', {});
+        IndexView.view({});
     }
 }
 
