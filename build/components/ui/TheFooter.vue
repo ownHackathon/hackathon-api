@@ -1,0 +1,32 @@
+<template>
+  <footer class="footer row">
+    <div class="col-md-4 text-start small">
+      Lizenz:
+      <a href="https://github.com/BibaltiK/Hackathon/blob/master/LICENSE" target="_blank">
+        BSD 3-Clause
+        <i class="fas fa-external-link-alt external"></i>
+      </a>
+    </div>
+    <div class="col-md-4 text-center small">
+      Community Hackathon auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server <i class="fas fa-external-link-alt external"></i></a>
+      von <a href="https://www.youtube.com/VitalijMik" target="_blank">BlackScorp <i class="fas fa-external-link-alt external"></i></a>
+    </div>
+    <div class="col-md-4 text-end small">
+      Hackathon @ <a href="https://github.com/BibaltiK/Hackathon" target="_blank">GitHub <i class="fas fa-external-link-alt external"></i></a>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {
+  name: "TheFooter"
+}
+</script>
+
+<style lang="scss">
+footer {
+  margin-top: 50px;
+  background-color: #222222;
+  width: 99%;
+}
+</style>

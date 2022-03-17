@@ -3,7 +3,7 @@
 /tests/.phpunit.result.cache
 /vendor/
 /node_modules/
-/public/assets/js/*
+/public/assets/*
 *.cache
 *.phar
 .ddev
