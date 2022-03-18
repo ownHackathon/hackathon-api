@@ -8,6 +8,7 @@
 </script>
 
 <style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
 html,
 body {
   font-family: "Open Sans", sans-serif;
@@ -49,11 +50,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: xx-small;
 }
 
+.content {
+  width: 100%;
+  background-color: #2c3034;
+  color: #f0f0f0;
+  padding: 10px;
+}
+
 .external {
   font-size: xx-small;
   font-variant-position: super;
   color: lightgray;
 }
-
-@import '~bootstrap/dist/css/bootstrap.css';
 </style>

@@ -4,15 +4,16 @@
       Lizenz:
       <a href="https://github.com/BibaltiK/Hackathon/blob/master/LICENSE" target="_blank">
         BSD 3-Clause
-        <i class="fas fa-external-link-alt external"></i>
+        <font-awesome-icon icon="external-link-alt" class="external"></font-awesome-icon>
       </a>
     </div>
     <div class="col-md-4 text-center small">
-      Community Hackathon auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server <i class="fas fa-external-link-alt external"></i></a>
-      von <a href="https://www.youtube.com/VitalijMik" target="_blank">BlackScorp <i class="fas fa-external-link-alt external"></i></a>
+      Community Hackathon auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server <font-awesome-icon icon="external-link-alt" class="external"></font-awesome-icon></a>
+      von <a href="https://www.youtube.com/VitalijMik" target="_blank">BlackScorp <font-awesome-icon icon="external-link-alt" class="external"></font-awesome-icon></a>
     </div>
     <div class="col-md-4 text-end small">
-      Hackathon @ <a href="https://github.com/BibaltiK/Hackathon" target="_blank">GitHub <i class="fas fa-external-link-alt external"></i></a>
+      Hackathon @ <a href="https://github.com/BibaltiK/Hackathon" target="_blank">GitHub <font-awesome-icon icon="external-link-alt" class="external"></font-awesome-icon></a>
+
     </div>
   </footer>
 </template>
@@ -24,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
-footer {
+.footer {
   margin-top: 50px;
   background-color: #222222;
   width: 99%;
