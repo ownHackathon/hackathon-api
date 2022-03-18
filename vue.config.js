@@ -5,7 +5,7 @@ module.exports = defineConfig({
     transpileDependencies: true,
     outputDir: "public/",
     assetsDir: "assets/",
-    indexPath: './../template/layout/default.mustache',
+    indexPath: './../public/default.mustache',
     chainWebpack: config => {
         config
             .entry("app")
@@ -17,7 +17,7 @@ module.exports = defineConfig({
         config
             .plugin('html')
             .tap(args => {
-                args[0].template = 'template/layout/default.tpl';
+                args[0].template = 'public/default.tpl';
                 args[0].inject = 'body';
                 return args
             })
