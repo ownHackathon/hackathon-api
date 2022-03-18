@@ -7,11 +7,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import {
+    faBars,
     faExternalLinkAlt,
     faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
+    faBars,
     faExternalLinkAlt,
     faUserLock,
 );
