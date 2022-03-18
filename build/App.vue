@@ -4,11 +4,7 @@
   </div>
 </template>
 
-<script>
-
-
-
-</script>
+<script></script>
 
 <style lang="scss">
 @import '~bootstrap/scss/bootstrap.scss';
@@ -51,13 +47,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-xx-small {
   font-size: xx-small;
-}
-
-.content {
-  width: 100%;
-  background-color: #2c3034;
-  color: #f0f0f0;
-  padding: 10px;
 }
 
 .external {
