@@ -10,12 +10,9 @@ class MustacheFactory
 {
     public function __invoke(ContainerInterface $container): Mustache_Engine
     {
-        $settings = $container->get('config');
-        $settings = $settings['templates']['paths'];
         return new Mustache_Engine([
             'entity_flags' => ENT_QUOTES,
             'delimiters' => '{{+ }}',
-            'partials_loader' => new Mustache_Loader_FilesystemLoader($settings['app'] . '/partial'),
         ]);
     }
 }
