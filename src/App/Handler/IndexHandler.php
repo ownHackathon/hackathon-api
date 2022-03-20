@@ -10,13 +10,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class IndexHandler implements RequestHandlerInterface
 {
-    public function __construct(
-        private TemplateService $service
-    ) {
-    }
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new HtmlResponse($this->service->getTemplateContent('layout', 'default'));
+        $indexFile = file_get_contents(ROOT_DIR . 'public/default.mustache');
+        return new HtmlResponse($indexFile);
     }
 }

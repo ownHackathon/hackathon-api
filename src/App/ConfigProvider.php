@@ -66,6 +66,7 @@ class ConfigProvider
                 Handler\EventNameHandler::class,
                 Handler\EventParticipantSubscribeHandler::class,
                 Handler\PingHandler::class,
+                Handler\IndexHandler::class,
 
                 Rating\ProjectRatingCalculator::class,
 
@@ -94,8 +95,6 @@ class ConfigProvider
                 Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
-
-                Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
@@ -171,9 +170,6 @@ class ConfigProvider
             ],
             Handler\EventListHandler::class => [
                 TemplateRendererInterface::class,
-            ],
-            Handler\IndexHandler::class => [
-                TemplateService::class,
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,
