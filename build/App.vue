@@ -54,4 +54,11 @@ h1, h2, h3, h4, h5, h6 {
   font-variant-position: super;
   color: lightgray;
 }
+
+a[target="_blank"]:after {
+  content: url("/build/assets/box-arrow-up-right.svg");
+  padding: 0px 3px 0px 3px;
+  bottom: 5px;
+  position: relative;
+}
 </style>

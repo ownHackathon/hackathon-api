@@ -2,7 +2,6 @@
 
 namespace App\Handler;
 
-use Administration\Service\TemplateService;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

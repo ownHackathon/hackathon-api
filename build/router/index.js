@@ -1,11 +1,14 @@
 import {createRouter, createWebHistory} from 'vue-router';
+import NotFound from "@/views/NotFound";
 import MainLayout from "@/layouts/MainLayout";
 import MainView from "@/views/MainView";
-import NotFound from "@/views/NotFound";
+import EventAbout from "@/views/event/EventAbout";
 
 const routes = [{
     component: MainLayout, path: "/", children: [{
         path: "/home", name: "home", alias: '/', component: MainView,
+    }, {
+        path: "/event", name: "event_about", component: EventAbout,
     }, {
         path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound,
     },],
