@@ -7,7 +7,7 @@
       </a>
     </div>
     <div class="col-md-4 text-center small">
-      Community Hackathon auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server</a>
+      Community Hackathon auf dem <router-link to="/discord" target="_blank">Discord Server</router-link>
       von <a href="https://www.youtube.com/VitalijMik" target="_blank">BlackScorp</a>
     </div>
     <div class="col-md-4 text-end small">

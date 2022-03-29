@@ -17,13 +17,13 @@
     <h5>Information zur Webseite</h5>
     <p>
       Diese Webseite dient lediglich dazu um die Events einfacher verwalten zu können.<br>
-      Jedigliche Kommunikation findet auf dem <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server</a> statt.<br>
-      Das heißt, das sich einige Informationen zum Umgang mit dem Event auf den <a href="https://discord.gg/VjrfCFKRgR" target="_blank">Discord Server</a>
+      Jedigliche Kommunikation findet auf dem <router-link to="/discord" target="_blank">Discord Server</router-link> statt.<br>
+      Das heißt, das sich einige Informationen zum Umgang mit dem Event auf den <router-link to="/discord" target="_blank">Discord Server</router-link>
       beziehen.
     </p>
     <h5>Events</h5>
     <p>
-      Aktuelle und laufende Events werden in einen eigenen (Discord) Thread behandelt.<br>
+      Aktuelle und laufende Events werden in einen eigenen (<router-link to="/discord" target="_blank">Discord Server</router-link>) Thread behandelt.<br>
       Für Diskussionen zu laufenden Events oder allgemein zum Hackathon nutzt bitte den <span class="text-white-50">#diskussion</span> Channel.<br>
       Um euer Projekt vorzustellen und alle auf den laufenden zu halten, könnt ihr nach der Teilnahmeanmeldung im Channel <span class="text-white-50">#teilnahmen</span>
       einen eigenen Thread erstellen.<br>
@@ -34,13 +34,15 @@
       Dies muss spätestens zum Ablauf des Events (Stichzeit) mit einem dafür erstellten Tag erfolgen.<br>
       Wahl des Gewinners erfolgt über alle Teilnehmenden in einem Punkte/Kategorie Verfahren.<br>
       Es müssen jeweils bis zu 6 Punkte (0 bis 6, wobei 6 die beste Bepunktung ist) pro Kategorien<br>
-      <ul>
-        <li>Kreativität (Wie kreativ ist die Idee)</li>
-        <li>Umsetzung (Projektidee gut oder schlecht umgesetzt?)</li>
-        <li>Aufbau (struktureller Aufbau von dem Projekt)</li>
-        <li>Technik (Spagettiecode, Nutzung von Designpatterns und/oder Frameworks etc. pp.)</li>
-        <li>Umfang (Projektumfang, Tests, Docs, zusätzliche Inhalte ...)</li>
-      </ul>
+    </p>
+    <ul>
+      <li>Kreativität (Wie kreativ ist die Idee)</li>
+      <li>Umsetzung (Projektidee gut oder schlecht umgesetzt?)</li>
+      <li>Aufbau (struktureller Aufbau von dem Projekt)</li>
+      <li>Technik (Spagettiecode, Nutzung von Designpatterns und/oder Frameworks etc. pp.)</li>
+      <li>Umfang (Projektumfang, Tests, Docs, zusätzliche Inhalte ...)</li>
+    </ul>
+    <p>
       und pro Projekt vergeben werden.<br>
       Zu bedenken ist, das die Punktewertung nicht zwingend die fachliche Qualität widerspiegelt, da ggf. bei der Bewertung der jeweilige Kenntnisstand des<br>
       Teilnehmers mit berücksichtigt wurde.<br>
@@ -53,9 +55,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style lang="scss">

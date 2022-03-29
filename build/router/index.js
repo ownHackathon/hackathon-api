@@ -13,6 +13,8 @@ const routes = [{
     }, {
         path: "/event/list", name: "event_list", component: EventList,
     }, {
+        path: "/discord", beforeEnter() {location.href = 'https://discord.gg/VjrfCFKRgR'},
+    }, {
         path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound,
     },],
 },
