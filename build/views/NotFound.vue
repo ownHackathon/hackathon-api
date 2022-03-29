@@ -12,10 +12,9 @@
 
 <script>
 export default {
-  name: "NotFound"
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

@@ -1,7 +1,8 @@
 import {createApp} from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import 'bootstrap';
 import { library} from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -11,6 +12,8 @@ import {
     faExternalLinkAlt,
     faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 library.add(
     faArrowUpRightFromSquare,
@@ -20,7 +23,7 @@ library.add(
 );
 
 createApp(App)
-    .use(store)
+    .use(pinia)
     .use(router)
     .component("font-awesome-icon", FontAwesomeIcon)
     .mount('#app');

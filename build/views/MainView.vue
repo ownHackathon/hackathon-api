@@ -9,10 +9,10 @@
 
 <script>
 export default {
-  name: "MainView"
+
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

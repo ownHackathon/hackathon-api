@@ -42,8 +42,8 @@
         <li>Umfang (Projektumfang, Tests, Docs, zusätzliche Inhalte ...)</li>
       </ul>
       und pro Projekt vergeben werden.<br>
-      Zu bedenken ist, das die Punktewertung nicht zwingend die fachliche Qualität widerspiegelt, da ggf. bei der Bewertung der jeweilige Kenntnisstand des
-      Teilnehmers mit berücksichtigt wurde.
+      Zu bedenken ist, das die Punktewertung nicht zwingend die fachliche Qualität widerspiegelt, da ggf. bei der Bewertung der jeweilige Kenntnisstand des<br>
+      Teilnehmers mit berücksichtigt wurde.<br>
     </p>
     <p>
       Anmeldung zu einem Event erfolgt mittels <span class="fa fa-thumbs-up"></span> Reaktion im entsprechenden Info Thread.<br>
@@ -54,10 +54,10 @@
 
 <script>
 export default {
-  name: "EventAbout"
+
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>
