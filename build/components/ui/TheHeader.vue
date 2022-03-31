@@ -1,50 +1,33 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg bg-dark">
-      <div class="container-fluid">
-        <router-link class="navbar-brand" to="/">(Black) Hackathon</router-link>
-        <button class="navbar-toggler text-white-50" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <font-awesome-icon icon="bars"></font-awesome-icon>
+    <nav class="flex items-center justify-between flex-wrap bg-gray-600 p-2 fixed w-full z-10 top-0">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
+          <span class="text-xl pl-2"><i class="em em-grinning"></i>(Black) Hackathon</span>
+        </a>
+      </div>
+
+      <div class="block lg:hidden">
+        <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white">
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <ul class="navbar-nav d-flex">
-              <li class="nav-item dropdown">
-                <router-link class="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span>Event </span>
-                </router-link>
-                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-                  <li><router-link class="dropdown-item" to="/event">Allgemeine Informationen</router-link></li>
-                  <li><router-link class="dropdown-item" to="/event/list">Event Übersicht</router-link></li>
-                  <li><router-link class="dropdown-item" to="/topic/submit">Thema vorschlagen</router-link></li>
-                </ul>
-              </li>
-            </ul>
-            <li class="nav-item">
-              <router-link class="nav-link active" to="/team" >Team</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link active" to="#blog">Blog</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link active" to="#about">Über uns</router-link>
-            </li>
-          </ul>
-          <ul class="navbar-nav d-flex">
-            <li class="nav-item dropdown">
-              <router-link class="nav-link dropdown-toggle" to="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="fas fa-user-lock"></span>
-                <font-awesome-icon icon="user-lock"></font-awesome-icon>
-                <span> </span>
-              </router-link>
-              <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarUserDropdown">
-                <li class="text-center fw-bolder"></li>
-                <li><router-link class="dropdown-item" to="/login">Anmelden</router-link></li>
-                <li><router-link class="dropdown-item" to="/user/register">Registrieren</router-link></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+      </div>
+
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-white no-underline" href="#">Active</a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
@@ -57,17 +40,4 @@ export default {
 </script>
 
 <style lang="scss">
-header {
-  margin-bottom: 10px;
-}
-.nav-link {
-  color: #f0f0f0;
-}
-
-.nav-item > a:hover, .nav-item > a:focus, .nav-item > a > span:hover, .nav-item > a > span:focus {
-  color: #f0f0f0;
-  text-decoration-color: #a52834;
-  text-decoration-line: underline;
-  text-decoration-thickness: 3px;
-}
 </style>

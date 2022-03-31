@@ -23,9 +23,4 @@ export default {
 </script>
 
 <style lang="scss">
-.footer {
-  margin-top: 50px;
-  background-color: #222222;
-  width: 99%;
-}
 </style>
