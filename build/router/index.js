@@ -4,7 +4,6 @@ import MainLayout from "@/layouts/MainLayout";
 import MainView from "@/views/MainView";
 import EventAbout from "@/views/event/EventAbout";
 import EventList from "@/views/event/EventList";
-import TestView from "@/views/TestView";
 
 const routes = [{
     component: MainLayout, path: "/", children: [{
