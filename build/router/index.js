@@ -16,8 +16,6 @@ const routes = [{
     }, {
         path: "/discord", name: "discord", beforeEnter() {location.href = 'https://discord.gg/VjrfCFKRgR'},
     },{
-        path: "/test", name: "test_view", component: TestView,
-    }, {
         path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound,
     },],
 },
