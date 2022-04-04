@@ -1,8 +1,8 @@
 <template>
-  <div class="jumbotron">
+  <div>
     <h6>
       Projekt für die Auswertung der abgehaltenen Hackathon Events auf dem
-      <a href="https://discord.gg/VjrfCFKRgR" target="_blank"> Discord Server</a> von BlackScorp
+      <router-link :to="{name: 'discord'}" target="_blank"> Discord Server</router-link> von BlackScorp
     </h6>
   </div>
 </template>

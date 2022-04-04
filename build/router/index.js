@@ -4,6 +4,7 @@ import MainLayout from "@/layouts/MainLayout";
 import MainView from "@/views/MainView";
 import EventAbout from "@/views/event/EventAbout";
 import EventList from "@/views/event/EventList";
+import TestView from "@/views/TestView";
 
 const routes = [{
     component: MainLayout, path: "/", children: [{
@@ -13,7 +14,9 @@ const routes = [{
     }, {
         path: "/event/list", name: "event_list", component: EventList,
     }, {
-        path: "/discord", beforeEnter() {location.href = 'https://discord.gg/VjrfCFKRgR'},
+        path: "/discord", name: "discord", beforeEnter() {location.href = 'https://discord.gg/VjrfCFKRgR'},
+    },{
+        path: "/test", name: "test_view", component: TestView,
     }, {
         path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound,
     },],

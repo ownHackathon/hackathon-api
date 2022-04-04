@@ -1,29 +1,25 @@
 <template>
-  <TheHeader/>
-  <main class="container-fluid content">
-    <RouterView/>
+  <TheHeader />
+  <main class="px-4 max-w-8xl">
+    <RouterView class="prose max-w-max flex-auto " />
   </main>
-  <TheFooter/>
+  <TheFooter />
 </template>
 
 <script>
-import TheHeader from "@/components/ui/TheHeader";
+
 import TheFooter from "@/components/ui/TheFooter";
+import TheHeader from "@/components/ui/TheHeader";
 
 export default {
   name: "MainLayout",
   components: {
-    TheFooter,
     TheHeader,
+    TheFooter,
   }
 }
 </script>
 
 <style lang="scss">
-.content {
-  width: 100%;
-  background-color: #2c3034;
-  color: #f0f0f0;
-  padding: 10px;
-}
+
 </style>
