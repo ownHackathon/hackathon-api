@@ -4,14 +4,6 @@
   </header>
 </template>
 
-<script>
-import TheTopNavBar from "@/components/ui/TheTopNavBar";
-export default {
-  name: "TheHeader",
-  components: {TheTopNavBar},
-}
+<script setup>
+  import TheTopNavBar from "@/components/ui/TheTopNavBar";
 </script>
-
-<style lang="scss">
-
-</style>

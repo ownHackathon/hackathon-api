@@ -12,44 +12,31 @@
       <span class="text-xl pl-2"><i class="em em-grinning"></i>(Black) Hackathon</span>
     </router-link>
 
-    <div :class="showMenu ? 'flex' : 'hidden'" class="flex-col absolute top-9 bg-gray-800 z-10
-      md:flex md:relative md:top-0 md:bg-gray-800 md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0">
-      <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'event_about'}">Info</router-link>
+    <div :class="isMenuOpen ? 'flex' : 'hidden'" class="flex-col absolute top-8 border border-gray-600 bg-gray-800 z-10
+      md:border-0 md:flex md:relative md:top-0 md:bg-gray-800 md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0">
+      <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'event_general_information'}">Info</router-link>
       <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'event_list'}">Events</router-link>
       <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'home'}">Blog</router-link>
-      <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'home'}">Über</router-link>
+      <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'about'}">Über</router-link>
     </div>
 
     <TheUserNav />
   </nav>
 </template>
 
-<script>
-import TheUserNav from "@/components/ui/TheUserNav";
+<script setup>
+  import { ref } from 'vue';
+  import TheUserNav from "@/components/ui/TheUserNav";
 
-export default {
-  name: "TheTopNavBar",
-  components: {TheUserNav},
-  data() {
-    return {
-      isMenuOpen: false,
-    };
-  },
-  computed: {
-    showMenu() {
-      return this.isMenuOpen;
-    }
-  },
-};
+  const isMenuOpen = ref(false);
 </script>
 
 <style lang="scss" scoped>
-nav span {
-  color: #e43c5c;
-}
+  nav span {
+    color: #e43c5c;
+  }
 
-.nav-entry {
-  @apply  no-underline py-2 px-4 text-gray-300 hover:text-white;
-}
-
+  .nav-entry {
+    @apply  no-underline py-2 px-4 text-gray-300 hover:text-white;
+  }
 </style>

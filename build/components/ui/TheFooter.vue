@@ -17,14 +17,8 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: "TheFooter"
-}
-</script>
-
 <style lang="scss">
-footer {
-  margin-top: 50px;
-}
+  footer {
+    margin-top: 50px;
+  }
 </style>

@@ -6,20 +6,7 @@
   <TheFooter />
 </template>
 
-<script>
-
-import TheFooter from "@/components/ui/TheFooter";
-import TheHeader from "@/components/ui/TheHeader";
-
-export default {
-  name: "MainLayout",
-  components: {
-    TheHeader,
-    TheFooter,
-  }
-}
+<script setup>
+  import TheFooter from "@/components/ui/TheFooter";
+  import TheHeader from "@/components/ui/TheHeader";
 </script>
-
-<style lang="scss">
-
-</style>
