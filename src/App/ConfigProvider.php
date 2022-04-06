@@ -169,7 +169,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\EventListHandler::class => [
-                TemplateRendererInterface::class,
+                ReflectionHydrator::class,
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,

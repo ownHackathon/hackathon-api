@@ -45,9 +45,9 @@ class EventService
     }
 
     /** @return array<Event>|null */
-    public function findAll(): ?array
+    public function findAll(string $order = 'id', string $sort = 'ASC'): ?array
     {
-        $events = $this->table->findAll();
+        $events = $this->table->findAll($order, $sort);
 
         return $this->hydrator->hydrateList($events, Event::class);
     }

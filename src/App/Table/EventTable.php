@@ -23,6 +23,11 @@ class EventTable extends AbstractTable
         return $this;
     }
 
+    public function findAll(string $order = 'id', string $sort = 'ASC'): bool|array
+    {
+        return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll();
+    }
+
     public function findByName(string $topic): bool|array
     {
         return $this->query->from($this->table)

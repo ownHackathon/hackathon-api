@@ -2,6 +2,7 @@ import './index.css';
 import {createApp} from 'vue';
 import App from './App.vue';
 import router from './router';
+import "@/config/axios.js";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { library} from "@fortawesome/fontawesome-svg-core";
