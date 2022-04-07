@@ -1,11 +1,11 @@
 {
-    "name": "bibaltik/blackjam",
-    "description": "Evaluation project for the JAM on the Discord server from BlackScorp",
+    "name": "bibaltik/hackathon",
+    "description": "Evaluation project for the Hackathon on the Discord server from BlackScorp",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywords": [
         "BlackScorp",
-        "JAM",
+        "Hackathon",
         "Discord"
     ],
     "config": {
@@ -43,7 +43,8 @@
         "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
         "mezzio/mezzio-session": "^1.6.0",
         "mezzio/mezzio-session-ext": "^1.12.0",
-        "michelf/php-markdown": "^1.9"
+        "michelf/php-markdown": "^1.9",
+        "mustache/mustache": "^2.13"
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",
@@ -60,7 +61,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "AppTest\\": "tests/App"
         }
     }
 }

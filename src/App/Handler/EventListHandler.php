@@ -2,8 +2,8 @@
 
 namespace App\Handler;
 
-use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Template\TemplateRendererInterface;
+use App\Hydrator\ReflectionHydrator;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -11,15 +11,20 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventListHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $template,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data['activeEvents'] = $request->getAttribute('ActiveEvents') ?? [];
-        $data['notActiveEvents'] = $request->getAttribute('NotActiveEvents') ?? [];
+        $events = $request->getAttribute('events') ?? [];
 
-        return new HtmlResponse($this->template->render('app::event_list', $data));
+        $data = [];
+
+        foreach ($events as $event) {
+            $data[] = $this->hydrator->extract($event);
+        }
+
+        return new JsonResponse($data);
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Handler;
 
+use Administration\Service\TemplateService;
 use App\Model\Event;
 use App\Model\Topic;
 use App\Model\User;
 use DateInterval;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +19,7 @@ class EventHandler implements RequestHandlerInterface
 {
     public function __construct(
         private ClassMethodsHydrator $hydrator,
-        private TemplateRendererInterface $template,
+        private TemplateService $service,
     ) {
     }
 
@@ -41,6 +43,6 @@ class EventHandler implements RequestHandlerInterface
         $data['topics'] = $request->getAttribute('topics');
         $data['topic'] = $request->getAttribute(Topic::class);
 
-        return new HtmlResponse($this->template->render('app::event', $data));
+        return new JsonResponse($data);
     }
 }

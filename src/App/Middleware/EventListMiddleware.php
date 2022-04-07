@@ -17,12 +17,19 @@ class EventListMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $allActiveEvents = $this->eventService->findAllActive();
-        $allNotActiveEvents = $this->eventService->findAllNotActive();
+        $params = $request->getQueryParams();
 
-        return $handler->handle(
-            $request->withAttribute('ActiveEvents', $allActiveEvents)
-                ->withAttribute('NotActiveEvents', $allNotActiveEvents)
-        );
+        if (!array_key_exists('order', $params)) {
+            $events = $this->eventService->findAll();
+        } else {
+            $sort = match (strtoupper($params['sort'] ?? '')) {
+                'DESC' => 'DESC',
+                default => 'ASC',
+            };
+
+            $events = $this->eventService->findAll($params['order'], $sort);
+        }
+
+        return $handler->handle($request->withAttribute('events', $events));
     }
 }

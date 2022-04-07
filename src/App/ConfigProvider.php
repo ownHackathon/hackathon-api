@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Administration\Service\TemplateService;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
@@ -65,6 +66,7 @@ class ConfigProvider
                 Handler\EventNameHandler::class,
                 Handler\EventParticipantSubscribeHandler::class,
                 Handler\PingHandler::class,
+                Handler\IndexHandler::class,
 
                 Rating\ProjectRatingCalculator::class,
 
@@ -93,8 +95,6 @@ class ConfigProvider
                 Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
-
-                Handler\IndexHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
@@ -169,10 +169,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\EventListHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\IndexHandler::class => [
-                TemplateRendererInterface::class,
+                ReflectionHydrator::class,
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,

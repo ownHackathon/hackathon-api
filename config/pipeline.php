@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Administration\Middleware\FrontLoaderMiddleware;
 use App\Middleware\TemplateDefaultsMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
@@ -33,6 +34,7 @@ return function (Application $app): void {
     $app->pipe(UrlHelperMiddleware::class);
 
     $app->pipe(TemplateDefaultsMiddleware::class);
+    $app->pipe(FrontLoaderMiddleware::class);
 
     $app->pipe(DispatchMiddleware::class);
 

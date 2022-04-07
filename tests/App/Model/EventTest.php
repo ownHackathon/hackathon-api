@@ -24,6 +24,7 @@ class EventTest extends TestCase
         $this->assertInstanceOf(Event::class, $eventId);
         $this->assertIsInt($id);
         $this->assertSame(1, $id);
+        $this->assertNull();
     }
 
     public function testCanSetAndGetUserId()
@@ -104,8 +105,8 @@ class EventTest extends TestCase
 
     public function testCanSetAndGetActive()
     {
-        $eventActive = $this->event->setActive(true);
-        $active = $eventActive->isActive();
+        $eventActive = $this->event->setStatus(true);
+        $active = $eventActive->isStatus();
 
         $this->assertInstanceOf(Event::class, $eventActive);
         $this->assertIsBool($active);

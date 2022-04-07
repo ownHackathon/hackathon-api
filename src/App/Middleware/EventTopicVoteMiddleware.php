@@ -25,7 +25,7 @@ class EventTopicVoteMiddleware implements MiddlewareInterface
         /** @var Event $event */
         $event = $request->getAttribute(Event::class);
 
-        if (!$event->isActive()) {
+        if (!$event->isStatus()) {
             return $handler->handle($request);
         }
 

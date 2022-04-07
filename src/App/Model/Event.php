@@ -6,6 +6,13 @@ use DateTime;
 
 class Event
 {
+    public const STATUS_CLOSED = 1;
+    public const STATUS_SOON = 2;
+    public const STATUS_PREPARE = 3;
+    public const STATUS_RUNNING = 4;
+    public const STATUS_EVALUATION = 5;
+    public const STATUS_COMPLETE = 6;
+
     private int $id = 0;
     private int $userId = 0;
     private string $name = '';
@@ -14,7 +21,7 @@ class Event
     private DateTime $createTime;
     private DateTime $startTime;
     private int $duration = 0;
-    private bool $active = false;
+    private int $status = 0;
     private bool $ratingCompleted = false;
 
     public function __construct()
@@ -119,14 +126,14 @@ class Event
         return $this;
     }
 
-    public function isActive(): bool
+    public function getStatus(): int
     {
-        return $this->active;
+        return $this->status;
     }
 
-    public function setActive(int|bool $active): self
+    public function setStatus(int $status): self
     {
-        $this->active = (bool)$active;
+        $this->status = $status;
 
         return $this;
     }
