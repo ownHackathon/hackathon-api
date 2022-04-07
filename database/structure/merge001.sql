@@ -1,1 +1,0 @@
-ALTER TABLE `Event` CHANGE `active` `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1';
