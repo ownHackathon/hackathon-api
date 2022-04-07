@@ -13,8 +13,6 @@ import {
     faExternalLinkAlt,
     faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
 
 library.add(
     faArrowUpRightFromSquare,
@@ -22,6 +20,9 @@ library.add(
     faExternalLinkAlt,
     faUserLock,
 );
+
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 createApp(App)
     .use(pinia)

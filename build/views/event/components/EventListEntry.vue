@@ -4,28 +4,37 @@
       <RouterLink :to="{name: 'home'}"> {{ eventname }}</RouterLink>
     </th>
     <td class="hidden md:flex py-2">{{ description }}</td>
-    <td class="py-2" >
-     {{ dateTime(startTime) }}
-      </td>
-    <td class="hidden lg:flex py-2">{{ duration }}</td>
-    <td class="py-2">{{ status }}</td>
+    <td class="py-2" >{{ dateTime(startTime) }}</td>
+    <td class="hidden lg:flex py-2">{{ dateTime(addTime(startTime, duration)) }}</td>
+    <td class="py-2">{{ statusTranslate(status) }}</td>
     <td class="hidden sm:flex py-2">{{ owner }}</td>
   </tr>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
-import { dateTime } from "@/composables/moment.js";
+import { dateTime, addTime } from "@/composables/moment.js";
 
 defineProps({
   eventname: String,
   description: String,
   startTime: Date,
   duration: Int32Array,
-  status: Boolean,
+  status: Intl,
   owner: Int32Array
 })
 
+const statusList = [
+    'geschlossen',
+    'bald',
+    'vorbereiten',
+    'läuft',
+    'auswerten',
+    'beendet',
+]
 
+const statusTranslate = (value) => {
+  return statusList[value-1];
+}
 
 </script>
