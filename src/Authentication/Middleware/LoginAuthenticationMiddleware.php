@@ -5,6 +5,8 @@ namespace Authentication\Middleware;
 use App\Model\User;
 use App\Service\UserService;
 use Authentication\Service\LoginAuthenticationService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -28,15 +30,13 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $name = $data['userName'];
+        $name = $data['username'];
         $password = $data['password'];
 
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            $validationMessages['userName']['userDataNotCorrect'] = 'Benutzername und/oder Passwort nicht korrekt.';
-
-            return $handler->handle($request->withAttribute('validationMessages', $validationMessages));
+            return new JsonResponse(['message' => 'Login failed'], HTTP::STATUS_FORBIDDEN);
         }
 
         return $handler->handle(

@@ -113,13 +113,6 @@ return static function (Mezzio\Application $app): void {
         App\Handler\UserHandler::class
     );
 
-    $app->get(
-        '/login[/]',
-        [
-            Authentication\Handler\LoginHandler::class,
-        ],
-        Authentication\Handler\LoginHandler::class
-    );
     $app->post(
         '/login[/]',
         [

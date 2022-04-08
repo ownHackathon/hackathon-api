@@ -6,7 +6,7 @@
 
       <div :class="isMenuOpen ? 'flex' : 'hidden'" class="flex-col absolute top-14 border border-gray-600 bg-gray-800 z-10">
         <span class="text-center font-bold">Willkommen</span>
-        <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'home'}">Anmelden</router-link>
+        <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'login'}">Anmelden</router-link>
         <router-link @click="isMenuOpen = false" class="nav-entry" :to="{name: 'home'}">Registrieren</router-link>
       </div>
     </div>

@@ -4,8 +4,8 @@ namespace Authentication\Handler;
 
 use App\Model\User;
 use Authentication\Service\JwtTokenGeneratorTrait;
-use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\Response\RedirectResponse;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionMiddleware;
 use Mezzio\Template\TemplateRendererInterface;
@@ -18,7 +18,6 @@ class LoginHandler implements RequestHandlerInterface
     use JwtTokenGeneratorTrait;
 
     public function __construct(
-        private TemplateRendererInterface $template,
         private string $tokenSecret,
         private int $tokenDuration
     ) {
@@ -27,26 +26,14 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
-        $data['validationMessages'] = $request->getAttribute('validationMessages');
 
-        if ($user instanceof User) {
-            $token = $this->generateToken(
-                $user->getId(),
-                $user->getName(),
-                $this->tokenSecret,
-                $this->tokenDuration
-            );
+        $token = $this->generateToken(
+            $user->getId(),
+            $user->getName(),
+            $this->tokenSecret,
+            $this->tokenDuration,
+        );
 
-            /** @var SessionInterface $session */
-            $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-            $session->set('token', $token);
-
-            return new RedirectResponse('/', 303);
-        }
-
-        $postData = $request->getParsedBody();
-        $data['userName'] = $postData['userName'] ?? null;
-
-        return new HtmlResponse($this->template->render('app::loginbox', $data));
+        return new JsonResponse(['token' => $token], HTTP::STATUS_OK);
     }
 }

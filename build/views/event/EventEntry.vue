@@ -28,7 +28,9 @@
     </DivTableContent>
     <DivTableContent v-else >
       <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
-      <TButton>Themenauswahl</TButton>
+      <div class="flex justify-center">
+        <TButton>Themenauswahl</TButton>
+      </div>
     </DivTableContent>
   </DivTable>
 

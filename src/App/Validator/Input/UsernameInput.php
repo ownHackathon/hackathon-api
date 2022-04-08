@@ -8,7 +8,7 @@ class UsernameInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('userName');
+        parent::__construct('username');
 
         $this->setRequired(true);
 

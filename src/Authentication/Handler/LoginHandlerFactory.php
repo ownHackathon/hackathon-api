@@ -9,9 +9,8 @@ class LoginHandlerFactory
 {
     public function __invoke(ContainerInterface $container): LoginHandler
     {
-        $templateRenderer = $container->get(TemplateRendererInterface::class);
         $token = $container->get('config')['token'];
 
-        return new LoginHandler($templateRenderer, $token['secret'], (int)$token['duration']);
+        return new LoginHandler($token['secret'], (int)$token['duration']);
     }
 }
