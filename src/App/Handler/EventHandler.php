@@ -4,6 +4,7 @@ namespace App\Handler;
 
 use App\Model\Event;
 use App\Model\Participant;
+use App\Model\Topic;
 use App\Service\ParticipantService;
 use App\Service\ProjectService;
 use App\Service\TopicPoolService;
@@ -49,11 +50,14 @@ class EventHandler implements RequestHandlerInterface
         }
 
         $topic = $this->topicPoolService->findByEventId($event->getId());
+        $topicData = [];
 
-        $topicData = [
-            'title' => $topic->getTopic(),
-            'description' => $topic->getDescription(),
-        ];
+        if ($topic instanceof Topic) {
+            $topicData = [
+                'title' => $topic->getTopic(),
+                'description' => $topic->getDescription(),
+            ];
+        }
 
         $data = [
             'id' => $event->getId(),
