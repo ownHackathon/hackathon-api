@@ -15,12 +15,12 @@ class ProjectService
     ) {
     }
 
-    public function findById(int $id): Project
+    public function findById(int $id): ?Project
     {
         $project = $this->table->findById($id);
 
         if (!$project) {
-            throw new InvalidArgumentException('Could not find Project', 400);
+            return null;
         }
 
         return $this->hydrator->hydrate($project, new Project());

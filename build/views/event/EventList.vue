@@ -7,7 +7,7 @@
           <th class="px-3 py-3" scope="col">
             Name
           </th>
-          <th class="hidden md:table-cell py-3" scope="col">
+          <th class="hidden xl:table-cell py-3" scope="col">
             Beschreibung
           </th>
           <th class="py-3" scope="col">
@@ -22,7 +22,7 @@
           <th class="py-3" scope="col">
             Status
           </th>
-          <th class="hidden sm:table-cell py-3" scope="col">
+          <th class="hidden md:table-cell py-3" scope="col">
             Ersteller
           </th>
         </tr>
@@ -31,10 +31,11 @@
       <EventListEntry
           v-for="entry in data"
           :key="entry.id"
+          :id="entry.id"
+          :owner="entry.owner"
+          :eventname="entry.name"
           :description="entry.description"
           :duration="entry.duration"
-          :eventname="entry.name"
-          :owner="entry.userId"
           :start-time="entry.startTime"
           :status="entry.status"
       />

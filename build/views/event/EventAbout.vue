@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="prose max-w-max">
     <h3>Hackathon</h3>
     <h5>Worum geht es überhaupt?</h5>
     <p>

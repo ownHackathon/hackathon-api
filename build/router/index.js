@@ -4,6 +4,7 @@ import MainLayout from "@/layouts/MainLayout";
 import MainView from "@/views/MainView";
 import EventAbout from "@/views/event/EventAbout";
 import EventList from "@/views/event/EventList";
+import EventEntry from "@/views/event/EventEntry";
 
 const routes = [{
     component: MainLayout, path: "/", children: [{
@@ -11,6 +12,8 @@ const routes = [{
     }, {
         path: "/event/information", name: "event_general_information", component: EventAbout,
     }, {
+        path: "/event/:id", name: "event_entry", component: EventEntry,
+    },{
         path: "/event/list", name: "event_list", component: EventList,
     }, {
         path: "/about", name: "about", component: MainView,

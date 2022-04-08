@@ -6,12 +6,12 @@ use DateTime;
 
 class Event
 {
-    public const STATUS_CLOSED = 1;
-    public const STATUS_SOON = 2;
-    public const STATUS_PREPARE = 3;
-    public const STATUS_RUNNING = 4;
-    public const STATUS_EVALUATION = 5;
-    public const STATUS_COMPLETE = 6;
+    public const STATUS_SOON = 1;
+    public const STATUS_PREPARE = 2;
+    public const STATUS_RUNNING = 3;
+    public const STATUS_EVALUATION = 4;
+    public const STATUS_COMPLETE = 5;
+    public const STATUS_CLOSED = 6;
 
     private int $id = 0;
     private int $userId = 0;

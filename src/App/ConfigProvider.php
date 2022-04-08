@@ -7,8 +7,12 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Service\EventServiceFactory;
+use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
+use App\Service\ProjectService;
 use App\Service\ProjectServiceFactory;
+use App\Service\TopicPoolService;
+use App\Service\UserService;
 use App\Service\UserServiceFactory;
 use App\Validator\EventCreateValidator;
 use App\Validator\Input\EmailInput;
@@ -102,13 +106,11 @@ class ConfigProvider
 
                 Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventParticipantMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventTopicMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventTopicVoteMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
@@ -116,7 +118,6 @@ class ConfigProvider
                 Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TemplateDefaultsMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
@@ -156,8 +157,10 @@ class ConfigProvider
     {
         return [
             Handler\EventHandler::class => [
-                ClassMethodsHydrator::class,
-                TemplateRendererInterface::class,
+                UserService::class,
+                ParticipantService::class,
+                ProjectService::class,
+                TopicPoolService::class,
             ],
             Handler\EventCreateHandler::class => [
                 TemplateRendererInterface::class,
@@ -169,7 +172,7 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\EventListHandler::class => [
-                ReflectionHydrator::class,
+                UserService::class,
             ],
             Handler\ProjectHandler::class => [
                 ClassMethodsHydrator::class,
@@ -201,17 +204,11 @@ class ConfigProvider
             Middleware\EventNameMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventParticipantMiddleware::class => [
-                Service\ParticipantService::class,
-            ],
             Middleware\EventParticipantSubscribeMiddleware::class => [
                 Service\ParticipantService::class,
             ],
             Middleware\EventRatingReleasedMiddleware::class => [
                 Service\EventService::class,
-            ],
-            Middleware\EventTopicMiddleware::class => [
-                Service\TopicPoolService::class,
             ],
             Middleware\EventTopicVoteMiddleware::class => [
                 Service\TopicPoolService::class,
@@ -236,9 +233,6 @@ class ConfigProvider
             ],
             Middleware\ProjectParticipantMiddleware::class => [
                 Service\ParticipantService::class,
-            ],
-            Middleware\TemplateDefaultsMiddleware::class => [
-                TemplateRendererInterface::class,
             ],
             Middleware\TopicCreateValidationMiddleware::class => [
                 Validator\TopicCreateValidator::class,

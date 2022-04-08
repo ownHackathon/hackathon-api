@@ -1,7 +1,7 @@
 <template>
   <TheHeader />
   <main class="px-4 top-16 max-w-8xl">
-    <RouterView class="prose max-w-max flex-auto " />
+    <RouterView />
   </main>
   <TheFooter />
 </template>
