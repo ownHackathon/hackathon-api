@@ -9,59 +9,57 @@
     </p>
   </div>
 
-  <div class="relative overflow-x-auto shadow rounded">
-    <div class="flex py-1 px-2 text-xs uppercase bg-gray-700 text-gray-400">
+  <DivTable>
+    <DivTableHeader>
       <div class="grow">Beschreibung</div>
       <div class="flex-none">Erstellt: {{ date(data.createTime) }}</div>
-    </div>
-    <div class="py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableHeader>
+    <DivTableContent>
       {{ data.eventText }}
-    </div>
-  </div>
+    </DivTableContent>
+  </DivTable>
 
-  <div class="py-6"></div>
-
-  <div class="relative overflow-x-auto shadow rounded">
-    <div class="flex py-1 px-2 text-xs uppercase bg-gray-700 text-gray-400">
+  <DivTable>
+    <DivTableHeader>
       <div>Thema: <span class="font-bold">{{ data.topic.title }}</span></div>
-    </div>
-    <div class="py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableHeader>
+    <DivTableContent v-if="isShowTopic">
       {{ data.topic.description }}
-    </div>
-  </div>
+    </DivTableContent>
+    <DivTableContent v-else >
+      <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
+      <TButton>Themenauswahl</TButton>
+    </DivTableContent>
+  </DivTable>
 
-  <div class="py-6"></div>
-
-  <div class="relative overflow-x-auto shadow rounded">
-    <div class="flex py-1 px-2 text-xs uppercase bg-gray-700 text-gray-400">
+  <DivTable>
+    <DivTableHeader>
       Daten
-    </div>
-    <div class="flex border-t border-gray-700 flex py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableHeader>
+    <DivTableContentRow>
       <div class="grow">Start:</div>
       <div class="flex-initial">{{ dateTime(data.startTime) }} Uhr</div>
-    </div>
-    <div class="flex border-t border-gray-700 py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableContentRow>
+    <DivTableContentRow>
       <div class="grow">Laufzeit:</div>
       <div class="flex-initial">{{ data.duration }} Tage</div>
-    </div>
-    <div class="flex border-t border-gray-700 py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableContentRow>
+    <DivTableContentRow>
       <div class="grow">Ende:</div>
       <div class="flex-initial">{{ dateTime(addTime(data.startTime, data.duration)) }} Uhr</div>
-    </div>
-    <div class="flex border-t border-gray-700 py-1 px-2 text-gray-400 bg-gray-800">
+    </DivTableContentRow>
+    <DivTableContentRow>
       <div class="grow">Status:</div>
       <div class="flex-initial">{{ getStatusText(data.status) }}</div>
-    </div>
-  </div>
+    </DivTableContentRow>
+  </DivTable>
 
-  <div class="py-6"></div>
-
-  <div class="relative overflow-x-auto shadow-md rounded-lg">
-    <div class="flex py-1 px-2 text-xs uppercase bg-gray-700 text-gray-400">
+  <DivTable>
+    <DivTableHeader>
       <div class="flex-1">Teilnehmer</div>
       <div class="flex-1">Projekt</div>
-    </div>
-    <div v-for="participant in data.participants" :key="participant.id"
+    </DivTableHeader>
+    <DivTableContentRow v-for="participant in data.participants" :key="participant.id"
          class="flex bg-gray-800 py-1 px-2 border-t border-gray-700"
     >
       <div class="flex-1">
@@ -71,30 +69,43 @@
         <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
       </div>
       <div v-else class="flex-1">-</div>
-    </div>
-  </div>
+    </DivTableContentRow>
+  </DivTable>
 
   <div class="flex p-3 text-gray-800">
-    <div class="grow">Event erstellt am: {{date(data.createTime)}}</div>
-    <div class="flex-initial pl-2">von: <RouterLink to="/user/">{{ data.owner}}</RouterLink></div>
+    <div class="grow">Event erstellt am: {{ date(data.createTime) }}</div>
+    <div class="flex-initial pl-2">von:
+      <RouterLink to="/user/">{{ data.owner }}</RouterLink>
+    </div>
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
 import {useRoute} from "vue-router";
-import {ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {addTime, date, dateTime} from '@/composables/moment.js';
-import { getStatusText } from "@/composables/status";
+import {getStatusText} from "@/composables/status";
+import DivTable from "@/components/form/DivTable";
+import DivTableHeader from "@/components/form/DivTableHeader";
+import DivTableContent from "@/components/form/DivTableContent";
+import DivTableContentRow from "@/components/form/DivTableContentRow";
+import TButton from "@/components/form/TButton";
 
 const route = useRoute();
-const data = ref(null);
+const data = ref(' ');
 
-axios
-    .get(`/event/${route.params.id}`)
-    .then(async response => {
-      data.value = await response.data;
+const isShowTopic = computed(() => {
+          return (Object.prototype.toString.call(data.value.topic) === "[object Object]" );
     });
+
+onMounted(() => {
+  axios
+      .get(`/event/${route.params.id}`)
+      .then(async response => {
+        data.value = await response.data;
+      });
+});
 </script>
 
 <style lang="scss">
