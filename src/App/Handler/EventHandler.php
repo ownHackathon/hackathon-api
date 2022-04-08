@@ -2,15 +2,14 @@
 
 namespace App\Handler;
 
-use Administration\Service\TemplateService;
 use App\Model\Event;
-use App\Model\Topic;
-use App\Model\User;
-use DateInterval;
-use Laminas\Diactoros\Response\HtmlResponse;
+use App\Model\Participant;
+use App\Service\ParticipantService;
+use App\Service\ProjectService;
+use App\Service\TopicPoolService;
+use App\Service\UserService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -18,8 +17,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ClassMethodsHydrator $hydrator,
-        private TemplateService $service,
+        private UserService $userService,
+        private ParticipantService $participantService,
+        private ProjectService $projectService,
+        private TopicPoolService $topicPoolService,
     ) {
     }
 
@@ -28,21 +29,47 @@ class EventHandler implements RequestHandlerInterface
         /** @var Event $event */
         $event = $request->getAttribute(Event::class);
 
-        /** @var User $user */
-        $user = $request->getAttribute(User::class);
+        /** @var array<Participant> $participants */
+        $participants = $this->participantService->findActiveParticipantByEvent($event->getId());
 
-        $endTime = clone $event->getStartTime();
-        // TODO: Move To Model
+        $participantData = [];
 
-        $data = $this->hydrator->extract($event);
-        $data['endTime'] = $endTime->add(new DateInterval('P' . $event->getDuration() . 'D'));
-        $data['eventUser'] = $user->getName();
-        $data['eventUserId'] = $user->getId();
-        $data['participants'] = $request->getAttribute('participants');
-        $data['loggedInUser'] = $request->getAttribute(User::USER_ATTRIBUTE);
-        $data['topics'] = $request->getAttribute('topics');
-        $data['topic'] = $request->getAttribute(Topic::class);
+        foreach ($participants as $participant) {
+            $user = $this->userService->findById($participant->getUserId());
+            $project = $this->projectService->findByParticipantId($participant->getId());
+            $entry = [
+                'id' => $participant->getId(),
+                'username' => $user->getName(),
+                'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
+                'projectId' => $project ? $project->getId() : '',
+                'projectTitle' => $project ? $project->getTitle() : '',
+            ];
 
-        return new JsonResponse($data);
+            $participantData[] = $entry;
+        }
+
+        $topic = $this->topicPoolService->findByEventId($event->getId());
+
+        $topicData = [
+            'title' => $topic->getTopic(),
+            'description' => $topic->getDescription(),
+        ];
+
+        $data = [
+            'id' => $event->getId(),
+            'owner' => $this->userService->findById($event->getUserId())->getName(),
+            'name' => $event->getName(),
+            'description' => $event->getDescription(),
+            'eventText' => $event->getEventText(),
+            'createTime' => $event->getCreateTime()->format('Y-m-d H:i'),
+            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
+            'duration' => $event->getDuration(),
+            'status' => $event->getStatus(),
+            'ratingCompleted' => $event->isRatingCompleted(),
+            'topic' => $topicData,
+            'participants' => $participantData,
+        ];
+
+        return new JsonResponse($data, HTTP::STATUS_OK);
     }
 }

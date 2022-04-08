@@ -46,12 +46,6 @@ return static function (Mezzio\Application $app): void {
         '/event/{eventId:\d+}[/]',
         [
             App\Middleware\EventMiddleware::class,
-            App\Middleware\UserMiddleware::class,
-            App\Middleware\EventParticipantMiddleware::class,
-            App\Middleware\ParticipantProjectMiddleware::class,
-            App\Middleware\TopicListAvailableMiddleware::class,
-            App\Middleware\EventTopicVoteMiddleware::class,
-            App\Middleware\EventTopicMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class
