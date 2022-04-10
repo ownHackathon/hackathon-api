@@ -1,5 +1,12 @@
 <template>
   <p class="py-6">Hier bekommt ihr eine Übersicht über alle derzeit laufenden und bereits abgeschlossenen Events</p>
+  <div v-if="user.isAuthenticated()">
+    <div>
+      <button class="button" @click="router.push({name: 'event_create'})">
+        Event erstellen
+      </button>
+    </div>
+  </div>
   <div class="relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-400">
       <thead class="text-xs uppercase bg-gray-700 text-gray-400">
@@ -47,8 +54,12 @@
 <script setup>
 import axios from "axios";
 import EventListEntry from "@/views/event/components/EventListEntry";
+import useUser from "@/composables/user";
+import {useRouter} from "vue-router";
 import {onMounted, ref} from 'vue';
 
+const user = useUser();
+const router = useRouter();
 const data = ref(' ');
 onMounted(() => {
   axios
