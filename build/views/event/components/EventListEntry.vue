@@ -4,7 +4,7 @@
       <RouterLink :to="{ name: 'event_entry', params: { id: id }}"> {{ eventname }}</RouterLink>
     </th>
     <td class="hidden xl:table-cell py-2">{{ description }}</td>
-    <td class="py-2" >{{ dateTime(startTime) }} Uhr</td>
+    <td class="py-2">{{ dateTime(startTime) }} Uhr</td>
     <td class="hidden lg:table-cell py-2">{{ dateTime(addTime(startTime, duration)) }} Uhr</td>
     <td class="hidden sm:table-cell py-2">{{ duration }} Tage</td>
     <td class="py-2">{{ getStatusText(status) }}</td>
@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-import { dateTime, addTime } from "@/composables/moment.js";
-import { getStatusText } from "@/composables/status";
+import {defineProps} from "vue";
+import {addTime, dateTime} from "@/composables/moment.js";
+import {getStatusText} from "@/composables/status";
 
 defineProps({
   id: Intl,
@@ -25,5 +25,5 @@ defineProps({
   duration: Intl,
   startTime: Date,
   status: Intl,
-})
+});
 </script>

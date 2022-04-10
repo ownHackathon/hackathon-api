@@ -10,8 +10,5 @@ onMounted(() => {
   unLoadUser();
   localStorage.removeItem('token');
   router.push('/');
-})
-
-
+});
 </script>
-

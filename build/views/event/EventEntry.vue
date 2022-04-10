@@ -30,7 +30,7 @@
   </div>
   <div v-else class="div-table">
     <div class="div-table-header">
-      <div>Thema: </div>
+      <div>Thema:</div>
     </div>
     <div class="div-table-content">
       <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
@@ -71,7 +71,7 @@
       <div class="flex-1">Teilnehmer</div>
       <div class="flex-1">Projekt</div>
     </div>
-    <div class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700" v-for="participant in data.participants" :key="participant.id">
+    <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
       <div class="flex-1">
         <RouterLink to="/user/">{{ participant.username }}</RouterLink>
       </div>
@@ -103,8 +103,8 @@ const route = useRoute();
 const data = ref(' ');
 
 const isShowTopic = computed(() => {
-          return (Object.prototype.toString.call(data.value.topic) === "[object Object]" );
-    });
+  return (Object.prototype.toString.call(data.value.topic) === "[object Object]");
+});
 
 onMounted(() => {
   axios

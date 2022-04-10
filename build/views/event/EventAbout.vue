@@ -17,13 +17,18 @@
     <h5>Information zur Webseite</h5>
     <p>
       Diese Webseite dient lediglich dazu um die Events einfacher verwalten zu können.<br>
-      Jegliche Kommunikation findet auf dem <router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link> statt.<br>
-      Das heißt, das sich einige Informationen zum Umgang mit dem Event auf den <router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link>
+      Jegliche Kommunikation findet auf dem
+      <router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link>
+      statt.<br>
+      Das heißt, das sich einige Informationen zum Umgang mit dem Event auf den
+      <router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link>
       beziehen.
     </p>
     <h5>Events</h5>
     <p>
-      Aktuelle und laufende Events werden in einen eigenen (<router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link>) Thread behandelt.<br>
+      Aktuelle und laufende Events werden in einen eigenen (
+      <router-link :to="{name: 'discord'}" target="_blank">Discord Server</router-link>
+      ) Thread behandelt.<br>
       Für Diskussionen zu laufenden Events oder allgemein zum Hackathon nutzt bitte den <span class="text-white-50">#diskussion</span> Channel.<br>
       Um euer Projekt vorzustellen und alle auf den laufenden zu halten, könnt ihr nach der Teilnahmeanmeldung im Channel <span class="text-white-50">#teilnahmen</span>
       einen eigenen Thread erstellen.<br>

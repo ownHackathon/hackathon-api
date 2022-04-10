@@ -42,4 +42,6 @@
     </rule>
 
     <file>src</file>
+
+    <exclude-pattern>*/build/*</exclude-pattern>
 </ruleset>
