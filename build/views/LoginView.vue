@@ -10,70 +10,70 @@
     </div>
   </div>
   <form @submit.prevent="login">
-  <div class="flex justify-center w-full pt-6">
-    <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
-      <div class="div-table-header">
-        Anmelden
-      </div>
-      <div class="div-table-content">
-        <div class="mb-6">
-          <label class="label" for="username">Benutzername</label>
-          <input class="input" type="text" v-model="payload.username" id="username" name="username" placeholder="Dein Benutzername" required />
+    <div class="flex justify-center w-full pt-6">
+      <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
+        <div class="div-table-header">
+          Anmelden
         </div>
+        <div class="div-table-content">
+          <div class="mb-6">
+            <label class="label" for="username">Benutzername</label>
+            <input id="username" v-model="payload.username" class="input" name="username" placeholder="Dein Benutzername" required type="text"/>
+          </div>
 
-        <div class="mb-6">
-          <label class="label" for="password">Passwort</label>
-          <input class="input" type="password" v-model="payload.password" name="password" id="password" required />
-        </div>
+          <div class="mb-6">
+            <label class="label" for="password">Passwort</label>
+            <input id="password" v-model="payload.password" class="input" name="password" required type="password"/>
+          </div>
 
-        <div class="flex">
-          <input class="checkbox" type="checkbox" id="remember" aria-describedby="remember" disabled/>
-          <label class="label" for="remember">Angemeldet bleiben</label>
-        </div>
+          <div class="flex">
+            <input id="remember" aria-describedby="remember" class="checkbox" disabled type="checkbox"/>
+            <label class="label" for="remember">Angemeldet bleiben</label>
+          </div>
 
-        <div class="flex justify-center pb-6">
-          <RouterLink to="/">Passwort vergessen?</RouterLink>
-        </div>
-        <div class="flex justify-center">
-          <button class="button" type="submit">Anmelden</button>
+          <div class="flex justify-center pb-6">
+            <RouterLink to="/">Passwort vergessen?</RouterLink>
+          </div>
+          <div class="flex justify-center">
+            <button class="button" type="submit">Anmelden</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </form>
 </template>
 
 <script setup>
 import axios from "axios";
-import {onBeforeMount, reactive} from "vue";
+import {onMounted, reactive} from "vue";
 import {useRouter} from 'vue-router';
-import {useUserStore} from "@/store/user";
+import useUser from "@/composables/user";
 
-const userStore = useUserStore();
+const user = useUser();
 const router = useRouter();
 const payload = reactive({
   username: '',
   password: '',
 });
 
-onBeforeMount(() => {
-  if (userStore.isAuthenticated) {
-    router.back();
+onMounted(() => {
+  if (user.isAuthenticated()) {
+    router.push('/');
   }
-})
+});
 
 async function login() {
   const response = await axios
-      .post("/login", payload, )
+      .post("/login", payload,)
       .catch((err) => {
         document.getElementById('error-message').innerHTML = 'Unbekannter Fehler, später noch einmal versuchen';
         document.getElementById('error-container').classList.remove('hidden');
         console.error(err);
-      })
+      });
 
   if (response && response.status === 200) {
     localStorage.setItem('token', response.data.token);
-    userStore.isAuthenticated = true;
+    user.loadUser();
     await router.back();
   } else {
     document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';

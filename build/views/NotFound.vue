@@ -5,7 +5,9 @@
     <p>We encountered a 404 Not Found error.</p>
     <p>
       You are looking for something that doesn't exist or may have moved. Check out one of the links on this page
-      or head back to <router-link to="/">Home</router-link>.
+      or head back to
+      <router-link to="/">Home</router-link>
+      .
     </p>
   </div>
 </template>
