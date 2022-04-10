@@ -12,7 +12,7 @@ function date(value)
 
 function addTime(value, count)
 {
-    return moment(value, "DD-MM-YYYY hh:mm").add(count, 'days');
+    return moment(value, ).add(count, 'days');
 }
 
 export {

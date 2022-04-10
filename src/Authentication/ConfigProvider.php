@@ -2,6 +2,7 @@
 
 namespace Authentication;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Service\UserService;
 use App\Validator\Input;
 use App\Validator\Input\EmailInput;
@@ -32,6 +33,7 @@ class ConfigProvider
                 Service\LoginAuthenticationService::class,
             ],
             'factories' => [
+                Handler\ApiMeHandler::class => ConfigAbstractFactory::class,
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
                 Handler\UserRegisterHandler::class => ConfigAbstractFactory::class,
                 Handler\UserRegisterSubmitHandler::class => ConfigAbstractFactory::class,
@@ -51,6 +53,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            Handler\ApiMeHandler::class => [
+                ReflectionHydrator::class,
+            ],
             Handler\UserRegisterHandler::class => [
                 TemplateRendererInterface::class,
             ],

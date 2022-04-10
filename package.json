@@ -15,6 +15,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.2",
     "pinia": "^2.0.0-rc.10",
     "pinia-plugin-persistedstate": "^1.5.1",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",

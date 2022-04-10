@@ -11,6 +11,7 @@ import {
     faArrowUpRightFromSquare,
     faBars,
     faExternalLinkAlt,
+    faUser,
     faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,10 +19,12 @@ library.add(
     faArrowUpRightFromSquare,
     faBars,
     faExternalLinkAlt,
+    faUser,
     faUserLock,
 );
 
 const pinia = createPinia();
+
 pinia.use(piniaPluginPersistedstate);
 
 createApp(App)

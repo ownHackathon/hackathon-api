@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
     $app->get(
-        '/template/{section}/{template}[/]',
+        '/api/me[/]',
         [
-            Administration\Handler\TemplateHandler::class,
+            Authentication\Handler\ApiMeHandler::class,
         ],
-        Administration\Handler\TemplateHandler::class
+        Authentication\Handler\ApiMeHandler::class
     );
     $app->get(
         '/',
@@ -112,7 +112,6 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\UserHandler::class
     );
-
     $app->get(
         '/login[/]',
         [
@@ -120,6 +119,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\LoginHandler::class
     );
+
     $app->post(
         '/login[/]',
         [

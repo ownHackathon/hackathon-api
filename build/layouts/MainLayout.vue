@@ -9,4 +9,12 @@
 <script setup>
   import TheFooter from "@/components/ui/TheFooter";
   import TheHeader from "@/components/ui/TheHeader";
+  import {onMounted} from "vue";
+  import useUser from "@/composables/user";
+
+  const {loadUser} = useUser();
+
+  onMounted(() => {
+    loadUser();
+  })
 </script>

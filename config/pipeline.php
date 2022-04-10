@@ -6,8 +6,8 @@ use Administration\Middleware\FrontLoaderMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
-use Mezzio\Flash\FlashMessageMiddleware;
 use Mezzio\Handler\NotFoundHandler;
+use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 use Mezzio\Helper\ServerUrlMiddleware;
 use Mezzio\Helper\UrlHelperMiddleware;
 use Mezzio\Router\Middleware\DispatchMiddleware;
@@ -15,14 +15,12 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use Mezzio\Session\SessionMiddleware;
 
 return function (Application $app): void {
     $app->pipe(ErrorHandler::class);
     $app->pipe(ServerUrlMiddleware::class);
+    $app->pipe(BodyParamsMiddleware::class);
 
-    $app->pipe(SessionMiddleware::class);
-    $app->pipe(FlashMessageMiddleware::class);
     $app->pipe(JwtAuthenticationMiddleware::class);
     $app->pipe(RouteMiddleware::class);
 
