@@ -17,7 +17,7 @@ export default function useUser() {
           }
         })
         .catch((err) => {
-          userStore.user = null;
+          unLoadUser();
           console.error(err);
         });
   };
