@@ -1,5 +1,5 @@
 {
-  "name": "vue.local",
+  "name": "bibaltik_hackathon",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,13 +15,16 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "highlight": "^0.2.4",
+    "highlight.js": "^11.5.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.2",
     "pinia": "^2.0.0-rc.10",
     "pinia-plugin-persistedstate": "^1.5.1",
     "vue": "^3.2.13",
     "vue-meta": "^2.4.0",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

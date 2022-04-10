@@ -5,6 +5,7 @@ import MainLayout from '@/layouts/MainLayout';
 import MainView from '@/views/MainView';
 import LoginView from '@/views/LoginView';
 import LogoutView from '@/views/LogoutView';
+import RegisterView from '@/views/RegisterView';
 import EventAbout from '@/views/event/EventAbout';
 import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
@@ -17,6 +18,8 @@ const routes = [{
     path: "/login", name: "login", component: LoginView,
   }, {
     path: "/logout", name: "logout", component: LogoutView,
+  },{
+    path: "/register", name: "register", component: RegisterView,
   }, {
     path: "/event/information", name: "event_general_information", component: EventAbout,
   }, {

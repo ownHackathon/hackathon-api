@@ -14,7 +14,7 @@
       <div class="grow">Beschreibung</div>
     </div>
     <div class="div-table-content">
-      {{ data.eventText }}
+      <Markdown :source="data.eventText" :plugins="plugins" class="prose max-w-max" />
     </div>
   </div>
 
@@ -25,7 +25,7 @@
       <div>Thema: <span class="font-bold">{{ data.topic.title }}</span></div>
     </div>
     <div class="div-table-content">
-      {{ data.topic.description }}
+      <Markdown :source="data.topic.description" class="prose max-w-max" />
     </div>
   </div>
   <div v-else class="div-table">
@@ -66,13 +66,12 @@
 
   <div class="py-6"></div>
 
-  <div v-if="user.isAuthenticated()">
-    <div class="div-table">
-      <div class="div-table-header">
-        <div class="flex-1">Teilnehmer</div>
-        <div class="flex-1">Projekt</div>
-      </div>
-
+  <div class="div-table">
+    <div class="div-table-header">
+      <div class="flex-1">Teilnehmer</div>
+      <div class="flex-1">Projekt</div>
+    </div>
+    <div v-if="user.isAuthenticated()">
       <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
         <div class="flex-1">
           <RouterLink to="/user/">{{ participant.username }}</RouterLink>
@@ -81,6 +80,11 @@
           <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
         </div>
         <div v-else class="flex-1">-</div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="div-table-content">
+        Diese Daten können nur <RouterLink :to="{name: 'register'}">registriert</RouterLink> und <RouterLink :to="{name: 'login'}">angemeldet</RouterLink> eingesehen werden.
       </div>
     </div>
   </div>
@@ -101,6 +105,7 @@ import useUser from "@/composables/user";
 import {computed, onMounted, ref} from "vue";
 import {addTime, date, dateTime} from '@/composables/moment.js';
 import {getStatusText} from "@/composables/status";
+import Markdown from 'vue3-markdown-it';
 
 const route = useRoute();
 const user = useUser();

@@ -5,6 +5,7 @@ namespace App\Handler;
 use App\Model\Event;
 use App\Model\Participant;
 use App\Model\Topic;
+use App\Model\User;
 use App\Service\ParticipantService;
 use App\Service\ProjectService;
 use App\Service\TopicPoolService;
@@ -27,37 +28,14 @@ class EventHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /** @var User $user */
+        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+
         /** @var Event $event */
         $event = $request->getAttribute(Event::class);
 
         /** @var array<Participant> $participants */
         $participants = $this->participantService->findActiveParticipantByEvent($event->getId());
-
-        $participantData = [];
-
-        foreach ($participants as $participant) {
-            $user = $this->userService->findById($participant->getUserId());
-            $project = $this->projectService->findByParticipantId($participant->getId());
-            $entry = [
-                'id' => $participant->getId(),
-                'username' => $user->getName(),
-                'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
-                'projectId' => $project ? $project->getId() : '',
-                'projectTitle' => $project ? $project->getTitle() : '',
-            ];
-
-            $participantData[] = $entry;
-        }
-
-        $topic = $this->topicPoolService->findByEventId($event->getId());
-        $topicData = [];
-
-        if ($topic instanceof Topic) {
-            $topicData = [
-                'title' => $topic->getTopic(),
-                'description' => $topic->getDescription(),
-            ];
-        }
 
         $data = [
             'id' => $event->getId(),
@@ -70,9 +48,37 @@ class EventHandler implements RequestHandlerInterface
             'duration' => $event->getDuration(),
             'status' => $event->getStatus(),
             'ratingCompleted' => $event->isRatingCompleted(),
-            'topic' => $topicData,
-            'participants' => $participantData,
         ];
+
+        if ($user instanceof User) {
+            $participantData = [];
+            foreach ($participants as $participant) {
+                $user = $this->userService->findById($participant->getUserId());
+                $project = $this->projectService->findByParticipantId($participant->getId());
+                $entry = [
+                    'id' => $participant->getId(),
+                    'username' => $user->getName(),
+                    'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
+                    'projectId' => $project ? $project->getId() : '',
+                    'projectTitle' => $project ? $project->getTitle() : '',
+                ];
+
+                $participantData[] = $entry;
+            }
+
+            $data['participants'] = $participantData;
+        }
+
+        $topic = $this->topicPoolService->findByEventId($event->getId());
+
+        if ($topic instanceof Topic) {
+            $topicData = [
+                'title' => $topic->getTopic(),
+                'description' => $topic->getDescription(),
+            ];
+
+            $data['topic'] = $topicData;
+        }
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }
