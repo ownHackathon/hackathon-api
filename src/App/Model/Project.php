@@ -9,9 +9,9 @@ class Project
     private int $id = 0;
     private int $participantId = 0;
     private string $title = '';
-    private string $description = '';
-    private string $gitRepoUri = '';
-    private string $demoPageUri = '';
+    private ?string $description = '';
+    private ?string $gitRepoUri = '';
+    private ?string $demoPageUri = '';
     private DateTime $createTime;
 
     public function __construct()
