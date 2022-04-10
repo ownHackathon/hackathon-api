@@ -26,13 +26,16 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $token = null;
 
-        $token = $this->generateToken(
-            $user->getId(),
-            $user->getName(),
-            $this->tokenSecret,
-            $this->tokenDuration,
-        );
+        if ($user instanceof User) {
+            $token = $this->generateToken(
+                $user->getId(),
+                $user->getName(),
+                $this->tokenSecret,
+                $this->tokenDuration,
+            );
+        }
 
         return new JsonResponse(['token' => $token], HTTP::STATUS_OK);
     }

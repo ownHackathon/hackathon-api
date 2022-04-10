@@ -11,10 +11,10 @@
           Beschreibung
         </th>
         <th class="py-3" scope="col">
-          Startzeit
+          Start
         </th>
         <th class="hidden lg:table-cell py-3" scope="col">
-          Endzeit
+          Ende
         </th>
         <th class="hidden sm:table-cell py-3" scope="col">
           Laufzeit

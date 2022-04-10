@@ -9,61 +9,69 @@
     </p>
   </div>
 
-  <DivTable>
-    <DivTableHeader>
+  <div class="div-table">
+    <div class="div-table-header">
       <div class="grow">Beschreibung</div>
-      <div class="flex-none">Erstellt: {{ date(data.createTime) }}</div>
-    </DivTableHeader>
-    <DivTableContent>
+    </div>
+    <div class="div-table-content">
       {{ data.eventText }}
-    </DivTableContent>
-  </DivTable>
+    </div>
+  </div>
 
-  <DivTable>
-    <DivTableHeader>
+  <div class="py-6"></div>
+
+  <div v-if="isShowTopic" class="div-table">
+    <div class="div-table-header">
       <div>Thema: <span class="font-bold">{{ data.topic.title }}</span></div>
-    </DivTableHeader>
-    <DivTableContent v-if="isShowTopic">
+    </div>
+    <div class="div-table-content">
       {{ data.topic.description }}
-    </DivTableContent>
-    <DivTableContent v-else >
+    </div>
+  </div>
+  <div v-else class="div-table">
+    <div class="div-table-header">
+      <div>Thema: </div>
+    </div>
+    <div class="div-table-content">
       <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
       <div class="flex justify-center">
-        <TButton>Themenauswahl</TButton>
+        <button class="button">Themenauswahl</button>
       </div>
-    </DivTableContent>
-  </DivTable>
+    </div>
+  </div>
 
-  <DivTable>
-    <DivTableHeader>
+  <div class="py-6"></div>
+
+  <div class="div-table">
+    <div class="div-table-header">
       Daten
-    </DivTableHeader>
-    <DivTableContentRow>
+    </div>
+    <div class="div-table-content-row">
       <div class="grow">Start:</div>
       <div class="flex-initial">{{ dateTime(data.startTime) }} Uhr</div>
-    </DivTableContentRow>
-    <DivTableContentRow>
+    </div>
+    <div class="div-table-content-row">
       <div class="grow">Laufzeit:</div>
       <div class="flex-initial">{{ data.duration }} Tage</div>
-    </DivTableContentRow>
-    <DivTableContentRow>
+    </div>
+    <div class="div-table-content-row">
       <div class="grow">Ende:</div>
       <div class="flex-initial">{{ dateTime(addTime(data.startTime, data.duration)) }} Uhr</div>
-    </DivTableContentRow>
-    <DivTableContentRow>
+    </div>
+    <div class="div-table-content-row">
       <div class="grow">Status:</div>
       <div class="flex-initial">{{ getStatusText(data.status) }}</div>
-    </DivTableContentRow>
-  </DivTable>
+    </div>
+  </div>
 
-  <DivTable>
-    <DivTableHeader>
+  <div class="py-6"></div>
+
+  <div class="div-table">
+    <div class="div-table-header">
       <div class="flex-1">Teilnehmer</div>
       <div class="flex-1">Projekt</div>
-    </DivTableHeader>
-    <DivTableContentRow v-for="participant in data.participants" :key="participant.id"
-         class="flex bg-gray-800 py-1 px-2 border-t border-gray-700"
-    >
+    </div>
+    <div class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700" v-for="participant in data.participants" :key="participant.id">
       <div class="flex-1">
         <RouterLink to="/user/">{{ participant.username }}</RouterLink>
       </div>
@@ -71,8 +79,10 @@
         <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
       </div>
       <div v-else class="flex-1">-</div>
-    </DivTableContentRow>
-  </DivTable>
+    </div>
+  </div>
+
+  <div class="py-6"></div>
 
   <div class="flex p-3 text-gray-800">
     <div class="grow">Event erstellt am: {{ date(data.createTime) }}</div>
@@ -88,11 +98,6 @@ import {useRoute} from "vue-router";
 import {computed, onMounted, ref} from "vue";
 import {addTime, date, dateTime} from '@/composables/moment.js';
 import {getStatusText} from "@/composables/status";
-import DivTable from "@/components/form/DivTable";
-import DivTableHeader from "@/components/form/DivTableHeader";
-import DivTableContent from "@/components/form/DivTableContent";
-import DivTableContentRow from "@/components/form/DivTableContentRow";
-import TButton from "@/components/form/TButton";
 
 const route = useRoute();
 const data = ref(' ');

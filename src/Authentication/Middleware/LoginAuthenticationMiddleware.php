@@ -36,7 +36,7 @@ class LoginAuthenticationMiddleware implements MiddlewareInterface
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            return new JsonResponse(['message' => 'Login failed'], HTTP::STATUS_FORBIDDEN);
+            return new JsonResponse(['message' => 'Login failed'], HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle(

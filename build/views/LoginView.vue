@@ -1,57 +1,83 @@
 <template>
+  <div id="error-container" class="hidden flex justify-center w-full pt-6">
+    <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
+      <div class="div-table-header">
+        Fehler bei der Anmeldung
+      </div>
+      <div class="div-table-content content-center">
+        <span id="error-message" class="text-red-500 "></span>
+      </div>
+    </div>
+  </div>
   <form @submit.prevent="login">
   <div class="flex justify-center w-full pt-6">
-    <DivTable class="w-5/6 md:w-3/6 2xl:w-2/6">
-      <DivTableHeader>
+    <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
+      <div class="div-table-header">
         Anmelden
-      </DivTableHeader>
-      <DivTableContent>
+      </div>
+      <div class="div-table-content">
         <div class="mb-6">
-          <TLabel for="username">Benutzername</TLabel>
-          <TInput type="text" :value="payload.username" id="username" name="username" minlength="3" placeholder="Dein Benutzername" required />
+          <label class="label" for="username">Benutzername</label>
+          <input class="input" type="text" v-model="payload.username" id="username" name="username" placeholder="Dein Benutzername" required />
         </div>
 
         <div class="mb-6">
-          <TLabel for="password">Passwort</TLabel>
-          <TInput type="password" :value="payload.password" name="password" minlength="6" id="password" required />
+          <label class="label" for="password">Passwort</label>
+          <input class="input" type="password" v-model="payload.password" name="password" id="password" required />
         </div>
 
         <div class="flex">
-          <TInputCheckbox id="remember" aria-describedby="remember" disabled />
-          <TLabel for="remember">Angemeldet bleiben</TLabel>
+          <input class="checkbox" type="checkbox" id="remember" aria-describedby="remember" disabled/>
+          <label class="label" for="remember">Angemeldet bleiben</label>
         </div>
 
         <div class="flex justify-center pb-6">
           <RouterLink to="/">Passwort vergessen?</RouterLink>
         </div>
         <div class="flex justify-center">
-          <TButton type="submit">Anmelden</TButton>
+          <button class="button" type="submit">Anmelden</button>
         </div>
-      </DivTableContent>
-    </DivTable>
+      </div>
+    </div>
   </div>
   </form>
 </template>
 
 <script setup>
-import DivTable from "@/components/form/DivTable";
-import DivTableHeader from "@/components/form/DivTableHeader";
-import DivTableContent from "@/components/form/DivTableContent";
-import TButton from "@/components/form/TButton";
-import TInput from "@/components/form/TInput";
-import TLabel from "@/components/form/TLabel";
-import TInputCheckbox from "@/components/form/TInputCheckbox";
 import axios from "axios";
-import {reactive} from "vue";
+import {onBeforeMount, reactive} from "vue";
+import {useRouter} from 'vue-router';
+import {useUserStore} from "@/store/user";
 
-
+const userStore = useUserStore();
+const router = useRouter();
 const payload = reactive({
   username: '',
   password: '',
 });
 
+onBeforeMount(() => {
+  if (userStore.isAuthenticated) {
+    router.back();
+  }
+})
+
 async function login() {
-  await axios
-      .post("/login/", payload)
+  const response = await axios
+      .post("/login", payload, )
+      .catch((err) => {
+        document.getElementById('error-message').innerHTML = 'Unbekannter Fehler, später noch einmal versuchen';
+        document.getElementById('error-container').classList.remove('hidden');
+        console.error(err);
+      })
+
+  if (response && response.status === 200) {
+    localStorage.setItem('token', response.data.token);
+    userStore.isAuthenticated = true;
+    await router.back();
+  } else {
+    document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';
+    document.getElementById('error-container').classList.remove('hidden');
+  }
 }
 </script>

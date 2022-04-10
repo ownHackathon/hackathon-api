@@ -24,7 +24,7 @@ class LoginValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            return new JsonResponse(['message' => 'Login failed'], HTTP::STATUS_FORBIDDEN);
+            return new JsonResponse(['message' => 'Login failed', 'data' => $data], HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));
