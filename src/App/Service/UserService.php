@@ -6,6 +6,7 @@ use App\Hydrator\ReflectionHydrator;
 use App\Model\Role;
 use App\Model\User;
 use App\Table\UserTable;
+use DateTime;
 use Psr\Log\InvalidArgumentException;
 
 use function password_hash;
@@ -18,11 +19,13 @@ class UserService
     ) {
     }
 
-    public function updateLastUserActionTime(User $user): self
+    public function updateLastUserActionTime(User $user): User
     {
-        $this->table->updateLastUserActionTime($user->getId());
+        $user->setLastAction(new DateTime());
 
-        return $this;
+        $this->table->updateLastUserActionTime($user->getId(), $user->getLastAction());
+
+        return $user;
     }
 
     public function create(User $user, int $role = Role::USER): bool

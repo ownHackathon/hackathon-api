@@ -2,9 +2,9 @@
 
 namespace App\Table;
 
-use DateTime;
 use Administration\Table\AbstractTable;
 use App\Model\User;
+use DateTime;
 
 class UserTable extends AbstractTable
 {
@@ -22,12 +22,10 @@ class UserTable extends AbstractTable
         return $this;
     }
 
-    public function updateLastUserActionTime(int $id): self
+    public function updateLastUserActionTime(int $id, DateTime $actionTime): self
     {
-        $time = new DateTime();
-        $time = $time->format('Y-m-d H:i:s');
         $this->query->update($this->table)
-            ->set(['lastAction' => $time])
+            ->set(['lastAction' => $actionTime->format('Y-m-d H:i:s')])
             ->where('id', $id)
             ->execute();
 
