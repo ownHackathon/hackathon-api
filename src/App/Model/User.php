@@ -9,6 +9,7 @@ class User
     public const USER_ATTRIBUTE = 'authenticatedUser';
 
     private int $id = 0;
+    private string $uuid = '';
     private int $roleId = 0;
     private string $name = '';
     private string $password = '';
@@ -30,6 +31,18 @@ class User
     public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }

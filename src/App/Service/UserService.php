@@ -93,4 +93,15 @@ class UserService
 
         return $this->hydrator->hydrate($user, new User());
     }
+
+    public function findByUuid(string $uuid): User
+    {
+        $user = $this->table->findByUuid($uuid);
+
+        if (!$user) {
+            throw new InvalidArgumentException('Could not find user', 400);
+        }
+
+        return $this->hydrator->hydrate($user, new User());
+    }
 }

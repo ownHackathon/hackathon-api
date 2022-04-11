@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Erstellungszeit: 11. Apr 2022 um 19:40
+-- Erstellungszeit: 12. Apr 2022 um 00:49
 -- Server-Version: 10.5.15-MariaDB-1:10.5.15+maria~focal-log
 -- PHP-Version: 7.4.28
 
@@ -45,9 +45,9 @@ CREATE TABLE `Comment` (
 CREATE TABLE `Event` (
   `id` int(10) UNSIGNED NOT NULL,
   `userId` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `eventText` varchar(8192) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `eventText` varchar(8192) CHARACTER SET utf8mb4 NOT NULL,
   `createTime` datetime NOT NULL DEFAULT current_timestamp(),
   `startTime` datetime NOT NULL,
   `duration` smallint(5) UNSIGNED NOT NULL DEFAULT 7,
@@ -104,10 +104,10 @@ CREATE TABLE `Participant` (
 CREATE TABLE `Project` (
   `id` int(10) UNSIGNED NOT NULL,
   `participantId` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(8192) NOT NULL,
-  `gitRepoUri` varchar(2048) NOT NULL,
-  `demoPageUri` varchar(2048) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `description` varchar(8192) CHARACTER SET utf8mb4 NOT NULL,
+  `gitRepoUri` varchar(2048) CHARACTER SET utf8mb4 NOT NULL,
+  `demoPageUri` varchar(2048) CHARACTER SET utf8mb4 DEFAULT NULL,
   `createTime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -160,8 +160,8 @@ CREATE TABLE `RatingCategory` (
 
 CREATE TABLE `Role` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(255) DEFAULT NULL
+  `name` varchar(50) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -186,10 +186,11 @@ CREATE TABLE `TopicPool` (
 
 CREATE TABLE `User` (
   `id` int(10) UNSIGNED NOT NULL,
+  `uuid` char(36) CHARACTER SET utf8 NOT NULL,
   `roleId` int(10) UNSIGNED NOT NULL DEFAULT 1,
-  `name` varchar(50) NOT NULL,
-  `password` varchar(60) NOT NULL,
-  `email` varchar(300) DEFAULT NULL,
+  `name` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
+  `email` varchar(300) CHARACTER SET utf8mb4 DEFAULT NULL,
   `registrationTime` datetime NOT NULL DEFAULT current_timestamp(),
   `lastAction` datetime DEFAULT NULL,
   `active` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
@@ -288,6 +289,7 @@ ALTER TABLE `TopicPool`
 ALTER TABLE `User`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name_UNIQUE` (`name`),
+  ADD UNIQUE KEY `uuid_UNIQUE` (`uuid`) USING BTREE,
   ADD UNIQUE KEY `email_UNIQUE` (`email`),
   ADD KEY `fk_User_Role_idx` (`roleId`);
 
