@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Administration\Middleware\FrontLoaderMiddleware;
+use Administration\Middleware\UpdateLastUserActionTimeMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
@@ -22,6 +23,7 @@ return function (Application $app): void {
     $app->pipe(BodyParamsMiddleware::class);
 
     $app->pipe(JwtAuthenticationMiddleware::class);
+    $app->pipe(UpdateLastUserActionTimeMiddleware::class);
     $app->pipe(RouteMiddleware::class);
 
     $app->pipe(ImplicitHeadMiddleware::class);

@@ -14,7 +14,7 @@ class User
     private string $password = '';
     private ?string $email = null;
     private DateTime $registrationTime;
-    private ?DateTime $lastLogin = null;
+    private ?DateTime $lastAction = null;
     private bool $active = false;
 
     public function __construct()
@@ -94,14 +94,14 @@ class User
         return $this;
     }
 
-    public function getLastLogin(): ?DateTime
+    public function getLastAction(): ?DateTime
     {
-        return $this->lastLogin;
+        return $this->lastAction;
     }
 
-    public function setLastLogin(DateTime $lastLogin): self
+    public function setLastAction(DateTime $lastAction): self
     {
-        $this->lastLogin = $lastLogin;
+        $this->lastAction = $lastAction;
 
         return $this;
     }

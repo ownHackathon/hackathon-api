@@ -2,12 +2,10 @@
 
 namespace App\Service;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\Role;
 use App\Model\User;
 use App\Table\UserTable;
-use DateTime;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use App\Hydrator\ReflectionHydrator;
 use Psr\Log\InvalidArgumentException;
 
 use function password_hash;
@@ -18,6 +16,13 @@ class UserService
         private UserTable $table,
         private ReflectionHydrator $hydrator,
     ) {
+    }
+
+    public function updateLastUserActionTime(User $user): self
+    {
+        $this->table->updateLastUserActionTime($user->getId());
+
+        return $this;
     }
 
     public function create(User $user, int $role = Role::USER): bool
@@ -39,27 +44,16 @@ class UserService
         return true;
     }
 
-    public function findById(int $id): User
+    private function isUserExist(string $userName): bool
     {
-        $user = $this->table->findById($id);
+        $user = $this->findByName($userName);
 
-        if (!$user) {
-            throw new InvalidArgumentException('Could not find user', 400);
-        }
-
-        return $this->hydrator->hydrate($user, new User());
+        return $user instanceof User;
     }
 
     public function findByName(string $name): ?User
     {
         $user = $this->table->findByName($name);
-
-        return $this->hydrator->hydrate($user, new User());
-    }
-
-    public function findByEMail(string $email): ?User
-    {
-        $user = $this->table->findByEMail($email);
 
         return $this->hydrator->hydrate($user, new User());
     }
@@ -79,10 +73,21 @@ class UserService
         return false;
     }
 
-    private function isUserExist(string $userName): bool
+    public function findByEMail(string $email): ?User
     {
-        $user = $this->findByName($userName);
+        $user = $this->table->findByEMail($email);
 
-        return $user instanceof User;
+        return $this->hydrator->hydrate($user, new User());
+    }
+
+    public function findById(int $id): User
+    {
+        $user = $this->table->findById($id);
+
+        if (!$user) {
+            throw new InvalidArgumentException('Could not find user', 400);
+        }
+
+        return $this->hydrator->hydrate($user, new User());
     }
 }

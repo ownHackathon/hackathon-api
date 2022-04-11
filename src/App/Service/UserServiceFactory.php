@@ -20,7 +20,7 @@ class UserServiceFactory
             $strategy,
         );
         $hydrator->addStrategy(
-            'lastLogin',
+            'lastAction',
             $strategy,
         );
 
