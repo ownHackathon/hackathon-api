@@ -19,7 +19,7 @@ class UserTest extends TestCase
     public function testPropertiesIsByInitializeNull()
     {
         $email = $this->user->getEmail();
-        $lastLogin = $this->user->getLastLogin();
+        $lastLogin = $this->user->getLastAction();
 
         $this->assertNull($email);
         $this->assertNull($lastLogin);
@@ -92,8 +92,8 @@ class UserTest extends TestCase
     public function testCanSetAndGetLastLogin()
     {
         $time = '1000-01-01 00:00:00';
-        $userLastLogin = $this->user->setLastLogin(new DateTime($time));
-        $lastLogin = $userLastLogin->getLastLogin();
+        $userLastLogin = $this->user->setLastAction(new DateTime($time));
+        $lastLogin = $userLastLogin->getLastAction();
 
         $this->assertInstanceOf(User::class, $userLastLogin);
         $this->assertInstanceOf(DateTime::class, $lastLogin);

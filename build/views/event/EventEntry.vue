@@ -14,7 +14,7 @@
       <div class="grow">Beschreibung</div>
     </div>
     <div class="div-table-content">
-      <Markdown :source="data.eventText" :plugins="plugins" class="prose max-w-max" />
+      <Markdown :source="data.eventText" class="prose max-w-max text-gray-400" />
     </div>
   </div>
 
@@ -25,7 +25,7 @@
       <div>Thema: <span class="font-bold">{{ data.topic.title }}</span></div>
     </div>
     <div class="div-table-content">
-      <Markdown :source="data.topic.description" class="prose max-w-max" />
+      <Markdown :source="data.topic.description" class="prose max-w-max text-gray-400" />
     </div>
   </div>
   <div v-else class="div-table">

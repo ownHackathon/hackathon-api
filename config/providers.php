@@ -28,7 +28,6 @@ return new ConfigAggregator([
     App\ConfigProvider::class,
     Authentication\ConfigProvider::class,
 
-
     new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
 
     new PhpFileProvider(realpath(__DIR__) . '/development.config.php'),

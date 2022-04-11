@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Erstellungszeit: 07. Apr 2022 um 08:03
+-- Erstellungszeit: 11. Apr 2022 um 19:40
 -- Server-Version: 10.5.15-MariaDB-1:10.5.15+maria~focal-log
 -- PHP-Version: 7.4.28
 
@@ -191,7 +191,7 @@ CREATE TABLE `User` (
   `password` varchar(60) NOT NULL,
   `email` varchar(300) DEFAULT NULL,
   `registrationTime` datetime NOT NULL DEFAULT current_timestamp(),
-  `lastLogin` datetime DEFAULT NULL,
+  `lastAction` datetime DEFAULT NULL,
   `active` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

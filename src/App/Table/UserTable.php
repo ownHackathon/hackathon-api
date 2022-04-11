@@ -2,6 +2,7 @@
 
 namespace App\Table;
 
+use DateTime;
 use Administration\Table\AbstractTable;
 use App\Model\User;
 
@@ -17,6 +18,18 @@ class UserTable extends AbstractTable
         ];
 
         $this->query->insertInto($this->table, $values)->execute();
+
+        return $this;
+    }
+
+    public function updateLastUserActionTime(int $id): self
+    {
+        $time = new DateTime();
+        $time = $time->format('Y-m-d H:i:s');
+        $this->query->update($this->table)
+            ->set(['lastAction' => $time])
+            ->where('id', $id)
+            ->execute();
 
         return $this;
     }
