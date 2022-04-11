@@ -21,10 +21,10 @@ class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         if ($user instanceof User) {
-            $this->userService->updateLastUserActionTime($user);
+            $user = $this->userService->updateLastUserActionTime($user);
         }
 
-        return $handler->handle($request);
+        return $handler->handle($request->withAttribute(User::USER_ATTRIBUTE, $user));
     }
 
 }
