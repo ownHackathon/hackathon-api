@@ -12,7 +12,7 @@ export default function useUser() {
     axios
         .get('/api/me')
         .then((response) => {
-          if (response.data.id !== undefined) {
+          if (response.data.uuid !== undefined) {
             userStore.setUser(response.data);
           }
         })
