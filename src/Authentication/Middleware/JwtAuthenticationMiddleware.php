@@ -30,7 +30,7 @@ class JwtAuthenticationMiddleware implements MiddlewareInterface
         if ($token) {
             $tokenData = JWT::decode($token, new Key($this->tokenSecrect, $this->tokenAlgorithmus));
 
-            $user = $this->userService->findById($tokenData->id);
+            $user = $this->userService->findByUuid($tokenData->uuid);
         }
 
         return $handler->handle($request->withAttribute(User::USER_ATTRIBUTE, $user));

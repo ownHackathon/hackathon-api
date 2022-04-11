@@ -30,8 +30,7 @@ class LoginHandler implements RequestHandlerInterface
 
         if ($user instanceof User) {
             $token = $this->generateToken(
-                $user->getId(),
-                $user->getName(),
+                $user->getUuid(),
                 $this->tokenSecret,
                 $this->tokenDuration,
             );

@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 
 trait JwtTokenGeneratorTrait
 {
-    private function generateToken(int $userId, string $userName, string $tokenSecret, int $timeout, string $alg = 'HS512'): string
+    private function generateToken(string $uuid, string $tokenSecret, int $timeout, string $alg = 'HS512'): string
     {
         $now = time();
 
@@ -15,8 +15,7 @@ trait JwtTokenGeneratorTrait
                 'iat' => $now,
                 'exp' => $now + $timeout,
 
-                'id' => $userId,
-                'name' => $userName,
+                'uuid' => $uuid,
             ],
             $tokenSecret,
             $alg

@@ -15,7 +15,6 @@ return new ConfigAggregator([
 
     Mezzio\Session\Ext\ConfigProvider::class,
     Mezzio\Session\ConfigProvider::class,
-    Mezzio\Flash\ConfigProvider::class,
 
     // Swoole config to overwrite some services (if installed)
     class_exists(Mezzio\Swoole\ConfigProvider::class)
