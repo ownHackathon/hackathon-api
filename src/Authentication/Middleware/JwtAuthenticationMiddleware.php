@@ -2,14 +2,17 @@
 
 namespace Authentication\Middleware;
 
+use Exception;
 use App\Model\User;
 use App\Service\UserService;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 
 class JwtAuthenticationMiddleware implements MiddlewareInterface
 {
@@ -28,7 +31,11 @@ class JwtAuthenticationMiddleware implements MiddlewareInterface
         $user = null;
 
         if ($token) {
-            $tokenData = JWT::decode($token, new Key($this->tokenSecrect, $this->tokenAlgorithmus));
+            try {
+                $tokenData = JWT::decode($token, new Key($this->tokenSecrect, $this->tokenAlgorithmus));
+            } catch (Exception $e) {
+                return new JsonResponse(['message' => 'invalid Token'], HTTP::STATUS_UNAUTHORIZED);
+            }
 
             $user = $this->userService->findByUuid($tokenData->uuid);
         }
