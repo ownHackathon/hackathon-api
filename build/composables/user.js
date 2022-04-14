@@ -1,5 +1,6 @@
 import {useUserStore} from "@/store/user";
 import axios from "axios";
+import router from "@/router";
 
 export default function useUser() {
   const userStore = useUserStore();
@@ -12,8 +13,10 @@ export default function useUser() {
     axios
         .get('/api/me')
         .then((response) => {
-          if (response.data.uuid !== undefined) {
+          if (response.status === 200 && response.data.uuid !== undefined) {
             userStore.setUser(response.data);
+          } else if (response.status === 401) {
+            unLoadUser();
           }
         })
         .catch((err) => {
@@ -24,6 +27,8 @@ export default function useUser() {
 
   const unLoadUser = () => {
     userStore.user = null;
+    localStorage.removeItem('token');
+    router.push('/');
   };
 
   const isAuthenticated = () => {
