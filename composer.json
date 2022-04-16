@@ -3,6 +3,12 @@
     "description": "Evaluation project for the Hackathon on the Discord server from BlackScorp",
     "type": "project",
     "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "BibaltiK",
+            "email": "bibaltik@exdrals.de"
+        }
+    ],
     "keywords": [
         "BlackScorp",
         "Hackathon",

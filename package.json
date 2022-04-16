@@ -1,6 +1,10 @@
 {
   "name": "bibaltik_hackathon",
   "version": "0.1.0",
+  "homepage": "https://github.com/BibaltiK/Hackathon#readme",
+  "url" : "https://github.com/BibaltiK/Hackathon/issues",
+  "email" : "bibaltik@exdrals.de",
+  "license" : "BSD-3-Clause",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
