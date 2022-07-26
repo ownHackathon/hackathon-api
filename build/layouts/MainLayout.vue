@@ -1,9 +1,9 @@
 <template>
-  <TheHeader />
-  <main class="px-4 top-16 max-w-8xl">
-    <RouterView />
+  <TheHeader/>
+  <main class="main">
+    <RouterView/>
   </main>
-  <TheFooter />
+  <TheFooter/>
 </template>
 
 <script setup>
@@ -14,9 +14,9 @@ import useUser from "@/composables/user";
 
 const {loadUser} = useUser();
 
-  onBeforeMount(() => {
-    loadUser();
-  })
+onBeforeMount(() => {
+  loadUser();
+});
 </script>
 
 <style lang="scss">
@@ -39,40 +39,103 @@ a:hover {
 
 a[target="_blank"]:after {
   content: url("/build/assets/box-arrow-up-right.svg");
-  padding: 0px 3px 0px 3px;
+  padding: 0 3px;
   bottom: 5px;
   position: relative;
 }
 
+.main {
+  @apply px-4;
+  @apply top-16;
+  @apply max-w-7xl;
+}
+
 .div-table {
-  @apply relative overflow-x-auto shadow rounded;
+  @apply relative;
+  @apply overflow-x-auto;
+  @apply shadow;
+  @apply rounded;
 }
 
 .div-table-header {
-  @apply flex py-1 px-2 text-xs uppercase bg-gray-700 text-gray-400;
+  @apply flex;
+  @apply py-1;
+  @apply px-2;
+  @apply text-xs;
+  @apply uppercase;
+  @apply bg-gray-700;
+  @apply text-gray-400;
 }
 
 .div-table-content {
-  @apply py-1 px-2 text-gray-400 bg-gray-800;
+  @apply py-1;
+  @apply px-2;
+  @apply text-gray-400;
+  @apply bg-gray-800;
 }
 
 .div-table-content-row {
-  @apply flex border-t border-gray-700 py-1 px-2 text-gray-400 bg-gray-800;
+  @apply flex;
+  @apply border-t;
+  @apply border-gray-700;
+  @apply py-1;
+  @apply px-2;
+  @apply text-gray-400;
+  @apply bg-gray-800;
 }
 
 .label {
-  @apply block mb-2 text-sm font-medium text-gray-300;
+  @apply block;
+  @apply mb-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply text-gray-300;
 }
 
 .input {
-  @apply p-2.5 border text-sm rounded-lg block w-full border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 bg-gray-600;
+  @apply p-2.5;
+  @apply border;
+  @apply text-sm;
+  @apply rounded-lg;
+  @apply block;
+  @apply w-full;
+  @apply border-gray-600;
+  @apply placeholder-gray-400;
+  @apply text-white;
+  @apply focus:ring-blue-500;
+  @apply focus:border-blue-500;
+  @apply bg-gray-600;
 }
 
 .checkbox {
-  @apply w-4 h-4 mx-2 bg-gray-800 border-gray-600 rounded border focus:ring-blue-600 ring-offset-gray-800;
+  @apply w-4;
+  @apply h-4;
+  @apply mx-2;
+  @apply bg-gray-800;
+  @apply border-gray-600;
+  @apply rounded;
+  @apply border;
+  @apply focus:ring-blue-600;
+  @apply ring-offset-gray-800;
 }
 
 .button {
-  @apply pb-1.5 pt-0.5 px-3 mr-2 mb-2 text-sm font-medium focus:outline-none focus:z-10 focus:ring-gray-700 rounded border bg-gray-700 text-gray-400 border-gray-600 hover:text-white hover:bg-gray-600;
+  @apply pb-1.5;
+  @apply pt-0.5;
+  @apply px-3;
+  @apply mr-2;
+  @apply mb-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply focus:outline-none;
+  @apply focus:z-10;
+  @apply focus:ring-gray-700;
+  @apply rounded;
+  @apply border;
+  @apply bg-gray-700;
+  @apply text-gray-400;
+  @apply border-gray-600;
+  @apply hover:text-white;
+  @apply hover:bg-gray-600;
 }
 </style>
