@@ -1,6 +1,6 @@
 <template>
   <TheHeader/>
-  <main class="main">
+  <main>
     <RouterView/>
   </main>
   <TheFooter/>
@@ -44,7 +44,7 @@ a[target="_blank"]:after {
   position: relative;
 }
 
-.main {
+main {
   @apply px-4;
   @apply top-16;
   @apply max-w-7xl;
