@@ -47,9 +47,9 @@
 import axios from "axios";
 import {onMounted, reactive} from "vue";
 import {useRouter} from 'vue-router';
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
 
-const user = useUser();
+const user = useUserService();
 const router = useRouter();
 const payload = reactive({
   username: '',

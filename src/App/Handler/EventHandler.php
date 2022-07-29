@@ -58,6 +58,7 @@ class EventHandler implements RequestHandlerInterface
                 $entry = [
                     'id' => $participant->getId(),
                     'username' => $user->getName(),
+                    'userUuid' => $user->getUuid(),
                     'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
                     'projectId' => $project ? $project->getId() : '',
                     'projectTitle' => $project ? $project->getTitle() : '',

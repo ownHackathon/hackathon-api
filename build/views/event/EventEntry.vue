@@ -39,7 +39,7 @@
       <div class="div-table-header">
         <div>Thema:</div>
       </div>
-      <div v-if="user.isAuthenticated()">
+      <div v-if="userService.isAuthenticated()">
         <div class="div-table-content">
           <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
           <div class="flex justify-center">
@@ -94,17 +94,19 @@
       <div class="flex-1">Projekt</div>
     </div>
 
-
-    <div v-if="user.isAuthenticated()">
+    <div v-if="userService.isAuthenticated()">
       <div v-show="canStillParticipate">
-        <div v-show="!isUserInList">
+        <div v-if="!isUserInList">
           Anmeldebutton
         </div>
+        <div v-else>
+          Abmeldebutton
+        </div>
       </div>
-      <div v-if="haveParticipants">
+      <div v-if="hasParticipants">
         <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
           <div class="flex-1">
-            <RouterLink to="/user/">{{ participant.username }}</RouterLink>
+            <RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
           </div>
           <div v-if="participant.projectId" class="flex-1">
             <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
@@ -142,7 +144,8 @@
 <script setup>
 import axios from "axios";
 import {useRoute} from "vue-router";
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
+import {useUserStore} from "@/store/UserStore";
 import {computed, ref} from "vue";
 import {addTime, date, dateTime} from '@/composables/moment.js';
 import {getStatusText} from "@/composables/status";
@@ -150,7 +153,8 @@ import Markdown from 'vue3-markdown-it';
 
 const data = ref({});
 const route = useRoute();
-const user = useUser();
+const userService = useUserService();
+const userStore = useUserStore();
 
 axios
     .get(`/event/${route.params.id}`)
@@ -162,17 +166,16 @@ const isShowTopic = computed(() => {
   return (Object.prototype.toString.call(data.value.topic) === "[object Object]");
 });
 
-const haveParticipants = computed(() => {
+const hasParticipants = computed(() => {
   return (data.value.participants !== undefined && data.value.participants.length > 0);
 });
 
 const isUserInList = computed(() => {
-  let found = undefined;
-  if (data.value.participants !== undefined) {
-    found = data.value.participants.find(element => element.username === 'BibaltiK');
-    console.log(found);
+  if (hasParticipants.value) {
+    return data.value.participants.find(element => element.username === userStore.user.name) !== undefined;
   }
-  return found !== undefined;
+
+  return false;
 });
 
 const canStillParticipate = computed(() => {

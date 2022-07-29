@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <TheTopNavBar/>
   </header>
 </template>
@@ -8,7 +8,7 @@
 import TheTopNavBar from "@/components/ui/TheTopNavBar";</script>
 
 <style lang="scss">
-header {
+.header {
   @apply bg-gray-800;
   @apply border-b;
   @apply border-gray-600;

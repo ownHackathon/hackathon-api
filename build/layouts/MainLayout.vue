@@ -1,6 +1,6 @@
 <template>
   <TheHeader/>
-  <main>
+  <main class="main">
     <RouterView/>
   </main>
   <TheFooter/>
@@ -10,9 +10,9 @@
 import TheFooter from "@/components/ui/TheFooter";
 import TheHeader from "@/components/ui/TheHeader";
 import {onBeforeMount} from "vue";
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
 
-const {loadUser} = useUser();
+const {loadUser} = useUserService();
 
 onBeforeMount(() => {
   loadUser();
@@ -44,10 +44,10 @@ a[target="_blank"]:after {
   position: relative;
 }
 
-main {
+.main {
   @apply px-4;
   @apply top-16;
-  @apply max-w-7xl;
+  @apply max-w-full;
 }
 
 .div-table {

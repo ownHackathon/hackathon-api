@@ -18,9 +18,9 @@
 
 <script setup>
 import {ref} from 'vue';
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
 
-const user = useUser();
+const user = useUserService();
 const isMenuOpen = ref(false);
 </script>
 

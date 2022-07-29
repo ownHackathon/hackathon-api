@@ -54,13 +54,13 @@
 <script setup>
 import axios from "axios";
 import EventListEntry from "@/views/event/components/EventListEntry";
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
 import {useRouter} from "vue-router";
 import {onMounted, ref} from 'vue';
 
-const user = useUser();
+const user = useUserService();
 const router = useRouter();
-const data = ref(' ');
+const data = ref({});
 onMounted(() => {
   axios
       .get("/event/list/")

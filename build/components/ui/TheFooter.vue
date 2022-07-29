@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="footer">
     <div>
       Lizenz:
       <a href="https://github.com/BibaltiK/Hackathon/blob/master/LICENSE" target="_blank">
@@ -19,7 +19,7 @@
 </template>
 
 <style lang="scss">
-footer {
+.footer {
   margin-top: 50px;
   @apply flex;
   @apply items-center;
