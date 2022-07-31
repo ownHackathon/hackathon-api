@@ -9,7 +9,7 @@
     </p>
   </div>
 
-  <div class="div-table py-6">
+  <div class="div-table">
     <div class="div-table-header">
       <div class="grow">Beschreibung</div>
     </div>

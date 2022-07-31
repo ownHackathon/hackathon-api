@@ -1,6 +1,6 @@
 <template>
   <div v-if="isShowTopic">
-    <div class="div-table py-6">
+    <div class="div-table">
       <div class="div-table-header">
         <div>Thema: <span class="font-bold">{{ props.topic.title }}</span></div>
       </div>
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div v-else>
-    <div class="div-table py-6">
+    <div class="div-table">
       <div class="div-table-header">
         <div>Thema:</div>
       </div>
@@ -50,6 +50,7 @@ const userService = useUserService();
 const props = defineProps({
   topic: Array,
 });
+/** @TODO Remove console.log */
 console.log(props);
 
 const isShowTopic = computed(() => {

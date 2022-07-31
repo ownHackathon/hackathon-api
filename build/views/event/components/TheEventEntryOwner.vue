@@ -10,12 +10,9 @@
 <script setup>
 import {defineProps} from "vue";
 import {date} from '@/composables/moment.js';
+
 defineProps({
   createTime: Date,
   owner: String,
-})
+});
 </script>
-
-<style lang="scss">
-
-</style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="div-table py-6">
+  <div class="div-table">
     <div class="div-table-header">
       <div class="flex-1">Teilnehmer</div>
       <div class="flex-1">Projekt</div>
     </div>
 
     <div v-if="userService.isAuthenticated()">
-      <div v-if="hasParticipants">
+      <div v-if="eventService.hasParticipants(data.participants)">
         <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
           <div class="flex-1">
             <RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
@@ -38,15 +38,14 @@
 
 <script setup>
 import useUserService from "@/composables/UserService";
-import {defineProps, computed} from "vue";
+import useEventService from "@/composables/EventService";
+import {defineProps} from "vue";
 const userService = useUserService();
+const eventService = useEventService();
 const data = defineProps({
   participants: Array,
 })
 
-const hasParticipants = computed(() => {
-  return (data.participants !== undefined && data.participants.length > 0);
-});
 </script>
 
 <style lang="scss">
