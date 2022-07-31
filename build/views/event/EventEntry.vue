@@ -1,199 +1,56 @@
 <template>
-  <div class="top-6 flex w-full justify-center items-center">
-    <h1 class="font-bold">{{ data.name }}</h1>
-  </div>
+  <TheEventEntryMetaData
+    :title="data.name"
+    :description="data.description"
+    :fulltext="data.eventText"
+  />
 
-  <div class="p-3 flex w-full justify-center items-center">
-    <p class="text-xs text-gray-400 ">
-      {{ data.description }}
-    </p>
-  </div>
+  <TheEventThema
+    :topic="data.topic"
+  />
 
-  <div class="div-table">
-    <div class="div-table-header">
-      <div class="grow">Beschreibung</div>
-    </div>
-    <div class="div-table-content">
-      <div class="prose max-w-max text-gray-400">
-        <Markdown :source="data.eventText"/>
-      </div>
-    </div>
-  </div>
+  <TheEventEntryData
+    :startTime="data.startTime"
+    :duration="data.duration"
+    :status="data.status"
+  />
 
-  <div class="py-6"></div>
+  <TheEventEntrySignup
+    :status="data.status"
+    :participants="data.participants"
+  />
 
-  <div v-if="isShowTopic">
-    <div class="div-table">
-      <div class="div-table-header">
-        <div>Thema: <span class="font-bold">{{ data.topic.title }}</span></div>
-      </div>
-      <div class="div-table-content">
-        <div class="prose max-w-max text-gray-400">
-          <Markdown :source="data.topic.description"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div v-else>
-    <div class="div-table">
-      <div class="div-table-header">
-        <div>Thema:</div>
-      </div>
-      <div v-if="userService.isAuthenticated()">
-        <div class="div-table-content">
-          <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
-          <div class="flex justify-center">
-            <button class="button">Themenauswahl</button>
-          </div>
-        </div>
-      </div>
-      <div v-else>
-        <div class="div-table-content">
-          <span class="flex justify-center pb-6">Themenauswahl hat noch nicht statt gefunden.</span>
-          <div class="div-table-content">
-            Für das Themenvoting sind nur
-            <RouterLink :to="{name: 'register'}">registrierte</RouterLink>
-            ,
-            <RouterLink :to="{name: 'login'}">angemeldete</RouterLink>
-            sowie teilnehmende Benutzer zugelassen.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <TheEventEntryParticipantsList
+    :participants="data.participants"
+  />
 
-  <div class="py-6"></div>
-
-  <div class="div-table">
-    <div class="div-table-header">
-      Daten
-    </div>
-    <div class="div-table-content-row">
-      <div class="grow">Start:</div>
-      <div class="flex-initial">{{ dateTime(data.startTime) }} Uhr</div>
-    </div>
-    <div class="div-table-content-row">
-      <div class="grow">Laufzeit:</div>
-      <div class="flex-initial">{{ data.duration }} Tage</div>
-    </div>
-    <div class="div-table-content-row">
-      <div class="grow">Ende:</div>
-      <div class="flex-initial">{{ dateTime(addTime(data.startTime, data.duration)) }} Uhr</div>
-    </div>
-    <div class="div-table-content-row">
-      <div class="grow">Status:</div>
-      <div class="flex-initial">{{ getStatusText(data.status) }}</div>
-    </div>
-  </div>
-
-  <div class="py-6"></div>
-
-  <div v-show="userService.isAuthenticated() && canStillParticipate">
-    <div v-if="!isUserInList" class="flex">
-      <button class="button" @click="addAsParticipant(userStore.user.uuid)">Zum Event <span class="text-green-600">anmelden</span></button>
-    </div>
-    <div v-else>
-      <button class="button">Vom Event <span class="text-red-600">abmelden</span></button>
-    </div>
-  </div>
-
-
-  <div class="div-table">
-    <div class="div-table-header">
-      <div class="flex-1">Teilnehmer</div>
-      <div class="flex-1">Projekt</div>
-    </div>
-
-    <div v-if="userService.isAuthenticated()">
-      <div v-if="hasParticipants">
-        <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
-          <div class="flex-1">
-            <RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
-          </div>
-          <div v-if="participant.projectId" class="flex-1">
-            <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
-          </div>
-          <div v-else class="flex-1">-</div>
-        </div>
-      </div>
-      <div v-else>
-        <div class="div-table-content">
-          Es hat sich bisher noch kein Benutzer zur Teilnahme angemeldet.
-        </div>
-      </div>
-    </div>
-
-    <div v-else>
-      <div class="div-table-content">
-        Zum Anmelden an ein Event und einsehen der Daten bitte
-        <RouterLink :to="{name: 'register'}">registrieren</RouterLink>
-        und
-        <RouterLink :to="{name: 'login'}">angemelden</RouterLink>
-        .
-      </div>
-    </div>
-  </div>
-  <div class="py-6"></div>
-
-  <div class="flex p-3 text-gray-800">
-    <div class="grow">Event erstellt am: {{ date(data.createTime) }}</div>
-    <div class="flex-initial pl-2">von:
-      <RouterLink to="/user/">{{ data.owner }}</RouterLink>
-    </div>
-  </div>
+  <TheEventEntryOwner
+    :createTime="data.createTime"
+    :owner="data.owner"
+  />
 </template>
 
 <script setup>
 import axios from "axios";
 import {useRoute} from "vue-router";
-import useUserService from "@/composables/UserService";
-import {useUserStore} from "@/store/UserStore";
-import useEventService from "@/composables/EventService";
-import {computed, ref} from "vue";
-import {addTime, date, dateTime} from '@/composables/moment.js';
-import {getStatusText} from "@/composables/status";
-import Markdown from 'vue3-markdown-it';
+
+import {ref} from "vue";
+import TheEventEntryMetaData from "@/views/event/components/TheEventEntryMetaData";
+import TheEventThema from "@/views/event/components/TheEventThema";
+import TheEventEntryData from "@/views/event/components/TheEventEntryData";
+import TheEventEntrySignup from "@/views/event/components/TheEventEntrySignup";
+import TheEventEntryParticipantsList from "@/views/event/components/TheEventEntryParticipantsList";
+import TheEventEntryOwner from "@/views/event/components/TheEventEntryOwner";
 
 const data = ref({});
 const route = useRoute();
-const userService = useUserService();
-const userStore = useUserStore();
-const eventService = useEventService();
 
 axios
     .get(`/event/${route.params.id}`)
     .then(async response => {
       data.value = await response.data;
     });
-
-const isShowTopic = computed(() => {
-  return (Object.prototype.toString.call(data.value.topic) === "[object Object]");
-});
-
-const hasParticipants = computed(() => {
-  return (data.value.participants !== undefined && data.value.participants.length > 0);
-});
-
-const isUserInList = computed(() => {
-  if (hasParticipants.value) {
-    return data.value.participants.find(element => element.username === userStore.user.name) !== undefined;
-  }
-
-  return false;
-});
-
-const canStillParticipate = computed(() => {
-  return data.value.status < 3;
-});
-
-function addAsParticipant(userUuid) {
-  eventService.addUserAsParticipantToEvent(userUuid, route.params.id);
-}
 </script>
 
 <style lang="scss">
-h1 {
-  font-size: 2rem;
-  color: #e43c5c;
-}
 </style>
