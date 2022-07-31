@@ -53,7 +53,7 @@
           <div class="div-table-content">
             Für das Themenvoting sind nur
             <RouterLink :to="{name: 'register'}">registrierte</RouterLink>
-            und
+            ,
             <RouterLink :to="{name: 'login'}">angemeldete</RouterLink>
             sowie teilnehmende Benutzer zugelassen.
           </div>
@@ -88,6 +88,16 @@
 
   <div class="py-6"></div>
 
+  <div v-show="userService.isAuthenticated() && canStillParticipate">
+    <div v-if="!isUserInList" class="flex">
+      <button class="button" @click="addAsParticipant(userStore.user.uuid)">Zum Event <span class="text-green-600">anmelden</span></button>
+    </div>
+    <div v-else>
+      <button class="button">Vom Event <span class="text-red-600">abmelden</span></button>
+    </div>
+  </div>
+
+
   <div class="div-table">
     <div class="div-table-header">
       <div class="flex-1">Teilnehmer</div>
@@ -95,14 +105,6 @@
     </div>
 
     <div v-if="userService.isAuthenticated()">
-      <div v-show="canStillParticipate">
-        <div v-if="!isUserInList">
-          Anmeldebutton
-        </div>
-        <div v-else>
-          Abmeldebutton
-        </div>
-      </div>
       <div v-if="hasParticipants">
         <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
           <div class="flex-1">
@@ -146,6 +148,7 @@ import axios from "axios";
 import {useRoute} from "vue-router";
 import useUserService from "@/composables/UserService";
 import {useUserStore} from "@/store/UserStore";
+import useEventService from "@/composables/EventService";
 import {computed, ref} from "vue";
 import {addTime, date, dateTime} from '@/composables/moment.js';
 import {getStatusText} from "@/composables/status";
@@ -155,6 +158,7 @@ const data = ref({});
 const route = useRoute();
 const userService = useUserService();
 const userStore = useUserStore();
+const eventService = useEventService();
 
 axios
     .get(`/event/${route.params.id}`)
@@ -181,6 +185,10 @@ const isUserInList = computed(() => {
 const canStillParticipate = computed(() => {
   return data.value.status < 3;
 });
+
+function addAsParticipant(userUuid) {
+  eventService.addUserAsParticipantToEvent(userUuid, route.params.id);
+}
 </script>
 
 <style lang="scss">

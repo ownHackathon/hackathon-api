@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-import TheTopNavBar from "@/components/ui/TheTopNavBar";</script>
+  import TheTopNavBar from "@/components/ui/TheTopNavBar";
+</script>
 
 <style lang="scss">
 .header {
