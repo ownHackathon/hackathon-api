@@ -66,7 +66,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventListHandler::class
     );
-    $app->get(
+    $app->put(
         '/event/participant/subscribe/{eventId:\d+}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,

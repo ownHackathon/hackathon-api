@@ -16,7 +16,7 @@ class Event
 
     private int $id = 0;
     private int $userId = 0;
-    private string $name = '';
+    private string $title = '';
     private ?string $description = null;
     private string $eventText = '';
     private DateTime $createTime;
@@ -55,14 +55,14 @@ class Event
         return $this;
     }
 
-    public function getName(): string
+    public function getTitle(): string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }

@@ -12,10 +12,10 @@ class EventServiceTest extends AbstractServiceTest
         $table = $this->createMock(EventTable::class);
 
         $event = new Event();
-        $event->setName('fakeEvent');
+        $event->setTitle('fakeEvent');
 
         $table->expects($this->once())
-            ->method('findByName')
+            ->method('findByTitle')
             ->with('fakeEvent')
             ->willReturn($this->fetchResult);
 
@@ -31,10 +31,10 @@ class EventServiceTest extends AbstractServiceTest
         $table = $this->createMock(EventTable::class);
 
         $event = new Event();
-        $event->setName('fakeEvent');
+        $event->setTitle('fakeEvent');
 
         $table->expects($this->once())
-            ->method('findByName')
+            ->method('findByTitle')
             ->with('fakeEvent')
             ->willReturn(false);
 

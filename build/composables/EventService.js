@@ -1,7 +1,14 @@
+import axios from "axios";
+
 export default function useEventService() {
-  function addUserAsParticipantToEvent(userUuid, eventId) {
-    /** TODO addUserAsParticipantToEvent */
-    console.log(`Add ${userUuid} as Participant to EventId ${eventId}`);
+  function addUserAsParticipantToEvent(eventId) {
+    let event = {};
+    axios
+        .put(`/event/participant/subscribe/${eventId}`)
+        .then(async response => {
+          event.value = await response.data;
+        });
+    return event;
   }
 
   function hasParticipants(participantsList)  {

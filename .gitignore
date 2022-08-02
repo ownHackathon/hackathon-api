@@ -8,3 +8,4 @@
 *.phar
 .ddev
 /public/*.mustache
+/database/structure/update*.sql

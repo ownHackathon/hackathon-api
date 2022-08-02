@@ -17,7 +17,7 @@ class EventService
 
     public function create(Event $event): bool
     {
-        if ($this->isEventExist($event->getName())) {
+        if ($this->isEventExist($event->getTitle())) {
             return false;
         }
 
@@ -37,9 +37,9 @@ class EventService
         return $this->hydrator->hydrate($event, new Event());
     }
 
-    public function findByName(string $topic): ?Event
+    public function findByTitle(string $topic): ?Event
     {
-        $event = $this->table->findByName($topic);
+        $event = $this->table->findByTitle($topic);
 
         return $this->hydrator->hydrate($event, new Event());
     }
@@ -77,7 +77,7 @@ class EventService
 
     public function isEventExist(string $topic): bool
     {
-        $event = $this->findByName($topic);
+        $event = $this->findByTitle($topic);
 
         return $event instanceof Event;
     }

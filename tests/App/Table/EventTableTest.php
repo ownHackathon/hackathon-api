@@ -14,7 +14,7 @@ class EventTableTest extends AbstractTableTest
         $event = new Event();
         $values = [
             'userId' => $event->getUserId(),
-            'name' => $event->getName(),
+            'name' => $event->getTitle(),
             'description' => $event->getDescription(),
             'eventText' => $event->getEventText(),
             'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
@@ -58,7 +58,7 @@ class EventTableTest extends AbstractTableTest
     {
         $this->configureSelectWithOneWhere('name', 'fakeName');
 
-        $event = $this->table->findByName('fakeName');
+        $event = $this->table->findByTitle('fakeName');
 
         $this->assertSame($this->fetchResult, $event);
     }

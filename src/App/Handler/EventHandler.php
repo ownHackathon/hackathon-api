@@ -19,10 +19,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private UserService $userService,
-        private ParticipantService $participantService,
-        private ProjectService $projectService,
-        private TopicPoolService $topicPoolService,
+        private readonly UserService $userService,
+        private readonly ParticipantService $participantService,
+        private readonly ProjectService $projectService,
+        private readonly TopicPoolService $topicPoolService,
     ) {
     }
 
@@ -40,7 +40,7 @@ class EventHandler implements RequestHandlerInterface
         $data = [
             'id' => $event->getId(),
             'owner' => $this->userService->findById($event->getUserId())->getName(),
-            'name' => $event->getName(),
+            'title' => $event->getTitle(),
             'description' => $event->getDescription(),
             'eventText' => $event->getEventText(),
             'createTime' => $event->getCreateTime()->format('Y-m-d H:i'),

@@ -35,13 +35,13 @@
       </tr>
       </thead>
       <tbody>
-      <TheEventListEntry
+      <EventListEntry
           v-for="entry in data"
           :id="entry.id"
           :key="entry.id"
           :description="entry.description"
           :duration="entry.duration"
-          :eventname="entry.name"
+          :eventname="entry.title"
           :owner="entry.owner"
           :start-time="entry.startTime"
           :status="entry.status"
@@ -53,7 +53,7 @@
 
 <script setup>
 import axios from "axios";
-import TheEventListEntry from "@/views/event/components/TheEventListEntry";
+import EventListEntry from "@/views/event/components/EventListEntry";
 import useUserService from "@/composables/UserService";
 import {useRouter} from "vue-router";
 import {onMounted, ref} from 'vue';

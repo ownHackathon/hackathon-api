@@ -2,17 +2,42 @@
 
 namespace App\Handler;
 
-use Laminas\Diactoros\Response\RedirectResponse;
+use App\Model\User;
+use App\Service\ParticipantService;
+use App\Service\ProjectService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class EventParticipantSubscribeHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private readonly ParticipantService $participantService,
+        private readonly ProjectService $projectService,
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $eventId = $request->getAttribute('eventId');
+        /** @var User $user */
+        $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        return new RedirectResponse('/event/' . $eventId, 303);
+        $eventId = (int)$request->getAttribute('eventId');
+
+        $participant = $this->participantService->findByUserIdAndEventId($user->getId(), $eventId);
+        $project = $this->projectService->findByParticipantId($participant->getId());
+
+        $participantData = [
+            'id' => $participant->getId(),
+            'username' => $user->getName(),
+            'userUuid' => $user->getUuid(),
+            'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
+            'projectId' => $project ? $project->getId() : '',
+            'projectTitle' => $project ? $project->getTitle() : '',
+        ];
+
+        return new JsonResponse($participantData, HTTP::STATUS_OK);
     }
 }

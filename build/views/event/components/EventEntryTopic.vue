@@ -50,8 +50,6 @@ const userService = useUserService();
 const props = defineProps({
   topic: Array,
 });
-/** @TODO Remove console.log */
-console.log(props);
 
 const isShowTopic = computed(() => {
   return props.topic !== undefined;

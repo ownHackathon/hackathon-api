@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventParticipantSubscribeMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ParticipantService $service,
+        private readonly ParticipantService $service,
     ) {
     }
 
