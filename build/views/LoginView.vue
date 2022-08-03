@@ -27,11 +27,13 @@
           </div>
 
           <div class="flex">
+            <!-- @TODO Remember me function -->
             <input id="remember" aria-describedby="remember" class="checkbox" disabled type="checkbox"/>
             <label class="label" for="remember">Angemeldet bleiben</label>
           </div>
 
           <div class="flex justify-center pb-6">
+            <!-- @TODO Password forgotten function -->
             <RouterLink to="/">Passwort vergessen?</RouterLink>
           </div>
           <div class="flex justify-center">
@@ -47,9 +49,9 @@
 import axios from "axios";
 import {onMounted, reactive} from "vue";
 import {useRouter} from 'vue-router';
-import useUser from "@/composables/user";
+import useUserService from "@/composables/UserService";
 
-const user = useUser();
+const userService = useUserService();
 const router = useRouter();
 const payload = reactive({
   username: '',
@@ -57,7 +59,7 @@ const payload = reactive({
 });
 
 onMounted(() => {
-  if (user.isAuthenticated()) {
+  if (userService.isAuthenticated()) {
     router.push('/');
   }
 });
@@ -73,7 +75,7 @@ async function login() {
 
   if (response && response.status === 200) {
     localStorage.setItem('token', response.data.token);
-    user.loadUser();
+    userService.loadUser();
     await router.back();
   } else {
     document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';

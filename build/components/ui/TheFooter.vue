@@ -1,5 +1,5 @@
 <template>
-  <footer class="flex items-center justify-between flex-wrap min-h-10 p-2 mx-1 bg-gray-900 text-zinc-400 text-xs rounded">
+  <footer class="footer">
     <div>
       Lizenz:
       <a href="https://github.com/BibaltiK/Hackathon/blob/master/LICENSE" target="_blank">
@@ -19,7 +19,18 @@
 </template>
 
 <style lang="scss">
-footer {
+.footer {
   margin-top: 50px;
+  @apply flex;
+  @apply items-center;
+  @apply justify-between;
+  @apply flex-wrap;
+  @apply min-h-full;
+  @apply p-2;
+  @apply mx-1;
+  @apply bg-gray-900;
+  @apply text-zinc-400;
+  @apply text-xs;
+  @apply rounded;
 }
 </style>

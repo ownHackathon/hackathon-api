@@ -7,7 +7,7 @@ use App\Model\Participant;
 
 class ParticipantTable extends AbstractTable
 {
-    public function insert(Participant $participant): self
+    public function insert(Participant $participant): int|bool
     {
         $values = [
             'userId' => $participant->getUserId(),
@@ -15,9 +15,15 @@ class ParticipantTable extends AbstractTable
             'approved' => $participant->isApproved(),
         ];
 
-        $this->query->insertInto($this->table, $values)->execute();
+        return (int)$this->query->insertInto($this->table, $values)->execute();
+    }
 
-        return $this;
+    public function remove(Participant $participant): int|bool
+    {
+        return (int)$this->query->delete($this->table)
+            ->where('userId', $participant->getUserId())
+            ->where('eventId', $participant->getEventId())
+            ->execute();
     }
 
     public function findByUserId(int $userId): bool|array

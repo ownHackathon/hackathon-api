@@ -21,7 +21,7 @@ class EventNameMiddleware implements MiddlewareInterface
     {
         $eventName = $request->getAttribute('eventName');
 
-        $event = $this->service->findByName($eventName);
+        $event = $this->service->findByTitle($eventName);
 
         if (!$event instanceof Event) {
             throw new InvalidArgumentException('Could not find Event', 400);

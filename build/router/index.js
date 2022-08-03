@@ -1,15 +1,18 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import useUser from "@/composables/user";
-import NotFound from '@/views/NotFound';
+import useUserService from "@/composables/UserService";
+import NotFoundView from '@/views/NotFoundView';
+import ErrorView from '@/views/ErrorView';
 import MainLayout from '@/layouts/MainLayout';
 import MainView from '@/views/MainView';
 import LoginView from '@/views/LoginView';
 import LogoutView from '@/views/LogoutView';
 import RegisterView from '@/views/RegisterView';
+import UserView from "@/views/UserView";
 import EventAbout from '@/views/event/EventAbout';
 import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
+import ProjectView from "@/views/ProjectView";
 
 const routes = [{
   component: MainLayout, path: "/", children: [{
@@ -20,6 +23,8 @@ const routes = [{
     path: "/logout", name: "logout", component: LogoutView,
   },{
     path: "/register", name: "register", component: RegisterView,
+  },{
+    path: "/user/:uuid", name: "user_entry", component: UserView,
   }, {
     path: "/event/information", name: "event_general_information", component: EventAbout,
   }, {
@@ -29,13 +34,17 @@ const routes = [{
   }, {
     path: "/event/create", name: "event_create", component: EventCreate, meta: {requireAuth: true},
   }, {
+    path: "/project/:uuid", name: "project_entry", component: ProjectView,
+  }, {
     path: "/about", name: "about", component: MainView,
   }, {
     path: "/discord", name: "discord", beforeEnter() {
       location.href = 'https://discord.gg/VjrfCFKRgR';
     },
   }, {
-    path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound,
+    path: '/error', name: 'error', component: ErrorView,
+  }, {
+    path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView,
   },],
 },];
 
@@ -46,7 +55,7 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const user = useUser();
+  const user = useUserService();
 
   if (to.meta.requireAuth && !user.isAuthenticated()) {
     return next({ path: "/login" });

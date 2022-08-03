@@ -28,7 +28,7 @@ class EventListHandler implements RequestHandlerInterface
             $entry = [
                 'id' => $event->getId(),
                 'owner' => $this->userService->findById($event->getUserId())->getName(),
-                'name' => $event->getName(),
+                'title' => $event->getTitle(),
                 'description' => $event->getDescription(),
                 'duration' => $event->getDuration(),
                 'startTime' => $event->getStartTime()->format('Y-m-d H:i'),

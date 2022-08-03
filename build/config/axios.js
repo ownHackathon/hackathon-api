@@ -21,13 +21,13 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
 
-  if (!error.response.status) {
-    router.push("/error");
+  if (error.response.status === 401) {
+    router.push("/login");
     return;
   }
 
-  if (error.response.status === 401) {
-    router.push("/login");
+  if (error.response.status) {
+    router.push("/error");
     return;
   }
 

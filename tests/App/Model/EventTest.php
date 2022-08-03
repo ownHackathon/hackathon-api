@@ -39,8 +39,8 @@ class EventTest extends TestCase
 
     public function testCanSetAndGetName()
     {
-        $eventName = $this->event->setName('test');
-        $name = $eventName->getName();
+        $eventName = $this->event->setTitle('test');
+        $name = $eventName->getTitle();
 
         $this->assertInstanceOf(Event::class, $eventName);
         $this->assertIsString($name);

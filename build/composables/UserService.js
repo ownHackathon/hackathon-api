@@ -1,12 +1,12 @@
-import {useUserStore} from "@/store/user";
+import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 import router from "@/router";
 
-export default function useUser() {
-  const userStore = useUserStore();
+export default function useUserService() {
+  const user = useUserStore();
 
   const loadUser = () => {
-    if (userStore.user !== null) {
+    if (user.user !== null) {
       return;
     }
 
@@ -14,7 +14,7 @@ export default function useUser() {
         .get('/api/me')
         .then((response) => {
           if (response.status === 200 && response.data.uuid !== undefined) {
-            userStore.setUser(response.data);
+            user.setUser(response.data);
           } else if (response.status === 401) {
             unLoadUser();
           }
@@ -26,13 +26,13 @@ export default function useUser() {
   };
 
   const unLoadUser = () => {
-    userStore.user = null;
+    user.user = null;
     localStorage.removeItem('token');
     router.push('/');
   };
 
   const isAuthenticated = () => {
-    return userStore.user !== null;
+    return user.user !== null;
   };
 
   return {

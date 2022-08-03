@@ -11,7 +11,7 @@ class EventTable extends AbstractTable
     {
         $values = [
             'userId' => $event->getUserId(),
-            'name' => $event->getName(),
+            'title' => $event->getTitle(),
             'description' => $event->getDescription(),
             'eventText' => $event->getEventText(),
             'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
@@ -28,10 +28,10 @@ class EventTable extends AbstractTable
         return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll();
     }
 
-    public function findByName(string $topic): bool|array
+    public function findByTitle(string $topic): bool|array
     {
         return $this->query->from($this->table)
-            ->where('name', $topic)
+            ->where('title', $topic)
             ->fetch();
     }
 

@@ -21,9 +21,12 @@ class ParticipantService
             return false;
         }
 
-        $this->table->insert($participant);
+        return $this->table->insert($participant) !== false;
+    }
 
-        return true;
+    public function remove(Participant $participant): bool
+    {
+        return $this->table->remove($participant) == 0 ? false : true;
     }
 
     public function findById(int $id): Participant
