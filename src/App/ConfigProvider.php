@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Administration\Service\TemplateService;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
+use App\Hydrator\ReflectionHydrator;
 use App\Service\EventServiceFactory;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
@@ -27,7 +27,6 @@ use App\Validator\Input\TopicInput;
 use App\Validator\Input\UsernameInput;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use App\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -68,6 +67,7 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\EventNameHandler::class,
+                Handler\EventParticipantUnsubsribeHandler::class,
                 Handler\PingHandler::class,
                 Handler\IndexHandler::class,
 
@@ -107,6 +107,7 @@ class ConfigProvider
                 Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
@@ -210,6 +211,11 @@ class ConfigProvider
             ],
             Middleware\EventParticipantSubscribeMiddleware::class => [
                 Service\ParticipantService::class,
+                Service\EventService::class,
+            ],
+            Middleware\EventParticipantUnsubscribeMiddleware::class => [
+                Service\ParticipantService::class,
+                Service\EventService::class,
             ],
             Middleware\EventRatingReleasedMiddleware::class => [
                 Service\EventService::class,

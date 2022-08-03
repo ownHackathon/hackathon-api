@@ -1,16 +1,4 @@
-import axios from "axios";
-
 export default function useEventService() {
-  function addUserAsParticipantToEvent(eventId) {
-    let event = {};
-    axios
-        .put(`/event/participant/subscribe/${eventId}`)
-        .then(async response => {
-          event.value = await response.data;
-        });
-    return event;
-  }
-
   function hasParticipants(participantsList)  {
     return (participantsList !== undefined && participantsList.length > 0);
   }
@@ -19,14 +7,19 @@ export default function useEventService() {
     return eventStatus < 3;
   }
 
-  function isUserInParticipantList(participantList, user)  {
+  function findUserInParticipantList(participantList, user){
     if (hasParticipants(participantList) && user !== null) {
-      return participantList.find(element => element.username === user.name) !== undefined;
+      return participantList.find(element => element.username === user.name);
     }
-    return false;
+
+    return null;
+  }
+
+  function isUserInParticipantList(participantList, user)  {
+    return !!findUserInParticipantList(participantList, user);
   }
 
   return {
-    addUserAsParticipantToEvent, canStillParticipate, hasParticipants, isUserInParticipantList
+    canStillParticipate, hasParticipants, findUserInParticipantList, isUserInParticipantList
   };
 }

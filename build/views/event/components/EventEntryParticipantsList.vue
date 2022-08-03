@@ -9,8 +9,7 @@
       <div v-if="eventService.hasParticipants(data.participants)">
         <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
           <div class="flex-1">
-            <!--<RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>-->
-            <RouterLink to="/">{{ participant.username }}</RouterLink>
+            <RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
           </div>
           <div v-if="participant.projectId" class="flex-1">
             <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
@@ -40,16 +39,12 @@
 <script setup>
 import useUserService from "@/composables/UserService";
 import useEventService from "@/composables/EventService";
-import {defineProps,  onUpdated, ref} from "vue";
+import {defineProps} from "vue";
+
 const userService = useUserService();
 const eventService = useEventService();
-const props = defineProps({
+const data = defineProps({
   participants: Array,
-});
-const data = ref(props);
-
-onUpdated(()=>{
-  console.log(data);
 });
 
 </script>
