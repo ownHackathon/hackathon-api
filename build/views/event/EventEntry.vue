@@ -21,7 +21,7 @@
 
   <div class="py-3"></div>
 
-  <div v-show="userService.isAuthenticated() && eventService.canStillParticipate(event.status)">
+  <div v-show="isShowSubscribeButton">
     <button v-if="eventSubscribeStatus===0" class="button" @click="addUserAsParticipantToEvent()">
       Zum Event <span class="text-green-600">anmelden</span>
     </button>
@@ -29,6 +29,7 @@
       Vom Event <span class="text-red-600">abmelden</span>
     </button>
   </div>
+
   <EventEntryParticipantsList
       :participants="event.participants"
   />
@@ -42,7 +43,7 @@
 <script setup>
 import axios from "axios";
 import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, computed} from "vue";
 import {useUserStore} from "@/store/UserStore";
 import useEventService from "@/composables/EventService";
 import useUserService from "@/composables/UserService";
@@ -51,21 +52,27 @@ import EventEntryTopic from "@/views/event/components/EventEntryTopic";
 import EventEntryData from "@/views/event/components/EventEntryData";
 import EventEntryOwner from "@/views/event/components/EventEntryOwner";
 import EventEntryParticipantsList from "@/views/event/components/EventEntryParticipantsList";
-
+import { useToast } from "vue-toastification";
 
 const event = ref({});
 const route = useRoute();
+const toast = useToast();
 const userStore = useUserStore();
 const userService = useUserService();
 const eventService = useEventService();
 const eventSubscribeStatus = ref(0);
+const isShowSubscribeButton = computed(() => {
+  return userService.isAuthenticated() && eventService.canStillParticipate(event.value.status);
+})
 
 function sortByName(a, b) {
   return a.username.localeCompare(b.username);
 }
 
 function sortParticpantList() {
-  event.value.participants.sort(sortByName);
+  if (eventService.hasParticipants(event.value.participants)) {
+    event.value.participants.sort(sortByName);
+  }
 }
 
 onMounted(() => {
@@ -74,10 +81,7 @@ onMounted(() => {
       .then(async response => {
         event.value = await response.data;
         sortParticpantList();
-        if (eventService.isUserInParticipantList(event.value.participants, userStore.user)) {
-          eventSubscribeStatus.value = 1;
-        }
-
+          eventSubscribeStatus.value = + eventService.isUserInParticipantList(event.value.participants, userStore.user);
       });
 });
 
@@ -89,6 +93,7 @@ function addUserAsParticipantToEvent() {
         event.value.participants.push(participant);
         sortParticpantList();
         eventSubscribeStatus.value = 1;
+        toast.success('Anmeldung zum Event erfolgreich');
       });
 }
 
@@ -101,6 +106,7 @@ function removeUserAsParticipantFromEvent() {
         event.value.participants.splice(event.value.participants.indexOf(participant), 1);
         sortParticpantList();
         eventSubscribeStatus.value = 0;
+        toast.success('Abmeldung vom Event erfolgreich');
       });
 }
 

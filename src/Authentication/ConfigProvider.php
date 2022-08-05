@@ -28,6 +28,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Handler\UserRegisterSubmitHandler::class,
                 Middleware\IsLoginAuthenticationMiddleware::class,
                 Middleware\LoginValidationMiddleware::class,
                 Service\LoginAuthenticationService::class,
@@ -35,8 +36,6 @@ class ConfigProvider
             'factories' => [
                 Handler\ApiMeHandler::class => ConfigAbstractFactory::class,
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
-                Handler\UserRegisterHandler::class => ConfigAbstractFactory::class,
-                Handler\UserRegisterSubmitHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
@@ -55,12 +54,6 @@ class ConfigProvider
         return [
             Handler\ApiMeHandler::class => [
                 ReflectionHydrator::class,
-            ],
-            Handler\UserRegisterHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\UserRegisterSubmitHandler::class => [
-                TemplateRendererInterface::class,
             ],
             Middleware\UserRegisterMiddleware::class => [
                 UserService::class,

@@ -11,7 +11,7 @@
     </div>
     <div v-else :class="isMenuOpen ? 'flex' : 'hidden'" class="user-nav-entry">
       <router-link :to="{name: 'login'}" class="nav-entry" @click="isMenuOpen = false">Anmelden</router-link>
-      <router-link :to="{name: 'home'}" class="nav-entry" @click="isMenuOpen = false">Registrieren</router-link>
+      <router-link :to="{name: 'register'}" class="nav-entry" @click="isMenuOpen = false">Registrieren</router-link>
     </div>
   </div>
 </template>

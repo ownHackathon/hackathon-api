@@ -97,13 +97,6 @@ return static function (Mezzio\Application $app): void {
         App\Handler\ProjectHandler::class
     );
 
-    $app->get(
-        '/user/register[/]',
-        [
-            Authentication\Handler\UserRegisterHandler::class,
-        ],
-        Authentication\Handler\UserRegisterHandler::class
-    );
     $app->post(
         '/user/register[/]',
         [

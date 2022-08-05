@@ -2,9 +2,9 @@
   "name": "bibaltik_hackathon",
   "version": "0.1.0",
   "homepage": "https://github.com/BibaltiK/Hackathon#readme",
-  "url" : "https://github.com/BibaltiK/Hackathon/issues",
-  "email" : "bibaltik@exdrals.de",
-  "license" : "BSD-3-Clause",
+  "url": "https://github.com/BibaltiK/Hackathon/issues",
+  "email": "bibaltik@exdrals.de",
+  "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -28,7 +28,8 @@
     "vue": "^3.2.13",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.14",
-    "vue3-markdown-it": "^1.0.10"
+    "vue3-markdown-it": "^1.0.10",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

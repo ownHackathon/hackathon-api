@@ -24,7 +24,7 @@ CREATE TABLE `Event`
 (
     `id`              int(10) UNSIGNED     NOT NULL,
     `userId`          int(10) UNSIGNED     NOT NULL,
-    `name`            varchar(255)         NOT NULL,
+    `title`           varchar(255)         NOT NULL,
     `description`     varchar(255)                  DEFAULT NULL,
     `eventText`       varchar(8192)        NOT NULL,
     `createTime`      datetime             NOT NULL DEFAULT current_timestamp(),
@@ -143,7 +143,7 @@ ALTER TABLE `Comment`
 
 ALTER TABLE `Event`
     ADD PRIMARY KEY (`id`),
-    ADD UNIQUE KEY `name_UNIQUE` (name),
+    ADD UNIQUE KEY `title_UNIQUE` (title),
     ADD KEY `fk_Event_User_idx` (`userId`);
 
 ALTER TABLE `EventRating`

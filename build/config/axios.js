@@ -26,7 +26,7 @@ axios.interceptors.response.use(function (response) {
     return;
   }
 
-  if (error.response.status) {
+  if (error.response.status === 500) {
     router.push("/error");
     return;
   }
