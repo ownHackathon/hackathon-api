@@ -2,13 +2,14 @@
 
 namespace Administration\Factory;
 
-use Ramsey\Uuid\Uuid;
 use Psr\Container\ContainerInterface;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class UuidFactory
 {
-    public function __invoke(ContainerInterface $container): Uuid
+    public function __invoke(ContainerInterface $container): UuidInterface
     {
-        return new Uuid();
+        return  Uuid::uuid4();
     }
 }

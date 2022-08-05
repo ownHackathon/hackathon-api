@@ -1,15 +1,6 @@
 <template>
-  <div id="error-container" class="hidden flex justify-center w-full pt-6">
-    <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
-      <div class="div-table-header">
-        Fehler bei der Anmeldung
-      </div>
-      <div class="div-table-content content-center">
-        <span id="error-message" class="text-red-500 "></span>
-      </div>
-    </div>
-  </div>
-  <form @submit.prevent="login">
+  <FailureView/>
+  <form @submit.prevent="login" action="/login">
     <div class="flex justify-center w-full pt-6">
       <div class="div-table w-5/6 md:w-3/6 2xl:w-2/6">
         <div class="div-table-header">
@@ -50,9 +41,12 @@ import axios from "axios";
 import {onMounted, reactive} from "vue";
 import {useRouter} from 'vue-router';
 import useUserService from "@/composables/UserService";
+import FailureView from "@/views/user/compontents/FailureView";
+import {useToast} from "vue-toastification";
 
 const userService = useUserService();
 const router = useRouter();
+const toast = useToast();
 const payload = reactive({
   username: '',
   password: '',
@@ -67,19 +61,21 @@ onMounted(() => {
 async function login() {
   const response = await axios
       .post("/login", payload,)
-      .catch((err) => {
+      .catch(() => {
         document.getElementById('error-message').innerHTML = 'Unbekannter Fehler, später noch einmal versuchen';
         document.getElementById('error-container').classList.remove('hidden');
-        console.error(err);
+        toast.error('Anmeldevorgang nicht erfolgreich');
       });
 
   if (response && response.status === 200) {
     localStorage.setItem('token', response.data.token);
     userService.loadUser();
-    await router.back();
+    router.back();
+    toast.success('Anmeldung erfolgreich');
   } else {
     document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';
     document.getElementById('error-container').classList.remove('hidden');
+    toast.error('Anmeldevorgang nicht erfolgreich');
   }
 }
 </script>

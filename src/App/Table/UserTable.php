@@ -12,6 +12,7 @@ class UserTable extends AbstractTable
     {
         $values = [
             'roleId' => $user->getRoleId(),
+            'uuid' => $user->getUuid(),
             'name' => $user->getName(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),

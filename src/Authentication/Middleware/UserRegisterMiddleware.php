@@ -15,6 +15,7 @@ class UserRegisterMiddleware implements MiddlewareInterface
     public function __construct(
         private UserService $userService,
         private ClassMethodsHydrator $hydrator,
+
     ) {
     }
 
@@ -27,7 +28,7 @@ class UserRegisterMiddleware implements MiddlewareInterface
         }
 
         $data = $request->getParsedBody();
-        $data['name'] = $data['userName'];
+        $data['name'] = $data['username'];
         $user = $this->hydrator->hydrate($data, new User());
 
         if (!$this->userService->create($user)) {

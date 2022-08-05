@@ -1,13 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import useUserService from "@/composables/UserService";
-import NotFoundView from '@/views/NotFoundView';
-import ErrorView from '@/views/ErrorView';
+import NotFoundView from '@/views/error/NotFoundView';
+import ErrorView from '@/views/error/ErrorView';
 import MainLayout from '@/layouts/MainLayout';
 import MainView from '@/views/MainView';
-import LoginView from '@/views/LoginView';
-import LogoutView from '@/views/LogoutView';
-import RegisterView from '@/views/RegisterView';
-import UserView from "@/views/UserView";
+import LoginView from '@/views/user/login/LoginView';
+import LogoutView from '@/views/user/login/LogoutView';
+import RegisterView from '@/views/user/register/RegisterView';
+import UserView from "@/views/user/UserView";
 import EventAbout from '@/views/event/EventAbout';
 import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
@@ -42,7 +42,11 @@ const routes = [{
       path: "/user/:uuid",
       name: "user_entry",
       component: UserView,
-    }, {
+      meta: {
+        requireAuth: true
+      },
+    },
+    {
       path: "/event/information",
       name: "event_general_information",
       component: EventAbout,
@@ -69,6 +73,9 @@ const routes = [{
       path: "/project/:uuid",
       name: "project_entry",
       component: ProjectView,
+      meta: {
+        requireAuth: true
+      },
     },
     {
       path: "/about",
@@ -107,7 +114,7 @@ router.beforeEach((to, from, next) => {
     return next({path: "/login"});
   }
 
-  if (to.path === "/login" && localStorage.getItem("token") !== null) {
+  if ((to.path === "/login" || to.path === "/register" ) && localStorage.getItem("token") !== null) {
     return next({path: "/"});
   }
 

@@ -8,6 +8,9 @@ use App\Model\User;
 use App\Table\UserTable;
 use DateTime;
 use Psr\Log\InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
+
+use Ramsey\Uuid\UuidInterface;
 
 use function password_hash;
 
@@ -16,6 +19,7 @@ class UserService
     public function __construct(
         private UserTable $table,
         private ReflectionHydrator $hydrator,
+        private UuidInterface $uuid,
     ) {
     }
 
@@ -41,6 +45,7 @@ class UserService
 
         $user->setPassword($hashedPassword);
         $user->setRoleId($role);
+        $user->setUuid($this->uuid->toString());
 
         $this->table->insert($user);
 

@@ -2,20 +2,14 @@
 
 namespace Authentication\Handler;
 
-use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Template\TemplateRendererInterface;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class UserRegisterSubmitHandler implements RequestHandlerInterface
 {
-    public function __construct(
-        private TemplateRendererInterface $template,
-    ) {
-    }
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $validationMessages = $request->getAttribute('validationMessages');
@@ -25,9 +19,9 @@ class UserRegisterSubmitHandler implements RequestHandlerInterface
 
             $data['validationMessages'] = $validationMessages;
 
-            return new HtmlResponse($this->template->render('app::user_register', $data));
+            return new JsonResponse(['message' => $validationMessages], HTTP::STATUS_NOT_ACCEPTABLE);
         }
 
-        return new RedirectResponse('/', 303);
+        return new JsonResponse(['message' => 'OK'], HTTP::STATUS_OK);
     }
 }

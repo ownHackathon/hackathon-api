@@ -70,7 +70,9 @@ function sortByName(a, b) {
 }
 
 function sortParticpantList() {
-  event.value.participants.sort(sortByName);
+  if (eventService.hasParticipants(event.value.participants)) {
+    event.value.participants.sort(sortByName);
+  }
 }
 
 onMounted(() => {
@@ -91,7 +93,7 @@ function addUserAsParticipantToEvent() {
         event.value.participants.push(participant);
         sortParticpantList();
         eventSubscribeStatus.value = 1;
-        toast.success('Du wurdest als Teilnehmer zum Event hinzugefügt');
+        toast.success('Anmeldung zum Event erfolgreich');
       });
 }
 
@@ -104,7 +106,7 @@ function removeUserAsParticipantFromEvent() {
         event.value.participants.splice(event.value.participants.indexOf(participant), 1);
         sortParticpantList();
         eventSubscribeStatus.value = 0;
-        toast.success('Du wurdest als Teilnehmer vom Event entfernt');
+        toast.success('Abmeldung vom Event erfolgreich');
       });
 }
 
