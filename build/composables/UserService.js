@@ -5,12 +5,12 @@ import router from "@/router";
 export default function useUserService() {
   const user = useUserStore();
 
-  const loadUser = () => {
+  const loadUser = async () => {
     if (user.user !== null) {
       return;
     }
 
-    axios
+    await axios
         .get('/api/me')
         .then((response) => {
           if (response.status === 200 && response.data.uuid !== undefined) {

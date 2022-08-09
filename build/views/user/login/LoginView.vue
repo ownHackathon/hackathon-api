@@ -59,23 +59,24 @@ onMounted(() => {
 });
 
 async function login() {
-  const response = await axios
+  await axios
       .post("/login", payload,)
+      .then((response) => {
+        if (response && response.status === 200) {
+          localStorage.setItem('token', response.data.token);
+          userService.loadUser();
+          router.back();
+          toast.success('Anmeldung erfolgreich');
+        } else {
+          document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';
+          document.getElementById('error-container').classList.remove('hidden');
+          toast.error('Anmeldevorgang nicht erfolgreich');
+        }
+      })
       .catch(() => {
         document.getElementById('error-message').innerHTML = 'Unbekannter Fehler, später noch einmal versuchen';
         document.getElementById('error-container').classList.remove('hidden');
         toast.error('Anmeldevorgang nicht erfolgreich');
       });
-
-  if (response && response.status === 200) {
-    localStorage.setItem('token', response.data.token);
-    userService.loadUser();
-    router.back();
-    toast.success('Anmeldung erfolgreich');
-  } else {
-    document.getElementById('error-message').innerHTML = 'Benutzer/Passwort Kombination fehlerhaft';
-    document.getElementById('error-container').classList.remove('hidden');
-    toast.error('Anmeldevorgang nicht erfolgreich');
-  }
 }
 </script>

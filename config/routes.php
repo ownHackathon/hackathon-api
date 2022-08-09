@@ -107,7 +107,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\UserRegisterSubmitHandler::class
     );
     $app->get(
-        '/user/{userId:\d+}[/]',
+        '/user/{userUuid}[/]',
         [
             App\Middleware\UserMiddleware::class,
             App\Handler\UserHandler::class,

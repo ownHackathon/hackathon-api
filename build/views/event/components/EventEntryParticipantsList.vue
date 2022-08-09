@@ -9,7 +9,7 @@
       <div v-if="eventService.hasParticipants(data.participants)">
         <div v-for="participant in data.participants" :key="participant.id" class="div-table-content-row flex bg-gray-800 py-1 px-2 border-t border-gray-700">
           <div class="flex-1">
-            <RouterLink :to="{name: 'user_entry', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
+            <RouterLink :to="{name: 'user_view', params: { uuid: participant.userUuid }}">{{ participant.username }}</RouterLink>
           </div>
           <div v-if="participant.projectId" class="flex-1">
             <RouterLink to="/project/">{{ participant.projectTitle }}</RouterLink>
@@ -44,7 +44,7 @@ import {defineProps} from "vue";
 const userService = useUserService();
 const eventService = useEventService();
 const data = defineProps({
-  participants: Array,
+  participants: Object,
 });
 
 </script>

@@ -12,7 +12,7 @@ import {defineProps} from "vue";
 import {date} from '@/composables/moment.js';
 
 defineProps({
-  createTime: Date,
+  createTime: String,
   owner: String,
 });
 </script>

@@ -23,7 +23,7 @@ defineProps({
   eventname: String,
   description: String,
   duration: Intl,
-  startTime: Date,
+  startTime: String,
   status: Intl,
 });
 </script>
