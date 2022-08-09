@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import useUserService from "@/composables/UserService";
 import NotFoundView from '@/views/error/NotFoundView';
 import ErrorView from '@/views/error/ErrorView';
 import MainLayout from '@/layouts/MainLayout';
@@ -13,6 +12,8 @@ import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
+import {useUserStore} from "@/store/UserStore";
+import axios from "axios";
 
 const routes = [{
   component: MainLayout,
@@ -40,11 +41,11 @@ const routes = [{
     },
     {
       path: "/user/:uuid",
-      name: "user_entry",
+      name: "user_view",
       component: UserView,
       meta: {
         requireAuth: true
-      },
+      }
     },
     {
       path: "/event/information",
@@ -67,7 +68,7 @@ const routes = [{
       component: EventCreate,
       meta: {
         requireAuth: true
-      },
+      }
     },
     {
       path: "/project/:uuid",
@@ -107,14 +108,28 @@ const router = createRouter({
 });
 
 
-router.beforeEach((to, from, next) => {
-  const user = useUserService();
+router.beforeEach(async (to, from, next) => {
+  const userStore = useUserStore();
 
-  if (to.meta.requireAuth && !user.isAuthenticated()) {
-    return next({path: "/login"});
+  if (to.meta.requireAuth) {
+    if (!userStore.user) {
+      await axios
+          .get('/api/me')
+          .then((response) => {
+            if (response.status === 200 && response.data.uuid !== undefined) {
+              userStore.setUser(response.data);
+            } else {
+              return next({path: "/login"});
+            }
+          }).catch(() => {
+            userStore.user = null;
+            localStorage.removeItem('token');
+            return next({path: "/login"});
+          });
+    }
   }
 
-  if ((to.path === "/login" || to.path === "/register" ) && localStorage.getItem("token") !== null) {
+  if ((to.path === "/login" || to.path === "/register") && localStorage.getItem("token") !== null) {
     return next({path: "/"});
   }
 

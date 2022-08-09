@@ -1,49 +1,53 @@
 <template>
-  <EventEntryHeadData
-      :title="event.title"
-      :description="event.description"
-      :fulltext="event.eventText"
-  />
+  <TheSpinner />
 
-  <div class="py-3"></div>
+  <div id="content" class="hidden">
+    <EventEntryHeadData
+        :title="event.title"
+        :description="event.description"
+        :fulltext="event.eventText"
+    />
 
-  <EventEntryTopic
-      :topic="event.topic"
-  />
+    <div class="py-3"></div>
 
-  <div class="py-3"></div>
+    <EventEntryTopic
+        :topic="event.topic"
+    />
 
-  <EventEntryData
-      :startTime="event.startTime"
-      :duration="event.duration"
-      :status="event.status"
-  />
+    <div class="py-3"></div>
 
-  <div class="py-3"></div>
+    <EventEntryData
+        :startTime="event.startTime"
+        :duration="event.duration"
+        :status="event.status"
+    />
 
-  <div v-show="isShowSubscribeButton">
-    <button v-if="eventSubscribeStatus===0" class="button" @click="addUserAsParticipantToEvent()">
-      Zum Event <span class="text-green-600">anmelden</span>
-    </button>
-    <button v-else class="button" @click="removeUserAsParticipantFromEvent()">
-      Vom Event <span class="text-red-600">abmelden</span>
-    </button>
+    <div class="py-3"></div>
+
+    <div v-show="isShowSubscribeButton">
+      <button v-if="eventSubscribeStatus===0" class="button" @click="addUserAsParticipantToEvent()">
+        Zum Event <span class="text-green-600">anmelden</span>
+      </button>
+      <button v-else class="button" @click="removeUserAsParticipantFromEvent()">
+        Vom Event <span class="text-red-600">abmelden</span>
+      </button>
+    </div>
+
+    <EventEntryParticipantsList
+        :participants="event.participants"
+    />
+
+    <EventEntryOwner
+        :createTime="event.createTime"
+        :owner="event.owner"
+    />
   </div>
-
-  <EventEntryParticipantsList
-      :participants="event.participants"
-  />
-
-  <EventEntryOwner
-      :createTime="event.createTime"
-      :owner="event.owner"
-  />
 </template>
 
 <script setup>
 import axios from "axios";
 import {useRoute} from "vue-router";
-import {onMounted, ref, computed} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useUserStore} from "@/store/UserStore";
 import useEventService from "@/composables/EventService";
 import useUserService from "@/composables/UserService";
@@ -52,7 +56,8 @@ import EventEntryTopic from "@/views/event/components/EventEntryTopic";
 import EventEntryData from "@/views/event/components/EventEntryData";
 import EventEntryOwner from "@/views/event/components/EventEntryOwner";
 import EventEntryParticipantsList from "@/views/event/components/EventEntryParticipantsList";
-import { useToast } from "vue-toastification";
+import {useToast} from "vue-toastification";
+import TheSpinner from "@/components/ui/TheSpinner";
 
 const event = ref({});
 const route = useRoute();
@@ -63,7 +68,7 @@ const eventService = useEventService();
 const eventSubscribeStatus = ref(0);
 const isShowSubscribeButton = computed(() => {
   return userService.isAuthenticated() && eventService.canStillParticipate(event.value.status);
-})
+});
 
 function sortByName(a, b) {
   return a.username.localeCompare(b.username);
@@ -81,7 +86,9 @@ onMounted(() => {
       .then(async response => {
         event.value = await response.data;
         sortParticpantList();
-          eventSubscribeStatus.value = + eventService.isUserInParticipantList(event.value.participants, userStore.user);
+        eventSubscribeStatus.value = +eventService.isUserInParticipantList(event.value.participants, userStore.user);
+        document.getElementById('spinner').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
       });
 });
 

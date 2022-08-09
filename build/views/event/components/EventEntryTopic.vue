@@ -48,7 +48,7 @@ import useUserService from "@/composables/UserService";
 const userService = useUserService();
 
 const props = defineProps({
-  topic: Array,
+  topic: Object,
 });
 
 const isShowTopic = computed(() => {

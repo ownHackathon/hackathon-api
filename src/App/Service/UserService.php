@@ -8,8 +8,6 @@ use App\Model\User;
 use App\Table\UserTable;
 use DateTime;
 use Psr\Log\InvalidArgumentException;
-use Ramsey\Uuid\Uuid;
-
 use Ramsey\Uuid\UuidInterface;
 
 use function password_hash;
@@ -17,9 +15,9 @@ use function password_hash;
 class UserService
 {
     public function __construct(
-        private UserTable $table,
-        private ReflectionHydrator $hydrator,
-        private UuidInterface $uuid,
+        private readonly UserTable $table,
+        private readonly ReflectionHydrator $hydrator,
+        private readonly UuidInterface $uuid,
     ) {
     }
 

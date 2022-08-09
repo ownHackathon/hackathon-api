@@ -28,7 +28,7 @@ import {addTime, dateTime} from '@/composables/moment.js';
 import {getStatusText} from "@/composables/status";
 
 defineProps({
-  startTime: Date,
+  startTime: String,
   duration: Intl,
   status: Intl,
 });

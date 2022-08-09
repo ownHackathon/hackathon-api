@@ -3,9 +3,9 @@
 namespace App\Handler;
 
 use App\Model\User;
-use Laminas\Diactoros\Response\HtmlResponse;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -14,7 +14,6 @@ class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
         private ClassMethodsHydrator $hydrator,
-        private TemplateRendererInterface $template,
     ) {
     }
 
@@ -24,6 +23,6 @@ class UserHandler implements RequestHandlerInterface
 
         $data = $this->hydrator->extract($user);
 
-        return new HtmlResponse($this->template->render('app::user', $data));
+        return new JsonResponse($data, HTTP::STATUS_OK);
     }
 }

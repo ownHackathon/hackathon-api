@@ -191,7 +191,6 @@ class ConfigProvider
             ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
-                TemplateRendererInterface::class,
             ],
             Middleware\EventCreateMiddleware::class => [
                 Service\EventService::class,
