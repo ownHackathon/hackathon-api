@@ -11,6 +11,6 @@ const {unLoadUser} = useUserService();
 onMounted(() => {
   unLoadUser();
   toast.success('Abmeldung erfolgreich');
-  router.push('/');
+  router.back();
 });
 </script>
