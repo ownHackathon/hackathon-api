@@ -15,8 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class LoginAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserService $userService,
-        private LoginAuthenticationService $authService,
+        private readonly UserService $userService,
+        private readonly LoginAuthenticationService $authService,
     ) {
     }
 

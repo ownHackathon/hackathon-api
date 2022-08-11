@@ -5,12 +5,15 @@ namespace Administration\Table;
 use Envms\FluentPDO\Query;
 use ReflectionClass;
 
+use function substr;
+
 class AbstractTable
 {
     protected string $table;
 
-    public function __construct(protected Query $query)
-    {
+    public function __construct(
+        protected readonly Query $query
+    ) {
         $this->table = substr((new ReflectionClass($this))->getShortName(), 0, -5);
     }
 

@@ -5,13 +5,12 @@ namespace App\Service;
 use App\Hydrator\ReflectionHydrator;
 use App\Model\Project;
 use App\Table\ProjectTable;
-use Psr\Log\InvalidArgumentException;
 
 class ProjectService
 {
     public function __construct(
-        private ProjectTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly ProjectTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 

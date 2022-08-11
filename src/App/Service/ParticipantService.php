@@ -10,8 +10,8 @@ use Psr\Log\InvalidArgumentException;
 class ParticipantService
 {
     public function __construct(
-        private ParticipantTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly ParticipantTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 

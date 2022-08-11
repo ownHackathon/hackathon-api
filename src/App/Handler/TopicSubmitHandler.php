@@ -8,10 +8,12 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function array_merge;
+
 class TopicSubmitHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $template,
+        private readonly TemplateRendererInterface $template,
     ) {
     }
 

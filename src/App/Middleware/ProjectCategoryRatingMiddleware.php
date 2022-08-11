@@ -14,8 +14,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ProjectCategoryRatingMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private RatingService $ratingService,
-        private ProjectRatingCalculator $projectRatingCalculator,
+        private readonly RatingService $ratingService,
+        private readonly ProjectRatingCalculator $projectRatingCalculator,
     ) {
     }
 

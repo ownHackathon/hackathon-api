@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TopicCreateValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private TopicCreateValidator $validator,
+        private readonly TopicCreateValidator $validator,
     ) {
     }
 

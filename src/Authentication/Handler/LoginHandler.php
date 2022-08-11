@@ -15,8 +15,8 @@ class LoginHandler implements RequestHandlerInterface
     use JwtTokenGeneratorTrait;
 
     public function __construct(
-        private string $tokenSecret,
-        private int $tokenDuration
+        private readonly string $tokenSecret,
+        private readonly int $tokenDuration
     ) {
     }
 

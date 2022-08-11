@@ -11,13 +11,13 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TopicListMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private TopicPoolService $service,
+        private readonly TopicPoolService $topicPoolService,
     ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $topics = $this->service->findAll();
+        $topics = $this->topicPoolService->findAll();
 
         return $handler->handle($request->withAttribute('topics', $topics));
     }

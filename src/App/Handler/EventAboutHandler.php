@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventAboutHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $template,
+        private readonly TemplateRendererInterface $template,
     ) {
     }
 

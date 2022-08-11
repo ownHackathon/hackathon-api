@@ -4,16 +4,16 @@ namespace App\Handler;
 
 use App\Model\Event;
 use App\Service\UserService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
 
 class EventListHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private UserService $userService,
+        private readonly UserService $userService,
     ) {
     }
 

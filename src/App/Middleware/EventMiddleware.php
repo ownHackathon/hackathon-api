@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventService $eventService
+        private readonly EventService $eventService
     ) {
     }
 

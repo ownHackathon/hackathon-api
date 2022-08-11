@@ -13,7 +13,7 @@ use Psr\Log\InvalidArgumentException;
 class EventNameMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventService $service,
+        private readonly EventService $eventService,
     ) {
     }
 
@@ -21,7 +21,7 @@ class EventNameMiddleware implements MiddlewareInterface
     {
         $eventName = $request->getAttribute('eventName');
 
-        $event = $this->service->findByTitle($eventName);
+        $event = $this->eventService->findByTitle($eventName);
 
         if (!$event instanceof Event) {
             throw new InvalidArgumentException('Could not find Event', 400);

@@ -15,8 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventTopicVoteMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private TopicPoolService $topicPoolService,
-        private TopicVoterService $topicVoterService,
+        private readonly TopicPoolService $topicPoolService,
+        private readonly TopicVoterService $topicVoterService,
     ) {
     }
 

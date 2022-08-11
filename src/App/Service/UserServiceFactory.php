@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\Table\UserTable;
 use App\Hydrator\ReflectionHydrator;
+use App\Table\UserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;

@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ProjectOwnerMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserService $userService,
+        private readonly UserService $userService,
     ) {
     }
 

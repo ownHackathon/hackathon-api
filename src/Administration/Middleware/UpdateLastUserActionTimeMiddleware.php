@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserService $userService,
+        private readonly UserService $userService,
     ) {
     }
 
@@ -26,5 +26,4 @@ class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
 
         return $handler->handle($request->withAttribute(User::USER_ATTRIBUTE, $user));
     }
-
 }

@@ -11,11 +11,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventRatingReleasedMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventService $eventService,
+        private readonly EventService $eventService,
     ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        return $handler->handle($request);
     }
 }

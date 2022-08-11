@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TopicHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateRendererInterface $template,
+        private readonly TemplateRendererInterface $template,
     ) {
     }
 

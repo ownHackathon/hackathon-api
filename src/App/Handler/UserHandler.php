@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ClassMethodsHydrator $hydrator,
+        private readonly ClassMethodsHydrator $hydrator,
     ) {
     }
 

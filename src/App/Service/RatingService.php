@@ -11,8 +11,8 @@ use Psr\Log\InvalidArgumentException;
 class RatingService
 {
     public function __construct(
-        private RatingTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly RatingTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 

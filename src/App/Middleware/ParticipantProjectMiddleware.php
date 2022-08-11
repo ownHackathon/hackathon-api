@@ -15,8 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ParticipantProjectMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ProjectService $projectService,
-        private UserService $userService
+        private readonly ProjectService $projectService,
+        private readonly UserService $userService
     ) {
     }
 

@@ -10,9 +10,9 @@ use Laminas\InputFilter\InputFilter;
 class RegisterValidator extends InputFilter
 {
     public function __construct(
-        private UsernameInput $usernameInput,
-        private PasswordInput $passwordInput,
-        private EmailInput $emailInput,
+        private readonly UsernameInput $usernameInput,
+        private readonly PasswordInput $passwordInput,
+        private readonly EmailInput $emailInput,
     ) {
         $this->add($this->usernameInput);
         $this->add($this->passwordInput);

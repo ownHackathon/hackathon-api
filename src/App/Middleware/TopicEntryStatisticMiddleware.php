@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TopicEntryStatisticMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private TopicPoolService $topicPoolService,
+        private readonly TopicPoolService $topicPoolService,
     ) {
     }
 

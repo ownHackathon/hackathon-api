@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ApiMeHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ReflectionHydrator $hydrator,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 

@@ -10,8 +10,8 @@ use Psr\Log\InvalidArgumentException;
 class EventRatingCategoryService
 {
     public function __construct(
-        private EventRatingCategoryTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly EventRatingCategoryTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 

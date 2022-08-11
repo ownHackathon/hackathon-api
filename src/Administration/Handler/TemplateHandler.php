@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TemplateHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private TemplateService $service,
+        private readonly TemplateService $service,
     ) {
     }
 

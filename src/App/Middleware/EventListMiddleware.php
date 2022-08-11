@@ -8,10 +8,13 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function array_key_exists;
+use function strtoupper;
+
 class EventListMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventService $eventService
+        private readonly EventService $eventService
     ) {
     }
 

@@ -13,8 +13,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 class TopicSubmitMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private TopicPoolService $topicPoolService,
-        private ClassMethodsHydrator $hydrator,
+        private readonly TopicPoolService $topicPoolService,
+        private readonly ClassMethodsHydrator $hydrator,
     ) {
     }
 

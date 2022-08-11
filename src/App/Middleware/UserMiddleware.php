@@ -14,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserService $userService
+        private readonly UserService $userService
     ) {
     }
 

@@ -4,6 +4,8 @@ namespace Authentication\Service;
 
 use Firebase\JWT\JWT;
 
+use function time;
+
 trait JwtTokenGeneratorTrait
 {
     private function generateToken(string $uuid, string $tokenSecret, int $timeout, string $alg = 'HS512'): string
