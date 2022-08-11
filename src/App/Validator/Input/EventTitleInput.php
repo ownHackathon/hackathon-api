@@ -4,11 +4,11 @@ namespace App\Validator\Input;
 
 use Laminas\InputFilter\Input;
 
-class EventNameInput extends Input
+class EventTitleInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('name');
+        parent::__construct('title');
 
         $this->setRequired(true);
 
@@ -20,6 +20,7 @@ class EventNameInput extends Input
                 'encoding' => 'UTF-8',
                 'min' => 3,
                 'max' => 255,
+                'inclusive' => true,
             ]
         );
     }

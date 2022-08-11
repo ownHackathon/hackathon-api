@@ -18,6 +18,8 @@ class EventTextInput extends Input
             'StringLength',
             [
                 'encoding' => 'UTF-8',
+                'max' => 8192,
+                'inclusive' => true,
             ]
         );
     }

@@ -24,23 +24,15 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventAboutHandler::class
     );
-    $app->get(
-        '/event/create[/]',
-        [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
-            App\Handler\EventCreateHandler::class,
-        ],
-        App\Handler\EventCreateHandler::class
-    );
     $app->post(
-        '/event/create[/]',
+        '/event[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\EventCreateValidationMiddleware::class,
             App\Middleware\EventCreateMiddleware::class,
-            App\Handler\EventCreateSubmitHandler::class,
+            App\Handler\EventCreateHandler::class,
         ],
-        App\Handler\EventCreateSubmitHandler::class
+        App\Handler\EventCreateHandler::class
     );
     $app->get(
         '/event/{eventId:\d+}[/]',
@@ -109,6 +101,7 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/user/{userUuid}[/]',
         [
+            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\UserMiddleware::class,
             App\Handler\UserHandler::class,
         ],

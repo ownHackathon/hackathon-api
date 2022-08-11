@@ -23,7 +23,7 @@ class EventTable extends AbstractTable
         return $this;
     }
 
-    public function findAll(string $order = 'id', string $sort = 'ASC'): bool|array
+    public function findAll(string $order = 'startTime', string $sort = 'ASC'): bool|array
     {
         return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll();
     }

@@ -3,6 +3,8 @@
 namespace App\Middleware;
 
 use App\Validator\EventCreateValidator;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -11,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EventCreateValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventCreateValidator $validator,
+        private readonly EventCreateValidator $validator,
     ) {
     }
 
@@ -22,7 +24,10 @@ class EventCreateValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            return $handler->handle($request->withAttribute('validationMessages', $this->validator->getMessages()));
+            return new JsonResponse([
+                'message' => 'Validation fault',
+                'data' => $this->validator->getMessages(),
+            ], HTTP::STATUS_NOT_FOUND);
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));

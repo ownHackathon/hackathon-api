@@ -3,7 +3,8 @@
 namespace Authentication\Middleware;
 
 use App\Model\User;
-use Authentication\Exception\InvalidAuthenticationException;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -16,8 +17,8 @@ class IsLoginAuthenticationMiddleware implements MiddlewareInterface
         /** @var null|User $user */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        if (null === $user) {
-            throw new InvalidAuthenticationException();
+        if (!$user) {
+            return new JsonResponse(['message' => 'Authentication is required'], HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle($request);

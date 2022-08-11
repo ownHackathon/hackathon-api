@@ -22,6 +22,7 @@ class UserHandler implements RequestHandlerInterface
         $user = $request->getAttribute(User::class);
 
         $data = $this->hydrator->extract($user);
+        unset($data['password']);
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }

@@ -6,6 +6,7 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
+use App\Middleware\EventCreateMiddlewareFactory;
 use App\Service\EventServiceFactory;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
@@ -18,7 +19,7 @@ use App\Validator\EventCreateValidator;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\EventDescriptionInput;
 use App\Validator\Input\EventDurationInput;
-use App\Validator\Input\EventNameInput;
+use App\Validator\Input\EventTitleInput;
 use App\Validator\Input\EventStartTimeInput;
 use App\Validator\Input\EventTextInput;
 use App\Validator\Input\PasswordInput;
@@ -67,6 +68,7 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\EventNameHandler::class,
+                Handler\EventCreateHandler::class,
                 Handler\EventParticipantUnsubsribeHandler::class,
                 Handler\PingHandler::class,
                 Handler\IndexHandler::class,
@@ -78,7 +80,7 @@ class ConfigProvider
                 EmailInput::class,
                 EventDescriptionInput::class,
                 EventDurationInput::class,
-                EventNameInput::class,
+                EventTitleInput::class,
                 EventStartTimeInput::class,
                 EventTextInput::class,
                 PasswordInput::class,
@@ -94,8 +96,6 @@ class ConfigProvider
                 NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
-                Handler\EventCreateHandler::class => ConfigAbstractFactory::class,
-                Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
@@ -104,7 +104,7 @@ class ConfigProvider
                 Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
-                Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
                 Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
@@ -163,12 +163,6 @@ class ConfigProvider
                 ProjectService::class,
                 TopicPoolService::class,
             ],
-            Handler\EventCreateHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\EventCreateSubmitHandler::class => [
-                TemplateRendererInterface::class,
-            ],
             Handler\EventAboutHandler::class => [
                 TemplateRendererInterface::class,
             ],
@@ -190,10 +184,6 @@ class ConfigProvider
                 TemplateRendererInterface::class,
             ],
             Handler\UserHandler::class => [
-                ClassMethodsHydrator::class,
-            ],
-            Middleware\EventCreateMiddleware::class => [
-                Service\EventService::class,
                 ClassMethodsHydrator::class,
             ],
             Middleware\EventCreateValidationMiddleware::class => [
@@ -318,7 +308,7 @@ class ConfigProvider
             ],
 
             Validator\EventCreateValidator::class => [
-                EventNameInput::class,
+                EventTitleInput::class,
                 EventDescriptionInput::class,
                 EventTextInput::class,
                 EventStartTimeInput::class,

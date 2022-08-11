@@ -2,21 +2,18 @@
 
 namespace App\Handler;
 
-use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Template\TemplateRendererInterface;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class EventCreateHandler implements RequestHandlerInterface
 {
-    public function __construct(
-        private TemplateRendererInterface $template,
-    ) {
-    }
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new HtmlResponse($this->template->render('app::event_create_form', []));
+        $data = $request->getParsedBody();
+
+        return new JsonResponse($data, HTTP::STATUS_CREATED);
     }
 }
