@@ -19,7 +19,7 @@ class EventTitleInput extends Input
             [
                 'encoding' => 'UTF-8',
                 'min' => 3,
-                'max' => 255,
+                'max' => 50,
                 'inclusive' => true,
             ]
         );

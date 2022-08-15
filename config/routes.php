@@ -20,9 +20,10 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/event[/]',
         [
-            App\Handler\EventAboutHandler::class,
+            App\Middleware\EventListMiddleware::class,
+            App\Handler\EventListHandler::class,
         ],
-        App\Handler\EventAboutHandler::class
+        App\Handler\EventListHandler::class
     );
     $app->post(
         '/event[/]',
@@ -49,14 +50,6 @@ return static function (Mezzio\Application $app): void {
             App\Handler\EventNameHandler::class,
         ],
         App\Handler\EventNameHandler::class
-    );
-    $app->get(
-        '/event/list[/]',
-        [
-            App\Middleware\EventListMiddleware::class,
-            App\Handler\EventListHandler::class,
-        ],
-        App\Handler\EventListHandler::class
     );
     $app->put(
         '/event/participant/subscribe/{eventId:\d+}[/]',

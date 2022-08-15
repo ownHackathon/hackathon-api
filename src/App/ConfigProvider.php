@@ -96,7 +96,6 @@ class ConfigProvider
                 NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
-                Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\ProjectHandler::class => ConfigAbstractFactory::class,
@@ -162,9 +161,6 @@ class ConfigProvider
                 ParticipantService::class,
                 ProjectService::class,
                 TopicPoolService::class,
-            ],
-            Handler\EventAboutHandler::class => [
-                TemplateRendererInterface::class,
             ],
             Handler\EventListHandler::class => [
                 UserService::class,
