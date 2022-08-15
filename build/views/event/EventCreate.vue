@@ -255,22 +255,22 @@ function checkForm() {
     let formFilled = true;
 
     document.getElementById('error-container').classList.add('hidden');
-    document.getElementById('eventTitle').classList.add('inpput');
+    document.getElementById('eventTitle').classList.add('input');
     document.getElementById('eventTitle').classList.remove('input_failure');
-    document.getElementById('eventDescription').classList.add('inpput');
+    document.getElementById('eventDescription').classList.add('input');
     document.getElementById('eventDescription').classList.remove('input_failure');
     document.getElementById('eventText').classList.add('textarea');
     document.getElementById('eventText').classList.remove('textarea_failure');
-    document.getElementById('eventDuration').classList.add('inpput');
+    document.getElementById('eventDuration').classList.add('input');
     document.getElementById('eventDuration').classList.remove('input_failure');
 
     if (payload.title.length < 3 || payload.title.length > 50) {
-        document.getElementById('eventTitle').classList.remove('inpput');
+        document.getElementById('eventTitle').classList.remove('input');
         document.getElementById('eventTitle').classList.add('input_failure');
         formFilled = false;
     }
     if (payload.description.length < 10 || payload.description.length > 255) {
-        document.getElementById('eventDescription').classList.remove('inpput');
+        document.getElementById('eventDescription').classList.remove('input');
         document.getElementById('eventDescription').classList.add('input_failure');
         formFilled = false;
     }
@@ -280,7 +280,7 @@ function checkForm() {
         formFilled = false;
     }
     if (payload.duration < 1 || payload.duration > 356) {
-        document.getElementById('eventDuration').classList.remove('inpput');
+        document.getElementById('eventDuration').classList.remove('input');
         document.getElementById('eventDuration').classList.add('input_failure');
         formFilled = false;
     }
