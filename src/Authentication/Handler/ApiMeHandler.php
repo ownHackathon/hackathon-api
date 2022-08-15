@@ -27,8 +27,7 @@ class ApiMeHandler implements RequestHandlerInterface
 
         $data = $this->hydrator->extract($user);
 
-        unset($data['password']);
-        unset($data['id']);
+        unset($data['id'], $data['password'], $data['email']);
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }
