@@ -65,9 +65,9 @@ return static function (Mezzio\Application $app): void {
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\EventParticipantUnsubscribeMiddleware::class,
-            App\Handler\EventParticipantUnsubsribeHandler::class,
+            App\Handler\EventParticipantUnsubscribeHandler::class,
         ],
-        App\Handler\EventParticipantUnsubsribeHandler::class
+        App\Handler\EventParticipantUnsubscribeHandler::class
     );
     $app->get(
         '/project/{projectId:\d+}[/]',

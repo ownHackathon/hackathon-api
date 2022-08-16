@@ -9,8 +9,8 @@ use Laminas\InputFilter\InputFilter;
 class TopicCreateValidator extends InputFilter
 {
     public function __construct(
-        private TopicInput $topicInput,
-        private TopicDescriptionInput $topicDescriptionInput,
+        private readonly TopicInput $topicInput,
+        private readonly TopicDescriptionInput $topicDescriptionInput,
     ) {
         $this->add($this->topicInput);
         $this->add($this->topicDescriptionInput);

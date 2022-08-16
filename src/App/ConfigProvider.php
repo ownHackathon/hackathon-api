@@ -69,7 +69,7 @@ class ConfigProvider
             'invokables' => [
                 Handler\EventNameHandler::class,
                 Handler\EventCreateHandler::class,
-                Handler\EventParticipantUnsubsribeHandler::class,
+                Handler\EventParticipantUnsubscribeHandler::class,
                 Handler\PingHandler::class,
                 Handler\IndexHandler::class,
 

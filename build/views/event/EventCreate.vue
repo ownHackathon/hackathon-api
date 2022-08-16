@@ -3,7 +3,7 @@
         :header="formData.failureView.header"
         :content="formData.failureView.content"
     />
-    <form @submit.prevent="checkForm" action="/event/create">
+    <form @submit.prevent="checkForm">
         <div class="div-table pt-6">
             <div class="div-table-header">
                 Event erstellen

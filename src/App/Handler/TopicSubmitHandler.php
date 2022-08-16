@@ -27,7 +27,7 @@ class TopicSubmitHandler implements RequestHandlerInterface
         $data['validationMessages'] = $request->getAttribute('validationMessages');
 
         if (null === $data['validationMessages']) {
-            $data['info'] = 'Vielen Dank für den Themenvorschalg.';
+            $data['info'] = 'Vielen Dank für den Themenvorschlag.';
         }
 
         return new HtmlResponse($this->template->render('app::topic_submit', $data));

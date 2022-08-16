@@ -28,8 +28,8 @@
     "vue": "^3.2.13",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.14",
-    "vue3-markdown-it": "^1.0.10",
-    "vue-toastification": "^2.0.0-rc.5"
+    "vue-toastification": "^2.0.0-rc.5",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

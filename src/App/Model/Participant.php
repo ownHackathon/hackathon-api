@@ -68,7 +68,7 @@ class Participant
 
     public function isApproved(): bool
     {
-        return (bool)$this->approved;
+        return $this->approved;
     }
 
     public function setApproved(int|bool $approved): self
@@ -80,7 +80,7 @@ class Participant
 
     public function isDisqualified(): bool
     {
-        return (bool)$this->disqualified;
+        return $this->disqualified;
     }
 
     public function setDisqualified(int|bool $disqualified): self

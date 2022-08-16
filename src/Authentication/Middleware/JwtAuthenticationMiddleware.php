@@ -20,7 +20,7 @@ class JwtAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private readonly UserService $userService,
-        private readonly string $tokenSecrect,
+        private readonly string $tokenSecret,
         private readonly string $tokenAlgorithmus
     ) {
     }
@@ -34,7 +34,7 @@ class JwtAuthenticationMiddleware implements MiddlewareInterface
 
         if ($token) {
             try {
-                $tokenData = JWT::decode($token, new Key($this->tokenSecrect, $this->tokenAlgorithmus));
+                $tokenData = JWT::decode($token, new Key($this->tokenSecret, $this->tokenAlgorithmus));
             } catch (Exception $e) {
                 return new JsonResponse(['message' => 'invalid Token'], HTTP::STATUS_UNAUTHORIZED);
             }
