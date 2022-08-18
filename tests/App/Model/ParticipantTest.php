@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class ParticipantTest extends TestCase
 {
     private Participant $participant;
+    private string $testTime = '1000-01-01 00:00:00';
 
     protected function setUp(): void
     {
@@ -16,7 +17,7 @@ class ParticipantTest extends TestCase
         parent::setUp();
     }
 
-    public function testCanSetAndGetId()
+    public function testCanSetAndGetId(): void
     {
         $participantId = $this->participant->setId(1);
         $id = $participantId->getId();
@@ -26,7 +27,7 @@ class ParticipantTest extends TestCase
         $this->assertSame(1, $id);
     }
 
-    public function testCanSetAndGetUserId()
+    public function testCanSetAndGetUserId(): void
     {
         $participantUserId = $this->participant->setUserId(1);
         $userId = $participantUserId->getUserId();
@@ -36,7 +37,7 @@ class ParticipantTest extends TestCase
         $this->assertSame(1, $userId);
     }
 
-    public function testCanSetAndGetEventId()
+    public function testCanSetAndGetEventId(): void
     {
         $participantEventId = $this->participant->setEventId(1);
         $eventId = $participantEventId->getEventId();
@@ -46,18 +47,17 @@ class ParticipantTest extends TestCase
         $this->assertSame(1, $eventId);
     }
 
-    public function testCanSetAndGetRequestTime()
+    public function testCanSetAndGetRequestTime(): void
     {
-        $time = '1000-01-01 00:00:00';
-        $participantRequestTime = $this->participant->setRequestTime(new DateTime($time));
+        $participantRequestTime = $this->participant->setRequestTime(new DateTime($this->testTime));
         $requestTime = $participantRequestTime->getRequestTime();
 
         $this->assertInstanceOf(Participant::class, $participantRequestTime);
         $this->assertInstanceOf(DateTime::class, $requestTime);
-        $this->assertSame($time, $requestTime->format('Y-m-d H:i:s'));
+        $this->assertSame($this->testTime, $requestTime->format('Y-m-d H:i:s'));
     }
 
-    public function testCanSetAndGetApproved()
+    public function testCanSetAndGetApproved(): void
     {
         $participantApproved = $this->participant->setApproved(true);
         $approved = $participantApproved->isApproved();
@@ -67,7 +67,7 @@ class ParticipantTest extends TestCase
         $this->assertSame(true, $approved);
     }
 
-    public function testCanSetAndGetDisqualified()
+    public function testCanSetAndGetDisqualified(): void
     {
         $participantDisqualified = $this->participant->setDisqualified(true);
         $disqualified = $participantDisqualified->isDisqualified();

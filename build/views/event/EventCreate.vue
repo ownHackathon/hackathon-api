@@ -3,7 +3,7 @@
         :header="formData.failureView.header"
         :content="formData.failureView.content"
     />
-    <form @submit.prevent="checkForm">
+    <form @submit.prevent="checkForm" novalidate>
         <div class="div-table pt-6">
             <div class="div-table-header">
                 Event erstellen
@@ -253,7 +253,6 @@ function toggleEventDurationPlaceholder(value) {
 
 function checkForm() {
     let formFilled = true;
-
     document.getElementById('error-container').classList.add('hidden');
     document.getElementById('eventTitle').classList.add('input');
     document.getElementById('eventTitle').classList.remove('input_failure');

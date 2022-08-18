@@ -7,7 +7,7 @@ use App\Model\Event;
 
 class EventTable extends AbstractTable
 {
-    public function insert(Event $event): self
+    public function insert(Event $event): int|bool
     {
         $values = [
             'userId' => $event->getUserId(),
@@ -18,9 +18,7 @@ class EventTable extends AbstractTable
             'duration' => $event->getDuration(),
         ];
 
-        $this->query->insertInto($this->table, $values)->execute();
-
-        return $this;
+        return (int)$this->query->insertInto($this->table, $values)->execute();
     }
 
     public function findAll(string $order = 'startTime', string $sort = 'ASC'): bool|array

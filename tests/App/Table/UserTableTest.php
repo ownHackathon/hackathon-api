@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace AppTest\Table;
 
 use App\Model\User;
+use App\Table\UserTable;
 
 /**
  * @property UserTable $table

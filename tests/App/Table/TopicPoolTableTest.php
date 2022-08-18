@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace AppTest\Table;
 
 use App\Model\Topic;
+use App\Table\TopicPoolTable;
 use PHPUnit\Framework\TestCase;
 
 /**

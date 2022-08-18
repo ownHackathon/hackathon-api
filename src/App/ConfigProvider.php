@@ -70,12 +70,7 @@ class ConfigProvider
                 Handler\EventNameHandler::class,
                 Handler\EventCreateHandler::class,
                 Handler\EventParticipantUnsubscribeHandler::class,
-                Handler\PingHandler::class,
                 Handler\IndexHandler::class,
-
-                Rating\ProjectRatingCalculator::class,
-
-                Service\TopicVoterService::class,
 
                 EmailInput::class,
                 EventDescriptionInput::class,
@@ -110,11 +105,6 @@ class ConfigProvider
                 Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventTopicVoteMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectEventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
@@ -125,25 +115,15 @@ class ConfigProvider
                 Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
-                Service\EventRatingCategoryService::class => ConfigAbstractFactory::class,
-                Service\EventRatingService::class => ConfigAbstractFactory::class,
                 Service\EventService::class => EventServiceFactory::class,
                 Service\ParticipantService::class => ParticipantServiceFactory::class,
                 Service\ProjectService::class => ProjectServiceFactory::class,
-                Service\RatingCategoryService::class => ConfigAbstractFactory::class,
-                Service\RatingService::class => ConfigAbstractFactory::class,
-                Service\RoleService::class => ConfigAbstractFactory::class,
                 Service\TopicPoolService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => UserServiceFactory::class,
 
-                Table\EventRatingCategoryTable::class => ConfigAbstractFactory::class,
-                Table\EventRatingTable::class => ConfigAbstractFactory::class,
                 Table\EventTable::class => ConfigAbstractFactory::class,
                 Table\ParticipantTable::class => ConfigAbstractFactory::class,
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
-                Table\RatingCategoryTable::class => ConfigAbstractFactory::class,
-                Table\RatingTable::class => ConfigAbstractFactory::class,
-                Table\RoleTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
 
@@ -202,24 +182,6 @@ class ConfigProvider
                 Service\ParticipantService::class,
                 Service\EventService::class,
             ],
-            Middleware\EventRatingReleasedMiddleware::class => [
-                Service\EventService::class,
-            ],
-            Middleware\EventTopicVoteMiddleware::class => [
-                Service\TopicPoolService::class,
-                Service\TopicVoterService::class,
-            ],
-            Middleware\ParticipantProjectMiddleware::class => [
-                Service\ProjectService::class,
-                Service\UserService::class,
-            ],
-            Middleware\ProjectCategoryRatingMiddleware::class => [
-                Service\RatingService::class,
-                Rating\ProjectRatingCalculator::class,
-            ],
-            Middleware\ProjectEventRatingReleasedMiddleware::class => [
-                Service\EventService::class,
-            ],
             Middleware\ProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
@@ -248,35 +210,9 @@ class ConfigProvider
             Middleware\UserMiddleware::class => [
                 Service\UserService::class,
             ],
-            Service\EventRatingCategoryService::class => [
-                Table\EventRatingCategoryTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\EventRatingService::class => [
-                Table\EventRatingTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RatingCategoryService::class => [
-                Table\RatingCategoryTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RatingService::class => [
-                Table\RatingTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RoleService::class => [
-                Table\RoleTable::class,
-                ReflectionHydrator::class,
-            ],
             Service\TopicPoolService::class => [
                 Table\TopicPoolTable::class,
                 ReflectionHydrator::class,
-            ],
-            Table\EventRatingCategoryTable::class => [
-                Query::class,
-            ],
-            Table\EventRatingTable::class => [
-                Query::class,
             ],
             Table\EventTable::class => [
                 Query::class,
@@ -285,15 +221,6 @@ class ConfigProvider
                 Query::class,
             ],
             Table\ProjectTable::class => [
-                Query::class,
-            ],
-            Table\RatingCategoryTable::class => [
-                Query::class,
-            ],
-            Table\RatingTable::class => [
-                Query::class,
-            ],
-            Table\RoleTable::class => [
                 Query::class,
             ],
             Table\TopicPoolTable::class => [

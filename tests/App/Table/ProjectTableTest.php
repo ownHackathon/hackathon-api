@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace AppTest\Table;
+
+use App\Table\ProjectTable;
 
 /**
  * @property ProjectTable $table

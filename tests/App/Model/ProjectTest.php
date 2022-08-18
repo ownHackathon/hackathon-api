@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Model;
+namespace AppTest\Model;
 
+use App\Model\Project;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class ProjectTest extends TestCase
 {
     private Project $project;
+    private string $testTime = '1000-01-01 00:00:00';
 
     protected function setUp(): void
     {
@@ -16,7 +18,7 @@ class ProjectTest extends TestCase
         parent::setUp();
     }
 
-    public function testCanSetAndGetId()
+    public function testCanSetAndGetId(): void
     {
         $projectId = $this->project->setId(1);
         $id = $projectId->getId();
@@ -26,7 +28,7 @@ class ProjectTest extends TestCase
         $this->assertSame(1, $id);
     }
 
-    public function testCanSetAndGetParticipantId()
+    public function testCanSetAndGetParticipantId(): void
     {
         $projectParticipantId = $this->project->setParticipantId(1);
         $participantId = $projectParticipantId->getParticipantId();
@@ -36,7 +38,7 @@ class ProjectTest extends TestCase
         $this->assertSame(1, $participantId);
     }
 
-    public function testCanSetAndGetTitle()
+    public function testCanSetAndGetTitle(): void
     {
         $projectTitle = $this->project->setTitle('test');
         $title = $projectTitle->getTitle();
@@ -46,7 +48,7 @@ class ProjectTest extends TestCase
         $this->assertSame('test', $title);
     }
 
-    public function testCanSetAndGetDescription()
+    public function testCanSetAndGetDescription(): void
     {
         $projectDescription = $this->project->setDescription('test');
         $description = $projectDescription->getDescription();
@@ -56,7 +58,7 @@ class ProjectTest extends TestCase
         $this->assertSame('test', $description);
     }
 
-    public function testCanSetAndGetGitRepoUri()
+    public function testCanSetAndGetGitRepoUri(): void
     {
         $projectGitRepoUri = $this->project->setGitRepoUri('https://github.com');
         $gitRepoUri = $projectGitRepoUri->getGitRepoUri();
@@ -66,7 +68,7 @@ class ProjectTest extends TestCase
         $this->assertSame('https://github.com', $gitRepoUri);
     }
 
-    public function testCanSetAndGetDemoPageUri()
+    public function testCanSetAndGetDemoPageUri(): void
     {
         $projectDemoPageUri = $this->project->setDemoPageUri('https://github.com');
         $demoPageUri = $projectDemoPageUri->getDemoPageUri();
@@ -76,14 +78,13 @@ class ProjectTest extends TestCase
         $this->assertSame('https://github.com', $demoPageUri);
     }
 
-    public function testCanSetAndGetCreateTime()
+    public function testCanSetAndGetCreateTime(): void
     {
-        $time = '1000-01-01 00:00:00';
-        $projectCreateTime = $this->project->setCreateTime(new DateTime($time));
+        $projectCreateTime = $this->project->setCreateTime(new DateTime($this->testTime));
         $createTime = $projectCreateTime->getCreateTime();
 
         $this->assertInstanceOf(Project::class, $projectCreateTime);
         $this->assertInstanceOf(DateTime::class, $createTime);
-        $this->assertSame($time, $createTime->format('Y-m-d H:i:s'));
+        $this->assertSame($this->testTime, $createTime->format('Y-m-d H:i:s'));
     }
 }

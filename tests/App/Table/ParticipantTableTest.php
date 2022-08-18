@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace AppTest\Table;
 
 use App\Model\Participant;
+use App\Table\ParticipantTable;
 
 /**
  * @property ParticipantTable $table
@@ -22,7 +23,7 @@ class ParticipantTableTest extends AbstractTableTest
 
         $insert->expects($this->once())
             ->method('execute')
-            ->willReturn('');
+            ->willReturn(true);
 
         $insertParticipant = $this->table->insert($participant);
 

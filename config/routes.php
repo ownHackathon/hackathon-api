@@ -69,19 +69,6 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventParticipantUnsubscribeHandler::class
     );
-    $app->get(
-        '/project/{projectId:\d+}[/]',
-        [
-            App\Middleware\ProjectMiddleware::class,
-            App\Middleware\ProjectParticipantMiddleware::class,
-            App\Middleware\ProjectOwnerMiddleware::class,
-            App\Middleware\ProjectEventRatingReleasedMiddleware::class,
-            App\Middleware\ProjectCategoryRatingMiddleware::class,
-            App\Handler\ProjectHandler::class,
-        ],
-        App\Handler\ProjectHandler::class
-    );
-
     $app->post(
         '/user/register[/]',
         [
@@ -145,22 +132,5 @@ return static function (Mezzio\Application $app): void {
             App\Handler\TopicSubmitHandler::class,
         ],
         App\Handler\TopicSubmitHandler::class
-    );
-
-    $app->get(
-        '/api/ping',
-        [
-            App\Handler\PingHandler::class,
-        ],
-        App\Handler\PingHandler::class
-    );
-
-    $app->get(
-        '/admin[/]',
-        [
-            Authentication\Middleware\AdministrationAuthenticationMiddleware::class,
-            Administration\Handler\IndexHandler::class,
-        ],
-        Administration\Handler\IndexHandler::class
     );
 };

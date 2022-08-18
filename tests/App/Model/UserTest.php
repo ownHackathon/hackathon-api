@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class UserTest extends TestCase
 {
     private User $user;
+    private string $testTime = '1000-01-01 00:00:00';
 
     protected function setUp(): void
     {
@@ -16,7 +17,7 @@ class UserTest extends TestCase
         parent::setUp();
     }
 
-    public function testPropertiesIsByInitializeNull()
+    public function testPropertiesIsByInitializeNull(): void
     {
         $email = $this->user->getEmail();
         $lastLogin = $this->user->getLastAction();
@@ -25,7 +26,7 @@ class UserTest extends TestCase
         $this->assertNull($lastLogin);
     }
 
-    public function testCanSetAndGetId()
+    public function testCanSetAndGetId(): void
     {
         $userId = $this->user->setId(1);
         $id = $userId->getId();
@@ -35,7 +36,17 @@ class UserTest extends TestCase
         $this->assertSame(1, $id);
     }
 
-    public function testCanSetAndGetRoleId()
+    public function testCanSetAndGetUuId(): void
+    {
+        $userId = $this->user->setUuid('asdfasfd-sadf-asfd-as-dfas-dfdwa');
+        $uuid = $userId->getUuid();
+
+        $this->assertInstanceOf(User::class, $userId);
+        $this->assertIsString($uuid);
+        $this->assertSame('asdfasfd-sadf-asfd-as-dfas-dfdwa', $uuid);
+    }
+
+    public function testCanSetAndGetRoleId(): void
     {
         $userRoleId = $this->user->setRoleId(1);
         $roleId = $userRoleId->getRoleId();
@@ -45,7 +56,7 @@ class UserTest extends TestCase
         $this->assertSame(1, $roleId);
     }
 
-    public function testCanSetAndGetName()
+    public function testCanSetAndGetName(): void
     {
         $userName = $this->user->setName('test');
         $name = $userName->getName();
@@ -55,7 +66,7 @@ class UserTest extends TestCase
         $this->assertSame('test', $name);
     }
 
-    public function testCanSetAndGetPassword()
+    public function testCanSetAndGetPassword(): void
     {
         $userPassword = $this->user->setPassword('test');
         $password = $userPassword->getPassword();
@@ -65,7 +76,7 @@ class UserTest extends TestCase
         $this->assertSame('test', $password);
     }
 
-    public function testCanSetAndGetEmail()
+    public function testCanSetAndGetEmail(): void
     {
         $email = $this->user->getEmail();
         $this->assertNull($email);
@@ -78,29 +89,27 @@ class UserTest extends TestCase
         $this->assertSame('test@dev.de', $email);
     }
 
-    public function testCanSetAndGetRegistrationTime()
+    public function testCanSetAndGetRegistrationTime(): void
     {
-        $time = '1000-01-01 00:00:00';
-        $userRegistrationTime = $this->user->setRegistrationTime(new DateTime($time));
+        $userRegistrationTime = $this->user->setRegistrationTime(new DateTime($this->testTime));
         $registrationTime = $userRegistrationTime->getRegistrationTime();
 
         $this->assertInstanceOf(User::class, $userRegistrationTime);
         $this->assertInstanceOf(DateTime::class, $registrationTime);
-        $this->assertSame($time, $registrationTime->format('Y-m-d H:i:s'));
+        $this->assertSame($this->testTime, $registrationTime->format('Y-m-d H:i:s'));
     }
 
-    public function testCanSetAndGetLastLogin()
+    public function testCanSetAndGetLastLogin(): void
     {
-        $time = '1000-01-01 00:00:00';
-        $userLastLogin = $this->user->setLastAction(new DateTime($time));
+        $userLastLogin = $this->user->setLastAction(new DateTime($this->testTime));
         $lastLogin = $userLastLogin->getLastAction();
 
         $this->assertInstanceOf(User::class, $userLastLogin);
         $this->assertInstanceOf(DateTime::class, $lastLogin);
-        $this->assertSame($time, $lastLogin->format('Y-m-d H:i:s'));
+        $this->assertSame($this->testTime, $lastLogin->format('Y-m-d H:i:s'));
     }
 
-    public function testCanSetAndGetActive()
+    public function testCanSetAndGetActive(): void
     {
         $userActive = $this->user->setActive(true);
         $active = $this->user->isActive();
