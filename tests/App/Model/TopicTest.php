@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model;
+namespace AppTest\Model;
 
+use App\Model\Topic;
 use PHPUnit\Framework\TestCase;
 
 class TopicTest extends TestCase

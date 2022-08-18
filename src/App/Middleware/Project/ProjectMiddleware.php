@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware;
+namespace App\Middleware\Project;
 
 use App\Model\Project;
 use App\Service\ProjectService;

@@ -2,23 +2,29 @@
 
 namespace App\Middleware;
 
-use App\Service\TopicPoolService;
+use App\Handler\IndexHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicListMiddleware implements MiddlewareInterface
+use function array_key_exists;
+
+class FrontLoaderMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly TopicPoolService $topicPoolService,
+        private readonly IndexHandler $indexHandler
     ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $topics = $this->topicPoolService->findAll();
+        $header = $request->getHeaders();
 
-        return $handler->handle($request->withAttribute('topics', $topics));
+        if (!array_key_exists('x-frontloader', $header)) {
+            return $this->indexHandler->handle($request);
+        }
+
+        return $handler->handle($request);
     }
 }

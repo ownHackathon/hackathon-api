@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware;
+namespace App\Middleware\Topic;
 
 use App\Validator\TopicCreateValidator;
 use Psr\Http\Message\ResponseInterface;

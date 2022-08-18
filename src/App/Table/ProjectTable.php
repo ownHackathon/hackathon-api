@@ -2,8 +2,6 @@
 
 namespace App\Table;
 
-use Administration\Table\AbstractTable;
-
 class ProjectTable extends AbstractTable
 {
     public function findByParticipantId(int $id): bool|array

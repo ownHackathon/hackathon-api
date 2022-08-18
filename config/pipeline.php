@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Administration\Middleware\FrontLoaderMiddleware;
-use Administration\Middleware\UpdateLastUserActionTimeMiddleware;
+use App\Middleware\FrontLoaderMiddleware;
+use App\Middleware\UpdateLastUserActionTimeMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;

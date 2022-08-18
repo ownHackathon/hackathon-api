@@ -12,7 +12,7 @@ class UserMiddlewareTest extends AbstractMiddlewareTest
     public function testReturnResponseInterface(): void
     {
         $service = $this->createMock(UserService::class);
-        $user = new User();
+        $user = $this->createMock(User::class);
 
         $this->request->expects($this->once())
             ->method('getAttribute')

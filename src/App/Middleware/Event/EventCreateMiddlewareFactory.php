@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Middleware\Event;
 
 use App\Hydrator\ReflectionHydrator;
 use App\Service\EventService;

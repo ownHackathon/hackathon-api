@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Factory;
+namespace App\Factory;
 
 use Envms\FluentPDO\Query;
 use PDO;

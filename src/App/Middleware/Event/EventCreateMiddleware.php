@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware;
+namespace App\Middleware\Event;
 
 use App\Hydrator\ReflectionHydrator;
 use App\Model\Event;

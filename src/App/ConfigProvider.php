@@ -6,7 +6,7 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
-use App\Middleware\EventCreateMiddlewareFactory;
+use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Service\EventServiceFactory;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
@@ -32,7 +32,6 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
 {
@@ -93,26 +92,29 @@ class ConfigProvider
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
-                Handler\ProjectHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
-                Middleware\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
-                Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
+                Middleware\Event\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventNameMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventListMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\Project\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Project\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Project\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicListMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
+
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\EventService::class => EventServiceFactory::class,
@@ -149,63 +151,59 @@ class ConfigProvider
                 Service\ParticipantService::class,
                 Service\ProjectService::class,
             ],
-            Handler\ProjectHandler::class => [
-                ClassMethodsHydrator::class,
-                TemplateRendererInterface::class,
-            ],
-            Handler\TopicHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\TopicSubmitHandler::class => [
-                TemplateRendererInterface::class,
-            ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
             ],
-            Middleware\EventCreateValidationMiddleware::class => [
+            Middleware\Event\EventCreateValidationMiddleware::class => [
                 EventCreateValidator::class,
             ],
-            Middleware\EventListMiddleware::class => [
+            Middleware\Event\EventListMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventMiddleware::class => [
+            Middleware\Event\EventMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventNameMiddleware::class => [
+            Middleware\Event\EventNameMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventParticipantSubscribeMiddleware::class => [
+            Middleware\Event\EventParticipantSubscribeMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\EventService::class,
             ],
-            Middleware\EventParticipantUnsubscribeMiddleware::class => [
+            Middleware\Event\EventParticipantUnsubscribeMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\EventService::class,
             ],
-            Middleware\ProjectMiddleware::class => [
+            Middleware\FrontLoaderMiddleware::class => [
+                Handler\IndexHandler::class,
+            ],
+            Middleware\Project\ProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
-            Middleware\ProjectOwnerMiddleware::class => [
+            Middleware\Project\ProjectOwnerMiddleware::class => [
                 Service\UserService::class,
             ],
-            Middleware\ProjectParticipantMiddleware::class => [
+            Middleware\Project\ProjectParticipantMiddleware::class => [
                 Service\ParticipantService::class,
             ],
-            Middleware\TopicCreateValidationMiddleware::class => [
+            Middleware\Topic\TopicCreateValidationMiddleware::class => [
                 Validator\TopicCreateValidator::class,
             ],
-            Middleware\TopicEntryStatisticMiddleware::class => [
+            Middleware\Topic\TopicEntryStatisticMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicListAvailableMiddleware::class => [
+            Middleware\Topic\TopicListAvailableMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicListMiddleware::class => [
+            Middleware\Topic\TopicListMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicSubmitMiddleware::class => [
+            Middleware\Topic\TopicSubmitMiddleware::class => [
                 Service\TopicPoolService::class,
                 ClassMethodsHydrator::class,
+            ],
+            Middleware\UpdateLastUserActionTimeMiddleware::class => [
+                UserService::class,
             ],
             Middleware\UserMiddleware::class => [
                 Service\UserService::class,

@@ -2,14 +2,14 @@
 
 namespace App\Middleware;
 
-use App\Model\Participant;
+use App\Model\User;
 use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class ProjectOwnerMiddleware implements MiddlewareInterface
+class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private readonly UserService $userService,
@@ -18,11 +18,12 @@ class ProjectOwnerMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Participant $participant */
-        $participant = $request->getAttribute(Participant::class);
+        $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        $projectOwner = $this->userService->findById($participant->getUserId());
+        if ($user instanceof User) {
+            $user = $this->userService->updateLastUserActionTime($user);
+        }
 
-        return $handler->handle($request->withAttribute('projectOwner', $projectOwner));
+        return $handler->handle($request->withAttribute(User::USER_ATTRIBUTE, $user));
     }
 }

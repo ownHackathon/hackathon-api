@@ -2,7 +2,7 @@
 
 namespace AppTest\Table;
 
-use Administration\Table\AbstractTable;
+use App\Table\AbstractTable;
 use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;

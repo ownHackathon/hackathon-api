@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Table;
+namespace App\Table;
 
 use Envms\FluentPDO\Query;
 use ReflectionClass;

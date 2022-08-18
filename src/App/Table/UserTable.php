@@ -2,7 +2,6 @@
 
 namespace App\Table;
 
-use Administration\Table\AbstractTable;
 use App\Model\User;
 use DateTime;
 
