@@ -18,17 +18,18 @@ class UserTableTest extends AbstractTableTest
             'name' => $user->getName(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
+            'uuid' => $user->getUuid(),
         ];
 
         $insert = $this->createInsert($values);
 
         $insert->expects($this->once())
             ->method('execute')
-            ->willReturn('');
+            ->willReturn(1);
 
         $insertUser = $this->table->insert($user);
 
-        $this->assertInstanceOf(UserTable::class, $insertUser);
+        $this->assertSame(1, $insertUser);
     }
 
     public function testCanFindById(): void

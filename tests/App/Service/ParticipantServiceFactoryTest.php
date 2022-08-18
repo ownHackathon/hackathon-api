@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Service\ParticipantService;
+use App\Service\ParticipantServiceFactory;
 use App\Table\ParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;

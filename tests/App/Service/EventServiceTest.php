@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Model\Event;
+use App\Service\EventService;
 use App\Table\EventTable;
 
 class EventServiceTest extends AbstractServiceTest
@@ -109,7 +110,7 @@ class EventServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(Event::class, $event[0]);
     }
 
-    public function testCheckIsRatingCompleted()
+    public function testCheckIsRatingCompleted(): void
     {
         $table = $this->createMock(EventTable::class);
 

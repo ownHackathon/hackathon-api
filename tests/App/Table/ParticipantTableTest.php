@@ -23,11 +23,11 @@ class ParticipantTableTest extends AbstractTableTest
 
         $insert->expects($this->once())
             ->method('execute')
-            ->willReturn(true);
+            ->willReturn(1);
 
         $insertParticipant = $this->table->insert($participant);
 
-        $this->assertInstanceOf(ParticipantTable::class, $insertParticipant);
+        $this->assertSame(1, $insertParticipant);
     }
 
     public function testCanFindById(): void

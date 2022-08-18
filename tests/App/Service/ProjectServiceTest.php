@@ -1,28 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Model\Project;
+use App\Service\ProjectService;
 use App\Table\ProjectTable;
 
 class ProjectServiceTest extends AbstractServiceTest
 {
-    public function testFindByIdThrowException(): void
-    {
-        $table = $this->createMock(ProjectTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn(false);
-
-        $service = new ProjectService($table, $this->hydrator);
-
-        $this->expectException('InvalidArgumentException');
-
-        $service->findById(1);
-    }
-
     public function testCanFindById(): void
     {
         $table = $this->createMock(ProjectTable::class);
