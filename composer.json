@@ -45,10 +45,6 @@
         "mezzio/mezzio": "^3.6.0",
         "mezzio/mezzio-fastroute": "^3.3.0",
         "mezzio/mezzio-helpers": "^5.7.0",
-        "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
-        "mezzio/mezzio-session": "^1.6.0",
-        "mezzio/mezzio-session-ext": "^1.12.0",
-        "mustache/mustache": "^2.13",
         "ramsey/uuid": "^4.3"
     },
     "require-dev": {

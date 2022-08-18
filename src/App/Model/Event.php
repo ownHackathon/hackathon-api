@@ -12,7 +12,8 @@ class Event
     public const STATUS_EVALUATION = 4;
     public const STATUS_COMPLETE = 5;
     public const STATUS_CLOSED = 6;
-    public const STATUS_HIDDEN = 7;
+    public const STATUS_ABORTED = 7;
+    public const STATUS_HIDDEN = 8;
 
     private int $id = 0;
     private int $userId = 0;

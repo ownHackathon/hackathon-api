@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserRegisterValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private RegisterValidator $validator
+        private readonly RegisterValidator $validator
     ) {
     }
 

@@ -1,6 +1,5 @@
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
-import router from "@/router";
 
 export default function useUserService() {
   const user = useUserStore();
@@ -28,7 +27,6 @@ export default function useUserService() {
   const unLoadUser = () => {
     user.user = null;
     localStorage.removeItem('token');
-    router.push('/');
   };
 
   const isAuthenticated = () => {

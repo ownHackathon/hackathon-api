@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Model\Topic;
+use App\Service\TopicPoolService;
 use App\Table\TopicPoolTable;
 
 class TopicPoolServiceTest extends AbstractServiceTest

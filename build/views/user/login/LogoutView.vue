@@ -2,12 +2,15 @@
 import {useRouter} from "vue-router";
 import useUserService from "@/composables/UserService";
 import {onMounted} from "vue";
+import {useToast} from "vue-toastification";
 
 const router = useRouter();
+const toast = useToast();
 const {unLoadUser} = useUserService();
 
 onMounted(() => {
   unLoadUser();
-  router.push('/');
+  toast.success('Abmeldung erfolgreich');
+  router.back();
 });
 </script>

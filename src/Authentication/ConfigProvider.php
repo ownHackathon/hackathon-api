@@ -12,7 +12,6 @@ use Authentication\Handler\LoginHandlerFactory;
 use Authentication\Validator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
 {

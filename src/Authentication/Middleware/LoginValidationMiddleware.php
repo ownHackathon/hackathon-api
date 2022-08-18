@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class LoginValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private LoginValidator $validator,
+        private readonly LoginValidator $validator,
     ) {
     }
 

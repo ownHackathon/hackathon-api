@@ -6,6 +6,7 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
+use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Service\EventServiceFactory;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
@@ -18,9 +19,9 @@ use App\Validator\EventCreateValidator;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\EventDescriptionInput;
 use App\Validator\Input\EventDurationInput;
-use App\Validator\Input\EventNameInput;
 use App\Validator\Input\EventStartTimeInput;
 use App\Validator\Input\EventTextInput;
+use App\Validator\Input\EventTitleInput;
 use App\Validator\Input\PasswordInput;
 use App\Validator\Input\TopicDescriptionInput;
 use App\Validator\Input\TopicInput;
@@ -31,7 +32,6 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
 {
@@ -67,18 +67,14 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\EventNameHandler::class,
-                Handler\EventParticipantUnsubsribeHandler::class,
-                Handler\PingHandler::class,
+                Handler\EventCreateHandler::class,
+                Handler\EventParticipantUnsubscribeHandler::class,
                 Handler\IndexHandler::class,
-
-                Rating\ProjectRatingCalculator::class,
-
-                Service\TopicVoterService::class,
 
                 EmailInput::class,
                 EventDescriptionInput::class,
                 EventDurationInput::class,
-                EventNameInput::class,
+                EventTitleInput::class,
                 EventStartTimeInput::class,
                 EventTextInput::class,
                 PasswordInput::class,
@@ -94,57 +90,42 @@ class ConfigProvider
                 NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
-                Handler\EventCreateHandler::class => ConfigAbstractFactory::class,
-                Handler\EventCreateSubmitHandler::class => ConfigAbstractFactory::class,
-                Handler\EventAboutHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
-                Handler\ProjectHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicSubmitHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
 
-                Middleware\EventCreateMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventNameMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\EventTopicVoteMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ParticipantProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectCategoryRatingMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectEventRatingReleasedMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
+                Middleware\Event\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventParticipantUnsubscribeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventNameMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Event\EventListMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\Project\ProjectMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Project\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Project\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicCreateValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicListMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
+
+                Middleware\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
+
                 Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
-                Service\EventRatingCategoryService::class => ConfigAbstractFactory::class,
-                Service\EventRatingService::class => ConfigAbstractFactory::class,
                 Service\EventService::class => EventServiceFactory::class,
                 Service\ParticipantService::class => ParticipantServiceFactory::class,
                 Service\ProjectService::class => ProjectServiceFactory::class,
-                Service\RatingCategoryService::class => ConfigAbstractFactory::class,
-                Service\RatingService::class => ConfigAbstractFactory::class,
-                Service\RoleService::class => ConfigAbstractFactory::class,
                 Service\TopicPoolService::class => ConfigAbstractFactory::class,
                 Service\UserService::class => UserServiceFactory::class,
 
-                Table\EventRatingCategoryTable::class => ConfigAbstractFactory::class,
-                Table\EventRatingTable::class => ConfigAbstractFactory::class,
                 Table\EventTable::class => ConfigAbstractFactory::class,
                 Table\ParticipantTable::class => ConfigAbstractFactory::class,
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
-                Table\RatingCategoryTable::class => ConfigAbstractFactory::class,
-                Table\RatingTable::class => ConfigAbstractFactory::class,
-                Table\RoleTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
 
@@ -163,15 +144,6 @@ class ConfigProvider
                 ProjectService::class,
                 TopicPoolService::class,
             ],
-            Handler\EventCreateHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\EventCreateSubmitHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\EventAboutHandler::class => [
-                TemplateRendererInterface::class,
-            ],
             Handler\EventListHandler::class => [
                 UserService::class,
             ],
@@ -179,118 +151,66 @@ class ConfigProvider
                 Service\ParticipantService::class,
                 Service\ProjectService::class,
             ],
-            Handler\ProjectHandler::class => [
-                ClassMethodsHydrator::class,
-                TemplateRendererInterface::class,
-            ],
-            Handler\TopicHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\TopicSubmitHandler::class => [
-                TemplateRendererInterface::class,
-            ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
             ],
-            Middleware\EventCreateMiddleware::class => [
-                Service\EventService::class,
-                ClassMethodsHydrator::class,
-            ],
-            Middleware\EventCreateValidationMiddleware::class => [
+            Middleware\Event\EventCreateValidationMiddleware::class => [
                 EventCreateValidator::class,
             ],
-            Middleware\EventListMiddleware::class => [
+            Middleware\Event\EventListMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventMiddleware::class => [
+            Middleware\Event\EventMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventNameMiddleware::class => [
+            Middleware\Event\EventNameMiddleware::class => [
                 Service\EventService::class,
             ],
-            Middleware\EventParticipantSubscribeMiddleware::class => [
+            Middleware\Event\EventParticipantSubscribeMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\EventService::class,
             ],
-            Middleware\EventParticipantUnsubscribeMiddleware::class => [
+            Middleware\Event\EventParticipantUnsubscribeMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\EventService::class,
             ],
-            Middleware\EventRatingReleasedMiddleware::class => [
-                Service\EventService::class,
+            Middleware\FrontLoaderMiddleware::class => [
+                Handler\IndexHandler::class,
             ],
-            Middleware\EventTopicVoteMiddleware::class => [
-                Service\TopicPoolService::class,
-                Service\TopicVoterService::class,
-            ],
-            Middleware\ParticipantProjectMiddleware::class => [
-                Service\ProjectService::class,
-                Service\UserService::class,
-            ],
-            Middleware\ProjectCategoryRatingMiddleware::class => [
-                Service\RatingService::class,
-                Rating\ProjectRatingCalculator::class,
-            ],
-            Middleware\ProjectEventRatingReleasedMiddleware::class => [
-                Service\EventService::class,
-            ],
-            Middleware\ProjectMiddleware::class => [
+            Middleware\Project\ProjectMiddleware::class => [
                 Service\ProjectService::class,
             ],
-            Middleware\ProjectOwnerMiddleware::class => [
+            Middleware\Project\ProjectOwnerMiddleware::class => [
                 Service\UserService::class,
             ],
-            Middleware\ProjectParticipantMiddleware::class => [
+            Middleware\Project\ProjectParticipantMiddleware::class => [
                 Service\ParticipantService::class,
             ],
-            Middleware\TopicCreateValidationMiddleware::class => [
+            Middleware\Topic\TopicCreateValidationMiddleware::class => [
                 Validator\TopicCreateValidator::class,
             ],
-            Middleware\TopicEntryStatisticMiddleware::class => [
+            Middleware\Topic\TopicEntryStatisticMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicListAvailableMiddleware::class => [
+            Middleware\Topic\TopicListAvailableMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicListMiddleware::class => [
+            Middleware\Topic\TopicListMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\TopicSubmitMiddleware::class => [
+            Middleware\Topic\TopicSubmitMiddleware::class => [
                 Service\TopicPoolService::class,
                 ClassMethodsHydrator::class,
+            ],
+            Middleware\UpdateLastUserActionTimeMiddleware::class => [
+                UserService::class,
             ],
             Middleware\UserMiddleware::class => [
                 Service\UserService::class,
             ],
-            Service\EventRatingCategoryService::class => [
-                Table\EventRatingCategoryTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\EventRatingService::class => [
-                Table\EventRatingTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RatingCategoryService::class => [
-                Table\RatingCategoryTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RatingService::class => [
-                Table\RatingTable::class,
-                ReflectionHydrator::class,
-            ],
-            Service\RoleService::class => [
-                Table\RoleTable::class,
-                ReflectionHydrator::class,
-            ],
             Service\TopicPoolService::class => [
                 Table\TopicPoolTable::class,
                 ReflectionHydrator::class,
-            ],
-            Table\EventRatingCategoryTable::class => [
-                Query::class,
-            ],
-            Table\EventRatingTable::class => [
-                Query::class,
             ],
             Table\EventTable::class => [
                 Query::class,
@@ -301,15 +221,6 @@ class ConfigProvider
             Table\ProjectTable::class => [
                 Query::class,
             ],
-            Table\RatingCategoryTable::class => [
-                Query::class,
-            ],
-            Table\RatingTable::class => [
-                Query::class,
-            ],
-            Table\RoleTable::class => [
-                Query::class,
-            ],
             Table\TopicPoolTable::class => [
                 Query::class,
             ],
@@ -318,7 +229,7 @@ class ConfigProvider
             ],
 
             Validator\EventCreateValidator::class => [
-                EventNameInput::class,
+                EventTitleInput::class,
                 EventDescriptionInput::class,
                 EventTextInput::class,
                 EventStartTimeInput::class,

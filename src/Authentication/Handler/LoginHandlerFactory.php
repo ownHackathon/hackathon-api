@@ -2,7 +2,6 @@
 
 namespace Authentication\Handler;
 
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
 class LoginHandlerFactory

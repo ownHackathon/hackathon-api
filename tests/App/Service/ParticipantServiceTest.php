@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Model\Participant;
+use App\Service\ParticipantService;
 use App\Table\ParticipantTable;
 
 class ParticipantServiceTest extends AbstractServiceTest
@@ -36,6 +37,10 @@ class ParticipantServiceTest extends AbstractServiceTest
             ->method('findByUserIdAndEventId')
             ->with(1, 1)
             ->willReturn(false);
+
+        $table->expects($this->once())
+            ->method('insert')
+            ->willReturn(1);
 
         $service = new ParticipantService($table, $this->hydrator);
 

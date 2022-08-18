@@ -1,9 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace AppTest\Service;
 
 use App\Model\User;
+use App\Service\UserService;
 use App\Table\UserTable;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class UserServiceTest extends AbstractServiceTest
 {
@@ -20,7 +23,7 @@ class UserServiceTest extends AbstractServiceTest
             ->with('fakeName')
             ->willReturn(['name' => 'fakeName']);
 
-        $service = new UserService($table, $this->hydrator);
+        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
         $insert = $service->create($user);
 
@@ -45,7 +48,7 @@ class UserServiceTest extends AbstractServiceTest
             ->with('fake@example.com')
             ->willReturn(['email' => 'fake@example.com']);
 
-        $service = new UserService($table, $this->hydrator);
+        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
         $insert = $service->create($user);
 
@@ -69,7 +72,7 @@ class UserServiceTest extends AbstractServiceTest
             ->method('findByEmail')
             ->willReturn(false);
 
-        $service = new UserService($table, $this->hydrator);
+        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
         $insert = $service->create($user);
 
@@ -84,7 +87,7 @@ class UserServiceTest extends AbstractServiceTest
             ->method('findById')
             ->willReturn(false);
 
-        $service = new UserService($table, $this->hydrator);
+        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
         $this->expectException('InvalidArgumentException');
 
@@ -102,7 +105,7 @@ class UserServiceTest extends AbstractServiceTest
             ->with(1)
             ->willReturn($this->fetchResult);
 
-        $service = new UserService($table, $this->hydrator);
+        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
         $user = $service->findById(1);
 

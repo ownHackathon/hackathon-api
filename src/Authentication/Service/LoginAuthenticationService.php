@@ -4,6 +4,8 @@ namespace Authentication\Service;
 
 use App\Model\User;
 
+use function password_verify;
+
 class LoginAuthenticationService
 {
     public function isUserDataCorrect(?User $user, string $password): bool

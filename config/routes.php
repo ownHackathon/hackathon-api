@@ -20,32 +20,25 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/event[/]',
         [
-            App\Handler\EventAboutHandler::class,
+            App\Middleware\Event\EventListMiddleware::class,
+            App\Handler\EventListHandler::class,
         ],
-        App\Handler\EventAboutHandler::class
+        App\Handler\EventListHandler::class
     );
-    $app->get(
-        '/event/create[/]',
+    $app->post(
+        '/event[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            App\Middleware\Event\EventCreateValidationMiddleware::class,
+            App\Middleware\Event\EventCreateMiddleware::class,
             App\Handler\EventCreateHandler::class,
         ],
         App\Handler\EventCreateHandler::class
     );
-    $app->post(
-        '/event/create[/]',
-        [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
-            App\Middleware\EventCreateValidationMiddleware::class,
-            App\Middleware\EventCreateMiddleware::class,
-            App\Handler\EventCreateSubmitHandler::class,
-        ],
-        App\Handler\EventCreateSubmitHandler::class
-    );
     $app->get(
         '/event/{eventId:\d+}[/]',
         [
-            App\Middleware\EventMiddleware::class,
+            App\Middleware\Event\EventMiddleware::class,
             App\Handler\EventHandler::class,
         ],
         App\Handler\EventHandler::class
@@ -53,24 +46,16 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/event/show/{eventName}[/]',
         [
-            App\Middleware\EventNameMiddleware::class,
+            App\Middleware\Event\EventNameMiddleware::class,
             App\Handler\EventNameHandler::class,
         ],
         App\Handler\EventNameHandler::class
-    );
-    $app->get(
-        '/event/list[/]',
-        [
-            App\Middleware\EventListMiddleware::class,
-            App\Handler\EventListHandler::class,
-        ],
-        App\Handler\EventListHandler::class
     );
     $app->put(
         '/event/participant/subscribe/{eventId:\d+}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
-            App\Middleware\EventParticipantSubscribeMiddleware::class,
+            App\Middleware\Event\EventParticipantSubscribeMiddleware::class,
             App\Handler\EventParticipantSubscribeHandler::class,
         ],
         App\Handler\EventParticipantSubscribeHandler::class
@@ -79,24 +64,11 @@ return static function (Mezzio\Application $app): void {
         '/event/participant/unsubscribe/{eventId:\d+}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
-            App\Middleware\EventParticipantUnsubscribeMiddleware::class,
-            App\Handler\EventParticipantUnsubsribeHandler::class,
+            App\Middleware\Event\EventParticipantUnsubscribeMiddleware::class,
+            App\Handler\EventParticipantUnsubscribeHandler::class,
         ],
-        App\Handler\EventParticipantUnsubsribeHandler::class
+        App\Handler\EventParticipantUnsubscribeHandler::class
     );
-    $app->get(
-        '/project/{projectId:\d+}[/]',
-        [
-            App\Middleware\ProjectMiddleware::class,
-            App\Middleware\ProjectParticipantMiddleware::class,
-            App\Middleware\ProjectOwnerMiddleware::class,
-            App\Middleware\ProjectEventRatingReleasedMiddleware::class,
-            App\Middleware\ProjectCategoryRatingMiddleware::class,
-            App\Handler\ProjectHandler::class,
-        ],
-        App\Handler\ProjectHandler::class
-    );
-
     $app->post(
         '/user/register[/]',
         [
@@ -109,6 +81,7 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/user/{userUuid}[/]',
         [
+            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\UserMiddleware::class,
             App\Handler\UserHandler::class,
         ],
@@ -121,7 +94,6 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\LoginHandler::class
     );
-
     $app->post(
         '/login[/]',
         [
@@ -131,7 +103,6 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Middleware\LoginAuthenticationMiddleware::class
     );
-
     $app->get(
         '/logout[/]',
         [
@@ -139,42 +110,5 @@ return static function (Mezzio\Application $app): void {
             Authentication\Handler\LogoutHandler::class,
         ],
         Authentication\Handler\LogoutHandler::class
-    );
-
-    $app->get(
-        '/topic/submit[/]',
-        [
-            App\Middleware\TopicEntryStatisticMiddleware::class,
-            App\Handler\TopicHandler::class,
-        ],
-        App\Handler\TopicHandler::class
-    );
-
-    $app->post(
-        '/topic/submit[/]',
-        [
-            App\Middleware\TopicCreateValidationMiddleware::class,
-            App\Middleware\TopicSubmitMiddleware::class,
-            App\Middleware\TopicEntryStatisticMiddleware::class,
-            App\Handler\TopicSubmitHandler::class,
-        ],
-        App\Handler\TopicSubmitHandler::class
-    );
-
-    $app->get(
-        '/api/ping',
-        [
-            App\Handler\PingHandler::class,
-        ],
-        App\Handler\PingHandler::class
-    );
-
-    $app->get(
-        '/admin[/]',
-        [
-            Authentication\Middleware\AdministrationAuthenticationMiddleware::class,
-            Administration\Handler\IndexHandler::class,
-        ],
-        Administration\Handler\IndexHandler::class
     );
 };

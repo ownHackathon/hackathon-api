@@ -16,6 +16,7 @@ class EventDurationInput extends Input
             'GreaterThan',
             [
                 'min' => 1,
+                'max' => 356,
                 'inclusive' => true,
             ],
         );

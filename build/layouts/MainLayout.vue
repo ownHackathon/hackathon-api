@@ -107,6 +107,51 @@ a[target="_blank"]:after {
   @apply bg-gray-600;
 }
 
+.input_failure {
+  @apply p-2.5;
+  @apply border;
+  @apply text-sm;
+  @apply rounded-lg;
+  @apply block;
+  @apply w-full;
+  @apply border-red-600;
+  @apply placeholder-gray-400;
+  @apply text-white;
+  @apply focus:ring-blue-500;
+  @apply focus:border-blue-500;
+  @apply bg-gray-600;
+}
+
+.textarea {
+  @apply block;
+  @apply p-2.5;
+  @apply w-full;
+  @apply text-sm;
+  @apply bg-gray-600;
+  @apply rounded-lg;
+  @apply border;
+  @apply focus:ring-blue-500;
+  @apply focus:border-blue-500;
+  @apply border-gray-600;
+  @apply placeholder-gray-400;
+  @apply text-white;
+}
+
+.textarea_failure {
+  @apply block;
+  @apply p-2.5;
+  @apply w-full;
+  @apply text-sm;
+  @apply bg-gray-600;
+  @apply rounded-lg;
+  @apply border;
+  @apply focus:ring-blue-500;
+  @apply focus:border-blue-500;
+  @apply border-red-600;
+  @apply placeholder-gray-400;
+  @apply text-white;
+}
+
 .checkbox {
   @apply w-4;
   @apply h-4;

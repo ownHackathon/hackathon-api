@@ -4,6 +4,7 @@ namespace App\Validator\Input;
 
 use App\Validator\DateLessNow;
 use Laminas\InputFilter\Input;
+use Laminas\Validator\Date;
 
 class EventStartTimeInput extends Input
 {
@@ -12,13 +13,15 @@ class EventStartTimeInput extends Input
         parent::__construct('startTime');
 
         $this->setRequired(true);
+        $this->setBreakOnFailure(true);
 
-        $this->getFilterChain()->attachByName(
-            'DateTimeFormatter',
-            [
-                'format' => 'Y-m-d\TH:i',
-            ],
+        $this->getValidatorChain()->attach(
+            new Date([
+                'format' => 'Y-m-d H:i:s',
+                'strict' => true,
+            ]),
         );
+
         $this->getValidatorChain()->attach(new DateLessNow());
     }
 }

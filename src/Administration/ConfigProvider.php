@@ -5,7 +5,6 @@ namespace Administration;
 use App\Handler\IndexHandler;
 use App\Service\UserService;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Mezzio\Template\TemplateRendererInterface;
 
 class ConfigProvider
 {
@@ -21,14 +20,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-
             ],
             'factories' => [
-                Handler\IndexHandler::class => ConfigAbstractFactory::class,
-                Handler\TemplateHandler::class => ConfigAbstractFactory::class,
-                Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
-                Service\TemplateService::class => Service\TemplateServiceFactory::class,
             ],
         ];
     }
@@ -36,18 +29,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Handler\IndexHandler::class => [
-                TemplateRendererInterface::class,
-            ],
-            Handler\TemplateHandler::class => [
-                Service\TemplateService::class,
-            ],
-            Middleware\FrontLoaderMiddleware::class => [
-                IndexHandler::class,
-            ],
-            Middleware\UpdateLastUserActionTimeMiddleware::class => [
-                UserService::class,
-            ],
         ];
     }
 }

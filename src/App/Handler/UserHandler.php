@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ClassMethodsHydrator $hydrator,
+        private readonly ClassMethodsHydrator $hydrator,
     ) {
     }
 
@@ -22,6 +22,7 @@ class UserHandler implements RequestHandlerInterface
         $user = $request->getAttribute(User::class);
 
         $data = $this->hydrator->extract($user);
+        unset($data['id'], $data['password'], $data['email']);
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }

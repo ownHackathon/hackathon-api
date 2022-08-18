@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace AppTest\Table;
 
-use Administration\Table\AbstractTable;
+use App\Table\AbstractTable;
 use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;
@@ -16,20 +16,21 @@ use function substr;
 abstract class AbstractTableTest extends TestCase
 {
     protected AbstractTable $table;
-    protected Query $query;
+    protected Query&MockObject $query;
     protected array $fetchResult = ['id' => 1];
-    protected array $fetchAllResult = [
-        0 => ['id' => 1],
-    ];
+    protected array $fetchAllResult
+        = [
+            0 => ['id' => 1],
+        ];
 
     protected function setUp(): void
     {
         $this->query = $this->createMock(Query::class);
 
-        $this->table = new (substr(get_class($this), 0, -4))($this->query);
+        $this->table = new ('App' . substr(get_class($this), 7, -4))($this->query);
     }
 
-    protected function createSelect(): Select|MockObject
+    protected function createSelect(): Select&MockObject
     {
         $select = $this->createMock(Select::class);
 
@@ -40,7 +41,7 @@ abstract class AbstractTableTest extends TestCase
         return $select;
     }
 
-    protected function createInsert(array $values): Insert|MockObject
+    protected function createInsert(array $values): Insert&MockObject
     {
         $insert = $this->createMock(Insert::class);
 
@@ -52,7 +53,7 @@ abstract class AbstractTableTest extends TestCase
         return $insert;
     }
 
-    protected function createUpdate(array $values): Update|MockObject
+    protected function createUpdate(array $values): Update&MockObject
     {
         $update = $this->createMock(Update::class);
 
@@ -64,7 +65,7 @@ abstract class AbstractTableTest extends TestCase
         return $update;
     }
 
-    protected function configureSelectWithOneWhere(string $where, mixed $value): Select|MockObject
+    protected function configureSelectWithOneWhere(string $where, mixed $value): Select&MockObject
     {
         $select = $this->createSelect();
 

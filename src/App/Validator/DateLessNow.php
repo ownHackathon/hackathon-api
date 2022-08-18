@@ -3,6 +3,7 @@
 namespace App\Validator;
 
 use DateTime;
+use Exception;
 use Laminas\Validator\AbstractValidator;
 
 class DateLessNow extends AbstractValidator
@@ -13,17 +14,22 @@ class DateLessNow extends AbstractValidator
         self::VALID_DATE => "Date is in the past",
     ];
 
-    public function isValid($value)
+    public function isValid($value): bool
     {
-        $this->setValue($value);
-
         $dateNow = new DateTime();
-        $dateValue = new DateTime($value);
+
+        try {
+            $dateValue = new DateTime($value);
+        } catch (Exception $exception) {
+            return false;
+        }
 
         if ($dateValue <= $dateNow) {
             $this->error(self::VALID_DATE);
             return false;
         }
+
+        $this->setValue($value);
 
         return true;
     }

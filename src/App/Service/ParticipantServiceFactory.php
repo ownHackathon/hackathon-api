@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\Table\ParticipantTable;
 use App\Hydrator\ReflectionHydrator;
+use App\Table\ParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 

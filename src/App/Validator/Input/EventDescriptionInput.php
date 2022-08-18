@@ -18,7 +18,9 @@ class EventDescriptionInput extends Input
             'StringLength',
             [
                 'encoding' => 'UTF-8',
+                'min' => 10,
                 'max' => 255,
+                'inclusive' => true,
             ]
         );
     }

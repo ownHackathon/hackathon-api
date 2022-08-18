@@ -11,17 +11,13 @@ return new ConfigAggregator([
     Laminas\HttpHandlerRunner\ConfigProvider::class,
     Laminas\Diactoros\ConfigProvider::class,
     Laminas\Hydrator\ConfigProvider::class,
-    Mezzio\LaminasView\ConfigProvider::class,
-
-    Mezzio\Session\Ext\ConfigProvider::class,
-    Mezzio\Session\ConfigProvider::class,
 
     // Swoole config to overwrite some services (if installed)
     class_exists(Mezzio\Swoole\ConfigProvider::class)
         ? Mezzio\Swoole\ConfigProvider::class
         : function (): array {
-        return [];
-    },
+            return [];
+        },
 
     Administration\ConfigProvider::class,
     App\ConfigProvider::class,

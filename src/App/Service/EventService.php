@@ -10,8 +10,8 @@ use Psr\Log\InvalidArgumentException;
 class EventService
 {
     public function __construct(
-        private EventTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly EventTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 
@@ -45,7 +45,7 @@ class EventService
     }
 
     /** @return array<Event>|null */
-    public function findAll(string $order = 'id', string $sort = 'ASC'): ?array
+    public function findAll(string $order = 'startTime', string $sort = 'DESC'): ?array
     {
         $events = $this->table->findAll($order, $sort);
 

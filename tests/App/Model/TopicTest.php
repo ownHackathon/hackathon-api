@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model;
+namespace AppTest\Model;
 
+use App\Model\Topic;
 use PHPUnit\Framework\TestCase;
 
 class TopicTest extends TestCase
@@ -15,7 +16,7 @@ class TopicTest extends TestCase
         parent::setUp();
     }
 
-    public function testPropertiesIsByInitializeNull()
+    public function testPropertiesIsByInitializeNull(): void
     {
         $eventId = $this->topic->getEventId();
         $description = $this->topic->getDescription();
@@ -26,7 +27,7 @@ class TopicTest extends TestCase
         $this->assertNull($accepted);
     }
 
-    public function testCanSetAndGetId()
+    public function testCanSetAndGetId(): void
     {
         $topicId = $this->topic->setId(1);
         $id = $topicId->getId();
@@ -36,7 +37,7 @@ class TopicTest extends TestCase
         $this->assertSame(1, $id);
     }
 
-    public function testCanSetAndGetEventId()
+    public function testCanSetAndGetEventId(): void
     {
         $eventId = $this->topic->setEventId(1);
         $id = $eventId->getEventId();
@@ -46,7 +47,7 @@ class TopicTest extends TestCase
         $this->assertSame(1, $id);
     }
 
-    public function testCanSetAndGetTopic()
+    public function testCanSetAndGetTopic(): void
     {
         $topicTopic = $this->topic->setTopic('test');
         $topic = $topicTopic->getTopic();
@@ -56,7 +57,7 @@ class TopicTest extends TestCase
         $this->assertSame('test', $topic);
     }
 
-    public function testCanSetAndGetDescription()
+    public function testCanSetAndGetDescription(): void
     {
         $topicDescription = $this->topic->setDescription('test');
         $description = $topicDescription->getDescription();
@@ -66,7 +67,7 @@ class TopicTest extends TestCase
         $this->assertSame('test', $description);
     }
 
-    public function testCanSetAndGetAccepted()
+    public function testCanSetAndGetAccepted(): void
     {
         $topicAccepted = $this->topic->setAccepted(true);
         $accepted = $topicAccepted->getAccepted();

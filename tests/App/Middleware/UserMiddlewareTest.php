@@ -1,22 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware;
+namespace AppTest\Middleware;
 
+use App\Middleware\UserMiddleware;
 use App\Model\User;
 use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 
 class UserMiddlewareTest extends AbstractMiddlewareTest
 {
-    public function testReturnResponseInterface()
+    public function testReturnResponseInterface(): void
     {
         $service = $this->createMock(UserService::class);
-        $user = new User();
+        $user = $this->createMock(User::class);
 
         $this->request->expects($this->once())
             ->method('getAttribute')
-            ->with('userId')
-            ->willReturn(1);
+            ->with('userUuid')
+            ->willReturn('A3953212-23ed-3a79-cb02-215fe2a9bd6a');
 
         $this->request->expects($this->once())
             ->method('withAttribute')
@@ -24,8 +25,8 @@ class UserMiddlewareTest extends AbstractMiddlewareTest
             ->willReturn($this->request);
 
         $service->expects($this->once())
-            ->method('findById')
-            ->with(1)
+            ->method('findByUuid')
+            ->with('A3953212-23ed-3a79-cb02-215fe2a9bd6a')
             ->willReturn($user);
 
         $middleware = new UserMiddleware($service);

@@ -5,13 +5,14 @@ namespace App\Service;
 use App\Hydrator\ReflectionHydrator;
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
+use JetBrains\PhpStorm\ArrayShape;
 use Psr\Log\InvalidArgumentException;
 
 class TopicPoolService
 {
     public function __construct(
-        private TopicPoolTable $table,
-        private ReflectionHydrator $hydrator,
+        private readonly TopicPoolTable $table,
+        private readonly ReflectionHydrator $hydrator,
     ) {
     }
 
@@ -77,7 +78,11 @@ class TopicPoolService
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
-    /** @return array<int> */
+    #[ArrayShape([
+        'allTopic' => 'int',
+        'allAcceptedTopic' => 'int',
+        'allSelectionAvailableTopic' => 'int',
+    ])]
     public function getEntriesStatistic(): array
     {
         return [
