@@ -21,4 +21,4 @@ Build all public files with
 
 update data in `config/database.php`
 
-import Database structur `database/structure/structure.sql`
+import Database structure `database/structure/structure.sql`
