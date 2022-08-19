@@ -44,7 +44,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventHandler::class
     );
     $app->get(
-        '/event/show/{eventName}[/]',
+        '/event/{eventName}[/]',
         [
             App\Middleware\Event\EventNameMiddleware::class,
             App\Handler\EventNameHandler::class,

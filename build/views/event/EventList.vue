@@ -40,11 +40,10 @@
         <tbody>
         <EventListEntry
             v-for="entry in data"
-            :id="entry.id"
             :key="entry.id"
             :description="entry.description"
             :duration="entry.duration"
-            :eventname="entry.title"
+            :eventName="entry.title"
             :owner="entry.owner"
             :startTime="entry.startTime"
             :status="entry.status"

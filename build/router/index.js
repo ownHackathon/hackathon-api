@@ -15,76 +15,83 @@ import ProjectView from "@/views/ProjectView";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 
-const routes = [{
-  component: MainLayout,
-  path: "/",
-  children: [{
-    path: "/home",
-    name: "home",
-    alias: '/',
-    component: MainView,
-  },
-    {
-      path: "/login",
-      name: "login",
-      component: LoginView,
-    },
-    {
-      path: "/logout",
-      name: "logout",
-      component: LogoutView,
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: RegisterView,
-    },
-    {
-      path: "/user/:uuid",
-      name: "user_view",
-      component: UserView,
-      meta: {
-        requireAuth: true
-      }
-    },
-    {
-      path: "/event/information",
-      name: "event_general_information",
-      component: EventAbout,
-    },
-    {
-      path: "/event/:id",
-      name: "event_entry",
-      component: EventEntry,
-    },
-    {
-      path: "/event/list",
-      name: "event_list",
-      component: EventList,
-    },
-    {
-      path: "/event/create",
-      name: "event_create",
-      component: EventCreate,
-      meta: {
-        requireAuth: true
-      }
-    },
-    {
-      path: "/project/:uuid",
-      name: "project_entry",
-      component: ProjectView,
-      meta: {
-        requireAuth: true
+const routes = [
+  {
+    component: MainLayout,
+    path: "/",
+    children: [
+      {
+        path: "home",
+        name: "home",
+        alias: '/',
+        component: MainView,
       },
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: MainView,
-    },
-  ]
-},
+      {
+        path: "login",
+        name: "login",
+        component: LoginView,
+      },
+      {
+        path: "logout",
+        name: "logout",
+        component: LogoutView,
+      },
+      {
+        path: "register",
+        name: "register",
+        component: RegisterView,
+      },
+      {
+        path: "user/:uuid",
+        name: "user_view",
+        component: UserView,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "event",
+        name: "event_list",
+        component: EventList,
+      },
+      {
+        path: "event/information",
+        name: "event_general_information",
+        component: EventAbout,
+      },
+      {
+        path: "event/:id(\\d+)",
+        name: "event_entry",
+        component: EventEntry,
+      },
+      {
+        path: "event/:eventName",
+        name: "event_entry_named",
+        component: EventEntry,
+      },
+      {
+        path: "event/create",
+        name: "event_create",
+        component: EventCreate,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "project/:uuid",
+        name: "project_entry",
+        component: ProjectView,
+        meta: {
+          requiresAuth: true
+        },
+      },
+      {
+        path: "about",
+        name: "about",
+        component: MainView,
+      },
+    ]
+  },
   {
     path: "/discord",
     name: "discord", beforeEnter() {
@@ -103,15 +110,17 @@ const routes = [{
   },
 ];
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL), routes,
 });
 
-
+/** ToDo: remove Arg next */
 router.beforeEach(async (to, from, next) => {
+
   const userStore = useUserStore();
 
-  if (to.meta.requireAuth) {
+  if (to.meta.requiresAuth) {
     if (!userStore.user) {
       await axios
           .get('/api/me')
@@ -119,22 +128,21 @@ router.beforeEach(async (to, from, next) => {
             if (response.status === 200 && response.data.uuid !== undefined) {
               userStore.setUser(response.data);
             } else {
-              return next({path: "/login"});
+              return next({name: 'login'});
             }
           }).catch(() => {
             userStore.user = null;
             localStorage.removeItem('token');
-            return next({path: "/login"});
+            return next({name: 'login'});
           });
     }
   }
 
   if ((to.path === "/login" || to.path === "/register") && localStorage.getItem("token") !== null) {
-    return next({path: "/"});
+    return next({name: 'home'});
   }
 
   return next();
-
 });
 
 export default router;
