@@ -22,9 +22,6 @@ class EventMiddleware implements MiddlewareInterface
 
         $event = $this->eventService->findById($eventId);
 
-        return $handler->handle(
-            $request->withAttribute(Event::class, $event)
-                ->withAttribute('userId', $event->getUserId())
-        );
+        return $handler->handle($request->withAttribute(Event::class, $event));
     }
 }

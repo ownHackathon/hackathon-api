@@ -3,7 +3,8 @@
 namespace App\Handler;
 
 use App\Model\Event;
-use Laminas\Diactoros\Response\RedirectResponse;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -12,8 +13,13 @@ class EventNameHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /** @var Event $event */
         $event = $request->getAttribute(Event::class);
 
-        return new RedirectResponse('/event/' . $event->getId());
+        $data = [
+            'eventId' => $event->getId(),
+        ];
+
+        return new JsonResponse($data, HTTP::STATUS_OK);
     }
 }

@@ -46,6 +46,7 @@ import {useToast} from "vue-toastification";
 
 const userService = useUserService();
 const router = useRouter();
+
 const toast = useToast();
 const payload = reactive({
   username: '',
