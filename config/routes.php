@@ -4,11 +4,25 @@ declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
     $app->get(
+        '/testmail',
+        [
+            App\Handler\TestMailHandler::class,
+        ],
+        App\Handler\TestMailHandler::class
+    );
+    $app->get(
         '/api/me[/]',
         [
             Authentication\Handler\ApiMeHandler::class,
         ],
         Authentication\Handler\ApiMeHandler::class
+    );
+    $app->get(
+        '/api/csrf[/]',
+        [
+            App\Handler\CsrfTokenHandler::class,
+        ],
+        App\Handler\CsrfTokenHandler::class,
     );
     $app->get(
         '/',

@@ -45,7 +45,8 @@
         "mezzio/mezzio": "^3.6.0",
         "mezzio/mezzio-fastroute": "^3.3.0",
         "mezzio/mezzio-helpers": "^5.7.0",
-        "ramsey/uuid": "^4.3"
+        "ramsey/uuid": "^4.3",
+        "symfony/mailer": "^6.1"
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",

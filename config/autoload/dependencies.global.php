@@ -6,6 +6,7 @@ return [
             PDO::class => 'database',
             Envms\FluentPDO\Query::class => 'query',
             Ramsey\Uuid\Uuid::class => 'uuid',
+            Symfony\Component\Mailer\Mailer::class => 'mailer',
         ],
         'invokables' => [
         ],
@@ -13,6 +14,7 @@ return [
             'database' => App\Factory\DatabaseFactory::class,
             'query' => App\Factory\QueryFactory::class,
             'uuid' => App\Factory\UuidFactory::class,
+            'mailer' => App\Factory\MailFactory::class,
         ],
     ],
 ];

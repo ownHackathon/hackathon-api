@@ -13,6 +13,9 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faArrowUpRightFromSquare, faBars, faExternalLinkAlt, faUser, faUserLock,} from "@fortawesome/free-solid-svg-icons";
 
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
 library.add(
     faArrowUpRightFromSquare,
     faBars,
@@ -21,9 +24,6 @@ library.add(
     faUserLock,
 );
 
-const pinia = createPinia();
-
-pinia.use(piniaPluginPersistedstate);
 
 createApp(App)
     .use(pinia)

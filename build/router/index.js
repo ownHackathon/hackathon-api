@@ -5,6 +5,7 @@ import MainLayout from '@/layouts/MainLayout';
 import MainView from '@/views/MainView';
 import LoginView from '@/views/user/login/LoginView';
 import LogoutView from '@/views/user/login/LogoutView';
+import PasswordForgottenView from "@/views/user/login/PasswordForgottenView";
 import RegisterView from '@/views/user/register/RegisterView';
 import UserView from "@/views/user/UserView";
 import EventAbout from '@/views/event/EventAbout';
@@ -40,6 +41,11 @@ const routes = [
         path: "register",
         name: "register",
         component: RegisterView,
+      },
+      {
+        path: "user/password/forgotten",
+        name: "user_password_forgotten",
+        component: PasswordForgottenView,
       },
       {
         path: "user/:uuid",

@@ -102,6 +102,7 @@
                     />
                 </div>
             </div>
+            <input id="csrfToken" name="csrfToken" v-model="payload.csrfToken" type="hidden" />
             <div class="div-table-content">
                 <div class="mb-6">
                     <div class="flex justify-center">
@@ -120,9 +121,12 @@ import {useToast} from "vue-toastification";
 import {addTime, databaseDateTime} from "@/composables/moment";
 import axios from 'axios';
 import router from "@/router";
+import {useCsrfStore} from "@/store/CsrfStore";
 
 const toast = useToast();
 const nowDate = new Date();
+const token = useCsrfStore();
+
 
 const payload = reactive({
     title: '',
@@ -130,6 +134,7 @@ const payload = reactive({
     eventText: '',
     startTime: '',
     duration: 14,
+    csrfToken: '',
 });
 
 const formData = ref({
@@ -170,6 +175,7 @@ onMounted(() => {
     payload.startTime = databaseDateTime(addTime(nowDate, 30));
     formData.value.eventStartTime.time.min = databaseDateTime(addTime(nowDate, 1));
     formData.value.eventStartTime.time.max = databaseDateTime(addTime(nowDate, 356));
+    console.log(token.csrfToken);
 });
 
 function checkResponseError(data) {
