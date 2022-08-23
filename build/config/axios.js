@@ -1,6 +1,5 @@
 import axios from "axios";
 import router from "@/router";
-import {useCsrfStore} from "@/store/CsrfStore";
 
 window.axios = axios;
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
@@ -13,7 +12,6 @@ axios.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${authToken}`;
   }
 
-  config.headers["x-csrf-jwt"] = useCsrfStore().csrfToken;
   config.headers["Content-Type"] = "application/json";
   config.headers["x-frontloader"] = "x-frontloader";
 

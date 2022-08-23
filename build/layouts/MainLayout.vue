@@ -11,15 +11,11 @@ import TheFooter from "@/components/ui/TheFooter";
 import TheHeader from "@/components/ui/TheHeader";
 import {onBeforeMount} from "vue";
 import useUserService from "@/composables/UserService";
-import useCsrf from "@/composables/Csrf";
 
 const {loadUser} = useUserService();
-const {loadCsrf} = useCsrf();
-
 
 onBeforeMount(() => {
   loadUser();
-  loadCsrf();
 });
 </script>
 

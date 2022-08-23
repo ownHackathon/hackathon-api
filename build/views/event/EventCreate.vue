@@ -121,12 +121,9 @@ import {useToast} from "vue-toastification";
 import {addTime, databaseDateTime} from "@/composables/moment";
 import axios from 'axios';
 import router from "@/router";
-import {useCsrfStore} from "@/store/CsrfStore";
 
 const toast = useToast();
 const nowDate = new Date();
-const token = useCsrfStore();
-
 
 const payload = reactive({
     title: '',
@@ -175,7 +172,6 @@ onMounted(() => {
     payload.startTime = databaseDateTime(addTime(nowDate, 30));
     formData.value.eventStartTime.time.min = databaseDateTime(addTime(nowDate, 1));
     formData.value.eventStartTime.time.max = databaseDateTime(addTime(nowDate, 356));
-    console.log(token.csrfToken);
 });
 
 function checkResponseError(data) {
