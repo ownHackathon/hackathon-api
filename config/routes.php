@@ -18,13 +18,6 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\ApiMeHandler::class
     );
     $app->get(
-        '/api/csrf[/]',
-        [
-            App\Handler\CsrfTokenHandler::class,
-        ],
-        App\Handler\CsrfTokenHandler::class,
-    );
-    $app->get(
         '/',
         [
             App\Handler\IndexHandler::class,

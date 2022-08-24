@@ -70,7 +70,6 @@ class ConfigProvider
                 DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
                 NullableStrategy::class => NullableStrategyFactory::class,
 
-                Handler\CsrfTokenHandler::class => Handler\CsrfTokenHandlerFactory::class,
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Middleware\CsrfTokenMiddleware;
 use App\Middleware\FrontLoaderMiddleware;
 use App\Middleware\UpdateLastUserActionTimeMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
@@ -24,7 +23,6 @@ return function (Application $app): void {
     $app->pipe(BodyParamsMiddleware::class);
 
     $app->pipe(JwtAuthenticationMiddleware::class);
-    $app->pipe(CsrfTokenMiddleware::class);
     $app->pipe(UpdateLastUserActionTimeMiddleware::class);
     $app->pipe(RouteMiddleware::class);
 
