@@ -17,6 +17,7 @@ class User
     private DateTime $registrationTime;
     private ?DateTime $lastAction = null;
     private bool $active = false;
+    private ?string $token = null;
 
     public function __construct()
     {
@@ -127,6 +128,18 @@ class User
     public function setActive(int|bool $active): self
     {
         $this->active = (bool)$active;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

@@ -64,6 +64,8 @@ class ConfigProvider
                 UsernameInput::class,
 
                 ReflectionHydrator::class,
+
+                Service\TokenService::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,

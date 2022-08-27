@@ -10,7 +10,7 @@ class EmailInput extends Input
     {
         parent::__construct('email');
 
-        $this->setRequired(false);
+        $this->setRequired(true);
 
         $this->getFilterChain()->attachByName('StringTrim');
 

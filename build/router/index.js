@@ -6,6 +6,7 @@ import MainView from '@/views/MainView';
 import LoginView from '@/views/user/login/LoginView';
 import LogoutView from '@/views/user/login/LogoutView';
 import PasswordForgottenView from "@/views/user/login/PasswordForgottenView";
+import CreateNewPasswordView from "@/views/user/login/CreateNewPasswordView";
 import RegisterView from '@/views/user/register/RegisterView';
 import UserView from "@/views/user/UserView";
 import EventAbout from '@/views/event/EventAbout';
@@ -46,6 +47,11 @@ const routes = [
         path: "user/password/forgotten",
         name: "user_password_forgotten",
         component: PasswordForgottenView,
+      },
+      {
+        path: "user/password/:token",
+        name: "user_password_forgotten_token",
+        component: CreateNewPasswordView,
       },
       {
         path: "user/:uuid",

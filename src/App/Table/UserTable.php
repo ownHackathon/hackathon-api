@@ -20,6 +20,23 @@ class UserTable extends AbstractTable
         return (int)$this->query->insertInto($this->table, $values)->execute();
     }
 
+    public function update(User $user): bool
+    {
+        $values = [
+            'uuid' => $user->getUuid(),
+            'roleId' => $user->getRoleId(),
+            'name' => $user->getName(),
+            'password' => $user->getPassword(),
+            'email' => $user->getEmail(),
+            'registrationTime' => $user->getRegistrationTime()->format('Y-m-d H:i:s'),
+            'lastAction' => $user->getLastAction()->format('Y-m-d H:i:s'),
+            'active' => $user->isActive(),
+            'token' => $user->getToken(),
+        ];
+
+        return (bool)$this->query->update($this->table, $values, $user->getId())->execute();
+    }
+
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self
     {
         $this->query->update($this->table)
@@ -48,6 +65,13 @@ class UserTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('email', $email)
+            ->fetch();
+    }
+
+    public function findByToken(string $token): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('token', $token)
             ->fetch();
     }
 }

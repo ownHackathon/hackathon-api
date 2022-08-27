@@ -24,13 +24,25 @@
 <script setup>
 import FailureView from "@/views/user/compontents/FailureView";
 import {reactive} from "vue";
+import axios from "axios";
 
 const payload = reactive({
     email: '',
 });
 
 async function submitEmail() {
-
+    await axios
+        .post('/user/password/forgotten', payload)
+        .then((response) => {
+            if (response.status === 200) {
+                console.log(response.data);
+            } else {
+                console.log(response.data);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 </script>
 

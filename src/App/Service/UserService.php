@@ -33,8 +33,8 @@ class UserService
     public function create(User $user, int $role = Role::USER): bool
     {
         if (
-            $this->isUserExist($user->getName()) ||
-            $this->isEmailExist($user->getEmail())
+            $this->isUserExist($user->getName())
+            || $this->isEmailExist($user->getEmail())
         ) {
             return false;
         }
@@ -45,9 +45,12 @@ class UserService
         $user->setRoleId($role);
         $user->setUuid($this->uuid->toString());
 
-        $this->table->insert($user);
+        return $this->table->insert($user);
+    }
 
-        return true;
+    public function update(User $user): bool
+    {
+        return $this->table->update($user);
     }
 
     private function isUserExist(string $userName): bool
@@ -55,13 +58,6 @@ class UserService
         $user = $this->findByName($userName);
 
         return $user instanceof User;
-    }
-
-    public function findByName(string $name): ?User
-    {
-        $user = $this->table->findByName($name);
-
-        return $this->hydrator->hydrate($user, new User());
     }
 
     private function isEmailExist(?string $email): bool
@@ -77,13 +73,6 @@ class UserService
         }
 
         return false;
-    }
-
-    public function findByEMail(string $email): ?User
-    {
-        $user = $this->table->findByEMail($email);
-
-        return $this->hydrator->hydrate($user, new User());
     }
 
     public function findById(int $id): User
@@ -102,5 +91,26 @@ class UserService
         $user = $this->table->findByUuid($uuid);
 
         return $user ? $this->hydrator->hydrate($user, new User()) : null;
+    }
+
+    public function findByName(string $name): ?User
+    {
+        $user = $this->table->findByName($name);
+
+        return $this->hydrator->hydrate($user, new User());
+    }
+
+    public function findByEMail(string $email): ?User
+    {
+        $user = $this->table->findByEMail($email);
+
+        return $this->hydrator->hydrate($user, new User());
+    }
+
+    public function findByToken(string $token): ?User
+    {
+        $user = $this->table->findByToken($token);
+
+        return $this->hydrator->hydrate($user, new User());
     }
 }
