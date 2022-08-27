@@ -14,6 +14,7 @@ import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
+import InvalidTokenView from "@/views/error/InvalidTokenView";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 
@@ -101,6 +102,11 @@ const routes = [
         path: "about",
         name: "about",
         component: MainView,
+      },
+      {
+        path: "/error/token/invalid",
+        name: "invalid_token",
+        component: InvalidTokenView,
       },
     ]
   },
