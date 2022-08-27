@@ -132,7 +132,8 @@ CREATE TABLE `User`
     `email`            varchar(300)                         DEFAULT NULL,
     `registrationTime` datetime                    NOT NULL DEFAULT current_timestamp(),
     `lastAction`       datetime                             DEFAULT NULL,
-    `active`           tinyint(1) UNSIGNED         NOT NULL DEFAULT 1
+    `active`           tinyint(1) UNSIGNED         NOT NULL DEFAULT 1,
+    `token`            varchar(32)                          default NULL null
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
