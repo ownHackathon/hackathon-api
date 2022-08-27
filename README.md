@@ -7,7 +7,7 @@ Clone this Repository
 
 `git clone https://github.com/BibaltiK/Hackathon.git`
 
-Install composer an node.js and run
+Install composer an node.js/npm and run
 
 `composer install`
 
@@ -22,3 +22,5 @@ Build all public files with
 update data in `config/database.php`
 
 import Database structure `database/structure/structure.sql`
+
+create configuration from `config/autoload/*.dist` for `mail`, `project` and `token`
