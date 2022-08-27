@@ -11,10 +11,14 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Email;
 
+use function sprintf;
+
 class UserPasswordForgottonHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Mailer $mailer
+        private readonly Mailer $mailer,
+        private readonly string $mailSender,
+        private readonly string $projectUri,
     ) {
     }
 
@@ -24,11 +28,14 @@ class UserPasswordForgottonHandler implements RequestHandlerInterface
         $user = $request->getAttribute(User::class);
 
         $email = (new Email())
-            ->from('hackathon@exdrals.de')
+            ->from($this->mailSender)
             ->to($user->getEmail())
             ->subject('Password forgotton')
             ->text(
-                'Follow the link to change your password: https://hackathon.ddev.site/user/password/' . $user->getToken(
+                sprintf(
+                    'Follow the link to change your password: %suser/password/%s',
+                    $this->projectUri,
+                    $user->getToken(),
                 )
             );
 

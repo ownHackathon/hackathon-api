@@ -3,5 +3,6 @@
 return [
     'mailer' => [
         'dsn' => 'smtp://localhost:1025',
+        'from' => 'hackathon@exdrals.de',
     ],
 ];

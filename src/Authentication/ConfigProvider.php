@@ -13,7 +13,6 @@ use Authentication\Handler\LoginHandlerFactory;
 use Authentication\Validator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Symfony\Component\Mailer\Mailer;
 
 class ConfigProvider
 {
@@ -39,7 +38,7 @@ class ConfigProvider
             'factories' => [
                 Handler\ApiMeHandler::class => ConfigAbstractFactory::class,
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
-                Handler\UserPasswordForgottonHandler::class => ConfigAbstractFactory::class,
+                Handler\UserPasswordForgottonHandler::class => Handler\UserPasswordForgottonHandlerFactory::class,
 
                 Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
@@ -65,9 +64,6 @@ class ConfigProvider
         return [
             Handler\ApiMeHandler::class => [
                 ReflectionHydrator::class,
-            ],
-            Handler\UserPasswordForgottonHandler::class => [
-                Mailer::class,
             ],
             Middleware\UserRegisterMiddleware::class => [
                 UserService::class,
