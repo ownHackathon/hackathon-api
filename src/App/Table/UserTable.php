@@ -7,7 +7,7 @@ use DateTime;
 
 class UserTable extends AbstractTable
 {
-    public function insert(User $user): int|bool
+    public function insert(User $user): bool
     {
         $values = [
             'roleId' => $user->getRoleId(),
@@ -17,7 +17,7 @@ class UserTable extends AbstractTable
             'email' => $user->getEmail(),
         ];
 
-        return (int)$this->query->insertInto($this->table, $values)->execute();
+        return (bool)$this->query->insertInto($this->table, $values)->execute();
     }
 
     public function update(User $user): bool
