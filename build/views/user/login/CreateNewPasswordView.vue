@@ -40,12 +40,12 @@ onMounted(async () => {
         .get(`/user/password/${route.params.token}`)
         .then((response) => {
             if (response.status !== 200) {
-                router.push({name: 'error'});
+                router.push({name: 'invalid_token'});
             }
         })
         .catch((error) => {
             console.log(error)
-            router.push({name: 'error'});
+            router.push({name: 'invalid_token'});
         })
 });
 
