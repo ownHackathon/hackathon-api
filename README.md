@@ -21,6 +21,6 @@ Build all public files with
 
 Copy config/database.dist.php and rename it to database.php. After that fill in your database connection credentials
 
-import Database structure `database/structure/structure.sql`
+import Database structure `database/structure/structure.sql` and Data `database/data/live.sql`
 
 copy `config/autoload/*.dist` for `mail`, `project` and `token` After that fill the configurations.
