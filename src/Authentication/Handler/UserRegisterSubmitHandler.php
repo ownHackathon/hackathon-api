@@ -12,16 +12,6 @@ class UserRegisterSubmitHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $validationMessages = $request->getAttribute('validationMessages');
-
-        if (null !== $validationMessages) {
-            $data = $request->getParsedBody();
-
-            $data['validationMessages'] = $validationMessages;
-
-            return new JsonResponse(['message' => $validationMessages], HTTP::STATUS_NOT_ACCEPTABLE);
-        }
-
-        return new JsonResponse(['message' => 'OK'], HTTP::STATUS_OK);
+        return new JsonResponse(['message' => 'Account was created'], HTTP::STATUS_OK);
     }
 }
