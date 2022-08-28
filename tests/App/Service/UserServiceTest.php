@@ -6,7 +6,6 @@ use App\Model\User;
 use App\Service\UserService;
 use App\Table\UserTable;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class UserServiceTest extends AbstractServiceTest
 {
@@ -71,6 +70,10 @@ class UserServiceTest extends AbstractServiceTest
         $table->expects($this->once())
             ->method('findByEmail')
             ->willReturn(false);
+
+        $table->expects($this->once())
+            ->method('insert')
+            ->willReturn(true);
 
         $service = new UserService($table, $this->hydrator, Uuid::uuid4());
 
