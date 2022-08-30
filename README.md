@@ -24,6 +24,6 @@ The easiest way to do this is to create a docker container using ddev.
 
 Copy config/database.php.dist and rename it to database.php. Then enter the credentials for the database
 
-import the database structure from database/structure/structure.sql into your database and import the data from database/data/live.sql
+import the database structure from `database/structure/structure.sql` into your database and import the data from `database/data/live.sql`
 
-Rename the config/autoload/*.dist files for mail, project and token to *.php and then fill in the configurations.
+Rename the `config/autoload/*.dist` files for mail, project and token to `*.php` and then fill in the configurations.
