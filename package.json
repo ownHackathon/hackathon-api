@@ -25,6 +25,7 @@
     "moment": "^2.29.2",
     "pinia": "^2.0.0-rc.10",
     "pinia-plugin-persistedstate": "^1.5.1",
+    "vee-validate": "^4.6.7",
     "vue": "^3.2.13",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.14",
@@ -60,7 +61,14 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }]
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "none",
+          "ignoreRestSiblings": false
+        }
+      ]
     }
   },
   "browserslist": [
