@@ -4,5 +4,5 @@ namespace App\Model;
 
 class Role
 {
-    public const USER = 3;
+    public const USER = 4;
 }

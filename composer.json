@@ -24,14 +24,16 @@
     },
     "scripts": {
         "phpcs": "phpcs --standard=phpcs.xml",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "doctrine": "php ./bin/migrations.php"
     },
     "require": {
         "php": "^8.1",
         "ext-json": "*",
-        "ext-pdo": "*",
         "ext-openssl": "*",
+        "ext-pdo": "*",
         "composer/package-versions-deprecated": "^1.11.99.4",
+        "doctrine/migrations": "^3.5",
         "envms/fluentpdo": "^2.2.0",
         "firebase/php-jwt": "^5.4",
         "laminas/laminas-component-installer": "^2.6.0",
@@ -60,7 +62,8 @@
         "psr-4": {
             "Administration\\": "src/Administration",
             "App\\": "src/App/",
-            "Authentication\\": "src/Authentication"
+            "Authentication\\": "src/Authentication",
+            "Migrations\\": "database/migrations"
         }
     },
     "autoload-dev": {
