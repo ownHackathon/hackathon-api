@@ -2,22 +2,19 @@
 
 return [
     'table_storage' => [
-        'table_name' => 'doctrine_migration_versions',
+        'table_name' => 'hack_MigrationVersions',
         'version_column_name' => 'version',
         'version_column_length' => 1024,
-        'executed_at_column_name' => 'executed_at',
-        'execution_time_column_name' => 'execution_time',
+        'executed_at_column_name' => 'executedAt',
+        'execution_time_column_name' => 'executionTime',
     ],
 
     'migrations_paths' => [
-        'MyProject\Migrations' => '/data/doctrine/migrations/lib/MyProject/Migrations',
-        'MyProject\Component\Migrations' => './Component/MyProject/Migrations',
+        'Migrations' => __DIR__ . '/../../database/migrations',
     ],
 
     'all_or_nothing' => true,
     'transactional' => true,
     'check_database_platform' => true,
     'organize_migrations' => 'none',
-    'connection' => null,
-    'em' => null,
 ];
