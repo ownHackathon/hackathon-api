@@ -43,7 +43,7 @@ class UserService
 
         $user->setPassword($hashedPassword);
         $user->setRoleId($role);
-        $user->setUuid($this->uuid->toString());
+        $user->setUuid($this->uuid->getHex()->toString());
 
         return $this->table->insert($user);
     }
