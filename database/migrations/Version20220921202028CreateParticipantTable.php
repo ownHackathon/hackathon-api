@@ -10,7 +10,7 @@ final class Version20220921202028CreateParticipantTable extends AbstractMigratio
 {
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('hack_Participant');
+        $table = $schema->createTable('Participant');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('userId', Types::INTEGER, ['unsigned' => true]);
@@ -24,6 +24,6 @@ final class Version20220921202028CreateParticipantTable extends AbstractMigratio
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('hack_Participant');
+        $schema->dropTable('Participant');
     }
 }

@@ -10,7 +10,7 @@ final class Version20220921200425CreateProjectTable extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('hack_Project');
+        $table = $schema->createTable('Project');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('participantId', Types::INTEGER, ['unsigned' => true,]);
@@ -26,6 +26,6 @@ final class Version20220921200425CreateProjectTable extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('hack_Project');
+        $schema->dropTable('Project');
     }
 }

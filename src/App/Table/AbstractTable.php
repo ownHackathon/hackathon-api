@@ -14,7 +14,7 @@ class AbstractTable
     public function __construct(
         protected readonly Query $query
     ) {
-        $this->table = 'hack_' . substr((new ReflectionClass($this))->getShortName(), 0, -5);
+        $this->table = substr((new ReflectionClass($this))->getShortName(), 0, -5);
     }
 
     public function getTableName(): string

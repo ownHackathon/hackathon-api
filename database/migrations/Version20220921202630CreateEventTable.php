@@ -10,7 +10,7 @@ final class Version20220921202630CreateEventTable extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('hack_Event');
+        $table = $schema->createTable('Event');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('userid', Types::INTEGER, ['unsigned' => true,]);
@@ -29,6 +29,6 @@ final class Version20220921202630CreateEventTable extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('hack_Event');
+        $schema->dropTable('Event');
     }
 }

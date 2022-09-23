@@ -11,7 +11,7 @@ final class Version20220921210154InsertDefaultsToRoleTable extends AbstractMigra
     {
         $sql = <<<SQL
                 INSERT INTO 
-                    `hack_Role` (`id`, `name`, `description`)
+                    `Role` (`id`, `name`, `description`)
                 VALUES 
                     (1, 'Owner', NULL),
                     (2, 'Administrator', NULL),
@@ -25,8 +25,8 @@ final class Version20220921210154InsertDefaultsToRoleTable extends AbstractMigra
     public function down(Schema $schema): void
     {
         $sql = <<<SQL
-                DELETE FROM `hack_Role`;
-                TRUNCATE `hack_Role`;
+                DELETE FROM `Role`;
+                TRUNCATE `Role`;
         SQL;
 
         $this->addSql($sql);

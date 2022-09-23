@@ -10,7 +10,7 @@ final class Version20220921195606CreateTopicPoolTable extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('hack_TopicPool');
+        $table = $schema->createTable('TopicPool');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('eventId', Types::INTEGER, ['unsigned' => true,]);
@@ -24,6 +24,6 @@ final class Version20220921195606CreateTopicPoolTable extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('hack_TopicPool');
+        $schema->dropTable('TopicPool');
     }
 }

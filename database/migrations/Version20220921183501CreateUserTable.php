@@ -10,7 +10,7 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('hack_User');
+        $table = $schema->createTable('User');
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('uuid', Types::STRING, ['length' => 32]);
         $table->addColumn('roleId', Types::INTEGER, ['unsigned' => true]);
@@ -30,6 +30,6 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('hack_User');
+        $schema->dropTable('User');
     }
 }
