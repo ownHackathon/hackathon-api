@@ -5,6 +5,8 @@ import MainLayout from '@/layouts/MainLayout';
 import MainView from '@/views/MainView';
 import LoginView from '@/views/user/login/LoginView';
 import LogoutView from '@/views/user/login/LogoutView';
+import PasswordForgottenView from "@/views/user/password/PasswordForgottenView";
+import CreateNewPasswordView from "@/views/user/password/CreateNewPasswordView";
 import RegisterView from '@/views/user/register/RegisterView';
 import UserView from "@/views/user/UserView";
 import EventAbout from '@/views/event/EventAbout';
@@ -12,6 +14,7 @@ import EventList from '@/views/event/EventList';
 import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
+import InvalidTokenView from "@/views/error/InvalidTokenView";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 
@@ -40,6 +43,16 @@ const routes = [
         path: "register",
         name: "register",
         component: RegisterView,
+      },
+      {
+        path: "user/password/forgotten",
+        name: "user_password_forgotten",
+        component: PasswordForgottenView,
+      },
+      {
+        path: "user/password/:token",
+        name: "user_password_forgotten_token",
+        component: CreateNewPasswordView,
       },
       {
         path: "user/:uuid",
@@ -89,6 +102,11 @@ const routes = [
         path: "about",
         name: "about",
         component: MainView,
+      },
+      {
+        path: "/error/token/invalid",
+        name: "invalid_token",
+        component: InvalidTokenView,
       },
     ]
   },

@@ -2,3 +2,5 @@ local.php
 *.local.php
 development.local.php
 token.global.php
+mail.global.php
+project.global.php

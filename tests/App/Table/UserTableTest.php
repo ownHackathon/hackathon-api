@@ -29,7 +29,7 @@ class UserTableTest extends AbstractTableTest
 
         $insertUser = $this->table->insert($user);
 
-        $this->assertSame(1, $insertUser);
+        $this->assertSame(true, $insertUser);
     }
 
     public function testCanFindById(): void

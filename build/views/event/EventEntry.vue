@@ -12,6 +12,7 @@
 
         <EventEntryTopic
             :topic="event.topic"
+            :eventSubscribeStatus="eventSubscribeStatus"
         />
 
         <div class="py-3"></div>
@@ -66,6 +67,7 @@ const userStore = useUserStore();
 const userService = useUserService();
 const eventService = useEventService();
 const eventSubscribeStatus = ref(0);
+
 const isShowSubscribeButton = computed(() => {
     return userService.isAuthenticated() && eventService.canStillParticipate(event.value.status);
 });

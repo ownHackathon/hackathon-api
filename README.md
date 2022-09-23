@@ -3,11 +3,11 @@ Evaluation project for the Hackathon Events on the Discord server from BlackScor
 
 ## Installation
 
-Clone this Repository
+Clone this repository
 
 `git clone https://github.com/BibaltiK/Hackathon.git`
 
-Install composer an node.js and run
+Install composer and node.js/npm and run
 
 `composer install`
 
@@ -19,6 +19,11 @@ Build all public files with
 
 `npm run build`
 
-update data in `config/database.php`
+For the execution you need a webserver with database.
+The easiest way to do this is to create a docker container using ddev.
 
-import Database structure `database/structure/structure.sql`
+Copy config/database.php.dist and rename it to database.php. Then enter the credentials for the database
+
+import the database structure from `database/structure/structure.sql` into your database and import the data from `database/data/live.sql`
+
+Rename the `config/autoload/*.dist` files for mail, project and token to `*.php` and then fill in the configurations.

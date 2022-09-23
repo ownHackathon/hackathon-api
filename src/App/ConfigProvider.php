@@ -31,34 +31,15 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\ServiceManager\Factory\InvokableFactory;
+use Symfony\Component\Mailer\Mailer;
 
 class ConfigProvider
 {
     public function __invoke(): array
     {
         return [
-            'view_helpers' => $this->getViewHelperConfig(),
             'dependencies' => $this->getDependencies(),
             ConfigAbstractFactory::class => $this->getAbstractFactoryConfig(),
-        ];
-    }
-
-    public function getViewHelperConfig(): array
-    {
-        return [
-            'invokables' => [
-
-            ],
-            'aliases' => [
-                'canEventSubscribe' => View\Helper\CanEventSubscribe::class,
-                'isParticipant' => View\Helper\IsParticipant::class,
-
-            ],
-            'factories' => [
-                View\Helper\CanEventSubscribe::class => InvokableFactory::class,
-                View\Helper\IsParticipant::class => InvokableFactory::class,
-            ],
         ];
     }
 
@@ -83,6 +64,8 @@ class ConfigProvider
                 UsernameInput::class,
 
                 ReflectionHydrator::class,
+
+                Service\TokenService::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
@@ -93,6 +76,7 @@ class ConfigProvider
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
+                Handler\TestMailHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\Event\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
                 Middleware\Event\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
@@ -153,6 +137,9 @@ class ConfigProvider
             ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
+            ],
+            Handler\TestMailHandler::class => [
+                Mailer::class,
             ],
             Middleware\Event\EventCreateValidationMiddleware::class => [
                 EventCreateValidator::class,

@@ -18,9 +18,8 @@ export default function useUserService() {
             unLoadUser();
           }
         })
-        .catch((err) => {
+        .catch(() => {
           unLoadUser();
-          console.error(err);
         });
   };
 

@@ -4,6 +4,8 @@ namespace Authentication\Middleware;
 
 use App\Model\User;
 use App\Service\UserService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,12 +22,6 @@ class UserRegisterMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $validationMessages = $request->getAttribute('validationMessages');
-
-        if (null !== $validationMessages) {
-            return $handler->handle($request);
-        }
-
         $data = $request->getParsedBody();
         $data['name'] = $data['username'];
         $user = $this->hydrator->hydrate($data, new User());
@@ -37,7 +33,7 @@ class UserRegisterMiddleware implements MiddlewareInterface
                 ],
             ];
 
-            return $handler->handle($request->withAttribute('validationMessages', $validationMessages));
+            return new JsonResponse(['message' => 'Registration failed', 'data' => $validationMessages], HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle($request);

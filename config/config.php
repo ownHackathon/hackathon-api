@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
 
-$aggregator = require CONFIG_DIR . 'providers.php';
+$aggregator = require __DIR__ . '/providers.php';
 
 return $aggregator->getMergedConfig();

@@ -102,6 +102,7 @@
                     />
                 </div>
             </div>
+            <input id="csrfToken" name="csrfToken" v-model="payload.csrfToken" type="hidden" />
             <div class="div-table-content">
                 <div class="mb-6">
                     <div class="flex justify-center">
@@ -130,6 +131,7 @@ const payload = reactive({
     eventText: '',
     startTime: '',
     duration: 14,
+    csrfToken: '',
 });
 
 const formData = ref({

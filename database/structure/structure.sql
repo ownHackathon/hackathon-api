@@ -4,12 +4,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 CREATE TABLE `Comment`
 (
     `id`         int(10) UNSIGNED NOT NULL,
@@ -132,7 +126,8 @@ CREATE TABLE `User`
     `email`            varchar(300)                         DEFAULT NULL,
     `registrationTime` datetime                    NOT NULL DEFAULT current_timestamp(),
     `lastAction`       datetime                             DEFAULT NULL,
-    `active`           tinyint(1) UNSIGNED         NOT NULL DEFAULT 1
+    `active`           tinyint(1) UNSIGNED         NOT NULL DEFAULT 1,
+    `token`            varchar(32)                          default NULL null
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
@@ -260,7 +255,3 @@ ALTER TABLE `User`
     ADD CONSTRAINT `fk_User_Role` FOREIGN KEY (`roleId`) REFERENCES `Role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 SET FOREIGN_KEY_CHECKS = 1;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

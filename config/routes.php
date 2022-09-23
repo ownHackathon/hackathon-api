@@ -1,8 +1,13 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 return static function (Mezzio\Application $app): void {
+    $app->get(
+        '/testmail',
+        [
+            App\Handler\TestMailHandler::class,
+        ],
+        App\Handler\TestMailHandler::class
+    );
     $app->get(
         '/api/me[/]',
         [
@@ -110,5 +115,32 @@ return static function (Mezzio\Application $app): void {
             Authentication\Handler\LogoutHandler::class,
         ],
         Authentication\Handler\LogoutHandler::class
+    );
+    $app->post(
+        '/user/password/forgotten',
+        [
+            Authentication\Middleware\UserPasswordForgottenValidator::class,
+            Authentication\Middleware\UserPasswordForgottenMiddleware::class,
+            Authentication\Handler\UserPasswordForgottonHandler::class,
+        ],
+        Authentication\Handler\UserPasswordForgottonHandler::class
+    );
+    $app->get(
+        '/user/password/{token}[/]',
+        [
+            Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
+            Authentication\Handler\UserPasswordVerifyTokenHandler::class,
+        ],
+        Authentication\Handler\UserPasswordVerifyTokenHandler::class
+    );
+    $app->post(
+        '/user/password/{token}[/]',
+        [
+            Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
+            Authentication\Middleware\UserPasswordChangeValidatorMiddleware::class,
+            Authentication\Middleware\UserPasswordChangeMiddleware::class,
+            Authentication\Handler\UserPasswordChangeHandler::class,
+        ],
+        Authentication\Handler\UserPasswordChangeHandler::class
     );
 };
