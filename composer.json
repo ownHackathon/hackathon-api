@@ -25,7 +25,8 @@
     "scripts": {
         "phpcs": "phpcs --standard=phpcs.xml",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "doctrine": "php ./bin/migrations.php"
+        "doctrine": "php ./bin/migrations.php",
+        "test": "vendor/bin/phpunit"
     },
     "require": {
         "php": "^8.1",
