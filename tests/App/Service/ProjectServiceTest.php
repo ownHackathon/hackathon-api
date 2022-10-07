@@ -24,6 +24,22 @@ class ProjectServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(Project::class, $project);
     }
 
+    public function testCanNotFindById(): void
+    {
+        $table = $this->createMock(ProjectTable::class);
+
+        $table->expects($this->once())
+            ->method('findById')
+            ->with(1)
+            ->willReturn(false);
+
+        $service = new ProjectService($table, $this->hydrator);
+
+        $project = $service->findById(1);
+
+        $this->assertNull($project);
+    }
+
     public function testCanFindByParticipantId(): void
     {
         $table = $this->createMock(ProjectTable::class);
