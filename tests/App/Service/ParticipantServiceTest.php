@@ -54,6 +54,46 @@ class ParticipantServiceTest extends AbstractServiceTest
         $this->assertSame(true, $participant);
     }
 
+    public function testCanRemoveParticipant(): void
+    {
+        $table = $this->createMock(ParticipantTable::class);
+
+        $table->expects($this->once())
+            ->method('remove')
+            ->willReturn(true);
+
+        $service = new ParticipantService($table, $this->hydrator);
+
+        $participant = new Participant();
+        $participant->setId(1)
+            ->setUserId(1)
+            ->setEventId(1);
+
+        $response = $service->remove($participant);
+
+        $this->assertSame(true, $response);
+    }
+
+    public function testCanNotRemoveParticipant(): void
+    {
+        $table = $this->createMock(ParticipantTable::class);
+
+        $table->expects($this->once())
+            ->method('remove')
+            ->willReturn(false);
+
+        $service = new ParticipantService($table, $this->hydrator);
+
+        $participant = new Participant();
+        $participant->setId(1)
+            ->setUserId(1)
+            ->setEventId(1);
+
+        $response = $service->remove($participant);
+
+        $this->assertSame(false, $response);
+    }
+
     public function testFindByIdThrowException(): void
     {
         $table = $this->createMock(ParticipantTable::class);
