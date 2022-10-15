@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js 14
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
@@ -32,6 +32,11 @@ jobs:
           password: ${{ secrets.BUILD_PASSWORD }}
           exclude: |
             **/.git*
+            **/*.dist
+            **/*.dist/**
             **/.git*/**
+            **/bin/**
+            **/config/migrations/**
             **/node_modules/**
             **/build/**
+            **/database/**
