@@ -27,6 +27,11 @@ jobs:
       - name: FTP Deploy to Development Server (Staging)
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          ftp-server: ${{ secrets.BUILD_HOST }}
-          ftp-username: ${{ secrets.BUILD_USER }}
-          ftp-password: ${{ secrets.BUILD_PASSWORD }}
+          server: ${{ secrets.BUILD_HOST }}
+          username: ${{ secrets.BUILD_USER }}
+          password: ${{ secrets.BUILD_PASSWORD }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/build/**
