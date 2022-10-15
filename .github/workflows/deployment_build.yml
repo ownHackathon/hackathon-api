@@ -7,9 +7,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Get latest code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
         with:
-          fetch-depth: 2
+          node-version: '14'
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
@@ -21,9 +25,13 @@ jobs:
         run: npm run build
 
       - name: FTP Deploy to Development Server (Staging)
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           ftp-server: ${{ secrets.BUILD_HOST }}
           ftp-username: ${{ secrets.BUILD_USER }}
           ftp-password: ${{ secrets.BUILD_PASSWORD }}
-          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            /build/**
