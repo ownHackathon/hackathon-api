@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - master
+name: Development Deployment
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: npm install
+        run: npm install
+
+      - name: npm run build
+        run: npm run build
+
+      - name: FTP Deploy to Development Server (Staging)
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          ftp-server: ${{ secrets.BUILD_HOST }}
+          ftp-username: ${{ secrets.BUILD_USER }}
+          ftp-password: ${{ secrets.BUILD_PASSWORD }}
+          local-dir: ./
