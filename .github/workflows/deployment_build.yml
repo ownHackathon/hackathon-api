@@ -30,8 +30,3 @@ jobs:
           ftp-server: ${{ secrets.BUILD_HOST }}
           ftp-username: ${{ secrets.BUILD_USER }}
           ftp-password: ${{ secrets.BUILD_PASSWORD }}
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            /build/**
