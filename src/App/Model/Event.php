@@ -6,15 +6,6 @@ use DateTime;
 
 class Event
 {
-    public const STATUS_SOON = 1;
-    public const STATUS_PREPARE = 2;
-    public const STATUS_RUNNING = 3;
-    public const STATUS_EVALUATION = 4;
-    public const STATUS_COMPLETE = 5;
-    public const STATUS_CLOSED = 6;
-    public const STATUS_ABORTED = 7;
-    public const STATUS_HIDDEN = 8;
-
     private int $id = 0;
     private int $userId = 0;
     private string $title = '';

@@ -2,6 +2,7 @@
 
 namespace AppTest\Model;
 
+use App\Enum\EventStatus;
 use App\Model\Event;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -104,12 +105,12 @@ class EventTest extends TestCase
 
     public function testCanSetAndGetActive(): void
     {
-        $eventActive = $this->event->setStatus(Event::STATUS_RUNNING);
+        $eventActive = $this->event->setStatus(EventStatus::RUNNING->value);
         $active = $eventActive->getStatus();
 
         $this->assertInstanceOf(Event::class, $eventActive);
         $this->assertIsInt($active);
-        $this->assertSame(Event::STATUS_RUNNING, $active);
+        $this->assertSame(EventStatus::RUNNING->value, $active);
     }
 
     public function testCanSetAndGetRatingComplete(): void
