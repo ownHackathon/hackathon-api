@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
 use App\Model\Role;
 use App\Model\User;
@@ -30,7 +31,7 @@ class UserService
         return $user;
     }
 
-    public function create(User $user, int $role = Role::USER): bool
+    public function create(User $user, UserRole $role = UserRole::USER): bool
     {
         if (
             $this->isUserExist($user->getName())
@@ -42,7 +43,7 @@ class UserService
         $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
 
         $user->setPassword($hashedPassword);
-        $user->setRoleId($role);
+        $user->setRoleId($role->value);
         $user->setUuid($this->uuid->getHex()->toString());
 
         return $this->table->insert($user);
