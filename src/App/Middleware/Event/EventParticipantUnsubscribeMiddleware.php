@@ -2,6 +2,7 @@
 
 namespace App\Middleware\Event;
 
+use App\Enum\EventStatus;
 use App\Model\Event;
 use App\Model\User;
 use App\Service\EventService;
@@ -29,7 +30,7 @@ class EventParticipantUnsubscribeMiddleware implements MiddlewareInterface
 
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus() >= Event::STATUS_RUNNING) {
+        if ($event->getStatus() >= EventStatus::RUNNING->value) {
             return $handler->handle($request->withAttribute('participantRemoveStatus', $participantRemoveStatus));
         }
 
