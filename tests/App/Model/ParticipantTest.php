@@ -2,14 +2,18 @@
 
 namespace AppTest\Model;
 
+use App\Enum\DateTimeFormat;
 use App\Model\Participant;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class ParticipantTest extends TestCase
 {
+    private const TEST_USER_ID = 1;
+    private const TEST_EVENT_IT = 1;
+    private const TEST_TIME = '1000-01-01 00:00';
+
     private Participant $participant;
-    private string $testTime = '1000-01-01 00:00:00';
 
     protected function setUp(): void
     {
@@ -20,42 +24,42 @@ class ParticipantTest extends TestCase
 
     public function testCanSetAndGetId(): void
     {
-        $participantId = $this->participant->setId(1);
+        $participantId = $this->participant->setId(self::TEST_USER_ID);
         $id = $participantId->getId();
 
         $this->assertInstanceOf(Participant::class, $participantId);
         $this->assertIsInt($id);
-        $this->assertSame(1, $id);
+        $this->assertSame(self::TEST_USER_ID, $id);
     }
 
     public function testCanSetAndGetUserId(): void
     {
-        $participantUserId = $this->participant->setUserId(1);
+        $participantUserId = $this->participant->setUserId(self::TEST_USER_ID);
         $userId = $participantUserId->getUserId();
 
         $this->assertInstanceOf(Participant::class, $participantUserId);
         $this->assertIsInt($userId);
-        $this->assertSame(1, $userId);
+        $this->assertSame(self::TEST_USER_ID, $userId);
     }
 
     public function testCanSetAndGetEventId(): void
     {
-        $participantEventId = $this->participant->setEventId(1);
+        $participantEventId = $this->participant->setEventId(self::TEST_EVENT_IT);
         $eventId = $participantEventId->getEventId();
 
         $this->assertInstanceOf(Participant::class, $participantEventId);
         $this->assertIsInt($eventId);
-        $this->assertSame(1, $eventId);
+        $this->assertSame(self::TEST_EVENT_IT, $eventId);
     }
 
     public function testCanSetAndGetRequestTime(): void
     {
-        $participantRequestTime = $this->participant->setRequestTime(new DateTime($this->testTime));
+        $participantRequestTime = $this->participant->setRequestTime(new DateTime(self::TEST_TIME));
         $requestTime = $participantRequestTime->getRequestTime();
 
         $this->assertInstanceOf(Participant::class, $participantRequestTime);
         $this->assertInstanceOf(DateTime::class, $requestTime);
-        $this->assertSame($this->testTime, $requestTime->format('Y-m-d H:i:s'));
+        $this->assertSame(self::TEST_TIME, $requestTime->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetApproved(): void
@@ -77,5 +81,4 @@ class ParticipantTest extends TestCase
         $this->assertIsBool($disqualified);
         $this->assertSame(true, $disqualified);
     }
-
 }
