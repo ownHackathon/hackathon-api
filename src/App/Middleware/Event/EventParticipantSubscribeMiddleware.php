@@ -2,6 +2,7 @@
 
 namespace App\Middleware\Event;
 
+use App\Enum\EventStatus;
 use App\Model\Event;
 use App\Model\Participant;
 use App\Model\User;
@@ -27,7 +28,7 @@ class EventParticipantSubscribeMiddleware implements MiddlewareInterface
         $eventId = (int)$request->getAttribute('eventId');
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus() >= Event::STATUS_RUNNING) {
+        if ($event->getStatus() >= EventStatus::RUNNING->value) {
             return $handler->handle($request->withAttribute('participantCreateStatus', $participantCreateStatus));
         }
 
