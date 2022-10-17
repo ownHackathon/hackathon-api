@@ -11,6 +11,9 @@
         <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
         <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
     </rule>
+    <rule ref="PSR2">
+        <exlude name="PSR2.Classes.PropertyDeclaration.Underscore" />
+    </rule>
     <rule ref="PSR12">
         <exclude name="PSR12.Files.OpenTag.NotAlone" />
         <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock" />
