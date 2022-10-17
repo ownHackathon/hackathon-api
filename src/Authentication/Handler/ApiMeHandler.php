@@ -21,9 +21,7 @@ class ApiMeHandler implements RequestHandlerInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        if (!$user instanceof User) {
-            return new JsonResponse([], HTTP::STATUS_OK);
-        }
+        if (!$user instanceof User) { return new JsonResponse([], HTTP::STATUS_OK); }
 
         $data = $this->hydrator->extract($user);
 
