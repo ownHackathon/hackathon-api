@@ -17,7 +17,7 @@ trait JwtTokenGeneratorTrait
                 'iat' => $now,
                 'exp' => $now + $timeout,
 
-                'uuid' => $uuid,
+                'uuid' => $uuid ,
             ],
             $tokenSecret,
             $alg
