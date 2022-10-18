@@ -1,11 +1,18 @@
-# Release "pre first Release"
+<!--
+Entry with Issus, Pull Request, Author
+Example:
+- new time entry added #0000 !0000 @BibaltiK
+-->
+# Unreleased
 
-# Features
+# Added <!-- for new feature -->
 
-# Changes
+# Changed <!-- for changes in existing functionality. -->
 
-# Bugfixes
+# Deprecated <!-- for soon-to-be removed features -->
 
-# Refactoring
+# Removed <!-- for now removed features -->
 
-# Dev
+# Fixed <!-- for any bug fixes. -->
+
+# Security <!-- in case of vulnerabilities.  -->
