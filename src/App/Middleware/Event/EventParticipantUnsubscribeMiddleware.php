@@ -3,7 +3,6 @@
 namespace App\Middleware\Event;
 
 use App\Enum\EventStatus;
-use App\Model\Event;
 use App\Model\User;
 use App\Service\EventService;
 use App\Service\ParticipantService;
@@ -24,7 +23,9 @@ class EventParticipantUnsubscribeMiddleware implements MiddlewareInterface
     {
         $participantRemoveStatus = false;
 
-        /** @var  User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
         $eventId = (int)$request->getAttribute('eventId');
 

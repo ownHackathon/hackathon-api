@@ -27,7 +27,9 @@ class EventParticipantSubscribeHandler implements RequestHandlerInterface
             return new JsonResponse(['Status' => 'Benutzer konnte der Teilnehmerliste nicht hinzugefügt werden'], HTTP::STATUS_METHOD_NOT_ALLOWED);
         }
 
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
         $eventId = (int)$request->getAttribute('eventId');
 

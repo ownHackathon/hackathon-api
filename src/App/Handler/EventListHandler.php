@@ -19,7 +19,9 @@ class EventListHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var array<Event> $events */
+        /**
+         * @var array<Event> $events
+         */
         $events = $request->getAttribute('events') ?? [];
 
         $data = [];

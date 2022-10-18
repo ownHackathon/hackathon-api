@@ -19,7 +19,9 @@ class ProjectParticipantMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Project $project */
+        /**
+         * @var Project $project
+         */
         $project = $request->getAttribute(Project::class);
 
         $participant = $this->participantService->findById($project->getParticipantId());

@@ -2,11 +2,10 @@
 <ruleset name="template coding standard">
     <arg value="p"/>
     <arg name="colors"/>
-
     <rule ref="PSR12">
-        <exclude name="PSR12.Files.OpenTag.NotAlone" />
-        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock" />
-        <exclude name="PSR12.Files.FileHeader.SpacingInsideBlock" />
+        <exclude name="PSR12.Files.OpenTag.NotAlone"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingInsideBlock"/>
     </rule>
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
@@ -20,16 +19,17 @@
     <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
     <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
     <rule ref="Squiz.Scope.MemberVarScope"/>
+
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
             <property name="forbiddenFunctions"
                       type="array"
-                      value="dump=>null,dd=>null,var_dump=>null,echo=>$output->writeln,die=>null,exit=>null" />
+                      value="dump=>null,dd=>null,var_dump=>null,echo=>$output->writeln,die=>null,exit=>null"/>
         </properties>
     </rule>
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
-            <property name="maxPercentage" value="60" />
+            <property name="maxPercentage" value="60"/>
         </properties>
     </rule>
 
@@ -44,4 +44,8 @@
     <file>src</file>
 
     <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/config/*</exclude-pattern>
+    <exclude-pattern>*/database/*</exclude-pattern>
 </ruleset>

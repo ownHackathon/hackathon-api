@@ -14,7 +14,9 @@ class IsLoginAuthenticationMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var null|User $user */
+        /**
+         * @var null|User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         if (!$user) {

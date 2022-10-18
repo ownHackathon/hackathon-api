@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
-use App\Model\Role;
 use App\Model\User;
 use App\Table\UserTable;
 use DateTime;
@@ -34,8 +33,8 @@ class UserService
     public function create(User $user, UserRole $role = UserRole::USER): bool
     {
         if (
-            $this->isUserExist($user->getName())
-            || $this->isEmailExist($user->getEmail())
+            $this->isUserExist($user->getName()) ||
+            $this->isEmailExist($user->getEmail())
         ) {
             return false;
         }
