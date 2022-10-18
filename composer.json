@@ -23,6 +23,7 @@
         }
     },
     "scripts": {
+        "phplint": "vendor/bin/phplint",
         "phpcs": "phpcs --standard=phpcs.xml -s",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "doctrine": "php ./bin/migrations.php",
