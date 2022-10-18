@@ -15,5 +15,4 @@ class UserPasswordForgottonHandlerFactory
 
         return new UserPasswordForgottonHandler($mailer, $mailSender, $projectUri);
     }
-
 }

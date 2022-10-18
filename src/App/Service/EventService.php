@@ -44,7 +44,9 @@ class EventService
         return $this->hydrator->hydrate($event, new Event());
     }
 
-    /** @return array<Event>|null */
+    /**
+     * @return array<Event>|null
+     */
     public function findAll(string $order = 'startTime', string $sort = 'DESC'): ?array
     {
         $events = $this->table->findAll($order, $sort);
@@ -52,7 +54,9 @@ class EventService
         return $this->hydrator->hydrateList($events, Event::class);
     }
 
-    /** @return array<Event>|null */
+    /**
+     * @return array<Event>|null
+     */
     public function findAllActive(): ?array
     {
         $events = $this->table->findAllActive();
@@ -60,7 +64,9 @@ class EventService
         return $this->hydrator->hydrateList($events, Event::class);
     }
 
-    /** @return array<Event>|null */
+    /**
+     * @return array<Event>|null
+     */
     public function findAllNotActive(): ?array
     {
         $events = $this->table->findAllNotActive();

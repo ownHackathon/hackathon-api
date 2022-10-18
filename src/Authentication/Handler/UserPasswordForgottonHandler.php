@@ -24,7 +24,9 @@ class UserPasswordForgottonHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::class);
 
         $email = (new Email())

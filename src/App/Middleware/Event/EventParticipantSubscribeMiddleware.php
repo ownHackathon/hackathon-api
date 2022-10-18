@@ -32,7 +32,9 @@ class EventParticipantSubscribeMiddleware implements MiddlewareInterface
             return $handler->handle($request->withAttribute('participantCreateStatus', $participantCreateStatus));
         }
 
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         $participant = new Participant();

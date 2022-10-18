@@ -13,7 +13,9 @@ class EventNameHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var Event $event */
+        /**
+         * @var Event $event
+         */
         $event = $request->getAttribute(Event::class);
 
         $data = [

@@ -11,7 +11,7 @@ jobs:
 
       - name: Install PHP Code Sniffer
         run: |
-          composer require --dev squizlabs/php_codesniffer          
+          composer require --dev squizlabs/php_codesniffer
 
       - name: Check coding standards
         run: vendor/bin/phpcs

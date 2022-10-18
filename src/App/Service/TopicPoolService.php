@@ -48,7 +48,9 @@ class TopicPoolService
         return $this->hydrator->hydrate($topic, new Topic());
     }
 
-    /** @return array<Topic>|null */
+    /**
+     * @return array<Topic>|null
+     */
     public function findAvailable(): ?array
     {
         $topics = $this->table->findAvailable();
@@ -56,7 +58,9 @@ class TopicPoolService
         return $this->hydrator->hydrateList($topics, Topic::class);
     }
 
-    /** @return array<Topic>|null */
+    /**
+     * @return array<Topic>|null
+     */
     public function findAll(): ?array
     {
         $topics = $this->table->findAll();

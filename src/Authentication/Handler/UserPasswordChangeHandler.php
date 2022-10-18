@@ -10,7 +10,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class UserPasswordChangeHandler implements RequestHandlerInterface
 {
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new JsonResponse(['message' => 'Password was changed'], HTTP::STATUS_OK);
