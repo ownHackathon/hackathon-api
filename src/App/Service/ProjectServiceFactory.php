@@ -15,7 +15,8 @@ class ProjectServiceFactory
         $hydrator = $container->get(ReflectionHydrator::class);
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
-        $hydrator->addStrategy(            'createTime',
+        $hydrator->addStrategy(
+            'createTime',
             $strategy,
         );
 
