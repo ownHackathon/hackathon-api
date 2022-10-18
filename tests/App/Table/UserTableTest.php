@@ -10,6 +10,8 @@ use App\Table\UserTable;
  */
 class UserTableTest extends AbstractTableTest
 {
+    private const TEST_USER_ID = 1;
+
     public function testCanInsertUser(): void
     {
         $user = new User();
@@ -34,9 +36,9 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', 1);
+        $this->configureSelectWithOneWhere('id', self::TEST_USER_ID);
 
-        $user = $this->table->findById(1);
+        $user = $this->table->findById(self::TEST_USER_ID);
 
         $this->assertSame($this->fetchResult, $user);
     }

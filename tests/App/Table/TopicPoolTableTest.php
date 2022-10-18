@@ -4,13 +4,15 @@ namespace AppTest\Table;
 
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @property TopicPoolTable $table
  */
 class TopicPoolTableTest extends AbstractTableTest
 {
+    private const TEST_TOPIC_POOL_ID = 1;
+    private const TEST_EVENT_ID = 1;
+
     public function testCanInsertTopic(): void
     {
         $topic = new Topic();
@@ -50,9 +52,9 @@ class TopicPoolTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', 1);
+        $this->configureSelectWithOneWhere('id', self::TEST_TOPIC_POOL_ID);
 
-        $topic = $this->table->findById(1);
+        $topic = $this->table->findById(self::TEST_TOPIC_POOL_ID);
 
         $this->assertSame($this->fetchResult, $topic);
     }
@@ -72,9 +74,9 @@ class TopicPoolTableTest extends AbstractTableTest
 
     public function testCanFindByEventId(): void
     {
-        $this->configureSelectWithOneWhere('eventId', 1);
+        $this->configureSelectWithOneWhere('eventId', self::TEST_EVENT_ID);
 
-        $topic = $this->table->findByEventId(1);
+        $topic = $this->table->findByEventId(self::TEST_EVENT_ID);
 
         $this->assertSame($this->fetchResult, $topic);
     }

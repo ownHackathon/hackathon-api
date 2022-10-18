@@ -10,6 +10,10 @@ use App\Table\ParticipantTable;
  */
 class ParticipantTableTest extends AbstractTableTest
 {
+    private const TEST_PARTICIPANT_ID = 1;
+    private const TEST_USER_ID = 1;
+    private const TEST_EVENT_ID = 1;
+
     public function testCanInsertParticipant(): void
     {
         $participant = new Participant();
@@ -32,9 +36,9 @@ class ParticipantTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', 1);
+        $this->configureSelectWithOneWhere('id', self::TEST_PARTICIPANT_ID);
 
-        $project = $this->table->findById(1);
+        $project = $this->table->findById(self::TEST_PARTICIPANT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }
@@ -54,9 +58,9 @@ class ParticipantTableTest extends AbstractTableTest
 
     public function testCanFindByUserId(): void
     {
-        $this->configureSelectWithOneWhere('userId', 1);
+        $this->configureSelectWithOneWhere('userId', self::TEST_USER_ID);
 
-        $participant = $this->table->findByUserId(1);
+        $participant = $this->table->findByUserId(self::TEST_USER_ID);
 
         $this->assertSame($this->fetchResult, $participant);
     }
@@ -77,7 +81,7 @@ class ParticipantTableTest extends AbstractTableTest
             ->method('fetch')
             ->willReturn($this->fetchResult);
 
-        $participant = $this->table->findByUserIdAndEventId(1, 1);
+        $participant = $this->table->findByUserIdAndEventId(self::TEST_USER_ID, self::TEST_EVENT_ID);
 
         $this->assertSame($this->fetchResult, $participant);
     }
@@ -99,7 +103,7 @@ class ParticipantTableTest extends AbstractTableTest
             ->method('fetchAll')
             ->willReturn($this->fetchAllResult);
 
-        $participant = $this->table->findActiveParticipantByEvent(1);
+        $participant = $this->table->findActiveParticipantByEvent(self::TEST_EVENT_ID);
 
         $this->assertSame($this->fetchAllResult, $participant);
     }
