@@ -22,7 +22,9 @@ class UserPasswordChangeMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::class);
 
         $data = $request->getParsedBody();

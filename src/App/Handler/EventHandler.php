@@ -28,13 +28,19 @@ class EventHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
-        /** @var Event $event */
+        /**
+         * @var Event $event
+         */
         $event = $request->getAttribute(Event::class);
 
-        /** @var array<Participant> $participants */
+        /**
+         * @var array<Participant> $participants
+         */
         $participants = $this->participantService->findActiveParticipantByEvent($event->getId());
 
         $data = [

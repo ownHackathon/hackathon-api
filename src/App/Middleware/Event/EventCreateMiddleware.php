@@ -23,7 +23,9 @@ class EventCreateMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         $data = $request->getParsedBody();

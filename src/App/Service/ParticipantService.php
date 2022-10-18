@@ -54,7 +54,9 @@ class ParticipantService
         return $this->hydrator->hydrate($participant, new Participant());
     }
 
-    /** @return array<Participant>|null */
+    /**
+     * @return array<Participant>|null
+     */
     public function findActiveParticipantByEvent(int $eventId): ?array
     {
         $participants = $this->table->findActiveParticipantByEvent($eventId);

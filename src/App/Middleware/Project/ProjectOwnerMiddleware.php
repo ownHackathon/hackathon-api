@@ -18,7 +18,9 @@ class ProjectOwnerMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Participant $participant */
+        /**
+         * @var Participant $participant
+         */
         $participant = $request->getAttribute(Participant::class);
 
         $projectOwner = $this->userService->findById($participant->getUserId());
