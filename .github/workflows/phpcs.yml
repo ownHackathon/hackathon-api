@@ -1,6 +1,9 @@
 name: PHP Code Sniffer
 
-on: pull_request
+on: 
+  pull_request:
+    paths:
+      - "**.php"
 
 jobs:
   phpcs:
