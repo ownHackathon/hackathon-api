@@ -1,0 +1,24 @@
+name: PHP Lint
+
+on:
+  push:
+    paths:
+      - "**.php"
+
+  pull_request:
+    paths:
+      - "**.php"
+
+jobs:
+  phplint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: PHP Lint
+        uses: overtrue/phplint@8.1
+        with:
+          path: .
+          options: --exclude=*.log
+        run: vendor/bin/phplint ./ --exclude=vendor
