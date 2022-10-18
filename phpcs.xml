@@ -2,22 +2,6 @@
 <ruleset name="template coding standard">
     <arg value="p"/>
     <arg name="colors"/>
-    <rule ref="PEAR">
-        <exclude name="Generic.Commenting.DocComment.MissingShort"/>
-        <exclude name="PEAR.Commenting.ClassComment.Missing"/>
-        <exclude name="PEAR.Commenting.FileComment.Missing"/>
-        <exclude name="PEAR.Commenting.FunctionComment.Missing"/>
-        <exclude name="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
-        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
-        <exclude name="PEAR.ControlStructures.MultiLineCondition.SpacingAfterOpenBrace"/>
-        <exclude name="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
-    </rule>
-    <rule ref="PSR2">
-        <exlude name="PSR2.Classes.PropertyDeclaration.Underscore" />
-    </rule>
     <rule ref="PSR12">
         <exclude name="PSR12.Files.OpenTag.NotAlone"/>
         <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
