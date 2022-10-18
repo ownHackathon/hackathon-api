@@ -14,6 +14,7 @@ class UserTest extends TestCase
     private const TEST_NAME = 'Test Name';
     private const TEST_PASSWORD = 'Test Password';
     private const TEST_EMAIL = 'example@example.com';
+    private const TEST_TOKEN = '4e10cfecf3bb51811689956e647705a0';
 
     private User $user;
 
@@ -124,5 +125,15 @@ class UserTest extends TestCase
         $this->assertInstanceOf(User::class, $userActive);
         $this->assertIsBool($active);
         $this->assertSame(true, $active);
+    }
+
+    public function testCanSetAndGetToken(): void
+    {
+        $userToken = $this->user->setToken(self::TEST_TOKEN);
+        $token = $this->user->getToken();
+
+        $this->assertInstanceOf(User::class, $userToken);
+        $this->assertIsString($token);
+        $this->assertSame(self::TEST_TOKEN, $token);
     }
 }
