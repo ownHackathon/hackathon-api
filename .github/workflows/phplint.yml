@@ -21,4 +21,3 @@ jobs:
         with:
           path: .
           options: --exclude=*.log
-        run: vendor/bin/phplint ./ --exclude=vendor
