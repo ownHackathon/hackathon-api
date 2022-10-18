@@ -23,6 +23,7 @@
         }
     },
     "scripts": {
+        "phplint": "vendor/bin/phplint",
         "phpcs": "phpcs --standard=phpcs.xml -s",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "doctrine": "php ./bin/migrations.php",
@@ -54,10 +55,11 @@
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "overtrue/phplint": "^5.3",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.6",
-        "jetbrains/phpstorm-attributes": "^1.0"
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
