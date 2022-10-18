@@ -9,11 +9,14 @@ use App\Table\ProjectTable;
  */
 class ProjectTableTest extends AbstractTableTest
 {
+    private const TEST_PROJECT_ID = 1;
+    private const TEST_PARTICIPANT_ID = 1;
+
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', 1);
+        $this->configureSelectWithOneWhere('id', self::TEST_PROJECT_ID);
 
-        $project = $this->table->findById(1);
+        $project = $this->table->findById(self::TEST_PROJECT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }
@@ -33,9 +36,9 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindByParticipantId(): void
     {
-        $this->configureSelectWithOneWhere('participantId', 1);
+        $this->configureSelectWithOneWhere('participantId', self::TEST_PARTICIPANT_ID);
 
-        $project = $this->table->findByParticipantId(1);
+        $project = $this->table->findByParticipantId(self::TEST_PARTICIPANT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }

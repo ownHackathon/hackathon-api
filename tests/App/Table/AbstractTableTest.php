@@ -15,6 +15,8 @@ use function substr;
 
 abstract class AbstractTableTest extends TestCase
 {
+    private const TABLE_NAME_OFFSET = 7;
+    private const TABLE_SUB_LENGTH = -4;
     protected AbstractTable $table;
     protected Query&MockObject $query;
     protected array $fetchResult = ['id' => 1];
@@ -27,7 +29,11 @@ abstract class AbstractTableTest extends TestCase
     {
         $this->query = $this->createMock(Query::class);
 
-        $this->table = new ('App' . substr(get_class($this), 7, -4))($this->query);
+        $this->table = new (
+            'App' . substr(get_class($this), self::TABLE_NAME_OFFSET, self::TABLE_SUB_LENGTH)
+        )(
+            $this->query
+        );
     }
 
     protected function createSelect(): Select&MockObject

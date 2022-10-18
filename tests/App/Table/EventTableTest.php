@@ -10,17 +10,12 @@ use App\Table\EventTable;
  */
 class EventTableTest extends AbstractTableTest
 {
+    private const TEST_EVENT_ID = 1;
+
     public function testCanInsertEvent(): void
     {
         $event = new Event();
-        $values = [
-            'userId' => $event->getUserId(),
-            'title' => $event->getTitle(),
-            'description' => $event->getDescription(),
-            'eventText' => $event->getEventText(),
-            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
-            'duration' => $event->getDuration(),
-        ];
+        $values = $this->extract($event);
 
         $insert = $this->createInsert($values);
 
@@ -36,14 +31,7 @@ class EventTableTest extends AbstractTableTest
     public function testCanNotInsertEvent(): void
     {
         $event = new Event();
-        $values = [
-            'userId' => $event->getUserId(),
-            'title' => $event->getTitle(),
-            'description' => $event->getDescription(),
-            'eventText' => $event->getEventText(),
-            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
-            'duration' => $event->getDuration(),
-        ];
+        $values = $this->extract($event);
 
         $insert = $this->createInsert($values);
 
@@ -60,7 +48,7 @@ class EventTableTest extends AbstractTableTest
     {
         $this->configureSelectWithOneWhere('id', 1);
 
-        $event = $this->table->findById(1);
+        $event = $this->table->findById(self::TEST_EVENT_ID);
 
         $this->assertSame($this->fetchResult, $event);
     }
@@ -136,5 +124,17 @@ class EventTableTest extends AbstractTableTest
         $event = $this->table->findAllNotActive();
 
         $this->assertSame($this->fetchAllResult, $event);
+    }
+
+    private function extract(Event $event): array
+    {
+        return [
+            'userId' => $event->getUserId(),
+            'title' => $event->getTitle(),
+            'description' => $event->getDescription(),
+            'eventText' => $event->getEventText(),
+            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
+            'duration' => $event->getDuration(),
+        ];
     }
 }
