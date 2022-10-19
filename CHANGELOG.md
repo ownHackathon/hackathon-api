@@ -1,18 +1,22 @@
 <!--
-Entry with Issus, Pull Request, Author
+Entry with Issues, Pull Request, Author
 Example:
-- new time entry added #0000 !0000 @BibaltiK
+- new time entry added [#0000] [!0000] [@BibaltiK]
 -->
-# Unreleased
+# Changelog for the Hackathon evaluation Project
 
-# Added <!-- for new feature -->
+## Unreleased
 
-# Changed <!-- for changes in existing functionality. -->
+<!--Example -->
 
-# Deprecated <!-- for soon-to-be removed features -->
+<!-- ### Added --><!-- for new feature --> 
 
-# Removed <!-- for now removed features -->
+<!-- ### Changed --><!-- for changes in existing functionality. -->
 
-# Fixed <!-- for any bug fixes. -->
+<!-- ### Deprecated --><!-- for soon-to-be removed features -->
 
-# Security <!-- in case of vulnerabilities.  -->
+<!-- ### Removed --><!-- for now removed features -->
+
+<!-- ### Fixed --><!-- for any bug fixes. -->
+
+<!-- ### Security --><!-- in case of vulnerabilities.  -->
