@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  hackathon-db-data:
+
+services:
+
+  webserver:
+    container_name: hackathon_backend
+    build: ./docker
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+
+  hackathon-db:
+    image: mariadb:10.9
+    container_name: hackathon_mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+    volumes:
+      - hackathon-db-data:/var/lib/mysql
+      - ./docker/init.sql:/data/application/init.sql
