@@ -2,7 +2,7 @@
 
 return [
     'database' => [
-        'host' => 'ddev-hackathon-db',
+        'host' => 'hackathon-db',
         'port' => '3306',
         'user' => 'db',
         'password' => 'db',
