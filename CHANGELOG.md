@@ -21,7 +21,8 @@ Example:
 
 ## Unreleased
 
-<!-- ### Added --><!-- for new feature --> 
+### Added <!-- for new feature -->
+- add Changelog #74 @BibaltiK
 
 <!-- ### Changed --><!-- for changes in existing functionality. -->
 
