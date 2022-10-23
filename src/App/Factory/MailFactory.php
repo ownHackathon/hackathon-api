@@ -8,7 +8,7 @@ use Symfony\Component\Mailer\Transport;
 
 class MailFactory
 {
-    public function __invoke(ContainerInterface $container): ?Mailer
+    public function __invoke(ContainerInterface $container): Mailer
     {
         $settings = $container->get('config');
 
