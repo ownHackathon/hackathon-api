@@ -4,6 +4,7 @@ RUN apt-get update \
     && apt-get install -y \
     libzip.dev \
     && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
     && a2enmod rewrite \
     && a2enmod headers
 
