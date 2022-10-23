@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Service;
+namespace App\Test\Service;
 
 use App\Hydrator\ReflectionHydrator;
 use App\Service\ParticipantService;

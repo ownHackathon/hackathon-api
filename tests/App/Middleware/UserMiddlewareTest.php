@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Middleware;
+namespace App\Test\Middleware;
 
 use App\Middleware\UserMiddleware;
 use App\Model\User;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Middleware;
+namespace App\Test\Middleware;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

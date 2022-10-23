@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Table;
+namespace App\Test\Table;
 
 use App\Table\ProjectTable;
 
