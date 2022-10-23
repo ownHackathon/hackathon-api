@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Model;
+namespace App\Test\Model;
 
 use App\Enum\DateTimeFormat;
 use App\Model\Participant;

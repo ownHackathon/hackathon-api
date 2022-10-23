@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AppTest\Table;
+namespace App\Test\Table;
 
 use App\Table\AbstractTable;
 use Envms\FluentPDO\Queries\Insert;
@@ -15,7 +15,7 @@ use function substr;
 
 abstract class AbstractTableTest extends TestCase
 {
-    private const TABLE_NAME_OFFSET = 7;
+    private const TABLE_NAME_OFFSET = 8;
     private const TABLE_SUB_LENGTH = -4;
     protected AbstractTable $table;
     protected Query&MockObject $query;
