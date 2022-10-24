@@ -12,42 +12,23 @@ class EventTableTest extends AbstractTableTest
 {
     private const TEST_EVENT_ID = 1;
 
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('Event', $this->table->getTableName());
+    }
+
+
     public function testCanInsertEvent(): void
     {
         $event = new Event();
-        $values = $this->extract($event);
-
-        $insert = $this->createInsert($values);
-
-        $insert->expects($this->once())
-            ->method('execute')
-            ->willReturn(1);
 
         $insertLastId = $this->table->insert($event);
 
         $this->assertSame(1, $insertLastId);
     }
 
-    public function testCanNotInsertEvent(): void
-    {
-        $event = new Event();
-        $values = $this->extract($event);
-
-        $insert = $this->createInsert($values);
-
-        $insert->expects($this->once())
-            ->method('execute')
-            ->willReturn(0);
-
-        $insertLastId = $this->table->insert($event);
-
-        $this->assertSame(0, $insertLastId);
-    }
-
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', 1);
-
         $event = $this->table->findById(self::TEST_EVENT_ID);
 
         $this->assertSame($this->fetchResult, $event);
@@ -55,17 +36,6 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindAll(): void
     {
-        $select = $this->createSelect();
-
-        $select->expects($this->once())
-            ->method('__call')
-            ->with('orderBy', ['startTime ASC'])
-            ->willReturnSelf();
-
-        $select->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn($this->fetchAllResult);
-
         $event = $this->table->findAll();
 
         $this->assertSame($this->fetchAllResult, $event);
@@ -73,8 +43,6 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindByName(): void
     {
-        $this->configureSelectWithOneWhere('title', 'fakeName');
-
         $event = $this->table->findByTitle('fakeName');
 
         $this->assertSame($this->fetchResult, $event);
@@ -82,22 +50,6 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindAllActive(): void
     {
-        $select = $this->createSelect();
-
-        $select->expects($this->once())
-            ->method('where')
-            ->with('active', 1)
-            ->willReturnSelf();
-
-        $select->expects($this->once())
-            ->method('__call')
-            ->with('orderBy', ['startTime DESC'])
-            ->willReturnSelf();
-
-        $select->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn($this->fetchAllResult);
-
         $event = $this->table->findAllActive();
 
         $this->assertSame($this->fetchAllResult, $event);
@@ -105,36 +57,8 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindAllNotActive(): void
     {
-        $select = $this->createSelect();
-
-        $select->expects($this->once())
-            ->method('where')
-            ->with('active', 0)
-            ->willReturnSelf();
-
-        $select->expects($this->once())
-            ->method('__call')
-            ->with('orderBy', ['startTime DESC'])
-            ->willReturnSelf();
-
-        $select->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn($this->fetchAllResult);
-
         $event = $this->table->findAllNotActive();
 
         $this->assertSame($this->fetchAllResult, $event);
-    }
-
-    private function extract(Event $event): array
-    {
-        return [
-            'userId' => $event->getUserId(),
-            'title' => $event->getTitle(),
-            'description' => $event->getDescription(),
-            'eventText' => $event->getEventText(),
-            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
-            'duration' => $event->getDuration(),
-        ];
     }
 }

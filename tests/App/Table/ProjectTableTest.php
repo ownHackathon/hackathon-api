@@ -14,8 +14,6 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', self::TEST_PROJECT_ID);
-
         $project = $this->table->findById(self::TEST_PROJECT_ID);
 
         $this->assertSame($this->fetchResult, $project);
@@ -23,12 +21,6 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindAll(): void
     {
-        $select = $this->createSelect();
-
-        $select->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn($this->fetchAllResult);
-
         $project = $this->table->findAll();
 
         $this->assertSame($this->fetchAllResult, $project);
@@ -36,8 +28,6 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindByParticipantId(): void
     {
-        $this->configureSelectWithOneWhere('participantId', self::TEST_PARTICIPANT_ID);
-
         $project = $this->table->findByParticipantId(self::TEST_PARTICIPANT_ID);
 
         $this->assertSame($this->fetchResult, $project);
