@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "master" ]
 jobs:
-  build:
+  deployment_of_hackathon_to_build:
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
