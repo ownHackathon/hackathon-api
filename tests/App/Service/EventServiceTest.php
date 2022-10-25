@@ -4,124 +4,91 @@ namespace App\Test\Service;
 
 use App\Model\Event;
 use App\Service\EventService;
-use App\Table\EventTable;
+use App\Test\Mock\Table\MockEventTable;
 
 class EventServiceTest extends AbstractServiceTest
 {
+    private EventService $service;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $table = new MockEventTable();
+        $this->service = new EventService($table, $this->hydrator);
+    }
+
     public function testCanNotCreate(): void
     {
-        $table = $this->createMock(EventTable::class);
-
         $event = new Event();
-        $event->setTitle('fakeEvent');
+        $event->setTitle('fakeNotFoundEvent');
 
-        $table->expects($this->once())
-            ->method('findByTitle')
-            ->with('fakeEvent')
-            ->willReturn($this->fetchResult);
-
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->create($event);
+        $event = $this->service->create($event);
 
         $this->assertSame(false, $event);
     }
 
     public function testCanCreate(): void
     {
-        $table = $this->createMock(EventTable::class);
-
         $event = new Event();
         $event->setTitle('fakeEvent');
 
-        $table->expects($this->once())
-            ->method('findByTitle')
-            ->with('fakeEvent')
-            ->willReturn(false);
-
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->create($event);
+        $event = $this->service->create($event);
 
         $this->assertSame(true, $event);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $table = $this->createMock(EventTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn(false);
-
-        $service = new EventService($table, $this->hydrator);
-
         $this->expectException('InvalidArgumentException');
 
-        $service->findById(1);
+        $this->service->findById(3);
+    }
+
+    public function testFindById(): void
+    {
+        $event = $this->service->findById(1);
+
+        $this->assertInstanceOf(Event::class, $event);
     }
 
     public function testCanFindAll(): void
     {
-        $table = $this->createMock(EventTable::class);
-
-        $table->expects($this->once())
-            ->method('findAll')
-            ->willReturn($this->fetchAllResult);
-
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->findAll();
+        $event = $this->service->findAll();
 
         $this->assertIsArray($event);
+        $this->assertArrayHasKey(0, $event);
         $this->assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCanFindAllActive(): void
     {
-        $table = $this->createMock(EventTable::class);
-
-        $table->expects($this->once())
-            ->method('findAllActive')
-            ->willReturn($this->fetchAllResult);
-
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->findAllActive();
+        $event = $this->service->findAllActive();
 
         $this->assertIsArray($event);
+        $this->assertArrayHasKey(0, $event);
         $this->assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCanFindAllNotActive(): void
     {
-        $table = $this->createMock(EventTable::class);
-
-        $table->expects($this->once())
-            ->method('findAllNotActive')
-            ->willReturn($this->fetchAllResult);
-
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->findAllNotActive();
+        $event = $this->service->findAllNotActive();
 
         $this->assertIsArray($event);
+        $this->assertArrayHasKey(0, $event);
         $this->assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCheckIsRatingCompleted(): void
     {
-        $table = $this->createMock(EventTable::class);
+        $event = $this->service->isRatingCompleted(1);
 
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn($this->fetchResult);
+        $this->assertSame(true, $event);
+    }
 
-        $service = new EventService($table, $this->hydrator);
-
-        $event = $service->isRatingCompleted(1);
+    public function testCheckIsRatingNotCompleted(): void
+    {
+        $event = $this->service->isRatingCompleted(2);
 
         $this->assertSame(false, $event);
     }

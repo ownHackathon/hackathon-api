@@ -5,157 +5,98 @@ namespace App\Test\Service;
 use App\Model\Participant;
 use App\Service\ParticipantService;
 use App\Table\ParticipantTable;
+use App\Test\Mock\Table\MockParticipantTable;
 
 class ParticipantServiceTest extends AbstractServiceTest
 {
+    private ParticipantService $service;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $table = new MockParticipantTable();
+        $this->service = new ParticipantService($table, $this->hydrator);
+    }
+
     public function testCanNotCreateParticipant(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findByUserIdAndEventId')
-            ->with(1, 1)
-            ->willReturn($this->fetchResult);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
         $participant = new Participant();
         $participant->setId(1)
             ->setUserId(1)
             ->setEventId(1);
 
-        $participant = $service->create($participant);
+        $participant = $this->service->create($participant);
 
         $this->assertSame(false, $participant);
     }
 
     public function testCanCreateParticipant(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findByUserIdAndEventId')
-            ->with(1, 1)
-            ->willReturn(false);
-
-        $table->expects($this->once())
-            ->method('insert')
-            ->willReturn(1);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
         $participant = new Participant();
-        $participant->setId(1)
-            ->setUserId(1)
-            ->setEventId(1);
+        $participant->setId(2)
+            ->setUserId(2)
+            ->setEventId(2);
 
-        $participant = $service->create($participant);
+        $participant = $this->service->create($participant);
 
         $this->assertSame(true, $participant);
     }
 
     public function testCanRemoveParticipant(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('remove')
-            ->willReturn(true);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
         $participant = new Participant();
-        $participant->setId(1)
-            ->setUserId(1)
-            ->setEventId(1);
+        $participant->setId(1);
 
-        $response = $service->remove($participant);
+        $response = $this->service->remove($participant);
 
         $this->assertSame(true, $response);
     }
 
     public function testCanNotRemoveParticipant(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('remove')
-            ->willReturn(false);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
         $participant = new Participant();
-        $participant->setId(1)
-            ->setUserId(1)
-            ->setEventId(1);
+        $participant->setId(2);
 
-        $response = $service->remove($participant);
+        $response = $this->service->remove($participant);
 
         $this->assertSame(false, $response);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn(false);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
         $this->expectException('InvalidArgumentException');
 
-        $service->findById(1);
+        $this->service->findById(2);
     }
 
     public function testCanFindById(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
-        $participant = $service->findById(1);
+        $participant = $this->service->findById(1);
 
         $this->assertInstanceOf(Participant::class, $participant);
     }
 
     public function testCanFindByUserId(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findByUserId')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
-        $participant = $service->findByUserId(1);
+        $participant = $this->service->findByUserId(1);
 
         $this->assertInstanceOf(Participant::class, $participant);
     }
 
+    public function testCanNotFindByUserId(): void
+    {
+        $participant = $this->service->findByUserId(2);
+
+        $this->assertNull($participant);
+    }
+
     public function testCanFindActiveParticipantByEvent(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-
-        $table->expects($this->once())
-            ->method('findActiveParticipantByEvent')
-            ->with(1)
-            ->willReturn($this->fetchAllResult);
-
-        $service = new ParticipantService($table, $this->hydrator);
-
-        $participant = $service->findActiveParticipantByEvent(1);
+         $participant = $this->service->findActiveParticipantByEvent(1);
 
         $this->assertIsArray($participant);
+        $this->assertArrayHasKey(0, $participant);
         $this->assertInstanceOf(Participant::class, $participant[0]);
     }
 }

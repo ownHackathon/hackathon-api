@@ -14,6 +14,11 @@ class ParticipantTableTest extends AbstractTableTest
     private const TEST_USER_ID = 1;
     private const TEST_EVENT_ID = 1;
 
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('Participant', $this->table->getTableName());
+    }
+
     public function testCanInsertParticipant(): void
     {
         $participant = new Participant();

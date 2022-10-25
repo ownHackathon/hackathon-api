@@ -15,6 +15,11 @@ class UserTableTest extends AbstractTableTest
     private const TEST_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
     private const TEST_TOKEN = '4e10cfecf3bb51811689956e647705a0';
 
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('User', $this->table->getTableName());
+    }
+
     public function testCanInsertUser(): void
     {
         $user = new User();

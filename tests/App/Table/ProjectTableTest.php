@@ -12,6 +12,11 @@ class ProjectTableTest extends AbstractTableTest
     private const TEST_PROJECT_ID = 1;
     private const TEST_PARTICIPANT_ID = 1;
 
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('Project', $this->table->getTableName());
+    }
+
     public function testCanFindById(): void
     {
         $project = $this->table->findById(self::TEST_PROJECT_ID);

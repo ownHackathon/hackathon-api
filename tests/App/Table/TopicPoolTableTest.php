@@ -13,6 +13,11 @@ class TopicPoolTableTest extends AbstractTableTest
     private const TEST_TOPIC_POOL_ID = 1;
     private const TEST_EVENT_ID = 1;
 
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('TopicPool', $this->table->getTableName());
+    }
+
     public function testCanInsertTopic(): void
     {
         $topic = new Topic();
