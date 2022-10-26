@@ -17,7 +17,7 @@ class ProjectServiceFactoryTest extends AbstractServiceTest
         $container = new MockContainer([
             ProjectTable::class => new MockProjectTable(),
             ReflectionHydrator::class => $this->hydrator,
-            DateTimeFormatterStrategy::class => $this->strategy,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
         ]);
 
         $factory = new ProjectServiceFactory();

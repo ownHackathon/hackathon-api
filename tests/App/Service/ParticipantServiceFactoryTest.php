@@ -17,7 +17,7 @@ class ParticipantServiceFactoryTest extends AbstractServiceTest
         $container = new MockContainer([
             ParticipantTable::class => new MockParticipantTable(),
             ReflectionHydrator::class => $this->hydrator,
-            DateTimeFormatterStrategy::class => $this->strategy,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
         ]);
 
         $factory = new ParticipantServiceFactory();

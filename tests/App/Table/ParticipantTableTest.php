@@ -28,6 +28,15 @@ class ParticipantTableTest extends AbstractTableTest
         $this->assertSame(1, $insertParticipant);
     }
 
+    public function testCanRemoveParticipant(): void
+    {
+        $participant = new Participant();
+
+        $removeParticipant = $this->table->remove($participant);
+
+        $this->assertSame(1, $removeParticipant);
+    }
+
     public function testCanFindById(): void
     {
         $project = $this->table->findById(self::TEST_PARTICIPANT_ID);

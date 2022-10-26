@@ -2,6 +2,7 @@
 
 namespace App\Test\Mock\Database;
 
+use Envms\FluentPDO\Queries\Delete;
 use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;
@@ -22,6 +23,11 @@ class MockQuery extends Query
     public function update(?string $table = null, $set = [], ?int $primaryKey = null): Update
     {
         return new MockUpdate($this, $table);
+    }
+
+    public function delete(?string $table = null, ?int $primaryKey = null): Delete
+    {
+        return new MockDelete($this, $table);
     }
 
     public function from(?string $table = null, ?int $primaryKey = null): Select

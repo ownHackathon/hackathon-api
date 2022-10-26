@@ -4,113 +4,118 @@ namespace App\Test\Service;
 
 use App\Model\User;
 use App\Service\UserService;
-use App\Table\UserTable;
-use Ramsey\Uuid\Uuid;
+use App\Test\Mock\Table\MockUserTable;
 
 class UserServiceTest extends AbstractServiceTest
 {
+    private UserService $service;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $table = new MockUserTable();
+        $this->service = new UserService($table, $this->hydrator, $this->uuid);
+    }
+
     public function testCanNotCreateUserWithExistUser(): void
     {
-        $table = $this->createMock(UserTable::class);
-
         $user = new User();
-        $user->setName('fakeName');
-        $user->setEmail('fake@example.com');
+        $user->setName('FakeNotCreateUser');
 
-        $table->expects($this->once())
-            ->method('findByName')
-            ->with('fakeName')
-            ->willReturn(['name' => 'fakeName']);
-
-        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
-
-        $insert = $service->create($user);
+        $insert = $this->service->create($user);
 
         $this->assertSame(false, $insert);
     }
 
     public function testCanNotCreateUserWithExistEmail(): void
     {
-        $table = $this->createMock(UserTable::class);
-
         $user = new User();
-        $user->setName('fakeName');
-        $user->setEmail('fake@example.com');
+        $user->setEmail('FakeNotCreateEMail');
 
-        $table->expects($this->once())
-            ->method('findByName')
-            ->with('fakeName')
-            ->willReturn(false);
-
-        $table->expects($this->once())
-            ->method('findByEmail')
-            ->with('fake@example.com')
-            ->willReturn(['email' => 'fake@example.com']);
-
-        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
-
-        $insert = $service->create($user);
+        $insert = $this->service->create($user);
 
         $this->assertSame(false, $insert);
     }
 
     public function testCanCreateUser(): void
     {
-        $table = $this->createMock(UserTable::class);
-
         $user = new User();
         $user->setName('fakeName');
         $user->setEmail('fake@example.com');
 
-        $table->expects($this->once())
-            ->method('findByName')
-            ->with('fakeName')
-            ->willReturn(false);
-
-        $table->expects($this->once())
-            ->method('findByEmail')
-            ->willReturn(false);
-
-        $table->expects($this->once())
-            ->method('insert')
-            ->willReturn(true);
-
-        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
-
-        $insert = $service->create($user);
+        $insert = $this->service->create($user);
 
         $this->assertSame(true, $insert);
     }
 
+    public function testCanUpdateLastUserActionTime(): void
+    {
+        $user = new User();
+
+        $update = $this->service->updateLastUserActionTime($user);
+
+        $this->assertInstanceOf(User::class, $update);
+    }
+
+    public function testCanNotUpdateUser(): void
+    {
+        $user = new User();
+        $user->setId(2);
+
+        $update = $this->service->update($user);
+
+        $this->assertSame(false, $update);
+    }
+
+    public function testCanUpdateUser(): void
+    {
+        $user = new User();
+        $user->setId(1);
+
+        $update = $this->service->update($user);
+
+        $this->assertSame(true, $update);
+    }
+
     public function testFindByIdThrowException(): void
     {
-        $table = $this->createMock(UserTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->willReturn(false);
-
-        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
-
         $this->expectException('InvalidArgumentException');
 
-        $service->findById(1);
+        $this->service->findById(2);
     }
 
     public function testCanFindById(): void
     {
-        $table = $this->createMock(UserTable::class);
-        $user = new User();
-        $user->setId(1);
+        $user = $this->service->findById(1);
 
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn($this->fetchResult);
+        $this->assertInstanceOf(User::class, $user);
+    }
 
-        $service = new UserService($table, $this->hydrator, Uuid::uuid4());
+    public function testCanFindByUuid(): void
+    {
+        $user = $this->service->findByUuid('FakeUserUuid');
 
-        $user = $service->findById(1);
+        $this->assertInstanceOf(User::class, $user);
+    }
+
+    public function testCanNotFindByUuid(): void
+    {
+        $user = $this->service->findByUuid('FakeUserNotUuid');
+
+        $this->assertNull($user);
+    }
+
+    public function testCanNotFindByToken(): void
+    {
+        $user = $this->service->findByToken('FakeUserNotToken');
+
+        $this->assertNull($user);
+    }
+
+    public function testCanFindByToken(): void
+    {
+        $user = $this->service->findByToken('FakeUserToken');
 
         $this->assertInstanceOf(User::class, $user);
     }

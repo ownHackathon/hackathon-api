@@ -6,34 +6,26 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\UserService;
 use App\Service\UserServiceFactory;
 use App\Table\UserTable;
+use App\Test\Mock\MockContainer;
+use App\Test\Mock\Table\MockUserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
-use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
 
 class UserServiceFactoryTest extends AbstractServiceTest
 {
     public function testCanCreateUserService(): void
     {
-        $userTable = $this->createMock(UserTable::class);
-        $strategy = $this->createMock(NullableStrategy::class);
-        $container = $this->createMock(ContainerInterface::class);
-        $uuid = Uuid::uuid4();
+        $container = new MockContainer([
+            UserTable::class => new MockUserTable(),
+            ReflectionHydrator::class => $this->hydrator,
+            NullableStrategy::class => $this->nullableStrategy,
+            Uuid::class => Uuid::uuid4(),
+        ]);
 
-        $container->expects($this->exactly(4))
-            ->method('get')->will(
-                $this->returnValueMap(
-                    [
-                        [UserTable::class, $userTable],
-                        [ReflectionHydrator::class, $this->hydrator],
-                        [NullableStrategy::class, $strategy],
-                        [Uuid::class, $uuid],
-                    ],
-                )
-            );
+        $factory = new UserServiceFactory();
 
-        $userServiceFactory = new UserServiceFactory();
-        $userService = $userServiceFactory($container);
+        $service = $factory($container);
 
-        $this->assertInstanceOf(UserService::class, $userService);
+        $this->assertInstanceOf(UserService::class, $service);
     }
 }

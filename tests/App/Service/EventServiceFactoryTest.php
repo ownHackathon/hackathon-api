@@ -17,7 +17,7 @@ class EventServiceFactoryTest extends AbstractServiceTest
         $container = new MockContainer([
             EventTable::class => new MockEventTable(),
             ReflectionHydrator::class => $this->hydrator,
-            DateTimeFormatterStrategy::class => $this->strategy,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
         ]);
 
         $factory = new EventServiceFactory();
