@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Hydrator;
+namespace App\Test\Hydrator;
 
+use App\Hydrator\ReflectionHydrator;
 use App\Model\User;
 use PHPUnit\Framework\TestCase;
 
