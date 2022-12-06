@@ -4,6 +4,7 @@ namespace App\Test\Mock\Database;
 
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
+use PDO;
 
 class MockSelect extends Select
 {
@@ -12,9 +13,10 @@ class MockSelect extends Select
         parent::__construct($fluent, $from);
     }
 
-    public function fetch(?string $column = null, int $cursorOrientation = \PDO::FETCH_ORI_NEXT): array
+    public function fetch(?string $column = null, int $cursorOrientation = PDO::FETCH_ORI_NEXT): array
     {
-        if (array_key_exists(1, $this->statements['SELECT']) && $this->statements['SELECT'][1] === "COUNT(id) AS countTopic")
+        if (array_key_exists(1, $this->statements['SELECT'])
+            && $this->statements['SELECT'][1] === "COUNT(id) AS countTopic")
         {
             return [
                 'countTopic' => 1
@@ -25,7 +27,7 @@ class MockSelect extends Select
         ];
     }
 
-    public function fetchAll($index = '', $selectOnly = '')
+    public function fetchAll($index = '', $selectOnly = ''): array
     {
         return [
             0 => ['id' => 1]
