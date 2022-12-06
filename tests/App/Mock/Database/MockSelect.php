@@ -6,6 +6,8 @@ use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
 use PDO;
 
+use function array_key_exists;
+
 class MockSelect extends Select
 {
     public function __construct(Query $fluent, string $from)
