@@ -8,14 +8,14 @@ use App\Test\Mock\Table\MockUserTable;
 
 class UserServiceTest extends AbstractServiceTest
 {
-    private UserService $service;
+    private UserService $userService;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $table = new MockUserTable();
-        $this->service = new UserService($table, $this->hydrator, $this->uuid);
+        $this->userService = new UserService($table, $this->hydrator, $this->uuid);
     }
 
     public function testCanNotCreateUserWithExistUser(): void
@@ -23,7 +23,7 @@ class UserServiceTest extends AbstractServiceTest
         $user = new User();
         $user->setName('FakeNotCreateUser');
 
-        $insert = $this->service->create($user);
+        $insert = $this->userService->create($user);
 
         $this->assertSame(false, $insert);
     }
@@ -33,7 +33,7 @@ class UserServiceTest extends AbstractServiceTest
         $user = new User();
         $user->setEmail('FakeNotCreateEMail');
 
-        $insert = $this->service->create($user);
+        $insert = $this->userService->create($user);
 
         $this->assertSame(false, $insert);
     }
@@ -44,7 +44,7 @@ class UserServiceTest extends AbstractServiceTest
         $user->setName('fakeName');
         $user->setEmail('fake@example.com');
 
-        $insert = $this->service->create($user);
+        $insert = $this->userService->create($user);
 
         $this->assertSame(true, $insert);
     }
@@ -53,7 +53,7 @@ class UserServiceTest extends AbstractServiceTest
     {
         $user = new User();
 
-        $update = $this->service->updateLastUserActionTime($user);
+        $update = $this->userService->updateLastUserActionTime($user);
 
         $this->assertInstanceOf(User::class, $update);
     }
@@ -63,7 +63,7 @@ class UserServiceTest extends AbstractServiceTest
         $user = new User();
         $user->setId(2);
 
-        $update = $this->service->update($user);
+        $update = $this->userService->update($user);
 
         $this->assertSame(false, $update);
     }
@@ -73,7 +73,7 @@ class UserServiceTest extends AbstractServiceTest
         $user = new User();
         $user->setId(1);
 
-        $update = $this->service->update($user);
+        $update = $this->userService->update($user);
 
         $this->assertSame(true, $update);
     }
@@ -82,40 +82,40 @@ class UserServiceTest extends AbstractServiceTest
     {
         $this->expectException('InvalidArgumentException');
 
-        $this->service->findById(2);
+        $this->userService->findById(2);
     }
 
     public function testCanFindById(): void
     {
-        $user = $this->service->findById(1);
+        $user = $this->userService->findById(1);
 
         $this->assertInstanceOf(User::class, $user);
     }
 
     public function testCanFindByUuid(): void
     {
-        $user = $this->service->findByUuid('FakeUserUuid');
+        $user = $this->userService->findByUuid('FakeUserUuid');
 
         $this->assertInstanceOf(User::class, $user);
     }
 
     public function testCanNotFindByUuid(): void
     {
-        $user = $this->service->findByUuid('FakeUserNotUuid');
+        $user = $this->userService->findByUuid('FakeUserNotUuid');
 
         $this->assertNull($user);
     }
 
     public function testCanNotFindByToken(): void
     {
-        $user = $this->service->findByToken('FakeUserNotToken');
+        $user = $this->userService->findByToken('FakeUserNotToken');
 
         $this->assertNull($user);
     }
 
     public function testCanFindByToken(): void
     {
-        $user = $this->service->findByToken('FakeUserToken');
+        $user = $this->userService->findByToken('FakeUserToken');
 
         $this->assertInstanceOf(User::class, $user);
     }
