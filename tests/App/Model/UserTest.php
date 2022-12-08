@@ -4,18 +4,12 @@ namespace App\Test\Model;
 
 use App\Enum\DateTimeFormat;
 use App\Model\User;
+use App\Test\Mock\TestConstants;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    private const TEST_TIME = '1000-01-01 00:00';
-    private const TEST_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
-    private const TEST_NAME = 'Test Name';
-    private const TEST_PASSWORD = 'Test Password';
-    private const TEST_EMAIL = 'example@example.com';
-    private const TEST_TOKEN = '4e10cfecf3bb51811689956e647705a0';
-
     private User $user;
 
     protected function setUp(): void
@@ -46,12 +40,12 @@ class UserTest extends TestCase
 
     public function testCanSetAndGetUuId(): void
     {
-        $userId = $this->user->setUuid(self::TEST_UUID);
+        $userId = $this->user->setUuid(TestConstants::USER_UUID);
         $uuid = $userId->getUuid();
 
         $this->assertInstanceOf(User::class, $userId);
         $this->assertIsString($uuid);
-        $this->assertSame(self::TEST_UUID, $uuid);
+        $this->assertSame(TestConstants::USER_UUID, $uuid);
     }
 
     public function testCanSetAndGetRoleId(): void
@@ -66,22 +60,22 @@ class UserTest extends TestCase
 
     public function testCanSetAndGetName(): void
     {
-        $userName = $this->user->setName(self::TEST_NAME);
+        $userName = $this->user->setName(TestConstants::USER_NAME);
         $name = $userName->getName();
 
         $this->assertInstanceOf(User::class, $userName);
         $this->assertIsString($name);
-        $this->assertSame(self::TEST_NAME, $name);
+        $this->assertSame(TestConstants::USER_NAME, $name);
     }
 
     public function testCanSetAndGetPassword(): void
     {
-        $userPassword = $this->user->setPassword(self::TEST_PASSWORD);
+        $userPassword = $this->user->setPassword(TestConstants::USER_PASSWORD);
         $password = $userPassword->getPassword();
 
         $this->assertInstanceOf(User::class, $userPassword);
         $this->assertIsString($password);
-        $this->assertSame(self::TEST_PASSWORD, $password);
+        $this->assertSame(TestConstants::USER_PASSWORD, $password);
     }
 
     public function testCanSetAndGetEmail(): void
@@ -89,32 +83,32 @@ class UserTest extends TestCase
         $email = $this->user->getEmail();
         $this->assertNull($email);
 
-        $userEmail = $this->user->setEmail(self::TEST_EMAIL);
+        $userEmail = $this->user->setEmail(TestConstants::USER_EMAIL);
         $email = $userEmail->getEmail();
 
         $this->assertInstanceOf(User::class, $userEmail);
         $this->assertIsString($email);
-        $this->assertSame(self::TEST_EMAIL, $email);
+        $this->assertSame(TestConstants::USER_EMAIL, $email);
     }
 
     public function testCanSetAndGetRegistrationTime(): void
     {
-        $userRegistrationTime = $this->user->setRegistrationTime(new DateTime(self::TEST_TIME));
+        $userRegistrationTime = $this->user->setRegistrationTime(new DateTime(TestConstants::TIME));
         $registrationTime = $userRegistrationTime->getRegistrationTime();
 
         $this->assertInstanceOf(User::class, $userRegistrationTime);
         $this->assertInstanceOf(DateTime::class, $registrationTime);
-        $this->assertSame(self::TEST_TIME, $registrationTime->format(DateTimeFormat::ISO_8601->value));
+        $this->assertSame(TestConstants::TIME, $registrationTime->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetLastLogin(): void
     {
-        $userLastLogin = $this->user->setLastAction(new DateTime(self::TEST_TIME));
+        $userLastLogin = $this->user->setLastAction(new DateTime(TestConstants::TIME));
         $lastLogin = $userLastLogin->getLastAction();
 
         $this->assertInstanceOf(User::class, $userLastLogin);
         $this->assertInstanceOf(DateTime::class, $lastLogin);
-        $this->assertSame(self::TEST_TIME, $lastLogin->format(DateTimeFormat::ISO_8601->value));
+        $this->assertSame(TestConstants::TIME, $lastLogin->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetActive(): void
@@ -129,11 +123,11 @@ class UserTest extends TestCase
 
     public function testCanSetAndGetToken(): void
     {
-        $userToken = $this->user->setToken(self::TEST_TOKEN);
+        $userToken = $this->user->setToken(TestConstants::USER_TOKEN);
         $token = $this->user->getToken();
 
         $this->assertInstanceOf(User::class, $userToken);
         $this->assertIsString($token);
-        $this->assertSame(self::TEST_TOKEN, $token);
+        $this->assertSame(TestConstants::USER_TOKEN, $token);
     }
 }
