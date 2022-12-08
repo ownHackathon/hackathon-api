@@ -4,16 +4,13 @@ namespace App\Test\Table;
 
 use App\Model\Participant;
 use App\Table\ParticipantTable;
+use App\Test\Mock\TestConstants;
 
 /**
  * @property ParticipantTable $table
  */
 class ParticipantTableTest extends AbstractTableTest
 {
-    private const TEST_PARTICIPANT_ID = 1;
-    private const TEST_USER_ID = 1;
-    private const TEST_EVENT_ID = 1;
-
     public function testCanGetTableName(): void
     {
         $this->assertSame('Participant', $this->table->getTableName());
@@ -39,7 +36,7 @@ class ParticipantTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $project = $this->table->findById(self::TEST_PARTICIPANT_ID);
+        $project = $this->table->findById(TestConstants::PARTICIPANT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }
@@ -53,21 +50,21 @@ class ParticipantTableTest extends AbstractTableTest
 
     public function testCanFindByUserId(): void
     {
-        $participant = $this->table->findByUserId(self::TEST_USER_ID);
+        $participant = $this->table->findByUserId(TestConstants::USER_ID);
 
         $this->assertSame($this->fetchResult, $participant);
     }
 
     public function testCanFindByUserIdAndEventId(): void
     {
-        $participant = $this->table->findByUserIdAndEventId(self::TEST_USER_ID, self::TEST_EVENT_ID);
+        $participant = $this->table->findByUserIdAndEventId(TestConstants::USER_ID, TestConstants::EVENT_ID);
 
         $this->assertSame($this->fetchResult, $participant);
     }
 
     public function testCanFindActiveParticipantByEvent(): void
     {
-        $participant = $this->table->findActiveParticipantByEvent(self::TEST_EVENT_ID);
+        $participant = $this->table->findActiveParticipantByEvent(TestConstants::EVENT_ID);
 
         $this->assertSame($this->fetchAllResult, $participant);
     }

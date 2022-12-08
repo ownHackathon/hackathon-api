@@ -4,15 +4,13 @@ namespace App\Test\Table;
 
 use App\Model\Topic;
 use App\Table\TopicPoolTable;
+use App\Test\Mock\TestConstants;
 
 /**
  * @property TopicPoolTable $table
  */
 class TopicPoolTableTest extends AbstractTableTest
 {
-    private const TEST_TOPIC_POOL_ID = 1;
-    private const TEST_EVENT_ID = 1;
-
     public function testCanGetTableName(): void
     {
         $this->assertSame('TopicPool', $this->table->getTableName());
@@ -38,7 +36,7 @@ class TopicPoolTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $topic = $this->table->findById(self::TEST_TOPIC_POOL_ID);
+        $topic = $this->table->findById(TestConstants::TOPIC_POOL_ID);
 
         $this->assertSame($this->fetchResult, $topic);
     }
@@ -52,7 +50,7 @@ class TopicPoolTableTest extends AbstractTableTest
 
     public function testCanFindByEventId(): void
     {
-        $topic = $this->table->findByEventId(self::TEST_EVENT_ID);
+        $topic = $this->table->findByEventId(TestConstants::EVENT_ID);
 
         $this->assertSame($this->fetchResult, $topic);
     }

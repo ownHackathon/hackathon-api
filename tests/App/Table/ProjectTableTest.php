@@ -3,15 +3,13 @@
 namespace App\Test\Table;
 
 use App\Table\ProjectTable;
+use App\Test\Mock\TestConstants;
 
 /**
  * @property ProjectTable $table
  */
 class ProjectTableTest extends AbstractTableTest
 {
-    private const TEST_PROJECT_ID = 1;
-    private const TEST_PARTICIPANT_ID = 1;
-
     public function testCanGetTableName(): void
     {
         $this->assertSame('Project', $this->table->getTableName());
@@ -19,7 +17,7 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $project = $this->table->findById(self::TEST_PROJECT_ID);
+        $project = $this->table->findById(TestConstants::PROJECT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }
@@ -33,7 +31,7 @@ class ProjectTableTest extends AbstractTableTest
 
     public function testCanFindByParticipantId(): void
     {
-        $project = $this->table->findByParticipantId(self::TEST_PARTICIPANT_ID);
+        $project = $this->table->findByParticipantId(TestConstants::PARTICIPANT_ID);
 
         $this->assertSame($this->fetchResult, $project);
     }

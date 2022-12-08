@@ -4,19 +4,17 @@ namespace App\Test\Table;
 
 use App\Model\Event;
 use App\Table\EventTable;
+use App\Test\Mock\TestConstants;
 
 /**
  * @property EventTable $table
  */
 class EventTableTest extends AbstractTableTest
 {
-    private const TEST_EVENT_ID = 1;
-
     public function testCanGetTableName(): void
     {
         $this->assertSame('Event', $this->table->getTableName());
     }
-
 
     public function testCanInsertEvent(): void
     {
@@ -29,7 +27,7 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindById(): void
     {
-        $event = $this->table->findById(self::TEST_EVENT_ID);
+        $event = $this->table->findById(TestConstants::EVENT_ID);
 
         $this->assertSame($this->fetchResult, $event);
     }

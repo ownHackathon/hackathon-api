@@ -18,6 +18,8 @@ class TestConstants
 
     public const USER_TOKEN = '4e10cfecf3bb51811689956e647705a0';
 
+    public const PARTICIPANT_ID = 1;
+
     public const EVENT_ID = 1;
 
     public const EVENT_TITLE = 'Test Title';
@@ -28,10 +30,12 @@ class TestConstants
 
     public const EVENT_DURATION = 1;
 
+    public const PROJECT_ID = 1;
     public const PROJECT_URL = 'https://github.com';
 
     public const TOPIC_ID = 1;
 
     public const TOPIC_TEXT = 'Test Topic Text';
 
+    public const TOPIC_POOL_ID = 1;
 }

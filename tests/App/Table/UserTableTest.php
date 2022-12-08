@@ -4,6 +4,7 @@ namespace App\Test\Table;
 
 use App\Model\User;
 use App\Table\UserTable;
+use App\Test\Mock\TestConstants;
 use DateTime;
 
 /**
@@ -11,10 +12,6 @@ use DateTime;
  */
 class UserTableTest extends AbstractTableTest
 {
-    private const TEST_USER_ID = 1;
-    private const TEST_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
-    private const TEST_TOKEN = '4e10cfecf3bb51811689956e647705a0';
-
     public function testCanGetTableName(): void
     {
         $this->assertSame('User', $this->table->getTableName());
@@ -41,21 +38,21 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanUpdateLastUserActionTime(): void
     {
-        $updateUser = $this->table->updateLastUserActionTime(self::TEST_USER_ID, new DateTime());
+        $updateUser = $this->table->updateLastUserActionTime(TestConstants::USER_ID, new DateTime());
 
         $this->assertInstanceOf(UserTable::class, $updateUser);
     }
 
     public function testCanFindById(): void
     {
-        $user = $this->table->findById(self::TEST_USER_ID);
+        $user = $this->table->findById(TestConstants::USER_ID);
 
         $this->assertSame($this->fetchResult, $user);
     }
 
     public function testCanFindByUuid(): void
     {
-        $user = $this->table->findByUuid(self::TEST_UUID);
+        $user = $this->table->findByUuid(TestConstants::USER_UUID);
 
         $this->assertSame($this->fetchResult, $user);
     }
@@ -83,7 +80,7 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanFindByToken(): void
     {
-        $user = $this->table->findByToken(self::TEST_TOKEN);
+        $user = $this->table->findByToken(TestConstants::USER_TOKEN);
 
         $this->assertSame($this->fetchResult, $user);
     }
