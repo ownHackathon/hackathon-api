@@ -21,7 +21,7 @@ class UserMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $userUuid = $request->getAttribute('userUuid');
-//testcommit
+
         $user = $this->userService->findByUuid($userUuid);
 
         if (!$user) {
