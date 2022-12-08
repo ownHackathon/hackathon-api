@@ -7,6 +7,7 @@ use App\Model\User;
 use App\Service\UserService;
 use App\Test\Mock\Table\MockUserTable;
 use App\Test\Mock\TestConstants;
+use DateTime;
 use Ramsey\Uuid\Uuid;
 
 class MockUserService extends UserService
@@ -18,10 +19,11 @@ class MockUserService extends UserService
 
     public function findByUuid(string $uuid): User|null
     {
-        if ($uuid === TestConstants::USER_UUID) {
-            return new User();
-        }
+        return ($uuid === TestConstants::USER_UUID) ? new User() : null;
+    }
 
-        return null;
+    public function updateLastUserActionTime(User $user): User
+    {
+        return $user->setLastAction(new DateTime(TestConstants::TIME));
     }
 }
