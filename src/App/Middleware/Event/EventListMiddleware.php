@@ -26,8 +26,8 @@ class EventListMiddleware implements MiddlewareInterface
             $events = $this->eventService->findAll();
         } else {
             $sort = match (strtoupper($params['sort'] ?? '')) {
-                'DESC' => 'DESC',
-                default => 'ASC',
+                'ASC' => 'ASC',
+                default => 'DESC',
             };
 
             $events = $this->eventService->findAll($params['order'], $sort);
