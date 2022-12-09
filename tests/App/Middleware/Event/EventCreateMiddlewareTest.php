@@ -16,7 +16,7 @@ class EventCreateMiddlewareTest extends AbstractMiddlewareTest
         parent::setUp();
     }
 
-    public function testCreateEventAndReturnResponceInterface(): void
+    public function testCreateEventAndReturnResponseInterface(): void
     {
         $middleware = new EventCreateMiddleware(new MockEventServie(), $this->hydrator);
         $user = new User();
