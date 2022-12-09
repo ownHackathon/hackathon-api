@@ -10,6 +10,7 @@ class MockServerRequest implements ServerRequestInterface
 {
     public function __construct(
         private array $attributes = [],
+        private array $headers = [],
     ) {
     }
 
@@ -25,7 +26,7 @@ class MockServerRequest implements ServerRequestInterface
 
     public function getHeaders()
     {
-        // TODO: Implement getHeaders() method.
+        return $this->headers;
     }
 
     public function hasHeader($name)
@@ -45,7 +46,9 @@ class MockServerRequest implements ServerRequestInterface
 
     public function withHeader($name, $value)
     {
-        // TODO: Implement withHeader() method.
+        $this->headers[$name] = $value;
+
+        return clone $this;
     }
 
     public function withAddedHeader($name, $value)
