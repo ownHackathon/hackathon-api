@@ -12,6 +12,7 @@ class MockServerRequest implements ServerRequestInterface
         private array $attributes = [],
         private array $headers = [],
         private array $body = [],
+        private array $queryParams = [],
     ) {
     }
 
@@ -119,12 +120,14 @@ class MockServerRequest implements ServerRequestInterface
 
     public function getQueryParams()
     {
-        // TODO: Implement getQueryParams() method.
+        return $this->queryParams;
     }
 
-    public function withQueryParams(array $query)
+    public function withQueryParams(array $query): self
     {
-        // TODO: Implement withQueryParams() method.
+        $this->queryParams = $query;
+
+        return clone $this;
     }
 
     public function getUploadedFiles()
