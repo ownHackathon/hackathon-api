@@ -11,6 +11,7 @@ class MockServerRequest implements ServerRequestInterface
     public function __construct(
         private array $attributes = [],
         private array $headers = [],
+        private array $body = [],
     ) {
     }
 
@@ -138,12 +139,14 @@ class MockServerRequest implements ServerRequestInterface
 
     public function getParsedBody()
     {
-        // TODO: Implement getParsedBody() method.
+        return $this->body;
     }
 
     public function withParsedBody($data)
     {
-        // TODO: Implement withParsedBody() method.
+        $this->body = $data;
+
+        return clone $this;
     }
 
     public function getAttributes()
