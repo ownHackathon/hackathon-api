@@ -64,7 +64,7 @@ class MockServerRequest implements ServerRequestInterface
 
     public function getBody()
     {
-        // TODO: Implement getBody() method.
+        return $this->body;
     }
 
     public function withBody(StreamInterface $body)
