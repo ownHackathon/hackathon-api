@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Event;
+namespace App\Test\Middleware\Event;
 
+use App\Middleware\Event\EventCreateMiddleware;
 use App\Model\User;
 use App\Test\Middleware\AbstractMiddlewareTest;
 use App\Test\Mock\Service\MockEventServie;

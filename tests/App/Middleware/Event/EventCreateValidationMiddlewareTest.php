@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Event;
+namespace App\Test\Middleware\Event;
 
+use App\Middleware\Event\EventCreateValidationMiddleware;
 use App\Test\Middleware\AbstractMiddlewareTest;
 use App\Test\Mock\Validator\MockEventCreateValidator;
 use Laminas\Diactoros\Response\JsonResponse;
