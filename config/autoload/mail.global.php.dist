@@ -2,7 +2,7 @@
 
 return [
     'mailer' => [
-        'dsn' => 'smtp://localhost:1025',
+        'dsn' => 'smtp://mailhog:1025',
         'from' => 'hackathon@exdrals.de',
     ],
 ];
