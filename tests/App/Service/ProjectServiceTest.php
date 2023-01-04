@@ -4,55 +4,45 @@ namespace App\Test\Service;
 
 use App\Model\Project;
 use App\Service\ProjectService;
-use App\Table\ProjectTable;
+use App\Test\Mock\Table\MockProjectTable;
 
 class ProjectServiceTest extends AbstractServiceTest
 {
+    private ProjectService $service;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $table = new MockProjectTable();
+        $this->service = new ProjectService($table, $this->hydrator);
+    }
+
     public function testCanFindById(): void
     {
-        $table = $this->createMock(ProjectTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new ProjectService($table, $this->hydrator);
-
-        $project = $service->findById(1);
+        $project = $this->service->findById(1);
 
         $this->assertInstanceOf(Project::class, $project);
     }
 
     public function testCanNotFindById(): void
     {
-        $table = $this->createMock(ProjectTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn(false);
-
-        $service = new ProjectService($table, $this->hydrator);
-
-        $project = $service->findById(1);
+        $project = $this->service->findById(2);
 
         $this->assertNull($project);
     }
 
     public function testCanFindByParticipantId(): void
     {
-        $table = $this->createMock(ProjectTable::class);
-
-        $table->expects($this->once())
-            ->method('findByParticipantId')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new ProjectService($table, $this->hydrator);
-
-        $project = $service->findByParticipantId(1);
+        $project = $this->service->findByParticipantId(1);
 
         $this->assertInstanceOf(Project::class, $project);
+    }
+
+    public function testCanNotFindByParticipantId(): void
+    {
+        $project = $this->service->findByParticipantId(2);
+
+        $this->assertNull($project);
     }
 }

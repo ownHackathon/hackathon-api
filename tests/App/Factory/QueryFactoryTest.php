@@ -2,8 +2,8 @@
 
 namespace App\Factory;
 
+use App\Test\Mock\Database\MockPDO;
 use App\Test\Mock\MockContainer;
-use App\Test\Mock\MockPDO;
 use Envms\FluentPDO\Query;
 use PDO;
 use PHPUnit\Framework\TestCase;

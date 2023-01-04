@@ -6,27 +6,19 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
 use App\Table\ParticipantTable;
+use App\Test\Mock\MockContainer;
+use App\Test\Mock\Table\MockParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Psr\Container\ContainerInterface;
 
 class ParticipantServiceFactoryTest extends AbstractServiceTest
 {
     public function testCanCreateParticipantService(): void
     {
-        $table = $this->createMock(ParticipantTable::class);
-        $container = $this->createMock(ContainerInterface::class);
-
-        $container->expects($this->exactly(3))
-            ->method('get')
-            ->will(
-                $this->returnValueMap(
-                    [
-                        [ParticipantTable::class, $table],
-                        [ReflectionHydrator::class, $this->hydrator],
-                        [DateTimeFormatterStrategy::class, new DateTimeFormatterStrategy()],
-                    ]
-                )
-            );
+        $container = new MockContainer([
+            ParticipantTable::class => new MockParticipantTable(),
+            ReflectionHydrator::class => $this->hydrator,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
+        ]);
 
         $factory = new ParticipantServiceFactory();
 

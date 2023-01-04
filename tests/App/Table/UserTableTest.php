@@ -4,53 +4,61 @@ namespace App\Test\Table;
 
 use App\Model\User;
 use App\Table\UserTable;
+use App\Test\Mock\TestConstants;
+use DateTime;
 
 /**
  * @property UserTable $table
  */
 class UserTableTest extends AbstractTableTest
 {
-    private const TEST_USER_ID = 1;
+    public function testCanGetTableName(): void
+    {
+        $this->assertSame('User', $this->table->getTableName());
+    }
 
     public function testCanInsertUser(): void
     {
         $user = new User();
-        $values = [
-            'roleId' => $user->getRoleId(),
-            'name' => $user->getName(),
-            'password' => $user->getPassword(),
-            'email' => $user->getEmail(),
-            'uuid' => $user->getUuid(),
-        ];
-
-        $insert = $this->createInsert($values);
-
-        $insert->expects($this->once())
-            ->method('execute')
-            ->willReturn(1);
 
         $insertUser = $this->table->insert($user);
 
         $this->assertSame(true, $insertUser);
     }
 
+    public function testCanUpdateUser(): void
+    {
+        $user = new User();
+        $user->setLastAction(new DateTime());
+
+        $updateUser = $this->table->update($user);
+
+        $this->assertSame(true, $updateUser);
+    }
+
+    public function testCanUpdateLastUserActionTime(): void
+    {
+        $updateUser = $this->table->updateLastUserActionTime(TestConstants::USER_ID, new DateTime());
+
+        $this->assertInstanceOf(UserTable::class, $updateUser);
+    }
+
     public function testCanFindById(): void
     {
-        $this->configureSelectWithOneWhere('id', self::TEST_USER_ID);
+        $user = $this->table->findById(TestConstants::USER_ID);
 
-        $user = $this->table->findById(self::TEST_USER_ID);
+        $this->assertSame($this->fetchResult, $user);
+    }
+
+    public function testCanFindByUuid(): void
+    {
+        $user = $this->table->findByUuid(TestConstants::USER_UUID);
 
         $this->assertSame($this->fetchResult, $user);
     }
 
     public function testCanFindAll(): void
     {
-        $select = $this->createSelect();
-
-        $select->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn($this->fetchAllResult);
-
         $users = $this->table->findAll();
 
         $this->assertSame($this->fetchAllResult, $users);
@@ -58,8 +66,6 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanFindByName(): void
     {
-        $this->configureSelectWithOneWhere('name', 'fakeName');
-
         $user = $this->table->findByName('fakeName');
 
         $this->assertSame($this->fetchResult, $user);
@@ -67,9 +73,14 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanFindByEmail(): void
     {
-        $this->configureSelectWithOneWhere('email', 'test@example.com');
-
         $user = $this->table->findByEMail('test@example.com');
+
+        $this->assertSame($this->fetchResult, $user);
+    }
+
+    public function testCanFindByToken(): void
+    {
+        $user = $this->table->findByToken(TestConstants::USER_TOKEN);
 
         $this->assertSame($this->fetchResult, $user);
     }

@@ -6,33 +6,24 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\ProjectService;
 use App\Service\ProjectServiceFactory;
 use App\Table\ProjectTable;
+use App\Test\Mock\MockContainer;
+use App\Test\Mock\Table\MockProjectTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Psr\Container\ContainerInterface;
 
 class ProjectServiceFactoryTest extends AbstractServiceTest
 {
     public function testCanCreateProjectService(): void
     {
-        $table = $this->createMock(ProjectTable::class);
-        $strategy = new DateTimeFormatterStrategy();
-        $container = $this->createMock(ContainerInterface::class);
+        $container = new MockContainer([
+            ProjectTable::class => new MockProjectTable(),
+            ReflectionHydrator::class => $this->hydrator,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
+        ]);
 
-        $container->expects($this->exactly(3))
-            ->method('get')
-            ->will(
-                $this->returnValueMap(
-                    [
-                        [ProjectTable::class, $table],
-                        [ReflectionHydrator::class, $this->hydrator],
-                        [DateTimeFormatterStrategy::class, $strategy],
-                    ]
-                )
-            );
+        $factory = new ProjectServiceFactory();
 
-        $projectServiceFactory = new ProjectServiceFactory();
+        $service = $factory($container);
 
-        $projectService = $projectServiceFactory($container);
-
-        $this->assertInstanceOf(ProjectService::class, $projectService);
+        $this->assertInstanceOf(ProjectService::class, $service);
     }
 }

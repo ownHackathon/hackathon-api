@@ -4,165 +4,104 @@ namespace App\Test\Service;
 
 use App\Model\Topic;
 use App\Service\TopicPoolService;
-use App\Table\TopicPoolTable;
+use App\Test\Mock\Table\MockTopicPoolTable;
 
 class TopicPoolServiceTest extends AbstractServiceTest
 {
+    private TopicPoolService $service;
+    private MockTopicPoolTable $table;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->table = new MockTopicPoolTable();
+        $this->service = new TopicPoolService($this->table, $this->hydrator);
+    }
+
     public function testCanInsertTopic(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('insert')
-            ->with(new Topic())
-            ->willReturnSelf();
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $insertTopic = $service->insert(new Topic());
+        $insertTopic = $this->service->insert(new Topic());
 
         $this->assertInstanceOf(TopicPoolService::class, $insertTopic);
     }
 
     public function testCanUpdateEventId(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('updateEventId')
-            ->with(new Topic())
-            ->willReturnSelf();
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $updateTopic = $service->updateEventId(new Topic());
+        $updateTopic = $this->service->updateEventId(new Topic());
 
         $this->assertInstanceOf(TopicPoolService::class, $updateTopic);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn(false);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
         $this->expectException('InvalidArgumentException');
 
-        $service->findById(1);
+        $this->service->findById(2);
     }
 
     public function testCanFindById(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->findById(1);
+        $topic = $this->service->findById(1);
 
         $this->assertInstanceOf(Topic::class, $topic);
     }
 
+    public function testCanNotFindByEventId(): void
+    {
+        $topic = $this->service->findByEventId(2);
+
+        $this->assertNull($topic);
+    }
+
     public function testCanFindByEventId(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findByEventId')
-            ->with(1)
-            ->willReturn($this->fetchResult);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->findByEventId(1);
+        $topic = $this->service->findByEventId(1);
 
         $this->assertInstanceOf(Topic::class, $topic);
     }
 
     public function testCanFindAvailable(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findAvailable')
-            ->willReturn($this->fetchAllResult);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->findAvailable();
+        $topic = $this->service->findAvailable();
 
         $this->assertIsArray($topic);
+        $this->assertArrayHasKey(0, $topic);
         $this->assertInstanceOf(Topic::class, $topic[0]);
     }
 
     public function testCanFindAll(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findAll')
-            ->willReturn($this->fetchAllResult);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->findAll();
+        $topic = $this->service->findAll();
 
         $this->assertIsArray($topic);
+        $this->assertArrayHasKey(0, $topic);
         $this->assertInstanceOf(Topic::class, $topic[0]);
     }
 
     public function testIsNotTopic(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findByTopic')
-            ->willReturn(false);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->isTopic('fakeTopic');
+        $topic = $this->service->isTopic('fakeIsNotTopic');
 
         $this->assertSame(false, $topic);
     }
 
     public function testIsTopic(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
-        $table->expects($this->once())
-            ->method('findByTopic')
-            ->willReturn($this->fetchResult);
-
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $topic = $service->isTopic('fakeTopic');
+        $topic = $this->service->isTopic('fakeTopic');
 
         $this->assertSame(true, $topic);
     }
 
     public function testCanGetEntriesStatistic(): void
     {
-        $table = $this->createMock(TopicPoolTable::class);
-
         $values = [
-            'allTopic' => $table->getCountTopic(),
-            'allAcceptedTopic' => $table->getCountTopicAccepted(),
-            'allSelectionAvailableTopic' => $table->getCountTopicSelectionAvailable(),
+            'allTopic' => $this->table->getCountTopic(),
+            'allAcceptedTopic' => $this->table->getCountTopicAccepted(),
+            'allSelectionAvailableTopic' => $this->table->getCountTopicSelectionAvailable(),
         ];
 
-        $service = new TopicPoolService($table, $this->hydrator);
-
-        $statistic = $service->getEntriesStatistic();
+        $statistic = $this->service->getEntriesStatistic();
 
         $this->assertSame($values, $statistic);
     }

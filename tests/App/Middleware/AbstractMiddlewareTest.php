@@ -2,20 +2,24 @@
 
 namespace App\Test\Middleware;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use App\Hydrator\ReflectionHydrator;
+use App\Test\Mock\MockRequestHandler;
+use App\Test\Mock\MockServerRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 abstract class AbstractMiddlewareTest extends TestCase
 {
-    protected ServerRequestInterface&MockObject $request;
-    protected RequestHandlerInterface&MockObject $handler;
+    protected readonly ServerRequestInterface $request;
+    protected readonly RequestHandlerInterface $handler;
+    protected readonly ReflectionHydrator $hydrator;
 
     protected function setUp(): void
     {
-        $this->request = $this->createMock(ServerRequestInterface::class);
-        $this->handler = $this->createMock(RequestHandlerInterface::class);
+        $this->request = new MockServerRequest();
+        $this->handler = new MockRequestHandler();
+        $this->hydrator = new ReflectionHydrator();
         parent::setUp();
     }
 }
