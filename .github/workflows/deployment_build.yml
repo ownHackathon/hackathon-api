@@ -40,3 +40,6 @@ jobs:
             **/node_modules/**
             **/build/**
             **/database/**
+            **/scripts/**
+            **/tests/**
+            **/docker/**
