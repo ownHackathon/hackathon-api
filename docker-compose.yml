@@ -13,6 +13,7 @@ services:
     volumes:
       - ./:/var/www/html
       - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/extra.ini
 
   hackathon-db:
     image: mariadb:10.9
@@ -26,3 +27,11 @@ services:
       MYSQL_PASSWORD: db
     volumes:
       - hackathon-db-data:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - "1025:1025" # smtp server
+      - "8025:8025" # web ui
