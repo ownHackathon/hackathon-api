@@ -8,8 +8,7 @@ if (PHP_SAPI === 'cli-server' && $_SERVER['SCRIPT_FILENAME'] !== __FILE__) {
     return false;
 }
 
-define('ROOT_DIR', realpath(__DIR__) . '/../');
-define('CONFIG_DIR', ROOT_DIR . 'config/');
+require_once __DIR__ . '/../constants.php';
 
 require ROOT_DIR . 'vendor/autoload.php';
 
