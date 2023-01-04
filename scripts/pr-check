@@ -1,0 +1,5 @@
+#!/bin/bash
+docker exec hackathon_backend composer run phpcs
+docker exec hackathon_backend composer run phplint
+docker exec hackathon_backend composer run phpstan
+docker exec hackathon_backend composer run test
