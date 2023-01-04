@@ -2,6 +2,6 @@
 
 return [
     'project' => [
-        'uri' => 'https://hackathon.ddev.site/',
+        'uri' => 'https://localhost',
     ],
 ];

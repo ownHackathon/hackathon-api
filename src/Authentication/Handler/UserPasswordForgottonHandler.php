@@ -35,7 +35,7 @@ class UserPasswordForgottonHandler implements RequestHandlerInterface
             ->subject('Password forgotton')
             ->text(
                 sprintf(
-                    'Follow the link to change your password: %suser/password/%s',
+                    'Follow the link to change your password: %s/user/password/%s',
                     $this->projectUri,
                     $user->getToken(),
                 )
