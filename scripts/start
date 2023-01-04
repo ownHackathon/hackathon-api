@@ -1,2 +1,8 @@
 #!/bin/bash
 docker-compose up -d
+docker exec hackathon_backend npm install
+docker exec hackathon_backend composer install
+sh ./scripts/build_dev
+
+echo Webserver: http://localhost
+echo MailHog: http://localhost:8025

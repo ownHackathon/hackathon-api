@@ -5,6 +5,8 @@ RUN apt-get update \
     libzip.dev \
     wget \
     sendmail \
+    nodejs \
+    npm \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && a2enmod rewrite \
