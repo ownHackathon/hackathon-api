@@ -6,10 +6,10 @@ volumes:
 services:
 
   webserver:
+    image: ghcr.io/bibaltik/webserver:latest
     container_name: hackathon_backend
-    build: ./docker
     ports:
-      - "80:80"
+      - "18181:80"
     volumes:
       - ./:/var/www/html
       - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
