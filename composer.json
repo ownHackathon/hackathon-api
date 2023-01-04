@@ -27,7 +27,7 @@
         "phpcs": "phpcs --standard=phpcs.xml -s",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "doctrine": "php ./bin/migrations.php",
-        "test": "vendor/bin/phpunit"
+        "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit"
     },
     "require": {
         "php": "^8.1",
