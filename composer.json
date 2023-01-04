@@ -25,7 +25,7 @@
     "scripts": {
         "phplint": "vendor/bin/phplint",
         "phpcs": "phpcs --standard=phpcs.xml -s",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --xdebug",
         "doctrine": "php ./bin/migrations.php",
         "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit"
     },
