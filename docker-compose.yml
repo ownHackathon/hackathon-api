@@ -26,4 +26,3 @@ services:
       MYSQL_PASSWORD: db
     volumes:
       - hackathon-db-data:/var/lib/mysql
-      - ./docker/init.sql:/data/application/init.sql
