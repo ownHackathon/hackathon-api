@@ -10,6 +10,7 @@ use App\Validator\Input\EmailInput;
 use App\Validator\Input\PasswordInput;
 use App\Validator\Input\UsernameInput;
 use Authentication\Handler\LoginHandlerFactory;
+use Authentication\Service\ApiAccessService;
 use Authentication\Validator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -40,6 +41,7 @@ class ConfigProvider
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
                 Handler\UserPasswordForgottonHandler::class => Handler\UserPasswordForgottonHandlerFactory::class,
 
+                Middleware\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\LoginValidationMiddleware::class => ConfigAbstractFactory::class,
@@ -50,6 +52,8 @@ class ConfigProvider
                 Middleware\UserPasswordVerifyTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserRegisterMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserRegisterValidationMiddleware::class => ConfigAbstractFactory::class,
+
+                Service\ApiAccessService::class => Service\ApiAccessServiceFactory::class,
 
                 Validator\LoginValidator::class => ConfigAbstractFactory::class,
                 Validator\PasswordForgottenEmailValidator::class => ConfigAbstractFactory::class,
@@ -68,6 +72,9 @@ class ConfigProvider
             Middleware\UserRegisterMiddleware::class => [
                 UserService::class,
                 ClassMethodsHydrator::class,
+            ],
+            Middleware\ApiAccessMiddleware::class => [
+                ApiAccessService::class,
             ],
             Middleware\UserPasswordForgottenMiddleware::class => [
                 UserService::class,
