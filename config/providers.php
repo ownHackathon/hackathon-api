@@ -26,12 +26,4 @@ return new ConfigAggregator([
     new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php.dist'),
 
     new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
-
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/database.php.dist'),
-
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/database.php'),
-
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/development.config.php.dist'),
-
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/development.config.php'),
 ]);

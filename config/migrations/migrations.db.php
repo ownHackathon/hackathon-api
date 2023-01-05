@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 $filePath = __DIR__ . '/../autoload/';
-if (file_exists($filePath . 'database.php')) {
-    $db = (require $filePath . 'database.php')['database'];
+if (file_exists($filePath . 'database.global.php')) {
+    $db = (require $filePath . 'database.global.php')['database'];
 } else {
-    $db = (require $filePath . 'database.php.dist')['database'];
+    $db = (require $filePath . 'database.global.php.dist')['database'];
 }
 
 return [
