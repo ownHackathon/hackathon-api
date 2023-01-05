@@ -20,6 +20,7 @@ class ApiAccessMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $domain = explode(':', $request->getHeader('Host')[0])[0];
+
         if (!$this->apiAccessService->hasAccessRights($domain)) {
             return new JsonResponse(['message' => 'No access authorization'], HTTP::STATUS_UNAUTHORIZED);
         }
