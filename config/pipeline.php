@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Middleware\FrontLoaderMiddleware;
 use App\Middleware\UpdateLastUserActionTimeMiddleware;
+use Authentication\Middleware\ApiAccessMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
@@ -22,6 +23,7 @@ return function (Application $app): void {
     $app->pipe(ServerUrlMiddleware::class);
     $app->pipe(BodyParamsMiddleware::class);
 
+    $app->pipe(ApiAccessMiddleware::class);
     $app->pipe(JwtAuthenticationMiddleware::class);
     $app->pipe(UpdateLastUserActionTimeMiddleware::class);
     $app->pipe(RouteMiddleware::class);
