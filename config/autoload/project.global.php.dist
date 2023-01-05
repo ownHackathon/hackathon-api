@@ -2,6 +2,6 @@
 
 return [
     'project' => [
-        'uri' => 'https://localhost',
+        'uri' => 'http://localhost',
     ],
 ];
