@@ -13,7 +13,7 @@ final class Version20220921202630CreateEventTable extends AbstractMigration
         $table = $schema->createTable('Event');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
-        $table->addColumn('userid', Types::INTEGER, ['unsigned' => true,]);
+        $table->addColumn('userId', Types::INTEGER, ['unsigned' => true,]);
         $table->addColumn('title', Types::STRING);
         $table->addColumn('description', Types::STRING);
         $table->addColumn('eventText', Types::TEXT);
