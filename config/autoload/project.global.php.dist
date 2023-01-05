@@ -4,4 +4,15 @@ return [
     'project' => [
         'uri' => 'http://localhost:18181',
     ],
+    'api' => [
+        'access' => [
+            'domain' => [
+                'whitelist' => [
+                    'localhost',
+                    'build.exdrals.de',
+                    'hackathon.exdrals.de'
+                ]
+            ]
+        ]
+    ]
 ];
