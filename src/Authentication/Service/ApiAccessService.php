@@ -2,8 +2,6 @@
 
 namespace Authentication\Service;
 
-use Psr\Http\Message\ServerRequestInterface;
-
 class ApiAccessService
 {
     public function __construct(
