@@ -31,6 +31,7 @@ class TestConstants
     public const EVENT_DURATION = 1;
 
     public const PROJECT_ID = 1;
+
     public const PROJECT_URL = 'https://github.com';
 
     public const TOPIC_ID = 1;
