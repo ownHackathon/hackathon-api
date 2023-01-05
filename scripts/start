@@ -1,12 +1,5 @@
 #!/bin/bash
 docker-compose up -d
 
-echo Install dependencies. This may take a while.
-
-docker exec hackathon_backend npm install
-docker exec hackathon_backend composer install
-sh ./scripts/build_dev
-sh ./scripts/seed
-
 echo Webserver: http://localhost:18181
 echo MailHog: http://localhost:8025
