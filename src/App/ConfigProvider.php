@@ -86,8 +86,6 @@ class ConfigProvider
                 Middleware\Event\EventNameMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Event\EventListMiddleware::class => ConfigAbstractFactory::class,
 
-                Middleware\FrontLoaderMiddleware::class => ConfigAbstractFactory::class,
-
                 Middleware\Project\ProjectMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Project\ProjectOwnerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Project\ProjectParticipantMiddleware::class => ConfigAbstractFactory::class,
@@ -160,9 +158,6 @@ class ConfigProvider
             Middleware\Event\EventParticipantUnsubscribeMiddleware::class => [
                 Service\ParticipantService::class,
                 Service\EventService::class,
-            ],
-            Middleware\FrontLoaderMiddleware::class => [
-                Handler\IndexHandler::class,
             ],
             Middleware\Project\ProjectMiddleware::class => [
                 Service\ProjectService::class,

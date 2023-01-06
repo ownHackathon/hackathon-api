@@ -34,8 +34,6 @@ return function (Application $app): void {
 
     $app->pipe(UrlHelperMiddleware::class);
 
-    $app->pipe(FrontLoaderMiddleware::class);
-
     $app->pipe(DispatchMiddleware::class);
 
     $app->pipe(NotFoundHandler::class);

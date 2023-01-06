@@ -13,7 +13,6 @@ axios.interceptors.request.use((config) => {
   }
 
   config.headers["Content-Type"] = "application/json";
-  config.headers["x-frontloader"] = "x-frontloader";
 
   return config;
 });
