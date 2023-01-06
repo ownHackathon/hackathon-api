@@ -38,7 +38,7 @@ class MockServerRequest implements ServerRequestInterface
 
     public function getHeader($name)
     {
-        // TODO: Implement getHeader() method.
+        return array_key_exists($name, $this->headers) ? $this->headers[$name] : null;
     }
 
     public function getHeaderLine($name)

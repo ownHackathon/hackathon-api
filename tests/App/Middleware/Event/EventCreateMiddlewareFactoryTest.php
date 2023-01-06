@@ -8,7 +8,7 @@ use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Service\EventService;
 use App\Test\Middleware\AbstractMiddlewareTest;
 use App\Test\Mock\MockContainer;
-use App\Test\Mock\Service\MockEventServie;
+use App\Test\Mock\Service\MockEventService;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 
 class EventCreateMiddlewareFactoryTest extends AbstractMiddlewareTest
@@ -22,7 +22,7 @@ class EventCreateMiddlewareFactoryTest extends AbstractMiddlewareTest
     {
         $container = new MockContainer(
             [
-                EventService::class => new MockEventServie(),
+                EventService::class => new MockEventService(),
                 ReflectionHydrator::class => new ReflectionHydrator(),
                 DateTimeFormatterStrategy::class => new DateTimeFormatterStrategy(),
             ]
