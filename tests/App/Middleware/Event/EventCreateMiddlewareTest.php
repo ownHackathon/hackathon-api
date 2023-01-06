@@ -5,7 +5,7 @@ namespace App\Test\Middleware\Event;
 use App\Middleware\Event\EventCreateMiddleware;
 use App\Model\User;
 use App\Test\Middleware\AbstractMiddlewareTest;
-use App\Test\Mock\Service\MockEventServie;
+use App\Test\Mock\Service\MockEventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -19,7 +19,7 @@ class EventCreateMiddlewareTest extends AbstractMiddlewareTest
 
     public function testCreateEventAndReturnResponseInterface(): void
     {
-        $middleware = new EventCreateMiddleware(new MockEventServie(), $this->hydrator);
+        $middleware = new EventCreateMiddleware(new MockEventService(), $this->hydrator);
         $user = new User();
         $user->setId(1);
         $response = $middleware->process(
@@ -34,7 +34,7 @@ class EventCreateMiddlewareTest extends AbstractMiddlewareTest
 
     public function testEventIsPresentAndCanNotCreated(): void
     {
-        $middleware = new EventCreateMiddleware(new MockEventServie(), $this->hydrator);
+        $middleware = new EventCreateMiddleware(new MockEventService(), $this->hydrator);
         $user = new User();
         $user->setId(1);
         $response = $middleware->process(

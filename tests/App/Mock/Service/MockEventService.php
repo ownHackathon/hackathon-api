@@ -10,7 +10,7 @@ use App\Test\Mock\TestConstants;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
-class MockEventServie extends EventService
+class MockEventService extends EventService
 {
     public function __construct()
     {

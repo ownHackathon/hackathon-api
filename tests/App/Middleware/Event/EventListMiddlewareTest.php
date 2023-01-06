@@ -4,7 +4,7 @@ namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventListMiddleware;
 use App\Test\Middleware\AbstractMiddlewareTest;
-use App\Test\Mock\Service\MockEventServie;
+use App\Test\Mock\Service\MockEventService;
 use Psr\Http\Message\ResponseInterface;
 
 class EventListMiddlewareTest extends AbstractMiddlewareTest
@@ -16,7 +16,7 @@ class EventListMiddlewareTest extends AbstractMiddlewareTest
 
     public function testCanFindAllEventUnsorted():void
     {
-        $middleware = new EventListMiddleware(new MockEventServie());
+        $middleware = new EventListMiddleware(new MockEventService());
 
         $response = $middleware->process($this->request, $this->handler);
 
@@ -25,7 +25,7 @@ class EventListMiddlewareTest extends AbstractMiddlewareTest
 
     public function testCanFindAllEventSortedASC():void
     {
-        $middleware = new EventListMiddleware(new MockEventServie());
+        $middleware = new EventListMiddleware(new MockEventService());
 
         $response = $middleware->process(
             $this->request->withQueryParams(
@@ -42,7 +42,7 @@ class EventListMiddlewareTest extends AbstractMiddlewareTest
 
     public function testCanFindAllEventSortedDESC():void
     {
-        $middleware = new EventListMiddleware(new MockEventServie());
+        $middleware = new EventListMiddleware(new MockEventService());
 
         $response = $middleware->process(
             $this->request->withQueryParams(
