@@ -48,7 +48,7 @@ const payload = reactive({
 
 async function register() {
   const response = await axios
-      .post("/user/register", payload,)
+      .post("/api/user/register", payload,)
       .catch(() => {
         document.getElementById('error-message').innerHTML = 'Unbekannter Fehler, später noch einmal versuchen';
         document.getElementById('error-container').classList.remove('hidden');

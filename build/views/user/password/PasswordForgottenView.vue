@@ -38,7 +38,7 @@ const payload = reactive({
 
 async function submitEmail() {
     await axios
-        .post('/user/password/forgotten', payload)
+        .post('/api/user/password/forgotten', payload)
         .then((response) => {
             if (response.status === 200) {
                 console.log(response.data);

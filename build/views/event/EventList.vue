@@ -67,7 +67,7 @@ const router = useRouter();
 const data = ref({});
 onMounted(() => {
   axios
-      .get("/event/")
+      .get("/api/event/")
       .then(async response => {
         data.value = await response.data;
         document.getElementById('spinner').classList.add('hidden');
