@@ -37,7 +37,7 @@ const payload = reactive({
 
 onMounted(async () => {
     await axios
-        .get(`/user/password/${route.params.token}`)
+        .get(`/api/user/password/${route.params.token}`)
         .then((response) => {
             if (response.status !== 200) {
                 router.push({name: 'invalid_token'});
@@ -51,7 +51,7 @@ onMounted(async () => {
 
 async function submitPassword() {
     await axios
-        .post(`/user/password/${route.params.token}`, payload)
+        .post(`/api/user/password/${route.params.token}`, payload)
         .then((response) => {
             if (response.status === 200) {
                 toast.success('Passwort wurde erfolgreich geändert.');

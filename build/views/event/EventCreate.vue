@@ -184,7 +184,7 @@ function checkResponseError(data) {
 
 async function createEvent() {
     await axios
-        .post("/event", payload)
+        .post("/api/event", payload)
         .then((response) => {
             if (response.status === 201) {
                 console.log(response);

@@ -84,13 +84,13 @@ function sortParticpantList() {
 onMounted(async () => {
     if (route.params.eventName) {
         await axios
-            .get(`/event/${route.params.eventName}`)
+            .get(`/api/event/${route.params.eventName}`)
             .then(response => {
                 route.params.id = response.data.eventId;
             });
     }
     await axios
-        .get(`/event/${route.params.id}`)
+        .get(`/api/event/${route.params.id}`)
         .then(response => {
             event.value = response.data;
             sortParticpantList();
@@ -102,7 +102,7 @@ onMounted(async () => {
 
 function addUserAsParticipantToEvent() {
     axios
-        .put(`/event/participant/subscribe/${route.params.id}`)
+        .put(`/api/event/participant/subscribe/${route.params.id}`)
         .then(async response => {
             let participant = await response.data;
             event.value.participants.push(participant);
@@ -114,7 +114,7 @@ function addUserAsParticipantToEvent() {
 
 function removeUserAsParticipantFromEvent() {
     axios
-        .put(`/event/participant/unsubscribe/${route.params.id}`)
+        .put(`/api/event/participant/unsubscribe/${route.params.id}`)
         .then(async response => {
             await response.data;
             let participant = eventService.findUserInParticipantList(event.value.participants, userStore.user);

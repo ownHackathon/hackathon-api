@@ -23,7 +23,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\IndexHandler::class
     );
     $app->get(
-        '/event[/]',
+        '/api/event[/]',
         [
             App\Middleware\Event\EventListMiddleware::class,
             App\Handler\EventListHandler::class,
@@ -31,7 +31,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventListHandler::class
     );
     $app->post(
-        '/event[/]',
+        '/api/event[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\Event\EventCreateValidationMiddleware::class,
@@ -41,7 +41,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventCreateHandler::class
     );
     $app->get(
-        '/event/{eventId:\d+}[/]',
+        '/api/event/{eventId:\d+}[/]',
         [
             App\Middleware\Event\EventMiddleware::class,
             App\Handler\EventHandler::class,
@@ -49,7 +49,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventHandler::class
     );
     $app->get(
-        '/event/{eventName}[/]',
+        '/api/event/{eventName}[/]',
         [
             App\Middleware\Event\EventNameMiddleware::class,
             App\Handler\EventNameHandler::class,
@@ -57,7 +57,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventNameHandler::class
     );
     $app->put(
-        '/event/participant/subscribe/{eventId:\d+}[/]',
+        '/api/event/participant/subscribe/{eventId:\d+}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\Event\EventParticipantSubscribeMiddleware::class,
@@ -66,7 +66,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventParticipantSubscribeHandler::class
     );
     $app->put(
-        '/event/participant/unsubscribe/{eventId:\d+}[/]',
+        '/api/event/participant/unsubscribe/{eventId:\d+}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\Event\EventParticipantUnsubscribeMiddleware::class,
@@ -75,7 +75,7 @@ return static function (Mezzio\Application $app): void {
         App\Handler\EventParticipantUnsubscribeHandler::class
     );
     $app->post(
-        '/user/register[/]',
+        '/api/user/register[/]',
         [
             Authentication\Middleware\UserRegisterValidationMiddleware::class,
             Authentication\Middleware\UserRegisterMiddleware::class,
@@ -84,7 +84,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\UserRegisterSubmitHandler::class
     );
     $app->get(
-        '/user/{userUuid}[/]',
+        '/api/user/{userUuid}[/]',
         [
             Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
             App\Middleware\UserMiddleware::class,
@@ -93,14 +93,14 @@ return static function (Mezzio\Application $app): void {
         App\Handler\UserHandler::class
     );
     $app->get(
-        '/login[/]',
+        '/api/login[/]',
         [
             Authentication\Handler\LoginHandler::class,
         ],
         Authentication\Handler\LoginHandler::class
     );
     $app->post(
-        '/login[/]',
+        '/api/login[/]',
         [
             Authentication\Middleware\LoginValidationMiddleware::class,
             Authentication\Middleware\LoginAuthenticationMiddleware::class,
@@ -109,7 +109,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Middleware\LoginAuthenticationMiddleware::class
     );
     $app->get(
-        '/logout[/]',
+        '/api/logout[/]',
         [
 
             Authentication\Handler\LogoutHandler::class,
@@ -117,7 +117,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\LogoutHandler::class
     );
     $app->post(
-        '/user/password/forgotten',
+        '/api/user/password/forgotten',
         [
             Authentication\Middleware\UserPasswordForgottenValidator::class,
             Authentication\Middleware\UserPasswordForgottenMiddleware::class,
@@ -126,7 +126,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\UserPasswordForgottonHandler::class
     );
     $app->get(
-        '/user/password/{token}[/]',
+        '/api/user/password/{token}[/]',
         [
             Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
             Authentication\Handler\UserPasswordVerifyTokenHandler::class,
@@ -134,7 +134,7 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\UserPasswordVerifyTokenHandler::class
     );
     $app->post(
-        '/user/password/{token}[/]',
+        '/api/user/password/{token}[/]',
         [
             Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
             Authentication\Middleware\UserPasswordChangeValidatorMiddleware::class,

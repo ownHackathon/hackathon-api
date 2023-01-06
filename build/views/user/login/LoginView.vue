@@ -60,7 +60,7 @@ onMounted(() => {
 
 async function login() {
     await axios
-        .post("/login", payload,)
+        .post("/api/login", payload,)
         .then((response) => {
             if (response && response.status === 200) {
                 localStorage.setItem('token', response.data.token);
