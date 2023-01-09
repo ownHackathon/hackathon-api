@@ -6,8 +6,8 @@ volumes:
 services:
 
   webserver:
+    image: ghcr.io/bibaltik/webserver:latest
     container_name: hackathon_backend
-    build: ./docker
     ports:
       - "18181:80"
     volumes:
