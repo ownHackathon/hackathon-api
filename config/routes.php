@@ -33,7 +33,7 @@ return static function (Mezzio\Application $app): void {
     $app->post(
         '/api/event[/]',
         [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             App\Middleware\Event\EventCreateValidationMiddleware::class,
             App\Middleware\Event\EventCreateMiddleware::class,
             App\Handler\EventCreateHandler::class,
@@ -59,7 +59,7 @@ return static function (Mezzio\Application $app): void {
     $app->put(
         '/api/event/participant/subscribe/{eventId:\d+}[/]',
         [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             App\Middleware\Event\EventParticipantSubscribeMiddleware::class,
             App\Handler\EventParticipantSubscribeHandler::class,
         ],
@@ -68,7 +68,7 @@ return static function (Mezzio\Application $app): void {
     $app->put(
         '/api/event/participant/unsubscribe/{eventId:\d+}[/]',
         [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             App\Middleware\Event\EventParticipantUnsubscribeMiddleware::class,
             App\Handler\EventParticipantUnsubscribeHandler::class,
         ],
@@ -86,7 +86,7 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/api/user/{userUuid}[/]',
         [
-            Authentication\Middleware\IsLoginAuthenticationMiddleware::class,
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             App\Middleware\UserMiddleware::class,
             App\Handler\UserHandler::class,
         ],

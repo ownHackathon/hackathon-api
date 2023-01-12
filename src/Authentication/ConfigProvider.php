@@ -32,7 +32,7 @@ class ConfigProvider
                 Handler\UserPasswordChangeHandler::class,
                 Handler\UserPasswordVerifyTokenHandler::class,
                 Handler\UserRegisterSubmitHandler::class,
-                Middleware\IsLoginAuthenticationMiddleware::class,
+                Middleware\IsLoggedInAuthenticationMiddleware::class,
                 Middleware\LoginValidationMiddleware::class,
                 Service\LoginAuthenticationService::class,
             ],
