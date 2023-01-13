@@ -14,12 +14,15 @@ class ParticipantTable extends AbstractTable
             'approved' => $participant->isApproved(),
         ];
 
-        return (int)$this->query->insertInto($this->table, $values)->execute();
+        return (int)$this->query->insertInto($this->table, $values)
+            ->onDuplicateKeyUpdate(['subscribed' => true])
+            ->execute();
     }
 
     public function remove(Participant $participant): int|bool
     {
-        return (int)$this->query->delete($this->table)
+        return (int)$this->query->update($this->table)
+            ->set(['subscribed'], false)
             ->where('userId', $participant->getUserId())
             ->where('eventId', $participant->getEventId())
             ->execute();
