@@ -10,6 +10,7 @@ class Participant
     private int $userId = 0;
     private int $eventId = 0;
     private DateTime $requestTime;
+    private bool $subscribed = true;
     private bool $approved = false;
     private bool $disqualified = true;
 
@@ -62,6 +63,18 @@ class Participant
     public function setRequestTime(DateTime $requestTime): self
     {
         $this->requestTime = $requestTime;
+
+        return $this;
+    }
+
+    public function isSubscribed(): bool
+    {
+        return $this->subscribed;
+    }
+
+    public function setSubscribed(int|bool $subscribed): self
+    {
+        $this->subscribed = (bool)$subscribed;
 
         return $this;
     }
