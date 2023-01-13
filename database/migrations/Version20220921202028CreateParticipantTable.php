@@ -16,9 +16,9 @@ final class Version20220921202028CreateParticipantTable extends AbstractMigratio
         $table->addColumn('userId', Types::INTEGER, ['unsigned' => true]);
         $table->addColumn('eventId', Types::INTEGER, ['unsigned' => true]);
         $table->addColumn('requestTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
+        $table->addColumn('subscribed', Types::BOOLEAN, ['default' => true]);
         $table->addColumn('approved', Types::BOOLEAN, ['default' => true,]);
         $table->addColumn('disqualified', Types::BOOLEAN, ['default' => false]);
-
         $table->setPrimaryKey(['id']);
     }
 
