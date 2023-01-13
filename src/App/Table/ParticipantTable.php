@@ -40,6 +40,7 @@ class ParticipantTable extends AbstractTable
         return $this->query->from(($this->table))
             ->where('userId', $userId)
             ->where('eventId', $eventId)
+            ->where('subscribed', true)
             ->fetch();
     }
 
@@ -47,6 +48,7 @@ class ParticipantTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('eventId', $eventId)
+            ->where('subscribed', true)
             ->where('approved', 1)
             ->where('disqualified', 0)
             ->fetchAll();
