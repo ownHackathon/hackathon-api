@@ -15,14 +15,14 @@ class ParticipantTable extends AbstractTable
         ];
 
         return (int)$this->query->insertInto($this->table, $values)
-            ->onDuplicateKeyUpdate(['subscribed' => true])
+            ->onDuplicateKeyUpdate(['subscribed' => 1])
             ->execute();
     }
 
     public function remove(Participant $participant): int|bool
     {
         return (int)$this->query->update($this->table)
-            ->set(['subscribed'], false)
+            ->set('subscribed', 0)
             ->where('userId', $participant->getUserId())
             ->where('eventId', $participant->getEventId())
             ->execute();
