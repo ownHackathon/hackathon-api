@@ -20,6 +20,7 @@ final class Version20220921202028CreateParticipantTable extends AbstractMigratio
         $table->addColumn('approved', Types::BOOLEAN, ['default' => true,]);
         $table->addColumn('disqualified', Types::BOOLEAN, ['default' => false]);
         $table->setPrimaryKey(['id']);
+        $table->addUniqueIndex(['userId', 'eventId'], 'UNIQUE_USER_EVENT');
     }
 
     public function down(Schema $schema): void
