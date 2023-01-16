@@ -14,5 +14,10 @@ return [
                 ]
             ]
         ]
+    ],
+    'event' => [
+        'participant' => [
+            'subscribe_delay' => 30
+        ]
     ]
 ];
