@@ -1,0 +1,46 @@
+name: Production Deployment
+on:
+  push:
+    branches: [ "releases/1.0.0" ]
+jobs:
+  deployment_of_hackathon_to_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --no-dev
+
+      - name: npm install
+        run: npm install
+
+      - name: npm run build
+        run: npm run build
+
+      - name: FTP Deploy to Development Server (Staging)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          password: ${{ secrets.PROD_PASSWORD }}
+          exclude: |
+            **/.git*
+            **/*.dist
+            **/*.dist/**
+            **/.git*/**
+            **/bin/**
+            **/tests/**
+            **/config/migrations/**
+            **/config/**
+            **/node_modules/**
+            **/build/**
+            **/database/**
+            **/scripts/**
+            **/tests/**
+            **/docker/**
