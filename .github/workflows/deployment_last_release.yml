@@ -1,7 +1,8 @@
 name: Production Deployment
 on:
-  push:
-    branches: [ "releases/**" ]
+  releases:
+    types:
+      - created
 jobs:
   deployment_of_hackathon_to_build:
     runs-on: ubuntu-latest
