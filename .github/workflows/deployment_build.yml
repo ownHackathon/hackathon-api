@@ -36,7 +36,7 @@ jobs:
             **/.git*/**
             **/bin/**
             **/tests/**
-            **/config/migrations/**
+            **/config/**
             **/node_modules/**
             **/build/**
             **/database/**
