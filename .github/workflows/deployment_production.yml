@@ -1,9 +1,11 @@
-name: Development Deployment
+name: Production Deployment
+
 on:
-  push:
-    branches: [ "master" ]
+  release:
+    types: [published]
+    
 jobs:
-  deployment_of_hackathon_to_build:
+  deployment_of_hackathon_to_production:
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
@@ -23,12 +25,12 @@ jobs:
       - name: npm run build
         run: npm run build
 
-      - name: FTP Deploy to Development Server (Staging)
+      - name: FTP Deploy to Production Server (Staging)
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ${{ secrets.BUILD_HOST }}
-          username: ${{ secrets.BUILD_USER }}
-          password: ${{ secrets.BUILD_PASSWORD }}
+          server: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          password: ${{ secrets.PROD_PASSWORD }}
           exclude: |
             **/.git*
             **/*.dist
