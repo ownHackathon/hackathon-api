@@ -18,6 +18,7 @@
 - [ ] Feature <!--- (mark pull request with Feat:) -->
 - [ ] Bug fix <!--- (mark pull request with Fix:) -->
 - [ ] Refactor <!--- (mark pull request with Refactor:) -->
+- [ ] Change <!--- (mark pull request with Change:) -->
 - [ ] Style <!--- (mark pull request with Style:) -->
 - [ ] Docs <!--- (mark pull request with Docs:) -->
 - [ ] Test <!--- (mark pull request with Test:) -->
