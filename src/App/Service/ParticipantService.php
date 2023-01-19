@@ -26,7 +26,7 @@ class ParticipantService
 
     public function remove(Participant $participant): bool
     {
-        return $this->table->remove($participant) == 0 ? false : true;
+        return (int)$this->table->remove($participant) !== 0;
     }
 
     public function findById(int $id): Participant

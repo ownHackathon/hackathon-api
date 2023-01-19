@@ -22,7 +22,7 @@ class ParticipantTable extends AbstractTable
     public function remove(Participant $participant): int|bool
     {
         return (int)$this->query->update($this->table)
-            ->set('subscribed', 0)
+            ->set(['subscribed' => 0])
             ->where('userId', $participant->getUserId())
             ->where('eventId', $participant->getEventId())
             ->execute();
@@ -40,7 +40,7 @@ class ParticipantTable extends AbstractTable
         return $this->query->from(($this->table))
             ->where('userId', $userId)
             ->where('eventId', $eventId)
-            ->where('subscribed', true)
+            ->where('subscribed', 1)
             ->fetch();
     }
 
@@ -48,7 +48,7 @@ class ParticipantTable extends AbstractTable
     {
         return $this->query->from($this->table)
             ->where('eventId', $eventId)
-            ->where('subscribed', true)
+            ->where('subscribed', 1)
             ->where('approved', 1)
             ->where('disqualified', 0)
             ->fetchAll();
