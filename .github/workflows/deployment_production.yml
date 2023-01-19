@@ -38,7 +38,8 @@ jobs:
             **/.git*/**
             **/bin/**
             **/tests/**
-            **/config/**
+            **/config/autoload/**
+            **/config/migrations/**
             **/node_modules/**
             **/build/**
             **/database/**
