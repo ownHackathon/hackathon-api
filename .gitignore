@@ -7,5 +7,5 @@
 *.cache
 *.phar
 .ddev
-/public/*.mustache
+/public/*.html
 /database/structure/update*.sql
