@@ -3,6 +3,7 @@ Entry with Issues, Pull Request, Author
 Example:
 - new time entry added #0000 !0000 @BibaltiK
 -->
+
 # Changelog for the Hackathon evaluation Project
 
 <!--Example -->
