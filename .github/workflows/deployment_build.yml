@@ -39,7 +39,7 @@ jobs:
             **/config/autoload/**
             **/config/migrations/**
             **/node_modules/**
-            **/build/**
+            **/client/**
             **/database/**
             **/scripts/**
             **/tests/**
