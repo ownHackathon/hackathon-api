@@ -11,13 +11,13 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use OpenApi\Attributes as OA;
 
-#[OA\Info(title: 'My Swagger', version: '0.0.1')]
+#[OA\Info(title: 'Hackathon API Overview', version: '0.0.1')]
 #[OA\SecurityScheme(
     securityScheme: 'bearerAuth',
     type: 'http',
     name: 'Authorization',
     in: 'header',
-    bearerFormat: 'JW1T',
+    bearerFormat: 'JWT',
     scheme: 'bearer',
 )
 ]
