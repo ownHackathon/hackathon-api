@@ -23,7 +23,7 @@ class ApiMeHandler implements RequestHandlerInterface
         responses: [
             new OA\Response(
                 response: HTTP::STATUS_OK,
-                description: 'Success.',
+                description: 'Success',
             ),
         ]
     )]

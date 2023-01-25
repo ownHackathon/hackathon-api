@@ -9,4 +9,4 @@
 .ddev
 /public/*.html
 /database/structure/update*.sql
-openapi.yaml
+/public/swaggerui/swagger.json
