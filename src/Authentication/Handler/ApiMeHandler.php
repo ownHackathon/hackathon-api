@@ -6,6 +6,7 @@ use App\Hydrator\ReflectionHydrator;
 use App\Model\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
+use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -17,6 +18,15 @@ class ApiMeHandler implements RequestHandlerInterface
     ) {
     }
 
+    #[OA\Get(
+        path: '/api/me',
+        responses: [
+            new OA\Response(
+                response: HTTP::STATUS_OK,
+                description: 'Success.',
+            ),
+        ]
+    )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);

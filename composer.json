@@ -27,6 +27,7 @@
         "phpcs": "phpcs --standard=phpcs.xml -s",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --xdebug",
         "doctrine": "php ./bin/migrations.php",
+        "openapi": "php ./vendor/bin/openapi src -f json -o ./public/swaggerui/swagger.json -d",
         "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit"
     },
     "require": {
@@ -51,7 +52,8 @@
         "mezzio/mezzio-fastroute": "^3.3.0",
         "mezzio/mezzio-helpers": "^5.7.0",
         "ramsey/uuid": "^4.3",
-        "symfony/mailer": "^6.1"
+        "symfony/mailer": "^6.1",
+        "zircote/swagger-php": "^4.6"
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",

@@ -23,6 +23,13 @@ return static function (Mezzio\Application $app): void {
         App\Handler\IndexHandler::class
     );
     $app->get(
+        '/swaggerui',
+        [
+            App\Handler\SwaggerUIHandler::class,
+        ],
+        App\Handler\SwaggerUIHandler::class
+    );
+    $app->get(
         '/api/event[/]',
         [
             App\Middleware\Event\EventListMiddleware::class,
