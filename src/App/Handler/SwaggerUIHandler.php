@@ -13,13 +13,13 @@ use OpenApi\Attributes as OA;
 
 #[OA\Info(title: 'My Swagger', version: '0.0.1')]
 #[OA\SecurityScheme(
-        securityScheme: 'bearerAuth',
+    securityScheme: 'bearerAuth',
     type: 'http',
     name: 'Authorization',
     in: 'header',
     bearerFormat: 'JW1T',
     scheme: 'bearer',
-    )
+)
 ]
 #[OA\OpenApi(
     security: [['bearerAuth' => []]],
