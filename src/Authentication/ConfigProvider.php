@@ -29,6 +29,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Handler\ApiMeHandler::class,
                 Handler\UserPasswordChangeHandler::class,
                 Handler\UserPasswordVerifyTokenHandler::class,
                 Handler\UserRegisterSubmitHandler::class,
@@ -37,7 +38,6 @@ class ConfigProvider
                 Service\LoginAuthenticationService::class,
             ],
             'factories' => [
-                Handler\ApiMeHandler::class => ConfigAbstractFactory::class,
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
                 Handler\UserPasswordForgottonHandler::class => Handler\UserPasswordForgottonHandlerFactory::class,
 
@@ -66,9 +66,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Handler\ApiMeHandler::class => [
-                ReflectionHydrator::class,
-            ],
             Middleware\UserRegisterMiddleware::class => [
                 UserService::class,
                 ClassMethodsHydrator::class,
