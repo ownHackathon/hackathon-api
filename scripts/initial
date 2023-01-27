@@ -8,5 +8,7 @@ docker exec hackathon_backend composer install
 sh ./scripts/build_dev
 sh ./scripts/seed
 
+docker exec hackathon_backend composer run openapi
+
 echo Webserver: http://localhost:18181
 echo MailHog: http://localhost:8025
