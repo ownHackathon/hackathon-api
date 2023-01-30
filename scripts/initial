@@ -9,6 +9,8 @@ sh ./scripts/build_dev
 sh ./scripts/seed
 sh ./scripts/build-swagger
 
+docker exec hackathon_backend composer run openapi
+
 echo Webserver: http://localhost:18181
 echo SwaggerUI: http://localhost:18181/swaggerui/
 echo MailHog: http://localhost:8025
