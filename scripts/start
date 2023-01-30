@@ -2,4 +2,5 @@
 docker-compose up -d
 
 echo Webserver: http://localhost:18181
+echo SwaggerUI: http://localhost:18181/swaggerui/
 echo MailHog: http://localhost:8025
