@@ -7,8 +7,7 @@ docker exec hackathon_backend npm install
 docker exec hackathon_backend composer install
 sh ./scripts/build_dev
 sh ./scripts/seed
-
-docker exec hackathon_backend composer run openapi
+sh ./scripts/build-swagger
 
 echo Webserver: http://localhost:18181
 echo SwaggerUI: http://localhost:18181/swaggerui/

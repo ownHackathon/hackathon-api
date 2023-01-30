@@ -2,10 +2,9 @@
 
 namespace Authentication\Handler;
 
-use App\DTO\ApiMe;
 use App\Enum\UserRole;
-use App\Hydrator\ReflectionHydrator;
 use App\Model\User;
+use Authentication\DTO\ApiMe;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
