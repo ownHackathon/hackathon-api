@@ -8,4 +8,14 @@ enum UserRole: int
     case ADMINISTRATOR = 2;
     case MODERATOR = 3;
     case USER = 4;
+
+    public function getRoleName(): string
+    {
+        return match ($this) {
+            UserRole::OWNER => 'Owner',
+            UserRole::ADMINISTRATOR => 'Administrator',
+            UserRole::MODERATOR => 'Moderator',
+            UserRole::USER => 'User',
+        };
+    }
 }

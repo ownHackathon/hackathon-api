@@ -15,5 +15,8 @@ window.onload = function() {
     ],
     layout: "StandaloneLayout",
     persistAuthorization: true,
+    defaultModelsExpandDepth: 10,
+    defaultModelExpandDepth: 10,
+    displayRequestDuration: true,
   });
 };
