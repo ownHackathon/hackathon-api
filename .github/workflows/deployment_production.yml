@@ -11,10 +11,10 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v2
 
-      - name: Use Node.js 14
+      - name: Use Node.js 19
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '19'
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
@@ -23,9 +23,11 @@ jobs:
         run: composer run-script openapi
 
       - name: npm install
+        working-directory: ./client
         run: npm install
 
       - name: npm run build
+        working-directory: ./client
         run: npm run build
 
       - name: FTP Deploy to Production Server (Staging)
