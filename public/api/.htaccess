@@ -16,4 +16,4 @@ RewriteRule ^ - [NC,L]
 # fits all solution.
 RewriteCond $0::%{REQUEST_URI} ^([^:]*+(?::[^:]*+)*?)::(/.+?)\1$
 RewriteRule .+ - [E=BASE:%2]
-RewriteRule .* %{ENV:BASE}index.html [NC,L]
+RewriteRule .* %{ENV:BASE}index.php [NC,L]

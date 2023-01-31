@@ -16,20 +16,6 @@ return static function (Mezzio\Application $app): void {
         Authentication\Handler\ApiMeHandler::class
     );
     $app->get(
-        '/',
-        [
-            App\Handler\IndexHandler::class,
-        ],
-        App\Handler\IndexHandler::class
-    );
-    $app->get(
-        '/swaggerui',
-        [
-            App\Handler\SwaggerUIHandler::class,
-        ],
-        App\Handler\SwaggerUIHandler::class
-    );
-    $app->get(
         '/api/event[/]',
         [
             App\Middleware\Event\EventListMiddleware::class,

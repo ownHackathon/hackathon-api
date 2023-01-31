@@ -38,7 +38,7 @@ a:hover {
 }
 
 a[target="_blank"]:after {
-  content: url("/client/assets/box-arrow-up-right.svg");
+  content: url("/src/assets/box-arrow-up-right.svg");
   padding: 0 3px;
   bottom: 5px;
   position: relative;

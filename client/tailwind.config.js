@@ -1,5 +1,5 @@
 module.exports = {
-    content: ["./public/index.html", "./client/**/*.{vue,js,ts,jsx,tsx}",],
+    content: ["./../public/index.html", "./src/**/*.{vue,js,ts,jsx,tsx}",],
     theme: {
         fontFamily: {
             'sans': ['ui-sans-serif', 'Segoe UI', 'sans-serif', 'Arial', 'Helvetica'],
