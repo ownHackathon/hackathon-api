@@ -21,10 +21,12 @@ jobs:
         run: composer run-script openapi
 
       - name: npm install
-        run: client/npm install
+        working-directory: ./client
+        run: npm install
 
       - name: npm run build
-        run: client/npm run build
+        working-directory: ./client
+        run: npm run build
 
       - name: FTP Deploy to Development Server (Staging)
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
