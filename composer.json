@@ -27,7 +27,7 @@
         "phpcs": "phpcs --standard=phpcs.xml -s",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --xdebug",
         "doctrine": "php ./bin/migrations.php",
-        "openapi": "php ./vendor/bin/openapi src -f json -o ./public/swaggerui/swagger.json -d",
+        "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/swaggerui/swagger.json -d",
         "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit"
     },
     "require": {
