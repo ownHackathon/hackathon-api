@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fde132185c65d87b026981ef66ed89ed",
+    "content-hash": "106c75791379c5cb8e7f4d8dcf151357",
     "packages": [
         {
             "name": "brick/math",
@@ -1721,16 +1721,16 @@
         },
         {
             "name": "laminas/laminas-inputfilter",
-            "version": "2.23.0",
+            "version": "2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-inputfilter.git",
-                "reference": "e97663a756370ba8105d07dc5f4fff53b650d151"
+                "reference": "01c56c11904565b0f594c9cb745b5457a0e390eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-inputfilter/zipball/e97663a756370ba8105d07dc5f4fff53b650d151",
-                "reference": "e97663a756370ba8105d07dc5f4fff53b650d151",
+                "url": "https://api.github.com/repos/laminas/laminas-inputfilter/zipball/01c56c11904565b0f594c9cb745b5457a0e390eb",
+                "reference": "01c56c11904565b0f594c9cb745b5457a0e390eb",
                 "shasum": ""
             },
             "require": {
@@ -1791,7 +1791,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-01-09T22:33:53+00:00"
+            "time": "2023-02-01T17:22:43+00:00"
         },
         {
             "name": "laminas/laminas-servicemanager",
