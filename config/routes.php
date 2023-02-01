@@ -15,6 +15,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\ApiMeHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/event[/]',
         [
@@ -23,6 +24,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventListHandler::class
     );
+    /** ToDo OpenApi */
     $app->post(
         '/api/event[/]',
         [
@@ -33,6 +35,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventCreateHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/event/{eventId:\d+}[/]',
         [
@@ -41,6 +44,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/event/{eventName}[/]',
         [
@@ -49,6 +53,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventNameHandler::class
     );
+    /** ToDo OpenApi */
     $app->put(
         '/api/event/participant/subscribe/{eventId:\d+}[/]',
         [
@@ -58,6 +63,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventParticipantSubscribeHandler::class
     );
+    /** ToDo OpenApi */
     $app->put(
         '/api/event/participant/unsubscribe/{eventId:\d+}[/]',
         [
@@ -67,6 +73,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventParticipantUnsubscribeHandler::class
     );
+    /** ToDo OpenApi */
     $app->post(
         '/api/user/register[/]',
         [
@@ -76,6 +83,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\UserRegisterSubmitHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/user/{userUuid}[/]',
         [
@@ -85,6 +93,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\UserHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/login[/]',
         [
@@ -92,6 +101,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\LoginHandler::class
     );
+    /** ToDo OpenApi */
     $app->post(
         '/api/login[/]',
         [
@@ -101,6 +111,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Middleware\LoginAuthenticationMiddleware::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/logout[/]',
         [
@@ -109,6 +120,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\LogoutHandler::class
     );
+    /** ToDo OpenApi */
     $app->post(
         '/api/user/password/forgotten',
         [
@@ -118,6 +130,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\UserPasswordForgottonHandler::class
     );
+    /** ToDo OpenApi */
     $app->get(
         '/api/user/password/{token}[/]',
         [
@@ -126,6 +139,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\UserPasswordVerifyTokenHandler::class
     );
+    /** ToDo OpenApi */
     $app->post(
         '/api/user/password/{token}[/]',
         [
