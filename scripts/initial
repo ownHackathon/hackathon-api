@@ -3,7 +3,7 @@ docker-compose up -d
 
 echo Install dependencies. This may take a while.
 
-docker exec hackathon_backend npm install
+docker exec hackathon_backend sh -c "cd client && npm install"
 docker exec hackathon_backend composer install
 sh ./scripts/build_dev
 sh ./scripts/seed
