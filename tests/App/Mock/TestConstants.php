@@ -8,13 +8,19 @@ class TestConstants
 
     public const USER_ID = 1;
 
+    public const USER_CREATE_ID = 2;
+
     public const USER_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
 
     public const USER_NAME = 'Test Name';
 
+    public const USER_CREATE_NAME = 'Test Create Name';
+
     public const USER_PASSWORD = 'Test Password';
 
     public const USER_EMAIL = 'example@example.com';
+
+    public const USER_CREATE_EMAIL = 'uniqueexample@example.com';
 
     public const USER_TOKEN = '4e10cfecf3bb51811689956e647705a0';
 
@@ -22,7 +28,11 @@ class TestConstants
 
     public const EVENT_ID = 1;
 
+    public const EVENT_NOT_REMOVE_ID = 2;
+
     public const EVENT_TITLE = 'Test Title';
+
+    public const EVENT_CREATE_TITLE = 'Test Create Title';
 
     public const EVENT_DESCRIPTION = 'Test Description';
 
@@ -35,6 +45,10 @@ class TestConstants
     public const PROJECT_URL = 'https://github.com';
 
     public const TOPIC_ID = 1;
+
+    public const TOPIC_UUID = '4e10cfecf3bb51811689956e647705a0';
+
+    public const TOPIC_TITLE = 'Test Title';
 
     public const TOPIC_TEXT = 'Test Topic Text';
 

@@ -20,10 +20,21 @@ class UserTableTest extends AbstractTableTest
     public function testCanInsertUser(): void
     {
         $user = new User();
+        $user->setName(TestConstants::USER_CREATE_NAME);
 
         $insertUser = $this->table->insert($user);
 
-        $this->assertSame(true, $insertUser);
+        $this->assertSame(1, $insertUser);
+    }
+
+    public function testCanNotInsertUser(): void
+    {
+        $user = new User();
+        $user->setName(TestConstants::USER_NAME);
+
+        $insertUser = $this->table->insert($user);
+
+        $this->assertSame(false, $insertUser);
     }
 
     public function testCanUpdateUser(): void
@@ -66,14 +77,14 @@ class UserTableTest extends AbstractTableTest
 
     public function testCanFindByName(): void
     {
-        $user = $this->table->findByName('fakeName');
+        $user = $this->table->findByName(TestConstants::USER_NAME);
 
         $this->assertSame($this->fetchResult, $user);
     }
 
     public function testCanFindByEmail(): void
     {
-        $user = $this->table->findByEMail('test@example.com');
+        $user = $this->table->findByEMail(TestConstants::USER_EMAIL);
 
         $this->assertSame($this->fetchResult, $user);
     }

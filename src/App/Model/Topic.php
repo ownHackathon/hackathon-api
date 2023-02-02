@@ -5,6 +5,7 @@ namespace App\Model;
 class Topic
 {
     private int $id = 0;
+    private string $uuid = '';
     private ?int $eventId = null;
     private string $topic = '';
     private ?string $description = null;
@@ -18,6 +19,18 @@ class Topic
     public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }

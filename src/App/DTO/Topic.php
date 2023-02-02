@@ -30,8 +30,8 @@ class Topic
 
     public function __construct(array $topic)
     {
-        $this->uuid = (string)$topic['id'];
-        $this->topic = $topic['topic'];
-        $this->description = $topic['description'];
+        $this->uuid = $topic['uuid'] ?? '';
+        $this->topic = $topic['topic'] ?? '';
+        $this->description = $topic['description'] ?? '';
     }
 }

@@ -41,6 +41,13 @@ class TopicPoolTableTest extends AbstractTableTest
         $this->assertSame($this->fetchResult, $topic);
     }
 
+    public function testCanFindByUuId(): void
+    {
+        $topic = $this->table->findByUuId(TestConstants::TOPIC_UUID);
+
+        $this->assertSame($this->fetchResult, $topic);
+    }
+
     public function testCanFindAll(): void
     {
         $users = $this->table->findAll();
@@ -64,7 +71,7 @@ class TopicPoolTableTest extends AbstractTableTest
 
     public function testCanFindByTopic(): void
     {
-        $topic = $this->table->findByTopic('fakeTopic');
+        $topic = $this->table->findByTopic(TestConstants::TOPIC_TITLE);
 
         $this->assertSame($this->fetchResult, $topic);
     }

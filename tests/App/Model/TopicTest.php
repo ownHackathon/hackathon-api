@@ -10,13 +10,6 @@ class TopicTest extends TestCase
 {
     private Topic $topic;
 
-    protected function setUp(): void
-    {
-        $this->topic = new Topic();
-
-        parent::setUp();
-    }
-
     public function testPropertiesIsByInitializeNull(): void
     {
         $eventId = $this->topic->getEventId();
@@ -36,6 +29,16 @@ class TopicTest extends TestCase
         $this->assertInstanceOf(Topic::class, $topicId);
         $this->assertIsInt($id);
         $this->assertSame(TestConstants::TOPIC_ID, $id);
+    }
+
+    public function testCanSetAndGetUuId(): void
+    {
+        $topicId = $this->topic->setUuid(TestConstants::TOPIC_UUID);
+        $uuid = $topicId->getUuid();
+
+        $this->assertInstanceOf(Topic::class, $topicId);
+        $this->assertIsString($uuid);
+        $this->assertSame(TestConstants::TOPIC_UUID, $uuid);
     }
 
     public function testCanSetAndGetEventId(): void
@@ -76,5 +79,12 @@ class TopicTest extends TestCase
         $this->assertInstanceOf(Topic::class, $topicAccepted);
         $this->assertIsBool($accepted);
         $this->assertSame(true, $accepted);
+    }
+
+    protected function setUp(): void
+    {
+        $this->topic = new Topic();
+
+        parent::setUp();
     }
 }

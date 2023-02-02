@@ -13,12 +13,14 @@ final class Version20220921195606CreateTopicPoolTable extends AbstractMigration
         $table = $schema->createTable('TopicPool');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
+        $table->addColumn('uuid', Types::STRING, ['length' => 32]);
         $table->addColumn('eventId', Types::INTEGER, ['unsigned' => true, 'notnull' => false]);
         $table->addColumn('topic', Types::STRING);
         $table->addColumn('description', Types::TEXT, ['notnull' => false]);
         $table->addColumn('accepted', Types::BOOLEAN, ['notnull' => false]);
 
         $table->setPrimaryKey(['id']);
+        $table->addUniqueIndex(['uuid'], 'uuid_UNIQUE');
         $table->addUniqueIndex(['topic'], 'topic_UNIQUE');
     }
 

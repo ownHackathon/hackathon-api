@@ -18,6 +18,13 @@ class TopicPoolTable extends AbstractTable
         return $this;
     }
 
+    public function findByUuId(string $uuid): bool|array
+    {
+        return $this->query->from($this->table)
+            ->where('uuid', $uuid)
+            ->fetch();
+    }
+
     public function updateEventId(Topic $topic): self
     {
         $values = [

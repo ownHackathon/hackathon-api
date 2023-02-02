@@ -17,7 +17,9 @@ class EventTable extends AbstractTable
             'duration' => $event->getDuration(),
         ];
 
-        return (int)$this->query->insertInto($this->table, $values)->execute();
+        $insertStatus = $this->query->insertInto($this->table, $values)->execute();
+
+        return !$insertStatus ? false : (int)$insertStatus;
     }
 
     public function findAll(string $order = 'startTime', string $sort = 'ASC'): bool|array
@@ -46,5 +48,12 @@ class EventTable extends AbstractTable
             ->where('active', 0)
             ->orderBy('startTime DESC')
             ->fetchAll();
+    }
+
+    public function remove(Event $event): bool|int
+    {
+        return $this->query->deleteFrom($this->table)
+            ->where('id', $event->getId())
+            ->execute();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Test\Service;
 use App\Model\User;
 use App\Service\UserService;
 use App\Test\Mock\Table\MockUserTable;
+use App\Test\Mock\TestConstants;
 
 class UserServiceTest extends AbstractServiceTest
 {
@@ -41,12 +42,23 @@ class UserServiceTest extends AbstractServiceTest
     public function testCanCreateUser(): void
     {
         $user = new User();
-        $user->setName('fakeName');
-        $user->setEmail('fake@example.com');
+        $user->setName(TestConstants::USER_CREATE_NAME);
+        $user->setEmail(TestConstants::USER_CREATE_EMAIL);
 
         $insert = $this->userService->create($user);
 
-        $this->assertSame(true, $insert);
+        $this->assertSame(1, $insert);
+    }
+
+    public function testCanNotCreateUser(): void
+    {
+        $user = new User();
+        $user->setName(TestConstants::USER_NAME);
+        $user->setEmail(TestConstants::USER_EMAIL);
+
+        $insert = $this->userService->create($user);
+
+        $this->assertSame(false, $insert);
     }
 
     public function testCanUpdateLastUserActionTime(): void
@@ -87,14 +99,14 @@ class UserServiceTest extends AbstractServiceTest
 
     public function testCanFindById(): void
     {
-        $user = $this->userService->findById(1);
+        $user = $this->userService->findById(TestConstants::USER_ID);
 
         $this->assertInstanceOf(User::class, $user);
     }
 
     public function testCanFindByUuid(): void
     {
-        $user = $this->userService->findByUuid('FakeUserUuid');
+        $user = $this->userService->findByUuid(TestConstants::USER_UUID);
 
         $this->assertInstanceOf(User::class, $user);
     }
@@ -115,7 +127,7 @@ class UserServiceTest extends AbstractServiceTest
 
     public function testCanFindByToken(): void
     {
-        $user = $this->userService->findByToken('FakeUserToken');
+        $user = $this->userService->findByToken(TestConstants::USER_TOKEN);
 
         $this->assertInstanceOf(User::class, $user);
     }
