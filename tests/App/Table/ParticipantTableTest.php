@@ -19,10 +19,21 @@ class ParticipantTableTest extends AbstractTableTest
     public function testCanInsertParticipant(): void
     {
         $participant = new Participant();
+        $participant->setUserId(TestConstants::USER_CREATE_ID);
 
         $insertParticipant = $this->table->insert($participant);
 
         $this->assertSame(1, $insertParticipant);
+    }
+
+    public function testCanNotInsertParticipant(): void
+    {
+        $participant = new Participant();
+        $participant->setUserId(TestConstants::USER_ID);
+
+        $insertParticipant = $this->table->insert($participant);
+
+        $this->assertSame(false, $insertParticipant);
     }
 
     public function testCanRemoveParticipant(): void
@@ -31,7 +42,7 @@ class ParticipantTableTest extends AbstractTableTest
 
         $removeParticipant = $this->table->remove($participant);
 
-        $this->assertSame(1, $removeParticipant);
+        $this->assertSame(true, $removeParticipant);
     }
 
     public function testCanFindById(): void

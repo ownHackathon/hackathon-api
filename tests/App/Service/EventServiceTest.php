@@ -5,6 +5,7 @@ namespace App\Test\Service;
 use App\Model\Event;
 use App\Service\EventService;
 use App\Test\Mock\Table\MockEventTable;
+use App\Test\Mock\TestConstants;
 
 class EventServiceTest extends AbstractServiceTest
 {
@@ -21,7 +22,7 @@ class EventServiceTest extends AbstractServiceTest
     public function testCanNotCreate(): void
     {
         $event = new Event();
-        $event->setTitle('fakeNotFoundEvent');
+        $event->setTitle(TestConstants::EVENT_TITLE);
 
         $event = $this->service->create($event);
 
@@ -31,7 +32,7 @@ class EventServiceTest extends AbstractServiceTest
     public function testCanCreate(): void
     {
         $event = new Event();
-        $event->setTitle('fakeEvent');
+        $event->setTitle(TestConstants::EVENT_CREATE_TITLE);
 
         $event = $this->service->create($event);
 

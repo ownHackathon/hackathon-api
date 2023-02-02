@@ -4,6 +4,7 @@ namespace App\Test\Mock\Table;
 
 use App\Table\EventTable;
 use App\Test\Mock\Database\MockQuery;
+use App\Test\Mock\TestConstants;
 
 class MockEventTable extends EventTable
 {
@@ -32,12 +33,12 @@ class MockEventTable extends EventTable
 
     public function findByTitle(string $topic): bool|array
     {
-        if ($topic === 'fakeEvent') {
-            return false;
+        if ($topic === TestConstants::EVENT_TITLE) {
+            return [
+                'title' => $topic,
+            ];
         }
 
-        return [
-            'title' => $topic,
-        ];
+        return false;
     }
 }

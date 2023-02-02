@@ -5,6 +5,7 @@ namespace App\Test\Mock\Table;
 use App\Model\User;
 use App\Table\UserTable;
 use App\Test\Mock\Database\MockQuery;
+use App\Test\Mock\TestConstants;
 
 class MockUserTable extends UserTable
 {
@@ -25,21 +26,21 @@ class MockUserTable extends UserTable
 
     public function findByUuid(string $uuid): bool|array
     {
-        return $uuid === 'FakeUserUuid' ? ['id' => 1] : false;
+        return $uuid === TestConstants::USER_UUID ? ['id' => 1] : false;
     }
 
     public function findByName(string $name): bool|array
     {
-        return $name === 'FakeNotCreateUser' ? ['id' => 1] : false;
+        return $name === TestConstants::USER_NAME ? ['id' => 1] : false;
     }
 
     public function findByEMail(string $email): bool|array
     {
-        return $email === 'FakeNotCreateEMail' ? ['id' => 1] : false;
+        return $email === TestConstants::USER_EMAIL ? ['id' => 1] : false;
     }
 
     public function findByToken(string $token): bool|array
     {
-        return $token === 'FakeUserToken' ? ['id' => 1] : false;
+        return $token === TestConstants::USER_TOKEN ? ['id' => 1] : false;
     }
 }

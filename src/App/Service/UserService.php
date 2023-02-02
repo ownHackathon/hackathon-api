@@ -30,7 +30,7 @@ class UserService
         return $user;
     }
 
-    public function create(User $user, UserRole $role = UserRole::USER): bool
+    public function create(User $user, UserRole $role = UserRole::USER): int|bool
     {
         if (
             $this->isUserExist($user->getName()) ||

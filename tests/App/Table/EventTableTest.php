@@ -19,10 +19,20 @@ class EventTableTest extends AbstractTableTest
     public function testCanInsertEvent(): void
     {
         $event = new Event();
+        $event->setTitle(TestConstants::EVENT_CREATE_TITLE);
 
         $insertLastId = $this->table->insert($event);
 
         $this->assertSame(1, $insertLastId);
+    }
+
+    public function testCanNotInsertEvent(): void
+    {
+        $event = new Event();
+
+        $insertLastId = $this->table->insert($event);
+
+        $this->assertSame(false, $insertLastId);
     }
 
     public function testCanFindById(): void
@@ -41,7 +51,7 @@ class EventTableTest extends AbstractTableTest
 
     public function testCanFindByName(): void
     {
-        $event = $this->table->findByTitle('fakeName');
+        $event = $this->table->findByTitle(TestConstants::EVENT_TITLE);
 
         $this->assertSame($this->fetchResult, $event);
     }
@@ -58,5 +68,25 @@ class EventTableTest extends AbstractTableTest
         $event = $this->table->findAllNotActive();
 
         $this->assertSame($this->fetchAllResult, $event);
+    }
+
+    public function testCanRemoveEvent(): void
+    {
+        $event = new Event();
+        $event->setId(TestConstants::EVENT_ID);
+
+        $removeStatus = $this->table->remove($event);
+
+        $this->assertSame(1, $removeStatus);
+    }
+
+    public function testCanNotRemoveEvent(): void
+    {
+        $event = new Event();
+        $event->setId(TestConstants::EVENT_NOT_REMOVE_ID);
+
+        $removeStatus = $this->table->remove($event);
+
+        $this->assertSame(false, $removeStatus);
     }
 }
