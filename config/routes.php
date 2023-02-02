@@ -73,6 +73,15 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventParticipantUnsubscribeHandler::class
     );
+    $app->get(
+        '/api/topics/available[/]',
+        [
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
+            App\Middleware\Topic\TopicListAvailableMiddleware::class,
+            App\Handler\TopicListAvailableHandler::class,
+        ],
+        App\Handler\TopicListAvailableHandler::class
+    );
     /** ToDo OpenApi */
     $app->post(
         '/api/user/register[/]',
@@ -115,7 +124,6 @@ return static function (Mezzio\Application $app): void {
     $app->get(
         '/api/logout[/]',
         [
-
             Authentication\Handler\LogoutHandler::class,
         ],
         Authentication\Handler\LogoutHandler::class

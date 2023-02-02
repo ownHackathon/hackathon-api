@@ -19,6 +19,6 @@ class TopicListAvailableMiddleware implements MiddlewareInterface
     {
         $topics = $this->topicPoolService->findAvailable();
 
-        return $handler->handle($request->withAttribute('topics', $topics));
+        return $handler->handle($request->withAttribute('availableTopics', $topics));
     }
 }
