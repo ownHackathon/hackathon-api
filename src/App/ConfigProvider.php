@@ -76,6 +76,7 @@ class ConfigProvider
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
+                Handler\TopicListAvailableHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\TestMailHandler::class => ConfigAbstractFactory::class,
 
@@ -133,6 +134,9 @@ class ConfigProvider
             Handler\EventParticipantSubscribeHandler::class => [
                 Service\ParticipantService::class,
                 Service\ProjectService::class,
+            ],
+            Handler\TopicListAvailableHandler::class => [
+                ReflectionHydrator::class,
             ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,

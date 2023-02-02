@@ -4,15 +4,6 @@ namespace App\Hydrator;
 
 class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 {
-    public function hydrate(bool|array $data, object $object): ?object
-    {
-        if (!$data) {
-            return null;
-        }
-
-        return parent::hydrate($data, $object);
-    }
-
     public function hydrateList(array $values, string $className): array
     {
         $hydratedList = [];
@@ -24,5 +15,26 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
         }
 
         return $hydratedList;
+    }
+
+    public function hydrate(bool|array $data, object $object): ?object
+    {
+        if (!$data) {
+            return null;
+        }
+
+        return parent::hydrate($data, $object);
+    }
+
+    public function extractList(array $data): array
+    {
+        $extractedList = [];
+
+        foreach ($data as $value) {
+            if (is_object($value)) {
+                $extractedList[] = $this->extract($value);
+            }
+        }
+        return $extractedList;
     }
 }
