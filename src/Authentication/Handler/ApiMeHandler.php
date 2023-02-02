@@ -16,7 +16,7 @@ class ApiMeHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/api/me',
-        tags: [' User Control'],
+        tags: ['User Control'],
         responses: [
             new OA\Response(
                 response: HTTP::STATUS_OK,
