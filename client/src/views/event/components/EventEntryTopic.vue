@@ -20,7 +20,9 @@
                 <div class="div-table-content">
                     <span class="flex justify-center pb-6">Noch kein Thema? Na dann mal fix zur...</span>
                     <div class="flex justify-center">
-                        <button class="button">Themenauswahl</button>
+                        <button class="button">
+                            <RouterLink :to="{name: 'topics_list_available'}">Themenauswahl</RouterLink>
+                        </button>
                     </div>
                 </div>
             </div>

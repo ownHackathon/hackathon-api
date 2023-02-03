@@ -8,9 +8,10 @@
 </template>
 
 <script setup>
-import {defineProps} from "vue";
+
 import {date} from '@/composables/moment.js';
 
+// eslint-disable-next-line no-undef
 defineProps({
   createTime: String,
   owner: String,

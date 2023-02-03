@@ -26,7 +26,7 @@ import {onMounted, reactive} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
 import {useToast} from "vue-toastification";
-import FailureView from "@/views/user/compontents/FailureView";
+import FailureView from "@/views/user/components/FailureView";
 
 const route = useRoute();
 const router = useRouter();

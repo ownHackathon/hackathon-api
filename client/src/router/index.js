@@ -15,6 +15,7 @@ import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
 import InvalidTokenView from "@/views/error/InvalidTokenView";
+import TopicList from "@/views/topic/TopicList.vue";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 
@@ -86,6 +87,14 @@ const routes = [
         path: "event/create",
         name: "event_create",
         component: EventCreate,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "topics/available",
+        name: "topics_list_available",
+        component: TopicList,
         meta: {
           requiresAuth: true
         }

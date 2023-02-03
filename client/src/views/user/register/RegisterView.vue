@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import FailureView from '@/views/user/compontents/FailureView'
+import FailureView from '@/views/user/components/FailureView'
 import {reactive} from "vue";
 import {useRouter} from 'vue-router';
 import axios from "axios";

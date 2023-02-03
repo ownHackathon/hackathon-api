@@ -13,10 +13,10 @@
 </template>
 
 <script setup>
-import {defineProps} from "vue";
 import {addTime, dateTime} from "@/composables/moment.js";
 import {getStatusText} from "@/composables/status";
 
+// eslint-disable-next-line no-undef
 defineProps({
   owner: String,
   eventName: String,

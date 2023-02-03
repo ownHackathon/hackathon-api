@@ -116,7 +116,7 @@
 
 <script setup>
 import {onMounted, reactive, ref} from "vue";
-import FailureView from "@/views/user/compontents/FailureView";
+import FailureView from "@/views/user/components/FailureView";
 import {useToast} from "vue-toastification";
 import {addTime, databaseDateTime} from "@/composables/moment";
 import axios from 'axios';

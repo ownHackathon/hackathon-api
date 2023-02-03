@@ -40,7 +40,7 @@ import axios from "axios";
 import {onMounted, reactive} from "vue";
 import {useRouter} from 'vue-router';
 import useUserService from "@/composables/UserService";
-import FailureView from "@/views/user/compontents/FailureView";
+import FailureView from "@/views/user/components/FailureView";
 import {useToast} from "vue-toastification";
 
 const userService = useUserService();
