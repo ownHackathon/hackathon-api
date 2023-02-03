@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import FailureView from "@/views/user/compontents/FailureView";
+import FailureView from "@/views/user/components/FailureView";
 import {reactive, ref} from "vue";
 import axios from "axios";
 
