@@ -1,14 +1,10 @@
 <template>
-  <div class="mt-5 mb-2">
-    <button class="button" @click="goBack">
-      zurück
-    </button>
-  </div>
+  <GoBackButton/>
   <div v-if="loading">
     <TheSpinner/>
   </div>
   <div v-if="error" class="center">
-    <span>Es ist ein Fehler aufgetreten: {{error}}</span>
+    <span>Es ist ein Fehler aufgetreten: {{ error }}</span>
   </div>
   <div id="content">
     <div class="relative overflow-x-auto shadow-md rounded-lg">
@@ -35,33 +31,26 @@
       </table>
     </div>
   </div>
-  <div class="mt-2 mb-2">
-    <button class="button" @click="goBack">
-      zurück
-    </button>
-  </div>
+  <GoBackButton/>
 </template>
 
 <script setup>
 import TheSpinner from "@/components/ui/TheSpinner.vue";
 import TopicListEntry from "@/views/topic/componets/TopicListEntry.vue";
+import GoBackButton from "@/components/GoBackButton.vue";
 import {storeToRefs} from "pinia";
 import {useTopicStore} from "@/store/topic";
 import {onMounted} from "vue";
-import {useRouter} from "vue-router";
 
 const topicStore = useTopicStore();
 const {topics, loading, error} = storeToRefs(topicStore);
-const router = useRouter();
 
 onMounted(() => {
       topicStore.fetchAvailableTopics();
     }
 );
 
-function goBack() {
-  return router.go(-1)
-}
+
 </script>
 
 <style scoped>
