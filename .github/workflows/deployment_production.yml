@@ -6,6 +6,7 @@ on:
 
 jobs:
   deployment_of_hackathon_to_production:
+    env: VUE_APP_API_BASE_URL = https://build.hackathon.exdrals.de
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
