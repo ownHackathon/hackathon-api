@@ -15,7 +15,7 @@ import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
 import InvalidTokenView from "@/views/error/InvalidTokenView";
-import TopicList from "@/views/topic/TopicList.vue";
+import TopicListAvailable from "@/views/topic/TopicListAvailable.vue";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
 
@@ -94,7 +94,7 @@ const routes = [
       {
         path: "topics/available",
         name: "topics_list_available",
-        component: TopicList,
+        component: TopicListAvailable,
         meta: {
           requiresAuth: true
         }
