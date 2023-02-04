@@ -4,7 +4,8 @@ on:
     branches: [ "master" ]
 jobs:
   deployment_of_hackathon_to_build:
-    env: VUE_APP_API_BASE_URL = https://build.hackathon.exdrals.de
+    env: 
+      VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
