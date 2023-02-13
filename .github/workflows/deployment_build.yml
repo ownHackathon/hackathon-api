@@ -17,7 +17,7 @@ jobs:
           node-version: '19'
 
       - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --no-dev
+        run: composer install 
 
       - name: Run create openapi Data
         run: composer run-script openapi
