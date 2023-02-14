@@ -50,7 +50,7 @@ class UserService
 
     public function update(User $user): bool
     {
-        return $this->table->update($user);
+        return (bool)$this->table->update($user);
     }
 
     private function isUserExist(string $userName): bool
