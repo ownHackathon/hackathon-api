@@ -19,6 +19,7 @@
 - [ ] Bug fix <!--- (mark pull request with Fix:) -->
 - [ ] Refactor <!--- (mark pull request with Refactor:) -->
 - [ ] Change <!--- (mark pull request with Change:) -->
+- [ ] Chore <!--- (mark pull request with Chore:) -->
 - [ ] Style <!--- (mark pull request with Style:) -->
 - [ ] Docs <!--- (mark pull request with Docs:) -->
 - [ ] Test <!--- (mark pull request with Test:) -->
