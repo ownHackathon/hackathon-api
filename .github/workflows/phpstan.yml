@@ -1,4 +1,4 @@
-name: PHP CodeSniffer
+name: PHP Stan
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "**.php"
 
 jobs:
-  phpcs:
+  phpstan:
     runs-on: ubuntu-20.04
 
     steps:
@@ -27,5 +27,5 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run PHP Codesniffer
-        run: composer run-script phpcs
+      - name: Run PHP Stan
+        run: composer run-script phpstan
