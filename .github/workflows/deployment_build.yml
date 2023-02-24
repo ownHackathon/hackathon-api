@@ -4,9 +4,9 @@ on:
     branches: [ "master" ]
 jobs:
   deployment_of_hackathon_to_build:
-    env: 
+    env:
       VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Get latest code
         uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           node-version: '19'
 
       - name: Install Composer Dependencies
-        run: composer install 
+        run: composer install
 
       - name: Run create openapi Data
         run: composer run-script openapi
