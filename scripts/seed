@@ -1,3 +1,0 @@
-#!/bin/bash
-docker exec hackathon_backend php bin/migrations.php migrations:sync-metadata-storage
-docker exec hackathon_backend php bin/migrations.php migrations:migrate

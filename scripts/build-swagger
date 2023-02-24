@@ -1,2 +1,0 @@
-#!/bin/bash
-docker exec hackathon_backend composer run openapi
