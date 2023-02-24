@@ -1,15 +1,13 @@
 version: "3"
 
-volumes:
-  hackathon-db-data:
-
 services:
 
   webserver:
-    image: ghcr.io/bibaltik/webserver:latest
+    build: ./docker/webserver
+    user: "${USERMAP_UID}:${USERMAP_GID}"
     container_name: hackathon_backend
     ports:
-      - "18181:80"
+      - "80:80"
     volumes:
       - ./:/var/www/html
       - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
@@ -35,3 +33,6 @@ services:
     ports:
       - "1025:1025" # smtp server
       - "8025:8025" # web ui
+
+volumes:
+  hackathon-db-data:
