@@ -3,8 +3,8 @@
 namespace App\Middleware\Event;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Model\Event;
-use App\Model\User;
+use App\Entity\Event;
+use App\Entity\User;
 use App\Service\EventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace App\Test\Mock\Table;
 
-use App\Model\Topic;
+use App\Entity\Topic;
 use App\Table\TopicPoolTable;
 use App\Test\Mock\Database\MockQuery;
 

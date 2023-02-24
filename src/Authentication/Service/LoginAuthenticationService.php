@@ -2,7 +2,7 @@
 
 namespace Authentication\Service;
 
-use App\Model\User;
+use App\Entity\User;
 
 use function password_verify;
 

@@ -2,7 +2,7 @@
 
 namespace App\Handler;
 
-use App\Model\User;
+use App\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;

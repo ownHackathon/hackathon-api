@@ -2,7 +2,7 @@
 
 namespace App\Test\Service;
 
-use App\Model\User;
+use App\Entity\User;
 use App\Service\UserService;
 use App\Test\Mock\Table\MockUserTable;
 use App\Test\Mock\TestConstants;

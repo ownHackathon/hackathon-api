@@ -2,7 +2,7 @@
 
 namespace App\Test\Service;
 
-use App\Model\Event;
+use App\Entity\Event;
 use App\Service\EventService;
 use App\Test\Mock\Table\MockEventTable;
 use App\Test\Mock\TestConstants;

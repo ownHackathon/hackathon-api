@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-use App\Model\Event;
+use App\Entity\Event;
 
 class EventTable extends AbstractTable
 {

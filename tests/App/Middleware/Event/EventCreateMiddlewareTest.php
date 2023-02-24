@@ -3,7 +3,7 @@
 namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventCreateMiddleware;
-use App\Model\User;
+use App\Entity\User;
 use App\Test\Middleware\AbstractMiddlewareTest;
 use App\Test\Mock\Service\MockEventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

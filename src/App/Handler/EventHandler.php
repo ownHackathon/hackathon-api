@@ -2,10 +2,10 @@
 
 namespace App\Handler;
 
-use App\Model\Event;
-use App\Model\Participant;
-use App\Model\Topic;
-use App\Model\User;
+use App\Entity\Event;
+use App\Entity\Participant;
+use App\Entity\Topic;
+use App\Entity\User;
 use App\Service\ParticipantService;
 use App\Service\ProjectService;
 use App\Service\TopicPoolService;

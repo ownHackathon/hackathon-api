@@ -3,7 +3,7 @@
 namespace App\Test\Model;
 
 use App\Enum\DateTimeFormat;
-use App\Model\User;
+use App\Entity\User;
 use App\Test\Mock\TestConstants;
 use DateTime;
 use PHPUnit\Framework\TestCase;

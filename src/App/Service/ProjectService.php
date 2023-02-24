@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Model\Project;
+use App\Entity\Project;
 use App\Table\ProjectTable;
 
 class ProjectService

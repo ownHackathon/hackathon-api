@@ -3,7 +3,7 @@
 namespace App\Middleware\Event;
 
 use App\Enum\EventStatus;
-use App\Model\User;
+use App\Entity\User;
 use App\Service\EventService;
 use App\Service\ParticipantService;
 use Psr\Http\Message\ResponseInterface;

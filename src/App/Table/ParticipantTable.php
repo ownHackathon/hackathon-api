@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-use App\Model\Participant;
+use App\Entity\Participant;
 
 class ParticipantTable extends AbstractTable
 {

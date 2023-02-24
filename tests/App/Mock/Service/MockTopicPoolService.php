@@ -3,7 +3,7 @@
 namespace App\Test\Mock\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Model\Topic;
+use App\Entity\Topic;
 use App\Service\TopicPoolService;
 use App\Test\Mock\Table\MockTopicPoolTable;
 

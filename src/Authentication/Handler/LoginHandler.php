@@ -2,7 +2,7 @@
 
 namespace Authentication\Handler;
 
-use App\Model\User;
+use App\Entity\User;
 use Authentication\Service\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

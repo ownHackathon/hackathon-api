@@ -2,7 +2,7 @@
 
 namespace App\Test\Service;
 
-use App\Model\Topic;
+use App\Entity\Topic;
 use App\Service\TopicPoolService;
 use App\Test\Mock\Table\MockTopicPoolTable;
 

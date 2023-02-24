@@ -2,7 +2,7 @@
 
 namespace App\Handler;
 
-use App\Model\Event;
+use App\Entity\Event;
 use App\Service\UserService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace App\Test\Service;
 
-use App\Model\Project;
+use App\Entity\Project;
 use App\Service\ProjectService;
 use App\Test\Mock\Table\MockProjectTable;
 
