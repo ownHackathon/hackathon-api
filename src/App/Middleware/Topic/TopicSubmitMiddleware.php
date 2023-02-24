@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Topic;
 
-use App\Model\Topic;
+use App\Entity\Topic;
 use App\Service\TopicPoolService;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Http\Message\ResponseInterface;

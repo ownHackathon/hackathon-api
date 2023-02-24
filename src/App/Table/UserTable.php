@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-use App\Model\User;
+use App\Entity\User;
 use DateTime;
 
 class UserTable extends AbstractTable

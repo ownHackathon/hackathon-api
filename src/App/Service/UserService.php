@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
-use App\Model\User;
+use App\Entity\User;
 use App\Table\UserTable;
 use DateTime;
 use Psr\Log\InvalidArgumentException;

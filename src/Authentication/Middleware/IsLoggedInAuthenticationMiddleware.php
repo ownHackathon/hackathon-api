@@ -2,7 +2,7 @@
 
 namespace Authentication\Middleware;
 
-use App\Model\User;
+use App\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

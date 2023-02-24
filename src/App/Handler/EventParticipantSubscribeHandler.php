@@ -2,7 +2,7 @@
 
 namespace App\Handler;
 
-use App\Model\User;
+use App\Entity\User;
 use App\Service\ParticipantService;
 use App\Service\ProjectService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

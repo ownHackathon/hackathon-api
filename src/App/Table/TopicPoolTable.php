@@ -2,7 +2,7 @@
 
 namespace App\Table;
 
-use App\Model\Topic;
+use App\Entity\Topic;
 
 class TopicPoolTable extends AbstractTable
 {

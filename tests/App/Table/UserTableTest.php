@@ -2,7 +2,7 @@
 
 namespace App\Test\Table;
 
-use App\Model\User;
+use App\Entity\User;
 use App\Table\UserTable;
 use App\Test\Mock\TestConstants;
 use DateTime;

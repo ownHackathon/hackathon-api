@@ -2,7 +2,7 @@
 
 namespace App\Test\Mock\Table;
 
-use App\Model\Participant;
+use App\Entity\Participant;
 use App\Table\ParticipantTable;
 use App\Test\Mock\Database\MockQuery;
 

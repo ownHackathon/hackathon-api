@@ -3,7 +3,7 @@
 namespace Authentication\Handler;
 
 use App\Enum\UserRole;
-use App\Model\User;
+use App\Entity\User;
 use Authentication\DTO\ApiMe;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

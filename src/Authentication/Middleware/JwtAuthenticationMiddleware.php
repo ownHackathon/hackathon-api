@@ -2,7 +2,7 @@
 
 namespace Authentication\Middleware;
 
-use App\Model\User;
+use App\Entity\User;
 use App\Service\UserService;
 use Exception;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

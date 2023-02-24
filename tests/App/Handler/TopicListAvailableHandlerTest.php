@@ -3,7 +3,7 @@
 namespace App\Test\Handler;
 
 use App\Handler\TopicListAvailableHandler;
-use App\Model\Topic;
+use App\Entity\Topic;
 use Laminas\Diactoros\Response\JsonResponse;
 
 class TopicListAvailableHandlerTest extends AbstractHandlerTest

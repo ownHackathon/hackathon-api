@@ -73,6 +73,7 @@
         "psr-4": {
             "Administration\\": "src/Administration",
             "App\\": "src/App/",
+            "Core\\": "src/Core/",
             "Authentication\\": "src/Authentication",
             "Migrations\\": "database/migrations"
         }

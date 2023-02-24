@@ -2,7 +2,7 @@
 
 namespace App\Test\Table;
 
-use App\Model\Event;
+use App\Entity\Event;
 use App\Table\EventTable;
 use App\Test\Mock\TestConstants;
 

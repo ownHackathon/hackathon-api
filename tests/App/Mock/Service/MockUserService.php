@@ -3,7 +3,7 @@
 namespace App\Test\Mock\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Model\User;
+use App\Entity\User;
 use App\Service\UserService;
 use App\Test\Mock\Table\MockUserTable;
 use App\Test\Mock\TestConstants;

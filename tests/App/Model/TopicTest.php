@@ -2,7 +2,7 @@
 
 namespace App\Test\Model;
 
-use App\Model\Topic;
+use App\Entity\Topic;
 use App\Test\Mock\TestConstants;
 use PHPUnit\Framework\TestCase;
 

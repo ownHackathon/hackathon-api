@@ -4,7 +4,7 @@ namespace App\Test\Model;
 
 use App\Enum\DateTimeFormat;
 use App\Enum\EventStatus;
-use App\Model\Event;
+use App\Entity\Event;
 use App\Test\Mock\TestConstants;
 use DateTime;
 use PHPUnit\Framework\TestCase;

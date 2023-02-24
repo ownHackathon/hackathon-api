@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Model\Event;
+use App\Entity\Event;
 use App\Table\EventTable;
 use Psr\Log\InvalidArgumentException;
 

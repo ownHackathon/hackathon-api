@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Project;
 
-use App\Model\Participant;
+use App\Entity\Participant;
 use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
