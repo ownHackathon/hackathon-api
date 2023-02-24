@@ -10,3 +10,4 @@
 /public/*.html
 /database/structure/update*.sql
 /public/swaggerui/swagger.json
+/.env
