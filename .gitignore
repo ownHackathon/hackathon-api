@@ -9,5 +9,5 @@
 .ddev
 /public/*.html
 /database/structure/update*.sql
-/public/swaggerui/swagger.json
+/public/api/doc/swagger.json
 /.env
