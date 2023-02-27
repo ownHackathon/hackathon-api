@@ -9,10 +9,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
+readonly class UpdateLastUserActionTimeMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

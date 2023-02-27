@@ -11,10 +11,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserPasswordVerifyTokenMiddleware implements MiddlewareInterface
+readonly class UserPasswordVerifyTokenMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

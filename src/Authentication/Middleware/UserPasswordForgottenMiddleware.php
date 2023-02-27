@@ -12,11 +12,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserPasswordForgottenMiddleware implements MiddlewareInterface
+readonly class UserPasswordForgottenMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly TokenService $tokenService,
+        private UserService $userService,
+        private TokenService $tokenService,
     ) {
     }
 

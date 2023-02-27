@@ -10,10 +10,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventListHandler implements RequestHandlerInterface
+readonly class EventListHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

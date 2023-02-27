@@ -10,10 +10,10 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\InvalidArgumentException;
 
-class EventNameMiddleware implements MiddlewareInterface
+readonly class EventNameMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly EventService $eventService,
+        private EventService $eventService,
     ) {
     }
 

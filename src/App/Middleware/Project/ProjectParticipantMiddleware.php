@@ -10,10 +10,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class ProjectParticipantMiddleware implements MiddlewareInterface
+readonly class ProjectParticipantMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly ParticipantService $participantService,
+        private ParticipantService $participantService,
     ) {
     }
 

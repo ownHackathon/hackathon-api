@@ -11,10 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicListAvailableHandler implements RequestHandlerInterface
+readonly class TopicListAvailableHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly ReflectionHydrator $hydrator,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

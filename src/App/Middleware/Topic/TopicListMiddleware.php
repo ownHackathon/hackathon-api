@@ -8,10 +8,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicListMiddleware implements MiddlewareInterface
+readonly class TopicListMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly TopicPoolService $topicPoolService,
+        private TopicPoolService $topicPoolService,
     ) {
     }
 

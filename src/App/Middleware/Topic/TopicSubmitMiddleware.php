@@ -10,11 +10,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicSubmitMiddleware implements MiddlewareInterface
+readonly class TopicSubmitMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly TopicPoolService $topicPoolService,
-        private readonly ClassMethodsHydrator $hydrator,
+        private TopicPoolService $topicPoolService,
+        private ClassMethodsHydrator $hydrator,
     ) {
     }
 

@@ -12,11 +12,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserRegisterMiddleware implements MiddlewareInterface
+readonly class UserRegisterMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly ClassMethodsHydrator $hydrator,
+        private UserService $userService,
+        private ClassMethodsHydrator $hydrator,
     ) {
     }
 

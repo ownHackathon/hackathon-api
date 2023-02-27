@@ -16,12 +16,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function substr;
 
-class JwtAuthenticationMiddleware implements MiddlewareInterface
+readonly class JwtAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly string $tokenSecret,
-        private readonly string $tokenAlgorithmus
+        private UserService $userService,
+        private string $tokenSecret,
+        private string $tokenAlgorithmus
     ) {
     }
 

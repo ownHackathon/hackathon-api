@@ -13,10 +13,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function password_hash;
 
-class UserPasswordChangeMiddleware implements MiddlewareInterface
+readonly class UserPasswordChangeMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

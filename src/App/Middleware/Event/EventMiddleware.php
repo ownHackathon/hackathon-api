@@ -9,10 +9,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventMiddleware implements MiddlewareInterface
+readonly class EventMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly EventService $eventService
+        private EventService $eventService
     ) {
     }
 

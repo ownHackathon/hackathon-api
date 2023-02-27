@@ -10,10 +10,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventCreateValidationMiddleware implements MiddlewareInterface
+readonly class EventCreateValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly EventCreateValidator $validator,
+        private EventCreateValidator $validator,
     ) {
     }
 
