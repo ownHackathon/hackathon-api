@@ -10,10 +10,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserPasswordForgottenValidator implements MiddlewareInterface
+readonly class UserPasswordForgottenValidator implements MiddlewareInterface
 {
     public function __construct(
-        private readonly PasswordForgottenEmailValidator $validator,
+        private PasswordForgottenEmailValidator $validator,
     ) {
     }
 

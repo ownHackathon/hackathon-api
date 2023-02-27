@@ -11,10 +11,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 use function array_key_exists;
 use function strtoupper;
 
-class EventListMiddleware implements MiddlewareInterface
+readonly class EventListMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly EventService $eventService
+        private EventService $eventService
     ) {
     }
 

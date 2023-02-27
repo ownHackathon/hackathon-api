@@ -6,11 +6,11 @@ use App\Hydrator\ReflectionHydrator;
 use App\Entity\Project;
 use App\Table\ProjectTable;
 
-class ProjectService
+readonly class ProjectService
 {
     public function __construct(
-        private readonly ProjectTable $table,
-        private readonly ReflectionHydrator $hydrator,
+        private ProjectTable $table,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

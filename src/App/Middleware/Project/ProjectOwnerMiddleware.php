@@ -9,10 +9,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class ProjectOwnerMiddleware implements MiddlewareInterface
+readonly class ProjectOwnerMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
+        private UserService $userService,
     ) {
     }
 

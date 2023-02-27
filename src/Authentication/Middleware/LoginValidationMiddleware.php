@@ -10,10 +10,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LoginValidationMiddleware implements MiddlewareInterface
+readonly class LoginValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly LoginValidator $validator,
+        private LoginValidator $validator,
     ) {
     }
 

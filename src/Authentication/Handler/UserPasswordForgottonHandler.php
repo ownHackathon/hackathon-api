@@ -13,12 +13,12 @@ use Symfony\Component\Mime\Email;
 
 use function sprintf;
 
-class UserPasswordForgottonHandler implements RequestHandlerInterface
+readonly class UserPasswordForgottonHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Mailer $mailer,
-        private readonly string $mailSender,
-        private readonly string $projectUri,
+        private Mailer $mailer,
+        private string $mailSender,
+        private string $projectUri,
     ) {
     }
 

@@ -12,11 +12,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LoginAuthenticationMiddleware implements MiddlewareInterface
+readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly LoginAuthenticationService $authService,
+        private UserService $userService,
+        private LoginAuthenticationService $authService,
     ) {
     }
 

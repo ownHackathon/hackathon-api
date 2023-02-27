@@ -10,10 +10,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Email;
 
-class TestMailHandler implements RequestHandlerInterface
+readonly class TestMailHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Mailer $mailer
+        private Mailer $mailer
     ) {
     }
 

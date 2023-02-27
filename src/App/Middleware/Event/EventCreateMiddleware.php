@@ -13,11 +13,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventCreateMiddleware implements MiddlewareInterface
+readonly class EventCreateMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly EventService $eventService,
-        private readonly ReflectionHydrator $hydrator,
+        private EventService $eventService,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

@@ -16,13 +16,13 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventHandler implements RequestHandlerInterface
+readonly class EventHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly UserService $userService,
-        private readonly ParticipantService $participantService,
-        private readonly ProjectService $projectService,
-        private readonly TopicPoolService $topicPoolService,
+        private UserService $userService,
+        private ParticipantService $participantService,
+        private ProjectService $projectService,
+        private TopicPoolService $topicPoolService,
     ) {
     }
 

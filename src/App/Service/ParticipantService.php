@@ -7,11 +7,11 @@ use App\Entity\Participant;
 use App\Table\ParticipantTable;
 use Psr\Log\InvalidArgumentException;
 
-class ParticipantService
+readonly class ParticipantService
 {
     public function __construct(
-        private readonly ParticipantTable $table,
-        private readonly ReflectionHydrator $hydrator,
+        private ParticipantTable $table,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

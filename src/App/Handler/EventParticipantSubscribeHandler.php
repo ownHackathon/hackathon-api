@@ -11,11 +11,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class EventParticipantSubscribeHandler implements RequestHandlerInterface
+readonly class EventParticipantSubscribeHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly ParticipantService $participantService,
-        private readonly ProjectService $projectService,
+        private ParticipantService $participantService,
+        private ProjectService $projectService,
     ) {
     }
 

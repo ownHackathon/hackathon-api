@@ -10,10 +10,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserHandler implements RequestHandlerInterface
+readonly class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly ClassMethodsHydrator $hydrator,
+        private ClassMethodsHydrator $hydrator,
     ) {
     }
 

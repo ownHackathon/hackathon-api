@@ -10,10 +10,10 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 
-class ApiAccessMiddleware implements MiddlewareInterface
+readonly class ApiAccessMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly ApiAccessService $apiAccessService,
+        private ApiAccessService $apiAccessService,
     ) {
     }
 
