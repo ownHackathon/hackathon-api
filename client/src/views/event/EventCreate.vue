@@ -296,6 +296,7 @@ function checkForm() {
     }
 
     if (formFilled) {
+        payload.startTime = databaseDateTime(payload.startTime);
         createEvent();
     } else {
         document.getElementById('error-container').classList.remove('hidden');
