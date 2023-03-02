@@ -2,8 +2,6 @@
 
 namespace Administration;
 
-use App\Handler\IndexHandler;
-use App\Service\UserService;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 class ConfigProvider

@@ -186,7 +186,7 @@ class ConfigProvider
             ],
             Middleware\Topic\TopicSubmitMiddleware::class => [
                 Service\TopicPoolService::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Middleware\UpdateLastUserActionTimeMiddleware::class => [
                 UserService::class,

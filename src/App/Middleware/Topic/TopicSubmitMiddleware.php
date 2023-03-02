@@ -3,8 +3,10 @@
 namespace App\Middleware\Topic;
 
 use App\Entity\Topic;
+use App\Exception\DuplicateNameHttpException;
+use App\Exception\HttpException;
+use App\Hydrator\ReflectionHydrator;
 use App\Service\TopicPoolService;
-use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -14,29 +16,26 @@ readonly class TopicSubmitMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private TopicPoolService $topicPoolService,
-        private ClassMethodsHydrator $hydrator,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 
+    /**
+     * @throws DuplicateNameHttpException|HttpException
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $validationMessages = $request->getAttribute('validationMessages');
-
-        if (null !== $validationMessages) {
-            return $handler->handle($request);
-        }
-
         $data = $request->getParsedBody();
+
         $topic = $this->hydrator->hydrate($data, new Topic());
 
         $existTopic = $this->topicPoolService->findByTopic($topic->getTopic());
 
         if ($existTopic instanceof Topic) {
-            $validationMessages['topic']['alreadyAvailable'] = 'Das Thema ist ungültig';
-            $request = $request->withAttribute('validationMessages', $validationMessages);
-        } else {
-            $this->topicPoolService->insert($topic);
+            throw new DuplicateNameHttpException(['topic' => ['topic' => 'The Topic is already present']]);
         }
+
+        $this->topicPoolService->insert($topic);
 
         return $handler->handle($request->withAttribute(Topic::class, $topic));
     }

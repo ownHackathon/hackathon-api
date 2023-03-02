@@ -3,6 +3,7 @@
 namespace App\Table;
 
 use App\Entity\Topic;
+use Envms\FluentPDO\Exception;
 
 class TopicPoolTable extends AbstractTable
 {
@@ -50,6 +51,9 @@ class TopicPoolTable extends AbstractTable
             ->fetchAll();
     }
 
+    /**
+     * @throws Exception
+     */
     public function findByTopic(string $topic): bool|array
     {
         return $this->query->from($this->table)

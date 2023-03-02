@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Handler\IndexHandler;
-use App\Middleware\FrontLoaderMiddleware;
+use App\Middleware\HttpExceptionMiddleware;
 use App\Middleware\UpdateLastUserActionTimeMiddleware;
 use Authentication\Middleware\ApiAccessMiddleware;
 use Authentication\Middleware\JwtAuthenticationMiddleware;
@@ -21,6 +20,8 @@ use Mezzio\Router\Middleware\RouteMiddleware;
 
 return function (Application $app): void {
     $app->pipe(ErrorHandler::class);
+    $app->pipe(HttpExceptionMiddleware::class);
+
     $app->pipe(ServerUrlMiddleware::class);
     $app->pipe(BodyParamsMiddleware::class);
 
@@ -36,8 +37,6 @@ return function (Application $app): void {
     $app->pipe(UrlHelperMiddleware::class);
 
     $app->pipe(DispatchMiddleware::class);
-
-    $app->pipe(IndexHandler::class);
 
     $app->pipe(NotFoundHandler::class);
 };

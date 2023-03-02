@@ -2,11 +2,14 @@
 
 namespace App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Topic;
+use App\Exception\HttpException;
+use App\Hydrator\ReflectionHydrator;
 use App\Table\TopicPoolTable;
 use JetBrains\PhpStorm\ArrayShape;
+use PDOException;
 use Psr\Log\InvalidArgumentException;
+use Fig\Http\Message\StatusCodeInterface as Http;
 
 class TopicPoolService
 {
@@ -16,9 +19,17 @@ class TopicPoolService
     ) {
     }
 
+    /**
+     * @throws HttpException
+     */
     public function insert(Topic $topic): self
     {
-        $this->table->insert($topic);
+        try {
+            $this->table->insert($topic);
+        } catch (PDOException $e) {
+            /** TODO: Change to Logger */
+            throw new HttpException(['PDO' => $e->getMessage()], HTTP::STATUS_INTERNAL_SERVER_ERROR);
+        }
 
         return $this;
     }
