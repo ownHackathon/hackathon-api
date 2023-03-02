@@ -10,6 +10,7 @@ class TopicPoolTable extends AbstractTable
     public function insert(Topic $topic): self
     {
         $values = [
+            'uuid' => $topic->getUuid(),
             'topic' => $topic->getTopic(),
             'description' => $topic->getDescription(),
         ];

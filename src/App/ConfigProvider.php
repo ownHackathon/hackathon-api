@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Administration\Service\EMail\TopicCreateEMailService;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
@@ -31,6 +32,7 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
 
 class ConfigProvider
@@ -75,6 +77,7 @@ class ConfigProvider
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
+                Handler\TopicCreateHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicListAvailableHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\TestMailHandler::class => ConfigAbstractFactory::class,
@@ -94,7 +97,7 @@ class ConfigProvider
                 Middleware\Topic\TopicEntryStatisticMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Topic\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Topic\TopicListMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Topic\TopicSubmitMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Topic\TopicCreateSubmitMiddleware::class => ConfigAbstractFactory::class,
 
                 Middleware\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
 
@@ -133,6 +136,10 @@ class ConfigProvider
             Handler\EventParticipantSubscribeHandler::class => [
                 Service\ParticipantService::class,
                 Service\ProjectService::class,
+            ],
+            Handler\TopicCreateHandler::class => [
+                ReflectionHydrator::class,
+                TopicCreateEMailService::class,
             ],
             Handler\TopicListAvailableHandler::class => [
                 ReflectionHydrator::class,
@@ -184,9 +191,10 @@ class ConfigProvider
             Middleware\Topic\TopicListMiddleware::class => [
                 Service\TopicPoolService::class,
             ],
-            Middleware\Topic\TopicSubmitMiddleware::class => [
+            Middleware\Topic\TopicCreateSubmitMiddleware::class => [
                 Service\TopicPoolService::class,
                 ReflectionHydrator::class,
+                Uuid::class,
             ],
             Middleware\UpdateLastUserActionTimeMiddleware::class => [
                 UserService::class,

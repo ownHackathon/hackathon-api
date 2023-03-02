@@ -78,7 +78,7 @@ return static function (Mezzio\Application $app): void {
         [
             Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             App\Middleware\Topic\TopicCreateValidationMiddleware::class,
-            App\Middleware\Topic\TopicSubmitMiddleware::class,
+            App\Middleware\Topic\TopicCreateSubmitMiddleware::class,
             App\Handler\TopicCreateHandler::class,
         ],
         App\Handler\TopicCreateHandler::class

@@ -12,7 +12,6 @@ services:
       - ./:/var/www/html
       - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./docker/php.ini:/usr/local/etc/php/conf.d/extra.ini
-      - ./.phpunit.cache/code-coverage:/opt/phpstorm-coverage
 
   hackathon-db:
     image: mariadb:10.9

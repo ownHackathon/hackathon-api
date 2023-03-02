@@ -2,7 +2,11 @@
 
 namespace App\Handler;
 
+use Administration\Service\EMail\TopicCreateEMailService;
+use App\DTO\Topic as TopicSubmit;
 use App\DTO\TopicCreate;
+use App\Entity\Topic;
+use App\Hydrator\ReflectionHydrator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -12,6 +16,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class TopicCreateHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private readonly ReflectionHydrator $hydrator,
+        private readonly TopicCreateEMailService $mailService,
+    ) {
+    }
+
     #[OA\Post(
         path: '/api/topic',
         requestBody: new OA\RequestBody(
@@ -36,8 +46,11 @@ class TopicCreateHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getAttribute(TopicCreate::class);
+        $data = $request->getAttribute(Topic::class);
 
+        $this->mailService->send($data);
+
+        $data = new TopicSubmit($this->hydrator->extract($data));
         return new JsonResponse($data, HTTP::STATUS_CREATED);
     }
 }

@@ -11,12 +11,14 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Ramsey\Uuid\UuidInterface;
 
-readonly class TopicSubmitMiddleware implements MiddlewareInterface
+readonly class TopicCreateSubmitMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private TopicPoolService $topicPoolService,
         private ReflectionHydrator $hydrator,
+        private UuidInterface $uuid,
     ) {
     }
 
@@ -34,6 +36,8 @@ readonly class TopicSubmitMiddleware implements MiddlewareInterface
         if ($existTopic instanceof Topic) {
             throw new DuplicateNameHttpException(['topic' => ['topic' => 'The Topic is already present']]);
         }
+
+        $topic->setUuid($this->uuid->getHex()->toString());
 
         $this->topicPoolService->insert($topic);
 
