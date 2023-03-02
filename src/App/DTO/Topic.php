@@ -5,7 +5,7 @@ namespace App\DTO;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class Topic
+readonly class Topic extends TopicCreate
 {
     #[OA\Property(
         description: 'unique one-time identification number of the topic',
@@ -14,24 +14,9 @@ readonly class Topic
     )]
     public string $uuid;
 
-    #[OA\Property(
-        description: 'The general designation of the topic',
-        type: 'string',
-        example: 'build a single page'
-    )]
-    public string $topic;
-
-    #[OA\Property(
-        description: 'The exact description of the topic with task etc.',
-        type: 'string',
-        example: 'Create a page with a single page'
-    )]
-    public string $description;
-
     public function __construct(array $topic)
     {
         $this->uuid = $topic['uuid'] ?? '';
-        $this->topic = $topic['topic'] ?? '';
-        $this->description = $topic['description'] ?? '';
+        parent::__construct($topic);
     }
 }
