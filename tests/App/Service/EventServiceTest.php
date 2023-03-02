@@ -7,7 +7,7 @@ use App\Service\EventService;
 use App\Test\Mock\Table\MockEventTable;
 use App\Test\Mock\TestConstants;
 
-class EventServiceTest extends AbstractServiceTest
+class EventServiceTest extends AbstractService
 {
     private EventService $service;
 

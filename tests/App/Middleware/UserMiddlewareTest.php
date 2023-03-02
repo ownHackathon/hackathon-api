@@ -10,7 +10,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 
-class UserMiddlewareTest extends AbstractMiddlewareTest
+class UserMiddlewareTest extends AbstractMiddleware
 {
     private readonly UserService $userService;
 

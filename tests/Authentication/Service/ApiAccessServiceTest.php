@@ -2,10 +2,10 @@
 
 namespace Authentication\Test\Service;
 
-use App\Test\Service\AbstractServiceTest;
+use App\Test\Service\AbstractService;
 use Authentication\Service\ApiAccessService;
 
-class ApiAccessServiceTest extends AbstractServiceTest
+class ApiAccessServiceTest extends AbstractService
 {
     private array $config;
     private ApiAccessService $apiAccessService;

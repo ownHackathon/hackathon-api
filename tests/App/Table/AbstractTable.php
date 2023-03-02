@@ -2,27 +2,20 @@
 
 namespace App\Test\Table;
 
-use App\Table\AbstractTable;
-use App\Test\Mock\Database\MockPDO;
+use App\Table\AbstractTable as ATable;
 use App\Test\Mock\Database\MockQuery;
-use Envms\FluentPDO\Queries\Insert;
-use Envms\FluentPDO\Queries\Select;
-use Envms\FluentPDO\Queries\Update;
-use Envms\FluentPDO\Query;
-use Hoa\Iterator\Mock;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 use function get_class;
 use function substr;
 
-abstract class AbstractTableTest extends TestCase
+abstract class AbstractTable extends TestCase
 {
     private const TABLE_NAME_OFFSET = 8;
     private const TABLE_SUB_LENGTH = -4;
 
     protected MockQuery $query;
-    protected AbstractTable $table;
+    protected ATable $table;
 
     protected array $fetchResult = ['id' => 1];
     protected array $fetchAllResult

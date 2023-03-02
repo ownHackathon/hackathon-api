@@ -6,7 +6,7 @@ use App\Entity\Project;
 use App\Service\ProjectService;
 use App\Test\Mock\Table\MockProjectTable;
 
-class ProjectServiceTest extends AbstractServiceTest
+class ProjectServiceTest extends AbstractService
 {
     private ProjectService $service;
 

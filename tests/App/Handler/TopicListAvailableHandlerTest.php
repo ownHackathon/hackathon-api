@@ -6,7 +6,7 @@ use App\Handler\TopicListAvailableHandler;
 use App\Entity\Topic;
 use Laminas\Diactoros\Response\JsonResponse;
 
-class TopicListAvailableHandlerTest extends AbstractHandlerTest
+class TopicListAvailableHandlerTest extends AbstractHandler
 {
 
     public function testReturnJsonResponseWithOneOrMoreItems(): void

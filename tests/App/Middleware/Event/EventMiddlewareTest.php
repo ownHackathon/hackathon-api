@@ -3,13 +3,13 @@
 namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventMiddleware;
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use App\Test\Mock\Service\MockEventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\InvalidArgumentException;
 
-class EventMiddlewareTest extends AbstractMiddlewareTest
+class EventMiddlewareTest extends AbstractMiddleware
 {
     public function setUp(): void
     {

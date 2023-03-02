@@ -7,7 +7,7 @@ use App\Test\Mock\MockServerRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract class AbstractHandlerTest extends TestCase
+abstract class AbstractHandler extends TestCase
 {
     protected ServerRequestInterface $request;
     protected ReflectionHydrator $hydrator;

@@ -7,7 +7,7 @@ use App\Service\ParticipantService;
 use App\Table\ParticipantTable;
 use App\Test\Mock\Table\MockParticipantTable;
 
-class ParticipantServiceTest extends AbstractServiceTest
+class ParticipantServiceTest extends AbstractService
 {
     private ParticipantService $service;
 
