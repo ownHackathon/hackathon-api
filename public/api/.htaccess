@@ -1,11 +1,5 @@
 RewriteEngine On
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "127.0.0.1:8080"
-    Header set Access-Control-Allow-Origin "http://localhost:8080"
-    Header set Access-Control-Allow-Methods "GET,PUT,POST,DELETE"
-    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
-    Header set Access-Control-Allow-Credentials "true"
-</IfModule>
+
 # The following rule allows authentication to work with fast-cgi
 RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 # The following rule tells Apache that if the requested filename
