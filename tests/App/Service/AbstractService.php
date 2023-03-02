@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-abstract class AbstractServiceTest extends TestCase
+abstract class AbstractService extends TestCase
 {
     protected ReflectionHydrator $hydrator;
     protected DateTimeFormatterStrategy $dateTimeFormatterStrategy;

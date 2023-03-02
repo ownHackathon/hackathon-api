@@ -2,14 +2,14 @@
 
 namespace Authentication\Test\Middleware;
 
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use Authentication\Middleware\ApiAccessMiddleware;
 use Authentication\Test\Mock\Service\MockApiAccessService;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 
-class ApiAccessMiddlewareTest extends AbstractMiddlewareTest
+class ApiAccessMiddlewareTest extends AbstractMiddleware
 {
     private MockApiAccessService $apiAccessService;
 

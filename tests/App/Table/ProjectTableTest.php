@@ -8,7 +8,7 @@ use App\Test\Mock\TestConstants;
 /**
  * @property ProjectTable $table
  */
-class ProjectTableTest extends AbstractTableTest
+class ProjectTableTest extends AbstractTable
 {
     public function testCanGetTableName(): void
     {

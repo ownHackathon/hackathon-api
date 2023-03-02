@@ -8,7 +8,7 @@ use App\Service\UserService;
 use App\Test\Mock\Service\MockUserService;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddlewareTest
+class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
 {
     private readonly UserService $userService;
 

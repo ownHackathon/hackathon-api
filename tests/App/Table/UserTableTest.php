@@ -10,7 +10,7 @@ use DateTime;
 /**
  * @property UserTable $table
  */
-class UserTableTest extends AbstractTableTest
+class UserTableTest extends AbstractTable
 {
     public function testCanGetTableName(): void
     {

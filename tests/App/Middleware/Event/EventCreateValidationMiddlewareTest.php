@@ -3,12 +3,12 @@
 namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventCreateValidationMiddleware;
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use App\Test\Mock\Validator\MockEventCreateValidator;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 
-class EventCreateValidationMiddlewareTest extends AbstractMiddlewareTest
+class EventCreateValidationMiddlewareTest extends AbstractMiddleware
 {
     public function setUp(): void
     {

@@ -3,13 +3,13 @@
 namespace Authentication\Test\Service;
 
 use App\Test\Mock\MockContainer;
-use App\Test\Service\AbstractServiceTest;
+use App\Test\Service\AbstractService;
 use Authentication\Service\ApiAccessService;
 use Authentication\Service\ApiAccessServiceFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class ApiAccessServiceFactoryTest extends AbstractServiceTest
+class ApiAccessServiceFactoryTest extends AbstractService
 {
     /**
      * @throws ContainerExceptionInterface

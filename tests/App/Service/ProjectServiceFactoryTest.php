@@ -10,7 +10,7 @@ use App\Test\Mock\MockContainer;
 use App\Test\Mock\Table\MockProjectTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 
-class ProjectServiceFactoryTest extends AbstractServiceTest
+class ProjectServiceFactoryTest extends AbstractService
 {
     public function testCanCreateProjectService(): void
     {

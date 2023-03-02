@@ -3,11 +3,11 @@
 namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventListMiddleware;
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use App\Test\Mock\Service\MockEventService;
 use Psr\Http\Message\ResponseInterface;
 
-class EventListMiddlewareTest extends AbstractMiddlewareTest
+class EventListMiddlewareTest extends AbstractMiddleware
 {
     public function setUp(): void
     {

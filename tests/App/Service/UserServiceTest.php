@@ -7,7 +7,7 @@ use App\Service\UserService;
 use App\Test\Mock\Table\MockUserTable;
 use App\Test\Mock\TestConstants;
 
-class UserServiceTest extends AbstractServiceTest
+class UserServiceTest extends AbstractService
 {
     private UserService $userService;
 

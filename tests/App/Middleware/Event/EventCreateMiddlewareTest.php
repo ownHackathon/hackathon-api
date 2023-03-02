@@ -4,13 +4,13 @@ namespace App\Test\Middleware\Event;
 
 use App\Middleware\Event\EventCreateMiddleware;
 use App\Entity\User;
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use App\Test\Mock\Service\MockEventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 
-class EventCreateMiddlewareTest extends AbstractMiddlewareTest
+class EventCreateMiddlewareTest extends AbstractMiddleware
 {
     public function setUp(): void
     {
