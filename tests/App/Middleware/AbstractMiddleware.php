@@ -9,11 +9,11 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-abstract class AbstractMiddlewareTest extends TestCase
+abstract class AbstractMiddleware extends TestCase
 {
-    protected readonly ServerRequestInterface $request;
-    protected readonly RequestHandlerInterface $handler;
-    protected readonly ReflectionHydrator $hydrator;
+    protected ServerRequestInterface $request;
+    protected RequestHandlerInterface $handler;
+    protected ReflectionHydrator $hydrator;
 
     protected function setUp(): void
     {

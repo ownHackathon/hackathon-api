@@ -9,7 +9,7 @@ use App\Test\Mock\TestConstants;
 /**
  * @property EventTable $table
  */
-class EventTableTest extends AbstractTableTest
+class EventTableTest extends AbstractTable
 {
     public function testCanGetTableName(): void
     {

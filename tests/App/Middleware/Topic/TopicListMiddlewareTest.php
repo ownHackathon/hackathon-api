@@ -3,11 +3,11 @@
 namespace App\Test\Middleware\Topic;
 
 use App\Middleware\Topic\TopicListAvailableMiddleware;
-use App\Test\Middleware\AbstractMiddlewareTest;
+use App\Test\Middleware\AbstractMiddleware;
 use App\Test\Mock\Service\MockTopicPoolService;
 use Psr\Http\Message\ResponseInterface;
 
-class TopicListMiddlewareTest extends AbstractMiddlewareTest
+class TopicListMiddlewareTest extends AbstractMiddleware
 {
     public function setUp(): void
     {

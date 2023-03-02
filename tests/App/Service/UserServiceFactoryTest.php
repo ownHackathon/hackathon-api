@@ -11,7 +11,7 @@ use App\Test\Mock\Table\MockUserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;
 
-class UserServiceFactoryTest extends AbstractServiceTest
+class UserServiceFactoryTest extends AbstractService
 {
     public function testCanCreateUserService(): void
     {

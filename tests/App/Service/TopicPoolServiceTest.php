@@ -6,7 +6,7 @@ use App\Entity\Topic;
 use App\Service\TopicPoolService;
 use App\Test\Mock\Table\MockTopicPoolTable;
 
-class TopicPoolServiceTest extends AbstractServiceTest
+class TopicPoolServiceTest extends AbstractService
 {
     private TopicPoolService $service;
     private MockTopicPoolTable $table;

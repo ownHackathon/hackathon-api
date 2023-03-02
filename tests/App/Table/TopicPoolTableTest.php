@@ -9,7 +9,7 @@ use App\Test\Mock\TestConstants;
 /**
  * @property TopicPoolTable $table
  */
-class TopicPoolTableTest extends AbstractTableTest
+class TopicPoolTableTest extends AbstractTable
 {
     public function testCanGetTableName(): void
     {

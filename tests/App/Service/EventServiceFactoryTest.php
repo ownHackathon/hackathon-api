@@ -10,7 +10,7 @@ use App\Test\Mock\MockContainer;
 use App\Test\Mock\Table\MockEventTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 
-class EventServiceFactoryTest extends AbstractServiceTest
+class EventServiceFactoryTest extends AbstractService
 {
     public function testCanCreateEventService(): void
     {
