@@ -11,3 +11,4 @@
 /database/structure/update*.sql
 /public/api/doc/swagger.json
 /.env
+coverage.xml
