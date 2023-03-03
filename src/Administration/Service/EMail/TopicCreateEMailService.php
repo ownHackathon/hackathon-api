@@ -6,7 +6,7 @@ use App\Entity\Topic;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Email;
 
-readonly class TopicCreateEMailService
+readonly class TopicCreateEMailService implements EMailServiceInterface
 {
     public function __construct(
         private Mailer $mailer,

@@ -10,7 +10,7 @@
       <directory suffix=".php">src</directory>
     </include>
     <report>
-      <clover outputFile=".phpunit.cache/code-coverage/coverage.xml"/>
+      <clover outputFile=".phpunit.cache/code-coverage/Hackathon@tests.xml"/>
       <html outputDirectory=".phpunit.cache/build/coverage"/>
     </report>
   </coverage>

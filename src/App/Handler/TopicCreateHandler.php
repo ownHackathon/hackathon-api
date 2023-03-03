@@ -2,9 +2,8 @@
 
 namespace App\Handler;
 
-use Administration\Service\EMail\TopicCreateEMailService;
+use Administration\Service\EMail\EMailServiceInterface;
 use App\DTO\Topic as TopicSubmit;
-use App\DTO\TopicCreate;
 use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -14,11 +13,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopicCreateHandler implements RequestHandlerInterface
+readonly class TopicCreateHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly ReflectionHydrator $hydrator,
-        private readonly TopicCreateEMailService $mailService,
+        private ReflectionHydrator $hydrator,
+        private EMailServiceInterface $mailService,
     ) {
     }
 
@@ -46,11 +45,12 @@ class TopicCreateHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getAttribute(Topic::class);
+        $topic = $request->getAttribute(Topic::class);
 
-        $this->mailService->send($data);
+        $this->mailService->send($topic);
 
-        $data = new TopicSubmit($this->hydrator->extract($data));
-        return new JsonResponse($data, HTTP::STATUS_CREATED);
+        $topic = new TopicSubmit($this->hydrator->extract($topic));
+
+        return new JsonResponse($topic, HTTP::STATUS_CREATED);
     }
 }

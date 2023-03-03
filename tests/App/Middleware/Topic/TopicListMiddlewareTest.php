@@ -9,11 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class TopicListMiddlewareTest extends AbstractMiddleware
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     public function testCanFindAllAvailableTopic(): void
     {
         $middleware = new TopicListAvailableMiddleware(new MockTopicPoolService());
