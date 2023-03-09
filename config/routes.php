@@ -73,6 +73,16 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\EventParticipantUnsubscribeHandler::class
     );
+    $app->post(
+        '/api/topic[/]',
+        [
+            Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
+            App\Middleware\Topic\TopicCreateValidationMiddleware::class,
+            App\Middleware\Topic\TopicCreateSubmitMiddleware::class,
+            App\Handler\TopicCreateHandler::class,
+        ],
+        App\Handler\TopicCreateHandler::class
+    );
     $app->get(
         '/api/topics/available[/]',
         [

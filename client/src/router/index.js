@@ -15,6 +15,7 @@ import EventEntry from '@/views/event/EventEntry';
 import EventCreate from '@/views/event/EventCreate';
 import ProjectView from "@/views/ProjectView";
 import InvalidTokenView from "@/views/error/InvalidTokenView";
+import TopicCreateView from "@/views/topic/TopicCreateView.vue";
 import TopicListAvailable from "@/views/topic/TopicListAvailable.vue";
 import {useUserStore} from "@/store/UserStore";
 import axios from "axios";
@@ -100,6 +101,18 @@ const routes = [
         }
       },
       {
+        path: "topic/view",
+        name: "topic_view"
+      },
+      {
+        path: "topic/create",
+        name: "topic_create",
+        component: TopicCreateView,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: "project/:uuid",
         name: "project_entry",
         component: ProjectView,
@@ -142,8 +155,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL), routes,
 });
 
-/** ToDo: remove Arg next */
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from) => {
 
   const userStore = useUserStore();
 
@@ -155,21 +167,19 @@ router.beforeEach(async (to, from, next) => {
             if (response.status === 200 && response.data.uuid !== undefined) {
               userStore.setUser(response.data);
             } else {
-              return next({name: 'login'});
+              return {name: 'login'};
             }
           }).catch(() => {
             userStore.user = null;
             localStorage.removeItem('token');
-            return next({name: 'login'});
+            return {name: 'login'};
           });
     }
   }
 
   if ((to.path === "/login" || to.path === "/register") && localStorage.getItem("token") !== null) {
-    return next({name: 'home'});
+    return {name: 'home'};
   }
-
-  return next();
 });
 
 export default router;

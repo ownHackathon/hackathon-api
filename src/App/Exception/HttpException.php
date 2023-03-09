@@ -11,7 +11,8 @@ class HttpException extends Exception
 {
     protected array $jsonMessage;
 
-    #[Pure] public function __construct(
+    #[Pure]
+    public function __construct(
         array $jsonMessage = [],
         int $code = Http::STATUS_FAILED_DEPENDENCY,
         ?Throwable $previous = null

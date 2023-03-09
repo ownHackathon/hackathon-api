@@ -2,7 +2,10 @@
 
 namespace Administration;
 
+use Administration\Service\EMail\TopicCreateEMailService;
+use Administration\Service\EMail\TopicCreateEMailServiceFactory;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Symfony\Component\Mailer\Mailer;
 
 class ConfigProvider
 {
@@ -20,6 +23,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                TopicCreateEMailService::class => TopicCreateEMailServiceFactory::class,
             ],
         ];
     }

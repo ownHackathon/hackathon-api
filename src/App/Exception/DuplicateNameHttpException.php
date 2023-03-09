@@ -6,7 +6,7 @@ use Fig\Http\Message\StatusCodeInterface as Http;
 use JetBrains\PhpStorm\Pure;
 use Throwable;
 
-class InvalidArgumentHttpException extends HttpException
+class DuplicateNameHttpException extends HttpException
 {
     #[Pure]
     public function __construct(

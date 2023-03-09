@@ -2,14 +2,14 @@
 
 return [
     'project' => [
-        'uri' => 'http://localhost:18181',
+        'uri' => 'http://localhost',
     ],
     'api' => [
         'access' => [
             'domain' => [
                 'whitelist' => [
                     'localhost',
-                    'build.exdrals.de',
+                    'build.hackathon.exdrals.de',
                     'hackathon.exdrals.de'
                 ]
             ]

@@ -2,8 +2,8 @@
 
 namespace App\Test\Mock\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Topic;
+use App\Hydrator\ReflectionHydrator;
 use App\Service\TopicPoolService;
 use App\Test\Mock\Table\MockTopicPoolTable;
 
@@ -19,4 +19,12 @@ class MockTopicPoolService extends TopicPoolService
         return [new Topic()];
     }
 
+    public function findByTopic(string $topic): ?Topic
+    {
+        if ($topic === 'duplicated') {
+            return new Topic();
+        }
+
+        return null;
+    }
 }

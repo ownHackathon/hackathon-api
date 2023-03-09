@@ -3,12 +3,14 @@
 namespace App\Table;
 
 use App\Entity\Topic;
+use Envms\FluentPDO\Exception;
 
 class TopicPoolTable extends AbstractTable
 {
     public function insert(Topic $topic): self
     {
         $values = [
+            'uuid' => $topic->getUuid(),
             'topic' => $topic->getTopic(),
             'description' => $topic->getDescription(),
         ];
@@ -50,6 +52,9 @@ class TopicPoolTable extends AbstractTable
             ->fetchAll();
     }
 
+    /**
+     * @throws Exception
+     */
     public function findByTopic(string $topic): bool|array
     {
         return $this->query->from($this->table)

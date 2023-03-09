@@ -2,6 +2,7 @@
 
 namespace App\Middleware\Topic;
 
+use App\Exception\InvalidArgumentHttpException;
 use App\Validator\TopicCreateValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,6 +16,9 @@ readonly class TopicCreateValidationMiddleware implements MiddlewareInterface
     ) {
     }
 
+    /**
+     * @throws InvalidArgumentHttpException
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();
@@ -22,7 +26,7 @@ readonly class TopicCreateValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            return $handler->handle($request->withAttribute('validationMessages', $this->validator->getMessages()));
+            throw new InvalidArgumentHttpException($this->validator->getMessages());
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));
