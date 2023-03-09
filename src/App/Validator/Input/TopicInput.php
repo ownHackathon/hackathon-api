@@ -19,7 +19,7 @@ class TopicInput extends Input
             [
                 'encoding' => 'UTF-8',
                 'min' => 3,
-                'max' => 1024,
+                'max' => 50,
             ]
         );
     }

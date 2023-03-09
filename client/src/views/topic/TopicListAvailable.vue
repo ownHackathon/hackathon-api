@@ -1,5 +1,10 @@
 <template>
+  <div class="flex flex-auto">
   <GoBackButton/>
+    <div class="mt-2 mb-2">
+      <button class="button" @click="createNewTopic">Ein neues Thema einreichen</button>
+    </div>
+  </div>
   <div v-if="loading">
     <TheSpinner/>
   </div>
@@ -41,9 +46,15 @@ import GoBackButton from "@/components/GoBackButton.vue";
 import {storeToRefs} from "pinia";
 import {useTopicStore} from "@/store/topic";
 import {onMounted} from "vue";
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const topicStore = useTopicStore();
 const {topics, loading, error} = storeToRefs(topicStore);
+
+const createNewTopic = () => {
+  router.push({name: 'topic_create'});
+}
 
 onMounted(() => {
       topicStore.fetchAvailableTopics();
