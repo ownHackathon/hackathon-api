@@ -2,10 +2,10 @@
 
 return [
     'database' => [
-        'host' => 'hackathon-db',
+        'host' => 'mariadb',
         'port' => '3306',
-        'user' => 'db',
-        'password' => 'db',
+        'user' => 'dev',
+        'password' => 'dev',
         'dbname' => 'db',
         'error' => PDO::ERRMODE_EXCEPTION,
     ]
