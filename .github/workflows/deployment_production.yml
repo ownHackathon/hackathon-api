@@ -24,14 +24,6 @@ jobs:
       - name: Run create openapi Data
         run: composer run-script openapi
 
-      - name: npm install
-        working-directory: ./client
-        run: npm install
-
-      - name: npm run build
-        working-directory: ./client
-        run: npm run build
-
       - name: FTP Deploy to Production Server (Staging)
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
