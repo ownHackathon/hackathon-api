@@ -2,7 +2,7 @@
 /tests/behat.yml
 /tests/.phpunit.result.cache
 /vendor/
-/client/*
+/client/
 /public/assets/*
 *.cache
 *.phar
