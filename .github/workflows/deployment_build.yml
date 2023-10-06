@@ -28,6 +28,7 @@ jobs:
           server: ${{ secrets.BUILD_HOST }}
           username: ${{ secrets.BUILD_USER }}
           password: ${{ secrets.BUILD_PASSWORD }}
+          state-name: ".ftp-deploy-sync-state-backend.json"
           exclude: |
             **/.git*
             **/*.dist
