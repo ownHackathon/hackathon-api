@@ -13,11 +13,6 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v2
 
-      - name: Use Node.js 19
-        uses: actions/setup-node@v2
-        with:
-          node-version: '19'
-
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
 
@@ -46,4 +41,11 @@ jobs:
             **/tests/**
             **/docker/**
             **/public/assets/**
-            **/public/index.php
+            **/public/index.html
+            **/*.md
+            **/*.xml
+            **/*.neon
+            **/*.json
+            **/*.yml
+            **/*.lock
+            **/LICENSE
