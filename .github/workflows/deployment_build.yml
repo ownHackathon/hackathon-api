@@ -46,3 +46,10 @@ jobs:
             **/docker/**
             **/public/assets/**
             **/public/index.html
+            **/*.md
+            **/*.xml
+            **/*.neon
+            **/*.json
+            **/*.yml
+            **/*.lock
+            **/LICENSE
