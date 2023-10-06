@@ -44,4 +44,4 @@ jobs:
             **/tests/**
             **/docker/**
             **/public/assets/**
-            **/public/index.php
+            **/public/index.html
