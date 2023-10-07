@@ -14,11 +14,7 @@ services:
   php:
     container_name: php
     user: "${USERMAP_UID:-1000}:${USERMAP_GID:-1000}"
-    build:
-      context: ./docker/php
-      args:
-        PHP_VERSION: ${PHP_VERSION:-8.2}
-        ENV: ${ENV:-production}
+    image: "ghcr.io/ownhackathon/hackathon-api-php:latest"
     volumes:
       - ./:/var/www/html
       - ./docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/extra.ini
