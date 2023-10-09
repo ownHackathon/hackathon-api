@@ -15,3 +15,5 @@ Evaluation project for the Hackathon Events on the Discord server from BlackScor
 9. Run `docker-compose exec php composer run openapi`
 
 Done. You can now open http://localhost/api/doc/ Thanks and have fun.
+
+See docker-compose.yml for existing services
