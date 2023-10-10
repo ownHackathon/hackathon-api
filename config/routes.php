@@ -112,7 +112,7 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\UserHandler::class
     );
-    /** ToDo OpenApi */
+
     $app->get(
         '/api/login[/]',
         [
@@ -120,7 +120,7 @@ return static function (Mezzio\Application $app): void {
         ],
         Authentication\Handler\LoginHandler::class
     );
-    /** ToDo OpenApi */
+
     $app->post(
         '/api/login[/]',
         [
