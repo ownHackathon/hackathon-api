@@ -1,7 +1,11 @@
-name: Development Deployment
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - '*'
+      - '!master'
+    paths:
+      - "**.php"
+  pull_request:
 
 jobs:
   phpcs:
@@ -103,55 +107,3 @@ jobs:
 
       - name: Run PHP Unit Test
         run: composer run-script test
-
-  deployment_of_hackathon_to_build:
-    name: Deploy Build
-    needs:
-      - phpcs
-      - phplint
-      - phpstan
-      - phpunit
-    env:
-      VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Get latest code
-        uses: actions/checkout@v2
-
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-dev
-
-      - name: Run create openapi Data
-        run: composer run-script openapi
-
-      - name: FTP Deploy to Development Server (Staging)
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
-        with:
-          server: ${{ secrets.BUILD_HOST }}
-          username: ${{ secrets.BUILD_USER }}
-          password: ${{ secrets.BUILD_PASSWORD }}
-          state-name: ".ftp-deploy-sync-state-backend.json"
-          exclude: |
-            **/.git*
-            **/*.dist
-            **/*.dist/**
-            **/.git*/**
-            **/bin/**
-            **/tests/**
-            **/config/autoload/**
-            **/config/migrations/**
-            **/node_modules/**
-            **/client/**
-            **/database/**
-            **/scripts/**
-            **/tests/**
-            **/docker/**
-            **/public/assets/**
-            **/public/index.html
-            **/*.md
-            **/*.xml
-            **/*.neon
-            **/*.json
-            **/*.yml
-            **/*.lock
-            **/LICENSE
