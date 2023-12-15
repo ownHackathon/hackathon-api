@@ -56,3 +56,7 @@ jobs:
             **/LICENSE
 
   no_deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v2
