@@ -3,6 +3,7 @@ on:
   push:
     branches: [ "master" ]
 jobs:
+
   deployment_of_hackathon_to_build:
     needs:
       - phpcs
@@ -53,3 +54,5 @@ jobs:
             **/*.yml
             **/*.lock
             **/LICENSE
+
+  no_deploy:
