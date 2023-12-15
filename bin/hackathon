@@ -60,7 +60,7 @@ case $1 in
         docker_cleanup
       ;;
       "vendor")
-        echo "cleanup database with vendor"
+        echo "cleanup vendor folder"
         docker_vendor_cleanup
       ;;
       *)
@@ -88,7 +88,7 @@ case $1 in
     docker-compose run --rm php composer "${@:2}"
     ;;
 
-  "indocker")
+  "php")
     docker-compose run --rm php "${@:2}"
     ;;
 

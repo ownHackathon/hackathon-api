@@ -17,3 +17,18 @@ Evaluation project for the Hackathon Events on the Discord server from BlackScor
 Done. You can now open http://localhost/api/doc/ Thanks and have fun.
 
 See docker-compose.yml for existing services
+
+# unsupportet Script
+
+You will find a script called `hackathon` under `/bin`. This offers possibilities to control the project
+
+- `./bin/hackathon setup` => start the docker container, run  composer install and seed Database Data
+- `./bin/hackathon start` => start the docker container
+- `./bin/hackathon restart` => restart the docker container
+- `./bin/hackathon stop` => stop the docker container
+- `./bin/hackathon reset` => clean up Database
+- `./bin/hackathon reset vendor` => clean up vendor folder
+- `./bin/hackathon reset all` => clean up system completely
+- `./bin/hackathon composer` => run composer with own param e.g. `./bin/hackathon composer install`
+- `./bin/hackathon php` => run commands in php container e.g. `./bin/hackathon php php -v`
+
