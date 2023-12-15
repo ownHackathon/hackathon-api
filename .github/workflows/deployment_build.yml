@@ -4,6 +4,11 @@ on:
     branches: [ "master" ]
 jobs:
   deployment_of_hackathon_to_build:
+    needs:
+      - phpcs
+      - phplint
+      - phpstan
+      - phpunit
     env:
       VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
     runs-on: ubuntu-20.04
