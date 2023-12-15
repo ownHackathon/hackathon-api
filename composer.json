@@ -43,7 +43,6 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "composer/package-versions-deprecated": "^1.11.99.4",
-        "doctrine/migrations": "^3.5",
         "envms/fluentpdo": "^2.2.0",
         "firebase/php-jwt": "^6.0",
         "laminas/laminas-component-installer": "^3.2.0",
@@ -64,6 +63,7 @@
         "jetbrains/phpstorm-attributes": "^1.0"
     },
     "require-dev": {
+        "doctrine/migrations": "^3.5",
         "filp/whoops": "^2.14.4",
         "overtrue/phplint": "^5.3",
         "phpstan/phpstan": "^1.4",
@@ -74,7 +74,6 @@
         "psr-4": {
             "Administration\\": "src/Administration",
             "App\\": "src/App/",
-            "Core\\": "src/Core/",
             "Authentication\\": "src/Authentication",
             "Migrations\\": "database/migrations"
         }
