@@ -1,3 +1,4 @@
+name: Codestyle and Unittest
 on:
   push:
     branches:
