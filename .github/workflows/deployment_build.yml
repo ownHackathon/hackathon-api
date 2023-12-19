@@ -4,30 +4,6 @@ on:
     branches: [ "master" ]
 
 jobs:
-  phpcs:
-    name: PHP CodeSniffer
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
-
-      - name: Run PHP Codesniffer
-        run: composer run-script phpcs
 
   phplint:
     name: PHP Lint
@@ -79,8 +55,40 @@ jobs:
       - name: Run PHP Stan
         run: composer run-script phpstan
 
+  phpcs:
+    name: PHP CodeSniffer
+    needs:
+      - phplint
+      - phpstan
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP Codesniffer
+        run: composer run-script phpcs
+
   phpunit:
     name: PHP Unit
+    needs:
+      - phplint
+      - phpstan
+      - phpcs
     runs-on: ubuntu-20.04
 
     steps:

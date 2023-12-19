@@ -44,6 +44,11 @@
         </properties>
     </rule>
 
+    <ruleset name="AcmeProject">
+        <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
+        <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    </ruleset>
+
     <file>src</file>
 
     <exclude-pattern>*/client/*</exclude-pattern>
