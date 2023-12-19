@@ -151,7 +151,7 @@ jobs:
             **/*.md
             **/*.xml
             **/*.neon
-            **/*.json
+            **/composer.json
             **/*.yml
             **/*.lock
             **/LICENSE
