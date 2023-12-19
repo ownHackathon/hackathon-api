@@ -4,6 +4,9 @@ namespace Authentication\Middleware;
 
 use App\Entity\User;
 use App\Service\UserService;
+use Authentication\Schema\LoginTokenSchema;
+use Authentication\Schema\MessageSchema;
+use Authentication\Schema\UserLogInDataSchema;
 use Authentication\Service\LoginAuthenticationService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -21,21 +24,24 @@ readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
     ) {
     }
 
+    /**
+     * Attempts to log in a user using transferred data
+     */
     #[OA\Post(path: '/api/login', tags: ['User Control'])]
     #[OA\RequestBody(
         description: 'User data for authentication',
         required: true,
-        content: new OA\JsonContent(ref: '#/components/schemas/UserLogInDataSchema')
+        content: new OA\JsonContent(ref: UserLogInDataSchema::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',
-        content: [new OA\JsonContent(ref: '#/components/schemas/LoginTokenSchema')]
+        content: [new OA\JsonContent(ref: LoginTokenSchema::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'User was not authenticated',
-        content: [new OA\JsonContent(ref: '#/components/schemas/MessageSchema')]
+        content: [new OA\JsonContent(ref: MessageSchema::class)]
     )]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

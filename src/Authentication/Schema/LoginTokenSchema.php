@@ -10,7 +10,8 @@ readonly class LoginTokenSchema
     #[OA\Property(
         description: 'The token after a valid registration. Without login equals null',
         type: 'string',
-        nullable: true,
+        example: 'string|null',
+        nullable: true
     )]
     public ?string $token;
 

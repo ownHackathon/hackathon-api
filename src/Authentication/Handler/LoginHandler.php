@@ -3,6 +3,7 @@
 namespace Authentication\Handler;
 
 use App\Entity\User;
+use Authentication\Schema\LoginTokenSchema;
 use Authentication\Service\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -21,35 +22,14 @@ class LoginHandler implements RequestHandlerInterface
     ) {
     }
 
-    #[OA\Get(
-        path: '/api/login',
-        tags: ['User Control'],
-        responses: [
-            new OA\Response(
-                response: HTTP::STATUS_OK,
-                description: 'Success',
-                content: [
-                    new OA\JsonContent(
-                        properties: [
-                            new OA\Property(
-                                property: 'token',
-                                description: 'token to authenticate a user',
-                                oneOf: [
-                                    new OA\Schema(
-                                        description: 'the token if the user could be authenticated',
-                                        type: 'string'
-                                    ),
-                                    new OA\Schema(
-                                        description: 'otherwise the token will be null',
-                                        type: 'null'
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
-            ),
-        ],
+    /**
+     * Returns the currently valid token or null
+     */
+    #[OA\Get(path: '/api/login', tags: ['User Control'])]
+    #[OA\Response(
+        response: HTTP::STATUS_OK,
+        description: 'Success',
+        content: new OA\JsonContent(ref: LoginTokenSchema::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

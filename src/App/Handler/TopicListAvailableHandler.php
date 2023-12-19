@@ -4,6 +4,7 @@ namespace App\Handler;
 
 use App\DTO\TopicList;
 use App\Hydrator\ReflectionHydrator;
+use Authentication\Schema\MessageSchema;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -18,20 +19,19 @@ readonly class TopicListAvailableHandler implements RequestHandlerInterface
     ) {
     }
 
-    #[OA\Get(
-        path: '/api/topics/available',
-        tags: ['Topics'],
-        responses: [
-            new OA\Response(
-                response: HTTP::STATUS_OK,
-                description: 'Success',
-                content: new OA\JsonContent()
-            ),
-            new OA\Response(
-                response: HTTP::STATUS_UNAUTHORIZED,
-                description: 'Incorrect authorization or expired'
-            ),
-        ]
+    /**
+     * Returns a list of all available topics that are available for a new event.
+     */
+    #[OA\Get(path: '/api/topics/available', tags: ['Topics'])]
+    #[OA\Response(
+        response: HTTP::STATUS_OK,
+        description: 'Success',
+        content: new OA\JsonContent(ref: TopicList::class)
+    )]
+    #[OA\Response(
+        response: HTTP::STATUS_UNAUTHORIZED,
+        description: 'Incorrect authorization or expired',
+        content: new OA\JsonContent(ref: MessageSchema::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -4,6 +4,7 @@ namespace Authentication\Handler;
 
 use App\Entity\User;
 use Authentication\Schema\ApiMeSchema;
+use Authentication\Schema\MessageSchema;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -28,17 +29,18 @@ use Psr\Http\Server\RequestHandlerInterface;
 class ApiMeHandler implements RequestHandlerInterface
 {
     /**
-     * Ask if the user is logged in
+     * Returns minimal information for a logged-in user or empty
      */
     #[OA\Get(path: '/api/me', tags: ['User Control'])]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',
-        content: new OA\JsonContent(ref: '#/components/schemas/ApiMeSchema')
+        content: new OA\JsonContent(ref: ApiMeSchema::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: 'Incorrect authorization or expired'
+        description: 'Incorrect authorization or expired',
+        content: new OA\JsonContent(ref: MessageSchema::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
