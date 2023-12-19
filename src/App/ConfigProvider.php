@@ -52,7 +52,6 @@ class ConfigProvider
                 Handler\EventNameHandler::class,
                 Handler\EventCreateHandler::class,
                 Handler\EventParticipantUnsubscribeHandler::class,
-                Handler\SwaggerUIHandler::class,
 
                 EmailInput::class,
                 EventDescriptionInput::class,

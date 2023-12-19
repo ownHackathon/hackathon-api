@@ -21,61 +21,21 @@ readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
     ) {
     }
 
-    #[OA\Post(
-        path: '/api/login',
-        requestBody: new OA\RequestBody(
-            description: 'User data for authentication',
-            required: true,
-            content: [
-                new OA\MediaType(
-                    mediaType: 'application/json',
-                    schema: new OA\Schema(
-                        properties: [
-                            new OA\Property(
-                                property: 'username',
-                                type: 'string',
-                            ),
-                            new OA\Property(
-                                property: 'password',
-                                type: 'string',
-                            )
-                        ],
-                        type: 'object'
-                    )
-                )
-            ]
-        ),
-        tags: ['User Control'],
-        responses: [
-            new OA\Response(
-                response: HTTP::STATUS_UNAUTHORIZED,
-                description: 'User was not authenticated'
-            ),
-            new OA\Response(
-                response: HTTP::STATUS_OK,
-                description: 'Success',
-                content: [
-                    new OA\JsonContent(
-                        properties: [
-                            new OA\Property(
-                                property: 'token',
-                                description: 'token to authenticate a user',
-                                oneOf: [
-                                    new OA\Schema(
-                                        description: 'the token if the user could be authenticated',
-                                        type: 'string'
-                                    ),
-                                    new OA\Schema(
-                                        description: 'otherwise the token will be null',
-                                        type: 'null'
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
-            ),
-        ]
+    #[OA\Post(path: '/api/login', tags: ['User Control'])]
+    #[OA\RequestBody(
+        description: 'User data for authentication',
+        required: true,
+        content: new OA\JsonContent(ref: '#/components/schemas/UserLogInDataSchema')
+    )]
+    #[OA\Response(
+        response: HTTP::STATUS_OK,
+        description: 'Success',
+        content: [new OA\JsonContent(ref: '#/components/schemas/LoginTokenSchema')]
+    )]
+    #[OA\Response(
+        response: HTTP::STATUS_UNAUTHORIZED,
+        description: 'User was not authenticated',
+        content: [new OA\JsonContent(ref: '#/components/schemas/MessageSchema')]
     )]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

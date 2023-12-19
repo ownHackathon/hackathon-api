@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Authentication\DTO;
+namespace Authentication\Schema;
 
+use App\Entity\User;
+use App\Enum\UserRole;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class ApiMe
+readonly class ApiMeSchema
 {
     #[OA\Property(
         description: 'unique one-time identification number of the user',
@@ -27,4 +29,11 @@ class ApiMe
         example: 'User'
     )]
     public string $role;
+
+    public function __construct(User $user)
+    {
+        $this->uuid = $user->getUuid();
+        $this->name = $user->getName();
+        $this->role = UserRole::from($user->getRoleId())->getRoleName();
+    }
 }
