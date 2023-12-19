@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-dev
@@ -133,7 +133,7 @@ jobs:
         run: composer run-script openapi
 
       - name: FTP Deploy to Development Server (Staging)
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
         with:
           server: ${{ secrets.BUILD_HOST }}
           username: ${{ secrets.BUILD_USER }}
