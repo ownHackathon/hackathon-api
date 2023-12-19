@@ -13,7 +13,7 @@ jobs:
       uses: SebastiaanZ/github-status-embed-for-discord@main
       with:
         # Discord webhook
-        webhook_id: '1234567890'  # Has to be provided as a string
+        webhook_id: '436916565'  # Has to be provided as a string
         webhook_token: ${{ secrets.webhook_token }}
 
         # Optional arguments for PR-related events
