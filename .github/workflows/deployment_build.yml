@@ -133,7 +133,7 @@ jobs:
         run: composer run-script openapi
 
       - name: FTP Deploy to Development Server (Staging)
-        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.BUILD_HOST }}
           username: ${{ secrets.BUILD_USER }}
