@@ -11,6 +11,9 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 
 class LogoutHandler implements RequestHandlerInterface
 {
+    /**
+     * not implementet yet
+     */
     #[OA\Get(
         path: '/api/logout',
         tags: ['User Control'],
