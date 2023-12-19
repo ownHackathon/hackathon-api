@@ -3,6 +3,7 @@ on:
   push:
     branches: [ "master" ]
 
+
 jobs:
   phplint:
     name: PHP Lint
