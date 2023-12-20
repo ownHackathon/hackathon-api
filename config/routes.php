@@ -8,13 +8,6 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\TestMailHandler::class
     );
-    $app->get(
-        '/api/me[/]',
-        [
-            Authentication\Handler\ApiMeHandler::class,
-        ],
-        Authentication\Handler\ApiMeHandler::class
-    );
     /** ToDo OpenApi */
     $app->get(
         '/api/event[/]',
@@ -92,6 +85,13 @@ return static function (Mezzio\Application $app): void {
         ],
         App\Handler\TopicListAvailableHandler::class
     );
+    $app->get(
+        '/api/user/me[/]',
+        [
+            Authentication\Handler\ApiMeHandler::class,
+        ],
+        Authentication\Handler\ApiMeHandler::class
+    );
     /** ToDo OpenApi */
     $app->post(
         '/api/user/register[/]',
@@ -113,14 +113,6 @@ return static function (Mezzio\Application $app): void {
         App\Handler\UserHandler::class
     );
 
-    $app->get(
-        '/api/login[/]',
-        [
-            Authentication\Handler\LoginHandler::class,
-        ],
-        Authentication\Handler\LoginHandler::class
-    );
-
     $app->post(
         '/api/login[/]',
         [
@@ -128,7 +120,7 @@ return static function (Mezzio\Application $app): void {
             Authentication\Middleware\LoginAuthenticationMiddleware::class,
             Authentication\Handler\LoginHandler::class,
         ],
-        Authentication\Middleware\LoginAuthenticationMiddleware::class
+        Authentication\Handler\LoginHandler::class
     );
     /** ToDo OpenApi */
     $app->get(

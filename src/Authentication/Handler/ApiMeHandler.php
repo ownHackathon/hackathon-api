@@ -31,7 +31,7 @@ class ApiMeHandler implements RequestHandlerInterface
     /**
      * Returns minimal information for a logged-in user or empty
      */
-    #[OA\Get(path: '/api/me', tags: ['User Control'])]
+    #[OA\Get(path: '/api/user/me', tags: ['User Control'])]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',
