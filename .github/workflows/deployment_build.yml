@@ -175,7 +175,7 @@ jobs:
         with:
           # Discord webhook
           webhook_id: '436916565'  # Has to be provided as a string
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          webhook_token: ${{ secrets.WEBHOOK_SECRET }}
 
           # Optional arguments for PR-related events
           # Note: There's no harm in including these lines for non-PR
