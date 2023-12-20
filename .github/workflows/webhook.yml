@@ -1,31 +1,15 @@
 name: Status Embed
 
 on:
-  check_run:
-    types: [ rerequested, completed ]
+  schedule:
+    - cron:  '0 12 * * *'
 
 jobs:
-  git:
+  message:
     runs-on: ubuntu-latest
     steps:
-    - name: Test Success
-      uses: rjstone/discord-webhook-notify@v1
-      if: success()
-      with:
-          severity: info
-          details: Test Succeeded!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
-    - name: Test Failure
-      uses: rjstone/discord-webhook-notify@v1
-      if: failure()
-      with:
-          severity: error
-          details: Test Failed!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
-    - name: Test Cancelled
-      uses: rjstone/discord-webhook-notify@v1
-      if: cancelled()
-      with:
-          severity: warn
-          details: Test Cancelled!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_TOKEN }}
+          content: "Test"

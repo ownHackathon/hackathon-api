@@ -113,16 +113,6 @@ jobs:
       - name: Run PHP Unit Test
         run: composer run-script test
 
-  webhook:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Send status to Discord
-        uses: nebularg/actions-discord-webhook@v1
-        with:
-          webhook_url: ${{ secrets.WEBHOOK_TOKEN }} # required
-          status: ${{ job.status }} # optional, this is the default
-        if: always() # or failure() or success()
-
   deployment_of_hackathon_to_build:
     name: Deploy Build
     needs:
