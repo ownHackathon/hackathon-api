@@ -113,6 +113,17 @@ jobs:
       - name: Run PHP Unit Test
         run: composer run-script test
 
+      - name: Test Step for Discord Action
+        id: discordAction
+        uses: Poss111/discord-hook-action@v1.6.12
+        with:
+          discord-hook-url: ${{ secrets.WEBHOOK_TOKEN }}
+          title: 'Sample Title'
+          message: 'Sample Message'
+          message-color: '65345'
+      - name: Was Job Successful
+        run: echo "The job was successful ran > ${{ steps.discordAction.outputs.successful }}"
+
   deployment_of_hackathon_to_build:
     name: Deploy Build
     needs:
