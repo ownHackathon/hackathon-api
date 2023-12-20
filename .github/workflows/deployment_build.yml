@@ -170,11 +170,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: # make sure the notification is sent AFTER the jobs you want included have completed
       - deployment_of_hackathon_to_build
-    if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
 
     steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
+      - name: Send status to Discord
+        uses: nebularg/actions-discord-webhook@v1
         with:
-          github-token: ${{ secrets.TOKEN }}
-          discord-webhook: ${{ secrets.WEBHOOK_TOKEN }}
+          webhook_url: ${{ secrets.WEBHOOK_TOKEN }} # required
+          status: ${{ job.status }} # optional, this is the default
+        if: always() # or failure() or success()
