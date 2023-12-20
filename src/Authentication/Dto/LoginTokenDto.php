@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Authentication\Schema;
+namespace Authentication\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class LoginTokenSchema
+readonly class LoginTokenDto
 {
     #[OA\Property(
         description: 'The token after a valid registration. Without login equals null',

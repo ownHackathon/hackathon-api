@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class Topic extends TopicCreate
+readonly class TopicDto extends TopicCreateDto
 {
     #[OA\Property(
         description: 'unique one-time identification number of the topic',

@@ -2,9 +2,9 @@
 
 namespace App\Handler;
 
-use App\DTO\TopicList;
+use App\Dto\TopicListDto;
 use App\Hydrator\ReflectionHydrator;
-use Authentication\Schema\MessageSchema;
+use Authentication\Dto\MessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -26,18 +26,18 @@ readonly class TopicListAvailableHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',
-        content: new OA\JsonContent(ref: TopicList::class)
+        content: new OA\JsonContent(ref: TopicListDto::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'Incorrect authorization or expired',
-        content: new OA\JsonContent(ref: MessageSchema::class)
+        content: new OA\JsonContent(ref: MessageDto::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getAttribute('availableTopics');
         $data = $this->hydrator->extractList($data);
-        $data = new TopicList($data);
+        $data = new TopicListDto($data);
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }

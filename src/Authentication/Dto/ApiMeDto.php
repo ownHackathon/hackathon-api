@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Authentication\Schema;
+namespace Authentication\Dto;
 
 use App\Entity\User;
 use App\Enum\UserRole;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class ApiMeSchema
+readonly class ApiMeDto
 {
     #[OA\Property(
         description: 'unique one-time identification number of the user',

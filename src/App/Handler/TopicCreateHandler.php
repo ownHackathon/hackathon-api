@@ -3,12 +3,12 @@
 namespace App\Handler;
 
 use Administration\Service\EMail\EMailServiceInterface;
-use App\DTO\Topic as TopicSubmit;
-use App\DTO\TopicCreate;
+use App\Dto\TopicCreateDto;
+use App\Dto\TopicCreateErrorDto;
+use App\Dto\TopicDto as TopicSubmit;
 use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
-use App\Schema\TopicCreateErrorSchema;
-use Authentication\Schema\MessageSchema;
+use Authentication\Dto\MessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -30,7 +30,7 @@ readonly class TopicCreateHandler implements RequestHandlerInterface
     #[OA\Post(path: '/api/topic', tags: ['Topics'])]
     #[OA\RequestBody(
         required: true,
-        content: new OA\JsonContent(ref: TopicCreate::class)
+        content: new OA\JsonContent(ref: TopicCreateDto::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_CREATED,
@@ -40,12 +40,12 @@ readonly class TopicCreateHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'Incorrect authorization or expired',
-        content: new OA\JsonContent(ref: MessageSchema::class)
+        content: new OA\JsonContent(ref: MessageDto::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
         description: 'Incorrect Request Data',
-        content: new OA\JsonContent(ref: TopicCreateErrorSchema::class)
+        content: new OA\JsonContent(ref: TopicCreateErrorDto::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

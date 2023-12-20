@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Authentication\Schema;
+namespace Authentication\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class MessageSchema
+class MessageDto
 {
     #[OA\Property(
         description: 'A message to the API user',

@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class TopicList
+class TopicListDto
 {
     #[OA\Property(
         type: 'array',
-        items: new OA\Items(ref: '#/components/schemas/Topic')
+        items: new OA\Items(ref: TopicDto::class)
     )]
     public array $topics;
 
@@ -18,7 +18,7 @@ class TopicList
         $this->topics = [];
 
         foreach ($topics as $topic) {
-            $this->topics[] = new Topic($topic);
+            $this->topics[] = new TopicDto($topic);
         }
     }
 }

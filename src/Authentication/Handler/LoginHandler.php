@@ -3,9 +3,9 @@
 namespace Authentication\Handler;
 
 use App\Entity\User;
-use Authentication\Schema\LoginTokenSchema;
-use Authentication\Schema\MessageSchema;
-use Authentication\Schema\UserLogInDataSchema;
+use Authentication\Dto\LoginTokenDto;
+use Authentication\Dto\MessageDto;
+use Authentication\Dto\UserLogInDataDto;
 use Authentication\Service\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -31,17 +31,17 @@ class LoginHandler implements RequestHandlerInterface
     #[OA\RequestBody(
         description: 'User data for authentication',
         required: true,
-        content: new OA\JsonContent(ref: UserLogInDataSchema::class)
+        content: new OA\JsonContent(ref: UserLogInDataDto::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',
-        content: [new OA\JsonContent(ref: LoginTokenSchema::class)]
+        content: [new OA\JsonContent(ref: LoginTokenDto::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'User was not authenticated',
-        content: [new OA\JsonContent(ref: MessageSchema::class)]
+        content: [new OA\JsonContent(ref: MessageDto::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

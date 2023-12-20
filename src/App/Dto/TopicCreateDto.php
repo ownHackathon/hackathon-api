@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO;
+namespace App\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class TopicCreate
+readonly class TopicCreateDto
 {
     #[OA\Property(
         description: 'The general designation of the topic',

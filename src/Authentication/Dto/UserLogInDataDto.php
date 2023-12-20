@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Authentication\Schema;
+namespace Authentication\Dto;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['username', 'password'])]
-class UserLogInDataSchema
+class UserLogInDataDto
 {
     #[OA\Property(
         description: 'The User name',
