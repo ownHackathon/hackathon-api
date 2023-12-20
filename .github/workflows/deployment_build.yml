@@ -173,13 +173,9 @@ jobs:
     if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
 
     steps:
-      - name: Test Step for Discord Action
-        id: discordAction
-        uses: Poss111/discord-hook-action@v1.6.12
+      - name: Send status to Discord
+        uses: nebularg/actions-discord-webhook@v1
         with:
-          discord-hook-url: ${{ secrets.WEBHOOK_TOKEN }}
-          title: 'Sample Title'
-          message: 'Ich mag nicht mehr'
-          message-color: '65345'
-      - name: Was Job Successful
-        run: echo "The job was successful ran > ${{ steps.discordAction.outputs.successful }}"
+          webhook_url: ${{ secrets.WEBHOOK_TOKEN }} # required
+          status: ${{ job.status }} # optional, this is the default
+        if: always() # or failure() or success()
