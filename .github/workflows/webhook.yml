@@ -1,9 +1,8 @@
 name: Status Embed
 
 on:
-  workflow_run:
-    workflows:
-      - PHP Lint
+  check_run:
+    types: [ rerequested, completed ]
 
 
 jobs:
