@@ -113,33 +113,6 @@ jobs:
       - name: Run PHP Unit Test
         run: composer run-script test
 
-  notify:
-    name: notify
-    runs-on: ubuntu-20.4
-
-    steps:
-      - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
-        if: success()
-        with:
-          severity: info
-          details: Test Succeeded!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
-      - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
-        if: failure()
-        with:
-          severity: error
-          details: Test Failed!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
-      - name: Test Cancelled
-        uses: rjstone/discord-webhook-notify@v1
-        if: cancelled()
-        with:
-          severity: warn
-          details: Test Cancelled!
-          webhookUrl: ${{ secrets.WEBHOOK_TOKEN }}
-
   deployment_of_hackathon_to_build:
     name: Deploy Build
     needs:
