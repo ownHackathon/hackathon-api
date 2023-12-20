@@ -115,8 +115,6 @@ jobs:
 
   notify:
     name: notify
-    needs:
-      - phpunit
     runs-on: ubuntu-20.4
 
     steps:
