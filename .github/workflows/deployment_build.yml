@@ -169,7 +169,6 @@ jobs:
     name: Discord Notification
     runs-on: ubuntu-latest
     needs: # make sure the notification is sent AFTER the jobs you want included have completed
-      - phpunit
       - deployment_of_hackathon_to_build
     if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
 
