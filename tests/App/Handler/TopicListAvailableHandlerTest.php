@@ -8,7 +8,6 @@ use Laminas\Diactoros\Response\JsonResponse;
 
 class TopicListAvailableHandlerTest extends AbstractHandler
 {
-
     public function testReturnJsonResponseWithOneOrMoreItems(): void
     {
         $handler = new TopicListAvailableHandler($this->hydrator);

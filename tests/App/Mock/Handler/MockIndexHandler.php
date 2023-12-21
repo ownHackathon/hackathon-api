@@ -14,5 +14,4 @@ class MockIndexHandler extends IndexHandler
     {
         return new JsonResponse(['test' => true], HTTP::STATUS_OK);
     }
-
 }

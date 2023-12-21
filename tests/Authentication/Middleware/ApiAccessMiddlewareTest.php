@@ -42,6 +42,7 @@ class ApiAccessMiddlewareTest extends AbstractMiddleware
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+
     public function testReturnJSonResponse(): void
     {
         $middleware = new ApiAccessMiddleware($this->apiAccessService);

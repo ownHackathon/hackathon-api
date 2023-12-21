@@ -14,7 +14,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
         parent::setUp();
     }
 
-    public function testCanFindAllEventUnsorted():void
+    public function testCanFindAllEventUnsorted(): void
     {
         $middleware = new EventListMiddleware(new MockEventService());
 
@@ -23,7 +23,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
-    public function testCanFindAllEventSortedASC():void
+    public function testCanFindAllEventSortedASC(): void
     {
         $middleware = new EventListMiddleware(new MockEventService());
 
@@ -40,7 +40,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
-    public function testCanFindAllEventSortedDESC():void
+    public function testCanFindAllEventSortedDESC(): void
     {
         $middleware = new EventListMiddleware(new MockEventService());
 
@@ -56,5 +56,4 @@ class EventListMiddlewareTest extends AbstractMiddleware
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
-
 }

@@ -28,7 +28,7 @@ class EventCreateMiddlewareFactoryTest extends AbstractMiddleware
             ]
         );
 
-        $middleware = (new EventCreateMiddlewareFactory)($container);
+        $middleware = (new EventCreateMiddlewareFactory())($container);
 
         $this->assertInstanceOf(EventCreateMiddleware::class, $middleware);
     }

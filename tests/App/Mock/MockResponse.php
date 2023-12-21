@@ -7,7 +7,6 @@ use Psr\Http\Message\StreamInterface;
 
 class MockResponse implements ResponseInterface
 {
-
     public function getProtocolVersion()
     {
         // TODO: Implement getProtocolVersion() method.

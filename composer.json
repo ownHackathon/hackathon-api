@@ -27,7 +27,8 @@
         "doctrine": "php ./bin/migrations.php",
         "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/doc/swagger.json",
         "phplint": "vendor/bin/phplint",
-        "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src",
+        "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
+        "phpcbf": "phpcbf --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --xdebug",
         "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
         "check": [

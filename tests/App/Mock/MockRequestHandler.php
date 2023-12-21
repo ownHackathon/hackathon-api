@@ -8,7 +8,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class MockRequestHandler implements RequestHandlerInterface
 {
-
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new MockResponse();
