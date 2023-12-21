@@ -21,7 +21,7 @@ class LogoutHandler implements RequestHandlerInterface
             new OA\Response(
                 response: HTTP::STATUS_SEE_OTHER,
                 description: 'not implementet yet'
-            )
+            ),
         ]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

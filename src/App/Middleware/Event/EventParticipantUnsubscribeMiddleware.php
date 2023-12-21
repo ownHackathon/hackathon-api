@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Middleware\Event;
 
-use App\Enum\EventStatus;
 use App\Entity\User;
+use App\Enum\EventStatus;
 use App\Service\EventService;
 use App\Service\ParticipantService;
 use Psr\Http\Message\ResponseInterface;

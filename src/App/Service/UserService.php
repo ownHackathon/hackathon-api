@@ -68,11 +68,7 @@ class UserService
             $isUser = $this->findByEMail($email);
         }
 
-        if ($isUser instanceof User) {
-            return true;
-        }
-
-        return false;
+        return ($isUser instanceof User);
     }
 
     public function findById(int $id): User

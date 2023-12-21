@@ -39,7 +39,7 @@ class ParticipantTable extends AbstractTable
 
     public function findByUserIdAndEventId(int $userId, int $eventId): bool|array
     {
-        return $this->query->from(($this->table))
+        return $this->query->from($this->table)
             ->where('userId', $userId)
             ->where('eventId', $eventId)
             ->where('subscribed', 1)

@@ -2,7 +2,6 @@
 
 namespace Authentication;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Service\TokenService;
 use App\Service\UserService;
 use App\Validator\Input;
@@ -11,7 +10,6 @@ use App\Validator\Input\PasswordInput;
 use App\Validator\Input\UsernameInput;
 use Authentication\Handler\LoginHandlerFactory;
 use Authentication\Service\ApiAccessService;
-use Authentication\Validator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
