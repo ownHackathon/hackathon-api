@@ -29,7 +29,7 @@
         "phplint": "vendor/bin/phplint",
         "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpcbf": "phpcbf --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --xdebug",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
         "check": [
             "@phplint",
