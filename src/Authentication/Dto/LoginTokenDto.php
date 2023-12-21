@@ -8,14 +8,12 @@ use OpenApi\Attributes as OA;
 readonly class LoginTokenDto
 {
     #[OA\Property(
-        description: 'The token after a valid registration. Without login equals null',
+        description: 'The token after a valid log-in',
         type: 'string',
-        example: 'string|null',
-        nullable: true
     )]
-    public ?string $token;
+    public string $token;
 
-    public function __construct(?string $token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }

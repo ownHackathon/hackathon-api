@@ -3,6 +3,7 @@
 namespace Authentication\Middleware;
 
 use App\Entity\User;
+use Authentication\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +21,7 @@ class IsLoggedInAuthenticationMiddleware implements MiddlewareInterface
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
 
         if (!$user) {
-            return new JsonResponse(['message' => 'Authentication is required'], HTTP::STATUS_UNAUTHORIZED);
+            return new JsonResponse(new SimpleMessageDto('Authentication is required'), HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle($request);

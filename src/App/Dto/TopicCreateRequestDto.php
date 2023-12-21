@@ -5,7 +5,7 @@ namespace App\Dto;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class TopicCreateDto
+readonly class TopicCreateRequestDto
 {
     #[OA\Property(
         description: 'The general designation of the topic',

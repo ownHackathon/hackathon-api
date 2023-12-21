@@ -26,7 +26,7 @@
     "scripts": {
         "doctrine": "php ./bin/migrations.php",
         "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/doc/swagger.json",
-        "phplint": "vendor/bin/phplint",
+        "phplint": "phplint -c .phplint.yml --no-cache",
         "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpcbf": "phpcbf --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",

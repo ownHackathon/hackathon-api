@@ -4,6 +4,7 @@ namespace Authentication\Middleware;
 
 use App\Entity\User;
 use App\Service\UserService;
+use Authentication\Dto\SimpleMessageDto;
 use Authentication\Service\LoginAuthenticationService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -36,7 +37,7 @@ readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
         $user = $this->userService->findByName($name);
 
         if (!$this->authService->isUserDataCorrect($user, $password)) {
-            return new JsonResponse(['message' => 'Login failed'], HTTP::STATUS_UNAUTHORIZED);
+            return new JsonResponse(new SimpleMessageDto('Login failed'), HTTP::STATUS_UNAUTHORIZED);
         }
 
         return $handler->handle(

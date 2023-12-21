@@ -5,7 +5,7 @@ namespace App\Dto;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly class TopicDto extends TopicCreateDto
+readonly class TopicCreateResponseDto extends TopicCreateRequestDto
 {
     #[OA\Property(
         description: 'unique one-time identification number of the topic',

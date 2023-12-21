@@ -5,7 +5,7 @@ namespace Authentication\Dto;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class MessageDto
+class SimpleMessageDto
 {
     #[OA\Property(
         description: 'A message to the API user',

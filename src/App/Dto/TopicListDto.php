@@ -9,7 +9,7 @@ class TopicListDto
 {
     #[OA\Property(
         type: 'array',
-        items: new OA\Items(ref: TopicDto::class)
+        items: new OA\Items(ref: TopicCreateResponseDto::class)
     )]
     public array $topics;
 
@@ -18,7 +18,7 @@ class TopicListDto
         $this->topics = [];
 
         foreach ($topics as $topic) {
-            $this->topics[] = new TopicDto($topic);
+            $this->topics[] = new TopicCreateResponseDto($topic);
         }
     }
 }

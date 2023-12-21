@@ -5,7 +5,7 @@ namespace App\Dto;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class TopicCreateErrorDto
+class TopicCreateFailureMessageDto
 {
     #[OA\Property(
         properties: [

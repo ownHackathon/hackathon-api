@@ -4,7 +4,7 @@ namespace Authentication\Handler;
 
 use App\Entity\User;
 use Authentication\Dto\ApiMeDto;
-use Authentication\Dto\MessageDto;
+use Authentication\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -40,7 +40,7 @@ class ApiMeHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'Incorrect authorization or expired',
-        content: new OA\JsonContent(ref: MessageDto::class)
+        content: new OA\JsonContent(ref: SimpleMessageDto::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

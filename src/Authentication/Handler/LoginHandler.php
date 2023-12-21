@@ -4,7 +4,8 @@ namespace Authentication\Handler;
 
 use App\Entity\User;
 use Authentication\Dto\LoginTokenDto;
-use Authentication\Dto\MessageDto;
+use Authentication\Dto\LoginValidationFailureMessageDto;
+use Authentication\Dto\SimpleMessageDto;
 use Authentication\Dto\UserLogInDataDto;
 use Authentication\Service\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -14,13 +15,13 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LoginHandler implements RequestHandlerInterface
+readonly class LoginHandler implements RequestHandlerInterface
 {
     use JwtTokenGeneratorTrait;
 
     public function __construct(
-        private readonly string $tokenSecret,
-        private readonly int $tokenDuration
+        private string $tokenSecret,
+        private int $tokenDuration
     ) {
     }
 
@@ -39,13 +40,19 @@ class LoginHandler implements RequestHandlerInterface
         content: [new OA\JsonContent(ref: LoginTokenDto::class)]
     )]
     #[OA\Response(
+        response: HTTP::STATUS_BAD_REQUEST,
+        description: 'Incorrect Request Data',
+        content: [new OA\JsonContent(ref: LoginValidationFailureMessageDto::class)]
+    )]
+    #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: 'User was not authenticated',
-        content: [new OA\JsonContent(ref: MessageDto::class)]
+        content: [new OA\JsonContent(ref: SimpleMessageDto::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(User::USER_ATTRIBUTE);
+
         $token = null;
 
         if ($user instanceof User) {
@@ -56,6 +63,6 @@ class LoginHandler implements RequestHandlerInterface
             );
         }
 
-        return new JsonResponse(['token' => $token], HTTP::STATUS_OK);
+        return new JsonResponse(new LoginTokenDto($token), HTTP::STATUS_OK);
     }
 }

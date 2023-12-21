@@ -2,6 +2,7 @@
 
 namespace Authentication\Middleware;
 
+use Authentication\Dto\LoginValidationFailureMessageDto;
 use Authentication\Validator\LoginValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -24,7 +25,11 @@ readonly class LoginValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            return new JsonResponse(['message' => 'Login failed', 'data' => $data], HTTP::STATUS_UNAUTHORIZED);
+            // ToDo $this->validator->getMessage()
+            return new JsonResponse(
+                new LoginValidationFailureMessageDto('Login failed', $data),
+                HTTP::STATUS_BAD_REQUEST
+            );
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));
