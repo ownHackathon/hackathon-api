@@ -11,6 +11,6 @@ class ApiAccessService
 
     public function hasAccessRights(string $domain): bool
     {
-        return in_array($domain, $this->apiAccessConfig['domain']['whitelist']);
+        return in_array($domain, $this->apiAccessConfig['domain']['whitelist'], true);
     }
 }

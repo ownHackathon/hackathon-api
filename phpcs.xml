@@ -153,4 +153,6 @@
     <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
 
     <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
+
+    <rule ref="SlevomatCodingStandard.Functions.StrictCall"/>
 </ruleset>
