@@ -8,7 +8,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-use function array_key_exists;
 use function strtoupper;
 
 readonly class EventListMiddleware implements MiddlewareInterface
@@ -22,16 +21,12 @@ readonly class EventListMiddleware implements MiddlewareInterface
     {
         $params = $request->getQueryParams();
 
-        if (!array_key_exists('order', $params)) {
-            $events = $this->eventService->findAll();
-        } else {
-            $sort = match (strtoupper($params['sort'] ?? '')) {
-                'ASC' => 'ASC',
-                default => 'DESC',
-            };
+        $sort = match (strtoupper($params['sort'] ?? '')) {
+            'ASC' => 'ASC',
+            default => 'DESC',
+        };
 
-            $events = $this->eventService->findAll($params['order'], $sort);
-        }
+        $events = $this->eventService->findAll(sort: $sort);
 
         return $handler->handle($request->withAttribute('events', $events));
     }
