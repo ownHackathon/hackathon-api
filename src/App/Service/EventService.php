@@ -45,9 +45,9 @@ class EventService
     }
 
     /**
-     * @return array<Event>|null
+     * @return array<Event>
      */
-    public function findAll(string $order = 'startTime', string $sort = 'DESC'): ?array
+    public function findAll(string $order = 'startTime', string $sort = 'DESC'): array
     {
         $events = $this->table->findAll($order, $sort);
 

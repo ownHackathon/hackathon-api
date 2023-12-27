@@ -3,7 +3,7 @@
 namespace App\Handler;
 
 use App\Dto\TopicListDto;
-use App\Hydrator\ReflectionHydrator;
+use App\Entity\Topic;
 use Authentication\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -14,11 +14,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly class TopicListAvailableHandler implements RequestHandlerInterface
 {
-    public function __construct(
-        private ReflectionHydrator $hydrator,
-    ) {
-    }
-
     /**
      * Returns a list of all available topics that are available for a new event.
      */
@@ -35,11 +30,8 @@ readonly class TopicListAvailableHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getAttribute('availableTopics');
-
-        $data = $this->hydrator->extractList($data);
-
-        $data = new TopicListDto($data);
+        /** @var array<Topic> $data */
+        $data = $request->getAttribute(TopicListDto::class);
 
         return new JsonResponse($data, HTTP::STATUS_OK);
     }

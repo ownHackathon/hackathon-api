@@ -3,11 +3,10 @@
 namespace App\Handler;
 
 use Administration\Service\EMail\EMailServiceInterface;
-use App\Dto\TopicCreateRequestDto;
 use App\Dto\TopicCreateFailureMessageDto;
+use App\Dto\TopicCreateRequestDto;
 use App\Dto\TopicCreateResponseDto;
 use App\Entity\Topic;
-use App\Hydrator\ReflectionHydrator;
 use Authentication\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -19,7 +18,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 readonly class TopicCreateHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private ReflectionHydrator $hydrator,
         private EMailServiceInterface $mailService,
     ) {
     }
@@ -49,11 +47,12 @@ readonly class TopicCreateHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /** @var Topic $topic */
         $topic = $request->getAttribute(Topic::class);
 
         $this->mailService->send($topic);
 
-        $topic = new TopicCreateResponseDto($this->hydrator->extract($topic));
+        $topic = new TopicCreateResponseDto($topic);
 
         return new JsonResponse($topic, HTTP::STATUS_CREATED);
     }

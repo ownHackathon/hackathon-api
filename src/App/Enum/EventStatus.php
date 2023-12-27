@@ -12,4 +12,18 @@ enum EventStatus: int
     case CLOSED = 6;
     case ABORTED = 7;
     case HIDDEN = 8;
+
+    public function getStatusName(): string
+    {
+        return match ($this) {
+            EventStatus::SOON => 'soon',
+            EventStatus::PREPARE => 'prepare',
+            EventStatus::RUNNING => 'running',
+            EventStatus::EVALUATION => 'evaluation',
+            EventStatus::COMPLETE => 'complete',
+            EventStatus::CLOSED => 'closed',
+            EventStatus::ABORTED => 'aborted',
+            EventStatus::HIDDEN => 'hidden',
+        };
+    }
 }

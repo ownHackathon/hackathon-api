@@ -22,6 +22,11 @@ class MockUserService extends UserService
         return $uuid === TestConstants::USER_UUID ? new User() : null;
     }
 
+    public function findById(int $id): User
+    {
+        return new User();
+    }
+
     public function updateLastUserActionTime(User $user): User
     {
         return $user->setLastAction(new DateTime(TestConstants::TIME));

@@ -2,6 +2,7 @@
 
 namespace App\Dto;
 
+use App\Entity\Topic;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
@@ -10,13 +11,12 @@ readonly class TopicCreateResponseDto extends TopicCreateRequestDto
     #[OA\Property(
         description: 'unique one-time identification number of the topic',
         type: 'string',
-        example: 'bec152fa163d406696633263761cbfbd'
     )]
     public string $uuid;
 
-    public function __construct(array $topic)
+    public function __construct(Topic $topic)
     {
-        $this->uuid = $topic['uuid'] ?? '';
+        $this->uuid = $topic->getUuid();
         parent::__construct($topic);
     }
 }

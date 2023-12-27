@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EventStatus;
 use DateTime;
 
 class Event
@@ -14,7 +15,7 @@ class Event
     private DateTime $createTime;
     private DateTime $startTime;
     private int $duration = 0;
-    private int $status = 0;
+    private EventStatus $status = EventStatus::SOON;
     private bool $ratingCompleted = false;
 
     public function __construct()
@@ -119,12 +120,12 @@ class Event
         return $this;
     }
 
-    public function getStatus(): int
+    public function getStatus(): EventStatus
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(EventStatus $status): self
     {
         $this->status = $status;
 

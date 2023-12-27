@@ -49,9 +49,11 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\EventNameHandler::class,
                 Handler\EventCreateHandler::class,
+                Handler\EventNameHandler::class,
+                Handler\EventListHandler::class,
                 Handler\EventParticipantUnsubscribeHandler::class,
+                Handler\TopicListAvailableHandler::class,
 
                 EmailInput::class,
                 EventDescriptionInput::class,
@@ -74,10 +76,8 @@ class ConfigProvider
                 NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\EventHandler::class => ConfigAbstractFactory::class,
-                Handler\EventListHandler::class => ConfigAbstractFactory::class,
                 Handler\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\TopicCreateHandler::class => ConfigAbstractFactory::class,
-                Handler\TopicListAvailableHandler::class => ConfigAbstractFactory::class,
                 Handler\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\TestMailHandler::class => ConfigAbstractFactory::class,
 
@@ -129,19 +129,12 @@ class ConfigProvider
                 ProjectService::class,
                 TopicPoolService::class,
             ],
-            Handler\EventListHandler::class => [
-                UserService::class,
-            ],
             Handler\EventParticipantSubscribeHandler::class => [
                 Service\ParticipantService::class,
                 Service\ProjectService::class,
             ],
             Handler\TopicCreateHandler::class => [
-                ReflectionHydrator::class,
                 TopicCreateEMailService::class,
-            ],
-            Handler\TopicListAvailableHandler::class => [
-                ReflectionHydrator::class,
             ],
             Handler\UserHandler::class => [
                 ClassMethodsHydrator::class,
@@ -154,6 +147,7 @@ class ConfigProvider
             ],
             Middleware\Event\EventListMiddleware::class => [
                 Service\EventService::class,
+                Service\UserService::class,
             ],
             Middleware\Event\EventMiddleware::class => [
                 Service\EventService::class,

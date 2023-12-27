@@ -11,7 +11,7 @@ class TopicCreateHandlerTest extends AbstractHandler
 {
     public function testReturnJSonWithTopicData(): void
     {
-        $handler = new TopicCreateHandler($this->hydrator, new MockTopicCreateEMailService());
+        $handler = new TopicCreateHandler(new MockTopicCreateEMailService());
 
         $response = $handler->handle($this->request->withAttribute(Topic::class, new Topic()));
 

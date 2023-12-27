@@ -21,8 +21,6 @@ readonly class EventParticipantUnsubscribeMiddleware implements MiddlewareInterf
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $participantRemoveStatus = false;
-
         /**
          * @var User $user
          */
@@ -31,8 +29,8 @@ readonly class EventParticipantUnsubscribeMiddleware implements MiddlewareInterf
 
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus() >= EventStatus::RUNNING->value) {
-            return $handler->handle($request->withAttribute('participantRemoveStatus', $participantRemoveStatus));
+        if ($event->getStatus()->value >= EventStatus::RUNNING->value) {
+            return $handler->handle($request->withAttribute('participantRemoveStatus', false));
         }
 
         $participant = $this->participantService->findByUserIdAndEventId($user->getId(), $eventId);

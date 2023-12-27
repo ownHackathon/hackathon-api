@@ -22,13 +22,11 @@ readonly class EventParticipantSubscribeMiddleware implements MiddlewareInterfac
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $participantCreateStatus = false;
-
         $eventId = (int)$request->getAttribute('eventId');
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus() >= EventStatus::RUNNING->value) {
-            return $handler->handle($request->withAttribute('participantCreateStatus', $participantCreateStatus));
+        if ($event->getStatus()->value >= EventStatus::RUNNING->value) {
+            return $handler->handle($request->withAttribute('participantCreateStatus', false));
         }
 
         /**

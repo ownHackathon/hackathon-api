@@ -2,7 +2,11 @@
 
 namespace App\Middleware\Event;
 
+use App\Dto\EventDto;
+use App\Dto\EventListDto;
+use App\Entity\Event;
 use App\Service\EventService;
+use App\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -13,7 +17,8 @@ use function strtoupper;
 readonly class EventListMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private EventService $eventService
+        private EventService $eventService,
+        private UserService $userService,
     ) {
     }
 
@@ -26,8 +31,37 @@ readonly class EventListMiddleware implements MiddlewareInterface
             default => 'DESC',
         };
 
-        $events = $this->eventService->findAll(sort: $sort);
+        $order = match (strtoupper($params['order'] ?? '')) {
+            'ID' => 'id',
+            'OWNER' => 'owner',
+            'TITLE' => 'title',
+            'DESCRIPTION' => 'description',
+            'DURATION' => 'duration',
+            'STATUS' => 'status',
+            default => 'startTime',
+        };
 
-        return $handler->handle($request->withAttribute('events', $events));
+        /** @var array<Event> $events */
+        $events = $this->eventService->findAll($order, $sort);
+
+        $eventList = [];
+
+        foreach ($events as $event) {
+            $entry = new EventDto(
+                $event->getId(),
+                $this->userService->findById($event->getUserId())->getName(),
+                $event->getTitle(),
+                $event->getDescription(),
+                $event->getDuration(),
+                $event->getStartTime()->format('Y-m-d H:i'),
+                $event->getStatus(),
+            );
+
+            $eventList[] = $entry;
+        }
+
+        $eventList = new EventListDto($eventList);
+
+        return $handler->handle($request->withAttribute(EventListDto::class, $eventList));
     }
 }

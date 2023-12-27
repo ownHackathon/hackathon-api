@@ -2,6 +2,7 @@
 
 namespace App\Middleware\Topic;
 
+use App\Dto\TopicListDto;
 use App\Service\TopicPoolService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,7 +19,8 @@ readonly class TopicListAvailableMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $topics = $this->topicPoolService->findAvailable();
+        $topics = new TopicListDto($topics);
 
-        return $handler->handle($request->withAttribute('availableTopics', $topics));
+        return $handler->handle($request->withAttribute(TopicListDto::class, $topics));
     }
 }

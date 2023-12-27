@@ -2,6 +2,7 @@
 
 namespace App\Dto;
 
+use App\Enum\EventStatus;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
@@ -16,8 +17,8 @@ readonly class EventDto
     #[OA\Property(description: 'The title of the event', type: 'string')]
     public string $title;
 
-    #[OA\Property(description: 'A detailed description of what this event is about', type: 'string')]
-    public string $description;
+    #[OA\Property(description: 'A detailed description of what this event is about', type: 'string', nullable: true)]
+    public ?string $description;
 
     #[OA\Property(description: 'Duration of the event', type: 'integer', format: 'in Days')]
     public int $duration;
@@ -25,17 +26,36 @@ readonly class EventDto
     #[OA\Property(description: 'The time from which the event starts', type: 'string', format: 'Y-M-D hh:mm')]
     public string $startTime;
 
-    #[OA\Property(description: 'Which status', type: 'integer')]
+    #[OA\Property(
+        description: 'Which status<br> 
+                      1 = coming soon <br> 
+                      2 = in preparation <br>
+                      3 = running <br>
+                      4 = in evaluation <br>
+                      5 = completed/finalized <br>
+                      6 = closed <br>
+                      7 = aborted <br>
+                      8 = hidden',
+        type: 'int',
+        enum: EventStatus::class,
+    )]
     public int $status;
 
-    public function __construct(array $data)
-    {
-        $this->id = $data['id'];
-        $this->owner = $data['owner'];
-        $this->title = $data['title'];
-        $this->description = $data['description'];
-        $this->duration = $data['duration'];
-        $this->startTime = $data['startTime'];
-        $this->status = $data['status'];
+    public function __construct(
+        int $id,
+        string $owner,
+        string $title,
+        ?string $description,
+        int $duration,
+        string $startTime,
+        EventStatus $status
+    ) {
+        $this->id = $id;
+        $this->owner = $owner;
+        $this->title = $title;
+        $this->description = $description;
+        $this->duration = $duration;
+        $this->startTime = $startTime;
+        $this->status = $status->value;
     }
 }

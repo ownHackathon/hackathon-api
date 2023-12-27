@@ -2,10 +2,11 @@
 
 namespace App\Dto;
 
+use App\Entity\Topic;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class TopicListDto
+readonly class TopicListDto
 {
     #[OA\Property(
         type: 'array',
@@ -13,12 +14,17 @@ class TopicListDto
     )]
     public array $topics;
 
+    /**
+     * @param array<Topic> $topics
+     */
     public function __construct(array $topics)
     {
-        $this->topics = [];
+        $topicList = [];
 
         foreach ($topics as $topic) {
-            $this->topics[] = new TopicCreateResponseDto($topic);
+            $topicList[] = new TopicCreateResponseDto($topic);
         }
+
+        $this->topics = $topicList;
     }
 }
