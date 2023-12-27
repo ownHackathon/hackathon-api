@@ -125,9 +125,9 @@ class Event
         return $this->status;
     }
 
-    public function setStatus(EventStatus $status): self
+    public function setStatus(int $status): self
     {
-        $this->status = $status;
+        $this->status = EventStatus::from($status);
 
         return $this;
     }

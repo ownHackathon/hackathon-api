@@ -106,7 +106,7 @@ class EventTest extends TestCase
 
     public function testCanSetAndGetActive(): void
     {
-        $eventActive = $this->event->setStatus(EventStatus::RUNNING);
+        $eventActive = $this->event->setStatus(EventStatus::RUNNING->value);
         $active = $eventActive->getStatus();
 
         $this->assertInstanceOf(Event::class, $eventActive);
