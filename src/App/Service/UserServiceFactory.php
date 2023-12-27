@@ -2,8 +2,10 @@
 
 namespace App\Service;
 
+use App\Enum\EventStatus;
 use App\Hydrator\ReflectionHydrator;
 use App\Table\UserTable;
+use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
@@ -24,6 +26,10 @@ class UserServiceFactory
         $hydrator->addStrategy(
             'lastAction',
             $strategy,
+        );
+        $hydrator->addStrategy(
+            'status',
+            new BackedEnumStrategy(EventStatus::class)
         );
 
         return new UserService($table, $hydrator, $uuid);
