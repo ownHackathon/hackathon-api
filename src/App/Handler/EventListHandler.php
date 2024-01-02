@@ -4,7 +4,6 @@ namespace App\Handler;
 
 use App\Dto\EventDto;
 use App\Dto\EventListDto;
-use App\Entity\Event;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -40,9 +39,7 @@ readonly class EventListHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /**
-         * @var array<Event> $events
-         */
+        /** @var EventListDto $events */
         $events = $request->getAttribute(EventListDto::class);
 
         return new JsonResponse($events, HTTP::STATUS_OK);

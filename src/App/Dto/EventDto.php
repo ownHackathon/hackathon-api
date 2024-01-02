@@ -36,7 +36,7 @@ readonly class EventDto
                       6 = closed <br>
                       7 = aborted <br>
                       8 = hidden',
-        type: 'int',
+        type: 'integer',
         enum: EventStatus::class,
     )]
     public int $status;
