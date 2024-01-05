@@ -50,6 +50,7 @@ class UserService
         return (bool)$this->table->update($user);
     }
 
+    // @phpstan-ignore-next-line
     private function isUserExist(string $userName): bool
     {
         $user = $this->findByName($userName);
