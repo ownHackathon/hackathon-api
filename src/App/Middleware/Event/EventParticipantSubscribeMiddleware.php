@@ -32,7 +32,7 @@ readonly class EventParticipantSubscribeMiddleware implements MiddlewareInterfac
         /**
          * @var User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         $participant = new Participant();
         $participant->setUserId($user->getId())

@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\User;
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
-use App\Entity\User;
 use App\Table\UserTable;
 use DateTime;
 use Psr\Log\InvalidArgumentException;
@@ -32,14 +32,11 @@ class UserService
 
     public function create(User $user, UserRole $role = UserRole::USER): int|bool
     {
-        if (
-            $this->isUserExist($user->getName()) ||
-            $this->isEmailExist($user->getEmail())
-        ) {
+        if ($this->isEmailExist($user->getEmail())) {
             return false;
         }
 
-        $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+        $hashedPassword = password_hash('1234', PASSWORD_BCRYPT);
 
         $user->setPassword($hashedPassword);
         $user->setRoleId($role->value);

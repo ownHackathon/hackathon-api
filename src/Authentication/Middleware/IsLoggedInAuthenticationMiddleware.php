@@ -18,7 +18,7 @@ class IsLoggedInAuthenticationMiddleware implements MiddlewareInterface
         /**
          * @var null|User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         if (!$user) {
             return new JsonResponse(new SimpleMessageDto('Authentication is required'), HTTP::STATUS_UNAUTHORIZED);

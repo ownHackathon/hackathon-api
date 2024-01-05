@@ -3,12 +3,13 @@
 namespace App\Validator\Input;
 
 use Laminas\InputFilter\Input;
+use Laminas\Validator\Hostname;
 
 class EmailInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('email');
+        parent::__construct('e-mail');
 
         $this->setRequired(true);
 
@@ -17,7 +18,8 @@ class EmailInput extends Input
         $this->getValidatorChain()->attachByName(
             'EmailAddress',
             [
-                'useDomainCheck' => false,
+                'hostnameValidator' => new Hostname(),
+                'useMxCheck' => true,
             ]
         );
     }

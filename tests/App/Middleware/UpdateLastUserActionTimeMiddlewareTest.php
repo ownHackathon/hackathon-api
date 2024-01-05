@@ -26,7 +26,7 @@ class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
         $user = new User();
 
         $response = $middleware->process(
-            $this->request->withAttribute(User::USER_ATTRIBUTE, $user),
+            $this->request->withAttribute(User::AUTHENTICATED_USER, $user),
             $this->handler
         );
 

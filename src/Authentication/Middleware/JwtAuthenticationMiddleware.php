@@ -42,6 +42,6 @@ readonly class JwtAuthenticationMiddleware implements MiddlewareInterface
             $user = $this->userService->findByUuid($tokenData->uuid);
         }
 
-        return $handler->handle($request->withAttribute(User::USER_ATTRIBUTE, $user));
+        return $handler->handle($request->withAttribute(User::AUTHENTICATED_USER, $user));
     }
 }

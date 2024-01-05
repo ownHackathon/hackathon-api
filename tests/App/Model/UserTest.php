@@ -21,10 +21,8 @@ class UserTest extends TestCase
 
     public function testPropertiesIsByInitializeNull(): void
     {
-        $email = $this->user->getEmail();
         $lastLogin = $this->user->getLastAction();
 
-        $this->assertNull($email);
         $this->assertNull($lastLogin);
     }
 
@@ -81,7 +79,7 @@ class UserTest extends TestCase
     public function testCanSetAndGetEmail(): void
     {
         $email = $this->user->getEmail();
-        $this->assertNull($email);
+        $this->assertSame('', $email);
 
         $userEmail = $this->user->setEmail(TestConstants::USER_EMAIL);
         $email = $userEmail->getEmail();

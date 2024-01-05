@@ -6,14 +6,14 @@ use DateTime;
 
 class User
 {
-    public const USER_ATTRIBUTE = 'authenticatedUser';
+    public const AUTHENTICATED_USER = 'authenticatedUser';
 
     private int $id = 0;
     private string $uuid = '';
     private int $roleId = 0;
-    private string $name = '';
+    private string $name = 'unbekannt';
     private string $password = '';
-    private ?string $email = null;
+    private string $email = '';
     private DateTime $registrationTime;
     private ?DateTime $lastAction = null;
     private bool $active = false;

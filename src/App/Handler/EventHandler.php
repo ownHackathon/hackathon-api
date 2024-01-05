@@ -31,7 +31,7 @@ readonly class EventHandler implements RequestHandlerInterface
         /**
          * @var User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         /**
          * @var Event $event

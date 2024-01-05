@@ -44,7 +44,7 @@ class ApiMeHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         if (!($user instanceof User)) {
             return new JsonResponse([], HTTP::STATUS_OK);

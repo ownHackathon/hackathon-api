@@ -2,6 +2,7 @@
 
 namespace Authentication\Middleware;
 
+use App\Dto\HttpStatusCodeMessage;
 use Authentication\Validator\RegisterValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -19,13 +20,18 @@ readonly class UserRegisterValidationMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-
         $data = $request->getParsedBody();
 
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            return new JsonResponse(['message' => 'Registration failed', 'data' => $data], HTTP::STATUS_UNAUTHORIZED);
+            return new JsonResponse([
+                new HttpStatusCodeMessage(
+                    HTTP::STATUS_BAD_REQUEST,
+                    'Registration failed',
+                    $this->validator->getMessages()
+                ),
+            ], HTTP::STATUS_BAD_REQUEST);
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));

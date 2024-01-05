@@ -41,7 +41,7 @@ readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
         }
 
         return $handler->handle(
-            $request->withAttribute(User::USER_ATTRIBUTE, $user)
+            $request->withAttribute(User::AUTHENTICATED_USER, $user)
         );
     }
 }

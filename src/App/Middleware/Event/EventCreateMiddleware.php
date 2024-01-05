@@ -26,7 +26,7 @@ readonly class EventCreateMiddleware implements MiddlewareInterface
         /**
          * @var User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         $data = $request->getParsedBody();
         $data['userId'] = $user->getId();

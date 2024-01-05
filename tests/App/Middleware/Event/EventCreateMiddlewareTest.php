@@ -23,7 +23,7 @@ class EventCreateMiddlewareTest extends AbstractMiddleware
         $user = new User();
         $user->setId(1);
         $response = $middleware->process(
-            $this->request->withAttribute(User::USER_ATTRIBUTE, $user)
+            $this->request->withAttribute(User::AUTHENTICATED_USER, $user)
                 ->withParsedBody(['id' => 2]),
             $this->handler
         );
@@ -38,7 +38,7 @@ class EventCreateMiddlewareTest extends AbstractMiddleware
         $user = new User();
         $user->setId(1);
         $response = $middleware->process(
-            $this->request->withAttribute(User::USER_ATTRIBUTE, $user)
+            $this->request->withAttribute(User::AUTHENTICATED_USER, $user)
                 ->withParsedBody(['id' => 1]),
             $this->handler
         );

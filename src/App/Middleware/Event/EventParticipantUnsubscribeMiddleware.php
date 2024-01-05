@@ -24,7 +24,7 @@ readonly class EventParticipantUnsubscribeMiddleware implements MiddlewareInterf
         /**
          * @var User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
         $eventId = (int)$request->getAttribute('eventId');
 
         $event = $this->eventService->findById($eventId);

@@ -30,7 +30,7 @@ readonly class EventParticipantSubscribeHandler implements RequestHandlerInterfa
         /**
          * @var User $user
          */
-        $user = $request->getAttribute(User::USER_ATTRIBUTE);
+        $user = $request->getAttribute(User::AUTHENTICATED_USER);
         $eventId = (int)$request->getAttribute('eventId');
 
         $participant = $this->participantService->findByUserIdAndEventId($user->getId(), $eventId);

@@ -7,7 +7,6 @@ use App\Service\UserService;
 use App\Validator\Input;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\PasswordInput;
-use App\Validator\Input\UsernameInput;
 use Authentication\Handler\LoginHandlerFactory;
 use Authentication\Service\ApiAccessService;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -106,8 +105,6 @@ class ConfigProvider
                 Input\EmailInput::class,
             ],
             Validator\RegisterValidator::class => [
-                UsernameInput::class,
-                PasswordInput::class,
                 EmailInput::class,
             ],
             Validator\UserPasswordChangeValidator::class => [

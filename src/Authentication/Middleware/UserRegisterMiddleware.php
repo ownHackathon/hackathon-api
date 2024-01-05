@@ -2,6 +2,7 @@
 
 namespace Authentication\Middleware;
 
+use App\Dto\HttpStatusCodeMessage;
 use App\Entity\User;
 use App\Service\UserService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -23,19 +24,25 @@ readonly class UserRegisterMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();
-        $data['name'] = $data['username'];
+        $data['email'] = $data['e-mail'];
         $user = $this->hydrator->hydrate($data, new User());
 
         if (!$this->userService->create($user)) {
             $validationMessages = [
-                'userName' => [
+                'email' => [
                     'message' => 'Invalid registration data',
                 ],
             ];
 
-            return new JsonResponse(['message' => 'Registration failed', 'data' => $validationMessages], HTTP::STATUS_UNAUTHORIZED);
+            return new JsonResponse(
+                new HttpStatusCodeMessage(
+                    HTTP::STATUS_BAD_REQUEST,
+                    'Registration failed',
+                    $validationMessages
+                ),
+                HTTP::STATUS_BAD_REQUEST
+            );
         }
-
         return $handler->handle($request);
     }
 }
