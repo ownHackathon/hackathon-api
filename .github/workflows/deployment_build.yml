@@ -184,7 +184,7 @@ jobs:
             **/.git*/**
             **/bin/**
             **/tests/**
-            **/config/autoload/**
+            **/config/autoload/*.dist
             **/config/migrations/**
             **/node_modules/**
             **/client/**
