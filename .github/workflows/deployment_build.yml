@@ -156,6 +156,7 @@ jobs:
       - phplint
       - phpstan
       - phpunit
+      - phpfunctional
     env:
       VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
     runs-on: ubuntu-20.04
