@@ -50,6 +50,10 @@ case $1 in
     setup_database
   ;;
 
+  "clean")
+    docker_vendor_cleanup
+  ;;
+
   "reset")
     echo "turning down docker container"
     docker_down
