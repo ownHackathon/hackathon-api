@@ -16,8 +16,8 @@ return new ConfigAggregator([
     class_exists(Mezzio\Swoole\ConfigProvider::class)
         ? Mezzio\Swoole\ConfigProvider::class
         : function (): array {
-            return [];
-        },
+        return [];
+    },
 
     Administration\ConfigProvider::class,
     App\ConfigProvider::class,

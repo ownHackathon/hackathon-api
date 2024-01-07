@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
 use App\Handler\PingHandler;
+use Mezzio\MiddlewareFactory;
+use Psr\Container\ContainerInterface;
 
-return static function (Mezzio\Application $app): void {
+return static function (Mezzio\Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/api/testmail',App\Handler\TestMailHandler::class,App\Handler\TestMailHandler::class);
     $app->get('/api/ping[/]', PingHandler::class, PingHandler::class);
 

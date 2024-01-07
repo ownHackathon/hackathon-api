@@ -1,28 +1,32 @@
 <?php declare(strict_types=1);
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
-date_default_timezone_set('Europe/Berlin');
+// Delegate static file requests back to the PHP built-in webserver
+use Mezzio\Application;
+use Mezzio\MiddlewareFactory;
+use Psr\Container\ContainerInterface;
 
 if (PHP_SAPI === 'cli-server' && $_SERVER['SCRIPT_FILENAME'] !== __FILE__) {
     return false;
 }
 
-require_once __DIR__ . '/../../constants.php';
+chdir(dirname(__DIR__));
+require './../vendor/autoload.php';
 
-require ROOT_DIR . 'vendor/autoload.php';
-
+/**
+ * Self-called anonymous function that creates its own scope and keeps the global namespace clean.
+ */
 (function () {
-    /** @var Psr\Container\ContainerInterface $container */
-    $container = require CONFIG_DIR . 'container.php';
+    /** @var ContainerInterface $container */
+    $container = require './../config/container.php';
 
-    /** @var Mezzio\Application $app */
-    $app = $container->get(Mezzio\Application::class);
+    /** @var Application $app */
+    $app = $container->get(Application::class);
+    $factory = $container->get(MiddlewareFactory::class);
 
-    $factory = $container->get(Mezzio\MiddlewareFactory::class);
-
-    (require CONFIG_DIR . 'pipeline.php')($app);
-    (require CONFIG_DIR . 'routes.php')($app);
+    // Execute programmatic/declarative middleware pipeline and routing
+    // configuration statements
+    (require './../config/pipeline.php')($app, $factory, $container);
+    (require './../config/routes.php')($app, $factory, $container);
 
     $app->run();
 })();
