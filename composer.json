@@ -37,8 +37,8 @@
         "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpcbf": "phpcbf --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always –-display-notices --testsuite 'Unit'",
-        "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always -display-notices --testsuite 'Functional'",
+        "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --testsuite 'Unit'",
+        "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --testsuite 'Functional'",
         "test": [
             "@unittest",
             "@functionaltest"
