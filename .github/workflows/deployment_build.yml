@@ -95,6 +95,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
+      - name: Install PHP with extensions.
+        uses: shivammathur/setup-php@v2
+        with:
+           php-version: 8.3
+           extensions: pdo, pdo_sqlite
+           ini-values: date.timezone='UTC'
+
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
