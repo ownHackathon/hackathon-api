@@ -66,6 +66,8 @@
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",
+        "helmich/phpunit-json-assert": "^3.5",
+        "helmich/phpunit-psr7-assert": "^4.4",
         "overtrue/phplint": "^5.3",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^10.0",
@@ -82,8 +84,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Test\\": "tests/App",
-            "Authentication\\Test\\": "tests/Authentication"
+            "Test\\": "tests"
         }
     }
 }

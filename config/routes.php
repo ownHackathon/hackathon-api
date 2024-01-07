@@ -1,13 +1,11 @@
 <?php declare(strict_types=1);
 
+use App\Handler\PingHandler;
+
 return static function (Mezzio\Application $app): void {
-    $app->get(
-        '/testmail',
-        [
-            App\Handler\TestMailHandler::class,
-        ],
-        App\Handler\TestMailHandler::class
-    );
+    $app->get('/api/testmail',App\Handler\TestMailHandler::class,App\Handler\TestMailHandler::class);
+    $app->get('/api/ping[/]', PingHandler::class, PingHandler::class);
+
     /** ToDo OpenApi */
     $app->get(
         '/api/event[/]',

@@ -53,6 +53,7 @@ class ConfigProvider
                 Handler\EventNameHandler::class,
                 Handler\EventListHandler::class,
                 Handler\EventParticipantUnsubscribeHandler::class,
+                Handler\PingHandler::class,
                 Handler\TopicListAvailableHandler::class,
 
                 EmailInput::class,
