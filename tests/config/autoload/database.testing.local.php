@@ -2,7 +2,8 @@
 
 return [
     'database' => [
-        'host' => 'hackathon-mariadb',
+        'database' => 'sqlite',
+        'host' => __DIR__ . '/../../../database/database.sqlite',
         'port' => '3306',
         'user' => 'dev',
         'password' => 'dev',

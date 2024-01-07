@@ -6,21 +6,24 @@ use Fig\Http\Message\StatusCodeInterface;
 use Helmich\JsonAssert\JsonAssertions;
 use Laminas\Diactoros\ServerRequest;
 
-use function json_decode;
 use function time;
 
 class PingTest extends FunctionalTestCase
 {
     use JsonAssertions;
+    use JsonRequestHelper;
 
     public function testDispatchRequest(): void
     {
         $request = new ServerRequest(uri: '/api/ping', method: 'GET');
 
-        $result = $this->app->dispatchRequest($request);
-        $content = json_decode($result->getBody()->getContents(), true);
+        $response = $this->app->dispatchRequest($request);
 
-        $this->assertSame(StatusCodeInterface::STATUS_OK, $result->getStatusCode());
-        $this->assertJsonValueMatches($content, '$.ack', self::greaterThanOrEqual(time()));
+        self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertJsonValueMatches(
+            self::getContentAsJson($response),
+            '$.ack',
+            self::greaterThanOrEqual(time())
+        );
     }
 }
