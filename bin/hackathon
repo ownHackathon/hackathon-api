@@ -6,8 +6,8 @@ function composer_install() {
 }
 
 function setup_database() {
-    docker-compose exec php composer run doctrine migrations:sync-metadata-storage
-    docker-compose exec php composer run doctrine migrations:migrate
+    docker-compose exec --env APP_ENV php composer run doctrine migrations:sync-metadata-storage
+    docker-compose exec --env APP_ENV php composer run doctrine migrations:migrate --no-interaction
 }
 
 function docker_start() {
