@@ -185,7 +185,10 @@ jobs:
             **/bin/**
             **/tests/**
             **/config/autoload/*.dist
-            **/config/migrations/**
+            **/config/autoload/*.develope.php
+            **/config/autoload/*.local.php
+            **/config/autoload/*.testing.php
+            **/config/*.dist
             **/node_modules/**
             **/client/**
             **/database/**
