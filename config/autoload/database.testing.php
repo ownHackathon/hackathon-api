@@ -3,12 +3,7 @@
 return [
     'database' => [
         'driver' => 'sqlite',
-        'host' => __DIR__ . '/../../database/database.sqlite',
-        'port' => '3306',
-        'user' => 'dev',
-        'password' => 'dev',
-        'dbname' => 'db',
-        'charset' => 'utf8mb4',
-        'error' => PDO::ERRMODE_EXCEPTION,
-    ]
+        'path' => __DIR__ . '/../../database/database.sqlite',
+        'memory' => false,
+    ],
 ];
