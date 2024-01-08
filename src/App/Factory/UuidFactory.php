@@ -10,6 +10,6 @@ class UuidFactory
 {
     public function __invoke(ContainerInterface $container): UuidInterface
     {
-        return Uuid::uuid4();
+        return Uuid::uuid7();
     }
 }
