@@ -21,7 +21,7 @@ final class Version20220921200425CreateProjectTable extends AbstractMigration
         $table->addColumn('createTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
 
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['title'], 'title_UNIQUE');
+        $table->addUniqueIndex(['title'], 'project_title_UNIQUE');
     }
 
     public function down(Schema $schema): void

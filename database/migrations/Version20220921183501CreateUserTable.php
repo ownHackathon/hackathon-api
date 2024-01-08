@@ -23,9 +23,9 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
         $table->addColumn('token', Types::STRING, ['length' => 32, 'notnull' => false]);
 
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['uuid'], 'uuid_UNIQUE');
-        $table->addUniqueIndex(['name'], 'name_UNIQUE');
-        $table->addUniqueIndex(['email'], 'email_UNIQUE');
+        $table->addUniqueIndex(['uuid'], 'user_uuid_UNIQUE');
+        $table->addUniqueIndex(['name'], 'user_name_UNIQUE');
+        $table->addUniqueIndex(['email'], 'user_email_UNIQUE');
     }
 
     public function down(Schema $schema): void

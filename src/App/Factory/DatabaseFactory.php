@@ -12,7 +12,7 @@ class DatabaseFactory
         $settings = $container->get('config');
         $settings = $settings['database'];
 
-        $dsn = $settings['database'] === 'mysql'
+        $dsn = $settings['driver'] === 'mysql'
             ? 'mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['host'] . ';port=' . $settings['port']
             . ';charset=utf8'
             : 'sqlite:' . $settings['host'];

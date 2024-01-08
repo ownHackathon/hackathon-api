@@ -16,7 +16,7 @@ class DatabaseFactoryTest extends TestCase
 
         $config = [
             'database' => [
-                'database' => 'mysqls',
+                'driver' => 'mysql',
                 'user' => 'testUser',
                 'password' => 'testPassword',
                 'host' => 'https//example.com',

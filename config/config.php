@@ -17,7 +17,7 @@ $aggregator = new ConfigAggregator([
     \Laminas\Validator\ConfigProvider::class,
     \Laminas\Hydrator\ConfigProvider::class,
     \Mezzio\Tooling\ConfigProvider::class,
-    \Mezzio\Helper\ConfigProvider::class,
+    ConfigProvider::class,
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
     // Include cache configuration
@@ -45,7 +45,12 @@ $aggregator = new ConfigAggregator([
     //   - `*.global.php`
     //   - `local.php`
     //   - `*.local.php`
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
+    new PhpFileProvider(
+        realpath(__DIR__) . sprintf(
+            '/autoload/{,*.}{global,%s,local}.php',
+            getenv('APP_ENV') ?: 'production'
+        )
+    ),
 
     // Load development config if it exists
     new PhpFileProvider(realpath(__DIR__) . '/development.config.php'),

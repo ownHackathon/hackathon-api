@@ -1,7 +1,4 @@
+*.production.php
 local.php
-*.local.php
+development.config.global.php
 development.local.php
-token.global.php
-mail.global.php
-project.global.php
-database.global.php

@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -12,14 +12,19 @@ use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\Migrations\Tools\Console\Command;
 use Symfony\Component\Console\Application;
 
-$dbParams = require __DIR__ . '/../config/migrations/migrations.db.php';
-$config = require __DIR__ . '/../config/migrations/migrations.setting.php';
+$env = getenv('APP_ENV') ?: '';
+
+//$dbParams = require __DIR__ . '/../config/migrations/migrations.db.php';
+$dbParams = (require realpath(__DIR__) . sprintf('/../config/autoload/database.%s.php', getenv('APP_ENV') ?: 'global'))['database'];
+$dbParams['driver'] = 'pdo_' . $dbParams['driver'];
+
+$config = (require realpath(__DIR__) . sprintf('/../config/autoload/migrations.%s.php', getenv('APP_ENV') ?: 'global'))['migrations'];
 
 $connection = DriverManager::getConnection($dbParams);
 
 $configuration = new Configuration();
 
-$configuration->setCustomTemplate(__DIR__ . '/../config/migrations/migrations.template.tpl');
+$configuration->setCustomTemplate(__DIR__ . '/../config/migrations.template.tpl');
 
 $configuration->addMigrationsDirectory('Migrations', $config['migrations_paths']['Migrations']);
 $configuration->setAllOrNothing($config['all_or_nothing']);

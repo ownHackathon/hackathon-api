@@ -24,7 +24,7 @@ final class Version20220921202630CreateEventTable extends AbstractMigration
         $table->addColumn('ratingCompleted', Types::BOOLEAN, ['default' => 0]);
 
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['title'], 'title_UNIQUE');
+        $table->addUniqueIndex(['title'], 'event_title_UNIQUE');
     }
 
     public function down(Schema $schema): void

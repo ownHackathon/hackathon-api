@@ -20,8 +20,8 @@ final class Version20220921195606CreateTopicPoolTable extends AbstractMigration
         $table->addColumn('accepted', Types::BOOLEAN, ['notnull' => false]);
 
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['uuid'], 'uuid_UNIQUE');
-        $table->addUniqueIndex(['topic'], 'topic_UNIQUE');
+        $table->addUniqueIndex(['uuid'], 'topicpool_uuid_UNIQUE');
+        $table->addUniqueIndex(['topic'], 'topicpool_topic_UNIQUE');
     }
 
     public function down(Schema $schema): void

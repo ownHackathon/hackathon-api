@@ -37,8 +37,8 @@
         "phpcs": "phpcs --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpcbf": "phpcbf --standard=phpcs.xml --extensions=php --tab-width=4 -sp src tests",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --testsuite 'Unit'",
-        "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --testsuite 'Functional'",
+        "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --configuration phpunit_unittest.xml",
+        "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --configuration phpunit_functionaltest.xml",
         "test": [
             "@unittest",
             "@functionaltest"
@@ -62,6 +62,7 @@
         "doctrine/migrations": "^3.5",
         "envms/fluentpdo": "^2.2.0",
         "firebase/php-jwt": "^6.0",
+        "jetbrains/phpstorm-attributes": "^1.0",
         "laminas/laminas-component-installer": "^3.2.0",
         "laminas/laminas-config-aggregator": "^1.6.0",
         "laminas/laminas-development-mode": "^3.12",
@@ -78,8 +79,7 @@
         "mezzio/mezzio-tooling": "^2.9",
         "ramsey/uuid": "^4.3",
         "symfony/mailer": "^6.1",
-        "zircote/swagger-php": "^4.6",
-        "jetbrains/phpstorm-attributes": "^1.0"
+        "zircote/swagger-php": "^4.6"
     },
     "require-dev": {
         "filp/whoops": "^2.14.4",

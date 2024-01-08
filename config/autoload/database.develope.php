@@ -2,12 +2,13 @@
 
 return [
     'database' => [
-        'database' => 'mysql',
+        'driver' => 'mysql',
         'host' => 'hackathon-mariadb',
         'port' => '3306',
         'user' => 'dev',
         'password' => 'dev',
         'dbname' => 'db',
+        'charset' => 'utf8mb4',
         'error' => PDO::ERRMODE_EXCEPTION,
     ]
 ];

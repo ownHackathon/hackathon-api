@@ -17,7 +17,7 @@ final class Version20220921185916CreateRoleTable extends AbstractMigration
         $table->addColumn('description', Types::TEXT, ['notnull' => false]);
 
         $table->setPrimaryKey(['id']);
-        $table->addUniqueIndex(['name'], 'name_UNIQUE');
+        $table->addUniqueIndex(['name'], 'role_name_UNIQUE');
     }
 
     public function down(Schema $schema): void

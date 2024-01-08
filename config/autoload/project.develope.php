@@ -9,15 +9,13 @@ return [
             'domain' => [
                 'whitelist' => [
                     'localhost',
-                    'build.hackathon.exdrals.de',
-                    'hackathon.exdrals.de'
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ],
     'event' => [
         'participant' => [
-            'subscribe_delay' => 30
-        ]
-    ]
+            'subscribe_delay' => 30,
+        ],
+    ],
 ];

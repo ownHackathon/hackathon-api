@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+export APP_ENV=${APP_ENV:-develope}
 
 function composer_install() {
     docker-compose exec php composer install
@@ -89,14 +90,10 @@ case $1 in
   ;;
 
   "composer")
-    docker-compose run --rm php composer "${@:2}"
+    docker-compose run --rm --env APP_ENV php composer "${@:2}"
     ;;
 
   "php")
-    docker-compose run --rm php "${@:2}"
-    ;;
-
-  *)
-
+    docker-compose run --rm --env APP_ENV php "${@:2}"
     ;;
 esac

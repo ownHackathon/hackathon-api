@@ -2,7 +2,7 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
-        bootstrap="vendor/autoload.php"
+        bootstrap="tests/bootstrap.php"
         executionOrder="depends,defects"
         beStrictAboutOutputDuringTests="true"
         failOnRisky="true"
@@ -12,22 +12,8 @@
         beStrictAboutCoverageMetadata="true"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Functional">
+       <testsuite name="Functional">
             <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
-    <coverage>
-        <report>
-            <clover outputFile=".phpunit.cache/code-coverage/Hackathon@tests.xml"/>
-            <html outputDirectory=".phpunit.cache/build/coverage"/>
-        </report>
-    </coverage>
-    <source>
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </source>
 </phpunit>
