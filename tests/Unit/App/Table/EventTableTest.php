@@ -42,6 +42,13 @@ class EventTableTest extends AbstractTable
         $this->assertSame($this->fetchResult, $event);
     }
 
+    public function testFindByIdHaveEmptyResult(): void
+    {
+        $event = $this->table->findById(TestConstants::EVENT_ID_UNUSED);
+
+        $this->assertSame([], $event);
+    }
+
     public function testCanFindAll(): void
     {
         $event = $this->table->findAll();

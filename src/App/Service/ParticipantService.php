@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Participant;
+use App\Hydrator\ReflectionHydrator;
 use App\Table\ParticipantTable;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
 readonly class ParticipantService
@@ -33,8 +34,11 @@ readonly class ParticipantService
     {
         $participant = $this->table->findById($id);
 
-        if (!$participant) {
-            throw new InvalidArgumentException('Could not find Participant', 400);
+        if ($participant === []) {
+            throw new InvalidArgumentException(
+                sprintf('Could not find Participant with id %d', $id),
+                HTTP::STATUS_NOT_FOUND
+            );
         }
 
         return $this->hydrator->hydrate($participant, new Participant());

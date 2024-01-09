@@ -62,6 +62,13 @@ class UserTableTest extends AbstractTable
         $this->assertSame($this->fetchResult, $user);
     }
 
+    public function testFindByIdHaveEmptyResult(): void
+    {
+        $user = $this->table->findById(TestConstants::USER_ID_UNUSED);
+
+        $this->assertSame([], $user);
+    }
+
     public function testCanFindByUuid(): void
     {
         $user = $this->table->findByUuid(TestConstants::USER_UUID);

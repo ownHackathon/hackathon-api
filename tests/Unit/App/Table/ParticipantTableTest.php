@@ -52,6 +52,13 @@ class ParticipantTableTest extends AbstractTable
         $this->assertSame($this->fetchResult, $project);
     }
 
+    public function testFindByIdHaveEmptyResult(): void
+    {
+        $project = $this->table->findById(TestConstants::PARTICIPANT_ID_UNUSED);
+
+        $this->assertSame([], $project);
+    }
+
     public function testCanFindAll(): void
     {
         $project = $this->table->findAll();

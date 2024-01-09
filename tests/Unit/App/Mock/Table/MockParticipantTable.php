@@ -18,9 +18,9 @@ class MockParticipantTable extends ParticipantTable
         return $participant->getId() === 1 ? 1 : false;
     }
 
-    public function findById(int $id): bool|array
+    public function findById(int $id): array
     {
-        return $id === 1 ? ['id' => $id] : false;
+        return $id === 1 ? ['id' => $id] : [];
     }
 
     public function findByUserId(int $userId): bool|array

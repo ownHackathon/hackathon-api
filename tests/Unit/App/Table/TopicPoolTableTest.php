@@ -41,6 +41,13 @@ class TopicPoolTableTest extends AbstractTable
         $this->assertSame($this->fetchResult, $topic);
     }
 
+    public function testFindByIdHaveEmptyResult(): void
+    {
+        $topic = $this->table->findById(TestConstants::TOPIC_POOL_ID_UNUSED);
+
+        $this->assertSame([], $topic);
+    }
+
     public function testCanFindByUuId(): void
     {
         $topic = $this->table->findByUuId(TestConstants::TOPIC_UUID);

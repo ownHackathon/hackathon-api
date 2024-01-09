@@ -22,11 +22,11 @@ class AbstractTable
         return $this->table;
     }
 
-    public function findById(int $id): bool|array
+    public function findById(int $id): array
     {
         return $this->query->from($this->table)
             ->where('id', $id)
-            ->fetch();
+            ->fetch() ?: [];
     }
 
     public function findAll(): bool|array

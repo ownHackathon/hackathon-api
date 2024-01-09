@@ -6,10 +6,10 @@ use App\Entity\Topic;
 use App\Exception\HttpException;
 use App\Hydrator\ReflectionHydrator;
 use App\Table\TopicPoolTable;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use JetBrains\PhpStorm\ArrayShape;
 use PDOException;
 use Psr\Log\InvalidArgumentException;
-use Fig\Http\Message\StatusCodeInterface as Http;
 
 class TopicPoolService
 {
@@ -45,8 +45,11 @@ class TopicPoolService
     {
         $event = $this->table->findById($id);
 
-        if (!$event) {
-            throw new InvalidArgumentException('Could not find Event', 400);
+        if ($event === []) {
+            throw new InvalidArgumentException(
+                sprintf('Could not find Event with id %d', $id),
+                HTTP::STATUS_NOT_FOUND
+            );
         }
 
         return $this->hydrator->hydrate($event, new Topic());

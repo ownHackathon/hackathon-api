@@ -13,7 +13,7 @@ class MockEventTable extends EventTable
         parent::__construct(new MockQuery());
     }
 
-    public function findById(int $id): bool|array
+    public function findById(int $id): array
     {
         if ($id === 1) {
             return [
@@ -28,7 +28,7 @@ class MockEventTable extends EventTable
             ];
         }
 
-        return false;
+        return [];
     }
 
     public function findByTitle(string $topic): bool|array

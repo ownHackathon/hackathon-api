@@ -4,7 +4,9 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\Project;
 use App\Service\ProjectService;
+use InvalidArgumentException;
 use Test\Unit\App\Mock\Table\MockProjectTable;
+use Test\Unit\App\Mock\TestConstants;
 
 class ProjectServiceTest extends AbstractService
 {
@@ -27,9 +29,9 @@ class ProjectServiceTest extends AbstractService
 
     public function testCanNotFindById(): void
     {
-        $project = $this->service->findById(2);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertNull($project);
+        $this->service->findById(TestConstants::PROJECT_ID_UNUSED);
     }
 
     public function testCanFindByParticipantId(): void

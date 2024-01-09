@@ -2,9 +2,13 @@
 
 namespace App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Project;
+use App\Hydrator\ReflectionHydrator;
 use App\Table\ProjectTable;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use InvalidArgumentException;
+
+use function sprintf;
 
 readonly class ProjectService
 {
@@ -18,8 +22,11 @@ readonly class ProjectService
     {
         $project = $this->table->findById($id);
 
-        if (!$project) {
-            return null;
+        if ($project === []) {
+            throw new InvalidArgumentException(
+                sprintf('Project with id %d not found', $id),
+                HTTP::STATUS_NOT_FOUND
+            );
         }
 
         return $this->hydrator->hydrate($project, new Project());

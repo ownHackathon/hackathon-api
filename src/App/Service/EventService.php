@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Event;
+use App\Hydrator\ReflectionHydrator;
 use App\Table\EventTable;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
 class EventService
@@ -30,8 +31,11 @@ class EventService
     {
         $event = $this->table->findById($id);
 
-        if (!$event) {
-            throw new InvalidArgumentException('Could not find Event', 400);
+        if ($event === []) {
+            throw new InvalidArgumentException(
+                sprintf('Could not find Event with id %d', $id),
+                HTTP::STATUS_NOT_FOUND
+            );
         }
 
         return $this->hydrator->hydrate($event, new Event());

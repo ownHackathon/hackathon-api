@@ -7,6 +7,7 @@ use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
 use App\Table\UserTable;
 use DateTime;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
 
@@ -75,8 +76,11 @@ class UserService
     {
         $user = $this->table->findById($id);
 
-        if (!$user) {
-            throw new InvalidArgumentException('Could not find user', 400);
+        if ($user === []) {
+            throw new InvalidArgumentException(
+                sprintf('Could not find user with id %d', $id),
+                HTTP::STATUS_NOT_FOUND
+            );
         }
 
         return $this->hydrator->hydrate($user, new User());

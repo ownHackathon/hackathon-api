@@ -12,9 +12,9 @@ class MockProjectTable extends ProjectTable
         parent::__construct(new MockQuery());
     }
 
-    public function findById(int $id): bool|array
+    public function findById(int $id): array
     {
-        return $id === 1 ? ['id' => $id] : false;
+        return $id === 1 ? ['id' => $id] : [];
     }
 
     public function findByParticipantId(int $id): bool|array

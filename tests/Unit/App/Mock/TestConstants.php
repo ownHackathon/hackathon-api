@@ -8,6 +8,8 @@ class TestConstants
 
     public const USER_ID = 1;
 
+    public const USER_ID_UNUSED = 2;
+
     public const USER_CREATE_ID = 2;
 
     public const USER_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
@@ -26,9 +28,13 @@ class TestConstants
 
     public const PARTICIPANT_ID = 1;
 
+    public const PARTICIPANT_ID_UNUSED = 2;
+
     public const EVENT_ID = 1;
 
     public const EVENT_NOT_REMOVE_ID = 2;
+
+    public const EVENT_ID_UNUSED = 3;
 
     public const EVENT_TITLE = 'Test Title';
 
@@ -42,6 +48,8 @@ class TestConstants
 
     public const PROJECT_ID = 1;
 
+    public const PROJECT_ID_UNUSED = 2;
+
     public const PROJECT_URL = 'https://github.com';
 
     public const TOPIC_ID = 1;
@@ -53,4 +61,6 @@ class TestConstants
     public const TOPIC_TEXT = 'Test Topic Text';
 
     public const TOPIC_POOL_ID = 1;
+
+    public const TOPIC_POOL_ID_UNUSED = 2;
 }
