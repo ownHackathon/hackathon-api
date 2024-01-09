@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Test\Functional;
+namespace Test\Functional\Root;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;
+use Test\Functional\FunctionalTestCase;
 
 use function time;
 
