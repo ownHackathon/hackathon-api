@@ -36,7 +36,7 @@ class UserService
             return false;
         }
 
-        $hashedPassword = password_hash('1234', PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
 
         $user->setPassword($hashedPassword);
         $user->setRoleId($role->value);
