@@ -61,9 +61,6 @@ jobs:
 
   phpcs:
     name: PHP CodeSniffer
-    needs:
-      - phplint
-      - phpstan
     runs-on: ubuntu-20.04
 
     steps:
