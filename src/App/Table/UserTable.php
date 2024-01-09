@@ -5,6 +5,8 @@ namespace App\Table;
 use App\Entity\User;
 use DateTime;
 
+use function intval;
+
 class UserTable extends AbstractTable
 {
     public function insert(User $user): int|bool
@@ -17,7 +19,7 @@ class UserTable extends AbstractTable
             'email' => $user->getEmail(),
         ];
 
-        return $this->query->insertInto($this->table, $values)->execute();
+        return intval($this->query->insertInto($this->table, $values)->execute());
     }
 
     public function update(User $user): int|bool
@@ -34,7 +36,7 @@ class UserTable extends AbstractTable
             'token' => $user->getToken(),
         ];
 
-        return $this->query->update($this->table, $values, $user->getId())->execute();
+        return intval($this->query->update($this->table, $values, $user->getId())->execute());
     }
 
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self
