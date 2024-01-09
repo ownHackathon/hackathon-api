@@ -2,10 +2,10 @@
 
 namespace Test\Unit\App\Mock\Database;
 
-use Test\Unit\App\Mock\TestConstants;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
 use PDO;
+use Test\Unit\App\Mock\TestConstants;
 
 use function array_key_exists;
 

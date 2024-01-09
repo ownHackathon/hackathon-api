@@ -22,9 +22,9 @@ class EventTable extends AbstractTable
         return !$insertStatus ? false : (int)$insertStatus;
     }
 
-    public function findAll(string $order = 'startTime', string $sort = 'DESC'): bool|array
+    public function findAll(string $order = 'startTime', string $sort = 'DESC'): array
     {
-        return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll();
+        return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll() ?: [];
     }
 
     public function findByTitle(string $topic): bool|array

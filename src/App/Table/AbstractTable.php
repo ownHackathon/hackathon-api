@@ -29,8 +29,8 @@ class AbstractTable
             ->fetch() ?: [];
     }
 
-    public function findAll(): bool|array
+    public function findAll(): array
     {
-        return $this->query->from($this->table)->fetchAll();
+        return $this->query->from($this->table)->fetchAll() ?: [];
     }
 }
