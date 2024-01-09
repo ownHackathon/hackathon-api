@@ -4,6 +4,7 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\User;
 use App\Service\UserService;
+use InvalidArgumentException;
 use Test\Unit\App\Mock\Table\MockUserTable;
 use Test\Unit\App\Mock\TestConstants;
 
@@ -24,9 +25,9 @@ class UserServiceTest extends AbstractService
         $user = new User();
         $user->setName('FakeNotCreateUser');
 
-        $insert = $this->userService->create($user);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertSame(false, $insert);
+        $this->userService->create($user);
     }
 
     public function testCanNotCreateUserWithExistEmail(): void
@@ -34,9 +35,9 @@ class UserServiceTest extends AbstractService
         $user = new User();
         $user->setEmail('FakeNotCreateEMail');
 
-        $insert = $this->userService->create($user);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertSame(false, $insert);
+        $this->userService->create($user);
     }
 
     public function testCanCreateUser(): void
@@ -56,9 +57,9 @@ class UserServiceTest extends AbstractService
         $user->setName(TestConstants::USER_NAME);
         $user->setEmail(TestConstants::USER_EMAIL);
 
-        $insert = $this->userService->create($user);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertSame(false, $insert);
+        $this->userService->create($user);
     }
 
     public function testCanUpdateLastUserActionTime(): void
@@ -75,9 +76,9 @@ class UserServiceTest extends AbstractService
         $user = new User();
         $user->setId(2);
 
-        $update = $this->userService->update($user);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertSame(false, $update);
+        $this->userService->update($user);
     }
 
     public function testCanUpdateUser(): void

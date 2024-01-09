@@ -2,6 +2,8 @@
 
 namespace Test\Functional\UserControl;
 
+use App\Entity\User;
+use App\Service\UserService;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;
 use Test\Functional\FunctionalTestCase;
@@ -21,6 +23,15 @@ class UserMeTest extends FunctionalTestCase
     public function testMeReturnValidUserByAuthenticatedUser(): void
     {
         $token = $this->app->container()->get('config')['token']['auth'];
+
+        $user = new User();
+        $user->setName('TestingUser')
+            ->setEmail('testing@example.com')
+            ->setPassword('myworld');
+
+        /** @var UserService $userService */
+        $userService = $this->app->container()->get(UserService::class);
+        $userService->create($user);
 
         $request = new ServerRequest(uri: '/api/user/me', method: 'GET');
 

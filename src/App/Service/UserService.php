@@ -7,10 +7,12 @@ use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
 use App\Table\UserTable;
 use DateTime;
-use Psr\Log\InvalidArgumentException;
+use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
 
+use function boolval;
 use function password_hash;
+use function sprintf;
 
 class UserService
 {
@@ -30,10 +32,10 @@ class UserService
         return $user;
     }
 
-    public function create(User $user, UserRole $role = UserRole::USER): int|bool
+    public function create(User $user, UserRole $role = UserRole::USER): int
     {
         if ($this->isEmailExist($user->getEmail())) {
-            return false;
+            return throw new InvalidArgumentException(sprintf('E-Mail %s already exists', $user->getEmail()));
         }
 
         $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
@@ -47,7 +49,7 @@ class UserService
 
     public function update(User $user): bool
     {
-        return (bool)$this->table->update($user);
+        return boolval($this->table->update($user));
     }
 
     // @phpstan-ignore-next-line

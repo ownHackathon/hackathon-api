@@ -10,6 +10,7 @@
         colors="true"
         cacheDirectory=".phpunit.cache"
         beStrictAboutCoverageMetadata="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
 >
     <testsuites>
         <testsuite name="Unit">

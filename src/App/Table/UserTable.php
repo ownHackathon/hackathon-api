@@ -4,12 +4,14 @@ namespace App\Table;
 
 use App\Entity\User;
 use DateTime;
+use InvalidArgumentException;
 
+use function boolval;
 use function intval;
 
 class UserTable extends AbstractTable
 {
-    public function insert(User $user): int|bool
+    public function insert(User $user): int
     {
         $values = [
             'roleId' => $user->getRoleId(),
@@ -19,10 +21,16 @@ class UserTable extends AbstractTable
             'email' => $user->getEmail(),
         ];
 
-        return intval($this->query->insertInto($this->table, $values)->execute());
+        $lastInsertId = $this->query->insertInto($this->table, $values)->execute();
+
+        if (!$lastInsertId) {
+            return throw new InvalidArgumentException('An equivalent data set already exists');
+        }
+
+        return intval($lastInsertId);
     }
 
-    public function update(User $user): int|bool
+    public function update(User $user): bool
     {
         $values = [
             'uuid' => $user->getUuid(),
@@ -36,7 +44,13 @@ class UserTable extends AbstractTable
             'token' => $user->getToken(),
         ];
 
-        return intval($this->query->update($this->table, $values, $user->getId())->execute());
+        $affectedRowCount = $this->query->update($this->table, $values, $user->getId())->execute();
+
+        if (!$affectedRowCount) {
+            throw new InvalidArgumentException('User data could not be modified');
+        }
+
+        return boolval($affectedRowCount);
     }
 
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self

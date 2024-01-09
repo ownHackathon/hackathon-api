@@ -4,6 +4,7 @@ namespace Test\Unit\App\Mock\Table;
 
 use App\Entity\User;
 use App\Table\UserTable;
+use InvalidArgumentException;
 use Test\Unit\App\Mock\Database\MockQuery;
 use Test\Unit\App\Mock\TestConstants;
 
@@ -16,7 +17,11 @@ class MockUserTable extends UserTable
 
     public function update(User $user): bool
     {
-        return ($user->getId() === 1);
+        if ($user->getId() !== 1) {
+            throw new InvalidArgumentException();
+        }
+
+        return true;
     }
 
     public function findById(int $id): bool|array

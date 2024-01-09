@@ -4,8 +4,9 @@ namespace Test\Unit\App\Table;
 
 use App\Entity\User;
 use App\Table\UserTable;
-use Test\Unit\App\Mock\TestConstants;
 use DateTime;
+use InvalidArgumentException;
+use Test\Unit\App\Mock\TestConstants;
 
 /**
  * @property UserTable $table
@@ -22,9 +23,9 @@ class UserTableTest extends AbstractTable
         $user = new User();
         $user->setName(TestConstants::USER_CREATE_NAME);
 
-        $insertUser = $this->table->insert($user);
+        $affectedRowCount = $this->table->insert($user);
 
-        $this->assertSame(1, $insertUser);
+        self::assertSame(1, $affectedRowCount);
     }
 
     public function testCanNotInsertUser(): void
@@ -32,9 +33,9 @@ class UserTableTest extends AbstractTable
         $user = new User();
         $user->setName(TestConstants::USER_NAME);
 
-        $insertUser = $this->table->insert($user);
+        self::expectException(InvalidArgumentException::class);
 
-        $this->assertSame(false, $insertUser);
+        $this->table->insert($user);
     }
 
     public function testCanUpdateUser(): void
