@@ -33,9 +33,9 @@ class MockSelectForFetchAll extends Select
         return false;
     }
 
-    public function fetchAll($index = '', $selectOnly = ''): array
+    public function fetchAll($index = '', $selectOnly = ''): bool|array
     {
-        return [];
+        return false;
     }
 
     private function handle(string $from, array $where, array $params): bool|array
