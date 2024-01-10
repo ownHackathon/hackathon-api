@@ -14,6 +14,8 @@ class TestConstants
 
     public const USER_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
 
+    public const USER_UUID_UNUSED = 'adftw4vxcvsdrgregsdfgesrtg';
+
     public const USER_NAME = 'Test Name';
 
     public const USER_CREATE_NAME = 'Test Create Name';

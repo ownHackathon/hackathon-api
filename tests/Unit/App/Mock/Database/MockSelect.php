@@ -114,26 +114,13 @@ class MockSelect extends Select
 
     private function handleUser(array $where, array $params): bool|array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::USER_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'uuid = ?' && $params[0] === TestConstants::USER_UUID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'name = ?' && $params[0] === TestConstants::USER_NAME) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'email = ?' && $params[0] === TestConstants::USER_EMAIL) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'token = ?' && $params[0] === TestConstants::USER_TOKEN) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::USER_ID ? ['id' => 1] : false,
+            'uuid = ?' => $params[0] === TestConstants::USER_UUID ? ['id' => 1] : false,
+            'name = ?' => $params[0] === TestConstants::USER_NAME ? ['id' => 1] : false,
+            'email = ?' => $params[0] === TestConstants::USER_EMAIL ? ['id' => 1] : false,
+            'token = ?' => $params[0] === TestConstants::USER_TOKEN ? ['id' => 1] : false,
+            default => false,
+        };
     }
 }

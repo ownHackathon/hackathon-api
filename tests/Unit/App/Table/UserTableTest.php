@@ -77,6 +77,13 @@ class UserTableTest extends AbstractTable
         $this->assertSame($this->fetchResult, $user);
     }
 
+    public function testFindByUuidHasEmptyResult(): void
+    {
+        $user = $this->table->findByUuid(TestConstants::USER_UUID_UNUSED);
+
+        $this->assertSame([], $user);
+    }
+
     public function testCanFindAll(): void
     {
         $users = $this->table->findAll();
@@ -86,7 +93,6 @@ class UserTableTest extends AbstractTable
 
     public function testFindAllReturnedEmpty(): void
     {
-
         $table = new UserTable(new MockQueryForFetchAll());
         $users = $table->findAll();
 

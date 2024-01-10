@@ -29,9 +29,9 @@ class MockUserTable extends UserTable
         return $id === 1 ? ['id' => $id] : [];
     }
 
-    public function findByUuid(string $uuid): bool|array
+    public function findByUuid(string $uuid): array
     {
-        return $uuid === TestConstants::USER_UUID ? ['id' => 1] : false;
+        return $uuid === TestConstants::USER_UUID ? ['id' => 1] : [];
     }
 
     public function findByName(string $name): bool|array

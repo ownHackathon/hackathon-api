@@ -73,11 +73,13 @@ class UserTable extends AbstractTable
         return $this;
     }
 
-    public function findByUuid(string $uuid): bool|array
+    public function findByUuid(string $uuid): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('uuid', $uuid)
             ->fetch();
+
+        return $result ?: [];
     }
 
     public function findByName(string $name): bool|array
