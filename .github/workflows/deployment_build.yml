@@ -13,7 +13,7 @@ jobs:
       - name: Run Discord Webhook
         uses: Mist3r-Robot/classic-discord-webhook@main
         with:
-          id: ${{ secrets.WEBHOOK_DISCORD_ID }}
+          id: '1031230677045227600'
           token: ${{ secrets.WEBHOOK_DISCORD_TOKEN }}
   phplint:
     name: PHP Lint
