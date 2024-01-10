@@ -185,22 +185,9 @@ jobs:
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
-
-  notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    needs: # make sure the notification is sent AFTER the jobs you want included have completed
-      - phpcs
-      - phplint
-      - phpstan
-      - phpunit
-      - phpfunctional
-      - deployment_of_hackathon_to_build
-    if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
-
-    steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
+      - name: Send status to Discord
+        uses: nebularg/actions-discord-webhook@v1
         with:
-          github-token: ${{ secrets.WEBHOOK_DISCORD_TOKEN }}
-          discord-webhook: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          webhook_url: ${{ secrets.WEBHOOK_DISCORD_URL }} # required
+          status: ${{ job.status }} # optional, this is the default
+          if: always() # or failure() or success()
