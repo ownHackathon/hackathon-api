@@ -160,7 +160,7 @@ jobs:
         with:
           switches: -avzr --delete --exclude-from={'deployExcludeList.txt'}
           path: src/
-          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_path: ${{ secrets.DEPLOY_PATH_API_BUILD }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_port: ${{ secrets.DEPLOY_PORT }}
           remote_user: ${{ secrets.DEPLOY_USER }}
