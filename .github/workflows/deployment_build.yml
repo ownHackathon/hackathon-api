@@ -178,6 +178,13 @@ jobs:
   send_embed:
     runs-on: ubuntu-latest
     name: Send an embed to Discord
+    needs:
+      - phpcs
+      - phplint
+      - phpstan
+      - phpunit
+      - phpfunctional
+      - deployment_of_hackathon_to_build
 
     steps:
       - name: Run the GitHub Actions Status Embed Action
