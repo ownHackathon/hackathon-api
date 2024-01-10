@@ -4,10 +4,13 @@ namespace App\Table;
 
 use App\Entity\User;
 use DateTime;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
+use LogicException;
 
 use function boolval;
 use function intval;
+use function sprintf;
 
 class UserTable extends AbstractTable
 {
@@ -55,10 +58,17 @@ class UserTable extends AbstractTable
 
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self
     {
-        $this->query->update($this->table)
+        $result = $this->query->update($this->table)
             ->set(['lastAction' => $actionTime->format('Y-m-d H:i:s')])
             ->where('id', $id)
             ->execute();
+
+        if (!$result) {
+            throw new LogicException(
+                sprintf('Error updating the last activity of user id %d', $id),
+                HTTP::STATUS_INTERNAL_SERVER_ERROR
+            );
+        }
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
+use Test\Unit\App\Mock\Database\MockQueryForFetchAll;
 use Test\Unit\App\Mock\TestConstants;
 
 /**
@@ -81,6 +82,15 @@ class UserTableTest extends AbstractTable
         $users = $this->table->findAll();
 
         $this->assertSame($this->fetchAllResult, $users);
+    }
+
+    public function testFindAllReturnedEmpty(): void
+    {
+
+        $table = new UserTable(new MockQueryForFetchAll());
+        $users = $table->findAll();
+
+        $this->assertSame([], $users);
     }
 
     public function testCanFindByName(): void
