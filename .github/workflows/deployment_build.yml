@@ -36,7 +36,7 @@ jobs:
         with:
           severity: info
           details: Test succeeded.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: always()
 
   phpstan:
