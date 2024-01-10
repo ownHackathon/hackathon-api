@@ -15,13 +15,13 @@ class MockUserTable extends UserTable
         parent::__construct(new MockQuery());
     }
 
-    public function update(User $user): bool
+    public function update(User $user): int
     {
         if ($user->getId() !== TestConstants::USER_ID) {
             throw new InvalidArgumentException();
         }
 
-        return true;
+        return 1;
     }
 
     public function findById(int $id): array
@@ -34,18 +34,18 @@ class MockUserTable extends UserTable
         return $uuid === TestConstants::USER_UUID ? ['id' => TestConstants::USER_ID] : [];
     }
 
-    public function findByName(string $name): bool|array
+    public function findByName(string $name): array
     {
-        return $name === TestConstants::USER_NAME ? ['id' => TestConstants::USER_ID] : false;
+        return $name === TestConstants::USER_NAME ? ['id' => TestConstants::USER_ID] : [];
     }
 
-    public function findByEMail(string $email): bool|array
+    public function findByEMail(string $email): array
     {
-        return $email === TestConstants::USER_EMAIL ? ['id' => TestConstants::USER_ID] : false;
+        return $email === TestConstants::USER_EMAIL ? ['id' => TestConstants::USER_ID] : [];
     }
 
-    public function findByToken(string $token): bool|array
+    public function findByToken(string $token): array
     {
-        return $token === TestConstants::USER_TOKEN ? ['id' => TestConstants::USER_ID] : false;
+        return $token === TestConstants::USER_TOKEN ? ['id' => TestConstants::USER_ID] : [];
     }
 }

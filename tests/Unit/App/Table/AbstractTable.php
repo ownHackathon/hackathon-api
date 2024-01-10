@@ -5,8 +5,7 @@ namespace Test\Unit\App\Table;
 use App\Table\AbstractTable as ATable;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\App\Mock\Database\MockQuery;
-use Test\Unit\App\Mock\Database\MockQueryForFetchAll;
-
+use Test\Unit\App\Mock\Database\MockQueryForCanNot;
 use Test\Unit\App\Mock\TestConstants;
 
 use function get_class;
@@ -17,7 +16,7 @@ abstract class AbstractTable extends TestCase
     private const TABLE_NAME_OFFSET = 13;
     private const TABLE_SUB_LENGTH = -4;
 
-    protected MockQuery|MockQueryForFetchAll $query;
+    protected MockQuery|MockQueryForCanNot $query;
     protected ATable $table;
 
     protected array $fetchResult = ['id' => TestConstants::USER_ID];

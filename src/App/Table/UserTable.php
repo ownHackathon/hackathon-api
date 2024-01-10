@@ -8,7 +8,6 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use LogicException;
 
-use function boolval;
 use function intval;
 use function sprintf;
 
@@ -33,7 +32,7 @@ class UserTable extends AbstractTable
         return intval($lastInsertId);
     }
 
-    public function update(User $user): bool
+    public function update(User $user): int
     {
         $values = [
             'uuid' => $user->getUuid(),
@@ -42,7 +41,7 @@ class UserTable extends AbstractTable
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
             'registrationTime' => $user->getRegistrationTime()->format('Y-m-d H:i:s'),
-            'lastAction' => $user->getLastAction()->format('Y-m-d H:i:s'),
+            'lastAction' => $user->getLastAction()?->format('Y-m-d H:i:s'),
             'active' => $user->isActive(),
             'token' => $user->getToken(),
         ];
@@ -53,7 +52,7 @@ class UserTable extends AbstractTable
             throw new InvalidArgumentException('User data could not be modified');
         }
 
-        return boolval($affectedRowCount);
+        return intval($affectedRowCount);
     }
 
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self
@@ -82,24 +81,30 @@ class UserTable extends AbstractTable
         return $result ?: [];
     }
 
-    public function findByName(string $name): bool|array
+    public function findByName(string $name): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('name', $name)
             ->fetch();
+
+        return $result ?: [];
     }
 
-    public function findByEMail(string $email): bool|array
+    public function findByEMail(string $email): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('email', $email)
             ->fetch();
+
+        return $result ?: [];
     }
 
-    public function findByToken(string $token): bool|array
+    public function findByToken(string $token): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('token', $token)
             ->fetch();
+
+        return $result ?: [];
     }
 }

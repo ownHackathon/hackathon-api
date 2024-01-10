@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
-use Test\Unit\App\Mock\Database\MockQueryForFetchAll;
+use Test\Unit\App\Mock\Database\MockQueryForCanNot;
 use Test\Unit\App\Mock\TestConstants;
 
 /**
@@ -16,7 +16,7 @@ class UserTableTest extends AbstractTable
 {
     public function testCanGetTableName(): void
     {
-        $this->assertSame('User', $this->table->getTableName());
+        self::assertSame('User', $this->table->getTableName());
     }
 
     public function testCanInsertUser(): void
@@ -42,81 +42,116 @@ class UserTableTest extends AbstractTable
     public function testCanUpdateUser(): void
     {
         $user = new User();
+        $user->setId(TestConstants::USER_ID);
+        $user->setRegistrationTime(new DateTime());
         $user->setLastAction(new DateTime());
 
         $updateUser = $this->table->update($user);
 
-        $this->assertSame(true, $updateUser);
+        self::assertSame(1, $updateUser);
+    }
+
+    public function testCanNotUpdateUser(): void
+    {
+        $user = new User();
+        $user->setId(TestConstants::USER_ID_THROW_EXCEPTION);
+        $user->setLastAction(new DateTime());
+        $table = new UserTable(new MockQueryForCanNot());
+
+        self::expectException(InvalidArgumentException::class);
+
+        $table->update($user);
     }
 
     public function testCanUpdateLastUserActionTime(): void
     {
         $updateUser = $this->table->updateLastUserActionTime(TestConstants::USER_ID, new DateTime());
 
-        $this->assertInstanceOf(UserTable::class, $updateUser);
+        self::assertInstanceOf(UserTable::class, $updateUser);
     }
 
     public function testCanFindById(): void
     {
         $user = $this->table->findById(TestConstants::USER_ID);
 
-        $this->assertSame($this->fetchResult, $user);
+        self::assertSame($this->fetchResult, $user);
     }
 
     public function testFindByIdHasEmptyResult(): void
     {
         $user = $this->table->findById(TestConstants::USER_ID_UNUSED);
 
-        $this->assertSame([], $user);
+        self::assertSame([], $user);
     }
 
     public function testCanFindByUuid(): void
     {
         $user = $this->table->findByUuid(TestConstants::USER_UUID);
 
-        $this->assertSame($this->fetchResult, $user);
+        self::assertSame($this->fetchResult, $user);
     }
 
     public function testFindByUuidHasEmptyResult(): void
     {
         $user = $this->table->findByUuid(TestConstants::USER_UUID_UNUSED);
 
-        $this->assertSame([], $user);
+        self::assertSame([], $user);
     }
 
     public function testCanFindAll(): void
     {
         $users = $this->table->findAll();
 
-        $this->assertSame($this->fetchAllResult, $users);
+        self::assertSame($this->fetchAllResult, $users);
     }
 
     public function testFindAllReturnedEmpty(): void
     {
-        $table = new UserTable(new MockQueryForFetchAll());
+        $table = new UserTable(new MockQueryForCanNot());
         $users = $table->findAll();
 
-        $this->assertSame([], $users);
+        self::assertSame([], $users);
     }
 
     public function testCanFindByName(): void
     {
         $user = $this->table->findByName(TestConstants::USER_NAME);
 
-        $this->assertSame($this->fetchResult, $user);
+        self::assertSame($this->fetchResult, $user);
+    }
+
+    public function testFindByNameHasEmptyResult(): void
+    {
+        $user = $this->table->findByName(TestConstants::USER_NAME_UNUSED);
+
+        self::assertSame([], $user);
     }
 
     public function testCanFindByEmail(): void
     {
         $user = $this->table->findByEMail(TestConstants::USER_EMAIL);
 
-        $this->assertSame($this->fetchResult, $user);
+        self::assertSame($this->fetchResult, $user);
+    }
+
+    public function testFindByEmailHasEmptyResult(): void
+    {
+        $user = $this->table->findByEMail(TestConstants::USER_EMAIL_UNUSED);
+
+        self::assertSame([], $user);
     }
 
     public function testCanFindByToken(): void
     {
         $user = $this->table->findByToken(TestConstants::USER_TOKEN);
 
-        $this->assertSame($this->fetchResult, $user);
+        self::assertSame($this->fetchResult, $user);
+    }
+
+    public function testFindByTokenHasEmptyResult(): void
+    {
+        $user = $this->table->findByToken(TestConstants::USER_TOKEN_UNUSED);
+
+        self::assertSame([], $user);
     }
 }

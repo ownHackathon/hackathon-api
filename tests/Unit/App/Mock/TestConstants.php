@@ -10,6 +10,8 @@ class TestConstants
 
     public const USER_ID_UNUSED = 2;
 
+    public const USER_ID_THROW_EXCEPTION = 3;
+
     public const USER_CREATE_ID = 2;
 
     public const USER_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
@@ -18,15 +20,21 @@ class TestConstants
 
     public const USER_NAME = 'Test Name';
 
+    public const USER_NAME_UNUSED = 'unused Test Name';
+
     public const USER_CREATE_NAME = 'Test Create Name';
 
     public const USER_PASSWORD = 'Test Password';
 
     public const USER_EMAIL = 'example@example.com';
 
+    public const USER_EMAIL_UNUSED = 'unused@example.com';
+
     public const USER_CREATE_EMAIL = 'uniqueexample@example.com';
 
     public const USER_TOKEN = '4e10cfecf3bb51811689956e647705a0';
+
+    public const USER_TOKEN_UNUSED = 'unused_user_token';
 
     public const PARTICIPANT_ID = 1;
 

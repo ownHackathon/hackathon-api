@@ -8,7 +8,7 @@ use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;
 use Envms\FluentPDO\Query;
 
-class MockQueryForFetchAll extends Query
+class MockQueryForCanNot extends Query
 {
     public function __construct()
     {
@@ -22,7 +22,7 @@ class MockQueryForFetchAll extends Query
 
     public function update(?string $table = null, $set = [], ?int $primaryKey = null): Update
     {
-        return new MockUpdate($this, $table);
+        return new MockUpdateForNotUpdate($this, $table);
     }
 
     public function delete(?string $table = null, ?int $primaryKey = null): Delete

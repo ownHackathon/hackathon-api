@@ -4,6 +4,7 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\User;
 use App\Service\UserService;
+use DateTime;
 use InvalidArgumentException;
 use Test\Unit\App\Mock\Table\MockUserTable;
 use Test\Unit\App\Mock\TestConstants;
@@ -65,6 +66,8 @@ class UserServiceTest extends AbstractService
     public function testCanUpdateLastUserActionTime(): void
     {
         $user = new User();
+        $user->setId(TestConstants::USER_ID);
+        $user->setLastAction(new DateTime());
 
         $update = $this->userService->updateLastUserActionTime($user);
 

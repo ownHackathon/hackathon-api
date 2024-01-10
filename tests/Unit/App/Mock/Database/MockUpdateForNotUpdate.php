@@ -7,12 +7,11 @@ use Envms\FluentPDO\Query;
 use Test\Unit\App\Mock\TestConstants;
 
 use function array_key_exists;
-use function var_dump;
 
 /**
  * ToDo Fix for Test
  */
-class MockUpdate extends Update
+class MockUpdateForNotUpdate extends Update
 {
     public function __construct(Query $fluent, string $table)
     {
@@ -31,7 +30,7 @@ class MockUpdate extends Update
     {
         if (array_key_exists('SET', $this->statements)) {
             if ($this->statements['SET'] === []) {
-                return 1;
+                return false;
             }
 
             if ($this->statements['SET']['lastAction']) {
