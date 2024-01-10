@@ -190,4 +190,4 @@ jobs:
         with:
           webhook_url: ${{ secrets.WEBHOOK_DISCORD_URL }} # required
           status: ${{ job.status }} # optional, this is the default
-          if: always() # or failure() or success()
+        if: always() # or failure() or success()
