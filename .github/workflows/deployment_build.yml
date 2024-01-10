@@ -34,8 +34,8 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: info
-          details: Test succeeded.
+          severity: error
+          details: Code-Style error.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: failure()
 
@@ -67,8 +67,8 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: info
-          details: Test succeeded.
+          severity: error
+          details: Code-Style error.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: failure()
 
@@ -100,8 +100,8 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: info
-          details: Test succeeded.
+          severity: error
+          details: Code-Style error.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: failure()
 
@@ -137,8 +137,8 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: info
-          details: Test succeeded.
+          severity: error
+          details: Test error.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: failure()
 
@@ -181,8 +181,8 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-          severity: info
-          details: Test succeeded.
+          severity: error
+          details: Test error.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: failure()
 
@@ -221,6 +221,6 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
-          details: Test succeeded.
+          details: Successful deployment on build.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: always()
