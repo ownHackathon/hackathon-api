@@ -51,7 +51,7 @@ class UserTableTest extends AbstractTable
         self::assertSame(1, $updateUser);
     }
 
-    public function testCanNotUpdateUser(): void
+    public function testUpdateUserThrowException(): void
     {
         $user = new User();
         $user->setId(TestConstants::USER_ID_THROW_EXCEPTION);
@@ -68,6 +68,13 @@ class UserTableTest extends AbstractTable
         $updateUser = $this->table->updateLastUserActionTime(TestConstants::USER_ID, new DateTime());
 
         self::assertInstanceOf(UserTable::class, $updateUser);
+    }
+
+    public function testUpdateLastUserActionTimeThrowException(): void
+    {
+        self::expectException(InvalidArgumentException::class);
+
+        $this->table->updateLastUserActionTime(TestConstants::USER_ID_THROW_EXCEPTION, new DateTime());
     }
 
     public function testCanFindById(): void
