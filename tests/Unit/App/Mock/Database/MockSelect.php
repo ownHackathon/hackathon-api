@@ -54,72 +54,51 @@ class MockSelect extends Select
 
     private function handleEvent(array $where, array $params): bool|array
     {
-        if ($where[0][1] === 'title = ?' && $params[0] === TestConstants::EVENT_TITLE) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::EVENT_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::EVENT_ID ? ['id' => TestConstants::EVENT_ID] : false,
+            'title = ?' => $params[0] === TestConstants::EVENT_TITLE ? ['id' => TestConstants::EVENT_ID] : false,
+            default => false
+        };
     }
 
     private function handleParticipant(array $where, array $params): bool|array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::PARTICIPANT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'userId = ?' && $params[0] === TestConstants::USER_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::PARTICIPANT_ID ? ['id' => TestConstants::PARTICIPANT_ID] : false,
+            'userId = ?' => $params[0] === TestConstants::USER_ID ? ['id' => TestConstants::PARTICIPANT_ID] : false,
+            default => false
+        };
     }
 
     private function handleProject(array $where, array $params): bool|array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::PROJECT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'participantId = ?' && $params[0] === TestConstants::PARTICIPANT_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::PROJECT_ID ? ['id' => TestConstants::PROJECT_ID] : false,
+            'participantId = ?' =>
+            $params[0] === TestConstants::PARTICIPANT_ID ? ['id' => TestConstants::PROJECT_ID] : false,
+            default => false
+        };
     }
 
     private function handleTopic(array $where, array $params): bool|array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::TOPIC_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'uuid = ?' && $params[0] === TestConstants::TOPIC_UUID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'eventId = ?' && $params[0] === TestConstants::EVENT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'topic = ?' && $params[0] === TestConstants::TOPIC_TITLE) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::TOPIC_ID ? ['id' => TestConstants::TOPIC_ID] : false,
+            'uuid = ?' => $params[0] === TestConstants::TOPIC_UUID ? ['id' => TestConstants::TOPIC_ID] : false,
+            'eventId = ?' => $params[0] === TestConstants::EVENT_ID ? ['id' => TestConstants::TOPIC_ID] : false,
+            'topic = ?' => $params[0] === TestConstants::TOPIC_TITLE ? ['id' => TestConstants::TOPIC_ID] : false,
+            default => false
+        };
     }
 
     private function handleUser(array $where, array $params): bool|array
     {
         return match ($where[0][1]) {
-            'id = ?' => $params[0] === TestConstants::USER_ID ? ['id' => 1] : false,
-            'uuid = ?' => $params[0] === TestConstants::USER_UUID ? ['id' => 1] : false,
-            'name = ?' => $params[0] === TestConstants::USER_NAME ? ['id' => 1] : false,
-            'email = ?' => $params[0] === TestConstants::USER_EMAIL ? ['id' => 1] : false,
-            'token = ?' => $params[0] === TestConstants::USER_TOKEN ? ['id' => 1] : false,
+            'id = ?' => $params[0] === TestConstants::USER_ID ? ['id' => TestConstants::USER_ID] : false,
+            'uuid = ?' => $params[0] === TestConstants::USER_UUID ? ['id' => TestConstants::USER_ID] : false,
+            'name = ?' => $params[0] === TestConstants::USER_NAME ? ['id' => TestConstants::USER_ID] : false,
+            'email = ?' => $params[0] === TestConstants::USER_EMAIL ? ['id' => TestConstants::USER_ID] : false,
+            'token = ?' => $params[0] === TestConstants::USER_TOKEN ? ['id' => TestConstants::USER_ID] : false,
             default => false,
         };
     }

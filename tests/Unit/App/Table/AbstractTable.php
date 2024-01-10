@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Test\Unit\App\Mock\Database\MockQuery;
 use Test\Unit\App\Mock\Database\MockQueryForFetchAll;
 
+use Test\Unit\App\Mock\TestConstants;
+
 use function get_class;
 use function substr;
 
@@ -18,10 +20,10 @@ abstract class AbstractTable extends TestCase
     protected MockQuery|MockQueryForFetchAll $query;
     protected ATable $table;
 
-    protected array $fetchResult = ['id' => 1];
+    protected array $fetchResult = ['id' => TestConstants::USER_ID];
     protected array $fetchAllResult
         = [
-            0 => ['id' => 1],
+            0 => ['id' => TestConstants::USER_ID],
         ];
 
     protected function setUp(): void

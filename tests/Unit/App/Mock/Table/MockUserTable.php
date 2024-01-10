@@ -17,7 +17,7 @@ class MockUserTable extends UserTable
 
     public function update(User $user): bool
     {
-        if ($user->getId() !== 1) {
+        if ($user->getId() !== TestConstants::USER_ID) {
             throw new InvalidArgumentException();
         }
 
@@ -26,26 +26,26 @@ class MockUserTable extends UserTable
 
     public function findById(int $id): array
     {
-        return $id === 1 ? ['id' => $id] : [];
+        return $id === TestConstants::USER_ID ? ['id' => $id] : [];
     }
 
     public function findByUuid(string $uuid): array
     {
-        return $uuid === TestConstants::USER_UUID ? ['id' => 1] : [];
+        return $uuid === TestConstants::USER_UUID ? ['id' => TestConstants::USER_ID] : [];
     }
 
     public function findByName(string $name): bool|array
     {
-        return $name === TestConstants::USER_NAME ? ['id' => 1] : false;
+        return $name === TestConstants::USER_NAME ? ['id' => TestConstants::USER_ID] : false;
     }
 
     public function findByEMail(string $email): bool|array
     {
-        return $email === TestConstants::USER_EMAIL ? ['id' => 1] : false;
+        return $email === TestConstants::USER_EMAIL ? ['id' => TestConstants::USER_ID] : false;
     }
 
     public function findByToken(string $token): bool|array
     {
-        return $token === TestConstants::USER_TOKEN ? ['id' => 1] : false;
+        return $token === TestConstants::USER_TOKEN ? ['id' => TestConstants::USER_ID] : false;
     }
 }
