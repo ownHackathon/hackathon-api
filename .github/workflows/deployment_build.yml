@@ -64,6 +64,14 @@ jobs:
       - name: Run PHP Stan
         run: composer run-script phpstan
 
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   phpcs:
     name: PHP CodeSniffer
     runs-on: ubuntu-20.04
@@ -88,6 +96,14 @@ jobs:
 
       - name: Run PHP Codesniffer
         run: composer run-script phpcs
+
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
 
   phpunit:
     name: PHP Unit Test
@@ -117,6 +133,14 @@ jobs:
 
       - name: Run PHP Unit Test
         run: composer run-script unittest
+
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
 
   phpfunctional:
     name: PHP Functional Test
@@ -154,6 +178,14 @@ jobs:
       - name: Run PHP Unit Test
         run: composer run-script functionaltest
 
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   deployment_of_hackathon_to_build:
     name: Deploy Build
     needs:
@@ -184,3 +216,11 @@ jobs:
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: always()
