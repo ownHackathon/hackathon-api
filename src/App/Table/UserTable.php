@@ -8,7 +8,6 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use LogicException;
 
-use function intval;
 use function sprintf;
 
 class UserTable extends AbstractTable
@@ -29,7 +28,7 @@ class UserTable extends AbstractTable
             return throw new InvalidArgumentException('An equivalent data set already exists');
         }
 
-        return intval($lastInsertId);
+        return (int)$lastInsertId;
     }
 
     public function update(User $user): int
@@ -52,7 +51,7 @@ class UserTable extends AbstractTable
             throw new InvalidArgumentException('User data could not be modified');
         }
 
-        return intval($affectedRowCount);
+        return (int)$affectedRowCount;
     }
 
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self

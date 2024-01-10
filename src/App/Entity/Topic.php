@@ -78,7 +78,7 @@ class Topic
 
     public function setAccepted(null|bool|int $accepted): self
     {
-        $this->accepted = $accepted !== null ? boolval($accepted) : null;
+        $this->accepted = $accepted !== null ? (bool)$accepted : null;
 
         return $this;
     }

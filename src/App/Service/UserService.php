@@ -11,7 +11,6 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
 
-use function boolval;
 use function password_hash;
 use function sprintf;
 
@@ -50,7 +49,7 @@ class UserService
 
     public function update(User $user): bool
     {
-        return boolval($this->table->update($user));
+        return (bool)$this->table->update($user);
     }
 
     // @phpstan-ignore-next-line
