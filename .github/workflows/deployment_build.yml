@@ -2,6 +2,7 @@ name: Development Deployment
 on:
   push:
     branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   phplint:
@@ -175,20 +176,30 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 
-  send_embed:
+  test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
-    name: Send an embed to Discord
-    needs:
-      - phpcs
-      - phplint
-      - phpstan
-      - phpunit
-      - phpfunctional
-      - deployment_of_hackathon_to_build
-    if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
     steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
+      - uses: actions/checkout@v3
+      - name: Basic Content Test
+        uses: ./
         with:
-          github-token: ${{ secrets.WEBHOOK_GITHUB_TOKEN }}
-          discord-webhook: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          webhook-url: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          content: test
+      - name: Test `@ping`
+        uses: ./
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          content: Hey there <@211894927997534208>
+      - name: Test with JSON Payload Provided
+        uses: ./
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          raw-data: __tests__/data/content-only.json
+      - name: Upload File
+        uses: ./
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          filename: __tests__/data/content-only.json
+          username: Bill
+          content: You should definintely be able to do this
+          avatar-url: https://cdn.discordapp.com/avatars/742807869023322232/dd41912939ffccbea0276f70688fa0ec.webp?size=256
