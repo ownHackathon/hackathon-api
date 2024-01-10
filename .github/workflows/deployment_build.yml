@@ -5,16 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Discord_notification:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Run Discord Webhook
-        uses: Mist3r-Robot/classic-discord-webhook@main
-        with:
-          id: ${{ secrets.WEBHOOK_DISCORD_ID }}
-          token: ${{ secrets.WEBHOOK_DISCORD_TOKEN }}
+
   phplint:
     name: PHP Lint
     runs-on: ubuntu-20.04
@@ -39,6 +30,14 @@ jobs:
 
       - name: Run PHP Linter
         run: composer run-script phplint
+
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        if: always()
 
   phpstan:
     name: PHP Stan
@@ -185,9 +184,3 @@ jobs:
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
-      - name: Send status to Discord
-        uses: nebularg/actions-discord-webhook@v1
-        with:
-          webhook_url: ${{ secrets.WEBHOOK_DISCORD_URL }} # required
-          status: ${{ job.status }} # optional, this is the default
-        if: always() # or failure() or success()
