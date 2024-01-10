@@ -3,9 +3,8 @@
 namespace Test\Unit\App\Table;
 
 use App\Table\AbstractTable as ATable;
-use Test\Unit\App\Mock\Database\MockQuery;
 use PHPUnit\Framework\TestCase;
-
+use Test\Unit\App\Mock\Database\MockQuery;
 use Test\Unit\App\Mock\Database\MockQueryForFetchAll;
 
 use function get_class;

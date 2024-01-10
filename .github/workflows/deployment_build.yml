@@ -152,50 +152,17 @@ jobs:
       - phpstan
       - phpunit
       - phpfunctional
-    env:
-      VUE_APP_API_BASE_URL: 'https://build.hackathon.exdrals.de'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Get latest code
-        uses: actions/checkout@v4.1.1
-
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-dev
-
-      - name: Run create openapi Data
-        run: composer run-script openapi
-
-      - name: FTP Deploy to Development Server (Staging)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - uses: actions/checkout@v4.1.1
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@6.0.0
         with:
-          server: ${{ secrets.BUILD_HOST }}
-          username: ${{ secrets.BUILD_USER }}
-          password: ${{ secrets.BUILD_PASSWORD }}
-          state-name: ".ftp-deploy-sync-state-backend.json"
-          exclude: |
-            **/.git*
-            **/*.dist
-            **/*.dist/**
-            **/.git*/**
-            **/bin/**
-            **/tests/**
-            **/config/autoload/*.dist
-            **/config/autoload/*.develope.php
-            **/config/autoload/*.local.php
-            **/config/autoload/*.testing.php
-            **/config/*.dist
-            **/node_modules/**
-            **/client/**
-            **/database/**
-            **/scripts/**
-            **/tests/**
-            **/docker/**
-            **/public/assets/**
-            **/public/index.html
-            **/*.md
-            **/*.xml
-            **/*.neon
-            **/composer.json
-            **/*.yml
-            **/*.lock
-            **/LICENSE
+          switches: -avzr --delete --exclude-from={'deployExcludeList.txt'}
+          path: src/
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+          remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
