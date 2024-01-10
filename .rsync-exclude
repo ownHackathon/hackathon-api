@@ -20,3 +20,6 @@
 /composer.*
 /*.yml
 /LICENSE
+/.github
+/docs
+.env
