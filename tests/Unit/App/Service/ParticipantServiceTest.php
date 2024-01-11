@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\Participant;
-use App\Service\ParticipantService;
+use App\Service\Participant\ParticipantService;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockParticipantTable;
 use Test\Unit\Mock\TestConstants;

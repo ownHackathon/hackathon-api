@@ -2,8 +2,8 @@
 
 namespace App\Middleware\Topic;
 
-use App\Dto\TopicListDto;
-use App\Service\TopicPoolService;
+use App\Dto\Topic\TopicListDto;
+use App\Service\Topic\TopicPoolService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

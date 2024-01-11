@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Authentication\Service;
 
-use Authentication\Service\ApiAccessService;
+use App\Service\Authentication\ApiAccessService;
 use Test\Unit\App\Service\AbstractService;
 
 class ApiAccessServiceTest extends AbstractService

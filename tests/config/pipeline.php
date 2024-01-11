@@ -2,7 +2,7 @@
 
 namespace Test;
 
-use Authentication\Middleware\JwtAuthenticationMiddleware;
+use App\Middleware\Authentication\JwtAuthenticationMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;

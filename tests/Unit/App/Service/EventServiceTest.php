@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\Event;
-use App\Service\EventService;
+use App\Service\Event\EventService;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockEventTable;
 use Test\Unit\Mock\TestConstants;

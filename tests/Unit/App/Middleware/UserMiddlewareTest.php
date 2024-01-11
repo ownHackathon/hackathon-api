@@ -2,8 +2,8 @@
 
 namespace Test\Unit\App\Middleware;
 
-use App\Middleware\UserMiddleware;
-use App\Service\UserService;
+use App\Middleware\User\UserMiddleware;
+use App\Service\User\UserService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

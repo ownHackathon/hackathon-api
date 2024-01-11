@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\User;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use DateTime;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockUserTable;

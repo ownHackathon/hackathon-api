@@ -3,7 +3,7 @@
 namespace App\Middleware\Event;
 
 use App\Entity\Event;
-use App\Service\EventService;
+use App\Service\Event\EventService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

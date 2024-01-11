@@ -3,7 +3,7 @@
 namespace App\Middleware\Project;
 
 use App\Entity\Project;
-use App\Service\ProjectService;
+use App\Service\Project\ProjectService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Authentication\Service;
 
-use Authentication\Service\ApiAccessService;
-use Authentication\Service\ApiAccessServiceFactory;
+use App\Service\Authentication\ApiAccessService;
+use App\Service\Authentication\ApiAccessServiceFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Test\Unit\App\Service\AbstractService;

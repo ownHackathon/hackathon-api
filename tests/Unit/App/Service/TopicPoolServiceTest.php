@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\Topic;
-use App\Service\TopicPoolService;
+use App\Service\Topic\TopicPoolService;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
 use Test\Unit\Mock\TestConstants;

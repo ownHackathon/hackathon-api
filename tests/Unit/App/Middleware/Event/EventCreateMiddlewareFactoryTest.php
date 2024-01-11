@@ -5,7 +5,7 @@ namespace Test\Unit\App\Middleware\Event;
 use App\Hydrator\ReflectionHydrator;
 use App\Middleware\Event\EventCreateMiddleware;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
-use App\Service\EventService;
+use App\Service\Event\EventService;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Test\Unit\App\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\MockContainer;

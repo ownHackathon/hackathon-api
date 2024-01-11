@@ -4,8 +4,8 @@ namespace App\Middleware\Event;
 
 use App\Entity\User;
 use App\Enum\EventStatus;
-use App\Service\EventService;
-use App\Service\ParticipantService;
+use App\Service\Event\EventService;
+use App\Service\Participant\ParticipantService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

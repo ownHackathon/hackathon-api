@@ -4,7 +4,7 @@ namespace Test\Unit\Mock\Service;
 
 use App\Entity\User;
 use App\Hydrator\ReflectionHydrator;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use Test\Unit\Mock\Table\MockUserTable;

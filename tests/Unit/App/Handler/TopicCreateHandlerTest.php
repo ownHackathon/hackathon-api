@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Handler;
 
 use App\Entity\Topic;
-use App\Handler\TopicCreateHandler;
+use App\Handler\Topic\TopicCreateHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Test\Unit\Mock\Service\MockTopicCreateEMailService;
 

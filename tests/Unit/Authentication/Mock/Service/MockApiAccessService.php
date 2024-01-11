@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Authentication\Mock\Service;
 
-use Authentication\Service\ApiAccessService;
+use App\Service\Authentication\ApiAccessService;
 
 class MockApiAccessService extends ApiAccessService
 {

@@ -3,8 +3,8 @@
 namespace Test\Unit\App\Middleware;
 
 use App\Entity\User;
-use App\Middleware\UpdateLastUserActionTimeMiddleware;
-use App\Service\UserService;
+use App\Middleware\User\UpdateLastUserActionTimeMiddleware;
+use App\Service\User\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Test\Unit\Mock\Service\MockUserService;
 

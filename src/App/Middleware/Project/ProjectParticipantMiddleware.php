@@ -4,7 +4,7 @@ namespace App\Middleware\Project;
 
 use App\Entity\Participant;
 use App\Entity\Project;
-use App\Service\ParticipantService;
+use App\Service\Participant\ParticipantService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

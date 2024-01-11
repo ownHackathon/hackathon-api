@@ -3,7 +3,7 @@
 namespace Test\Functional\UserControl;
 
 use App\Entity\User;
-use App\Service\UserService;
+use App\Service\User\UserService;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;
 use Test\Functional\FunctionalTestCase;

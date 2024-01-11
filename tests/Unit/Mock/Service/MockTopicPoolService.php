@@ -4,7 +4,7 @@ namespace Test\Unit\Mock\Service;
 
 use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
-use App\Service\TopicPoolService;
+use App\Service\Topic\TopicPoolService;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
 
 class MockTopicPoolService extends TopicPoolService

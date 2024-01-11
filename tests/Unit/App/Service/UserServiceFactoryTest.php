@@ -3,8 +3,8 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Service\UserService;
-use App\Service\UserServiceFactory;
+use App\Service\User\UserService;
+use App\Service\User\UserServiceFactory;
 use App\Table\UserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;

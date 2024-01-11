@@ -4,7 +4,7 @@ namespace Test\Unit\Mock\Service;
 
 use App\Entity\Event;
 use App\Hydrator\ReflectionHydrator;
-use App\Service\EventService;
+use App\Service\Event\EventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockEventTable;

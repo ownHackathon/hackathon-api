@@ -2,11 +2,11 @@
 
 namespace App\Middleware\Event;
 
-use App\Dto\EventDto;
-use App\Dto\EventListDto;
+use App\Dto\Event\EventDto;
+use App\Dto\Event\EventListDto;
 use App\Entity\Event;
-use App\Service\EventService;
-use App\Service\UserService;
+use App\Service\Event\EventService;
+use App\Service\User\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -96,7 +96,6 @@
         "psr-4": {
             "Administration\\": "src/Administration",
             "App\\": "src/App/",
-            "Authentication\\": "src/Authentication",
             "Migrations\\": "database/migrations"
         }
     },

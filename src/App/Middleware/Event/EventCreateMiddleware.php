@@ -2,10 +2,10 @@
 
 namespace App\Middleware\Event;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\Event;
 use App\Entity\User;
-use App\Service\EventService;
+use App\Hydrator\ReflectionHydrator;
+use App\Service\Event\EventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

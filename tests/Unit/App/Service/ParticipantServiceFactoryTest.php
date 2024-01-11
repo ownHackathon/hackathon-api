@@ -3,8 +3,8 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Service\ParticipantService;
-use App\Service\ParticipantServiceFactory;
+use App\Service\Participant\ParticipantService;
+use App\Service\Participant\ParticipantServiceFactory;
 use App\Table\ParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Test\Unit\Mock\MockContainer;

@@ -6,7 +6,7 @@ use App\Entity\Topic;
 use App\Exception\DuplicateNameHttpException;
 use App\Exception\HttpException;
 use App\Hydrator\ReflectionHydrator;
-use App\Service\TopicPoolService;
+use App\Service\Topic\TopicPoolService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
