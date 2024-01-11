@@ -3,10 +3,10 @@
 namespace Test\Unit\App\Middleware\Event;
 
 use App\Middleware\Event\EventCreateValidationMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Validator\MockEventCreateValidator;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Validator\MockEventCreateValidator;
 
 class EventCreateValidationMiddlewareTest extends AbstractMiddleware
 {
@@ -24,8 +24,8 @@ class EventCreateValidationMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertNotInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
+        self::assertNotInstanceOf(JsonResponse::class, $response);
     }
 
     public function testValidationIsNotValide(): void
@@ -37,6 +37,6 @@ class EventCreateValidationMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(JsonResponse::class, $response);
     }
 }

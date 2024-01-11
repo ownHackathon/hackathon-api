@@ -3,11 +3,11 @@
 namespace Test\Unit\App\Middleware;
 
 use App\Hydrator\ReflectionHydrator;
-use Test\Unit\App\Mock\MockRequestHandler;
-use Test\Unit\App\Mock\MockServerRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Test\Unit\Mock\MockRequestHandler;
+use Test\Unit\Mock\MockServerRequest;
 
 abstract class AbstractMiddleware extends TestCase
 {

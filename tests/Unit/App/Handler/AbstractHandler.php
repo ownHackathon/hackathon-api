@@ -5,7 +5,7 @@ namespace Test\Unit\App\Handler;
 use App\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Test\Unit\App\Mock\MockServerRequest;
+use Test\Unit\Mock\MockServerRequest;
 
 abstract class AbstractHandler extends TestCase
 {

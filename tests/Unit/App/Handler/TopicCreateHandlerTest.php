@@ -4,8 +4,8 @@ namespace Test\Unit\App\Handler;
 
 use App\Entity\Topic;
 use App\Handler\TopicCreateHandler;
-use Test\Unit\App\Mock\Service\MockTopicCreateEMailService;
 use Laminas\Diactoros\Response\JsonResponse;
+use Test\Unit\Mock\Service\MockTopicCreateEMailService;
 
 class TopicCreateHandlerTest extends AbstractHandler
 {
@@ -19,10 +19,10 @@ class TopicCreateHandlerTest extends AbstractHandler
 
         $responseDataAsArray = json_decode($responseData, true);
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertIsString($responseData);
-        $this->assertJson($responseData);
-        $this->assertIsArray($responseDataAsArray);
-        $this->assertArrayHasKey('topic', $responseDataAsArray);
+        self::assertInstanceOf(JsonResponse::class, $response);
+        self::assertIsString($responseData);
+        self::assertJson($responseData);
+        self::assertIsArray($responseDataAsArray);
+        self::assertArrayHasKey('topic', $responseDataAsArray);
     }
 }

@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Factory;
 
 use App\Factory\MailFactory;
-use Test\Unit\App\Mock\MockContainer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\Mailer;
+use Test\Unit\Mock\MockContainer;
 
 class MailFactoryTest extends TestCase
 {
@@ -23,6 +23,6 @@ class MailFactoryTest extends TestCase
 
         $mailer = (new MailFactory())($container);
 
-        $this->assertInstanceOf(Mailer::class, $mailer);
+        self::assertInstanceOf(Mailer::class, $mailer);
     }
 }

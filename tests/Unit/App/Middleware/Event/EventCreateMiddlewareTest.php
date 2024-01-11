@@ -2,13 +2,14 @@
 
 namespace Test\Unit\App\Middleware\Event;
 
-use App\Middleware\Event\EventCreateMiddleware;
 use App\Entity\User;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Service\MockEventService;
+use App\Middleware\Event\EventCreateMiddleware;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockEventService;
+use Test\Unit\Mock\TestConstants;
 
 class EventCreateMiddlewareTest extends AbstractMiddleware
 {
@@ -28,22 +29,22 @@ class EventCreateMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertNotInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
+        self::assertNotInstanceOf(JsonResponse::class, $response);
     }
 
     public function testEventIsPresentAndCanNotCreated(): void
     {
         $middleware = new EventCreateMiddleware(new MockEventService(), $this->hydrator);
         $user = new User();
-        $user->setId(1);
+        $user->setId(TestConstants::USER_ID);
         $response = $middleware->process(
             $this->request->withAttribute(User::AUTHENTICATED_USER, $user)
-                ->withParsedBody(['id' => 1]),
+                ->withParsedBody(['id' => TestConstants::USER_ID]),
             $this->handler
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(HTTP::STATUS_NOT_FOUND, $response->getStatusCode());
+        self::assertInstanceOf(JsonResponse::class, $response);
+        self::assertSame(HTTP::STATUS_NOT_FOUND, $response->getStatusCode());
     }
 }

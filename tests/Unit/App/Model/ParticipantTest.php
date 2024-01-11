@@ -2,11 +2,11 @@
 
 namespace Test\Unit\App\Model;
 
-use App\Enum\DateTimeFormat;
 use App\Entity\Participant;
-use Test\Unit\App\Mock\TestConstants;
+use App\Enum\DateTimeFormat;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\TestConstants;
 
 class ParticipantTest extends TestCase
 {
@@ -24,9 +24,9 @@ class ParticipantTest extends TestCase
         $participantId = $this->participant->setId(TestConstants::USER_ID);
         $id = $participantId->getId();
 
-        $this->assertInstanceOf(Participant::class, $participantId);
-        $this->assertIsInt($id);
-        $this->assertSame(TestConstants::USER_ID, $id);
+        self::assertInstanceOf(Participant::class, $participantId);
+        self::assertIsInt($id);
+        self::assertSame(TestConstants::USER_ID, $id);
     }
 
     public function testCanSetAndGetUserId(): void
@@ -34,9 +34,9 @@ class ParticipantTest extends TestCase
         $participantUserId = $this->participant->setUserId(TestConstants::USER_ID);
         $userId = $participantUserId->getUserId();
 
-        $this->assertInstanceOf(Participant::class, $participantUserId);
-        $this->assertIsInt($userId);
-        $this->assertSame(TestConstants::USER_ID, $userId);
+        self::assertInstanceOf(Participant::class, $participantUserId);
+        self::assertIsInt($userId);
+        self::assertSame(TestConstants::USER_ID, $userId);
     }
 
     public function testCanSetAndGetEventId(): void
@@ -44,9 +44,9 @@ class ParticipantTest extends TestCase
         $participantEventId = $this->participant->setEventId(TestConstants::EVENT_ID);
         $eventId = $participantEventId->getEventId();
 
-        $this->assertInstanceOf(Participant::class, $participantEventId);
-        $this->assertIsInt($eventId);
-        $this->assertSame(TestConstants::EVENT_ID, $eventId);
+        self::assertInstanceOf(Participant::class, $participantEventId);
+        self::assertIsInt($eventId);
+        self::assertSame(TestConstants::EVENT_ID, $eventId);
     }
 
     public function testCanSetAndGetRequestTime(): void
@@ -54,9 +54,9 @@ class ParticipantTest extends TestCase
         $participantRequestTime = $this->participant->setRequestTime(new DateTime(TestConstants::TIME));
         $requestTime = $participantRequestTime->getRequestTime();
 
-        $this->assertInstanceOf(Participant::class, $participantRequestTime);
-        $this->assertInstanceOf(DateTime::class, $requestTime);
-        $this->assertSame(TestConstants::TIME, $requestTime->format(DateTimeFormat::ISO_8601->value));
+        self::assertInstanceOf(Participant::class, $participantRequestTime);
+        self::assertInstanceOf(DateTime::class, $requestTime);
+        self::assertSame(TestConstants::TIME, $requestTime->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetApproved(): void
@@ -64,9 +64,9 @@ class ParticipantTest extends TestCase
         $participantApproved = $this->participant->setApproved(true);
         $approved = $participantApproved->isApproved();
 
-        $this->assertInstanceOf(Participant::class, $participantApproved);
-        $this->assertIsBool($approved);
-        $this->assertSame(true, $approved);
+        self::assertInstanceOf(Participant::class, $participantApproved);
+        self::assertIsBool($approved);
+        self::assertSame(true, $approved);
     }
 
     public function testCanSetAndGetDisqualified(): void
@@ -74,8 +74,8 @@ class ParticipantTest extends TestCase
         $participantDisqualified = $this->participant->setDisqualified(true);
         $disqualified = $participantDisqualified->isDisqualified();
 
-        $this->assertInstanceOf(Participant::class, $participantDisqualified);
-        $this->assertIsBool($disqualified);
-        $this->assertSame(true, $disqualified);
+        self::assertInstanceOf(Participant::class, $participantDisqualified);
+        self::assertIsBool($disqualified);
+        self::assertSame(true, $disqualified);
     }
 }

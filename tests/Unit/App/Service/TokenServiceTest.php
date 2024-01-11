@@ -11,7 +11,7 @@ class TokenServiceTest extends TestCase
         $service = new TokenService();
         $token = $service->generateToken();
 
-        $this->assertIsString($token);
-        $this->assertSame(32, strlen($token));
+        self::assertIsString($token);
+        self::assertSame(32, strlen($token));
     }
 }

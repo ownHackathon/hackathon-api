@@ -2,15 +2,15 @@
 
 namespace Test\Unit\App\Middleware;
 
-use App\Middleware\UpdateLastUserActionTimeMiddleware;
 use App\Entity\User;
+use App\Middleware\UpdateLastUserActionTimeMiddleware;
 use App\Service\UserService;
-use Test\Unit\App\Mock\Service\MockUserService;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\Mock\Service\MockUserService;
 
 class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
 {
-    private readonly UserService $userService;
+    private UserService $userService;
 
     public function setUp(): void
     {
@@ -30,6 +30,6 @@ class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 }

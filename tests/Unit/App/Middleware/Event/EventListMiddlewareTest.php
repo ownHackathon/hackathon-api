@@ -3,10 +3,10 @@
 namespace Test\Unit\App\Middleware\Event;
 
 use App\Middleware\Event\EventListMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Service\MockEventService;
-use Test\Unit\App\Mock\Service\MockUserService;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockEventService;
+use Test\Unit\Mock\Service\MockUserService;
 
 class EventListMiddlewareTest extends AbstractMiddleware
 {
@@ -21,7 +21,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
 
         $response = $middleware->process($this->request, $this->handler);
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testCanFindAllEventSortedASC(): void
@@ -38,7 +38,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testCanFindAllEventSortedDESC(): void
@@ -55,6 +55,6 @@ class EventListMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 }

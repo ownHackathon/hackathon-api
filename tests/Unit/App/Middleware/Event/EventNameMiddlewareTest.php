@@ -3,12 +3,12 @@
 namespace Test\Unit\App\Middleware\Event;
 
 use App\Middleware\Event\EventNameMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Service\MockEventService;
-use Test\Unit\App\Mock\TestConstants;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\InvalidArgumentException;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockEventService;
+use Test\Unit\Mock\TestConstants;
 
 class EventNameMiddlewareTest extends AbstractMiddleware
 {
@@ -26,18 +26,18 @@ class EventNameMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testThrowInvalidArgumentException(): void
     {
         $middleware = new EventNameMiddleware(new MockEventService());
 
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionCode(HTTP::STATUS_BAD_REQUEST);
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionCode(HTTP::STATUS_BAD_REQUEST);
 
-        $response = $middleware->process(
-            $this->request->withAttribute('eventName', 'fail'),
+        $middleware->process(
+            $this->request->withAttribute('eventName', TestConstants::EVENT_TITLE_THROW_EXCEPTION),
             $this->handler
         );
     }

@@ -4,9 +4,9 @@ namespace Test\Unit\App\Middleware\Topic;
 
 use App\Exception\InvalidArgumentHttpException;
 use App\Middleware\Topic\TopicCreateValidationMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Validator\MockTopicCreateValidator;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Validator\MockTopicCreateValidator;
 
 class TopicCreateValidationMiddlewareTest extends AbstractMiddleware
 {
@@ -26,14 +26,17 @@ class TopicCreateValidationMiddlewareTest extends AbstractMiddleware
 
     public function testValidateTopicData(): void
     {
-        $response = $this->middleware->process($this->request->withParsedBody($this->topicData), $this->handler);
+        $response = $this->middleware->process(
+            $this->request->withParsedBody($this->topicData),
+            $this->handler
+        );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testValidateTopicDataThrowException(): void
     {
-        $this->expectException(InvalidArgumentHttpException::class);
+        self::expectException(InvalidArgumentHttpException::class);
 
         $this->middleware->process($this->request->withParsedBody([]), $this->handler);
     }

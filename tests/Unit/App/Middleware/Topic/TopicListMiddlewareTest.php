@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Middleware\Topic;
 
 use App\Middleware\Topic\TopicListAvailableMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Service\MockTopicPoolService;
 use Psr\Http\Message\ResponseInterface;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockTopicPoolService;
 
 class TopicListMiddlewareTest extends AbstractMiddleware
 {
@@ -15,6 +15,6 @@ class TopicListMiddlewareTest extends AbstractMiddleware
 
         $response = $middleware->process($this->request, $this->handler);
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 }

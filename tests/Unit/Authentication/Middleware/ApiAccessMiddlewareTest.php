@@ -2,12 +2,12 @@
 
 namespace Test\Unit\Authentication\Middleware;
 
-use Test\Unit\App\Middleware\AbstractMiddleware;
 use Authentication\Middleware\ApiAccessMiddleware;
-use Test\Unit\Authentication\Mock\Service\MockApiAccessService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Authentication\Mock\Service\MockApiAccessService;
 
 class ApiAccessMiddlewareTest extends AbstractMiddleware
 {
@@ -28,7 +28,7 @@ class ApiAccessMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testReturnResponseInterfaceWithPort(): void
@@ -40,7 +40,7 @@ class ApiAccessMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testReturnJSonResponse(): void
@@ -52,7 +52,7 @@ class ApiAccessMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
+        self::assertInstanceOf(JsonResponse::class, $response);
+        self::assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
     }
 }

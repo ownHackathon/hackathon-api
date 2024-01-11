@@ -4,9 +4,8 @@ namespace Test\Unit\App\Table;
 
 use App\Table\AbstractTable as ATable;
 use PHPUnit\Framework\TestCase;
-use Test\Unit\App\Mock\Database\MockQuery;
-use Test\Unit\App\Mock\Database\MockQueryForCanNot;
-use Test\Unit\App\Mock\TestConstants;
+use Test\Unit\Mock\Database\MockQuery;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
 
 use function get_class;
 use function substr;
@@ -19,10 +18,10 @@ abstract class AbstractTable extends TestCase
     protected MockQuery|MockQueryForCanNot $query;
     protected ATable $table;
 
-    protected array $fetchResult = ['id' => TestConstants::USER_ID];
+    protected array $fetchResult = ['id' => 1];
     protected array $fetchAllResult
         = [
-            0 => ['id' => TestConstants::USER_ID],
+            0 => ['id' => 1],
         ];
 
     protected function setUp(): void

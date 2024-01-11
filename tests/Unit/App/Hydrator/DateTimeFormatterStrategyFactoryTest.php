@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Hydrator;
 
 use App\Hydrator\DateTimeFormatterStrategyFactory;
-use Test\Unit\App\Mock\MockContainer;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\MockContainer;
 
 class DateTimeFormatterStrategyFactoryTest extends TestCase
 {
@@ -13,6 +13,6 @@ class DateTimeFormatterStrategyFactoryTest extends TestCase
     {
         $dateTimeFormatterStrategy = (new DateTimeFormatterStrategyFactory())(new MockContainer());
 
-        $this->assertInstanceOf(DateTimeFormatterStrategy::class, $dateTimeFormatterStrategy);
+        self::assertInstanceOf(DateTimeFormatterStrategy::class, $dateTimeFormatterStrategy);
     }
 }

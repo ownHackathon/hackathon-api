@@ -20,6 +20,9 @@ class UserMeTest extends FunctionalTestCase
         self::assertEmpty(self::getContentAsJson($response));
     }
 
+    /**
+     *   ToDo - The Auth Token for verification is still missing here
+     */
     public function testMeReturnValidUserByAuthenticatedUser(): void
     {
         $token = $this->app->container()->get('config')['token']['auth'];

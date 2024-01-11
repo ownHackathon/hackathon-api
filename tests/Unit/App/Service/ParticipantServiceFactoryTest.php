@@ -6,9 +6,9 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\ParticipantService;
 use App\Service\ParticipantServiceFactory;
 use App\Table\ParticipantTable;
-use Test\Unit\App\Mock\MockContainer;
-use Test\Unit\App\Mock\Table\MockParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Test\Unit\Mock\MockContainer;
+use Test\Unit\Mock\Table\MockParticipantTable;
 
 class ParticipantServiceFactoryTest extends AbstractService
 {
@@ -24,6 +24,6 @@ class ParticipantServiceFactoryTest extends AbstractService
 
         $service = $factory($container);
 
-        $this->assertInstanceOf(ParticipantService::class, $service);
+        self::assertInstanceOf(ParticipantService::class, $service);
     }
 }

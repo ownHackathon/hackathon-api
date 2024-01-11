@@ -6,10 +6,10 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\UserService;
 use App\Service\UserServiceFactory;
 use App\Table\UserTable;
-use Test\Unit\App\Mock\MockContainer;
-use Test\Unit\App\Mock\Table\MockUserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;
+use Test\Unit\Mock\MockContainer;
+use Test\Unit\Mock\Table\MockUserTable;
 
 class UserServiceFactoryTest extends AbstractService
 {
@@ -26,6 +26,6 @@ class UserServiceFactoryTest extends AbstractService
 
         $service = $factory($container);
 
-        $this->assertInstanceOf(UserService::class, $service);
+        self::assertInstanceOf(UserService::class, $service);
     }
 }

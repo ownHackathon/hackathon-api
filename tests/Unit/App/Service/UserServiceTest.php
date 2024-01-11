@@ -6,8 +6,8 @@ use App\Entity\User;
 use App\Service\UserService;
 use DateTime;
 use InvalidArgumentException;
-use Test\Unit\App\Mock\Table\MockUserTable;
-use Test\Unit\App\Mock\TestConstants;
+use Test\Unit\Mock\Table\MockUserTable;
+use Test\Unit\Mock\TestConstants;
 
 class UserServiceTest extends AbstractService
 {
@@ -49,7 +49,7 @@ class UserServiceTest extends AbstractService
 
         $insert = $this->userService->create($user);
 
-        $this->assertSame(1, $insert);
+        self::assertSame(1, $insert);
     }
 
     public function testCanNotCreateUser(): void
@@ -71,13 +71,13 @@ class UserServiceTest extends AbstractService
 
         $update = $this->userService->updateLastUserActionTime($user);
 
-        $this->assertInstanceOf(User::class, $update);
+        self::assertInstanceOf(User::class, $update);
     }
 
     public function testCanNotUpdateUser(): void
     {
         $user = new User();
-        $user->setId(2);
+        $user->setId(TestConstants::USER_ID_UNUSED);
 
         self::expectException(InvalidArgumentException::class);
 
@@ -87,52 +87,52 @@ class UserServiceTest extends AbstractService
     public function testCanUpdateUser(): void
     {
         $user = new User();
-        $user->setId(1);
+        $user->setId(TestConstants::USER_ID);
 
         $update = $this->userService->update($user);
 
-        $this->assertSame(true, $update);
+        self::assertSame(true, $update);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $this->expectException('InvalidArgumentException');
+        self::expectException(InvalidArgumentException::class);
 
-        $this->userService->findById(2);
+        $this->userService->findById(TestConstants::USER_ID_THROW_EXCEPTION);
     }
 
     public function testCanFindById(): void
     {
         $user = $this->userService->findById(TestConstants::USER_ID);
 
-        $this->assertInstanceOf(User::class, $user);
+        self::assertInstanceOf(User::class, $user);
     }
 
     public function testCanFindByUuid(): void
     {
         $user = $this->userService->findByUuid(TestConstants::USER_UUID);
 
-        $this->assertInstanceOf(User::class, $user);
+        self::assertInstanceOf(User::class, $user);
     }
 
     public function testCanNotFindByUuid(): void
     {
-        $user = $this->userService->findByUuid('FakeUserNotUuid');
+        $user = $this->userService->findByUuid(TestConstants::USER_UUID_UNUSED);
 
-        $this->assertNull($user);
+        self::assertNull($user);
     }
 
     public function testCanNotFindByToken(): void
     {
-        $user = $this->userService->findByToken('FakeUserNotToken');
+        $user = $this->userService->findByToken(TestConstants::USER_TOKEN_UNUSED);
 
-        $this->assertNull($user);
+        self::assertNull($user);
     }
 
     public function testCanFindByToken(): void
     {
         $user = $this->userService->findByToken(TestConstants::USER_TOKEN);
 
-        $this->assertInstanceOf(User::class, $user);
+        self::assertInstanceOf(User::class, $user);
     }
 }

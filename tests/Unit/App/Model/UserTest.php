@@ -2,11 +2,11 @@
 
 namespace Test\Unit\App\Model;
 
-use App\Enum\DateTimeFormat;
 use App\Entity\User;
-use Test\Unit\App\Mock\TestConstants;
+use App\Enum\DateTimeFormat;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\TestConstants;
 
 class UserTest extends TestCase
 {
@@ -23,7 +23,7 @@ class UserTest extends TestCase
     {
         $lastLogin = $this->user->getLastAction();
 
-        $this->assertNull($lastLogin);
+        self::assertNull($lastLogin);
     }
 
     public function testCanSetAndGetId(): void
@@ -31,9 +31,9 @@ class UserTest extends TestCase
         $userId = $this->user->setId(1);
         $id = $userId->getId();
 
-        $this->assertInstanceOf(User::class, $userId);
-        $this->assertIsInt($id);
-        $this->assertSame(1, $id);
+        self::assertInstanceOf(User::class, $userId);
+        self::assertIsInt($id);
+        self::assertSame(1, $id);
     }
 
     public function testCanSetAndGetUuId(): void
@@ -41,9 +41,9 @@ class UserTest extends TestCase
         $userId = $this->user->setUuid(TestConstants::USER_UUID);
         $uuid = $userId->getUuid();
 
-        $this->assertInstanceOf(User::class, $userId);
-        $this->assertIsString($uuid);
-        $this->assertSame(TestConstants::USER_UUID, $uuid);
+        self::assertInstanceOf(User::class, $userId);
+        self::assertIsString($uuid);
+        self::assertSame(TestConstants::USER_UUID, $uuid);
     }
 
     public function testCanSetAndGetRoleId(): void
@@ -51,9 +51,9 @@ class UserTest extends TestCase
         $userRoleId = $this->user->setRoleId(1);
         $roleId = $userRoleId->getRoleId();
 
-        $this->assertInstanceOf(User::class, $userRoleId);
-        $this->assertIsInt($roleId);
-        $this->assertSame(1, $roleId);
+        self::assertInstanceOf(User::class, $userRoleId);
+        self::assertIsInt($roleId);
+        self::assertSame(1, $roleId);
     }
 
     public function testCanSetAndGetName(): void
@@ -61,9 +61,9 @@ class UserTest extends TestCase
         $userName = $this->user->setName(TestConstants::USER_NAME);
         $name = $userName->getName();
 
-        $this->assertInstanceOf(User::class, $userName);
-        $this->assertIsString($name);
-        $this->assertSame(TestConstants::USER_NAME, $name);
+        self::assertInstanceOf(User::class, $userName);
+        self::assertIsString($name);
+        self::assertSame(TestConstants::USER_NAME, $name);
     }
 
     public function testCanSetAndGetPassword(): void
@@ -71,9 +71,9 @@ class UserTest extends TestCase
         $userPassword = $this->user->setPassword(TestConstants::USER_PASSWORD);
         $password = $userPassword->getPassword();
 
-        $this->assertInstanceOf(User::class, $userPassword);
-        $this->assertIsString($password);
-        $this->assertSame(TestConstants::USER_PASSWORD, $password);
+        self::assertInstanceOf(User::class, $userPassword);
+        self::assertIsString($password);
+        self::assertSame(TestConstants::USER_PASSWORD, $password);
     }
 
     public function testCanSetAndGetEmail(): void
@@ -84,9 +84,9 @@ class UserTest extends TestCase
         $userEmail = $this->user->setEmail(TestConstants::USER_EMAIL);
         $email = $userEmail->getEmail();
 
-        $this->assertInstanceOf(User::class, $userEmail);
-        $this->assertIsString($email);
-        $this->assertSame(TestConstants::USER_EMAIL, $email);
+        self::assertInstanceOf(User::class, $userEmail);
+        self::assertIsString($email);
+        self::assertSame(TestConstants::USER_EMAIL, $email);
     }
 
     public function testCanSetAndGetRegistrationTime(): void
@@ -94,9 +94,9 @@ class UserTest extends TestCase
         $userRegistrationTime = $this->user->setRegistrationTime(new DateTime(TestConstants::TIME));
         $registrationTime = $userRegistrationTime->getRegistrationTime();
 
-        $this->assertInstanceOf(User::class, $userRegistrationTime);
-        $this->assertInstanceOf(DateTime::class, $registrationTime);
-        $this->assertSame(TestConstants::TIME, $registrationTime->format(DateTimeFormat::ISO_8601->value));
+        self::assertInstanceOf(User::class, $userRegistrationTime);
+        self::assertInstanceOf(DateTime::class, $registrationTime);
+        self::assertSame(TestConstants::TIME, $registrationTime->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetLastLogin(): void
@@ -104,9 +104,9 @@ class UserTest extends TestCase
         $userLastLogin = $this->user->setLastAction(new DateTime(TestConstants::TIME));
         $lastLogin = $userLastLogin->getLastAction();
 
-        $this->assertInstanceOf(User::class, $userLastLogin);
-        $this->assertInstanceOf(DateTime::class, $lastLogin);
-        $this->assertSame(TestConstants::TIME, $lastLogin->format(DateTimeFormat::ISO_8601->value));
+        self::assertInstanceOf(User::class, $userLastLogin);
+        self::assertInstanceOf(DateTime::class, $lastLogin);
+        self::assertSame(TestConstants::TIME, $lastLogin->format(DateTimeFormat::ISO_8601->value));
     }
 
     public function testCanSetAndGetActive(): void
@@ -114,9 +114,9 @@ class UserTest extends TestCase
         $userActive = $this->user->setActive(true);
         $active = $this->user->isActive();
 
-        $this->assertInstanceOf(User::class, $userActive);
-        $this->assertIsBool($active);
-        $this->assertSame(true, $active);
+        self::assertInstanceOf(User::class, $userActive);
+        self::assertIsBool($active);
+        self::assertSame(true, $active);
     }
 
     public function testCanSetAndGetToken(): void
@@ -124,8 +124,8 @@ class UserTest extends TestCase
         $userToken = $this->user->setToken(TestConstants::USER_TOKEN);
         $token = $this->user->getToken();
 
-        $this->assertInstanceOf(User::class, $userToken);
-        $this->assertIsString($token);
-        $this->assertSame(TestConstants::USER_TOKEN, $token);
+        self::assertInstanceOf(User::class, $userToken);
+        self::assertIsString($token);
+        self::assertSame(TestConstants::USER_TOKEN, $token);
     }
 }

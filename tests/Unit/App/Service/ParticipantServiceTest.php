@@ -4,7 +4,9 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\Participant;
 use App\Service\ParticipantService;
-use Test\Unit\App\Mock\Table\MockParticipantTable;
+use InvalidArgumentException;
+use Test\Unit\Mock\Table\MockParticipantTable;
+use Test\Unit\Mock\TestConstants;
 
 class ParticipantServiceTest extends AbstractService
 {
@@ -27,7 +29,7 @@ class ParticipantServiceTest extends AbstractService
 
         $participant = $this->service->create($participant);
 
-        $this->assertSame(false, $participant);
+        self::assertSame(false, $participant);
     }
 
     public function testCanCreateParticipant(): void
@@ -39,7 +41,7 @@ class ParticipantServiceTest extends AbstractService
 
         $participant = $this->service->create($participant);
 
-        $this->assertSame(true, $participant);
+        self::assertSame(true, $participant);
     }
 
     public function testCanRemoveParticipant(): void
@@ -49,7 +51,7 @@ class ParticipantServiceTest extends AbstractService
 
         $response = $this->service->remove($participant);
 
-        $this->assertSame(true, $response);
+        self::assertSame(true, $response);
     }
 
     public function testCanNotRemoveParticipant(): void
@@ -59,43 +61,43 @@ class ParticipantServiceTest extends AbstractService
 
         $response = $this->service->remove($participant);
 
-        $this->assertSame(false, $response);
+        self::assertSame(false, $response);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $this->expectException('InvalidArgumentException');
+        self::expectException(InvalidArgumentException::class);
 
-        $this->service->findById(2);
+        $this->service->findById(TestConstants::PARTICIPANT_ID_THROW_EXCEPTION);
     }
 
     public function testCanFindById(): void
     {
-        $participant = $this->service->findById(1);
+        $participant = $this->service->findById(TestConstants::PARTICIPANT_ID);
 
-        $this->assertInstanceOf(Participant::class, $participant);
+        self::assertInstanceOf(Participant::class, $participant);
     }
 
     public function testCanFindByUserId(): void
     {
-        $participant = $this->service->findByUserId(1);
+        $participant = $this->service->findByUserId(TestConstants::USER_ID);
 
-        $this->assertInstanceOf(Participant::class, $participant);
+        self::assertInstanceOf(Participant::class, $participant);
     }
 
     public function testCanNotFindByUserId(): void
     {
-        $participant = $this->service->findByUserId(2);
+        $participant = $this->service->findByUserId(TestConstants::USER_ID_UNUSED);
 
-        $this->assertNull($participant);
+        self::assertNull($participant);
     }
 
     public function testCanFindActiveParticipantByEvent(): void
     {
-         $participant = $this->service->findActiveParticipantByEvent(1);
+        $participant = $this->service->findActiveParticipantByEvent(TestConstants::EVENT_ID);
 
-        $this->assertIsArray($participant);
-        $this->assertArrayHasKey(0, $participant);
-        $this->assertInstanceOf(Participant::class, $participant[0]);
+        self::assertIsArray($participant);
+        self::assertArrayHasKey(0, $participant);
+        self::assertInstanceOf(Participant::class, $participant[0]);
     }
 }

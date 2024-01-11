@@ -2,9 +2,10 @@
 
 namespace Test\Unit\App\Hydrator;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Entity\User;
+use App\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\TestConstants;
 
 class ReflectionHydratorTest extends TestCase
 {
@@ -19,34 +20,34 @@ class ReflectionHydratorTest extends TestCase
     {
         $hydrate = $this->hydrator->hydrate(false, new User());
 
-        $this->assertNull($hydrate);
+        self::assertNull($hydrate);
     }
 
     public function testCanHydrate(): void
     {
         $data = [
-            'id' => 1,
+            'id' => TestConstants::USER_ID,
         ];
 
         $hydrate = $this->hydrator->hydrate($data, new User());
 
-        $this->assertInstanceOf(User::class, $hydrate);
+        self::assertInstanceOf(User::class, $hydrate);
     }
 
     public function testCanHydrateListWithoutData(): void
     {
         $hydrate = $this->hydrator->hydrateList([], User::class);
 
-        $this->assertIsArray($hydrate);
-        $this->assertSame(0, count($hydrate));
+        self::assertIsArray($hydrate);
+        self::assertSame(0, count($hydrate));
     }
 
     public function testCanHydrateListWithData(): void
     {
-        $hydrate = $this->hydrator->hydrateList([0 => ['id' => 1]], User::class);
+        $hydrate = $this->hydrator->hydrateList([0 => ['id' => TestConstants::USER_ID]], User::class);
 
-        $this->assertIsArray($hydrate);
-        $this->assertArrayHasKey(0, $hydrate);
-        $this->assertInstanceOf(User::class, $hydrate[0]);
+        self::assertIsArray($hydrate);
+        self::assertArrayHasKey(0, $hydrate);
+        self::assertInstanceOf(User::class, $hydrate[0]);
     }
 }

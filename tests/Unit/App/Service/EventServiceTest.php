@@ -4,8 +4,9 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\Event;
 use App\Service\EventService;
-use Test\Unit\App\Mock\Table\MockEventTable;
-use Test\Unit\App\Mock\TestConstants;
+use InvalidArgumentException;
+use Test\Unit\Mock\Table\MockEventTable;
+use Test\Unit\Mock\TestConstants;
 
 class EventServiceTest extends AbstractService
 {
@@ -26,7 +27,7 @@ class EventServiceTest extends AbstractService
 
         $event = $this->service->create($event);
 
-        $this->assertSame(false, $event);
+        self::assertSame(false, $event);
     }
 
     public function testCanCreate(): void
@@ -36,61 +37,61 @@ class EventServiceTest extends AbstractService
 
         $event = $this->service->create($event);
 
-        $this->assertSame(true, $event);
+        self::assertSame(true, $event);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $this->expectException('InvalidArgumentException');
+        self::expectException(InvalidArgumentException::class);
 
-        $this->service->findById(3);
+        $this->service->findById(TestConstants::EVENT_ID_THROW_EXCEPTION);
     }
 
     public function testFindById(): void
     {
-        $event = $this->service->findById(1);
+        $event = $this->service->findById(TestConstants::EVENT_ID);
 
-        $this->assertInstanceOf(Event::class, $event);
+        self::assertInstanceOf(Event::class, $event);
     }
 
     public function testCanFindAll(): void
     {
         $event = $this->service->findAll();
 
-        $this->assertIsArray($event);
-        $this->assertArrayHasKey(0, $event);
-        $this->assertInstanceOf(Event::class, $event[0]);
+        self::assertIsArray($event);
+        self::assertArrayHasKey(0, $event);
+        self::assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCanFindAllActive(): void
     {
         $event = $this->service->findAllActive();
 
-        $this->assertIsArray($event);
-        $this->assertArrayHasKey(0, $event);
-        $this->assertInstanceOf(Event::class, $event[0]);
+        self::assertIsArray($event);
+        self::assertArrayHasKey(0, $event);
+        self::assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCanFindAllNotActive(): void
     {
         $event = $this->service->findAllNotActive();
 
-        $this->assertIsArray($event);
-        $this->assertArrayHasKey(0, $event);
-        $this->assertInstanceOf(Event::class, $event[0]);
+        self::assertIsArray($event);
+        self::assertArrayHasKey(0, $event);
+        self::assertInstanceOf(Event::class, $event[0]);
     }
 
     public function testCheckIsRatingCompleted(): void
     {
-        $event = $this->service->isRatingCompleted(1);
+        $event = $this->service->isRatingCompleted(TestConstants::EVENT_ID);
 
-        $this->assertSame(true, $event);
+        self::assertSame(true, $event);
     }
 
     public function testCheckIsRatingNotCompleted(): void
     {
-        $event = $this->service->isRatingCompleted(2);
+        $event = $this->service->isRatingCompleted(TestConstants::EVENT_ID_RATING_NOT_COMPLETED);
 
-        $this->assertSame(false, $event);
+        self::assertSame(false, $event);
     }
 }

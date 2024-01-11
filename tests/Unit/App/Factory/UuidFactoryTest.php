@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Factory;
 
 use App\Factory\UuidFactory;
-use Test\Unit\App\Mock\MockContainer;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
+use Test\Unit\Mock\MockContainer;
 
 class UuidFactoryTest extends TestCase
 {
@@ -15,6 +15,6 @@ class UuidFactoryTest extends TestCase
 
         $uuid = (new UuidFactory())($container);
 
-        $this->assertInstanceOf(UuidInterface::class, $uuid);
+        self::assertInstanceOf(UuidInterface::class, $uuid);
     }
 }

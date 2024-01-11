@@ -3,10 +3,10 @@
 namespace Test\Unit\App\Factory;
 
 use App\Factory\DatabaseFactory;
-use Test\Unit\App\Mock\MockContainer;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\MockContainer;
 
 class DatabaseFactoryTest extends TestCase
 {
@@ -32,6 +32,6 @@ class DatabaseFactoryTest extends TestCase
 
         $pdo = (new DatabaseFactory())($container);
 
-        $this->assertInstanceOf(PDO::class, $pdo);
+        self::assertInstanceOf(PDO::class, $pdo);
     }
 }

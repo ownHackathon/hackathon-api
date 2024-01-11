@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Factory;
+namespace Test\Unit\App\Factory;
 
-use Test\Unit\App\Mock\Database\MockPDO;
-use Test\Unit\App\Mock\MockContainer;
+use App\Factory\QueryFactory;
 use Envms\FluentPDO\Query;
 use PDO;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\Database\MockPDO;
+use Test\Unit\Mock\MockContainer;
 
 class QueryFactoryTest extends TestCase
 {
@@ -17,6 +18,6 @@ class QueryFactoryTest extends TestCase
 
         $query = (new QueryFactory())($container);
 
-        $this->assertInstanceOf(Query::class, $query);
+        self::assertInstanceOf(Query::class, $query);
     }
 }

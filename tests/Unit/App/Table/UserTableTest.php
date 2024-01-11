@@ -6,8 +6,8 @@ use App\Entity\User;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
-use Test\Unit\App\Mock\Database\MockQueryForCanNot;
-use Test\Unit\App\Mock\TestConstants;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
+use Test\Unit\Mock\TestConstants;
 
 /**
  * @property UserTable $table

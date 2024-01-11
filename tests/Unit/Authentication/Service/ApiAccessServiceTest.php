@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Authentication\Service;
 
-use Test\Unit\App\Service\AbstractService;
 use Authentication\Service\ApiAccessService;
+use Test\Unit\App\Service\AbstractService;
 
 class ApiAccessServiceTest extends AbstractService
 {
@@ -28,12 +28,12 @@ class ApiAccessServiceTest extends AbstractService
     public function testHasAccessRights(): void
     {
         $hasRights = $this->apiAccessService->hasAccessRights('localhost');
-        $this->assertSame(true, $hasRights);
+        self::assertSame(true, $hasRights);
     }
 
     public function testHasAccessNotRights(): void
     {
         $hasRights = $this->apiAccessService->hasAccessRights('example.com');
-        $this->assertSame(false, $hasRights);
+        self::assertSame(false, $hasRights);
     }
 }

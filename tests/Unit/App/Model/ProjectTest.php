@@ -2,11 +2,11 @@
 
 namespace Test\Unit\App\Model;
 
-use App\Enum\DateTimeFormat;
 use App\Entity\Project;
-use Test\Unit\App\Mock\TestConstants;
+use App\Enum\DateTimeFormat;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\TestConstants;
 
 class ProjectTest extends TestCase
 {
@@ -24,9 +24,9 @@ class ProjectTest extends TestCase
         $projectId = $this->project->setId(1);
         $id = $projectId->getId();
 
-        $this->assertInstanceOf(Project::class, $projectId);
-        $this->assertIsInt($id);
-        $this->assertSame(1, $id);
+        self::assertInstanceOf(Project::class, $projectId);
+        self::assertIsInt($id);
+        self::assertSame(1, $id);
     }
 
     public function testCanSetAndGetParticipantId(): void
@@ -34,9 +34,9 @@ class ProjectTest extends TestCase
         $projectParticipantId = $this->project->setParticipantId(TestConstants::USER_ID);
         $participantId = $projectParticipantId->getParticipantId();
 
-        $this->assertInstanceOf(Project::class, $projectParticipantId);
-        $this->assertIsInt($participantId);
-        $this->assertSame(TestConstants::USER_ID, $participantId);
+        self::assertInstanceOf(Project::class, $projectParticipantId);
+        self::assertIsInt($participantId);
+        self::assertSame(TestConstants::USER_ID, $participantId);
     }
 
     public function testCanSetAndGetTitle(): void
@@ -44,9 +44,9 @@ class ProjectTest extends TestCase
         $projectTitle = $this->project->setTitle(TestConstants::EVENT_TITLE);
         $title = $projectTitle->getTitle();
 
-        $this->assertInstanceOf(Project::class, $projectTitle);
-        $this->assertIsString($title);
-        $this->assertSame(TestConstants::EVENT_TITLE, $title);
+        self::assertInstanceOf(Project::class, $projectTitle);
+        self::assertIsString($title);
+        self::assertSame(TestConstants::EVENT_TITLE, $title);
     }
 
     public function testCanSetAndGetDescription(): void
@@ -54,9 +54,9 @@ class ProjectTest extends TestCase
         $projectDescription = $this->project->setDescription(TestConstants::EVENT_DESCRIPTION);
         $description = $projectDescription->getDescription();
 
-        $this->assertInstanceOf(Project::class, $projectDescription);
-        $this->assertIsString($description);
-        $this->assertSame(TestConstants::EVENT_DESCRIPTION, $description);
+        self::assertInstanceOf(Project::class, $projectDescription);
+        self::assertIsString($description);
+        self::assertSame(TestConstants::EVENT_DESCRIPTION, $description);
     }
 
     public function testCanSetAndGetGitRepoUri(): void
@@ -64,9 +64,9 @@ class ProjectTest extends TestCase
         $projectGitRepoUri = $this->project->setGitRepoUri(TestConstants::PROJECT_URL);
         $gitRepoUri = $projectGitRepoUri->getGitRepoUri();
 
-        $this->assertInstanceOf(Project::class, $projectGitRepoUri);
-        $this->assertIsString($gitRepoUri);
-        $this->assertSame(TestConstants::PROJECT_URL, $gitRepoUri);
+        self::assertInstanceOf(Project::class, $projectGitRepoUri);
+        self::assertIsString($gitRepoUri);
+        self::assertSame(TestConstants::PROJECT_URL, $gitRepoUri);
     }
 
     public function testCanSetAndGetDemoPageUri(): void
@@ -74,9 +74,9 @@ class ProjectTest extends TestCase
         $projectDemoPageUri = $this->project->setDemoPageUri(TestConstants::PROJECT_URL);
         $demoPageUri = $projectDemoPageUri->getDemoPageUri();
 
-        $this->assertInstanceOf(Project::class, $projectDemoPageUri);
-        $this->assertIsString($demoPageUri);
-        $this->assertSame(TestConstants::PROJECT_URL, $demoPageUri);
+        self::assertInstanceOf(Project::class, $projectDemoPageUri);
+        self::assertIsString($demoPageUri);
+        self::assertSame(TestConstants::PROJECT_URL, $demoPageUri);
     }
 
     public function testCanSetAndGetCreateTime(): void
@@ -84,8 +84,8 @@ class ProjectTest extends TestCase
         $projectCreateTime = $this->project->setCreateTime(new DateTime(TestConstants::TIME));
         $createTime = $projectCreateTime->getCreateTime();
 
-        $this->assertInstanceOf(Project::class, $projectCreateTime);
-        $this->assertInstanceOf(DateTime::class, $createTime);
-        $this->assertSame(TestConstants::TIME, $createTime->format(DateTimeFormat::ISO_8601->value));
+        self::assertInstanceOf(Project::class, $projectCreateTime);
+        self::assertInstanceOf(DateTime::class, $createTime);
+        self::assertSame(TestConstants::TIME, $createTime->format(DateTimeFormat::ISO_8601->value));
     }
 }

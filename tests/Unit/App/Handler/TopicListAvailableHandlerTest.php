@@ -2,31 +2,31 @@
 
 namespace Test\Unit\App\Handler;
 
-use App\Handler\TopicListAvailableHandler;
 use App\Entity\Topic;
+use App\Handler\TopicListAvailableHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 
 class TopicListAvailableHandlerTest extends AbstractHandler
 {
     public function testReturnJsonResponseWithOneOrMoreItems(): void
     {
-        $handler = new TopicListAvailableHandler($this->hydrator);
+        $handler = new TopicListAvailableHandler();
 
         $topicList = [new Topic()];
 
         $response = $handler->handle($this->request->withAttribute('availableTopics', $topicList));
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(JsonResponse::class, $response);
     }
 
     public function testReturnJsonResponseWithoutItems(): void
     {
-        $handler = new TopicListAvailableHandler($this->hydrator);
+        $handler = new TopicListAvailableHandler();
 
         $topicList = [];
 
         $response = $handler->handle($this->request->withAttribute('availableTopics', $topicList));
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(JsonResponse::class, $response);
     }
 }

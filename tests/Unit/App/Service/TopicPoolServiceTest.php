@@ -4,7 +4,9 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\Topic;
 use App\Service\TopicPoolService;
-use Test\Unit\App\Mock\Table\MockTopicPoolTable;
+use InvalidArgumentException;
+use Test\Unit\Mock\Table\MockTopicPoolTable;
+use Test\Unit\Mock\TestConstants;
 
 class TopicPoolServiceTest extends AbstractService
 {
@@ -23,74 +25,74 @@ class TopicPoolServiceTest extends AbstractService
     {
         $insertTopic = $this->service->insert(new Topic());
 
-        $this->assertInstanceOf(TopicPoolService::class, $insertTopic);
+        self::assertInstanceOf(TopicPoolService::class, $insertTopic);
     }
 
     public function testCanUpdateEventId(): void
     {
         $updateTopic = $this->service->updateEventId(new Topic());
 
-        $this->assertInstanceOf(TopicPoolService::class, $updateTopic);
+        self::assertInstanceOf(TopicPoolService::class, $updateTopic);
     }
 
     public function testFindByIdThrowException(): void
     {
-        $this->expectException('InvalidArgumentException');
+        self::expectException(InvalidArgumentException::class);
 
-        $this->service->findById(2);
+        $this->service->findById(TestConstants::TOPIC_ID_THROW_EXCEPTION);
     }
 
     public function testCanFindById(): void
     {
-        $topic = $this->service->findById(1);
+        $topic = $this->service->findById(TestConstants::TOPIC_ID);
 
-        $this->assertInstanceOf(Topic::class, $topic);
+        self::assertInstanceOf(Topic::class, $topic);
     }
 
     public function testCanNotFindByEventId(): void
     {
-        $topic = $this->service->findByEventId(2);
+        $topic = $this->service->findByEventId(TestConstants::EVENT_ID_UNUSED);
 
         $this->assertNull($topic);
     }
 
     public function testCanFindByEventId(): void
     {
-        $topic = $this->service->findByEventId(1);
+        $topic = $this->service->findByEventId(TestConstants::EVENT_ID);
 
-        $this->assertInstanceOf(Topic::class, $topic);
+        self::assertInstanceOf(Topic::class, $topic);
     }
 
     public function testCanFindAvailable(): void
     {
         $topic = $this->service->findAvailable();
 
-        $this->assertIsArray($topic);
-        $this->assertArrayHasKey(0, $topic);
-        $this->assertInstanceOf(Topic::class, $topic[0]);
+        self::assertIsArray($topic);
+        self::assertArrayHasKey(0, $topic);
+        self::assertInstanceOf(Topic::class, $topic[0]);
     }
 
     public function testCanFindAll(): void
     {
         $topic = $this->service->findAll();
 
-        $this->assertIsArray($topic);
-        $this->assertArrayHasKey(0, $topic);
-        $this->assertInstanceOf(Topic::class, $topic[0]);
+        self::assertIsArray($topic);
+        self::assertArrayHasKey(0, $topic);
+        self::assertInstanceOf(Topic::class, $topic[0]);
     }
 
     public function testIsNotTopic(): void
     {
         $topic = $this->service->isTopic('fakeIsNotTopic');
 
-        $this->assertSame(false, $topic);
+        self::assertSame(false, $topic);
     }
 
     public function testIsTopic(): void
     {
         $topic = $this->service->isTopic('fakeTopic');
 
-        $this->assertSame(true, $topic);
+        self::assertSame(true, $topic);
     }
 
     public function testCanGetEntriesStatistic(): void
@@ -103,6 +105,6 @@ class TopicPoolServiceTest extends AbstractService
 
         $statistic = $this->service->getEntriesStatistic();
 
-        $this->assertSame($values, $statistic);
+        self::assertSame($values, $statistic);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Test\Unit\Authentication\Service;
 
-use Test\Unit\App\Mock\MockContainer;
-use Test\Unit\App\Service\AbstractService;
 use Authentication\Service\ApiAccessService;
 use Authentication\Service\ApiAccessServiceFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Test\Unit\App\Service\AbstractService;
+use Test\Unit\Mock\MockContainer;
 
 class ApiAccessServiceFactoryTest extends AbstractService
 {
@@ -33,6 +33,6 @@ class ApiAccessServiceFactoryTest extends AbstractService
 
         $apiAccessService = (new ApiAccessServiceFactory())($container);
 
-        $this->assertInstanceOf(ApiAccessService::class, $apiAccessService);
+        self::assertInstanceOf(ApiAccessService::class, $apiAccessService);
     }
 }

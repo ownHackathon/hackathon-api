@@ -6,10 +6,10 @@ use App\Hydrator\ReflectionHydrator;
 use App\Middleware\Event\EventCreateMiddleware;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Service\EventService;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\MockContainer;
-use Test\Unit\App\Mock\Service\MockEventService;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\MockContainer;
+use Test\Unit\Mock\Service\MockEventService;
 
 class EventCreateMiddlewareFactoryTest extends AbstractMiddleware
 {
@@ -30,6 +30,6 @@ class EventCreateMiddlewareFactoryTest extends AbstractMiddleware
 
         $middleware = (new EventCreateMiddlewareFactory())($container);
 
-        $this->assertInstanceOf(EventCreateMiddleware::class, $middleware);
+        self::assertInstanceOf(EventCreateMiddleware::class, $middleware);
     }
 }

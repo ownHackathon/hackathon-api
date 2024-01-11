@@ -4,15 +4,15 @@ namespace Test\Unit\App\Middleware;
 
 use App\Middleware\UserMiddleware;
 use App\Service\UserService;
-use Test\Unit\App\Mock\Service\MockUserService;
-use Test\Unit\App\Mock\TestConstants;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Test\Unit\Mock\Service\MockUserService;
+use Test\Unit\Mock\TestConstants;
 
 class UserMiddlewareTest extends AbstractMiddleware
 {
-    private readonly UserService $userService;
+    private UserService $userService;
 
     public function setUp(): void
     {
@@ -30,7 +30,7 @@ class UserMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testReturnStatusNotFound(): void
@@ -42,7 +42,7 @@ class UserMiddlewareTest extends AbstractMiddleware
             $this->handler
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame($response->getStatusCode(), HTTP::STATUS_NOT_FOUND);
+        self::assertInstanceOf(JsonResponse::class, $response);
+        self::assertSame($response->getStatusCode(), HTTP::STATUS_NOT_FOUND);
     }
 }

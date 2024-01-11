@@ -4,10 +4,10 @@ namespace Test\Unit\App\Middleware\Topic;
 
 use App\Exception\DuplicateNameHttpException;
 use App\Middleware\Topic\TopicCreateSubmitMiddleware;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\App\Mock\Service\MockTopicPoolService;
 use Psr\Http\Message\ResponseInterface;
 use Ramsey\Uuid\Uuid;
+use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockTopicPoolService;
 
 class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
 {
@@ -21,14 +21,21 @@ class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
     public function setUp(): void
     {
         parent::setUp();
-        $this->middleware = new TopicCreateSubmitMiddleware(new MockTopicPoolService(), $this->hydrator, Uuid::uuid4());
+        $this->middleware = new TopicCreateSubmitMiddleware(
+            new MockTopicPoolService(),
+            $this->hydrator,
+            Uuid::uuid4()
+        );
     }
 
     public function testHasCreateNewTopicAndReturnResponse(): void
     {
-        $response = $this->middleware->process($this->request->withParsedBody($this->topicData), $this->handler);
+        $response = $this->middleware->process(
+            $this->request->withParsedBody($this->topicData),
+            $this->handler
+        );
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        self::assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testTopicIsDuplicatedAndThrowException(): void
@@ -36,7 +43,7 @@ class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
         $data = $this->topicData;
         $data['topic'] = 'duplicated';
 
-        $this->expectException(DuplicateNameHttpException::class);
+        self::expectException(DuplicateNameHttpException::class);
 
         $this->middleware->process($this->request->withParsedBody($data), $this->handler);
     }

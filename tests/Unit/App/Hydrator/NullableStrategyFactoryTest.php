@@ -4,10 +4,10 @@ namespace Test\Unit\App\Hydrator;
 
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
-use Test\Unit\App\Mock\MockContainer;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\MockContainer;
 
 class NullableStrategyFactoryTest extends TestCase
 {
@@ -18,6 +18,6 @@ class NullableStrategyFactoryTest extends TestCase
 
         $nullableStragegy = (new NullableStrategyFactory())($container);
 
-        $this->assertInstanceOf(NullableStrategy::class, $nullableStragegy);
+        self::assertInstanceOf(NullableStrategy::class, $nullableStragegy);
     }
 }

@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Hydrator;
 
 use App\Hydrator\ClassMethodsHydratorFactory;
-use Test\Unit\App\Mock\MockContainer;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use PHPUnit\Framework\TestCase;
+use Test\Unit\Mock\MockContainer;
 
 class ClassMethodsHydratorFactoryTest extends TestCase
 {
@@ -13,6 +13,6 @@ class ClassMethodsHydratorFactoryTest extends TestCase
     {
         $classMethodsHydrator = (new ClassMethodsHydratorFactory())(new MockContainer());
 
-        $this->assertInstanceOf(ClassMethodsHydrator::class, $classMethodsHydrator);
+        self::assertInstanceOf(ClassMethodsHydrator::class, $classMethodsHydrator);
     }
 }
