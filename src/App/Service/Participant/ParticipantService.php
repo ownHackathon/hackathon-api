@@ -4,14 +4,14 @@ namespace App\Service\Participant;
 
 use App\Entity\Participant;
 use App\Hydrator\ReflectionHydrator;
-use App\Table\ParticipantTable;
+use App\Repository\ParticipantRepository;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
 readonly class ParticipantService
 {
     public function __construct(
-        private ParticipantTable $table,
+        private ParticipantRepository $repository,
         private ReflectionHydrator $hydrator,
     ) {
     }
@@ -22,17 +22,17 @@ readonly class ParticipantService
             return false;
         }
 
-        return $this->table->insert($participant) !== false;
+        return $this->repository->insert($participant) !== false;
     }
 
     public function remove(Participant $participant): bool
     {
-        return (int)$this->table->remove($participant) !== 0;
+        return (int)$this->repository->remove($participant) !== 0;
     }
 
     public function findById(int $id): Participant
     {
-        $participant = $this->table->findById($id);
+        $participant = $this->repository->findById($id);
 
         if ($participant === []) {
             throw new InvalidArgumentException(
@@ -46,14 +46,14 @@ readonly class ParticipantService
 
     public function findByUserId(int $userId): ?Participant
     {
-        $participant = $this->table->findByUserId($userId);
+        $participant = $this->repository->findByUserId($userId);
 
         return $this->hydrator->hydrate($participant, new Participant());
     }
 
     public function findByUserIdAndEventId(int $userId, int $eventId): ?Participant
     {
-        $participant = $this->table->findByUserIdAndEventId($userId, $eventId);
+        $participant = $this->repository->findByUserIdAndEventId($userId, $eventId);
 
         return $this->hydrator->hydrate($participant, new Participant());
     }
@@ -63,7 +63,7 @@ readonly class ParticipantService
      */
     public function findActiveParticipantByEvent(int $eventId): ?array
     {
-        $participants = $this->table->findActiveParticipantByEvent($eventId);
+        $participants = $this->repository->findActiveParticipantByEvent($eventId);
 
         return $this->hydrator->hydrateList($participants, Participant::class);
     }

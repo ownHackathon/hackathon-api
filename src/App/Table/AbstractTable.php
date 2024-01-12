@@ -2,12 +2,13 @@
 
 namespace App\Table;
 
+use App\Repository\Repository;
 use Envms\FluentPDO\Query;
 use ReflectionClass;
 
 use function substr;
 
-class AbstractTable
+class AbstractTable implements Repository
 {
     protected string $table;
 

@@ -4,14 +4,14 @@ namespace App\Service\Event;
 
 use App\Entity\Event;
 use App\Hydrator\ReflectionHydrator;
-use App\Table\EventTable;
+use App\Repository\EventRepository;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
 class EventService
 {
     public function __construct(
-        private readonly EventTable $table,
+        private readonly EventRepository $repository,
         private readonly ReflectionHydrator $hydrator,
     ) {
     }
@@ -22,14 +22,14 @@ class EventService
             return false;
         }
 
-        $this->table->insert($event);
+        $this->repository->insert($event);
 
         return true;
     }
 
     public function findById(int $id): Event
     {
-        $event = $this->table->findById($id);
+        $event = $this->repository->findById($id);
 
         if ($event === []) {
             throw new InvalidArgumentException(
@@ -43,7 +43,7 @@ class EventService
 
     public function findByTitle(string $topic): ?Event
     {
-        $event = $this->table->findByTitle($topic);
+        $event = $this->repository->findByTitle($topic);
 
         return $this->hydrator->hydrate($event, new Event());
     }
@@ -53,7 +53,7 @@ class EventService
      */
     public function findAll(string $order = 'startTime', string $sort = 'DESC'): array
     {
-        $events = $this->table->findAll($order, $sort);
+        $events = $this->repository->findAll($order, $sort);
 
         return $this->hydrator->hydrateList($events, Event::class);
     }
@@ -63,7 +63,7 @@ class EventService
      */
     public function findAllActive(): ?array
     {
-        $events = $this->table->findAllActive();
+        $events = $this->repository->findAllActive();
 
         return $this->hydrator->hydrateList($events, Event::class);
     }
@@ -73,7 +73,7 @@ class EventService
      */
     public function findAllNotActive(): ?array
     {
-        $events = $this->table->findAllNotActive();
+        $events = $this->repository->findAllNotActive();
 
         return $this->hydrator->hydrateList($events, Event::class);
     }

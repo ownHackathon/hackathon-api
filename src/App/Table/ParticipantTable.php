@@ -3,8 +3,9 @@
 namespace App\Table;
 
 use App\Entity\Participant;
+use App\Repository\ParticipantRepository;
 
-class ParticipantTable extends AbstractTable
+class ParticipantTable extends AbstractTable implements ParticipantRepository
 {
     public function insert(Participant $participant): int|bool
     {

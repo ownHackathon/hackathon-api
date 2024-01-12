@@ -5,7 +5,7 @@ namespace App\Service\User;
 use App\Entity\User;
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
-use App\Table\UserTable;
+use App\Repository\UserRepository;
 use DateTime;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
@@ -17,7 +17,7 @@ use function sprintf;
 class UserService
 {
     public function __construct(
-        private readonly UserTable $table,
+        private readonly UserRepository $repository,
         private readonly ReflectionHydrator $hydrator,
         private readonly UuidInterface $uuid,
     ) {
@@ -27,7 +27,7 @@ class UserService
     {
         $user->setLastAction(new DateTime());
 
-        $this->table->updateLastUserActionTime($user->getId(), $user->getLastAction());
+        $this->repository->updateLastUserActionTime($user->getId(), $user->getLastAction());
 
         return $user;
     }
@@ -44,12 +44,12 @@ class UserService
         $user->setRoleId($role->value);
         $user->setUuid($this->uuid->getHex()->toString());
 
-        return $this->table->insert($user);
+        return $this->repository->insert($user);
     }
 
     public function update(User $user): bool
     {
-        return (bool)$this->table->update($user);
+        return (bool)$this->repository->update($user);
     }
 
     // @phpstan-ignore-next-line
@@ -73,7 +73,7 @@ class UserService
 
     public function findById(int $id): User
     {
-        $user = $this->table->findById($id);
+        $user = $this->repository->findById($id);
 
         if ($user === []) {
             throw new InvalidArgumentException(
@@ -87,28 +87,28 @@ class UserService
 
     public function findByUuid(string $uuid): User|null
     {
-        $user = $this->table->findByUuid($uuid);
+        $user = $this->repository->findByUuid($uuid);
 
         return $user ? $this->hydrator->hydrate($user, new User()) : null;
     }
 
     public function findByName(string $name): ?User
     {
-        $user = $this->table->findByName($name);
+        $user = $this->repository->findByName($name);
 
         return $this->hydrator->hydrate($user, new User());
     }
 
     public function findByEMail(string $email): ?User
     {
-        $user = $this->table->findByEMail($email);
+        $user = $this->repository->findByEMail($email);
 
         return $this->hydrator->hydrate($user, new User());
     }
 
     public function findByToken(string $token): ?User
     {
-        $user = $this->table->findByToken($token);
+        $user = $this->repository->findByToken($token);
 
         return $this->hydrator->hydrate($user, new User());
     }

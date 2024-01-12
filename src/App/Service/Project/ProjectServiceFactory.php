@@ -3,7 +3,7 @@
 namespace App\Service\Project;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Table\ProjectTable;
+use App\Repository\ProjectRepository;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
@@ -11,7 +11,7 @@ class ProjectServiceFactory
 {
     public function __invoke(ContainerInterface $container): ProjectService
     {
-        $table = $container->get(ProjectTable::class);
+        $repository = $container->get(ProjectRepository::class);
         $hydrator = $container->get(ReflectionHydrator::class);
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
@@ -20,6 +20,6 @@ class ProjectServiceFactory
             $strategy,
         );
 
-        return new ProjectService($table, $hydrator);
+        return new ProjectService($repository, $hydrator);
     }
 }

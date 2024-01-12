@@ -3,7 +3,7 @@
 namespace App\Service\Participant;
 
 use App\Hydrator\ReflectionHydrator;
-use App\Table\ParticipantTable;
+use App\Repository\ParticipantRepository;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
@@ -11,7 +11,7 @@ class ParticipantServiceFactory
 {
     public function __invoke(ContainerInterface $container): ParticipantService
     {
-        $table = $container->get(ParticipantTable::class);
+        $repository = $container->get(ParticipantRepository::class);
         $hydrator = $container->get(ReflectionHydrator::class);
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
@@ -20,6 +20,6 @@ class ParticipantServiceFactory
             $strategy,
         );
 
-        return new ParticipantService($table, $hydrator);
+        return new ParticipantService($repository, $hydrator);
     }
 }

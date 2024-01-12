@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Repository\EventRepository;
 use App\Service\Event\EventService;
 use App\Service\Event\EventServiceFactory;
-use App\Table\EventTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Test\Unit\Mock\MockContainer;
 use Test\Unit\Mock\Table\MockEventTable;
@@ -15,7 +15,7 @@ class EventServiceFactoryTest extends AbstractService
     public function testCanCreateEventService(): void
     {
         $container = new MockContainer([
-            EventTable::class => new MockEventTable(),
+            EventRepository::class => new MockEventTable(),
             ReflectionHydrator::class => $this->hydrator,
             DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
         ]);

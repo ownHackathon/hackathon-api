@@ -3,10 +3,11 @@
 namespace App\Table;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use DateTime;
 use InvalidArgumentException;
 
-class UserTable extends AbstractTable
+class UserTable extends AbstractTable implements UserRepository
 {
     public function insert(User $user): int
     {

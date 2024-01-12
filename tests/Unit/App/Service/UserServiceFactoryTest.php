@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Repository\UserRepository;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceFactory;
-use App\Table\UserTable;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;
 use Test\Unit\Mock\MockContainer;
@@ -16,7 +16,7 @@ class UserServiceFactoryTest extends AbstractService
     public function testCanCreateUserService(): void
     {
         $container = new MockContainer([
-            UserTable::class => new MockUserTable(),
+            UserRepository::class => new MockUserTable(),
             ReflectionHydrator::class => $this->hydrator,
             NullableStrategy::class => $this->nullableStrategy,
             Uuid::class => Uuid::uuid4(),

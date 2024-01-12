@@ -10,6 +10,11 @@ use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
+use App\Repository\EventRepository;
+use App\Repository\ParticipantRepository;
+use App\Repository\ProjectRepository;
+use App\Repository\TopicPoolRepository;
+use App\Repository\UserRepository;
 use App\Service\Authentication\ApiAccessService;
 use App\Service\Authentication\ApiAccessServiceFactory;
 use App\Service\Authentication\LoginAuthenticationService;
@@ -23,7 +28,11 @@ use App\Service\Project\ProjectServiceFactory;
 use App\Service\Topic\TopicPoolService;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceFactory;
+use App\Table\EventTable;
+use App\Table\ParticipantTable;
+use App\Table\ProjectTable;
 use App\Table\TopicPoolTable;
+use App\Table\UserTable;
 use App\Validator\EventCreateValidator;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\EventDescriptionInput;
@@ -63,6 +72,13 @@ class ConfigProvider
         return [
             'invokables' => [
                 ReflectionHydrator::class,
+            ],
+            'aliases' => [
+                EventRepository::class => EventTable::class,
+                ParticipantRepository::class => ParticipantTable::class,
+                ProjectRepository::class => ProjectTable::class,
+                TopicPoolRepository::class => TopicPoolTable::class,
+                UserRepository::class => UserTable::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
@@ -238,7 +254,7 @@ class ConfigProvider
                 UserService::class,
             ],
             Service\Topic\TopicPoolService::class => [
-                TopicPoolTable::class,
+                TopicPoolRepository::class,
                 ReflectionHydrator::class,
             ],
             Table\EventTable::class => [

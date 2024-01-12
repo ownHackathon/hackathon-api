@@ -3,6 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\Topic;
+use App\Repository\TopicPoolRepository;
 use App\Service\Topic\TopicPoolService;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
@@ -11,7 +12,7 @@ use Test\Unit\Mock\TestConstants;
 class TopicPoolServiceTest extends AbstractService
 {
     private TopicPoolService $service;
-    private MockTopicPoolTable $table;
+    private TopicPoolRepository $table;
 
     protected function setUp(): void
     {

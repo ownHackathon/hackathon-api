@@ -3,8 +3,9 @@
 namespace App\Table;
 
 use App\Entity\Event;
+use App\Repository\EventRepository;
 
-class EventTable extends AbstractTable
+class EventTable extends AbstractTable implements EventRepository
 {
     public function insert(Event $event): int|bool
     {

@@ -5,16 +5,16 @@ namespace App\Service\Topic;
 use App\Entity\Topic;
 use App\Exception\HttpException;
 use App\Hydrator\ReflectionHydrator;
-use App\Table\TopicPoolTable;
+use App\Repository\TopicPoolRepository;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
+use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use PDOException;
-use Psr\Log\InvalidArgumentException;
 
 class TopicPoolService
 {
     public function __construct(
-        private readonly TopicPoolTable $table,
+        private readonly TopicPoolRepository $repository,
         private readonly ReflectionHydrator $hydrator,
     ) {
     }
@@ -25,7 +25,7 @@ class TopicPoolService
     public function insert(Topic $topic): self
     {
         try {
-            $this->table->insert($topic);
+            $this->repository->insert($topic);
         } catch (PDOException $e) {
             /** TODO: Change to Logger */
             throw new HttpException(['PDO' => $e->getMessage()], HTTP::STATUS_INTERNAL_SERVER_ERROR);
@@ -36,14 +36,14 @@ class TopicPoolService
 
     public function updateEventId(Topic $topic): self
     {
-        $this->table->updateEventId($topic);
+        $this->repository->updateEventId($topic);
 
         return $this;
     }
 
     public function findById(int $id): Topic
     {
-        $event = $this->table->findById($id);
+        $event = $this->repository->findById($id);
 
         if ($event === []) {
             throw new InvalidArgumentException(
@@ -57,7 +57,7 @@ class TopicPoolService
 
     public function findByEventId(int $id): ?Topic
     {
-        $topic = $this->table->findByEventId($id);
+        $topic = $this->repository->findByEventId($id);
 
         return $this->hydrator->hydrate($topic, new Topic());
     }
@@ -67,7 +67,7 @@ class TopicPoolService
      */
     public function findAvailable(): ?array
     {
-        $topics = $this->table->findAvailable();
+        $topics = $this->repository->findAvailable();
 
         return $this->hydrator->hydrateList($topics, Topic::class);
     }
@@ -77,7 +77,7 @@ class TopicPoolService
      */
     public function findAll(): ?array
     {
-        $topics = $this->table->findAll();
+        $topics = $this->repository->findAll();
 
         return $this->hydrator->hydrateList($topics, Topic::class);
     }
@@ -91,7 +91,7 @@ class TopicPoolService
 
     public function findByTopic(string $topic): ?Topic
     {
-        $topic = $this->table->findByTopic($topic);
+        $topic = $this->repository->findByTopic($topic);
 
         return $this->hydrator->hydrate($topic, new Topic());
     }
@@ -104,9 +104,9 @@ class TopicPoolService
     public function getEntriesStatistic(): array
     {
         return [
-            'allTopic' => $this->table->getCountTopic(),
-            'allAcceptedTopic' => $this->table->getCountTopicAccepted(),
-            'allSelectionAvailableTopic' => $this->table->getCountTopicSelectionAvailable(),
+            'allTopic' => $this->repository->getCountTopic(),
+            'allAcceptedTopic' => $this->repository->getCountTopicAccepted(),
+            'allSelectionAvailableTopic' => $this->repository->getCountTopicSelectionAvailable(),
         ];
     }
 }

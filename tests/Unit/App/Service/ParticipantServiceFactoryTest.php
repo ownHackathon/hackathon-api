@@ -3,9 +3,9 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Repository\ParticipantRepository;
 use App\Service\Participant\ParticipantService;
 use App\Service\Participant\ParticipantServiceFactory;
-use App\Table\ParticipantTable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Test\Unit\Mock\MockContainer;
 use Test\Unit\Mock\Table\MockParticipantTable;
@@ -15,7 +15,7 @@ class ParticipantServiceFactoryTest extends AbstractService
     public function testCanCreateParticipantService(): void
     {
         $container = new MockContainer([
-            ParticipantTable::class => new MockParticipantTable(),
+            ParticipantRepository::class => new MockParticipantTable(),
             ReflectionHydrator::class => $this->hydrator,
             DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
         ]);

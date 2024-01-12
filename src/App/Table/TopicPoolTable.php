@@ -3,8 +3,9 @@
 namespace App\Table;
 
 use App\Entity\Topic;
+use App\Repository\TopicPoolRepository;
 
-class TopicPoolTable extends AbstractTable
+class TopicPoolTable extends AbstractTable implements TopicPoolRepository
 {
     public function insert(Topic $topic): self
     {
