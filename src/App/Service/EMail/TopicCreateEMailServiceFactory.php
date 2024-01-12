@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Administration\Service\EMail;
+namespace App\Service\EMail;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;

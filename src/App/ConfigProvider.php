@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Administration\Service\EMail\TopicCreateEMailService;
 use App\Handler\Authentication\LoginHandlerFactory;
 use App\Handler\Authentication\UserPasswordForgottonHandlerFactory;
 use App\Hydrator\ClassMethodsHydratorFactory;
@@ -19,6 +18,8 @@ use App\Service\Authentication\ApiAccessService;
 use App\Service\Authentication\ApiAccessServiceFactory;
 use App\Service\Authentication\LoginAuthenticationService;
 use App\Service\Core\TokenService;
+use App\Service\EMail\TopicCreateEMailService;
+use App\Service\EMail\TopicCreateEMailServiceFactory;
 use App\Service\Event\EventService;
 use App\Service\Event\EventServiceFactory;
 use App\Service\Participant\ParticipantService;
@@ -123,6 +124,7 @@ class ConfigProvider
                 Middleware\User\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\Authentication\ApiAccessService::class => ApiAccessServiceFactory::class,
+                Service\EMail\TopicCreateEMailService::class => TopicCreateEMailServiceFactory::class,
                 Service\Event\EventService::class => EventServiceFactory::class,
                 Service\Participant\ParticipantService::class => ParticipantServiceFactory::class,
                 Service\Project\ProjectService::class => ProjectServiceFactory::class,

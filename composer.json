@@ -94,7 +94,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Administration\\": "src/Administration",
             "App\\": "src/App/",
             "Migrations\\": "database/migrations"
         }

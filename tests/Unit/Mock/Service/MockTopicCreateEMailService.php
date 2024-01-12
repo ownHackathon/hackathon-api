@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Mock\Service;
 
-use Administration\Service\EMail\EMailServiceInterface;
 use App\Entity\Topic;
+use App\Service\EMail\EMailServiceInterface;
 
 class MockTopicCreateEMailService implements EMailServiceInterface
 {

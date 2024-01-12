@@ -2,12 +2,12 @@
 
 namespace App\Handler\Topic;
 
-use Administration\Service\EMail\EMailServiceInterface;
 use App\Dto\Core\SimpleMessageDto;
 use App\Dto\Topic\TopicCreateFailureMessageDto;
 use App\Dto\Topic\TopicCreateRequestDto;
 use App\Dto\Topic\TopicCreateResponseDto;
 use App\Entity\Topic;
+use App\Service\EMail\EMailServiceInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
