@@ -75,14 +75,14 @@ class ParticipantTableTest extends AbstractTable
 
     public function testCanFindByUserIdAndEventId(): void
     {
-        $participant = $this->table->findByUserIdAndEventId(TestConstants::USER_ID, TestConstants::EVENT_ID);
+        $participant = $this->table->findUserForAnEvent(TestConstants::USER_ID, TestConstants::EVENT_ID);
 
         self::assertSame($this->fetchResult, $participant);
     }
 
     public function testCanFindActiveParticipantByEvent(): void
     {
-        $participant = $this->table->findActiveParticipantByEvent(TestConstants::EVENT_ID);
+        $participant = $this->table->findActiveParticipantsByEvent(TestConstants::EVENT_ID);
 
         self::assertSame($this->fetchAllResult, $participant);
     }

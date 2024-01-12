@@ -53,7 +53,7 @@ readonly class ParticipantService
 
     public function findByUserIdAndEventId(int $userId, int $eventId): ?Participant
     {
-        $participant = $this->repository->findByUserIdAndEventId($userId, $eventId);
+        $participant = $this->repository->findUserForAnEvent($userId, $eventId);
 
         return $this->hydrator->hydrate($participant, new Participant());
     }
@@ -63,7 +63,7 @@ readonly class ParticipantService
      */
     public function findActiveParticipantByEvent(int $eventId): ?array
     {
-        $participants = $this->repository->findActiveParticipantByEvent($eventId);
+        $participants = $this->repository->findActiveParticipantsByEvent($eventId);
 
         return $this->hydrator->hydrateList($participants, Participant::class);
     }

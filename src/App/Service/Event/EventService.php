@@ -73,7 +73,7 @@ class EventService
      */
     public function findAllNotActive(): ?array
     {
-        $events = $this->repository->findAllNotActive();
+        $events = $this->repository->findAllInactive();
 
         return $this->hydrator->hydrateList($events, Event::class);
     }

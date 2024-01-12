@@ -12,7 +12,7 @@ interface ParticipantRepository extends Repository
 
     public function findByUserId(int $userId): bool|array;
 
-    public function findByUserIdAndEventId(int $userId, int $eventId): bool|array;
+    public function findUserForAnEvent(int $userId, int $eventId): bool|array;
 
-    public function findActiveParticipantByEvent(int $eventId): array;
+    public function findActiveParticipantsByEvent(int $eventId): array;
 }

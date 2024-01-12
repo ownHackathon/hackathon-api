@@ -72,7 +72,7 @@ class EventTableTest extends AbstractTable
 
     public function testCanFindAllNotActive(): void
     {
-        $event = $this->table->findAllNotActive();
+        $event = $this->table->findAllInactive();
 
         self::assertSame($this->fetchAllResult, $event);
     }

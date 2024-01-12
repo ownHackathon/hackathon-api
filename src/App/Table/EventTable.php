@@ -43,7 +43,7 @@ class EventTable extends AbstractTable implements EventRepository
             ->fetchAll();
     }
 
-    public function findAllNotActive(): bool|array
+    public function findAllInactive(): bool|array
     {
         return $this->query->from($this->table)
             ->where('active', 0)

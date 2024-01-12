@@ -18,7 +18,7 @@ class MockTopicPoolTable extends TopicPoolTable
         return $this;
     }
 
-    public function updateEventId(Topic $topic): TopicPoolTable
+    public function updateEvent(Topic $topic): TopicPoolTable
     {
         return $this;
     }

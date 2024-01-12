@@ -29,7 +29,7 @@ class TopicPoolTableTest extends AbstractTable
     {
         $topic = new Topic();
 
-        $updateTopic = $this->table->updateEventId($topic);
+        $updateTopic = $this->table->updateEvent($topic);
 
         self::assertInstanceOf(TopicPoolTable::class, $updateTopic);
     }

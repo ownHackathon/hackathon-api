@@ -12,7 +12,7 @@ interface EventRepository extends Repository
 
     public function findAllActive(): bool|array;
 
-    public function findAllNotActive(): bool|array;
+    public function findAllInactive(): bool|array;
 
     public function remove(Event $event): bool|int;
 

@@ -28,7 +28,7 @@ class MockParticipantTable extends ParticipantTable
         return $userId === 1 ? ['userId' => 1] : false;
     }
 
-    public function findByUserIdAndEventId(int $userId, int $eventId): bool|array
+    public function findUserForAnEvent(int $userId, int $eventId): bool|array
     {
         if ($userId === 1 && $eventId === 1) {
             return [

@@ -27,7 +27,7 @@ class TopicPoolTable extends AbstractTable implements TopicPoolRepository
             ->fetch();
     }
 
-    public function updateEventId(Topic $topic): self
+    public function updateEvent(Topic $topic): self
     {
         $values = [
             'eventId' => $topic->getEventId(),
