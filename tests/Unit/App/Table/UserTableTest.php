@@ -3,6 +3,7 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\User;
+use App\Exception\User\UserAlreadyExistsException;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
@@ -34,7 +35,7 @@ class UserTableTest extends AbstractTable
         $user = new User();
         $user->setName(TestConstants::USER_NAME);
 
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(UserAlreadyExistsException::class);
 
         $this->table->insert($user);
     }

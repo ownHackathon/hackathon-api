@@ -4,8 +4,8 @@ namespace App\Middleware\Authentication;
 
 use App\Dto\Core\HttpStatusCodeMessage;
 use App\Entity\User;
+use App\Exception\User\UserAlreadyExistsException;
 use App\Service\User\UserService;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Http\Message\ResponseInterface;
@@ -27,7 +27,9 @@ readonly class UserRegisterMiddleware implements MiddlewareInterface
         $data['email'] = $data['e-mail'];
         $user = $this->hydrator->hydrate($data, new User());
 
-        if (!$this->userService->create($user)) {
+        try {
+            !$this->userService->create($user);
+        } catch (UserAlreadyExistsException $exception) {
             $validationMessages = [
                 'email' => [
                     'message' => 'Invalid registration data',
@@ -36,11 +38,11 @@ readonly class UserRegisterMiddleware implements MiddlewareInterface
 
             return new JsonResponse(
                 new HttpStatusCodeMessage(
-                    HTTP::STATUS_BAD_REQUEST,
+                    $exception->getCode(),
                     'Registration failed',
                     $validationMessages
                 ),
-                HTTP::STATUS_BAD_REQUEST
+                $exception->getCode()
             );
         }
         return $handler->handle($request);

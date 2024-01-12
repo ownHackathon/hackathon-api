@@ -3,6 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\User;
+use App\Exception\User\UserAlreadyExistsException;
 use App\Service\User\UserService;
 use DateTime;
 use InvalidArgumentException;
@@ -26,7 +27,7 @@ class UserServiceTest extends AbstractService
         $user = new User();
         $user->setName('FakeNotCreateUser');
 
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(UserAlreadyExistsException::class);
 
         $this->userService->create($user);
     }
@@ -36,7 +37,7 @@ class UserServiceTest extends AbstractService
         $user = new User();
         $user->setEmail('FakeNotCreateEMail');
 
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(UserAlreadyExistsException::class);
 
         $this->userService->create($user);
     }
@@ -58,7 +59,7 @@ class UserServiceTest extends AbstractService
         $user->setName(TestConstants::USER_NAME);
         $user->setEmail(TestConstants::USER_EMAIL);
 
-        self::expectException(InvalidArgumentException::class);
+        self::expectException(UserAlreadyExistsException::class);
 
         $this->userService->create($user);
     }
