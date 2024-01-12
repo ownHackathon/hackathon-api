@@ -28,10 +28,10 @@ class EventTable extends AbstractTable implements EventRepository
         return $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll() ?: [];
     }
 
-    public function findByTitle(string $topic): bool|array
+    public function findByTitle(string $title): bool|array
     {
         return $this->query->from($this->table)
-            ->where('title', $topic)
+            ->where('title', $title)
             ->fetch();
     }
 

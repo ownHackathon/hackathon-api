@@ -8,7 +8,7 @@ interface EventRepository extends Repository
 {
     public function insert(Event $event): int|bool;
 
-    public function findByTitle(string $topic): bool|array;
+    public function findByTitle(string $title): bool|array;
 
     public function findAllActive(): bool|array;
 
