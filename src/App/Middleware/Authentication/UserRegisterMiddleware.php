@@ -4,7 +4,7 @@ namespace App\Middleware\Authentication;
 
 use App\Dto\Core\HttpStatusCodeMessage;
 use App\Entity\User;
-use App\Exception\User\UserAlreadyExistsException;
+use App\Exception\DuplicateEntryException;
 use App\Service\User\UserService;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -29,7 +29,7 @@ readonly class UserRegisterMiddleware implements MiddlewareInterface
 
         try {
             !$this->userService->create($user);
-        } catch (UserAlreadyExistsException $exception) {
+        } catch (DuplicateEntryException $exception) {
             $validationMessages = [
                 'email' => [
                     'message' => 'Invalid registration data',

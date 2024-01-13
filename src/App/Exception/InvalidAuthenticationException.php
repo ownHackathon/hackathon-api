@@ -2,12 +2,12 @@
 
 namespace App\Exception;
 
-use Exception;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Throwable;
 
-class InvalidAuthenticationException extends Exception
+class InvalidAuthenticationException extends ClientException
 {
-    public function __construct(string $message = "Invalid Authorization", int $code = 403, ?Throwable $previous = null)
+    public function __construct(string $message = 'Invalid Authorization', int $code = HTTP::STATUS_FORBIDDEN, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

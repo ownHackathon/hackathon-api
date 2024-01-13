@@ -3,7 +3,7 @@
 namespace App\Table;
 
 use App\Entity\User;
-use App\Exception\User\UserAlreadyExistsException;
+use App\Exception\DuplicateEntryException;
 use App\Repository\UserRepository;
 use DateTime;
 use InvalidArgumentException;
@@ -23,7 +23,7 @@ class UserTable extends AbstractTable implements UserRepository
         $lastInsertId = $this->query->insertInto($this->table, $values)->execute();
 
         if (!$lastInsertId) {
-            return throw new UserAlreadyExistsException();
+            return throw new DuplicateEntryException('User', 1);
         }
 
         return (int)$lastInsertId;

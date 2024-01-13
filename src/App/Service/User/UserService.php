@@ -4,7 +4,7 @@ namespace App\Service\User;
 
 use App\Entity\User;
 use App\Enum\UserRole;
-use App\Exception\User\UserAlreadyExistsException;
+use App\Exception\DuplicateEntryException;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
 use DateTime;
@@ -36,7 +36,7 @@ class UserService
     public function create(User $user, UserRole $role = UserRole::USER): int
     {
         if ($this->isEmailExist($user->getEmail())) {
-            return throw new UserAlreadyExistsException(sprintf('E-Mail %s already exists', $user->getEmail()));
+            return throw new DuplicateEntryException('User', 1);
         }
 
         $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
