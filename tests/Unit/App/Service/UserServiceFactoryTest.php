@@ -6,6 +6,7 @@ use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceFactory;
+use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;
 use Test\Unit\Mock\MockContainer;
@@ -19,6 +20,7 @@ class UserServiceFactoryTest extends AbstractService
             UserRepository::class => new MockUserTable(),
             ReflectionHydrator::class => $this->hydrator,
             NullableStrategy::class => $this->nullableStrategy,
+            DateTimeFormatterStrategy::class => $this->dateTimeFormatterStrategy,
             Uuid::class => Uuid::uuid4(),
         ]);
 
