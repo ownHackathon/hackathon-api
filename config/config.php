@@ -45,7 +45,7 @@ $aggregator = new ConfigAggregator([
     //   - `*.local.php`
     new PhpFileProvider(
         realpath(__DIR__) . sprintf(
-            '/autoload/{,*.}{global,%s,local}.php',
+            '/autoload/{,*.}{global,local,%s}.php',
             getenv('APP_ENV') ?: 'production'
         )
     ),

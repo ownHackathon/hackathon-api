@@ -8,6 +8,7 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
+use App\Listener\LoggingErrorListenerDelegatorFactory;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Repository\EventRepository;
 use App\Repository\ParticipantRepository;
@@ -55,6 +56,7 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
 
@@ -80,6 +82,11 @@ class ConfigProvider
                 ProjectRepository::class => ProjectTable::class,
                 TopicPoolRepository::class => TopicPoolTable::class,
                 UserRepository::class => UserTable::class,
+            ],
+            'delegators' => [
+                ErrorHandler::class => [
+                    LoggingErrorListenerDelegatorFactory::class,
+                ],
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
