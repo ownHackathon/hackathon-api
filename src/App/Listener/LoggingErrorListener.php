@@ -26,9 +26,12 @@ readonly class LoggingErrorListener
                 'Method' => $serverParams['REQUEST_METHOD'],
                 'Route' => $serverParams['REQUEST_URI'],
                 'Redirect' => $serverParams['REDIRECT_URL'],
-                'Host' => $serverParams['HTTP_HOST'],
+                'Host' => $serverParams['REMOTE_ADDR'],
                 'user-agent' => $serverParams['HTTP_USER_AGENT'],
                 'Query' => $request->getQueryParams(),
+                /**
+                 * ToDo Remove password entry
+                 */
                 'Body' => $request->getParsedBody(),
                 'Code' => $error->getCode(),
                 'Message' => $error->getMessage(),

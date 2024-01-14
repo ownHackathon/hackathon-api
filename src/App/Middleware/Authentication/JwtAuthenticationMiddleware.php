@@ -52,7 +52,7 @@ readonly class JwtAuthenticationMiddleware implements MiddlewareInterface
         }
 
         $this->logger->info('{Host} as {User} call -> {URI}', [
-            'Host' => $request->getServerParams()['HTTP_HOST'],
+            'Host' => $request->getServerParams()['REMOTE_ADDR'],
             'User' => $user ? $user->getName() : 'Guest',
             'URI' => $request->getServerParams()['REQUEST_URI'],
             'Query' => $request->getQueryParams(),
