@@ -3,7 +3,6 @@
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
-use Mezzio\Helper\ConfigProvider;
 
 // To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
 // `config/autoload/local.php`.
@@ -12,24 +11,24 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
-    \Laminas\InputFilter\ConfigProvider::class,
-    \Laminas\Filter\ConfigProvider::class,
-    \Laminas\Validator\ConfigProvider::class,
-    \Laminas\Hydrator\ConfigProvider::class,
-    \Mezzio\Tooling\ConfigProvider::class,
-    ConfigProvider::class,
-    \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
-    \Laminas\HttpHandlerRunner\ConfigProvider::class,
+    Mezzio\Helper\ConfigProvider::class,
+    Laminas\Log\ConfigProvider::class,
+    Laminas\InputFilter\ConfigProvider::class,
+    Laminas\Filter\ConfigProvider::class,
+    Laminas\Validator\ConfigProvider::class,
+    Laminas\Hydrator\ConfigProvider::class,
+    Mezzio\Tooling\ConfigProvider::class,
+    Mezzio\Router\FastRouteRouter\ConfigProvider::class,
+    Laminas\HttpHandlerRunner\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
-    ConfigProvider::class,
-    \Mezzio\ConfigProvider::class,
-    \Mezzio\Router\ConfigProvider::class,
-    \Laminas\Diactoros\ConfigProvider::class,
+    Mezzio\ConfigProvider::class,
+    Mezzio\Router\ConfigProvider::class,
+    Laminas\Diactoros\ConfigProvider::class,
 
     // Swoole config to overwrite some services (if installed)
-    class_exists(\Mezzio\Swoole\ConfigProvider::class)
-        ? \Mezzio\Swoole\ConfigProvider::class
+    class_exists(Mezzio\Swoole\ConfigProvider::class)
+        ? Mezzio\Swoole\ConfigProvider::class
         : function (): array {
         return [];
     },

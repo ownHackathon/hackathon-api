@@ -8,7 +8,6 @@ use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
-use App\Listener\LoggingErrorListenerDelegatorFactory;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Repository\EventRepository;
 use App\Repository\ParticipantRepository;
@@ -56,7 +55,6 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\Stratigility\Middleware\ErrorHandler;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
 
@@ -83,11 +81,6 @@ class ConfigProvider
                 TopicPoolRepository::class => TopicPoolTable::class,
                 UserRepository::class => UserTable::class,
             ],
-            'delegators' => [
-                ErrorHandler::class => [
-                    LoggingErrorListenerDelegatorFactory::class,
-                ],
-            ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
                 DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
@@ -100,6 +93,8 @@ class ConfigProvider
                 Handler\Topic\TopicCreateHandler::class => ConfigAbstractFactory::class,
                 Handler\User\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\Core\TestMailHandler::class => ConfigAbstractFactory::class,
+
+                Listener\LoggingErrorListener::class => Listener\LoggingErrorListenerFactory::class,
 
                 Middleware\Authentication\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Authentication\JwtAuthenticationMiddleware::class => Middleware\Authentication\JwtAuthenticationMiddlewareFactory::class,

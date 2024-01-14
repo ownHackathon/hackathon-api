@@ -4,6 +4,7 @@ namespace App\Middleware\Authentication;
 
 use App\Service\User\UserService;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 class JwtAuthenticationMiddlewareFactory
 {
@@ -11,7 +12,13 @@ class JwtAuthenticationMiddlewareFactory
     {
         $userService = $container->get(UserService::class);
         $token = $container->get('config')['token']['auth'];
+        $logger = $container->get(LoggerInterface::class);
 
-        return new JwtAuthenticationMiddleware($userService, $token['secret'], $token['algorithmus']);
+        return new JwtAuthenticationMiddleware(
+            $userService,
+            $token['secret'],
+            $token['algorithmus'],
+            $logger,
+        );
     }
 }
