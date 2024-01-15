@@ -10,6 +10,7 @@
 /node_modules
 /client
 /database
+/data
 /scripts
 /docker
 /public/assets
