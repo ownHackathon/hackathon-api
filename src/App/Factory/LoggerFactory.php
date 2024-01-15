@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\System\Logger\BaseInformationProcessor;
 use DateTime;
 use Laminas\Log\Filter\Priority;
 use Laminas\Log\Formatter\Simple;
@@ -44,6 +45,7 @@ class LoggerFactory
         $logger->addWriter($defaultWriter);
         $logger->addWriter($errorWriter);
 
+        $logger->addProcessor(new BaseInformationProcessor());
         $logger->addProcessor(new PsrPlaceholder());
 
         return new PsrLoggerAdapter($logger);
