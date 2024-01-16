@@ -27,7 +27,7 @@ class LoggerFactory
         $path = rtrim($path, '/') . '/' . $date . '/';
 
         if (!is_dir($path)) {
-            mkdir($path, 0755);
+            mkdir($path, 0775);
         }
 
         $formatter = new Simple(Simple::DEFAULT_FORMAT, 'Y-m-d H:i:s');
