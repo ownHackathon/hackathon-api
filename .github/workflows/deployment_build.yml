@@ -231,4 +231,4 @@ jobs:
           severity: error
           details: Failure deployment on build.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
-        if: always()
+        if: failure()
