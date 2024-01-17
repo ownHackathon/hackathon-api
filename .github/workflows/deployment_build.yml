@@ -208,7 +208,7 @@ jobs:
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avz --numeric-ids --chmod=go=rw --delete --exclude-from='.rsync-exclude'
+          switches: -avz --no-o --no-g --no-perms --no-t -omit-dir-times --delete --exclude-from='.rsync-exclude'
           path: /
           remote_path: ${{ secrets.DEPLOY_PATH_API_BUILD }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
@@ -217,10 +217,18 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 
-      - name: Test Info
+      - name: Test Info Success
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
           details: Successful deployment on build.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: success()
+
+      - name: Test Info Failure
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Failure deployment on build.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: always()
