@@ -3,7 +3,9 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\Event;
+use App\Exception\DuplicateEntryException;
 use App\Table\EventTable;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Unit\Mock\TestConstants;
 
 /**
@@ -19,6 +21,7 @@ class EventTableTest extends AbstractTable
     public function testCanInsertEvent(): void
     {
         $event = new Event();
+
         $event->setTitle(TestConstants::EVENT_CREATE_TITLE);
 
         $insertLastId = $this->table->insert($event);
@@ -30,9 +33,9 @@ class EventTableTest extends AbstractTable
     {
         $event = new Event();
 
-        $insertLastId = $this->table->insert($event);
+        self::expectException(DuplicateEntryException::class);
 
-        self::assertSame(false, $insertLastId);
+        $this->table->insert($event);
     }
 
     public function testCanFindById(): void
@@ -42,7 +45,7 @@ class EventTableTest extends AbstractTable
         self::assertSame($this->fetchResult, $event);
     }
 
-    public function testFindByIdHaveEmptyResult(): void
+    public function testFindByIdHasEmptyResult(): void
     {
         $event = $this->table->findById(TestConstants::EVENT_ID_UNUSED);
 
@@ -54,6 +57,15 @@ class EventTableTest extends AbstractTable
         $event = $this->table->findAll();
 
         self::assertSame($this->fetchAllResult, $event);
+    }
+
+    public function testFindAllHasEmptyResult(): void
+    {
+        $table = new EventTable(new MockQueryForCanNot());
+
+        $event = $table->findAll();
+
+        self::assertSame([], $event);
     }
 
     public function testCanFindByName(): void
@@ -70,11 +82,29 @@ class EventTableTest extends AbstractTable
         self::assertSame($this->fetchAllResult, $event);
     }
 
+    public function testFindAllActiveHasEmptyResult(): void
+    {
+        $table = new EventTable(new MockQueryForCanNot());
+
+        $event = $table->findAllActive();
+
+        self::assertSame([], $event);
+    }
+
     public function testCanFindAllNotActive(): void
     {
         $event = $this->table->findAllInactive();
 
         self::assertSame($this->fetchAllResult, $event);
+    }
+
+    public function testFindAllNotActiveHasEmptyResult(): void
+    {
+        $table = new EventTable(new MockQueryForCanNot());
+
+        $event = $table->findAllInactive();
+
+        self::assertSame([], $event);
     }
 
     public function testCanRemoveEvent(): void
@@ -84,7 +114,7 @@ class EventTableTest extends AbstractTable
 
         $removeStatus = $this->table->remove($event);
 
-        self::assertSame(1, $removeStatus);
+        self::assertSame(true, $removeStatus);
     }
 
     public function testCanNotRemoveEvent(): void

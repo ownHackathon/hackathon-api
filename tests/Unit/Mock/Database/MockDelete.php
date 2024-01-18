@@ -18,7 +18,7 @@ class MockDelete extends Delete
         return $this->handle($this->statements['DELETE FROM'], $this->statements['WHERE'], $this->parameters['WHERE']);
     }
 
-    private function handle(string $table, array $where, array $value): bool|int
+    private function handle(string $table, array $where, array $value): bool
     {
         return match ($table) {
             'Event', 'MockEvent' => $this->handleEvent($where, $value),
@@ -26,10 +26,10 @@ class MockDelete extends Delete
         };
     }
 
-    private function handleEvent(array $where, array $value): bool|int
+    private function handleEvent(array $where, array $value): bool
     {
         if ($where[0][1] === 'id = ?' && $value[0] === TestConstants::EVENT_ID) {
-            return 1;
+            return true;
         }
 
         return false;

@@ -28,13 +28,13 @@ class MockEventTable extends EventTable
         };
     }
 
-    public function findByTitle(string $title): bool|array
+    public function findByTitle(string $title): array
     {
         return match ($title) {
             TestConstants::EVENT_TITLE => [
                 'title' => $title,
             ],
-            default => false
+            default => []
         };
     }
 }

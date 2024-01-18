@@ -6,15 +6,15 @@ use App\Entity\Event;
 
 interface EventRepository extends Repository
 {
-    public function insert(Event $event): int|bool;
+    public function insert(Event $event): int;
 
-    public function findByTitle(string $title): bool|array;
+    public function findByTitle(string $title): array;
 
-    public function findAllActive(): bool|array;
+    public function findAllActive(): array;
 
-    public function findAllInactive(): bool|array;
+    public function findAllInactive(): array;
 
-    public function remove(Event $event): bool|int;
+    public function remove(Event $event): bool;
 
     public function findAll(string $order = 'startTime', string $sort = 'DESC'): array;
 }
