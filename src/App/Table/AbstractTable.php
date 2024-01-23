@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Table;
 
@@ -25,13 +27,17 @@ class AbstractTable implements Repository
 
     public function findById(int $id): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('id', $id)
-            ->fetch() ?: [];
+            ->fetch();
+
+        return $result ?: [];
     }
 
     public function findAll(): array
     {
-        return $this->query->from($this->table)->fetchAll() ?: [];
+        $result = $this->query->from($this->table)->fetchAll();
+
+        return $result ?: [];
     }
 }

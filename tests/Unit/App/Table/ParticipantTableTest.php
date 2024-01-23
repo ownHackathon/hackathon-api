@@ -1,9 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Test\Unit\App\Table;
 
 use App\Entity\Participant;
+use App\Exception\DuplicateEntryException;
 use App\Table\ParticipantTable;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Unit\Mock\TestConstants;
 
 /**
@@ -26,14 +30,14 @@ class ParticipantTableTest extends AbstractTable
         self::assertSame(1, $insertParticipant);
     }
 
-    public function testCanNotInsertParticipant(): void
+    public function testInsertParticipantThrowsException(): void
     {
         $participant = new Participant();
         $participant->setUserId(TestConstants::USER_ID);
 
-        $insertParticipant = $this->table->insert($participant);
+        self::expectException(DuplicateEntryException::class);
 
-        self::assertSame(false, $insertParticipant);
+        $this->table->insert($participant);
     }
 
     public function testCanRemoveParticipant(): void
@@ -66,11 +70,27 @@ class ParticipantTableTest extends AbstractTable
         self::assertSame($this->fetchAllResult, $project);
     }
 
+    public function testFindAllHasEmptyResult(): void
+    {
+        $table = new ParticipantTable(new MockQueryForCanNot());
+
+        $project = $table->findAll();
+
+        self::assertSame([], $project);
+    }
+
     public function testCanFindByUserId(): void
     {
         $participant = $this->table->findByUserId(TestConstants::USER_ID);
 
         self::assertSame($this->fetchResult, $participant);
+    }
+
+    public function testFindByUserIdHasEmptyResult(): void
+    {
+        $participant = $this->table->findByUserId(TestConstants::USER_ID_UNUSED);
+
+        self::assertSame([], $participant);
     }
 
     public function testCanFindByUserIdAndEventId(): void
@@ -80,10 +100,26 @@ class ParticipantTableTest extends AbstractTable
         self::assertSame($this->fetchResult, $participant);
     }
 
+    public function testFindByUserIdAndEventIdHasEmptyResult(): void
+    {
+        $participant = $this->table->findUserForAnEvent(TestConstants::USER_ID_UNUSED, TestConstants::EVENT_ID_UNUSED);
+
+        self::assertSame([], $participant);
+    }
+
     public function testCanFindActiveParticipantByEvent(): void
     {
         $participant = $this->table->findActiveParticipantsByEvent(TestConstants::EVENT_ID);
 
         self::assertSame($this->fetchAllResult, $participant);
+    }
+
+    public function testFindActiveParticipantByEventHasEmptyResult(): void
+    {
+        $table = new ParticipantTable(new MockQueryForCanNot());
+
+        $participant = $table->findActiveParticipantsByEvent(TestConstants::EVENT_ID_UNUSED);
+
+        self::assertSame([], $participant);
     }
 }

@@ -1,13 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace App\Table;
 
 use App\Entity\Participant;
+use App\Exception\DuplicateEntryException;
 use App\Repository\ParticipantRepository;
 
 class ParticipantTable extends AbstractTable implements ParticipantRepository
 {
-    public function insert(Participant $participant): int|bool
+    public function insert(Participant $participant): int
     {
         $values = [
             'userId' => $participant->getUserId(),
@@ -19,41 +21,51 @@ class ParticipantTable extends AbstractTable implements ParticipantRepository
             ->onDuplicateKeyUpdate(['subscribed' => 1])
             ->execute();
 
-        return $insertStatus !== false ? (int)$insertStatus : false;
+        if (!$insertStatus) {
+            throw new DuplicateEntryException('Participant', $participant->getId());
+        }
+
+        return (int)$insertStatus;
     }
 
-    public function remove(Participant $participant): int|bool
+    public function remove(Participant $participant): bool
     {
-        return $this->query->update($this->table)
+        return (bool)$this->query->update($this->table)
             ->set(['subscribed' => 0])
             ->where('userId', $participant->getUserId())
             ->where('eventId', $participant->getEventId())
             ->execute();
     }
 
-    public function findByUserId(int $userId): bool|array
+    public function findByUserId(int $userId): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('userId', $userId)
             ->fetch();
+
+        return $result ?: [];
     }
 
-    public function findUserForAnEvent(int $userId, int $eventId): bool|array
+    public function findUserForAnEvent(int $userId, int $eventId): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('userId', $userId)
             ->where('eventId', $eventId)
             ->where('subscribed', 1)
             ->fetch();
+
+        return $result ?: [];
     }
 
     public function findActiveParticipantsByEvent(int $eventId): array
     {
-        return $this->query->from($this->table)
+        $result = $this->query->from($this->table)
             ->where('eventId', $eventId)
             ->where('subscribed', 1)
             ->where('approved', 1)
             ->where('disqualified', 0)
             ->fetchAll();
+
+        return $result ?: [];
     }
 }

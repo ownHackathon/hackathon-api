@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Test\Unit\Mock\Table;
 
@@ -13,9 +14,9 @@ class MockParticipantTable extends ParticipantTable
         parent::__construct(new MockQuery());
     }
 
-    public function remove(Participant $participant): int|bool
+    public function remove(Participant $participant): bool
     {
-        return $participant->getId() === 1 ? 1 : false;
+        return $participant->getId() === 1;
     }
 
     public function findById(int $id): array
@@ -23,12 +24,12 @@ class MockParticipantTable extends ParticipantTable
         return $id === 1 ? ['id' => $id] : [];
     }
 
-    public function findByUserId(int $userId): bool|array
+    public function findByUserId(int $userId): array
     {
-        return $userId === 1 ? ['userId' => 1] : false;
+        return $userId === 1 ? ['userId' => 1] : [];
     }
 
-    public function findUserForAnEvent(int $userId, int $eventId): bool|array
+    public function findUserForAnEvent(int $userId, int $eventId): array
     {
         if ($userId === 1 && $eventId === 1) {
             return [
@@ -37,6 +38,6 @@ class MockParticipantTable extends ParticipantTable
             ];
         }
 
-        return false;
+        return [];
     }
 }

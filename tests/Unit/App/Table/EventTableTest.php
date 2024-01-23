@@ -29,7 +29,7 @@ class EventTableTest extends AbstractTable
         self::assertSame(1, $insertLastId);
     }
 
-    public function testCanNotInsertEvent(): void
+    public function testInsertEventThrowsException(): void
     {
         $event = new Event();
 
@@ -73,6 +73,13 @@ class EventTableTest extends AbstractTable
         $event = $this->table->findByTitle(TestConstants::EVENT_TITLE);
 
         self::assertSame($this->fetchResult, $event);
+    }
+
+    public function testFindByNameHasEmptyResult(): void
+    {
+        $event = $this->table->findByTitle(TestConstants::EVENT_TITLE_UNUSED);
+
+        self::assertSame([], $event);
     }
 
     public function testCanFindAllActive(): void

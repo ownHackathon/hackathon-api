@@ -54,6 +54,8 @@ class TestConstants
 
     public const EVENT_TITLE = 'Test Title';
 
+    public const EVENT_TITLE_UNUSED = 'Title can not be found';
+
     public const EVENT_TITLE_THROW_EXCEPTION = 'Test Title throw Exception';
 
     public const EVENT_CREATE_TITLE = 'Test Create Title';
