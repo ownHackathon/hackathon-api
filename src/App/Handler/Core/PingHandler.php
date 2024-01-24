@@ -15,6 +15,7 @@ class PingHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/api/ping',
+        summary: 'Returns the current server time of the request.',
         tags: ['System Information'],
         responses: [
             new OA\Response(
