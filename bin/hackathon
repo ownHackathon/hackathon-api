@@ -19,7 +19,7 @@ function docker_down() {
 }
 
 function docker_database_cleanup() {
-    docker volume rm mariadb
+    docker volume rm hackathon-api_db
 }
 
 function docker_vendor_cleanup() {
