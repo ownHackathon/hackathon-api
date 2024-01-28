@@ -12,24 +12,30 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
     {
         $table = $schema->createTable('User');
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
-        $table->addColumn('uuid', Types::STRING, ['length' => 32]);
-        $table->addColumn('roleId', Types::INTEGER, ['unsigned' => true]);
-        $table->addColumn('name', Types::STRING, ['length' => 50]);
+        $table->addColumn('uuid', Types::STRING, ['length' => 32,]);
+        $table->addColumn('roleId', Types::INTEGER, ['unsigned' => true, 'default' => 1]);
+        $table->addColumn('name', Types::STRING, ['length' => 50,]);
         $table->addColumn('password', Types::STRING);
         $table->addColumn('email', Types::STRING);
-        $table->addColumn('registrationTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
-        $table->addColumn('lastAction', Types::DATETIME_IMMUTABLE, ['notnull' => false]);
-        $table->addColumn('active', Types::BOOLEAN, ['default' => true]);
-        $table->addColumn('token', Types::STRING, ['length' => 32, 'notnull' => false]);
+        $table->addColumn('registrationTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+        $table->addColumn('lastAction', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
         $table->setPrimaryKey(['id']);
         $table->addUniqueIndex(['uuid'], 'user_uuid_UNIQUE');
         $table->addUniqueIndex(['name'], 'user_name_UNIQUE');
         $table->addUniqueIndex(['email'], 'user_email_UNIQUE');
+
+        $schema->getTable('User')->addForeignKeyConstraint(
+            'Role',
+            ['roleId'],
+            ['id'],
+            name: 'fk_User_Role_idx'
+        );
     }
 
     public function down(Schema $schema): void
     {
+        $schema->getTable('User')->dropIndex('fk_User_Role_idx');
         $schema->dropTable('User');
     }
 }
