@@ -2,104 +2,20 @@
 
 namespace App\Entity;
 
+use App\System\Trait\CloneReadonlyClassWith;
 use DateTime;
 
-class Participant
+final readonly class Participant
 {
-    private int $id = 0;
-    private int $userId = 0;
-    private int $eventId = 0;
-    private DateTime $requestTime;
-    private bool $subscribed = true;
-    private bool $approved = false;
-    private bool $disqualified = true;
+    use CloneReadonlyClassWith;
 
-    public function __construct()
-    {
-        $this->requestTime = new DateTime();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    public function getEventId(): int
-    {
-        return $this->eventId;
-    }
-
-    public function setEventId(int $eventId): self
-    {
-        $this->eventId = $eventId;
-
-        return $this;
-    }
-
-    public function getRequestTime(): DateTime
-    {
-        return $this->requestTime;
-    }
-
-    public function setRequestTime(DateTime $requestTime): self
-    {
-        $this->requestTime = $requestTime;
-
-        return $this;
-    }
-
-    public function isSubscribed(): bool
-    {
-        return $this->subscribed;
-    }
-
-    public function setSubscribed(int|bool $subscribed): self
-    {
-        $this->subscribed = (bool)$subscribed;
-
-        return $this;
-    }
-
-    public function isApproved(): bool
-    {
-        return $this->approved;
-    }
-
-    public function setApproved(int|bool $approved): self
-    {
-        $this->approved = (bool)$approved;
-
-        return $this;
-    }
-
-    public function isDisqualified(): bool
-    {
-        return $this->disqualified;
-    }
-
-    public function setDisqualified(int|bool $disqualified): self
-    {
-        $this->disqualified = (bool)$disqualified;
-
-        return $this;
+    public function __construct(
+        public int $id,
+        public int $userId,
+        public int $eventId,
+        public DateTime $requestTime,
+        public bool $subscribed,
+        public bool $disqualified,
+    ) {
     }
 }

@@ -2,7 +2,18 @@
 
 namespace App\Entity;
 
-class Role
+use App\System\Trait\CloneReadonlyClassWith;
+use Ramsey\Uuid\UuidInterface;
+
+final readonly class Role
 {
-    public const USER = 4;
+    use CloneReadonlyClassWith;
+
+    public function __construct(
+        public int $id,
+        public UuidInterface $uuid,
+        public string $name,
+        public string $description
+    ) {
+    }
 }

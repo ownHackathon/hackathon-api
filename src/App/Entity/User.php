@@ -2,145 +2,26 @@
 
 namespace App\Entity;
 
+use App\Enum\UserRole;
+use App\System\Trait\CloneReadonlyClassWith;
 use DateTime;
 
-class User
+final readonly class User
 {
-    public const AUTHENTICATED_USER = 'authenticatedUser';
+    use CloneReadonlyClassWith;
 
-    private int $id = 0;
-    private string $uuid = '';
-    private int $roleId = 0;
-    private string $name = 'unbekannt';
-    private string $password = '';
-    private string $email = '';
-    private DateTime $registrationTime;
-    private ?DateTime $lastAction = null;
-    private bool $active = false;
-    private ?string $token = null;
+    // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
+    final public const string AUTHENTICATED_USER = 'authenticatedUser';
 
-    public function __construct()
-    {
-        $this->registrationTime = new DateTime();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getUuid(): string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
-
-    public function getRoleId(): int
-    {
-        return $this->roleId;
-    }
-
-    public function setRoleId(int $roleId): self
-    {
-        $this->roleId = $roleId;
-
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getRegistrationTime(): DateTime
-    {
-        return $this->registrationTime;
-    }
-
-    public function setRegistrationTime(DateTime $registrationTime): self
-    {
-        $this->registrationTime = $registrationTime;
-
-        return $this;
-    }
-
-    public function getLastAction(): ?DateTime
-    {
-        return $this->lastAction;
-    }
-
-    public function setLastAction(DateTime $lastAction): self
-    {
-        $this->lastAction = $lastAction;
-
-        return $this;
-    }
-
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    public function setActive(int|bool $active): self
-    {
-        $this->active = (bool)$active;
-
-        return $this;
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
+    public function __construct(
+        public int $id,
+        public string $uuid,
+        public UserRole $role,
+        public string $name,
+        public string $password,
+        public string $email,
+        public DateTime $registrationTime,
+        public DateTime $lastAction,
+    ) {
     }
 }
