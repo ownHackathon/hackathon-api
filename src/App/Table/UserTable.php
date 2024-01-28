@@ -13,11 +13,11 @@ class UserTable extends AbstractTable implements UserRepository
     public function insert(User $user): int
     {
         $values = [
-            'roleId' => $user->getRoleId(),
-            'uuid' => $user->getUuid(),
-            'name' => $user->getName(),
-            'password' => $user->getPassword(),
-            'email' => $user->getEmail(),
+            'roleId' => $user->roleId,
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'password' => $user->password,
+            'email' => $user->email,
         ];
 
         $lastInsertId = $this->query->insertInto($this->table, $values)->execute();
@@ -32,18 +32,17 @@ class UserTable extends AbstractTable implements UserRepository
     public function update(User $user): int
     {
         $values = [
-            'uuid' => $user->getUuid(),
-            'roleId' => $user->getRoleId(),
-            'name' => $user->getName(),
-            'password' => $user->getPassword(),
-            'email' => $user->getEmail(),
-            'registrationTime' => $user->getRegistrationTime()->format('Y-m-d H:i:s'),
-            'lastAction' => $user->getLastAction()?->format('Y-m-d H:i:s'),
-            'active' => $user->isActive(),
-            'token' => $user->getToken(),
+            'uuid' => $user->uuid,
+            'roleId' => $user->roleId,
+            'name' => $user->name,
+            'password' => $user->password,
+            'email' => $user->email,
+            'registrationTime' => $user->registrationTime->format('Y-m-d H:i:s'),
+            'lastAction' => $user->lastAction?->format('Y-m-d H:i:s'),
+            'active' => $user->active,
         ];
 
-        $affectedRowCount = $this->query->update($this->table, $values, $user->getId())->execute();
+        $affectedRowCount = $this->query->update($this->table, $values, $user->id)->execute();
 
         if (!$affectedRowCount) {
             throw new InvalidArgumentException('User data could not be modified');

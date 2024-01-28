@@ -17,8 +17,8 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
         $table->addColumn('name', Types::STRING, ['length' => 50,]);
         $table->addColumn('password', Types::STRING);
         $table->addColumn('email', Types::STRING);
-        $table->addColumn('registrationTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
-        $table->addColumn('lastAction', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+        $table->addColumn('registrationAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+        $table->addColumn('lastActionAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
         $table->setPrimaryKey(['id']);
         $table->addUniqueIndex(['uuid'], 'user_uuid_UNIQUE');
