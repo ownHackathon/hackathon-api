@@ -18,8 +18,8 @@ final class Version20220921184501CreateEventTable extends AbstractMigration
         $table->addColumn('title', Types::STRING);
         $table->addColumn('description', Types::STRING, ['default' => '']);
         $table->addColumn('eventText', Types::TEXT);
-        $table->addColumn('createTime', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
-        $table->addColumn('startTime', Types::DATETIME_IMMUTABLE);
+        $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
+        $table->addColumn('startedAt', Types::DATETIME_IMMUTABLE);
         $table->addColumn('duration', Types::SMALLINT, ['unsigned' => true,]);
         $table->addColumn('status', Types::SMALLINT, ['unsigned' => true, 'default' => 1,]);
         $table->addColumn('ratingCompleted', Types::BOOLEAN, ['default' => false]);

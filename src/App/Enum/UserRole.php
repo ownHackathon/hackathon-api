@@ -4,10 +4,11 @@ namespace App\Enum;
 
 enum UserRole: int
 {
-    case OWNER = 1;
-    case ADMINISTRATOR = 2;
-    case MODERATOR = 3;
-    case USER = 4;
+    case GUEST = 0;
+    case USER = 1;
+    case MODERATOR = 100;
+    case ADMINISTRATOR = 1000;
+    case OWNER = 999999;
 
     public function getRoleName(): string
     {
@@ -16,6 +17,7 @@ enum UserRole: int
             UserRole::ADMINISTRATOR => 'Administrator',
             UserRole::MODERATOR => 'Moderator',
             UserRole::USER => 'User',
+            UserRole::GUEST => 'Guest'
         };
     }
 }

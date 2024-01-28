@@ -13,7 +13,7 @@ final readonly class Participant
         public int $id,
         public int $userId,
         public int $eventId,
-        public DateTime $requestTime,
+        public DateTime $requestedAt,
         public bool $subscribed,
         public bool $disqualified,
     ) {

@@ -4,7 +4,7 @@ namespace App\Table;
 
 use App\Repository\ProjectRepository;
 
-class ProjectTable extends AbstractTable implements ProjectRepository
+readonly class ProjectTable extends AbstractTable implements ProjectRepository
 {
     public function findByParticipantId(int $id): bool|array
     {

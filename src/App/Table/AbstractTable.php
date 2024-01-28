@@ -8,12 +8,12 @@ use ReflectionClass;
 
 use function substr;
 
-class AbstractTable implements Repository
+readonly class AbstractTable implements Repository
 {
     protected string $table;
 
     public function __construct(
-        protected readonly Query $query
+        protected Query $query
     ) {
         $this->table = substr((new ReflectionClass($this))->getShortName(), 0, -5);
     }

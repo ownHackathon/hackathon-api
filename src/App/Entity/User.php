@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Enum\UserRole;
 use App\System\Trait\CloneReadonlyClassWith;
 use DateTime;
+use Ramsey\Uuid\UuidInterface;
 
 final readonly class User
 {
@@ -15,13 +16,13 @@ final readonly class User
 
     public function __construct(
         public int $id,
-        public string $uuid,
+        public UuidInterface $uuid,
         public UserRole $role,
         public string $name,
         public string $password,
         public string $email,
-        public DateTime $registrationTime,
-        public DateTime $lastAction,
+        public DateTime $registrationAt,
+        public DateTime $lastActionAt,
     ) {
     }
 }

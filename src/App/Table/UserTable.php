@@ -8,13 +8,13 @@ use App\Repository\UserRepository;
 use DateTime;
 use InvalidArgumentException;
 
-class UserTable extends AbstractTable implements UserRepository
+readonly class UserTable extends AbstractTable implements UserRepository
 {
     public function insert(User $user): int
     {
         $values = [
-            'roleId' => $user->roleId,
-            'uuid' => $user->uuid,
+            'uuid' => $user->uuid->getHex()->toString(),
+            'roleId' => $user->role->value,
             'name' => $user->name,
             'password' => $user->password,
             'email' => $user->email,
@@ -23,7 +23,7 @@ class UserTable extends AbstractTable implements UserRepository
         $lastInsertId = $this->query->insertInto($this->table, $values)->execute();
 
         if (!$lastInsertId) {
-            return throw new DuplicateEntryException('User', 1);
+            return throw new DuplicateEntryException('User', $user->uuid->getHex()->toString());
         }
 
         return (int)$lastInsertId;
@@ -33,13 +33,12 @@ class UserTable extends AbstractTable implements UserRepository
     {
         $values = [
             'uuid' => $user->uuid,
-            'roleId' => $user->roleId,
+            'roleId' => $user->role->value,
             'name' => $user->name,
             'password' => $user->password,
             'email' => $user->email,
-            'registrationTime' => $user->registrationTime->format('Y-m-d H:i:s'),
-            'lastAction' => $user->lastAction?->format('Y-m-d H:i:s'),
-            'active' => $user->active,
+            'registrationAt' => $user->registrationAt->format('Y-m-d H:i:s'),
+            'lastActionAt' => $user->lastActionAt->format('Y-m-d H:i:s'),
         ];
 
         $affectedRowCount = $this->query->update($this->table, $values, $user->id)->execute();
@@ -54,7 +53,7 @@ class UserTable extends AbstractTable implements UserRepository
     public function updateLastUserActionTime(int $id, DateTime $actionTime): self
     {
         $result = $this->query->update($this->table)
-            ->set(['lastAction' => $actionTime->format('Y-m-d H:i:s')])
+            ->set(['lastActionAt' => $actionTime->format('Y-m-d H:i:s')])
             ->where('id', $id)
             ->execute();
 

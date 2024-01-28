@@ -6,29 +6,30 @@ use App\Entity\Event;
 use App\Exception\DuplicateEntryException;
 use App\Repository\EventRepository;
 
-class EventTable extends AbstractTable implements EventRepository
+readonly class EventTable extends AbstractTable implements EventRepository
 {
     public function insert(Event $event): int
     {
         $values = [
-            'userId' => $event->getUserId(),
-            'title' => $event->getTitle(),
-            'description' => $event->getDescription(),
-            'eventText' => $event->getEventText(),
-            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
-            'duration' => $event->getDuration(),
+            'uuid' => $event->uuid->getHex()->toString(),
+            'userId' => $event->userId,
+            'title' => $event->title,
+            'description' => $event->description,
+            'eventText' => $event->eventText,
+            'startTime' => $event->startedAt->format('Y-m-d H:i'),
+            'duration' => $event->duration,
         ];
 
         $insertStatus = $this->query->insertInto($this->table, $values)->execute();
 
         if (!$insertStatus) {
-            throw new DuplicateEntryException('Event', $event->getId());
+            throw new DuplicateEntryException('Event', $event->uuid->getHex()->toString());
         }
 
         return (int)$insertStatus;
     }
 
-    public function findAll(string $order = 'startTime', string $sort = 'DESC'): array
+    public function findAll(string $order = 'startedAt', string $sort = 'DESC'): array
     {
         $result = $this->query->from($this->table)->orderBy($order . ' ' . $sort)->fetchAll();
 
@@ -48,7 +49,7 @@ class EventTable extends AbstractTable implements EventRepository
     {
         $result = $this->query->from($this->table)
             ->where('active', 1)
-            ->orderBy('startTime DESC')
+            ->orderBy('startedAt DESC')
             ->fetchAll();
 
         return $result ?: [];
@@ -67,7 +68,7 @@ class EventTable extends AbstractTable implements EventRepository
     public function remove(Event $event): bool
     {
         return $this->query->deleteFrom($this->table)
-            ->where('id', $event->getId())
+            ->where('id', $event->id)
             ->execute();
     }
 }

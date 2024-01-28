@@ -6,14 +6,13 @@ use App\Entity\Participant;
 use App\Exception\DuplicateEntryException;
 use App\Repository\ParticipantRepository;
 
-class ParticipantTable extends AbstractTable implements ParticipantRepository
+readonly class ParticipantTable extends AbstractTable implements ParticipantRepository
 {
     public function insert(Participant $participant): int
     {
         $values = [
-            'userId' => $participant->getUserId(),
-            'eventId' => $participant->getEventId(),
-            'approved' => $participant->isApproved(),
+            'userId' => $participant->userId,
+            'eventId' => $participant->eventId,
         ];
 
         $insertStatus = $this->query->insertInto($this->table, $values)
@@ -21,7 +20,7 @@ class ParticipantTable extends AbstractTable implements ParticipantRepository
             ->execute();
 
         if (!$insertStatus) {
-            throw new DuplicateEntryException('Participant', $participant->getId());
+            throw new DuplicateEntryException('Participant', (string)$participant->id);
         }
 
         return (int)$insertStatus;
@@ -31,8 +30,8 @@ class ParticipantTable extends AbstractTable implements ParticipantRepository
     {
         return (bool)$this->query->update($this->table)
             ->set(['subscribed' => 0])
-            ->where('userId', $participant->getUserId())
-            ->where('eventId', $participant->getEventId())
+            ->where('userId', $participant->userId)
+            ->where('eventId', $participant->eventId)
             ->execute();
     }
 
@@ -61,7 +60,6 @@ class ParticipantTable extends AbstractTable implements ParticipantRepository
         $result = $this->query->from($this->table)
             ->where('eventId', $eventId)
             ->where('subscribed', 1)
-            ->where('approved', 1)
             ->where('disqualified', 0)
             ->fetchAll();
 

@@ -5,14 +5,14 @@ namespace App\Table;
 use App\Entity\Topic;
 use App\Repository\TopicPoolRepository;
 
-class TopicPoolTable extends AbstractTable implements TopicPoolRepository
+readonly class TopicPoolTable extends AbstractTable implements TopicPoolRepository
 {
     public function insert(Topic $topic): self
     {
         $values = [
-            'uuid' => $topic->getUuid(),
-            'topic' => $topic->getTopic(),
-            'description' => $topic->getDescription(),
+            'uuid' => $topic->uuid->getHex()->toString(),
+            'topic' => $topic->topic,
+            'description' => $topic->description,
         ];
 
         $this->query->insertInto($this->table, $values)->execute();
@@ -27,20 +27,20 @@ class TopicPoolTable extends AbstractTable implements TopicPoolRepository
             ->fetch();
     }
 
-    public function updateEvent(Topic $topic): self
+    public function assignAnEvent(int $topicId, int $eventId): self
     {
         $values = [
-            'eventId' => $topic->getEventId(),
+            'eventId' => $eventId,
         ];
-        $this->query->update($this->table, $values, $topic->getId())->execute();
+        $this->query->update($this->table, $values, $topicId)->execute();
 
         return $this;
     }
 
-    public function findByEventId(int $id): bool|array
+    public function findByEventId(int $eventId): bool|array
     {
         return $this->query->from($this->table)
-            ->where('eventId', $id)
+            ->where('eventId', $eventId)
             ->fetch();
     }
 

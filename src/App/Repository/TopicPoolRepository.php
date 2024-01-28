@@ -10,9 +10,9 @@ interface TopicPoolRepository extends Repository
 
     public function findByUuId(string $uuid): bool|array;
 
-    public function updateEvent(Topic $topic): self;
+    public function assignAnEvent(int $topicId, int $eventId): self;
 
-    public function findByEventId(int $id): bool|array;
+    public function findByEventId(int $eventId): bool|array;
 
     public function findAvailable(): bool|array;
 

@@ -36,7 +36,7 @@ class TopicPoolService
 
     public function updateEventId(Topic $topic): self
     {
-        $this->repository->updateEvent($topic);
+        $this->repository->assignAnEvent($topic);
 
         return $this;
     }

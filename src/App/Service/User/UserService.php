@@ -26,24 +26,24 @@ class UserService
 
     public function updateLastUserActionTime(User $user): User
     {
-        $user->setLastAction(new DateTime());
-
-        $this->repository->updateLastUserActionTime($user->getId(), $user->getLastAction());
+        $this->repository->updateLastUserActionTime($user->id, new DateTime());
 
         return $user;
     }
 
     public function create(User $user, UserRole $role = UserRole::USER): int
     {
-        if ($this->isEmailExist($user->getEmail())) {
+        if ($this->isEmailExist($user->email)) {
             return throw new DuplicateEntryException('User', 1);
         }
 
-        $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($user->password, PASSWORD_BCRYPT);
 
-        $user->setPassword($hashedPassword);
-        $user->setRoleId($role->value);
-        $user->setUuid($this->uuid->getHex()->toString());
+        $user = $user->with([
+            'password' => $hashedPassword,
+            'roleId' => $role->value,
+            'uuid' => $this->uuid->getHex()->toString(),
+        ]);
 
         return $this->repository->insert($user);
     }
@@ -83,34 +83,34 @@ class UserService
             );
         }
 
-        return $this->hydrator->hydrate($user, new User());
+        return $this->hydrator->hydrate($user, new User(new DateTime()));
     }
 
     public function findByUuid(string $uuid): User|null
     {
         $user = $this->repository->findByUuid($uuid);
 
-        return $user ? $this->hydrator->hydrate($user, new User()) : null;
+        return $user ? $this->hydrator->hydrate($user, new User(new DateTime())) : null;
     }
 
     public function findByName(string $name): ?User
     {
         $user = $this->repository->findByName($name);
 
-        return $this->hydrator->hydrate($user, new User());
+        return $this->hydrator->hydrate($user, new User(new DateTime()));
     }
 
     public function findByEMail(string $email): ?User
     {
         $user = $this->repository->findByEMail($email);
 
-        return $this->hydrator->hydrate($user, new User());
+        return $this->hydrator->hydrate($user, new User(new DateTime()));
     }
 
     public function findByToken(string $token): ?User
     {
         $user = $this->repository->findByToken($token);
 
-        return $this->hydrator->hydrate($user, new User());
+        return $this->hydrator->hydrate($user, new User(new DateTime()));
     }
 }
