@@ -24,7 +24,7 @@ readonly class ProjectParticipantMiddleware implements MiddlewareInterface
          */
         $project = $request->getAttribute(Project::class);
 
-        $participant = $this->participantService->findById($project->getParticipantId());
+        $participant = $this->participantService->findById($project->participantId);
 
         return $handler->handle($request->withAttribute(Participant::class, $participant));
     }

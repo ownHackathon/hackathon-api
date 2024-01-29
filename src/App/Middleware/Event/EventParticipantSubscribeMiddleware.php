@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Enum\EventStatus;
 use App\Service\Event\EventService;
 use App\Service\Participant\ParticipantService;
+use DateTime;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -25,7 +26,7 @@ readonly class EventParticipantSubscribeMiddleware implements MiddlewareInterfac
         $eventId = (int)$request->getAttribute('eventId');
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus()->value >= EventStatus::RUNNING->value) {
+        if ($event->status->value >= EventStatus::RUNNING->value) {
             return $handler->handle($request->withAttribute('participantCreateStatus', false));
         }
 
@@ -34,10 +35,14 @@ readonly class EventParticipantSubscribeMiddleware implements MiddlewareInterfac
          */
         $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
-        $participant = new Participant();
-        $participant->setUserId($user->getId())
-            ->setEventId($eventId)
-            ->setApproved(true);
+        $participant = new Participant(
+            1,
+            $user->id,
+            $eventId,
+            new DateTime(),
+            true,
+            false
+        );
         $participantCreateStatus = $this->participantService->create($participant);
 
         return $handler->handle($request->withAttribute('participantCreateStatus', $participantCreateStatus));

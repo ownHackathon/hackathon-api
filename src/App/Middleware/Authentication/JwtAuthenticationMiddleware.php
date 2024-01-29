@@ -52,7 +52,7 @@ readonly class JwtAuthenticationMiddleware implements MiddlewareInterface
         }
 
         $this->logger->info('{Host} as {User} call -> {URI}', [
-            'User' => $user ? $user->getName() : 'Guest',
+            'User' => $user ? $user->name : 'Guest',
         ]);
 
         return $handler->handle($request->withAttribute(User::AUTHENTICATED_USER, $user));

@@ -29,9 +29,9 @@ readonly class TopicCreateSubmitMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $topic = $this->hydrator->hydrate($data, new Topic());
+        $topic = $this->hydrator->hydrate($data, Topic::class);
 
-        $existTopic = $this->topicPoolService->findByTopic($topic->getTopic());
+        $existTopic = $this->topicPoolService->findByTopic($topic->topic);
 
         if ($existTopic instanceof Topic) {
             throw new DuplicateNameHttpException(['topic' => ['topic' => 'The Topic is already present']]);

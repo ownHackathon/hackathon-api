@@ -48,13 +48,13 @@ readonly class EventListMiddleware implements MiddlewareInterface
 
         foreach ($events as $event) {
             $entry = new EventDto(
-                $event->getId(),
-                $this->userService->findById($event->getUserId())->getName(),
-                $event->getTitle(),
-                $event->getDescription(),
-                $event->getDuration(),
-                $event->getStartTime()->format('Y-m-d H:i'),
-                $event->getStatus(),
+                $event->id,
+                $this->userService->findById($event->userId)->name,
+                $event->title,
+                $event->description,
+                $event->duration,
+                $event->createdAt->format('Y-m-d H:i'),
+                $event->status,
             );
 
             $eventList[] = $entry;

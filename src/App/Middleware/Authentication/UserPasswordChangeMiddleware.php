@@ -13,6 +13,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function password_hash;
 
+use const PASSWORD_BCRYPT;
+
 readonly class UserPasswordChangeMiddleware implements MiddlewareInterface
 {
     public function __construct(
@@ -29,8 +31,8 @@ readonly class UserPasswordChangeMiddleware implements MiddlewareInterface
 
         $data = $request->getParsedBody();
 
-        $user->setToken(null);
-        $user->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
+        /** ToDo implements Token support */
+        $user = $user->with(['password' => password_hash($data['password'], PASSWORD_BCRYPT)]);
 
         if (!$this->userService->update($user)) {
             return new JsonResponse(['Password could not be changed'], Http::STATUS_BAD_REQUEST);

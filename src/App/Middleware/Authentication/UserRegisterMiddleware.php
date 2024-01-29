@@ -4,28 +4,42 @@ namespace App\Middleware\Authentication;
 
 use App\Dto\Core\HttpStatusCodeMessage;
 use App\Entity\User;
+use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;
+use App\Hydrator\ReflectionHydrator;
 use App\Service\User\UserService;
+use DateTime;
 use Laminas\Diactoros\Response\JsonResponse;
-use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Ramsey\Uuid\Uuid;
 
 readonly class UserRegisterMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private UserService $userService,
-        private ClassMethodsHydrator $hydrator,
+        private ReflectionHydrator $hydrator,
+        private Uuid $uuid,
     ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();
-        $data['email'] = $data['e-mail'];
-        $user = $this->hydrator->hydrate($data, new User());
+        $newUser = [
+            'id' => 1,
+            'uuid' => $this->uuid,
+            'role' => UserRole::GUEST,
+            'name' => '',
+            'password' => '',
+            'email' => $data['e-mail'],
+            'registrationAt' => new DateTime(),
+            'lastActionAt' => new DateTime(),
+        ];
+
+        $user = $this->hydrator->hydrate($newUser, User::class);
 
         try {
             !$this->userService->create($user);

@@ -29,11 +29,11 @@ readonly class EventParticipantUnsubscribeMiddleware implements MiddlewareInterf
 
         $event = $this->eventService->findById($eventId);
 
-        if ($event->getStatus()->value >= EventStatus::RUNNING->value) {
+        if ($event->status->value >= EventStatus::RUNNING->value) {
             return $handler->handle($request->withAttribute('participantRemoveStatus', false));
         }
 
-        $participant = $this->participantService->findByUserIdAndEventId($user->getId(), $eventId);
+        $participant = $this->participantService->findByUserIdAndEventId($user->id, $eventId);
 
         $participantRemoveStatus = $this->participantService->remove($participant);
 

@@ -31,13 +31,13 @@ readonly class UserPasswordForgottonHandler implements RequestHandlerInterface
 
         $email = (new Email())
             ->from($this->mailSender)
-            ->to($user->getEmail())
+            ->to($user->email)
             ->subject('Password forgotton')
             ->text(
                 sprintf(
                     'Follow the link to change your password: %s/user/password/%s',
                     $this->projectUri,
-                    $user->getToken(),
+                    $user->name, /** ToDo implements Token support */
                 )
             );
 

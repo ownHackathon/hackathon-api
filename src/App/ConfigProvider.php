@@ -155,7 +155,7 @@ class ConfigProvider
         return [
             Middleware\Authentication\UserRegisterMiddleware::class => [
                 UserService::class,
-                ClassMethodsHydrator::class,
+                ReflectionHydrator::class,
             ],
             Middleware\Authentication\ApiAccessMiddleware::class => [
                 ApiAccessService::class,

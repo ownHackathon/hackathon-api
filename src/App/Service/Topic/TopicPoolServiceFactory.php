@@ -5,6 +5,7 @@ namespace App\Service\Topic;
 use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\TopicPoolRepository;
+use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
@@ -23,7 +24,10 @@ class TopicPoolServiceFactory
             new HydratorStrategy($container->get(ReflectionHydrator::class), Topic::class)
         );
 
-        /** ToDo implements Uuid Strategy */
+        $hydrator->addStrategy(
+            'uuid',
+            new UuidStrategy()
+        );
 
         return new TopicPoolService($repository, $hydrator);
     }

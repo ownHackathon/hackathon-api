@@ -29,9 +29,9 @@ readonly class EventCreateMiddleware implements MiddlewareInterface
         $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
         $data = $request->getParsedBody();
-        $data['userId'] = $user->getId();
+        $data['userId'] = $user->id;
 
-        $event = $this->hydrator->hydrate($data, new Event());
+        $event = $this->hydrator->hydrate($data, Event::class);
 
         if (!$this->eventService->create($event)) {
             return new JsonResponse([

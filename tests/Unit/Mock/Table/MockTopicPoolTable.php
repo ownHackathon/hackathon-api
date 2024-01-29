@@ -18,7 +18,7 @@ class MockTopicPoolTable extends TopicPoolTable
         return $this;
     }
 
-    public function updateEvent(Topic $topic): TopicPoolTable
+    public function assignAnEvent(Topic $topic): TopicPoolTable
     {
         return $this;
     }
@@ -28,9 +28,9 @@ class MockTopicPoolTable extends TopicPoolTable
         return $id === 1 ? ['id' => $id] : [];
     }
 
-    public function findByEventId(int $id): bool|array
+    public function findByEventId(int $eventId): bool|array
     {
-        return $id === 1 ? ['eventId' => $id] : false;
+        return $eventId === 1 ? ['eventId' => $eventId] : false;
     }
 
     public function findByTopic(string $topic): bool|array

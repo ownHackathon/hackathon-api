@@ -57,7 +57,7 @@ readonly class LoginHandler implements RequestHandlerInterface
 
         if ($user instanceof User) {
             $token = $this->generateToken(
-                $user->getUuid(),
+                $user->uuid->getHex()->toString(),
                 $this->tokenSecret,
                 $this->tokenDuration,
             );

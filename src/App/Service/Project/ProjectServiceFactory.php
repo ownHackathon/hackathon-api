@@ -5,6 +5,7 @@ namespace App\Service\Project;
 use App\Entity\Project;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\ProjectRepository;
+use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
@@ -23,7 +24,7 @@ class ProjectServiceFactory
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
         $hydrator->addStrategy(
-            'createTime',
+            'createdAt',
             $strategy,
         );
 
@@ -32,7 +33,10 @@ class ProjectServiceFactory
             new HydratorStrategy($container->get(ReflectionHydrator::class), Project::class)
         );
 
-        /** ToDo implements Uuid Strategy */
+        $hydrator->addStrategy(
+            'uuid',
+            new UuidStrategy()
+        );
 
         return new ProjectService($repository, $hydrator);
     }

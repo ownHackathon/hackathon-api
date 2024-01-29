@@ -14,6 +14,6 @@ class LoginAuthenticationService
             return false;
         }
 
-        return password_verify($password, $user->getPassword());
+        return password_verify($password, $user->password);
     }
 }

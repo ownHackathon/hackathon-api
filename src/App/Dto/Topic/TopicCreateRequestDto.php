@@ -23,7 +23,7 @@ readonly class TopicCreateRequestDto
 
     public function __construct(Topic $topic)
     {
-        $this->topic = $topic->getTopic();
-        $this->description = $topic->getDescription();
+        $this->topic = $topic->topic;
+        $this->description = $topic->description;
     }
 }

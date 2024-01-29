@@ -30,7 +30,8 @@ readonly class UserPasswordForgottenMiddleware implements MiddlewareInterface
             return new JsonResponse(['message' => 'invalid E-Mai'], HTTP::STATUS_BAD_REQUEST);
         }
 
-        $user->setToken($this->tokenService->generateToken());
+        /** ToDo implements Token support */
+        $this->tokenService->generateToken();
 
         $this->userService->update($user);
 

@@ -4,7 +4,7 @@ namespace App\System\Trait;
 
 trait CloneReadonlyClassWith
 {
-    public function with(...$properties): static
+    public function with(array ...$properties): static
     {
         $properties += (array)$this;
 

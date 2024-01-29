@@ -16,7 +16,7 @@ readonly class TopicCreateResponseDto extends TopicCreateRequestDto
 
     public function __construct(Topic $topic)
     {
-        $this->uuid = $topic->getUuid();
+        $this->uuid = $topic->uuid->getHex()->toString();
         parent::__construct($topic);
     }
 }

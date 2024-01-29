@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
+use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
@@ -29,12 +30,12 @@ class UserServiceFactory
         $uuid = $container->get(Uuid::class);
 
         $hydrator->addStrategy(
-            'registrationTime',
+            'registrationAt',
             $dateTimeFormatterStrategy,
         );
 
         $hydrator->addStrategy(
-            'lastAction',
+            'lastActionAt',
             $dateTimeFormatterStrategy,
         );
 
@@ -48,7 +49,10 @@ class UserServiceFactory
             new HydratorStrategy($container->get(ReflectionHydrator::class), User::class)
         );
 
-        /** ToDo implements Uuid Strategy */
+        $hydrator->addStrategy(
+            'uuid',
+            new UuidStrategy()
+        );
 
         return new UserService($repository, $hydrator, $uuid);
     }

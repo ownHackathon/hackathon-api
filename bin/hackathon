@@ -81,7 +81,7 @@ case $1 in
     composer_install
 
     echo "wait for services"
-    sleep 10
+    sleep 5
 
     echo "create database storage information an run migrations"
     setup_database

@@ -8,19 +8,16 @@ use App\Exception\DuplicateEntryException;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
 use DateTime;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
-use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
 
 use function password_hash;
-use function sprintf;
 
-class UserService
+readonly class UserService
 {
     public function __construct(
-        private readonly UserRepository $repository,
-        private readonly ReflectionHydrator $hydrator,
-        private readonly UuidInterface $uuid,
+        private UserRepository $repository,
+        private ReflectionHydrator $hydrator,
+        private UuidInterface $uuid,
     ) {
     }
 
@@ -41,8 +38,8 @@ class UserService
 
         $user = $user->with([
             'password' => $hashedPassword,
-            'roleId' => $role->value,
-            'uuid' => $this->uuid->getHex()->toString(),
+            'role' => $role,
+            'uuid' => $this->uuid,
         ]);
 
         return $this->repository->insert($user);
@@ -61,56 +58,45 @@ class UserService
         return $user instanceof User;
     }
 
-    private function isEmailExist(?string $email): bool
+    private function isEmailExist(string $email): bool
     {
-        $isUser = null;
+        $user = $this->findByEMail($email);
 
-        if (null !== $email) {
-            $isUser = $this->findByEMail($email);
-        }
-
-        return ($isUser instanceof User);
+        return ($user instanceof User);
     }
 
-    public function findById(int $id): User
+    public function findById(int $id): ?User
     {
         $user = $this->repository->findById($id);
 
-        if ($user === []) {
-            throw new InvalidArgumentException(
-                sprintf('Could not find user with id %d', $id),
-                HTTP::STATUS_NOT_FOUND
-            );
-        }
-
-        return $this->hydrator->hydrate($user, User::class);
+        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }
 
-    public function findByUuid(string $uuid): User|null
+    public function findByUuid(string $uuid): ?User
     {
         $user = $this->repository->findByUuid($uuid);
 
-        return $user ? $this->hydrator->hydrate($user, User::class) : null;
+        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }
 
     public function findByName(string $name): ?User
     {
         $user = $this->repository->findByName($name);
 
-        return $this->hydrator->hydrate($user, User::class);
+        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }
 
     public function findByEMail(string $email): ?User
     {
         $user = $this->repository->findByEMail($email);
 
-        return $this->hydrator->hydrate($user, User::class);
+        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }
 
     public function findByToken(string $token): ?User
     {
         $user = $this->repository->findByToken($token);
 
-        return $this->hydrator->hydrate($user, User::class);
+        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }
 }

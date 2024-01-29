@@ -16,7 +16,7 @@ final readonly class Project
         public int $participantId,
         public string $title,
         public string $description,
-        public DateTime $createTime,
+        public DateTime $createdAt,
         public string $gitRepoUri,
         public string $demoPageUri,
     ) {

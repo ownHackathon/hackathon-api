@@ -3,7 +3,6 @@
 namespace App\Dto\Core;
 
 use App\Entity\User;
-use App\Enum\UserRole;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
@@ -32,8 +31,8 @@ readonly class ApiMeDto
 
     public function __construct(User $user)
     {
-        $this->uuid = $user->getUuid();
-        $this->name = $user->getName();
-        $this->role = UserRole::from($user->getRoleId())->getRoleName();
+        $this->uuid = $user->uuid->getHex()->toString();
+        $this->name = $user->name;
+        $this->role = $user->role->getRoleName();
     }
 }

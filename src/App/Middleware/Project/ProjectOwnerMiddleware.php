@@ -23,7 +23,7 @@ readonly class ProjectOwnerMiddleware implements MiddlewareInterface
          */
         $participant = $request->getAttribute(Participant::class);
 
-        $projectOwner = $this->userService->findById($participant->getUserId());
+        $projectOwner = $this->userService->findById($participant->userId);
 
         return $handler->handle($request->withAttribute('projectOwner', $projectOwner));
     }

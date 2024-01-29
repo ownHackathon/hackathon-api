@@ -2,26 +2,39 @@
 
 namespace App\Middleware\Event;
 
+use App\Entity\Event;
 use App\Hydrator\ReflectionHydrator;
 use App\Service\Event\EventService;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
 class EventCreateMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): EventCreateMiddleware
     {
+        /** @var EventService $service */
         $service = $container->get(EventService::class);
-        $hydrator = $container->get(ReflectionHydrator::class);
+
+        /** @var ReflectionHydrator $hydrator */
+        $hydrator = clone $container->get(ReflectionHydrator::class);
+
+        /** @var DateTimeFormatterStrategy $strategy */
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
         $hydrator->addStrategy(
-            'createTime',
+            'createdAt',
             $strategy,
         );
+
         $hydrator->addStrategy(
-            'startTime',
+            'startedAt',
             $strategy,
+        );
+
+        $hydrator->addStrategy(
+            'event',
+            new HydratorStrategy($container->get(ReflectionHydrator::class), Event::class)
         );
 
         return new EventCreateMiddleware($service, $hydrator);

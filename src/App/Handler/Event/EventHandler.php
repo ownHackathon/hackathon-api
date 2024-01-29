@@ -41,33 +41,33 @@ readonly class EventHandler implements RequestHandlerInterface
         /**
          * @var array<Participant> $participants
          */
-        $participants = $this->participantService->findActiveParticipantByEvent($event->getId());
+        $participants = $this->participantService->findActiveParticipantByEvent($event->id);
 
         $data = [
-            'id' => $event->getId(),
-            'owner' => $this->userService->findById($event->getUserId())->getName(),
-            'title' => $event->getTitle(),
-            'description' => $event->getDescription(),
-            'eventText' => $event->getEventText(),
-            'createTime' => $event->getCreateTime()->format('Y-m-d H:i'),
-            'startTime' => $event->getStartTime()->format('Y-m-d H:i'),
-            'duration' => $event->getDuration(),
-            'status' => $event->getStatus(),
-            'ratingCompleted' => $event->isRatingCompleted(),
+            'id' => $event->id,
+            'owner' => $this->userService->findById($event->userId)->name,
+            'title' => $event->title,
+            'description' => $event->description,
+            'eventText' => $event->eventText,
+            'createdAt' => $event->createdAt->format('Y-m-d H:i'),
+            'startedAt' => $event->startedAt->format('Y-m-d H:i'),
+            'duration' => $event->duration,
+            'status' => $event->status,
+            'ratingCompleted' => $event->ratingCompleted,
         ];
 
         if ($user instanceof User) {
             $participantData = [];
             foreach ($participants as $participant) {
-                $user = $this->userService->findById($participant->getUserId());
-                $project = $this->projectService->findByParticipantId($participant->getId());
+                $user = $this->userService->findById($participant->userId);
+                $project = $this->projectService->findByParticipantId($participant->id);
                 $entry = [
-                    'id' => $participant->getId(),
-                    'username' => $user->getName(),
-                    'userUuid' => $user->getUuid(),
-                    'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
-                    'projectId' => $project ? $project->getId() : '',
-                    'projectTitle' => $project ? $project->getTitle() : '',
+                    'id' => $participant->id,
+                    'username' => $user->name,
+                    'userUuid' => $user->uuid,
+                    'requestedAt' => $participant->requestedAt->format('Y-m-d H:i'),
+                    'projectId' => $project?->id,
+                    'projectTitle' => $project?->title,
                 ];
 
                 $participantData[] = $entry;
@@ -76,12 +76,12 @@ readonly class EventHandler implements RequestHandlerInterface
             $data['participants'] = $participantData;
         }
 
-        $topic = $this->topicPoolService->findByEventId($event->getId());
+        $topic = $this->topicPoolService->findByEventId($event->id);
 
         if ($topic instanceof Topic) {
             $topicData = [
-                'title' => $topic->getTopic(),
-                'description' => $topic->getDescription(),
+                'title' => $topic->topic,
+                'description' => $topic->description,
             ];
 
             $data['topic'] = $topicData;

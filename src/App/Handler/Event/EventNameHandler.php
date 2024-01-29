@@ -19,7 +19,7 @@ class EventNameHandler implements RequestHandlerInterface
         $event = $request->getAttribute(Event::class);
 
         $data = [
-            'eventId' => $event->getId(),
+            'eventId' => $event->id,
         ];
 
         return new JsonResponse($data, HTTP::STATUS_OK);

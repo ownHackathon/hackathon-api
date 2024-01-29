@@ -24,7 +24,10 @@ readonly class EventParticipantSubscribeHandler implements RequestHandlerInterfa
         $participantCreateStatus = $request->getAttribute('participantCreateStatus');
 
         if (!$participantCreateStatus) {
-            return new JsonResponse(['Status' => 'Benutzer konnte der Teilnehmerliste nicht hinzugefügt werden'], HTTP::STATUS_METHOD_NOT_ALLOWED);
+            return new JsonResponse(
+                ['Status' => 'Benutzer konnte der Teilnehmerliste nicht hinzugefügt werden'],
+                HTTP::STATUS_METHOD_NOT_ALLOWED
+            );
         }
 
         /**
@@ -33,16 +36,16 @@ readonly class EventParticipantSubscribeHandler implements RequestHandlerInterfa
         $user = $request->getAttribute(User::AUTHENTICATED_USER);
         $eventId = (int)$request->getAttribute('eventId');
 
-        $participant = $this->participantService->findByUserIdAndEventId($user->getId(), $eventId);
-        $project = $this->projectService->findByParticipantId($participant->getId());
+        $participant = $this->participantService->findByUserIdAndEventId($user->id, $eventId);
+        $project = $this->projectService->findByParticipantId($participant->id);
 
         $participantData = [
-            'id' => $participant->getId(),
-            'username' => $user->getName(),
-            'userUuid' => $user->getUuid(),
-            'requestTime' => $participant->getRequestTime()->format('Y-m-d H:i'),
-            'projectId' => $project ? $project->getId() : '',
-            'projectTitle' => $project ? $project->getTitle() : '',
+            'id' => $participant->id,
+            'username' => $user->name,
+            'userUuid' => $user->uuid,
+            'requestedAt' => $participant->requestedAt->format('Y-m-d H:i'),
+            'projectId' => $project?->id,
+            'projectTitle' => $project?->title,
         ];
 
         return new JsonResponse($participantData, HTTP::STATUS_OK);
