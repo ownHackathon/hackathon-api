@@ -17,14 +17,15 @@ readonly class TopicCreateEMailService implements EMailServiceInterface
 
     public function send(Topic $topic): void
     {
-        $subject = sprintf('A new topic was submitted: %s', $topic->getTopic());
+        $subject = sprintf('A new topic was submitted: %s', $topic->topic);
         $text = sprintf(
             "Check the new topic and approve it if necessary\r\n\r\nTitle:\r\n%s\r\n\r\nDescription:\r\n%s\r\n\r\nLink:\r\n%s/topic/%s",
-            $topic->getTopic(),
-            $topic->getDescription(),
+            $topic->topic,
+            $topic->description,
             $this->projectUri,
-            $topic->getUuid(),
+            $topic->uuid,
         );
+
         $email = (new Email())
             ->from($this->mailSender)
             ->to('hackathon@exdrals.de')

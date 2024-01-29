@@ -29,13 +29,13 @@ readonly class ProjectService
             );
         }
 
-        return $this->hydrator->hydrate($project, new Project());
+        return $this->hydrator->hydrate($project, Project::class);
     }
 
     public function findByParticipantId(int $id): ?Project
     {
         $project = $this->repository->findByParticipantId($id);
 
-        return $this->hydrator->hydrate($project, new Project());
+        return $this->hydrator->hydrate($project, Project::class);
     }
 }

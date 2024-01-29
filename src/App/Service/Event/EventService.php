@@ -18,7 +18,7 @@ class EventService
 
     public function create(Event $event): bool
     {
-        if ($this->isEventExist($event->getTitle())) {
+        if ($this->isEventExist($event->title)) {
             return false;
         }
 
@@ -38,14 +38,14 @@ class EventService
             );
         }
 
-        return $this->hydrator->hydrate($event, new Event());
+        return $this->hydrator->hydrate($event, Event::class);
     }
 
     public function findByTitle(string $topic): ?Event
     {
         $event = $this->repository->findByTitle($topic);
 
-        return $this->hydrator->hydrate($event, new Event());
+        return $this->hydrator->hydrate($event, Event::class);
     }
 
     /**
@@ -82,7 +82,7 @@ class EventService
     {
         $event = $this->findById($id);
 
-        return $event->isRatingCompleted();
+        return $event->ratingCompleted;
     }
 
     public function isEventExist(string $topic): bool

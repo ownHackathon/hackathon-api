@@ -18,7 +18,7 @@ readonly class ParticipantService
 
     public function create(Participant $participant): bool
     {
-        if ($this->isParticipantInEventExist($participant->getUserId(), $participant->getEventId())) {
+        if ($this->isParticipantInEventExist($participant->userId, $participant->eventId)) {
             return false;
         }
 
@@ -41,21 +41,21 @@ readonly class ParticipantService
             );
         }
 
-        return $this->hydrator->hydrate($participant, new Participant());
+        return $this->hydrator->hydrate($participant, Participant::class);
     }
 
     public function findByUserId(int $userId): ?Participant
     {
         $participant = $this->repository->findByUserId($userId);
 
-        return $this->hydrator->hydrate($participant, new Participant());
+        return $this->hydrator->hydrate($participant, Participant::class);
     }
 
     public function findByUserIdAndEventId(int $userId, int $eventId): ?Participant
     {
         $participant = $this->repository->findUserForAnEvent($userId, $eventId);
 
-        return $this->hydrator->hydrate($participant, new Participant());
+        return $this->hydrator->hydrate($participant, Participant::class);
     }
 
     /**

@@ -11,6 +11,7 @@ final readonly class User
 {
     use CloneReadonlyClassWith;
 
+    /** ToDo remove then phpcs the bug fixed */
     // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
     final public const string AUTHENTICATED_USER = 'authenticatedUser';
 

@@ -36,7 +36,7 @@ class TopicPoolService
 
     public function updateEventId(Topic $topic): self
     {
-        $this->repository->assignAnEvent($topic);
+        $this->repository->assignAnEvent($topic->id, $topic->eventId);
 
         return $this;
     }
@@ -52,14 +52,14 @@ class TopicPoolService
             );
         }
 
-        return $this->hydrator->hydrate($event, new Topic());
+        return $this->hydrator->hydrate($event, Topic::class);
     }
 
     public function findByEventId(int $id): ?Topic
     {
         $topic = $this->repository->findByEventId($id);
 
-        return $this->hydrator->hydrate($topic, new Topic());
+        return $this->hydrator->hydrate($topic, Topic::class);
     }
 
     /**
@@ -93,7 +93,7 @@ class TopicPoolService
     {
         $topic = $this->repository->findByTopic($topic);
 
-        return $this->hydrator->hydrate($topic, new Topic());
+        return $this->hydrator->hydrate($topic, Topic::class);
     }
 
     #[ArrayShape([

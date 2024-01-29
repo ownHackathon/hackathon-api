@@ -10,14 +10,14 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 
         foreach ($values as $data) {
             if ($data) {
-                $hydratedList[] = $this->hydrate($data, new $className());
+                $hydratedList[] = $this->hydrate($data, $className());
             }
         }
 
         return $hydratedList;
     }
 
-    public function hydrate(bool|array $data, object $object): ?object
+    public function hydrate(bool|array $data, string|object $object): ?object
     {
         if (!$data) {
             return null;

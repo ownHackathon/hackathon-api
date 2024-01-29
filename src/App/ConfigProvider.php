@@ -27,6 +27,7 @@ use App\Service\Participant\ParticipantServiceFactory;
 use App\Service\Project\ProjectService;
 use App\Service\Project\ProjectServiceFactory;
 use App\Service\Topic\TopicPoolService;
+use App\Service\Topic\TopicPoolServiceFactory;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceFactory;
 use App\Table\EventTable;
@@ -130,7 +131,7 @@ class ConfigProvider
                 Service\Event\EventService::class => EventServiceFactory::class,
                 Service\Participant\ParticipantService::class => ParticipantServiceFactory::class,
                 Service\Project\ProjectService::class => ProjectServiceFactory::class,
-                Service\Topic\TopicPoolService::class => ConfigAbstractFactory::class,
+                Service\Topic\TopicPoolService::class => TopicPoolServiceFactory::class,
                 Service\User\UserService::class => UserServiceFactory::class,
 
                 Table\EventTable::class => ConfigAbstractFactory::class,
@@ -256,10 +257,6 @@ class ConfigProvider
             ],
             Middleware\User\UserMiddleware::class => [
                 UserService::class,
-            ],
-            Service\Topic\TopicPoolService::class => [
-                TopicPoolRepository::class,
-                ReflectionHydrator::class,
             ],
             Table\EventTable::class => [
                 Query::class,

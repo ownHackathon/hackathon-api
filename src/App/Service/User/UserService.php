@@ -34,7 +34,7 @@ class UserService
     public function create(User $user, UserRole $role = UserRole::USER): int
     {
         if ($this->isEmailExist($user->email)) {
-            return throw new DuplicateEntryException('User', 1);
+            return throw new DuplicateEntryException('User', $user->uuid->getHex()->toString());
         }
 
         $hashedPassword = password_hash($user->password, PASSWORD_BCRYPT);
@@ -83,34 +83,34 @@ class UserService
             );
         }
 
-        return $this->hydrator->hydrate($user, new User(new DateTime()));
+        return $this->hydrator->hydrate($user, User::class);
     }
 
     public function findByUuid(string $uuid): User|null
     {
         $user = $this->repository->findByUuid($uuid);
 
-        return $user ? $this->hydrator->hydrate($user, new User(new DateTime())) : null;
+        return $user ? $this->hydrator->hydrate($user, User::class) : null;
     }
 
     public function findByName(string $name): ?User
     {
         $user = $this->repository->findByName($name);
 
-        return $this->hydrator->hydrate($user, new User(new DateTime()));
+        return $this->hydrator->hydrate($user, User::class);
     }
 
     public function findByEMail(string $email): ?User
     {
         $user = $this->repository->findByEMail($email);
 
-        return $this->hydrator->hydrate($user, new User(new DateTime()));
+        return $this->hydrator->hydrate($user, User::class);
     }
 
     public function findByToken(string $token): ?User
     {
         $user = $this->repository->findByToken($token);
 
-        return $this->hydrator->hydrate($user, new User(new DateTime()));
+        return $this->hydrator->hydrate($user, User::class);
     }
 }
