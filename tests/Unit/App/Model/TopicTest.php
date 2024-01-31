@@ -60,12 +60,12 @@ class TopicTest extends TestCase
 
     public function testCanSetAndGetTopic(): void
     {
-        $topicTopic = $this->topic->setTopic(TestConstants::TOPIC_TEXT);
+        $topicTopic = $this->topic->setTopic(TestConstants::TOPIC_DESCRIPTION);
         $topic = $topicTopic->getTopic();
 
         self::assertInstanceOf(Topic::class, $topicTopic);
         self::assertIsString($topic);
-        self::assertSame(TestConstants::TOPIC_TEXT, $topic);
+        self::assertSame(TestConstants::TOPIC_DESCRIPTION, $topic);
     }
 
     public function testCanSetAndGetDescription(): void

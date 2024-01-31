@@ -20,6 +20,10 @@ abstract class AbstractMiddleware extends TestCase
         $this->request = new MockServerRequest();
         $this->handler = new MockRequestHandler();
         $this->hydrator = new ReflectionHydrator();
+        $this->hydrator->addStrategy(
+            'topic',
+            new HydratorStrategy(new ReflectionHydrator(), Topic::class)
+        );
         parent::setUp();
     }
 }

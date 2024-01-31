@@ -5,7 +5,7 @@ namespace Test\Unit\Mock\Table;
 use App\Table\ProjectTable;
 use Test\Unit\Mock\Database\MockQuery;
 
-class MockProjectTable extends ProjectTable
+readonly class MockProjectTable extends ProjectTable
 {
     public function __construct()
     {

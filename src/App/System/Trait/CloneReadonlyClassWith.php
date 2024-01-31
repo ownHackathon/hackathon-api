@@ -4,7 +4,8 @@ namespace App\System\Trait;
 
 trait CloneReadonlyClassWith
 {
-    public function with(array ...$properties): static
+    /** @phpstan-ignore-next-line */
+    public function with(...$properties): static
     {
         $properties += (array)$this;
 

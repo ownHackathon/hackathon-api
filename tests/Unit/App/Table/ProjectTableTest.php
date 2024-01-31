@@ -3,6 +3,8 @@
 namespace Test\Unit\App\Table;
 
 use App\Table\ProjectTable;
+use DateTime;
+use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Unit\Mock\TestConstants;
 
 /**
@@ -10,6 +12,24 @@ use Test\Unit\Mock\TestConstants;
  */
 class ProjectTableTest extends AbstractTable
 {
+    private array $defaultProjectValue;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->defaultProjectValue = [
+            'id' => TestConstants::PROJECT_ID,
+            'uuid' => UuidV7::fromString(TestConstants::PROJECT_UUID),
+            'participantId' => TestConstants::PARTICIPANT_ID,
+            'title' => TestConstants::PROJECT_TITLE,
+            'description' => TestConstants::PROJECT_DESCRIPTION,
+            'createdAt' => new DateTime(TestConstants::TIME),
+            'gitRepoUri' => TestConstants::PROJECT_GIT_URL,
+            'demoPageUri' => TestConstants::PROJECT_DEMO_URI,
+        ];
+    }
+
     public function testCanGetTableName(): void
     {
         self::assertSame('Project', $this->table->getTableName());

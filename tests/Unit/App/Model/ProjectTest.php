@@ -61,22 +61,22 @@ class ProjectTest extends TestCase
 
     public function testCanSetAndGetGitRepoUri(): void
     {
-        $projectGitRepoUri = $this->project->setGitRepoUri(TestConstants::PROJECT_URL);
+        $projectGitRepoUri = $this->project->setGitRepoUri(TestConstants::PROJECT_GIT_URL);
         $gitRepoUri = $projectGitRepoUri->getGitRepoUri();
 
         self::assertInstanceOf(Project::class, $projectGitRepoUri);
         self::assertIsString($gitRepoUri);
-        self::assertSame(TestConstants::PROJECT_URL, $gitRepoUri);
+        self::assertSame(TestConstants::PROJECT_GIT_URL, $gitRepoUri);
     }
 
     public function testCanSetAndGetDemoPageUri(): void
     {
-        $projectDemoPageUri = $this->project->setDemoPageUri(TestConstants::PROJECT_URL);
+        $projectDemoPageUri = $this->project->setDemoPageUri(TestConstants::PROJECT_GIT_URL);
         $demoPageUri = $projectDemoPageUri->getDemoPageUri();
 
         self::assertInstanceOf(Project::class, $projectDemoPageUri);
         self::assertIsString($demoPageUri);
-        self::assertSame(TestConstants::PROJECT_URL, $demoPageUri);
+        self::assertSame(TestConstants::PROJECT_GIT_URL, $demoPageUri);
     }
 
     public function testCanSetAndGetCreateTime(): void

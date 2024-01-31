@@ -14,9 +14,9 @@ class TestConstants
 
     public const USER_CREATE_ID = 2;
 
-    public const USER_UUID = 'asdfasfdsadfasfdasdfasdfdwa';
+    public const USER_UUID = '018d61aa189d7245999a0194a487fe16';
 
-    public const USER_UUID_UNUSED = 'adftw4vxcvsdrgregsdfgesrtg';
+    public const USER_UUID_UNUSED = '018d61aa60cc70b1a918cb147bb5a6ea';
 
     public const USER_NAME = 'Test Name';
 
@@ -52,6 +52,8 @@ class TestConstants
 
     public const EVENT_ID_RATING_NOT_COMPLETED = 5;
 
+    public const EVENT_UUID = '018d61ab6a9076e2ade005e5ec782c08';
+
     public const EVENT_TITLE = 'Test Title';
 
     public const EVENT_TITLE_UNUSED = 'Title can not be found';
@@ -70,17 +72,25 @@ class TestConstants
 
     public const PROJECT_ID_UNUSED = 2;
 
-    public const PROJECT_URL = 'https://github.com';
+    public const PROJECT_UUID = '018d61cb07d675d98d0ffeaba13c2a99';
+
+    public const PROJECT_TITLE = 'Test Project Title';
+
+    public const PROJECT_DESCRIPTION = 'Test Project Description';
+
+    public const PROJECT_GIT_URL = 'https://github.com';
+
+    public const PROJECT_DEMO_URI = 'https//example.com';
 
     public const TOPIC_ID = 1;
 
     public const TOPIC_ID_THROW_EXCEPTION = 2;
 
-    public const TOPIC_UUID = '4e10cfecf3bb51811689956e647705a0';
+    public const TOPIC_UUID = '018d61aac3ea7a0da32ebb95d50922b5';
 
     public const TOPIC_TITLE = 'Test Title';
 
-    public const TOPIC_TEXT = 'Test Topic Text';
+    public const TOPIC_DESCRIPTION = 'Test Topic Text';
 
     public const TOPIC_POOL_ID = 1;
 

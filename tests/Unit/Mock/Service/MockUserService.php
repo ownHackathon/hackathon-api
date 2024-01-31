@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 use Test\Unit\Mock\Table\MockUserTable;
 use Test\Unit\Mock\TestConstants;
 
-class MockUserService extends UserService
+readonly class MockUserService extends UserService
 {
     public function __construct()
     {

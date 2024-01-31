@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Test\Unit\Mock\Database\MockQuery;
 use Test\Unit\Mock\TestConstants;
 
-class MockUserTable extends UserTable
+readonly class MockUserTable extends UserTable
 {
     public function __construct()
     {
@@ -17,7 +17,7 @@ class MockUserTable extends UserTable
 
     public function update(User $user): int
     {
-        if ($user->getId() !== TestConstants::USER_ID) {
+        if ($user->id !== TestConstants::USER_ID) {
             throw new InvalidArgumentException();
         }
 

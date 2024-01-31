@@ -5,6 +5,7 @@ namespace Test\Unit\App\Table;
 use App\Entity\Participant;
 use App\Exception\DuplicateEntryException;
 use App\Table\ParticipantTable;
+use DateTime;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Unit\Mock\TestConstants;
 
@@ -13,6 +14,22 @@ use Test\Unit\Mock\TestConstants;
  */
 class ParticipantTableTest extends AbstractTable
 {
+    private array $defaultParticipantValue;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->defaultParticipantValue = [
+            'id' => TestConstants::PARTICIPANT_ID,
+            'userId' => TestConstants::USER_ID,
+            'eventId' => TestConstants::EVENT_ID,
+            'requestedAt' => new DateTime(TestConstants::TIME),
+            'subscribed' => true,
+            'disqualified' => false,
+        ];
+    }
+
     public function testCanGetTableName(): void
     {
         self::assertSame('Participant', $this->table->getTableName());
@@ -20,8 +37,8 @@ class ParticipantTableTest extends AbstractTable
 
     public function testCanInsertParticipant(): void
     {
-        $participant = new Participant();
-        $participant->setUserId(TestConstants::USER_CREATE_ID);
+        $participant = new Participant(...$this->defaultParticipantValue);
+        $participant = $participant->with(userId: TestConstants::USER_CREATE_ID);
 
         $insertParticipant = $this->table->insert($participant);
 
@@ -30,8 +47,8 @@ class ParticipantTableTest extends AbstractTable
 
     public function testInsertParticipantThrowsException(): void
     {
-        $participant = new Participant();
-        $participant->setUserId(TestConstants::USER_ID);
+        $participant = new Participant(...$this->defaultParticipantValue);
+        $participant = $participant->with(userId: TestConstants::USER_ID);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -40,7 +57,7 @@ class ParticipantTableTest extends AbstractTable
 
     public function testCanRemoveParticipant(): void
     {
-        $participant = new Participant();
+        $participant = new Participant(...$this->defaultParticipantValue);
 
         $removeParticipant = $this->table->remove($participant);
 

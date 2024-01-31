@@ -6,7 +6,7 @@ use App\Entity\Topic;
 use App\Table\TopicPoolTable;
 use Test\Unit\Mock\Database\MockQuery;
 
-class MockTopicPoolTable extends TopicPoolTable
+readonly class MockTopicPoolTable extends TopicPoolTable
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ class MockTopicPoolTable extends TopicPoolTable
         return $this;
     }
 
-    public function assignAnEvent(Topic $topic): TopicPoolTable
+    public function assignAnEvent(int $topicId, int $eventId): TopicPoolTable
     {
         return $this;
     }

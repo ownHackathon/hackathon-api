@@ -3,10 +3,12 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\User;
+use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;
 use App\Service\User\UserService;
 use DateTime;
 use InvalidArgumentException;
+use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Unit\Mock\Table\MockUserTable;
 use Test\Unit\Mock\TestConstants;
 
@@ -14,18 +16,31 @@ class UserServiceTest extends AbstractService
 {
     private UserService $userService;
 
+    private array $testUserValues;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $table = new MockUserTable();
         $this->userService = new UserService($table, $this->hydrator, $this->uuid);
+
+        $this->testUserValues = [
+            TestConstants::USER_ID,
+            UuidV7::fromString(TestConstants::USER_UUID),
+            UserRole::USER,
+            TestConstants::USER_NAME,
+            TestConstants::USER_PASSWORD,
+            TestConstants::USER_EMAIL,
+            new DateTime(),
+            new DateTime(),
+        ];
     }
 
     public function testCanNotCreateUserWithExistUser(): void
     {
-        $user = new User();
-        $user->setName('FakeNotCreateUser');
+        $user = new User(...$this->testUserValues);
+        $user = $user->with(['name' => TestConstants::USER_NAME]);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -34,8 +49,8 @@ class UserServiceTest extends AbstractService
 
     public function testCanNotCreateUserWithExistEmail(): void
     {
-        $user = new User();
-        $user->setEmail('FakeNotCreateEMail');
+        $user = new User(...$this->testUserValues);
+        $user = $user->with(['email' => TestConstants::USER_EMAIL]);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -44,9 +59,11 @@ class UserServiceTest extends AbstractService
 
     public function testCanCreateUser(): void
     {
-        $user = new User();
-        $user->setName(TestConstants::USER_CREATE_NAME);
-        $user->setEmail(TestConstants::USER_CREATE_EMAIL);
+        $user = new User(...$this->testUserValues);
+        $user = $user->with([
+            'name' => TestConstants::USER_CREATE_NAME,
+            'email' => TestConstants::USER_CREATE_EMAIL,
+        ]);
 
         $insert = $this->userService->create($user);
 

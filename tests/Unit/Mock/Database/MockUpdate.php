@@ -33,7 +33,7 @@ class MockUpdate extends Update
                 return 1;
             }
 
-            if ($this->statements['SET']['lastAction']) {
+            if ($this->statements['SET']['lastActionAt']) {
                 return match ($this->statements['WHERE'][0][1]) {
                     'id = ?' => $this->parameters['WHERE'][0] === TestConstants::USER_ID ? 1 : false,
                     default => 1

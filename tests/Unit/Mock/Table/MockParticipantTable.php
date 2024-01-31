@@ -6,7 +6,7 @@ use App\Entity\Participant;
 use App\Table\ParticipantTable;
 use Test\Unit\Mock\Database\MockQuery;
 
-class MockParticipantTable extends ParticipantTable
+readonly class MockParticipantTable extends ParticipantTable
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ class MockParticipantTable extends ParticipantTable
 
     public function remove(Participant $participant): bool
     {
-        return $participant->getId() === 1;
+        return $participant->id === 1;
     }
 
     public function findById(int $id): array

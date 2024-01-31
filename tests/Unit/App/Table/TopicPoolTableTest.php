@@ -4,6 +4,7 @@ namespace Test\Unit\App\Table;
 
 use App\Entity\Topic;
 use App\Table\TopicPoolTable;
+use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Unit\Mock\TestConstants;
 
 /**
@@ -11,6 +12,22 @@ use Test\Unit\Mock\TestConstants;
  */
 class TopicPoolTableTest extends AbstractTable
 {
+    private array $defaultTopicValue;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->defaultTopicValue = [
+            'id' => TestConstants::TOPIC_ID,
+            'uuid' => UuidV7::fromString(TestConstants::TOPIC_UUID),
+            'eventId' => TestConstants::EVENT_ID,
+            'topic' => TestConstants::TOPIC_TITLE,
+            'description' => TestConstants::TOPIC_DESCRIPTION,
+            'accepted' => true,
+        ];
+    }
+
     public function testCanGetTableName(): void
     {
         self::assertSame('TopicPool', $this->table->getTableName());
@@ -18,7 +35,7 @@ class TopicPoolTableTest extends AbstractTable
 
     public function testCanInsertTopic(): void
     {
-        $topic = new Topic();
+        $topic = new Topic(...$this->defaultTopicValue);
 
         $insertTopic = $this->table->insert($topic);
 
@@ -27,9 +44,9 @@ class TopicPoolTableTest extends AbstractTable
 
     public function testCanUpdateEventId(): void
     {
-        $topic = new Topic();
+        $topic = new Topic(...$this->defaultTopicValue);
 
-        $updateTopic = $this->table->assignAnEvent($topic);
+        $updateTopic = $this->table->assignAnEvent($topic->id, $topic->eventId);
 
         self::assertInstanceOf(TopicPoolTable::class, $updateTopic);
     }

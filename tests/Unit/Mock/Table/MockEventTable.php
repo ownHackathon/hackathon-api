@@ -6,7 +6,7 @@ use App\Table\EventTable;
 use Test\Unit\Mock\Database\MockQuery;
 use Test\Unit\Mock\TestConstants;
 
-class MockEventTable extends EventTable
+readonly class MockEventTable extends EventTable
 {
     public function __construct()
     {

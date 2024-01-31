@@ -24,7 +24,7 @@ class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
         $this->middleware = new TopicCreateSubmitMiddleware(
             new MockTopicPoolService(),
             $this->hydrator,
-            Uuid::uuid4()
+            Uuid::uuid7()
         );
     }
 

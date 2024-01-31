@@ -3,10 +3,12 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\User;
+use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
+use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Unit\Mock\TestConstants;
 
@@ -15,6 +17,24 @@ use Test\Unit\Mock\TestConstants;
  */
 class UserTableTest extends AbstractTable
 {
+    private array $defaulUserValue;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->defaulUserValue = [
+            'id' => TestConstants::USER_ID,
+            'uuid' => UuidV7::fromString(TestConstants::USER_UUID),
+            'role' => UserRole::USER,
+            'name' => TestConstants::USER_NAME,
+            'password' => TestConstants::USER_PASSWORD,
+            'email' => TestConstants::USER_EMAIL,
+            'registrationAt' => new DateTime(TestConstants::TIME),
+            'lastActionAt' => new DateTime(TestConstants::TIME),
+        ];
+    }
+
     public function testCanGetTableName(): void
     {
         self::assertSame('User', $this->table->getTableName());
@@ -22,8 +42,8 @@ class UserTableTest extends AbstractTable
 
     public function testCanInsertUser(): void
     {
-        $user = new User();
-        $user->setName(TestConstants::USER_CREATE_NAME);
+        $user = new User(...$this->defaulUserValue);
+        $user = $user->with(name: TestConstants::USER_CREATE_NAME);
 
         $affectedRowCount = $this->table->insert($user);
 
@@ -32,8 +52,8 @@ class UserTableTest extends AbstractTable
 
     public function testCanNotInsertUser(): void
     {
-        $user = new User();
-        $user->setName(TestConstants::USER_NAME);
+        $user = new User(...$this->defaulUserValue);
+        $user = $user->with(name: TestConstants::USER_NAME);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -42,10 +62,12 @@ class UserTableTest extends AbstractTable
 
     public function testCanUpdateUser(): void
     {
-        $user = new User();
-        $user->setId(TestConstants::USER_ID);
-        $user->setRegistrationTime(new DateTime());
-        $user->setLastAction(new DateTime());
+        $user = new User(...$this->defaulUserValue);
+        $user = $user->with(
+            id: TestConstants::USER_ID,
+            registrationAt: new DateTime(),
+            lastActionAt: new DateTime(),
+        );
 
         $updateUser = $this->table->update($user);
 
@@ -54,9 +76,12 @@ class UserTableTest extends AbstractTable
 
     public function testUpdateUserThrowException(): void
     {
-        $user = new User();
-        $user->setId(TestConstants::USER_ID_THROW_EXCEPTION);
-        $user->setLastAction(new DateTime());
+        $user = new User(...$this->defaulUserValue);
+        $user = $user->with(
+            id: TestConstants::USER_ID_THROW_EXCEPTION,
+            lastActionAt: new DateTime(),
+        );
+
         $table = new UserTable(new MockQueryForCanNot());
 
         self::expectException(InvalidArgumentException::class);
