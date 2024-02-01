@@ -17,11 +17,11 @@ readonly class EventListHandler implements RequestHandlerInterface
     #[OA\QueryParameter(
         name: 'order',
         description: 'The field to be sorted by<br>
-                      Options: ID|OWNER|TITLE|DESCRIPTION|DURATION|STARTTIME|STATUS',
+                      Options: ID|OWNER|TITLE|DESCRIPTION|DURATION|STARTEDAT|STATUS',
         in: 'query',
         required: false,
         schema: new OA\Schema(type: 'string'),
-        example: 'startTime',
+        example: 'startedAt',
     )]
     #[OA\QueryParameter(
         name: 'sort',

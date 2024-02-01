@@ -2,14 +2,12 @@
 
 namespace App\Service\Event;
 
-use App\Entity\Event;
 use App\Enum\EventStatus;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\EventRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
 class EventServiceFactory
@@ -26,23 +24,18 @@ class EventServiceFactory
         $strategy = $container->get(DateTimeFormatterStrategy::class);
 
         $hydrator->addStrategy(
-            'createTime',
+            'createdAt',
             $strategy,
         );
 
         $hydrator->addStrategy(
-            'startTime',
+            'startedAt',
             $strategy,
         );
 
         $hydrator->addStrategy(
             'status',
             new BackedEnumStrategy(EventStatus::class)
-        );
-
-        $hydrator->addStrategy(
-            'event',
-            new HydratorStrategy($container->get(ReflectionHydrator::class), Event::class)
         );
 
         $hydrator->addStrategy(

@@ -3,38 +3,19 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\User;
-use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;
 use App\Table\UserTable;
 use DateTime;
 use InvalidArgumentException;
-use Ramsey\Uuid\Rfc4122\UuidV7;
+use Test\Data\Entity\UserTestEntity;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 /**
  * @property UserTable $table
  */
 class UserTableTest extends AbstractTable
 {
-    private array $defaulUserValue;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->defaulUserValue = [
-            'id' => TestConstants::USER_ID,
-            'uuid' => UuidV7::fromString(TestConstants::USER_UUID),
-            'role' => UserRole::USER,
-            'name' => TestConstants::USER_NAME,
-            'password' => TestConstants::USER_PASSWORD,
-            'email' => TestConstants::USER_EMAIL,
-            'registrationAt' => new DateTime(TestConstants::TIME),
-            'lastActionAt' => new DateTime(TestConstants::TIME),
-        ];
-    }
-
     public function testCanGetTableName(): void
     {
         self::assertSame('User', $this->table->getTableName());
@@ -42,7 +23,7 @@ class UserTableTest extends AbstractTable
 
     public function testCanInsertUser(): void
     {
-        $user = new User(...$this->defaulUserValue);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(name: TestConstants::USER_CREATE_NAME);
 
         $affectedRowCount = $this->table->insert($user);
@@ -52,7 +33,7 @@ class UserTableTest extends AbstractTable
 
     public function testCanNotInsertUser(): void
     {
-        $user = new User(...$this->defaulUserValue);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(name: TestConstants::USER_NAME);
 
         self::expectException(DuplicateEntryException::class);
@@ -62,7 +43,7 @@ class UserTableTest extends AbstractTable
 
     public function testCanUpdateUser(): void
     {
-        $user = new User(...$this->defaulUserValue);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(
             id: TestConstants::USER_ID,
             registrationAt: new DateTime(),
@@ -76,7 +57,7 @@ class UserTableTest extends AbstractTable
 
     public function testUpdateUserThrowException(): void
     {
-        $user = new User(...$this->defaulUserValue);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(
             id: TestConstants::USER_ID_THROW_EXCEPTION,
             lastActionAt: new DateTime(),
@@ -107,7 +88,7 @@ class UserTableTest extends AbstractTable
     {
         $user = $this->table->findById(TestConstants::USER_ID);
 
-        self::assertSame($this->fetchResult, $user);
+        self::assertEquals(UserTestEntity::getDefaultUserValue(), $user);
     }
 
     public function testFindByIdHasEmptyResult(): void
@@ -121,7 +102,7 @@ class UserTableTest extends AbstractTable
     {
         $user = $this->table->findByUuid(TestConstants::USER_UUID);
 
-        self::assertSame($this->fetchResult, $user);
+        self::assertEquals(UserTestEntity::getDefaultUserValue(), $user);
     }
 
     public function testFindByUuidHasEmptyResult(): void
@@ -135,7 +116,7 @@ class UserTableTest extends AbstractTable
     {
         $users = $this->table->findAll();
 
-        self::assertSame($this->fetchAllResult, $users);
+        self::assertEquals([0 => UserTestEntity::getDefaultUserValue()], $users);
     }
 
     public function testFindAllReturnedEmpty(): void
@@ -150,7 +131,7 @@ class UserTableTest extends AbstractTable
     {
         $user = $this->table->findByName(TestConstants::USER_NAME);
 
-        self::assertSame($this->fetchResult, $user);
+        self::assertEquals(UserTestEntity::getDefaultUserValue(), $user);
     }
 
     public function testFindByNameHasEmptyResult(): void
@@ -164,26 +145,12 @@ class UserTableTest extends AbstractTable
     {
         $user = $this->table->findByEMail(TestConstants::USER_EMAIL);
 
-        self::assertSame($this->fetchResult, $user);
+        self::assertEquals(UserTestEntity::getDefaultUserValue(), $user);
     }
 
     public function testFindByEmailHasEmptyResult(): void
     {
         $user = $this->table->findByEMail(TestConstants::USER_EMAIL_UNUSED);
-
-        self::assertSame([], $user);
-    }
-
-    public function testCanFindByToken(): void
-    {
-        $user = $this->table->findByToken(TestConstants::USER_TOKEN);
-
-        self::assertSame($this->fetchResult, $user);
-    }
-
-    public function testFindByTokenHasEmptyResult(): void
-    {
-        $user = $this->table->findByToken(TestConstants::USER_TOKEN_UNUSED);
 
         self::assertSame([], $user);
     }

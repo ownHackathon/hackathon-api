@@ -6,8 +6,9 @@ use App\Entity\Topic;
 use App\Repository\TopicPoolRepository;
 use App\Service\Topic\TopicPoolService;
 use InvalidArgumentException;
+use Test\Data\Entity\TopicTestEntity;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class TopicPoolServiceTest extends AbstractService
 {
@@ -24,14 +25,14 @@ class TopicPoolServiceTest extends AbstractService
 
     public function testCanInsertTopic(): void
     {
-        $insertTopic = $this->service->insert(new Topic());
+        $insertTopic = $this->service->insert(new Topic(...TopicTestEntity::getDefaultTopicValue()));
 
         self::assertInstanceOf(TopicPoolService::class, $insertTopic);
     }
 
     public function testCanUpdateEventId(): void
     {
-        $updateTopic = $this->service->updateEventId(new Topic());
+        $updateTopic = $this->service->updateEventId(new Topic(...TopicTestEntity::getDefaultTopicValue()));
 
         self::assertInstanceOf(TopicPoolService::class, $updateTopic);
     }
@@ -91,7 +92,7 @@ class TopicPoolServiceTest extends AbstractService
 
     public function testIsTopic(): void
     {
-        $topic = $this->service->isTopic('fakeTopic');
+        $topic = $this->service->isTopic(TestConstants::TOPIC_TITLE);
 
         self::assertSame(true, $topic);
     }

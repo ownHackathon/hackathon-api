@@ -5,6 +5,7 @@ namespace Test\Unit\App\Handler;
 use App\Entity\Topic;
 use App\Handler\Topic\TopicCreateHandler;
 use Laminas\Diactoros\Response\JsonResponse;
+use Test\Data\Entity\TopicTestEntity;
 use Test\Unit\Mock\Service\MockTopicCreateEMailService;
 
 class TopicCreateHandlerTest extends AbstractHandler
@@ -13,7 +14,9 @@ class TopicCreateHandlerTest extends AbstractHandler
     {
         $handler = new TopicCreateHandler(new MockTopicCreateEMailService());
 
-        $response = $handler->handle($this->request->withAttribute(Topic::class, new Topic()));
+        $response = $handler->handle(
+            $this->request->withAttribute(Topic::class, new Topic(...TopicTestEntity::getDefaultTopicValue()))
+        );
 
         $responseData = $response->getBody()->getContents();
 

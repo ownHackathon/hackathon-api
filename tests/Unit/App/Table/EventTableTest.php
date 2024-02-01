@@ -3,40 +3,17 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\Event;
-use App\Enum\EventStatus;
 use App\Exception\DuplicateEntryException;
 use App\Table\EventTable;
-use DateTime;
-use Ramsey\Uuid\Rfc4122\UuidV7;
+use Test\Data\Entity\EventTestEntity;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 /**
  * @property EventTable $table
  */
 class EventTableTest extends AbstractTable
 {
-    private array $defaultEventValue;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->defaultEventValue = [
-            'id' => TestConstants::EVENT_ID,
-            'uuid' => UuidV7::fromString(TestConstants::EVENT_UUID),
-            'userId' => TestConstants::USER_ID,
-            'title' => TestConstants::EVENT_TITLE,
-            'description' => TestConstants::EVENT_DESCRIPTION,
-            'eventText' => TestConstants::EVENT_TEXT,
-            'createdAt' => new DateTime(TestConstants::TIME),
-            'startedAt' => new DateTime(TestConstants::TIME),
-            'duration' => TestConstants::EVENT_DURATION,
-            'status' => EventStatus::SOON,
-            'ratingCompleted' => false,
-        ];
-    }
-
     public function testCanGetTableName(): void
     {
         self::assertSame('Event', $this->table->getTableName());
@@ -44,7 +21,7 @@ class EventTableTest extends AbstractTable
 
     public function testCanInsertEvent(): void
     {
-        $event = new Event(...$this->defaultEventValue);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
         $event = $event->with(title: TestConstants::EVENT_CREATE_TITLE);
 
         $insertLastId = $this->table->insert($event);
@@ -54,7 +31,7 @@ class EventTableTest extends AbstractTable
 
     public function testInsertEventThrowsException(): void
     {
-        $event = new Event(...$this->defaultEventValue);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
 
         self::expectException(DuplicateEntryException::class);
 
@@ -65,7 +42,7 @@ class EventTableTest extends AbstractTable
     {
         $event = $this->table->findById(TestConstants::EVENT_ID);
 
-        self::assertSame($this->fetchResult, $event);
+        self::assertEquals(EventTestEntity::getDefaultEventValue(), $event);
     }
 
     public function testFindByIdHasEmptyResult(): void
@@ -79,7 +56,7 @@ class EventTableTest extends AbstractTable
     {
         $event = $this->table->findAll();
 
-        self::assertSame($this->fetchAllResult, $event);
+        self::assertEquals([0 => EventTestEntity::getDefaultEventValue()], $event);
     }
 
     public function testFindAllHasEmptyResult(): void
@@ -95,7 +72,7 @@ class EventTableTest extends AbstractTable
     {
         $event = $this->table->findByTitle(TestConstants::EVENT_TITLE);
 
-        self::assertSame($this->fetchResult, $event);
+        self::assertEquals(EventTestEntity::getDefaultEventValue(), $event);
     }
 
     public function testFindByNameHasEmptyResult(): void
@@ -109,7 +86,7 @@ class EventTableTest extends AbstractTable
     {
         $event = $this->table->findAllActive();
 
-        self::assertSame($this->fetchAllResult, $event);
+        self::assertEquals([0 => EventTestEntity::getDefaultEventValue()], $event);
     }
 
     public function testFindAllActiveHasEmptyResult(): void
@@ -125,7 +102,7 @@ class EventTableTest extends AbstractTable
     {
         $event = $this->table->findAllInactive();
 
-        self::assertSame($this->fetchAllResult, $event);
+        self::assertEquals([0 => EventTestEntity::getDefaultEventValue()], $event);
     }
 
     public function testFindAllNotActiveHasEmptyResult(): void
@@ -139,7 +116,7 @@ class EventTableTest extends AbstractTable
 
     public function testCanRemoveEvent(): void
     {
-        $event = new Event(...$this->defaultEventValue);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
         $event = $event->with(id: TestConstants::EVENT_ID);
 
         $removeStatus = $this->table->remove($event);
@@ -149,7 +126,7 @@ class EventTableTest extends AbstractTable
 
     public function testCanNotRemoveEvent(): void
     {
-        $event = new Event(...$this->defaultEventValue);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
         $event = $event->with(id: TestConstants::EVENT_ID_NOT_REMOVED);
 
         $removeStatus = $this->table->remove($event);

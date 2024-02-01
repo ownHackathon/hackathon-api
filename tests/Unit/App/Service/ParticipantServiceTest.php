@@ -5,8 +5,9 @@ namespace Test\Unit\App\Service;
 use App\Entity\Participant;
 use App\Service\Participant\ParticipantService;
 use InvalidArgumentException;
+use Test\Data\Entity\ParticipantTestEntity;
 use Test\Unit\Mock\Table\MockParticipantTable;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class ParticipantServiceTest extends AbstractService
 {
@@ -22,10 +23,12 @@ class ParticipantServiceTest extends AbstractService
 
     public function testCanNotCreateParticipant(): void
     {
-        $participant = new Participant();
-        $participant->setId(1)
-            ->setUserId(1)
-            ->setEventId(1);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
+        $participant = $participant->with(
+            id: TestConstants::PARTICIPANT_ID,
+            userId: TestConstants::USER_ID,
+            eventId: TestConstants::EVENT_ID,
+        );
 
         $participant = $this->service->create($participant);
 
@@ -34,10 +37,12 @@ class ParticipantServiceTest extends AbstractService
 
     public function testCanCreateParticipant(): void
     {
-        $participant = new Participant();
-        $participant->setId(2)
-            ->setUserId(2)
-            ->setEventId(2);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
+        $participant = $participant->with(
+            id: TestConstants::PARTICIPANT_ID_UNUSED,
+            userId: TestConstants::USER_ID_UNUSED,
+            eventId: TestConstants::EVENT_ID_UNUSED,
+        );
 
         $participant = $this->service->create($participant);
 
@@ -46,8 +51,8 @@ class ParticipantServiceTest extends AbstractService
 
     public function testCanRemoveParticipant(): void
     {
-        $participant = new Participant();
-        $participant->setId(1);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
+        $participant = $participant->with(id: TestConstants::PARTICIPANT_ID);
 
         $response = $this->service->remove($participant);
 
@@ -56,8 +61,8 @@ class ParticipantServiceTest extends AbstractService
 
     public function testCanNotRemoveParticipant(): void
     {
-        $participant = new Participant();
-        $participant->setId(2);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
+        $participant = $participant->with(id: TestConstants::PARTICIPANT_ID_UNUSED);
 
         $response = $this->service->remove($participant);
 

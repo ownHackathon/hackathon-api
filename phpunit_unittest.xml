@@ -11,6 +11,7 @@
         cacheDirectory=".phpunit.cache"
         beStrictAboutCoverageMetadata="true"
         displayDetailsOnTestsThatTriggerWarnings="true"
+        testdox="true"
 >
     <testsuites>
         <testsuite name="Unit">

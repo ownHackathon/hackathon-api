@@ -7,9 +7,10 @@ use App\Middleware\Event\EventCreateMiddleware;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
+use Test\Data\Entity\UserTestEntity;
 use Test\Unit\App\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockEventService;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class EventCreateMiddlewareTest extends AbstractMiddleware
 {
@@ -21,8 +22,9 @@ class EventCreateMiddlewareTest extends AbstractMiddleware
     public function testCreateEventAndReturnResponseInterface(): void
     {
         $middleware = new EventCreateMiddleware(new MockEventService(), $this->hydrator);
-        $user = new User();
-        $user->setId(1);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(id: TestConstants::USER_ID);
+
         $response = $middleware->process(
             $this->request->withAttribute(User::AUTHENTICATED_USER, $user)
                 ->withParsedBody(['id' => 2]),
@@ -36,8 +38,9 @@ class EventCreateMiddlewareTest extends AbstractMiddleware
     public function testEventIsPresentAndCanNotCreated(): void
     {
         $middleware = new EventCreateMiddleware(new MockEventService(), $this->hydrator);
-        $user = new User();
-        $user->setId(TestConstants::USER_ID);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(id: TestConstants::USER_ID);
+
         $response = $middleware->process(
             $this->request->withAttribute(User::AUTHENTICATED_USER, $user)
                 ->withParsedBody(['id' => TestConstants::USER_ID]),

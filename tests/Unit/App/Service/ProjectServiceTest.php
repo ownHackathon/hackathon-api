@@ -6,7 +6,7 @@ use App\Entity\Project;
 use App\Service\Project\ProjectService;
 use InvalidArgumentException;
 use Test\Unit\Mock\Table\MockProjectTable;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class ProjectServiceTest extends AbstractService
 {

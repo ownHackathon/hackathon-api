@@ -4,7 +4,7 @@ namespace Test\Unit\Mock\Database;
 
 use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Query;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class MockInsert extends Insert
 {

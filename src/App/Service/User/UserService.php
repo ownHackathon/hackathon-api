@@ -36,11 +36,11 @@ readonly class UserService
 
         $hashedPassword = password_hash($user->password, PASSWORD_BCRYPT);
 
-        $user = $user->with([
-            'password' => $hashedPassword,
-            'role' => $role,
-            'uuid' => $this->uuid,
-        ]);
+        $user = $user->with(
+            password: $hashedPassword,
+            role: $role,
+            uuid: $this->uuid,
+        );
 
         return $this->repository->insert($user);
     }
@@ -89,13 +89,6 @@ readonly class UserService
     public function findByEMail(string $email): ?User
     {
         $user = $this->repository->findByEMail($email);
-
-        return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
-    }
-
-    public function findByToken(string $token): ?User
-    {
-        $user = $this->repository->findByToken($token);
 
         return $user !== [] ? $this->hydrator->hydrate($user, User::class) : null;
     }

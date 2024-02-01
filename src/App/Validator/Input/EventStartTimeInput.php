@@ -10,7 +10,7 @@ class EventStartTimeInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('startTime');
+        parent::__construct('startedAt');
 
         $this->setRequired(true);
         $this->setBreakOnFailure(true);

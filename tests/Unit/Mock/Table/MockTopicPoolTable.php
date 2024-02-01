@@ -4,6 +4,8 @@ namespace Test\Unit\Mock\Table;
 
 use App\Entity\Topic;
 use App\Table\TopicPoolTable;
+use Test\Data\Entity\TopicTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Database\MockQuery;
 
 readonly class MockTopicPoolTable extends TopicPoolTable
@@ -25,16 +27,20 @@ readonly class MockTopicPoolTable extends TopicPoolTable
 
     public function findById(int $id): array
     {
-        return $id === 1 ? ['id' => $id] : [];
+        return $id === TestConstants::TOPIC_ID ? ['id' => $id] + TopicTestEntity::getDefaultTopicValue() : [];
     }
 
-    public function findByEventId(int $eventId): bool|array
+    public function findByEventId(int $eventId): array
     {
-        return $eventId === 1 ? ['eventId' => $eventId] : false;
+        return $eventId === TestConstants::EVENT_ID
+            ? ['eventId' => $eventId] + TopicTestEntity::getDefaultTopicValue()
+            : [];
     }
 
-    public function findByTopic(string $topic): bool|array
+    public function findByTopic(string $topic): array
     {
-        return $topic === 'fakeTopic' ? ['topic' => $topic] : false;
+        return $topic === TestConstants::TOPIC_TITLE
+            ? ['topic' => $topic] + TopicTestEntity::getDefaultTopicValue()
+            : [];
     }
 }

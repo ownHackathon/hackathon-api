@@ -7,8 +7,9 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\Event\EventService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
+use Test\Data\Entity\EventTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockEventTable;
-use Test\Unit\Mock\TestConstants;
 
 class MockEventService extends EventService
 {
@@ -19,13 +20,13 @@ class MockEventService extends EventService
 
     public function create(Event $event): bool
     {
-        return $event->getId() === 2;
+        return $event->id === TestConstants::EVENT_ID_NOT_REMOVED;
     }
 
     public function findById(int $id): Event
     {
         if ($id === TestConstants::EVENT_ID) {
-            return new Event();
+            return new Event(...EventTestEntity::getDefaultEventValue());
         }
 
         throw new InvalidArgumentException('Could not find Event', HTTP::STATUS_BAD_REQUEST);
@@ -37,7 +38,7 @@ class MockEventService extends EventService
             throw new InvalidArgumentException(code: HTTP::STATUS_BAD_REQUEST);
         }
         if ($topic === TestConstants::EVENT_TITLE) {
-            return new Event();
+            return new Event(...EventTestEntity::getDefaultEventValue());
         }
 
         return null;

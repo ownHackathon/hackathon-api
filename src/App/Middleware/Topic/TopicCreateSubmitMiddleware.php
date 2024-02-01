@@ -37,7 +37,7 @@ readonly class TopicCreateSubmitMiddleware implements MiddlewareInterface
             throw new DuplicateNameHttpException(['topic' => ['topic' => 'The Topic is already present']]);
         }
 
-        $topic->setUuid($this->uuid->getHex()->toString());
+        $topic = $topic->with(uuid: $this->uuid);
 
         $this->topicPoolService->insert($topic);
 

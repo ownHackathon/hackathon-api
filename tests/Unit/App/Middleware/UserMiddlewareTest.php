@@ -8,7 +8,7 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Test\Unit\Mock\Service\MockUserService;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class UserMiddlewareTest extends AbstractMiddleware
 {

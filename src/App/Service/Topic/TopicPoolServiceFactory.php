@@ -2,11 +2,9 @@
 
 namespace App\Service\Topic;
 
-use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\TopicPoolRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
-use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
 class TopicPoolServiceFactory
@@ -18,11 +16,6 @@ class TopicPoolServiceFactory
 
         /** @var ReflectionHydrator $hydrator */
         $hydrator = clone $container->get(ReflectionHydrator::class);
-
-        $hydrator->addStrategy(
-            'topic',
-            new HydratorStrategy($container->get(ReflectionHydrator::class), Topic::class)
-        );
 
         $hydrator->addStrategy(
             'uuid',

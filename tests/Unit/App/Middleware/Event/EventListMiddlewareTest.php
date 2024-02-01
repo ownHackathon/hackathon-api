@@ -31,7 +31,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
         $response = $middleware->process(
             $this->request->withQueryParams(
                 [
-                    'order' => 'startTime',
+                    'order' => 'startedAt',
                     'sort' => 'ASC',
                 ]
             ),
@@ -48,7 +48,7 @@ class EventListMiddlewareTest extends AbstractMiddleware
         $response = $middleware->process(
             $this->request->withQueryParams(
                 [
-                    'order' => 'startTime',
+                    'order' => 'startedAt',
                     'sort' => 'DESC',
                 ]
             ),

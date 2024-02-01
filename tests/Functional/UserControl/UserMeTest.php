@@ -3,9 +3,12 @@
 namespace Test\Functional\UserControl;
 
 use App\Entity\User;
+use App\Enum\UserRole;
 use App\Service\User\UserService;
+use DateTime;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;
+use Ramsey\Uuid\Uuid;
 use Test\Functional\FunctionalTestCase;
 
 class UserMeTest extends FunctionalTestCase
@@ -27,10 +30,16 @@ class UserMeTest extends FunctionalTestCase
     {
         $token = $this->app->container()->get('config')['token']['auth'];
 
-        $user = new User();
-        $user->setName('TestingUser')
-            ->setEmail('testing@example.com')
-            ->setPassword('myworld');
+        $user = new User(
+            1,
+            Uuid::uuid7(),
+            UserRole::USER,
+            'TestingUser',
+            'myworld',
+            'testing@example.com',
+            new DateTime(),
+            new DateTime()
+        );
 
         /** @var UserService $userService */
         $userService = $this->app->container()->get(UserService::class);

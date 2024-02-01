@@ -3,44 +3,32 @@
 namespace Test\Unit\App\Service;
 
 use App\Entity\User;
-use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;
 use App\Service\User\UserService;
+use App\System\Hydrator\Strategy\UuidStrategy;
 use DateTime;
 use InvalidArgumentException;
-use Ramsey\Uuid\Rfc4122\UuidV7;
+use Test\Data\Entity\UserTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockUserTable;
-use Test\Unit\Mock\TestConstants;
 
 class UserServiceTest extends AbstractService
 {
     private UserService $userService;
-
-    private array $testUserValues;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $table = new MockUserTable();
+        $this->hydrator->addStrategy(UuidStrategy::class, $this->uuidStrategy);
         $this->userService = new UserService($table, $this->hydrator, $this->uuid);
-
-        $this->testUserValues = [
-            TestConstants::USER_ID,
-            UuidV7::fromString(TestConstants::USER_UUID),
-            UserRole::USER,
-            TestConstants::USER_NAME,
-            TestConstants::USER_PASSWORD,
-            TestConstants::USER_EMAIL,
-            new DateTime(),
-            new DateTime(),
-        ];
     }
 
     public function testCanNotCreateUserWithExistUser(): void
     {
-        $user = new User(...$this->testUserValues);
-        $user = $user->with(['name' => TestConstants::USER_NAME]);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(name: TestConstants::USER_NAME);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -49,8 +37,8 @@ class UserServiceTest extends AbstractService
 
     public function testCanNotCreateUserWithExistEmail(): void
     {
-        $user = new User(...$this->testUserValues);
-        $user = $user->with(['email' => TestConstants::USER_EMAIL]);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(email: TestConstants::USER_EMAIL);
 
         self::expectException(DuplicateEntryException::class);
 
@@ -59,11 +47,11 @@ class UserServiceTest extends AbstractService
 
     public function testCanCreateUser(): void
     {
-        $user = new User(...$this->testUserValues);
-        $user = $user->with([
-            'name' => TestConstants::USER_CREATE_NAME,
-            'email' => TestConstants::USER_CREATE_EMAIL,
-        ]);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(
+            name: TestConstants::USER_CREATE_NAME,
+            email: TestConstants::USER_CREATE_EMAIL,
+        );
 
         $insert = $this->userService->create($user);
 
@@ -72,9 +60,11 @@ class UserServiceTest extends AbstractService
 
     public function testCanNotCreateUser(): void
     {
-        $user = new User();
-        $user->setName(TestConstants::USER_NAME);
-        $user->setEmail(TestConstants::USER_EMAIL);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(
+            name: TestConstants::USER_NAME,
+            email: TestConstants::USER_EMAIL,
+        );
 
         self::expectException(DuplicateEntryException::class);
 
@@ -83,9 +73,11 @@ class UserServiceTest extends AbstractService
 
     public function testCanUpdateLastUserActionTime(): void
     {
-        $user = new User();
-        $user->setId(TestConstants::USER_ID);
-        $user->setLastAction(new DateTime());
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(
+            id: TestConstants::USER_ID,
+            lastActionAt: new DateTime(),
+        );
 
         $update = $this->userService->updateLastUserActionTime($user);
 
@@ -94,8 +86,8 @@ class UserServiceTest extends AbstractService
 
     public function testCanNotUpdateUser(): void
     {
-        $user = new User();
-        $user->setId(TestConstants::USER_ID_UNUSED);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(id: TestConstants::USER_ID_UNUSED);
 
         self::expectException(InvalidArgumentException::class);
 
@@ -104,19 +96,19 @@ class UserServiceTest extends AbstractService
 
     public function testCanUpdateUser(): void
     {
-        $user = new User();
-        $user->setId(TestConstants::USER_ID);
+        $user = new User(...UserTestEntity::getDefaultUserValue());
+        $user = $user->with(id: TestConstants::USER_ID);
 
         $update = $this->userService->update($user);
 
         self::assertSame(true, $update);
     }
 
-    public function testFindByIdThrowException(): void
+    public function testFindByIdResultIsNull(): void
     {
-        self::expectException(InvalidArgumentException::class);
+        $result = $this->userService->findById(TestConstants::USER_ID_UNUSED);
 
-        $this->userService->findById(TestConstants::USER_ID_THROW_EXCEPTION);
+        self::assertNull($result);
     }
 
     public function testCanFindById(): void
@@ -138,19 +130,5 @@ class UserServiceTest extends AbstractService
         $user = $this->userService->findByUuid(TestConstants::USER_UUID_UNUSED);
 
         self::assertNull($user);
-    }
-
-    public function testCanNotFindByToken(): void
-    {
-        $user = $this->userService->findByToken(TestConstants::USER_TOKEN_UNUSED);
-
-        self::assertNull($user);
-    }
-
-    public function testCanFindByToken(): void
-    {
-        $user = $this->userService->findByToken(TestConstants::USER_TOKEN);
-
-        self::assertInstanceOf(User::class, $user);
     }
 }

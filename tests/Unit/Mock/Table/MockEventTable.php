@@ -3,8 +3,9 @@
 namespace Test\Unit\Mock\Table;
 
 use App\Table\EventTable;
+use Test\Data\Entity\EventTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Database\MockQuery;
-use Test\Unit\Mock\TestConstants;
 
 readonly class MockEventTable extends EventTable
 {
@@ -17,13 +18,15 @@ readonly class MockEventTable extends EventTable
     {
         return match ($id) {
             TestConstants::EVENT_ID => [
-                'id' => $id,
-                'ratingCompleted' => true,
-            ],
+                    'id' => $id,
+                    'ratingCompleted' => true,
+                ] + EventTestEntity::getDefaultEventValue(),
+
             TestConstants::EVENT_ID_RATING_NOT_COMPLETED => [
-                'id' => $id,
-                'ratingCompleted' => false,
-            ],
+                    'id' => $id,
+                    'ratingCompleted' => false,
+                ] + EventTestEntity::getDefaultEventValue(),
+
             default => []
         };
     }
@@ -32,8 +35,9 @@ readonly class MockEventTable extends EventTable
     {
         return match ($title) {
             TestConstants::EVENT_TITLE => [
-                'title' => $title,
-            ],
+                    'title' => $title,
+                ] + EventTestEntity::getDefaultEventValue(),
+
             default => []
         };
     }

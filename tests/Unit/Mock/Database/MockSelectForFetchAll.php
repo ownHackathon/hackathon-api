@@ -5,7 +5,12 @@ namespace Test\Unit\Mock\Database;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
 use PDO;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\Entity\EventTestEntity;
+use Test\Data\Entity\ParticipantTestEntity;
+use Test\Data\Entity\ProjectTestEntity;
+use Test\Data\Entity\TopicTestEntity;
+use Test\Data\Entity\UserTestEntity;
+use Test\Data\TestConstants;
 
 use function array_key_exists;
 
@@ -50,88 +55,55 @@ class MockSelectForFetchAll extends Select
         };
     }
 
-    private function handleEvent(array $where, array $params): bool|array
+    private function handleEvent(array $where, array $params): array
     {
-        if ($where[0][1] === 'title = ?' && $params[0] === TestConstants::EVENT_TITLE) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::EVENT_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'title = ?' => $params[0] === TestConstants::EVENT_TITLE ? EventTestEntity::getDefaultEventValue() : [],
+            'id = ?' => $params[0] === TestConstants::EVENT_ID ? EventTestEntity::getDefaultEventValue() : [],
+            default => []
+        };
     }
 
-    private function handleParticipant(array $where, array $params): bool|array
+    private function handleParticipant(array $where, array $params): array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::PARTICIPANT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'userId = ?' && $params[0] === TestConstants::USER_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::PARTICIPANT_ID
+                ? ParticipantTestEntity::getDefaultParticipantValue() : [],
+            'userId = ?' => $params[0] === TestConstants::USER_ID ? ParticipantTestEntity::getDefaultParticipantValue()
+                : [],
+            default => []
+        };
     }
 
-    private function handleProject(array $where, array $params): bool|array
+    private function handleProject(array $where, array $params): array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::PROJECT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'participantId = ?' && $params[0] === TestConstants::PARTICIPANT_ID) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::PROJECT_ID ? ProjectTestEntity::getDefaultProjectValue() : [],
+            'participantId = ?' => $params[0] === TestConstants::PARTICIPANT_ID
+                ? ProjectTestEntity::getDefaultProjectValue() : [],
+            default => []
+        };
     }
 
-    private function handleTopic(array $where, array $params): bool|array
+    private function handleTopic(array $where, array $params): array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::TOPIC_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'uuid = ?' && $params[0] === TestConstants::TOPIC_UUID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'eventId = ?' && $params[0] === TestConstants::EVENT_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'topic = ?' && $params[0] === TestConstants::TOPIC_TITLE) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::TOPIC_ID ? TopicTestEntity::getDefaultTopicValue() : [],
+            'uuid = ?' => $params[0] === TestConstants::TOPIC_UUID ? TopicTestEntity::getDefaultTopicValue() : [],
+            'eventId = ?' => $params[0] === TestConstants::EVENT_ID ? TopicTestEntity::getDefaultTopicValue() : [],
+            'topic = ?' => $params[0] === TestConstants::TOPIC_TITLE ? TopicTestEntity::getDefaultTopicValue() : [],
+            default => []
+        };
     }
 
-    private function handleUser(array $where, array $params): bool|array
+    private function handleUser(array $where, array $params): array
     {
-        if ($where[0][1] === 'id = ?' && $params[0] === TestConstants::USER_ID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'uuid = ?' && $params[0] === TestConstants::USER_UUID) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'name = ?' && $params[0] === TestConstants::USER_NAME) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'email = ?' && $params[0] === TestConstants::USER_EMAIL) {
-            return ['id' => 1];
-        }
-
-        if ($where[0][1] === 'token = ?' && $params[0] === TestConstants::USER_TOKEN) {
-            return ['id' => 1];
-        }
-
-        return false;
+        return match ($where[0][1]) {
+            'id = ?' => $params[0] === TestConstants::USER_ID ? UserTestEntity::getDefaultUserValue() : [],
+            'uuid = ?' => $params[0] === TestConstants::USER_UUID ? UserTestEntity::getDefaultUserValue() : [],
+            'name = ?' => $params[0] === TestConstants::USER_NAME ? UserTestEntity::getDefaultUserValue() : [],
+            'email = ?' => $params[0] === TestConstants::USER_EMAIL ? UserTestEntity::getDefaultUserValue() : [],
+            default => []
+        };
     }
 }

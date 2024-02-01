@@ -3,6 +3,8 @@
 namespace Test\Unit\Mock\Table;
 
 use App\Table\ProjectTable;
+use Test\Data\Entity\ProjectTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Database\MockQuery;
 
 readonly class MockProjectTable extends ProjectTable
@@ -14,11 +16,13 @@ readonly class MockProjectTable extends ProjectTable
 
     public function findById(int $id): array
     {
-        return $id === 1 ? ['id' => $id] : [];
+        return $id === TestConstants::PROJECT_ID ? ['id' => $id] + ProjectTestEntity::getDefaultProjectValue() : [];
     }
 
-    public function findByParticipantId(int $id): bool|array
+    public function findByParticipantId(int $id): array
     {
-        return $id === 1 ? ['participantId' => $id] : false;
+        return $id === TestConstants::PARTICIPANT_ID
+            ? ['participantId' => $id] + ProjectTestEntity::getDefaultProjectValue()
+            : [];
     }
 }

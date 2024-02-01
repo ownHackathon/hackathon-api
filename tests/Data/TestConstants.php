@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Test\Unit\Mock;
+namespace Test\Data;
 
 class TestConstants
 {
@@ -82,6 +82,14 @@ class TestConstants
 
     public const PROJECT_DEMO_URI = 'https//example.com';
 
+    public const ROLE_ID = 1;
+
+    public const ROLE_UUID = '018d61cb07d675d98d0ffeaba13c2a99';
+
+    public const ROLE_NAME = 'Role Test Name';
+
+    public const ROLE_DESCRIPTION = 'Role Test Description';
+
     public const TOPIC_ID = 1;
 
     public const TOPIC_ID_THROW_EXCEPTION = 2;
@@ -89,6 +97,10 @@ class TestConstants
     public const TOPIC_UUID = '018d61aac3ea7a0da32ebb95d50922b5';
 
     public const TOPIC_TITLE = 'Test Title';
+
+    public const TOPIC_TITLE_CREATE = 'Test Create Title';
+
+    public const TOPIC_TITLE_UNUSED = 'Unused Test Title';
 
     public const TOPIC_DESCRIPTION = 'Test Topic Text';
 

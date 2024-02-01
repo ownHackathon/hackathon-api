@@ -6,17 +6,14 @@ use App\Exception\DuplicateNameHttpException;
 use App\Middleware\Topic\TopicCreateSubmitMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Ramsey\Uuid\Uuid;
+use Test\Data\Entity\TopicTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\App\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockTopicPoolService;
 
 class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
 {
     private TopicCreateSubmitMiddleware $middleware;
-    private array $topicData
-        = [
-            'topic' => 'topic',
-            'description' => 'This is the one and only Description',
-        ];
 
     public function setUp(): void
     {
@@ -31,7 +28,7 @@ class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
     public function testHasCreateNewTopicAndReturnResponse(): void
     {
         $response = $this->middleware->process(
-            $this->request->withParsedBody($this->topicData),
+            $this->request->withParsedBody(['topic' => TestConstants::TOPIC_TITLE_CREATE] + TopicTestEntity::getDefaultTopicValue()),
             $this->handler
         );
 
@@ -40,9 +37,7 @@ class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware
 
     public function testTopicIsDuplicatedAndThrowException(): void
     {
-        $data = $this->topicData;
-        $data['topic'] = 'duplicated';
-
+        $data = ['topic' => TestConstants::TOPIC_TITLE] + TopicTestEntity::getDefaultTopicValue();
         self::expectException(DuplicateNameHttpException::class);
 
         $this->middleware->process($this->request->withParsedBody($data), $this->handler);

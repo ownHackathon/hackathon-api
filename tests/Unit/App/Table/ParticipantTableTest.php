@@ -5,31 +5,15 @@ namespace Test\Unit\App\Table;
 use App\Entity\Participant;
 use App\Exception\DuplicateEntryException;
 use App\Table\ParticipantTable;
-use DateTime;
+use Test\Data\Entity\ParticipantTestEntity;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 /**
  * @property ParticipantTable $table
  */
 class ParticipantTableTest extends AbstractTable
 {
-    private array $defaultParticipantValue;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->defaultParticipantValue = [
-            'id' => TestConstants::PARTICIPANT_ID,
-            'userId' => TestConstants::USER_ID,
-            'eventId' => TestConstants::EVENT_ID,
-            'requestedAt' => new DateTime(TestConstants::TIME),
-            'subscribed' => true,
-            'disqualified' => false,
-        ];
-    }
-
     public function testCanGetTableName(): void
     {
         self::assertSame('Participant', $this->table->getTableName());
@@ -37,7 +21,7 @@ class ParticipantTableTest extends AbstractTable
 
     public function testCanInsertParticipant(): void
     {
-        $participant = new Participant(...$this->defaultParticipantValue);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
         $participant = $participant->with(userId: TestConstants::USER_CREATE_ID);
 
         $insertParticipant = $this->table->insert($participant);
@@ -47,7 +31,7 @@ class ParticipantTableTest extends AbstractTable
 
     public function testInsertParticipantThrowsException(): void
     {
-        $participant = new Participant(...$this->defaultParticipantValue);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
         $participant = $participant->with(userId: TestConstants::USER_ID);
 
         self::expectException(DuplicateEntryException::class);
@@ -57,7 +41,7 @@ class ParticipantTableTest extends AbstractTable
 
     public function testCanRemoveParticipant(): void
     {
-        $participant = new Participant(...$this->defaultParticipantValue);
+        $participant = new Participant(...ParticipantTestEntity::getDefaultParticipantValue());
 
         $removeParticipant = $this->table->remove($participant);
 
@@ -68,7 +52,7 @@ class ParticipantTableTest extends AbstractTable
     {
         $project = $this->table->findById(TestConstants::PARTICIPANT_ID);
 
-        self::assertSame($this->fetchResult, $project);
+        self::assertEquals(ParticipantTestEntity::getDefaultParticipantValue(), $project);
     }
 
     public function testFindByIdHaveEmptyResult(): void
@@ -82,7 +66,7 @@ class ParticipantTableTest extends AbstractTable
     {
         $project = $this->table->findAll();
 
-        self::assertSame($this->fetchAllResult, $project);
+        self::assertEquals([0 => ParticipantTestEntity::getDefaultParticipantValue()], $project);
     }
 
     public function testFindAllHasEmptyResult(): void
@@ -98,7 +82,7 @@ class ParticipantTableTest extends AbstractTable
     {
         $participant = $this->table->findByUserId(TestConstants::USER_ID);
 
-        self::assertSame($this->fetchResult, $participant);
+        self::assertEquals(ParticipantTestEntity::getDefaultParticipantValue(), $participant);
     }
 
     public function testFindByUserIdHasEmptyResult(): void
@@ -112,7 +96,7 @@ class ParticipantTableTest extends AbstractTable
     {
         $participant = $this->table->findUserForAnEvent(TestConstants::USER_ID, TestConstants::EVENT_ID);
 
-        self::assertSame($this->fetchResult, $participant);
+        self::assertEquals(ParticipantTestEntity::getDefaultParticipantValue(), $participant);
     }
 
     public function testFindByUserIdAndEventIdHasEmptyResult(): void
@@ -126,7 +110,7 @@ class ParticipantTableTest extends AbstractTable
     {
         $participant = $this->table->findActiveParticipantsByEvent(TestConstants::EVENT_ID);
 
-        self::assertSame($this->fetchAllResult, $participant);
+        self::assertEquals([0 => ParticipantTestEntity::getDefaultParticipantValue()], $participant);
     }
 
     public function testFindActiveParticipantByEventHasEmptyResult(): void

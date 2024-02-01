@@ -5,7 +5,7 @@ namespace Test\Unit\App\Hydrator;
 use App\Entity\User;
 use App\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\Entity\UserTestEntity;
 
 class ReflectionHydratorTest extends TestCase
 {
@@ -18,18 +18,14 @@ class ReflectionHydratorTest extends TestCase
 
     public function testCanNotHydrate(): void
     {
-        $hydrate = $this->hydrator->hydrate(false, new User());
+        $hydrate = $this->hydrator->hydrate(false, User::class);
 
         self::assertNull($hydrate);
     }
 
     public function testCanHydrate(): void
     {
-        $data = [
-            'id' => TestConstants::USER_ID,
-        ];
-
-        $hydrate = $this->hydrator->hydrate($data, new User());
+        $hydrate = $this->hydrator->hydrate(UserTestEntity::getDefaultUserValue(), User::class);
 
         self::assertInstanceOf(User::class, $hydrate);
     }
@@ -44,7 +40,7 @@ class ReflectionHydratorTest extends TestCase
 
     public function testCanHydrateListWithData(): void
     {
-        $hydrate = $this->hydrator->hydrateList([0 => ['id' => TestConstants::USER_ID]], User::class);
+        $hydrate = $this->hydrator->hydrateList([0 => UserTestEntity::getDefaultUserValue()], User::class);
 
         self::assertIsArray($hydrate);
         self::assertArrayHasKey(0, $hydrate);

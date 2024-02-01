@@ -7,28 +7,29 @@ use App\Hydrator\ReflectionHydrator;
 use App\Service\User\UserService;
 use DateTime;
 use Ramsey\Uuid\Uuid;
+use Test\Data\Entity\UserTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockUserTable;
-use Test\Unit\Mock\TestConstants;
 
 readonly class MockUserService extends UserService
 {
     public function __construct()
     {
-        parent::__construct(new MockUserTable(), new ReflectionHydrator(), Uuid::uuid4());
+        parent::__construct(new MockUserTable(), new ReflectionHydrator(), Uuid::uuid7());
     }
 
     public function findByUuid(string $uuid): User|null
     {
-        return $uuid === TestConstants::USER_UUID ? new User() : null;
+        return $uuid === TestConstants::USER_UUID ? new User(...UserTestEntity::getDefaultUserValue()) : null;
     }
 
     public function findById(int $id): User
     {
-        return new User();
+        return new User(...UserTestEntity::getDefaultUserValue());
     }
 
     public function updateLastUserActionTime(User $user): User
     {
-        return $user->setLastAction(new DateTime(TestConstants::TIME));
+        return $user->with(lastActionAt: new DateTime(TestConstants::TIME));
     }
 }

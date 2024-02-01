@@ -2,14 +2,12 @@
 
 namespace App\Service\User;
 
-use App\Entity\User;
 use App\Enum\UserRole;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -42,11 +40,6 @@ class UserServiceFactory
         $hydrator->addStrategy(
             'role',
             new BackedEnumStrategy(UserRole::class)
-        );
-
-        $hydrator->addStrategy(
-            'user',
-            new HydratorStrategy($container->get(ReflectionHydrator::class), User::class)
         );
 
         $hydrator->addStrategy(

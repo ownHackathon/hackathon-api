@@ -2,6 +2,10 @@
 
 namespace App\Hydrator;
 
+use ReflectionClass;
+
+use function is_object;
+
 class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 {
     public function hydrateList(array $values, string $className): array
@@ -10,7 +14,7 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
 
         foreach ($values as $data) {
             if ($data) {
-                $hydratedList[] = $this->hydrate($data, $className());
+                $hydratedList[] = $this->hydrate($data, $className);
             }
         }
 
@@ -21,6 +25,11 @@ class ReflectionHydrator extends \Laminas\Hydrator\ReflectionHydrator
     {
         if (!$data) {
             return null;
+        }
+
+        if (!is_object($object)) {
+            $object = new ReflectionClass($object);
+            $object = $object->newInstanceWithoutConstructor();
         }
 
         return parent::hydrate($data, $object);

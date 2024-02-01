@@ -4,30 +4,14 @@ namespace Test\Unit\App\Table;
 
 use App\Entity\Topic;
 use App\Table\TopicPoolTable;
-use Ramsey\Uuid\Rfc4122\UuidV7;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\Entity\TopicTestEntity;
+use Test\Data\TestConstants;
 
 /**
  * @property TopicPoolTable $table
  */
 class TopicPoolTableTest extends AbstractTable
 {
-    private array $defaultTopicValue;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->defaultTopicValue = [
-            'id' => TestConstants::TOPIC_ID,
-            'uuid' => UuidV7::fromString(TestConstants::TOPIC_UUID),
-            'eventId' => TestConstants::EVENT_ID,
-            'topic' => TestConstants::TOPIC_TITLE,
-            'description' => TestConstants::TOPIC_DESCRIPTION,
-            'accepted' => true,
-        ];
-    }
-
     public function testCanGetTableName(): void
     {
         self::assertSame('TopicPool', $this->table->getTableName());
@@ -35,7 +19,7 @@ class TopicPoolTableTest extends AbstractTable
 
     public function testCanInsertTopic(): void
     {
-        $topic = new Topic(...$this->defaultTopicValue);
+        $topic = new Topic(...TopicTestEntity::getDefaultTopicValue());
 
         $insertTopic = $this->table->insert($topic);
 
@@ -44,7 +28,7 @@ class TopicPoolTableTest extends AbstractTable
 
     public function testCanUpdateEventId(): void
     {
-        $topic = new Topic(...$this->defaultTopicValue);
+        $topic = new Topic(...TopicTestEntity::getDefaultTopicValue());
 
         $updateTopic = $this->table->assignAnEvent($topic->id, $topic->eventId);
 
@@ -55,7 +39,7 @@ class TopicPoolTableTest extends AbstractTable
     {
         $topic = $this->table->findById(TestConstants::TOPIC_POOL_ID);
 
-        self::assertSame($this->fetchResult, $topic);
+        self::assertEquals(TopicTestEntity::getDefaultTopicValue(), $topic);
     }
 
     public function testFindByIdHaveEmptyResult(): void
@@ -69,35 +53,35 @@ class TopicPoolTableTest extends AbstractTable
     {
         $topic = $this->table->findByUuId(TestConstants::TOPIC_UUID);
 
-        self::assertSame($this->fetchResult, $topic);
+        self::assertEquals(TopicTestEntity::getDefaultTopicValue(), $topic);
     }
 
     public function testCanFindAll(): void
     {
         $users = $this->table->findAll();
 
-        self::assertSame($this->fetchAllResult, $users);
+        self::assertEquals([0 => TopicTestEntity::getDefaultTopicValue()], $users);
     }
 
     public function testCanFindByEventId(): void
     {
         $topic = $this->table->findByEventId(TestConstants::EVENT_ID);
 
-        self::assertSame($this->fetchResult, $topic);
+        self::assertEquals(TopicTestEntity::getDefaultTopicValue(), $topic);
     }
 
     public function testCanFindAvailable(): void
     {
         $topic = $this->table->findAvailable();
 
-        self::assertSame($this->fetchAllResult, $topic);
+        self::assertEquals([0 => TopicTestEntity::getDefaultTopicValue()], $topic);
     }
 
     public function testCanFindByTopic(): void
     {
         $topic = $this->table->findByTopic(TestConstants::TOPIC_TITLE);
 
-        self::assertSame($this->fetchResult, $topic);
+        self::assertEquals(TopicTestEntity::getDefaultTopicValue(), $topic);
     }
 
     public function testCanGetCountTopic(): void

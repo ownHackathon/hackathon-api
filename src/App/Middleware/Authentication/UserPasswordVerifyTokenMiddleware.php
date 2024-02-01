@@ -22,7 +22,8 @@ readonly class UserPasswordVerifyTokenMiddleware implements MiddlewareInterface
     {
         $token = $request->getAttribute('token');
 
-        $user = $this->userService->findByToken($token);
+        /** ToDo implements Token */
+        $user = $this->userService->findById($token);
 
         if (!$user instanceof User) {
             return new JsonResponse(

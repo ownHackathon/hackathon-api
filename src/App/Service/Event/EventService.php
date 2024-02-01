@@ -51,7 +51,7 @@ class EventService
     /**
      * @return array<Event>
      */
-    public function findAll(string $order = 'startTime', string $sort = 'DESC'): array
+    public function findAll(string $order = 'startedAt', string $sort = 'DESC'): array
     {
         $events = $this->repository->findAll($order, $sort);
 

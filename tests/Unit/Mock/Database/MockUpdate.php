@@ -4,7 +4,7 @@ namespace Test\Unit\Mock\Database;
 
 use Envms\FluentPDO\Queries\Update;
 use Envms\FluentPDO\Query;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 use function array_key_exists;
 

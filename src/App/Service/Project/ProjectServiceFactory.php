@@ -2,12 +2,10 @@
 
 namespace App\Service\Project;
 
-use App\Entity\Project;
 use App\Hydrator\ReflectionHydrator;
 use App\Repository\ProjectRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
 class ProjectServiceFactory
@@ -26,11 +24,6 @@ class ProjectServiceFactory
         $hydrator->addStrategy(
             'createdAt',
             $strategy,
-        );
-
-        $hydrator->addStrategy(
-            'project',
-            new HydratorStrategy($container->get(ReflectionHydrator::class), Project::class)
         );
 
         $hydrator->addStrategy(

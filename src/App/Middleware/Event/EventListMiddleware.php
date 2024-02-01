@@ -38,7 +38,7 @@ readonly class EventListMiddleware implements MiddlewareInterface
             'DESCRIPTION' => 'description',
             'DURATION' => 'duration',
             'STATUS' => 'status',
-            default => 'startTime',
+            default => 'startedAt',
         };
 
         /** @var array<Event> $events */

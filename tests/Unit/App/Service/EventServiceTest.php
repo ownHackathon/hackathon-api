@@ -5,8 +5,9 @@ namespace Test\Unit\App\Service;
 use App\Entity\Event;
 use App\Service\Event\EventService;
 use InvalidArgumentException;
+use Test\Data\Entity\EventTestEntity;
 use Test\Unit\Mock\Table\MockEventTable;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class EventServiceTest extends AbstractService
 {
@@ -16,14 +17,13 @@ class EventServiceTest extends AbstractService
     {
         parent::setUp();
 
-        $table = new MockEventTable();
-        $this->service = new EventService($table, $this->hydrator);
+        $this->service = new EventService(new MockEventTable(), $this->hydrator);
     }
 
     public function testCanNotCreate(): void
     {
-        $event = new Event();
-        $event->setTitle(TestConstants::EVENT_TITLE);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
+        $event = $event->with(title: TestConstants::EVENT_TITLE);
 
         $event = $this->service->create($event);
 
@@ -32,8 +32,8 @@ class EventServiceTest extends AbstractService
 
     public function testCanCreate(): void
     {
-        $event = new Event();
-        $event->setTitle(TestConstants::EVENT_CREATE_TITLE);
+        $event = new Event(...EventTestEntity::getDefaultEventValue());
+        $event = $event->with(title: TestConstants::EVENT_CREATE_TITLE);
 
         $event = $this->service->create($event);
 

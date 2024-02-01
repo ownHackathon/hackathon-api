@@ -16,5 +16,5 @@ interface EventRepository extends Repository
 
     public function remove(Event $event): bool;
 
-    public function findAll(string $order = 'startTime', string $sort = 'DESC'): array;
+    public function findAll(string $order = 'startedAt', string $sort = 'DESC'): array;
 }

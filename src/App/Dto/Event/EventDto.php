@@ -24,7 +24,7 @@ readonly class EventDto
     public int $duration;
 
     #[OA\Property(description: 'The time from which the event starts', type: 'string', format: 'Y-M-D hh:mm')]
-    public string $startTime;
+    public string $startedAt;
 
     #[OA\Property(
         description: 'Which status<br> 
@@ -47,7 +47,7 @@ readonly class EventDto
         string $title,
         ?string $description,
         int $duration,
-        string $startTime,
+        string $startedAt,
         EventStatus $status
     ) {
         $this->id = $id;
@@ -55,7 +55,7 @@ readonly class EventDto
         $this->title = $title;
         $this->description = $description;
         $this->duration = $duration;
-        $this->startTime = $startTime;
+        $this->startedAt = $startedAt;
         $this->status = $status->value;
     }
 }

@@ -5,6 +5,7 @@ namespace Test\Unit\App\Handler;
 use App\Entity\Topic;
 use App\Handler\Topic\TopicListAvailableHandler;
 use Laminas\Diactoros\Response\JsonResponse;
+use Test\Data\Entity\TopicTestEntity;
 
 class TopicListAvailableHandlerTest extends AbstractHandler
 {
@@ -12,7 +13,7 @@ class TopicListAvailableHandlerTest extends AbstractHandler
     {
         $handler = new TopicListAvailableHandler();
 
-        $topicList = [new Topic()];
+        $topicList = [new Topic(...TopicTestEntity::getDefaultTopicValue())];
 
         $response = $handler->handle($this->request->withAttribute('availableTopics', $topicList));
 

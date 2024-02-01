@@ -5,32 +5,26 @@ namespace Test\Unit\Mock\Service;
 use App\Entity\Topic;
 use App\Hydrator\ReflectionHydrator;
 use App\Service\Topic\TopicPoolService;
-use Laminas\Hydrator\Strategy\HydratorStrategy;
+use Test\Data\Entity\TopicTestEntity;
+use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
 
 class MockTopicPoolService extends TopicPoolService
 {
-    private ReflectionHydrator $hydrator;
-
     public function __construct()
     {
-        $this->hydrator = new ReflectionHydrator();
-        $this->hydrator->addStrategy(
-            'topic',
-            new HydratorStrategy(new ReflectionHydrator(), Topic::class)
-        );
         parent::__construct(new MockTopicPoolTable(), new ReflectionHydrator());
     }
 
     public function findAvailable(): ?array
     {
-        return [new Topic()];
+        return [new Topic(...TopicTestEntity::getDefaultTopicValue())];
     }
 
     public function findByTopic(string $topic): ?Topic
     {
-        if ($topic === 'duplicated') {
-            return new Topic();
+        if ($topic === TestConstants::TOPIC_TITLE) {
+            return new Topic(...TopicTestEntity::getDefaultTopicValue());
         }
 
         return null;

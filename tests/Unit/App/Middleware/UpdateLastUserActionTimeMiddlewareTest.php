@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Middleware\User\UpdateLastUserActionTimeMiddleware;
 use App\Service\User\UserService;
 use Psr\Http\Message\ResponseInterface;
+use Test\Data\Entity\UserTestEntity;
 use Test\Unit\Mock\Service\MockUserService;
 
 class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
@@ -23,7 +24,7 @@ class UpdateLastUserActionTimeMiddlewareTest extends AbstractMiddleware
     {
         $middleware = new UpdateLastUserActionTimeMiddleware($this->userService);
 
-        $user = new User();
+        $user = new User(...UserTestEntity::getDefaultUserValue());
 
         $response = $middleware->process(
             $this->request->withAttribute(User::AUTHENTICATED_USER, $user),

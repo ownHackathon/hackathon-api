@@ -16,7 +16,7 @@ readonly class EventTable extends AbstractTable implements EventRepository
             'title' => $event->title,
             'description' => $event->description,
             'eventText' => $event->eventText,
-            'startTime' => $event->startedAt->format('Y-m-d H:i'),
+            'startedAt' => $event->startedAt->format('Y-m-d H:i'),
             'duration' => $event->duration,
         ];
 
@@ -59,7 +59,7 @@ readonly class EventTable extends AbstractTable implements EventRepository
     {
         $result = $this->query->from($this->table)
             ->where('active', 0)
-            ->orderBy('startTime DESC')
+            ->orderBy('startedAt DESC')
             ->fetchAll();
 
         return $result ?: [];

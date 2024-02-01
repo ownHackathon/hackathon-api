@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Test\Unit\App\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockEventService;
-use Test\Unit\Mock\TestConstants;
+use Test\Data\TestConstants;
 
 class EventNameMiddlewareTest extends AbstractMiddleware
 {
