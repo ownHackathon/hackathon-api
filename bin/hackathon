@@ -27,7 +27,7 @@ function docker_vendor_cleanup() {
 }
 
 function docker_cleanup() {
-    docker image rm ghcr.io/ownhackathon/hackathon-api-php:latest mariadb:latest mailhog/mailhog httpd:alpine
+    docker image rm -f ghcr.io/ownhackathon/hackathon-api-php:latest mariadb:latest mailhog/mailhog httpd:alpine
     docker_database_cleanup
     docker_vendor_cleanup
 }
