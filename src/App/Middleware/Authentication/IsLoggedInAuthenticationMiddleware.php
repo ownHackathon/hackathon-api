@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Dto\Core\SimpleMessageDto;
+use App\Dto\System\SimpleMessageDto;
 use App\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

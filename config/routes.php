@@ -4,8 +4,8 @@ use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
 
 return static function (Mezzio\Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
-    $app->get('/api/testmail', \App\Handler\Core\TestMailHandler::class, \App\Handler\Core\TestMailHandler::class);
-    $app->get('/api/ping[/]', \App\Handler\Core\PingHandler::class, \App\Handler\Core\PingHandler::class);
+    $app->get('/api/testmail', \App\Handler\System\TestMailHandler::class, \App\Handler\System\TestMailHandler::class);
+    $app->get('/api/ping[/]', \App\Handler\System\PingHandler::class, \App\Handler\System\PingHandler::class);
 
     /** ToDo OpenApi */
     $app->get(
@@ -90,9 +90,9 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->get(
         '/api/user/me[/]',
         [
-            \App\Handler\Core\ApiMeHandler::class,
+            \App\Handler\System\ApiMeHandler::class,
         ],
-        \App\Handler\Core\ApiMeHandler::class
+        \App\Handler\System\ApiMeHandler::class
     );
     /** ToDo OpenApi */
     $app->post(

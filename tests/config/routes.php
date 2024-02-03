@@ -2,8 +2,8 @@
 
 namespace Test;
 
-use App\Handler\Core\ApiMeHandler;
-use App\Handler\Core\PingHandler;
+use App\Handler\System\ApiMeHandler;
+use App\Handler\System\PingHandler;
 use Mezzio\Application;
 
 return static function (Application $app): void {

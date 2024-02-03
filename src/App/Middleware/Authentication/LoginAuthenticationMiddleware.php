@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Dto\Core\SimpleMessageDto;
+use App\Dto\System\SimpleMessageDto;
 use App\Entity\User;
 use App\Service\Authentication\LoginAuthenticationService;
 use App\Service\User\UserService;

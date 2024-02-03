@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Dto\Core\HttpStatusCodeMessage;
+use App\Dto\System\HttpStatusCodeMessage;
 use App\Validator\RegisterValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

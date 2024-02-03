@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Middleware\Authentication\ApiAccessMiddleware;
 use App\Middleware\Authentication\JwtAuthenticationMiddleware;
-use App\Middleware\Core\HttpExceptionMiddleware;
+use App\Middleware\System\HttpExceptionMiddleware;
 use App\Middleware\User\UpdateLastUserActionTimeMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;

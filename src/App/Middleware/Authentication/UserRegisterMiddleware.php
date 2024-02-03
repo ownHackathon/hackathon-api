@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Dto\Core\HttpStatusCodeMessage;
+use App\Dto\System\HttpStatusCodeMessage;
 use App\Entity\User;
 use App\Enum\UserRole;
 use App\Exception\DuplicateEntryException;

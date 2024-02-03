@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Dto\Core;
+namespace App\Dto\System;
 
 use App\Entity\User;
 use OpenApi\Attributes as OA;

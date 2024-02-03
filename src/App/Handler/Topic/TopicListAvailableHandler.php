@@ -2,7 +2,7 @@
 
 namespace App\Handler\Topic;
 
-use App\Dto\Core\SimpleMessageDto;
+use App\Dto\System\SimpleMessageDto;
 use App\Dto\Topic\TopicListDto;
 use App\Entity\Topic;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

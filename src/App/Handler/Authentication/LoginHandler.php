@@ -2,12 +2,12 @@
 
 namespace App\Handler\Authentication;
 
-use App\Dto\Core\SimpleMessageDto;
+use App\Dto\System\SimpleMessageDto;
 use App\Dto\UserContent\LoginTokenDto;
 use App\Dto\UserContent\LoginValidationFailureMessageDto;
 use App\Dto\UserContent\UserLogInDataDto;
 use App\Entity\User;
-use App\Service\Core\JwtTokenGeneratorTrait;
+use App\Service\System\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

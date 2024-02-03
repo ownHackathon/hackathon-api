@@ -2,7 +2,7 @@
 
 namespace App\Handler\Topic;
 
-use App\Dto\Core\SimpleMessageDto;
+use App\Dto\System\SimpleMessageDto;
 use App\Dto\Topic\TopicCreateFailureMessageDto;
 use App\Dto\Topic\TopicCreateRequestDto;
 use App\Dto\Topic\TopicCreateResponseDto;

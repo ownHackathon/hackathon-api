@@ -17,7 +17,7 @@ use App\Repository\UserRepository;
 use App\Service\Authentication\ApiAccessService;
 use App\Service\Authentication\ApiAccessServiceFactory;
 use App\Service\Authentication\LoginAuthenticationService;
-use App\Service\Core\TokenService;
+use App\Service\System\TokenService;
 use App\Service\EMail\TopicCreateEMailService;
 use App\Service\EMail\TopicCreateEMailServiceFactory;
 use App\Service\Event\EventService;
@@ -93,7 +93,7 @@ class ConfigProvider
                 Handler\Event\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\Topic\TopicCreateHandler::class => ConfigAbstractFactory::class,
                 Handler\User\UserHandler::class => ConfigAbstractFactory::class,
-                Handler\Core\TestMailHandler::class => ConfigAbstractFactory::class,
+                Handler\System\TestMailHandler::class => ConfigAbstractFactory::class,
 
                 Listener\LoggingErrorListener::class => Listener\LoggingErrorListenerFactory::class,
 
@@ -202,7 +202,7 @@ class ConfigProvider
             Handler\User\UserHandler::class => [
                 ClassMethodsHydrator::class,
             ],
-            Handler\Core\TestMailHandler::class => [
+            Handler\System\TestMailHandler::class => [
                 Mailer::class,
             ],
             Middleware\Event\EventCreateValidationMiddleware::class => [

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Handler\Core;
+namespace App\Handler\System;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Service\Core\TokenService;
+use App\Service\System\TokenService;
 use PHPUnit\Framework\TestCase;
 
 class TokenServiceTest extends TestCase
