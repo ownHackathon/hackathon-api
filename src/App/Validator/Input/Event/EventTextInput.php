@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Validator\Input;
+namespace App\Validator\Input\Event;
 
 use Laminas\InputFilter\Input;
 
-class TopicInput extends Input
+class EventTextInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('topic');
+        parent::__construct('eventText');
 
-        $this->setRequired(true);
+        $this->setRequired(false);
 
         $this->getFilterChain()->attachByName('StringTrim');
 
@@ -18,8 +18,9 @@ class TopicInput extends Input
             'StringLength',
             [
                 'encoding' => 'UTF-8',
-                'min' => 3,
-                'max' => 50,
+                'min' => 50,
+                'max' => 8192,
+                'inclusive' => true,
             ]
         );
     }

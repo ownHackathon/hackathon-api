@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Mock\Validator;
 
-use App\Validator\Input\TopicDescriptionInput;
-use App\Validator\Input\TopicInput;
+use App\Validator\Input\Topic\TopicDescriptionInput;
+use App\Validator\Input\Topic\TopicInput;
 use App\Validator\TopicCreateValidator;
 
 class MockTopicCreateValidator extends TopicCreateValidator

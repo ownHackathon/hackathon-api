@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Validator\Input;
+namespace App\Validator\Input\Event;
 
 use App\Validator\DateLessNow;
 use Laminas\InputFilter\Input;

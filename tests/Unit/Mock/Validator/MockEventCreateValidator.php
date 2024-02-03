@@ -3,11 +3,11 @@
 namespace Test\Unit\Mock\Validator;
 
 use App\Validator\EventCreateValidator;
-use App\Validator\Input\EventDescriptionInput;
-use App\Validator\Input\EventDurationInput;
-use App\Validator\Input\EventStartTimeInput;
-use App\Validator\Input\EventTextInput;
-use App\Validator\Input\EventTitleInput;
+use App\Validator\Input\Event\EventDescriptionInput;
+use App\Validator\Input\Event\EventDurationInput;
+use App\Validator\Input\Event\EventStartTimeInput;
+use App\Validator\Input\Event\EventTextInput;
+use App\Validator\Input\Event\EventTitleInput;
 
 class MockEventCreateValidator extends EventCreateValidator
 {

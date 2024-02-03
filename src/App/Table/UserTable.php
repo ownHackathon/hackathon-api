@@ -90,13 +90,4 @@ readonly class UserTable extends AbstractTable implements UserRepository
 
         return $result ?: [];
     }
-
-    public function findByToken(string $token): array
-    {
-        $result = $this->query->from($this->table)
-            ->where('token', $token)
-            ->fetch();
-
-        return $result ?: [];
-    }
 }

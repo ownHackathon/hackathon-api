@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace App\Validator\Input;
+namespace App\Validator\Input\Topic;
 
 use Laminas\InputFilter\Input;
 
-class TopicDescriptionInput extends Input
+class TopicInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('description');
+        parent::__construct('topic');
 
         $this->setRequired(true);
 
@@ -18,8 +18,8 @@ class TopicDescriptionInput extends Input
             'StringLength',
             [
                 'encoding' => 'UTF-8',
-                'min' => 20,
-                'max' => 8096,
+                'min' => 3,
+                'max' => 50,
             ]
         );
     }

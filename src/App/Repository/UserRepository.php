@@ -18,6 +18,4 @@ interface UserRepository extends Repository
     public function findByName(string $name): array;
 
     public function findByEMail(string $email): array;
-
-    public function findByToken(string $token): array;
 }
