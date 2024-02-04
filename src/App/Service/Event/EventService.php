@@ -8,11 +8,11 @@ use App\Repository\EventRepository;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Log\InvalidArgumentException;
 
-class EventService
+readonly class EventService
 {
     public function __construct(
-        private readonly EventRepository $repository,
-        private readonly ReflectionHydrator $hydrator,
+        private EventRepository $repository,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

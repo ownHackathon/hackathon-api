@@ -9,7 +9,7 @@ use Test\Data\Entity\TopicTestEntity;
 use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockTopicPoolTable;
 
-class MockTopicPoolService extends TopicPoolService
+readonly class MockTopicPoolService extends TopicPoolService
 {
     public function __construct()
     {

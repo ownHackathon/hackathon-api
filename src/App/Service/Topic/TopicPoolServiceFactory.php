@@ -7,7 +7,7 @@ use App\Repository\TopicPoolRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
 use Psr\Container\ContainerInterface;
 
-class TopicPoolServiceFactory
+readonly class TopicPoolServiceFactory
 {
     public function __invoke(ContainerInterface $container): TopicPoolService
     {

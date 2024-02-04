@@ -7,7 +7,7 @@ use App\Repository\ParticipantRepository;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
-class ParticipantServiceFactory
+readonly class ParticipantServiceFactory
 {
     public function __invoke(ContainerInterface $container): ParticipantService
     {

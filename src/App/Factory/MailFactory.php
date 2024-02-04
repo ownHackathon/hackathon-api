@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 
-class MailFactory
+readonly class MailFactory
 {
     public function __invoke(ContainerInterface $container): Mailer
     {

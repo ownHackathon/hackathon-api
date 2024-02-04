@@ -7,7 +7,7 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\Authentication\Mock\Service\MockApiAccessService;
+use Test\Unit\Mock\Service\MockApiAccessService;
 
 class ApiAccessMiddlewareTest extends AbstractMiddleware
 {

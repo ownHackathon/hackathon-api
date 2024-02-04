@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Test\Unit\Authentication\Mock\Service;
+namespace Test\Unit\Mock\Service;
 
 use App\Service\Authentication\ApiAccessService;
 
-class MockApiAccessService extends ApiAccessService
+readonly class MockApiAccessService extends ApiAccessService
 {
     public function __construct()
     {

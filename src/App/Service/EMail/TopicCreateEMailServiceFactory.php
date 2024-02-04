@@ -5,7 +5,7 @@ namespace App\Service\EMail;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;
 
-class TopicCreateEMailServiceFactory
+readonly class TopicCreateEMailServiceFactory
 {
     public function __invoke(ContainerInterface $container): TopicCreateEMailService
     {

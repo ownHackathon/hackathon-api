@@ -26,7 +26,7 @@ use Psr\Http\Server\RequestHandlerInterface;
     openapi: '3.1.0',
     security: [['bearerAuth' => []]],
 )]
-class ApiMeHandler implements RequestHandlerInterface
+readonly class ApiMeHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/api/user/me',

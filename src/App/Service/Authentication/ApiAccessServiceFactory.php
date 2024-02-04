@@ -4,7 +4,7 @@ namespace App\Service\Authentication;
 
 use Psr\Container\ContainerInterface;
 
-class ApiAccessServiceFactory
+readonly class ApiAccessServiceFactory
 {
     public function __invoke(ContainerInterface $container): ApiAccessService
     {

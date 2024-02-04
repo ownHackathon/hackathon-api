@@ -11,7 +11,7 @@ use Test\Data\Entity\EventTestEntity;
 use Test\Data\TestConstants;
 use Test\Unit\Mock\Table\MockEventTable;
 
-class MockEventService extends EventService
+readonly class MockEventService extends EventService
 {
     public function __construct()
     {

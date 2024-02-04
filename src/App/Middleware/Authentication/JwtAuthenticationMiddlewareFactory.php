@@ -6,7 +6,7 @@ use App\Service\User\UserService;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-class JwtAuthenticationMiddlewareFactory
+readonly class JwtAuthenticationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): JwtAuthenticationMiddleware
     {

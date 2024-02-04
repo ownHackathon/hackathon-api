@@ -5,7 +5,7 @@ namespace App\Hydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
-class DateTimeFormatterStrategyFactory
+readonly class DateTimeFormatterStrategyFactory
 {
     public function __invoke(ContainerInterface $container): DateTimeFormatterStrategy
     {

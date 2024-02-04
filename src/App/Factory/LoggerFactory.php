@@ -17,7 +17,7 @@ use function is_dir;
 use function mkdir;
 use function rtrim;
 
-class LoggerFactory
+readonly class LoggerFactory
 {
     public function __invoke(ContainerInterface $container): LoggerInterface
     {

@@ -2,7 +2,7 @@
 
 namespace App\Service\Authentication;
 
-class ApiAccessService
+readonly class ApiAccessService
 {
     public function __construct(
         private readonly array $apiAccessConfig,

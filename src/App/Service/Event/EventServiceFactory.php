@@ -10,7 +10,7 @@ use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
-class EventServiceFactory
+readonly class EventServiceFactory
 {
     public function __invoke(ContainerInterface $container): EventService
     {

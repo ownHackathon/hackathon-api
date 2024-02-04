@@ -5,7 +5,7 @@ namespace App\Listener;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-class LoggingErrorListenerFactory
+readonly class LoggingErrorListenerFactory
 {
     public function __invoke(ContainerInterface $container): LoggingErrorListener
     {

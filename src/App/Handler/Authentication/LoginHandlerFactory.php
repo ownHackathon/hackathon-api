@@ -4,7 +4,7 @@ namespace App\Handler\Authentication;
 
 use Psr\Container\ContainerInterface;
 
-class LoginHandlerFactory
+readonly class LoginHandlerFactory
 {
     public function __invoke(ContainerInterface $container): LoginHandler
     {

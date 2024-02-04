@@ -10,7 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 use function is_string;
 use function sprintf;
 
-class UuidStrategy implements StrategyInterface
+readonly class UuidStrategy implements StrategyInterface
 {
     public function extract($value, ?object $object = null)
     {

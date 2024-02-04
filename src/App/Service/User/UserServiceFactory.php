@@ -11,7 +11,7 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
 
-class UserServiceFactory
+readonly class UserServiceFactory
 {
     public function __invoke(ContainerInterface $container): UserService
     {

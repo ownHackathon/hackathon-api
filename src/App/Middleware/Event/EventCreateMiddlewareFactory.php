@@ -9,7 +9,7 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;
 
-class EventCreateMiddlewareFactory
+readonly class EventCreateMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): EventCreateMiddleware
     {

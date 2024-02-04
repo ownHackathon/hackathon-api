@@ -5,7 +5,7 @@ namespace App\Hydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Psr\Container\ContainerInterface;
 
-class ClassMethodsHydratorFactory
+readonly class ClassMethodsHydratorFactory
 {
     public function __invoke(ContainerInterface $container): ClassMethodsHydrator
     {

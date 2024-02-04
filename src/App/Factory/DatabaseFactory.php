@@ -5,7 +5,7 @@ namespace App\Factory;
 use PDO;
 use Psr\Container\ContainerInterface;
 
-class DatabaseFactory
+readonly class DatabaseFactory
 {
     public function __invoke(ContainerInterface $container): PDO
     {

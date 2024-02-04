@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserRegisterSubmitHandler implements RequestHandlerInterface
+readonly class UserRegisterSubmitHandler implements RequestHandlerInterface
 {
     #[OA\Post(path: '/api/user/register', summary: 'Register a user with e-mail', tags: ['User Control'])]
     #[OA\RequestBody(

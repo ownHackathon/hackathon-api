@@ -6,7 +6,7 @@ use App\Entity\User;
 
 use function password_verify;
 
-class LoginAuthenticationService
+readonly class LoginAuthenticationService
 {
     public function isUserDataCorrect(?User $user, string $password): bool
     {

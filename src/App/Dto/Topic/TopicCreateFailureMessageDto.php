@@ -5,7 +5,7 @@ namespace App\Dto\Topic;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class TopicCreateFailureMessageDto
+readonly class TopicCreateFailureMessageDto
 {
     #[OA\Property(
         properties: [
@@ -14,4 +14,9 @@ class TopicCreateFailureMessageDto
         type: 'object'
     )]
     public array $topic;
+
+    public function __construct(array $topic)
+    {
+        $this->topic = $topic;
+    }
 }

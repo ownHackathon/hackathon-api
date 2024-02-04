@@ -5,7 +5,7 @@ namespace App\Service\System;
 use function bin2hex;
 use function openssl_random_pseudo_bytes;
 
-class TokenService
+readonly class TokenService
 {
     public function generateToken(): string
     {

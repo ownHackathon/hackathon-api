@@ -5,7 +5,7 @@ namespace App\Dto\System;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-class SimpleMessageDto
+readonly class SimpleMessageDto
 {
     #[OA\Property(
         description: 'A message to the API user',

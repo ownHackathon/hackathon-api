@@ -8,7 +8,7 @@ use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
-class ProjectServiceFactory
+readonly class ProjectServiceFactory
 {
     public function __invoke(ContainerInterface $container): ProjectService
     {

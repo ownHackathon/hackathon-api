@@ -11,11 +11,11 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use PDOException;
 
-class TopicPoolService
+readonly class TopicPoolService
 {
     public function __construct(
-        private readonly TopicPoolRepository $repository,
-        private readonly ReflectionHydrator $hydrator,
+        private TopicPoolRepository $repository,
+        private ReflectionHydrator $hydrator,
     ) {
     }
 

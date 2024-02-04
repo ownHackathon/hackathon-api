@@ -5,7 +5,7 @@ namespace App\Dto\UserContent;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['username', 'password'])]
-class UserLogInDataDto
+readonly class UserLogInDataDto
 {
     #[OA\Property(
         description: 'The User name',
@@ -18,4 +18,10 @@ class UserLogInDataDto
         type: 'string',
     )]
     public string $password;
+
+    public function __construct(string $username, string $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
 }

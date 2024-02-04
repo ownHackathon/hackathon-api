@@ -6,7 +6,7 @@ use Envms\FluentPDO\Query;
 use PDO;
 use Psr\Container\ContainerInterface;
 
-class QueryFactory
+readonly class QueryFactory
 {
     public function __invoke(ContainerInterface $container): Query
     {

@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class UuidFactory
+readonly class UuidFactory
 {
     public function __invoke(ContainerInterface $container): UuidInterface
     {

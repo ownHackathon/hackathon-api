@@ -11,7 +11,7 @@ use function filter_input_array;
 use const INPUT_GET;
 use const INPUT_SERVER;
 
-class BaseInformationProcessor implements ProcessorInterface
+readonly class BaseInformationProcessor implements ProcessorInterface
 {
     public function process(array $event): array
     {

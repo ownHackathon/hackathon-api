@@ -5,7 +5,7 @@ namespace App\Handler\Authentication;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;
 
-class UserPasswordForgottonHandlerFactory
+readonly class UserPasswordForgottonHandlerFactory
 {
     public function __invoke(ContainerInterface $container): UserPasswordForgottonHandler
     {
