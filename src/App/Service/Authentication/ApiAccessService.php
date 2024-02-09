@@ -5,7 +5,7 @@ namespace App\Service\Authentication;
 readonly class ApiAccessService
 {
     public function __construct(
-        private readonly array $apiAccessConfig,
+        private array $apiAccessConfig,
     ) {
     }
 

@@ -10,7 +10,7 @@ readonly class LoginAuthenticationService
 {
     public function isUserDataCorrect(?User $user, string $password): bool
     {
-        if (null === $user) {
+        if (!($user instanceof User)) {
             return false;
         }
 
