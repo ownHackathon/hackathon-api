@@ -2,7 +2,7 @@
 
 namespace Test\Data\Entity;
 
-use DateTime;
+use DateTimeImmutable;
 use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Data\TestConstants;
 
@@ -16,7 +16,7 @@ class ProjectTestEntity
             'participantId' => TestConstants::PARTICIPANT_ID,
             'title' => TestConstants::PROJECT_TITLE,
             'description' => TestConstants::PROJECT_DESCRIPTION,
-            'createdAt' => new DateTime(TestConstants::TIME),
+            'createdAt' => new DateTimeImmutable(TestConstants::TIME),
             'gitRepoUri' => TestConstants::PROJECT_GIT_URL,
             'demoPageUri' => TestConstants::PROJECT_DEMO_URI,
         ];

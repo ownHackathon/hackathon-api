@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\System\Trait\CloneReadonlyClassWith;
-use DateTime;
+use DateTimeImmutable;
 
 final readonly class Participant
 {
@@ -13,7 +13,7 @@ final readonly class Participant
         public int $id,
         public int $userId,
         public int $eventId,
-        public DateTime $requestedAt,
+        public DateTimeImmutable $requestedAt,
         public bool $subscribed,
         public bool $disqualified,
     ) {

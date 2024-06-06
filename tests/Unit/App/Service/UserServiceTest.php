@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Exception\DuplicateEntryException;
 use App\Service\User\UserService;
 use App\System\Hydrator\Strategy\UuidStrategy;
-use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use Test\Data\Entity\UserTestEntity;
 use Test\Data\TestConstants;
@@ -76,7 +76,7 @@ class UserServiceTest extends AbstractService
         $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(
             id: TestConstants::USER_ID,
-            lastActionAt: new DateTime(),
+            lastActionAt: new DateTimeImmutable(),
         );
 
         $update = $this->userService->updateLastUserActionTime($user);

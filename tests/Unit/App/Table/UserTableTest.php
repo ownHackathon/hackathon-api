@@ -6,10 +6,11 @@ use App\Entity\User;
 use App\Exception\DuplicateEntryException;
 use App\Table\UserTable;
 use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use Test\Data\Entity\UserTestEntity;
-use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Data\TestConstants;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
 
 /**
  * @property UserTable $table
@@ -46,8 +47,8 @@ class UserTableTest extends AbstractTable
         $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(
             id: TestConstants::USER_ID,
-            registrationAt: new DateTime(),
-            lastActionAt: new DateTime(),
+            registrationAt: new DateTimeImmutable(),
+            lastActionAt: new DateTimeImmutable(),
         );
 
         $updateUser = $this->table->update($user);
@@ -60,7 +61,7 @@ class UserTableTest extends AbstractTable
         $user = new User(...UserTestEntity::getDefaultUserValue());
         $user = $user->with(
             id: TestConstants::USER_ID_THROW_EXCEPTION,
-            lastActionAt: new DateTime(),
+            lastActionAt: new DateTimeImmutable(),
         );
 
         $table = new UserTable(new MockQueryForCanNot());

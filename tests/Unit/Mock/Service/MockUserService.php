@@ -5,7 +5,7 @@ namespace Test\Unit\Mock\Service;
 use App\Entity\User;
 use App\Hydrator\ReflectionHydrator;
 use App\Service\User\UserService;
-use DateTime;
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Test\Data\Entity\UserTestEntity;
 use Test\Data\TestConstants;
@@ -30,6 +30,6 @@ readonly class MockUserService extends UserService
 
     public function updateLastUserActionTime(User $user): User
     {
-        return $user->with(lastActionAt: new DateTime(TestConstants::TIME));
+        return $user->with(lastActionAt: new DateTimeImmutable(TestConstants::TIME));
     }
 }

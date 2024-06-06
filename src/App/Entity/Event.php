@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Enum\EventStatus;
 use App\System\Trait\CloneReadonlyClassWith;
-use DateTime;
+use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final readonly class Event
@@ -18,8 +18,8 @@ final readonly class Event
         public string $title,
         public string $description,
         public string $eventText,
-        public DateTime $createdAt,
-        public DateTime $startedAt,
+        public DateTimeImmutable $createdAt,
+        public DateTimeImmutable $startedAt,
         public int $duration,
         public EventStatus $status,
         public bool $ratingCompleted,

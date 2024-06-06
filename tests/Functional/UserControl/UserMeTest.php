@@ -5,7 +5,7 @@ namespace Test\Functional\UserControl;
 use App\Entity\User;
 use App\Enum\UserRole;
 use App\Service\User\UserService;
-use DateTime;
+use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;
 use Ramsey\Uuid\Uuid;
@@ -37,8 +37,8 @@ class UserMeTest extends FunctionalTestCase
             'TestingUser',
             'myworld',
             'testing@example.com',
-            new DateTime(),
-            new DateTime()
+            new DateTimeImmutable(),
+            new DateTimeImmutable()
         );
 
         /** @var UserService $userService */

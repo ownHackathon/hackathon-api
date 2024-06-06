@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Enum\EventStatus;
 use App\Service\Event\EventService;
 use App\Service\Participant\ParticipantService;
-use DateTime;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -39,7 +39,7 @@ readonly class EventParticipantSubscribeMiddleware implements MiddlewareInterfac
             1,
             $user->id,
             $eventId,
-            new DateTime(),
+            new DateTimeImmutable(),
             true,
             false
         );

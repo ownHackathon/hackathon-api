@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\System\Trait\CloneReadonlyClassWith;
-use DateTime;
+use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final readonly class Project
@@ -16,7 +16,7 @@ final readonly class Project
         public int $participantId,
         public string $title,
         public string $description,
-        public DateTime $createdAt,
+        public DateTimeImmutable $createdAt,
         public string $gitRepoUri,
         public string $demoPageUri,
     ) {

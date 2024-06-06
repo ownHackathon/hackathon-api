@@ -2,7 +2,7 @@
 
 namespace Test\Data\Entity;
 
-use DateTime;
+use DateTimeImmutable;
 use Test\Data\TestConstants;
 
 class ParticipantTestEntity
@@ -13,7 +13,7 @@ class ParticipantTestEntity
             'id' => TestConstants::PARTICIPANT_ID,
             'userId' => TestConstants::USER_ID,
             'eventId' => TestConstants::EVENT_ID,
-            'requestedAt' => new DateTime(TestConstants::TIME),
+            'requestedAt' => new DateTimeImmutable(TestConstants::TIME),
             'subscribed' => true,
             'disqualified' => false,
         ];

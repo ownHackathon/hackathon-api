@@ -3,7 +3,7 @@
 namespace Test\Data\Entity;
 
 use App\Enum\UserRole;
-use DateTime;
+use DateTimeImmutable;
 use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Data\TestConstants;
 
@@ -18,8 +18,8 @@ class UserTestEntity
             'name' => TestConstants::USER_NAME,
             'password' => TestConstants::USER_PASSWORD,
             'email' => TestConstants::USER_EMAIL,
-            'registrationAt' => new DateTime(TestConstants::TIME),
-            'lastActionAt' => new DateTime(TestConstants::TIME),
+            'registrationAt' => new DateTimeImmutable(TestConstants::TIME),
+            'lastActionAt' => new DateTimeImmutable(TestConstants::TIME),
         ];
     }
 }
