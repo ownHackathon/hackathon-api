@@ -5,7 +5,7 @@ return [
         'table_storage' => [
             'table_name' => 'MigrationVersions',
             'version_column_name' => 'version',
-            'version_column_length' => 1024,
+            'version_column_length' => 192,
             'executed_at_column_name' => 'executedAt',
             'execution_time_column_name' => 'executionTime',
         ],
