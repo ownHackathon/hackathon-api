@@ -25,18 +25,12 @@ readonly class LoginAuthenticationMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $validationMessages = $request->getAttribute('validationMessages');
-
-        if (null !== $validationMessages) {
-            return $handler->handle($request);
-        }
-
         $name = $data['username'];
         $password = $data['password'];
 
         $user = $this->userService->findByName($name);
 
-        if (!$this->authService->isUserDataCorrect($user, $password)) {
+        if (!($user instanceof User) || !$this->authService->isUserDataCorrect($user, $password)) {
             return new JsonResponse(new SimpleMessageDto('Login failed'), HTTP::STATUS_UNAUTHORIZED);
         }
 

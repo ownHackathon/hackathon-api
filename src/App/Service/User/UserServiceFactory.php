@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Psr\Container\ContainerInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -21,8 +22,8 @@ readonly class UserServiceFactory
         /** @var ReflectionHydrator $hydrator */
         $hydrator = clone $container->get(ReflectionHydrator::class);
 
-        /** @var DateTimeFormatterStrategy $dateTimeFormatterStrategy */
-        $dateTimeFormatterStrategy = $container->get(DateTimeFormatterStrategy::class);
+        /** @var DateTimeImmutableFormatterStrategy $dateTimeFormatterStrategy */
+        $dateTimeFormatterStrategy = $container->get(DateTimeImmutableFormatterStrategy::class);
 
         /** @var Uuid $uuid */
         $uuid = $container->get(Uuid::class);

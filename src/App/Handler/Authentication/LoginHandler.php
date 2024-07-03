@@ -53,15 +53,11 @@ readonly class LoginHandler implements RequestHandlerInterface
     {
         $user = $request->getAttribute(User::AUTHENTICATED_USER);
 
-        $token = null;
-
-        if ($user instanceof User) {
-            $token = $this->generateToken(
-                $user->uuid->getHex()->toString(),
-                $this->tokenSecret,
-                $this->tokenDuration,
-            );
-        }
+        $token = $this->generateToken(
+            $user->uuid->getHex()->toString(),
+            $this->tokenSecret,
+            $this->tokenDuration,
+        );
 
         return new JsonResponse(new LoginTokenDto($token), HTTP::STATUS_OK);
     }

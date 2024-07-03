@@ -6,6 +6,7 @@ use App\Handler\Authentication\LoginHandlerFactory;
 use App\Handler\Authentication\UserPasswordForgottonHandlerFactory;
 use App\Hydrator\ClassMethodsHydratorFactory;
 use App\Hydrator\DateTimeFormatterStrategyFactory;
+use App\Hydrator\DateTimeImmutableFormatterStrategyFactory;
 use App\Hydrator\NullableStrategyFactory;
 use App\Hydrator\ReflectionHydrator;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
@@ -54,6 +55,7 @@ use App\Validator\UserPasswordChangeValidator;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Ramsey\Uuid\Uuid;
@@ -73,7 +75,19 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                LoginAuthenticationService::class,
+
+                EmailInput::class,
+                EventDescriptionInput::class,
+                EventDurationInput::class,
+                EventStartTimeInput::class,
+                EventTextInput::class,
+                EventTitleInput::class,
+                PasswordInput::class,
                 ReflectionHydrator::class,
+                TopicDescriptionInput::class,
+                TopicInput::class,
+                UsernameInput::class,
             ],
             'aliases' => [
                 EventRepository::class => EventTable::class,
@@ -85,6 +99,7 @@ class ConfigProvider
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
                 DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
+                DateTimeImmutableFormatterStrategy::class => DateTimeImmutableFormatterStrategyFactory::class,
                 NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\Authentication\LoginHandler::class => LoginHandlerFactory::class,
