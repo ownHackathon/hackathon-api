@@ -16,7 +16,7 @@ final class Version20220921210259CreateGarbageContainerTable extends AbstractMig
         $table->addColumn('tableId', Types::INTEGER, ['unsigned' => true,]);
         $table->addColumn('referenceId', Types::INTEGER, ['unsigned' => true,]);
         $table->addColumn('reasonId', Types::INTEGER, ['unsigned' => true,]);
-        $table->addColumn('userDefinedReason', Types::STRING, ['default' => '',]);
+        $table->addColumn('userDefinedReason', Types::STRING, ['length' => 255, 'default' => '',]);
         $table->addColumn('deletedAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
         $table->setPrimaryKey(['id']);

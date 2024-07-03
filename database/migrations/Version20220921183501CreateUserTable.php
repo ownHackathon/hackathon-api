@@ -11,12 +11,13 @@ final class Version20220921183501CreateUserTable extends AbstractMigration
     public function up(Schema $schema): void
     {
         $table = $schema->createTable('User');
+
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('uuid', Types::STRING, ['length' => 32,]);
         $table->addColumn('roleId', Types::INTEGER, ['unsigned' => true, 'default' => 1]);
         $table->addColumn('name', Types::STRING, ['length' => 50,]);
-        $table->addColumn('password', Types::STRING);
-        $table->addColumn('email', Types::STRING);
+        $table->addColumn('password', Types::STRING, ['length' => 255]);
+        $table->addColumn('email', Types::STRING, ['length' => 512]);
         $table->addColumn('registrationAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
         $table->addColumn('lastActionAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 

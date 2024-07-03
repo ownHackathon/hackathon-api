@@ -15,7 +15,7 @@ final class Version20220921195606CreateTopicPoolTable extends AbstractMigration
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('uuid', Types::STRING, ['length' => 32,]);
         $table->addColumn('eventId', Types::INTEGER, ['unsigned' => true, 'notnull' => false,]);
-        $table->addColumn('topic', Types::STRING);
+        $table->addColumn('topic', Types::STRING, ['length' => 512, 'notnull' => false]);
         $table->addColumn('description', Types::TEXT, ['default' => '',]);
         $table->addColumn('accepted', Types::BOOLEAN, ['default' => NULL, 'notnull' => false,]);
 

@@ -14,7 +14,6 @@ use Symfony\Component\Console\Application;
 
 $env = getenv('APP_ENV') ?: '';
 
-//$dbParams = require __DIR__ . '/../config/migrations/migrations.db.php';
 $dbParams = (require realpath(__DIR__) . sprintf('/../config/autoload/database.%s.php', getenv('APP_ENV') ?: 'global'))['database'];
 $dbParams['driver'] = 'pdo_' . $dbParams['driver'];
 
@@ -32,12 +31,14 @@ $configuration->setCheckDatabasePlatform($config['check_database_platform']);
 $configuration->setTransactional($config['transactional']);
 $configuration->setMigrationOrganization($config['organize_migrations']);
 
+
 $storageConfiguration = new TableMetadataStorageConfiguration();
 $storageConfiguration->setTableName($config['table_storage']['table_name']);
 $storageConfiguration->setVersionColumnName($config['table_storage']['version_column_name']);
 $storageConfiguration->setVersionColumnLength($config['table_storage']['version_column_length']);
 $storageConfiguration->setExecutedAtColumnName($config['table_storage']['executed_at_column_name']);
 $storageConfiguration->setExecutionTimeColumnName($config['table_storage']['execution_time_column_name']);
+
 
 $configuration->setMetadataStorageConfiguration($storageConfiguration);
 

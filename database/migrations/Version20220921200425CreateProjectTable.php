@@ -15,7 +15,7 @@ final class Version20220921200425CreateProjectTable extends AbstractMigration
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('uuid', Types::STRING, ['length' => 32,]);
         $table->addColumn('participantId', Types::INTEGER, ['unsigned' => true,]);
-        $table->addColumn('title', Types::STRING);
+        $table->addColumn('title', Types::STRING, ['length' => 512]);
         $table->addColumn('description', Types::TEXT);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
         $table->addColumn('gitRepoUri', Types::STRING, ['length' => 2083, 'default' => '',]);

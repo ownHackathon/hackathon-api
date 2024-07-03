@@ -9,6 +9,11 @@ return [
         'password' => 'dev',
         'dbname' => 'db',
         'charset' => 'utf8mb4',
+        'defaultTableOptions' => [
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_general_ci',
+            'engine' => 'InnoDB',
+        ],
         'error' => PDO::ERRMODE_EXCEPTION,
     ]
 ];

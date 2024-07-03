@@ -14,7 +14,7 @@ readonly class DatabaseFactory
 
         $dsn = $settings['driver'] === 'mysql'
             ? 'mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['host'] . ';port=' . $settings['port']
-            . ';charset=utf8'
+            . ';charset=utf8mb4'
             : 'sqlite:' . $settings['host'];
         $user = $settings['user'];
         $password = $settings['password'];

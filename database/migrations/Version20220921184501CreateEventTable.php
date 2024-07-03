@@ -15,8 +15,8 @@ final class Version20220921184501CreateEventTable extends AbstractMigration
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('uuid', Types::STRING, ['length' => 32]);
         $table->addColumn('userId', Types::INTEGER, ['unsigned' => true,]);
-        $table->addColumn('title', Types::STRING);
-        $table->addColumn('description', Types::STRING, ['default' => '']);
+        $table->addColumn('title', Types::STRING, ['length' => 255]);
+        $table->addColumn('description', Types::STRING, ['length' => 1024, 'default' => '']);
         $table->addColumn('eventText', Types::TEXT);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
         $table->addColumn('startedAt', Types::DATETIME_IMMUTABLE);
