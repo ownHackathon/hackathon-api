@@ -7,3 +7,5 @@ parameters:
 		- identifier: missingType.generics
 	bootstrapFiles:
 	    - constants.php
+includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon

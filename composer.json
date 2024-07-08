@@ -87,6 +87,7 @@
         "helmich/phpunit-json-assert": "^3.5",
         "overtrue/phplint": "^5.3",
         "phpstan/phpstan": "^1.4",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
         "phpunit/phpunit": "^10.0",
         "roave/security-advisories": "dev-latest",
         "slevomat/coding-standard": "^8.14",
