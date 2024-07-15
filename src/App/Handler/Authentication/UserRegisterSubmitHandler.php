@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly class UserRegisterSubmitHandler implements RequestHandlerInterface
 {
-    #[OA\Post(path: '/api/user/register', summary: 'Register a user with e-mail', tags: ['User Control'])]
+    #[OA\Post(path: '/api/user/register', summary: 'Register a user with e-mail', tags: ['User Control'], deprecated: true)]
     #[OA\RequestBody(
         required: true,
         content: new OA\JsonContent(

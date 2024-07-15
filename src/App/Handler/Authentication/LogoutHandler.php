@@ -22,7 +22,8 @@ readonly class LogoutHandler implements RequestHandlerInterface
                 response: HTTP::STATUS_SEE_OTHER,
                 description: 'not implementet yet'
             ),
-        ]
+        ],
+        deprecated: true,
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

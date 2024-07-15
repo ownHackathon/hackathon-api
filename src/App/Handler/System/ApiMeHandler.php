@@ -32,6 +32,7 @@ readonly class ApiMeHandler implements RequestHandlerInterface
         path: '/api/user/me',
         summary: 'Returns minimal information for a logged-in user or empty',
         tags: ['User Control'],
+        deprecated: true,
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,

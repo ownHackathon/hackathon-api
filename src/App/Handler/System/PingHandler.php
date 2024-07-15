@@ -33,7 +33,8 @@ readonly class PingHandler implements RequestHandlerInterface
                     ),
                 ]
             ),
-        ]
+        ],
+        deprecated: true
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

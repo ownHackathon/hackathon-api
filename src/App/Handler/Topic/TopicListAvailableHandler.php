@@ -17,7 +17,7 @@ readonly class TopicListAvailableHandler implements RequestHandlerInterface
     /**
      * Returns a list of all available topics that are available for a new event.
      */
-    #[OA\Get(path: '/api/topics/available', tags: ['Topics'])]
+    #[OA\Get(path: '/api/topics/available', tags: ['Topics'], deprecated: true)]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'Success',

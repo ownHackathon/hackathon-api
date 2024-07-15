@@ -25,7 +25,7 @@ readonly class TopicCreateHandler implements RequestHandlerInterface
     /**
      *  Create a new hackathon topic
      */
-    #[OA\Post(path: '/api/topic', tags: ['Topics'])]
+    #[OA\Post(path: '/api/topic', tags: ['Topics'], deprecated: true)]
     #[OA\RequestBody(
         required: true,
         content: new OA\JsonContent(ref: TopicCreateRequestDto::class)

@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly class EventListHandler implements RequestHandlerInterface
 {
-    #[OA\Get(path: '/api/event', summary: 'List of all events', tags: ['Event'])]
+    #[OA\Get(path: '/api/event', summary: 'List of all events', tags: ['Event'], deprecated: true)]
     #[OA\QueryParameter(
         name: 'order',
         description: 'The field to be sorted by<br>
