@@ -206,7 +206,7 @@ jobs:
         run: composer run-script openapi
 
       - name: rsync deployments
-        uses: burnett01/rsync-deployments@7
+        uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avz --no-o --no-g --no-perms --no-t --omit-dir-times --delete --exclude-from='.rsync-exclude'
           path: /
