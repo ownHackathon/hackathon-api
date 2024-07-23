@@ -2,7 +2,7 @@
 
 namespace App\Factory;
 
-use App\System\Logger\BaseInformationProcessor;
+use App\Logger\BaseInformationProcessor;
 use DateTime;
 use Laminas\Log\Filter\Priority;
 use Laminas\Log\Formatter\Simple;

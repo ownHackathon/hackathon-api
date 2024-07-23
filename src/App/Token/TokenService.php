@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\System;
+namespace App\Token;
 
 use function bin2hex;
 use function openssl_random_pseudo_bytes;

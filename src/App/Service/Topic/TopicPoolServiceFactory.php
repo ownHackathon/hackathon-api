@@ -3,8 +3,8 @@
 namespace App\Service\Topic;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Hydrator\Strategy\UuidStrategy;
 use App\Repository\TopicPoolRepository;
-use App\System\Hydrator\Strategy\UuidStrategy;
 use Psr\Container\ContainerInterface;
 
 readonly class TopicPoolServiceFactory

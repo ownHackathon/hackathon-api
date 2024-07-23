@@ -3,8 +3,8 @@
 namespace App\Middleware\Authentication;
 
 use App\Entity\User;
-use App\Service\System\TokenService;
 use App\Service\User\UserService;
+use App\Token\TokenService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

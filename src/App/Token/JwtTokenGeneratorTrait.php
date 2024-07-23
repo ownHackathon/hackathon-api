@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\System;
+namespace App\Token;
 
 use Firebase\JWT\JWT;
 

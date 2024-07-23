@@ -3,8 +3,8 @@
 namespace App\Service\Project;
 
 use App\Hydrator\ReflectionHydrator;
+use App\Hydrator\Strategy\UuidStrategy;
 use App\Repository\ProjectRepository;
-use App\System\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 

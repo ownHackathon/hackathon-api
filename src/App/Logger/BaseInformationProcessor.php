@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\System\Logger;
+namespace App\Logger;
 
 use Laminas\Log\Processor\ProcessorInterface;
 
 use function filter_input;
-
 use function filter_input_array;
 
 use const INPUT_GET;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\System\Hydrator\Strategy;
+namespace App\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;

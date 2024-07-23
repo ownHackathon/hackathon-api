@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\System;
+namespace App\Exception;
 
-use App\Exception\HttpException;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

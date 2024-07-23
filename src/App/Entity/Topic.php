@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\System\Trait\CloneReadonlyClassWith;
+use App\Trait\CloneReadonlyClassWith;
 use Ramsey\Uuid\UuidInterface;
 
 final readonly class Topic

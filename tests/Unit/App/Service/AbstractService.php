@@ -3,7 +3,7 @@
 namespace Test\Unit\App\Service;
 
 use App\Hydrator\ReflectionHydrator;
-use App\System\Hydrator\Strategy\UuidStrategy;
+use App\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;

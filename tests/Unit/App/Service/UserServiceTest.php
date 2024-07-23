@@ -4,8 +4,8 @@ namespace Test\Unit\App\Service;
 
 use App\Entity\User;
 use App\Exception\DuplicateEntryException;
+use App\Hydrator\Strategy\UuidStrategy;
 use App\Service\User\UserService;
-use App\System\Hydrator\Strategy\UuidStrategy;
 use DateTimeImmutable;
 use InvalidArgumentException;
 use Test\Data\Entity\UserTestEntity;
