@@ -30,13 +30,20 @@ use App\Table\ParticipantTable;
 use App\Table\ProjectTable;
 use App\Table\TopicPoolTable;
 use App\Table\UserTable;
+use App\Validator\EventCreateValidator;
+use App\Validator\TopicCreateValidator;
 use Core\Hydrator\ReflectionHydrator;
 use Core\Token\TokenService;
-use Core\Validator\EventCreateValidator;
+use Core\Validator\Input\Event\EventDescriptionInput;
+use Core\Validator\Input\Event\EventDurationInput;
+use Core\Validator\Input\Event\EventStartTimeInput;
+use Core\Validator\Input\Event\EventTextInput;
+use Core\Validator\Input\Event\EventTitleInput;
+use Core\Validator\Input\Topic\TopicDescriptionInput;
+use Core\Validator\Input\Topic\TopicInput;
 use Core\Validator\LoginValidator;
 use Core\Validator\PasswordForgottenEmailValidator;
 use Core\Validator\RegisterValidator;
-use Core\Validator\TopicCreateValidator;
 use Core\Validator\UserPasswordChangeValidator;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -120,6 +127,9 @@ class ConfigProvider
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
+
+                EventCreateValidator::class => ConfigAbstractFactory::class,
+                TopicCreateValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -246,6 +256,18 @@ class ConfigProvider
             ],
             Table\UserTable::class => [
                 Query::class,
+            ],
+
+            EventCreateValidator::class => [
+                EventTitleInput::class,
+                EventDescriptionInput::class,
+                EventTextInput::class,
+                EventStartTimeInput::class,
+                EventDurationInput::class,
+            ],
+            TopicCreateValidator::class => [
+                TopicInput::class,
+                TopicDescriptionInput::class,
             ],
         ];
     }

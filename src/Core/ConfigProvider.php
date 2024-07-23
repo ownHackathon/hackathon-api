@@ -9,7 +9,6 @@ use Core\Hydrator\NullableStrategyFactory;
 use Core\Hydrator\ReflectionHydrator;
 use Core\Listener\LoggingErrorListener;
 use Core\Listener\LoggingErrorListenerFactory;
-use Core\Validator\EventCreateValidator;
 use Core\Validator\Input\EmailInput;
 use Core\Validator\Input\Event\EventDescriptionInput;
 use Core\Validator\Input\Event\EventDurationInput;
@@ -23,7 +22,6 @@ use Core\Validator\Input\UsernameInput;
 use Core\Validator\LoginValidator;
 use Core\Validator\PasswordForgottenEmailValidator;
 use Core\Validator\RegisterValidator;
-use Core\Validator\TopicCreateValidator;
 use Core\Validator\UserPasswordChangeValidator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
@@ -68,11 +66,9 @@ class ConfigProvider
 
                 LoggingErrorListener::class => LoggingErrorListenerFactory::class,
 
-                EventCreateValidator::class => ConfigAbstractFactory::class,
                 LoginValidator::class => ConfigAbstractFactory::class,
                 PasswordForgottenEmailValidator::class => ConfigAbstractFactory::class,
                 RegisterValidator::class => ConfigAbstractFactory::class,
-                TopicCreateValidator::class => ConfigAbstractFactory::class,
                 UserPasswordChangeValidator::class => ConfigAbstractFactory::class,
             ],
         ];
@@ -81,13 +77,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            EventCreateValidator::class => [
-                EventTitleInput::class,
-                EventDescriptionInput::class,
-                EventTextInput::class,
-                EventStartTimeInput::class,
-                EventDurationInput::class,
-            ],
             LoginValidator::class => [
                 UsernameInput::class,
                 PasswordInput::class,
@@ -97,10 +86,6 @@ class ConfigProvider
             ],
             RegisterValidator::class => [
                 EmailInput::class,
-            ],
-            TopicCreateValidator::class => [
-                TopicInput::class,
-                TopicDescriptionInput::class,
             ],
             UserPasswordChangeValidator::class => [
                 PasswordInput::class,

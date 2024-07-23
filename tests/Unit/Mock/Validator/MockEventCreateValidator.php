@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Mock\Validator;
 
-use Core\Validator\EventCreateValidator;
+use App\Validator\EventCreateValidator;
 use Core\Validator\Input\Event\EventDescriptionInput;
 use Core\Validator\Input\Event\EventDurationInput;
 use Core\Validator\Input\Event\EventStartTimeInput;
