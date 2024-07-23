@@ -2,6 +2,15 @@
 
 namespace Core;
 
+use App\Service\User\UserService;
+use Core\Authentication\Handler;
+use Core\Authentication\Handler\LoginHandlerFactory;
+use Core\Authentication\Handler\UserPasswordForgottonHandlerFactory;
+use Core\Authentication\Middleware;
+use Core\Authentication\Service;
+use Core\Authentication\Service\ApiAccessService;
+use Core\Authentication\Service\ApiAccessServiceFactory;
+use Core\Authentication\Service\LoginAuthenticationService;
 use Core\Hydrator\ClassMethodsHydratorFactory;
 use Core\Hydrator\DateTimeFormatterStrategyFactory;
 use Core\Hydrator\DateTimeImmutableFormatterStrategyFactory;
@@ -9,20 +18,10 @@ use Core\Hydrator\NullableStrategyFactory;
 use Core\Hydrator\ReflectionHydrator;
 use Core\Listener\LoggingErrorListener;
 use Core\Listener\LoggingErrorListenerFactory;
-use Core\Validator\Input\EmailInput;
-use Core\Validator\Input\Event\EventDescriptionInput;
-use Core\Validator\Input\Event\EventDurationInput;
-use Core\Validator\Input\Event\EventStartTimeInput;
-use Core\Validator\Input\Event\EventTextInput;
-use Core\Validator\Input\Event\EventTitleInput;
-use Core\Validator\Input\PasswordInput;
-use Core\Validator\Input\Topic\TopicDescriptionInput;
-use Core\Validator\Input\Topic\TopicInput;
-use Core\Validator\Input\UsernameInput;
-use Core\Validator\LoginValidator;
-use Core\Validator\PasswordForgottenEmailValidator;
-use Core\Validator\RegisterValidator;
-use Core\Validator\UserPasswordChangeValidator;
+use Core\Repository\UserRepository;
+use Core\Table\UserTable;
+use Core\Token\TokenService;
+use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
@@ -43,33 +42,47 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                EmailInput::class,
-                EventDescriptionInput::class,
-                EventDurationInput::class,
-                EventStartTimeInput::class,
-                EventTextInput::class,
-                EventTitleInput::class,
-                PasswordInput::class,
                 ReflectionHydrator::class,
-                TopicDescriptionInput::class,
-                TopicInput::class,
-                UsernameInput::class,
+
+                Validator\Input\EmailInput::class,
+                Validator\Input\PasswordInput::class,
+                Validator\Input\UsernameInput::class,
             ],
             'aliases' => [
-
+                UserRepository::class => UserTable::class,
             ],
             'factories' => [
                 ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
                 DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
                 DateTimeImmutableFormatterStrategy::class => DateTimeImmutableFormatterStrategyFactory::class,
-                NullableStrategy::class => NullableStrategyFactory::class,
+
+                Handler\LoginHandler::class => LoginHandlerFactory::class,
+                Handler\UserPasswordForgottonHandler::class => UserPasswordForgottonHandlerFactory::class,
 
                 LoggingErrorListener::class => LoggingErrorListenerFactory::class,
 
-                LoginValidator::class => ConfigAbstractFactory::class,
-                PasswordForgottenEmailValidator::class => ConfigAbstractFactory::class,
-                RegisterValidator::class => ConfigAbstractFactory::class,
-                UserPasswordChangeValidator::class => ConfigAbstractFactory::class,
+                Middleware\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
+                Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\LoginValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserPasswordChangeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserPasswordChangeValidatorMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserPasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserPasswordForgottenValidator::class => ConfigAbstractFactory::class,
+                Middleware\UserPasswordVerifyTokenMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserRegisterMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserRegisterValidationMiddleware::class => ConfigAbstractFactory::class,
+
+                NullableStrategy::class => NullableStrategyFactory::class,
+
+                Service\ApiAccessService::class => ApiAccessServiceFactory::class,
+
+                Table\UserTable::class => ConfigAbstractFactory::class,
+
+                Validator\LoginValidator::class => ConfigAbstractFactory::class,
+                Validator\PasswordForgottenEmailValidator::class => ConfigAbstractFactory::class,
+                Validator\RegisterValidator::class => ConfigAbstractFactory::class,
+                Validator\UserPasswordChangeValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -77,18 +90,56 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            LoginValidator::class => [
-                UsernameInput::class,
-                PasswordInput::class,
+            Middleware\UserRegisterMiddleware::class => [
+                UserService::class,
+                ReflectionHydrator::class,
             ],
-            PasswordForgottenEmailValidator::class => [
-                EmailInput::class,
+            Middleware\ApiAccessMiddleware::class => [
+                ApiAccessService::class,
             ],
-            RegisterValidator::class => [
-                EmailInput::class,
+            Middleware\UserPasswordForgottenMiddleware::class => [
+                UserService::class,
+                TokenService::class,
             ],
-            UserPasswordChangeValidator::class => [
-                PasswordInput::class,
+            Middleware\UserPasswordChangeMiddleware::class => [
+                UserService::class,
+            ],
+            Middleware\UserPasswordChangeValidatorMiddleware::class => [
+                Validator\UserPasswordChangeValidator::class,
+            ],
+            Middleware\UserPasswordForgottenValidator::class => [
+                Validator\PasswordForgottenEmailValidator::class,
+            ],
+            Middleware\UserPasswordVerifyTokenMiddleware::class => [
+                UserService::class,
+            ],
+            Middleware\UserRegisterValidationMiddleware::class => [
+                Validator\RegisterValidator::class,
+            ],
+            Middleware\LoginAuthenticationMiddleware::class => [
+                UserService::class,
+                LoginAuthenticationService::class,
+            ],
+            Middleware\LoginValidationMiddleware::class => [
+                Validator\LoginValidator::class,
+            ],
+
+            Table\UserTable::class => [
+                Query::class,
+            ],
+
+            Validator\LoginValidator::class => [
+                Validator\Input\UsernameInput::class,
+                Validator\Input\PasswordInput::class,
+            ],
+            Validator\PasswordForgottenEmailValidator::class => [
+                Validator\Input\EmailInput::class,
+            ],
+            Validator\RegisterValidator::class => [
+                Validator\Input\EmailInput::class,
+            ],
+            Validator\UserPasswordChangeValidator::class => [
+                Validator\Input\PasswordInput::class,
             ],
         ];
     }

@@ -6,9 +6,9 @@ use App\Middleware\Event\EventNameMiddleware;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\Mock\Service\MockEventService;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockEventService;
 
 class EventNameMiddlewareTest extends AbstractMiddleware
 {

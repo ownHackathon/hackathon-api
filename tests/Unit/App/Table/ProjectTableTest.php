@@ -5,6 +5,7 @@ namespace Test\Unit\App\Table;
 use App\Table\ProjectTable;
 use Test\Data\Entity\ProjectTestEntity;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Table\AbstractTable;
 
 /**
  * @property ProjectTable $table

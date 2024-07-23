@@ -4,7 +4,7 @@ namespace Test\Unit\App\Middleware\Topic;
 
 use App\Middleware\Topic\TopicListAvailableMiddleware;
 use Psr\Http\Message\ResponseInterface;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockTopicPoolService;
 
 class TopicListMiddlewareTest extends AbstractMiddleware

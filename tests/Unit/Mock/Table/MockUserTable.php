@@ -3,7 +3,7 @@
 namespace Test\Unit\Mock\Table;
 
 use App\Entity\User;
-use App\Table\UserTable;
+use Core\Table\UserTable;
 use InvalidArgumentException;
 use Ramsey\Uuid\Rfc4122\UuidV7;
 use Test\Data\Entity\UserTestEntity;

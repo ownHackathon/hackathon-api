@@ -7,7 +7,7 @@ use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Service\Event\EventService;
 use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\MockContainer;
 use Test\Unit\Mock\Service\MockEventService;
 

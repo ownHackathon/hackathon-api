@@ -2,8 +2,8 @@
 
 namespace App\Validator;
 
-use Core\Validator\Input\Topic\TopicDescriptionInput;
-use Core\Validator\Input\Topic\TopicInput;
+use App\Validator\Input\Topic\TopicDescriptionInput;
+use App\Validator\Input\Topic\TopicInput;
 use Laminas\InputFilter\InputFilter;
 
 class TopicCreateValidator extends InputFilter

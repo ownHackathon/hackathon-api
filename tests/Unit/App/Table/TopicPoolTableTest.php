@@ -6,6 +6,7 @@ use App\Entity\Topic;
 use App\Table\TopicPoolTable;
 use Test\Data\Entity\TopicTestEntity;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Table\AbstractTable;
 
 /**
  * @property TopicPoolTable $table

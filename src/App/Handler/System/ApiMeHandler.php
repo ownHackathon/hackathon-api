@@ -2,9 +2,9 @@
 
 namespace App\Handler\System;
 
-use App\Dto\System\ApiMeDto;
-use App\Dto\System\SimpleMessageDto;
 use App\Entity\User;
+use Core\Dto\ApiMeDto;
+use Core\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

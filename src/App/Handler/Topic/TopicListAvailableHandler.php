@@ -2,9 +2,9 @@
 
 namespace App\Handler\Topic;
 
-use App\Dto\System\SimpleMessageDto;
 use App\Dto\Topic\TopicListDto;
 use App\Entity\Topic;
+use Core\Dto\SimpleMessageDto;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

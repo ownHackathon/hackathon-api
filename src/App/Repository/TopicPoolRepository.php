@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Topic;
+use Core\Repository\Repository;
 
 interface TopicPoolRepository extends Repository
 {

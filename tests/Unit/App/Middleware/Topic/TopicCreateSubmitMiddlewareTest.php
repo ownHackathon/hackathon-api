@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Ramsey\Uuid\Uuid;
 use Test\Data\Entity\TopicTestEntity;
 use Test\Data\TestConstants;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockTopicPoolService;
 
 class TopicCreateSubmitMiddlewareTest extends AbstractMiddleware

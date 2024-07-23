@@ -6,7 +6,7 @@ use App\Entity\Topic;
 use App\Handler\Topic\TopicListAvailableHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Test\Data\Entity\TopicTestEntity;
-use Test\Unit\App\Handler\AbstractHandler;
+use Test\Unit\Core\Handler\AbstractHandler;
 
 class TopicListAvailableHandlerTest extends AbstractHandler
 {

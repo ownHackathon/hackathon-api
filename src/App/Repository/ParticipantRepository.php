@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Participant;
+use Core\Repository\Repository;
 
 interface ParticipantRepository extends Repository
 {

@@ -6,8 +6,9 @@ use App\Entity\Event;
 use App\Service\Event\EventService;
 use InvalidArgumentException;
 use Test\Data\Entity\EventTestEntity;
-use Test\Unit\Mock\Table\MockEventTable;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Service\AbstractService;
+use Test\Unit\Mock\Table\MockEventTable;
 
 class EventServiceTest extends AbstractService
 {

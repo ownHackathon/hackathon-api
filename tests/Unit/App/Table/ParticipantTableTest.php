@@ -7,6 +7,7 @@ use App\Table\ParticipantTable;
 use Core\Exception\DuplicateEntryException;
 use Test\Data\Entity\ParticipantTestEntity;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Table\AbstractTable;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
 
 /**

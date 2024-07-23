@@ -4,6 +4,7 @@ namespace App\Table;
 
 use App\Entity\Topic;
 use App\Repository\TopicPoolRepository;
+use Core\Table\AbstractTable;
 
 readonly class TopicPoolTable extends AbstractTable implements TopicPoolRepository
 {

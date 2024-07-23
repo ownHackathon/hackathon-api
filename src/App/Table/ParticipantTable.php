@@ -5,6 +5,7 @@ namespace App\Table;
 use App\Entity\Participant;
 use App\Repository\ParticipantRepository;
 use Core\Exception\DuplicateEntryException;
+use Core\Table\AbstractTable;
 
 readonly class ParticipantTable extends AbstractTable implements ParticipantRepository
 {

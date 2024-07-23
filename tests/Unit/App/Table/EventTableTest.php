@@ -7,6 +7,7 @@ use App\Table\EventTable;
 use Core\Exception\DuplicateEntryException;
 use Test\Data\Entity\EventTestEntity;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Table\AbstractTable;
 use Test\Unit\Mock\Database\MockQueryForCanNot;
 
 /**

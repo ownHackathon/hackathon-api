@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use Core\Repository\Repository;
 
 interface EventRepository extends Repository
 {

@@ -7,8 +7,9 @@ use App\Repository\TopicPoolRepository;
 use App\Service\Topic\TopicPoolService;
 use InvalidArgumentException;
 use Test\Data\Entity\TopicTestEntity;
-use Test\Unit\Mock\Table\MockTopicPoolTable;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Service\AbstractService;
+use Test\Unit\Mock\Table\MockTopicPoolTable;
 
 class TopicPoolServiceTest extends AbstractService
 {

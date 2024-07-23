@@ -2,11 +2,11 @@
 
 namespace App\Validator;
 
-use Core\Validator\Input\Event\EventDescriptionInput;
-use Core\Validator\Input\Event\EventDurationInput;
-use Core\Validator\Input\Event\EventStartTimeInput;
-use Core\Validator\Input\Event\EventTextInput;
-use Core\Validator\Input\Event\EventTitleInput;
+use App\Validator\Input\Event\EventDescriptionInput;
+use App\Validator\Input\Event\EventDurationInput;
+use App\Validator\Input\Event\EventStartTimeInput;
+use App\Validator\Input\Event\EventTextInput;
+use App\Validator\Input\Event\EventTitleInput;
 use Laminas\InputFilter\InputFilter;
 
 class EventCreateValidator extends InputFilter

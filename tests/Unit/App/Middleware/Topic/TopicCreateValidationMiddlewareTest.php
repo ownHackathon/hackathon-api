@@ -5,7 +5,7 @@ namespace Test\Unit\App\Middleware\Topic;
 use App\Middleware\Topic\TopicCreateValidationMiddleware;
 use Core\Exception\InvalidArgumentHttpException;
 use Psr\Http\Message\ResponseInterface;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Validator\MockTopicCreateValidator;
 
 class TopicCreateValidationMiddlewareTest extends AbstractMiddleware

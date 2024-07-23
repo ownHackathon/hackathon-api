@@ -3,6 +3,7 @@
 namespace App\Table;
 
 use App\Repository\ProjectRepository;
+use Core\Table\AbstractTable;
 
 readonly class ProjectTable extends AbstractTable implements ProjectRepository
 {

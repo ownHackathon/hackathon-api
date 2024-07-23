@@ -8,9 +8,9 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Test\Data\Entity\UserTestEntity;
-use Test\Unit\App\Middleware\AbstractMiddleware;
-use Test\Unit\Mock\Service\MockEventService;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
+use Test\Unit\Mock\Service\MockEventService;
 
 class EventCreateMiddlewareTest extends AbstractMiddleware
 {

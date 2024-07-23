@@ -5,6 +5,7 @@ namespace App\Table;
 use App\Entity\Event;
 use App\Repository\EventRepository;
 use Core\Exception\DuplicateEntryException;
+use Core\Table\AbstractTable;
 
 readonly class EventTable extends AbstractTable implements EventRepository
 {

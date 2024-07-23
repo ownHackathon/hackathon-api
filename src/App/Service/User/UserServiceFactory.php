@@ -3,9 +3,9 @@
 namespace App\Service\User;
 
 use App\Enum\UserRole;
-use App\Repository\UserRepository;
 use Core\Hydrator\ReflectionHydrator;
 use Core\Hydrator\Strategy\UuidStrategy;
+use Core\Repository\UserRepository;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Psr\Container\ContainerInterface;

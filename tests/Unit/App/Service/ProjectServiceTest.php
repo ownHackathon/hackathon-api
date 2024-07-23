@@ -5,8 +5,9 @@ namespace Test\Unit\App\Service;
 use App\Entity\Project;
 use App\Service\Project\ProjectService;
 use InvalidArgumentException;
-use Test\Unit\Mock\Table\MockProjectTable;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Service\AbstractService;
+use Test\Unit\Mock\Table\MockProjectTable;
 
 class ProjectServiceTest extends AbstractService
 {

@@ -6,8 +6,9 @@ use App\Entity\Participant;
 use App\Service\Participant\ParticipantService;
 use InvalidArgumentException;
 use Test\Data\Entity\ParticipantTestEntity;
-use Test\Unit\Mock\Table\MockParticipantTable;
 use Test\Data\TestConstants;
+use Test\Unit\Core\Service\AbstractService;
+use Test\Unit\Mock\Table\MockParticipantTable;
 
 class ParticipantServiceTest extends AbstractService
 {

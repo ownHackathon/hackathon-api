@@ -7,6 +7,7 @@ use App\Service\Participant\ParticipantService;
 use App\Service\Participant\ParticipantServiceFactory;
 use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
+use Test\Unit\Core\Service\AbstractService;
 use Test\Unit\Mock\MockContainer;
 use Test\Unit\Mock\Table\MockParticipantTable;
 

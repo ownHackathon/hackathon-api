@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Core\Repository\Repository;
+
 interface ProjectRepository extends Repository
 {
     public function findByParticipantId(int $id): bool|array;

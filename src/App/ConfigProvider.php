@@ -2,17 +2,11 @@
 
 namespace App;
 
-use App\Handler\Authentication\LoginHandlerFactory;
-use App\Handler\Authentication\UserPasswordForgottonHandlerFactory;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Repository\EventRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\TopicPoolRepository;
-use App\Repository\UserRepository;
-use App\Service\Authentication\ApiAccessService;
-use App\Service\Authentication\ApiAccessServiceFactory;
-use App\Service\Authentication\LoginAuthenticationService;
 use App\Service\EMail\TopicCreateEMailService;
 use App\Service\EMail\TopicCreateEMailServiceFactory;
 use App\Service\Event\EventService;
@@ -29,22 +23,17 @@ use App\Table\EventTable;
 use App\Table\ParticipantTable;
 use App\Table\ProjectTable;
 use App\Table\TopicPoolTable;
-use App\Table\UserTable;
 use App\Validator\EventCreateValidator;
+use App\Validator\Input\Event\EventDescriptionInput;
+use App\Validator\Input\Event\EventDurationInput;
+use App\Validator\Input\Event\EventStartTimeInput;
+use App\Validator\Input\Event\EventTextInput;
+use App\Validator\Input\Event\EventTitleInput;
+use App\Validator\Input\Topic\TopicDescriptionInput;
+use App\Validator\Input\Topic\TopicInput;
 use App\Validator\TopicCreateValidator;
+use Core\Authentication\Service\LoginAuthenticationService;
 use Core\Hydrator\ReflectionHydrator;
-use Core\Token\TokenService;
-use Core\Validator\Input\Event\EventDescriptionInput;
-use Core\Validator\Input\Event\EventDurationInput;
-use Core\Validator\Input\Event\EventStartTimeInput;
-use Core\Validator\Input\Event\EventTextInput;
-use Core\Validator\Input\Event\EventTitleInput;
-use Core\Validator\Input\Topic\TopicDescriptionInput;
-use Core\Validator\Input\Topic\TopicInput;
-use Core\Validator\LoginValidator;
-use Core\Validator\PasswordForgottenEmailValidator;
-use Core\Validator\RegisterValidator;
-use Core\Validator\UserPasswordChangeValidator;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -66,36 +55,27 @@ class ConfigProvider
         return [
             'invokables' => [
                 LoginAuthenticationService::class,
-
+                EventDescriptionInput::class,
+                EventDurationInput::class,
+                EventStartTimeInput::class,
+                EventTextInput::class,
+                EventTitleInput::class,
+                TopicDescriptionInput::class,
+                TopicInput::class,
             ],
             'aliases' => [
                 EventRepository::class => EventTable::class,
                 ParticipantRepository::class => ParticipantTable::class,
                 ProjectRepository::class => ProjectTable::class,
                 TopicPoolRepository::class => TopicPoolTable::class,
-                UserRepository::class => UserTable::class,
             ],
             'factories' => [
-
-                Handler\Authentication\LoginHandler::class => LoginHandlerFactory::class,
-                Handler\Authentication\UserPasswordForgottonHandler::class => UserPasswordForgottonHandlerFactory::class,
                 Handler\Event\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\Event\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\Topic\TopicCreateHandler::class => ConfigAbstractFactory::class,
                 Handler\User\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\System\TestMailHandler::class => ConfigAbstractFactory::class,
 
-                Middleware\Authentication\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\JwtAuthenticationMiddleware::class => Middleware\Authentication\JwtAuthenticationMiddlewareFactory::class,
-                Middleware\Authentication\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\LoginValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserPasswordChangeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserPasswordChangeValidatorMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserPasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserPasswordForgottenValidator::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserPasswordVerifyTokenMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserRegisterMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Authentication\UserRegisterValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Event\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
                 Middleware\Event\EventCreateValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Event\EventParticipantSubscribeMiddleware::class => ConfigAbstractFactory::class,
@@ -114,7 +94,6 @@ class ConfigProvider
                 Middleware\User\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\User\UserMiddleware::class => ConfigAbstractFactory::class,
 
-                Service\Authentication\ApiAccessService::class => ApiAccessServiceFactory::class,
                 Service\EMail\TopicCreateEMailService::class => TopicCreateEMailServiceFactory::class,
                 Service\Event\EventService::class => EventServiceFactory::class,
                 Service\Participant\ParticipantService::class => ParticipantServiceFactory::class,
@@ -126,7 +105,6 @@ class ConfigProvider
                 Table\ParticipantTable::class => ConfigAbstractFactory::class,
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
-                Table\UserTable::class => ConfigAbstractFactory::class,
 
                 EventCreateValidator::class => ConfigAbstractFactory::class,
                 TopicCreateValidator::class => ConfigAbstractFactory::class,
@@ -137,39 +115,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Middleware\Authentication\UserRegisterMiddleware::class => [
-                UserService::class,
-                ReflectionHydrator::class,
-            ],
-            Middleware\Authentication\ApiAccessMiddleware::class => [
-                ApiAccessService::class,
-            ],
-            Middleware\Authentication\UserPasswordForgottenMiddleware::class => [
-                UserService::class,
-                TokenService::class,
-            ],
-            Middleware\Authentication\UserPasswordChangeMiddleware::class => [
-                UserService::class,
-            ],
-            Middleware\Authentication\UserPasswordChangeValidatorMiddleware::class => [
-                UserPasswordChangeValidator::class,
-            ],
-            Middleware\Authentication\UserPasswordForgottenValidator::class => [
-                PasswordForgottenEmailValidator::class,
-            ],
-            Middleware\Authentication\UserPasswordVerifyTokenMiddleware::class => [
-                UserService::class,
-            ],
-            Middleware\Authentication\UserRegisterValidationMiddleware::class => [
-                RegisterValidator::class,
-            ],
-            Middleware\Authentication\LoginAuthenticationMiddleware::class => [
-                UserService::class,
-                LoginAuthenticationService::class,
-            ],
-            Middleware\Authentication\LoginValidationMiddleware::class => [
-                LoginValidator::class,
-            ],
             Handler\Event\EventHandler::class => [
                 UserService::class,
                 ParticipantService::class,
@@ -252,9 +197,6 @@ class ConfigProvider
                 Query::class,
             ],
             Table\TopicPoolTable::class => [
-                Query::class,
-            ],
-            Table\UserTable::class => [
                 Query::class,
             ],
 

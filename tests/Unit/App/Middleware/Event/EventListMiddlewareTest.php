@@ -4,7 +4,7 @@ namespace Test\Unit\App\Middleware\Event;
 
 use App\Middleware\Event\EventListMiddleware;
 use Psr\Http\Message\ResponseInterface;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Service\MockEventService;
 use Test\Unit\Mock\Service\MockUserService;
 

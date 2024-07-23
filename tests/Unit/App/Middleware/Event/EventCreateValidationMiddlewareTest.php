@@ -5,7 +5,7 @@ namespace Test\Unit\App\Middleware\Event;
 use App\Middleware\Event\EventCreateValidationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
-use Test\Unit\App\Middleware\AbstractMiddleware;
+use Test\Unit\Core\Middleware\AbstractMiddleware;
 use Test\Unit\Mock\Validator\MockEventCreateValidator;
 
 class EventCreateValidationMiddlewareTest extends AbstractMiddleware

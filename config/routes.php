@@ -20,7 +20,7 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->post(
         '/api/event[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\Event\EventCreateValidationMiddleware::class,
             \App\Middleware\Event\EventCreateMiddleware::class,
             \App\Handler\Event\EventCreateHandler::class,
@@ -49,7 +49,7 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->put(
         '/api/event/participant/subscribe/{eventId:\d+}[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\Event\EventParticipantSubscribeMiddleware::class,
             \App\Handler\Event\EventParticipantSubscribeHandler::class,
         ],
@@ -59,7 +59,7 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->put(
         '/api/event/participant/unsubscribe/{eventId:\d+}[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\Event\EventParticipantUnsubscribeMiddleware::class,
             \App\Handler\Event\EventParticipantUnsubscribeHandler::class,
         ],
@@ -69,7 +69,7 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->post(
         '/api/topic[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\Topic\TopicCreateValidationMiddleware::class,
             \App\Middleware\Topic\TopicCreateSubmitMiddleware::class,
             \App\Handler\Topic\TopicCreateHandler::class,
@@ -80,7 +80,7 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->get(
         '/api/topics/available[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\Topic\TopicListAvailableMiddleware::class,
             \App\Handler\Topic\TopicListAvailableHandler::class,
         ],
@@ -98,17 +98,17 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->post(
         '/api/user/register[/]',
         [
-            \App\Middleware\Authentication\UserRegisterValidationMiddleware::class,
-            \App\Middleware\Authentication\UserRegisterMiddleware::class,
-            \App\Handler\Authentication\UserRegisterSubmitHandler::class,
+            \Core\Authentication\Middleware\UserRegisterValidationMiddleware::class,
+            \Core\Authentication\Middleware\UserRegisterMiddleware::class,
+            \Core\Authentication\Handler\UserRegisterSubmitHandler::class,
         ],
-        \App\Handler\Authentication\UserRegisterSubmitHandler::class
+        \Core\Authentication\Handler\UserRegisterSubmitHandler::class
     );
     /** ToDo OpenApi */
     $app->get(
         '/api/user/{userUuid}[/]',
         [
-            \App\Middleware\Authentication\IsLoggedInAuthenticationMiddleware::class,
+            \Core\Authentication\Middleware\IsLoggedInAuthenticationMiddleware::class,
             \App\Middleware\User\UserMiddleware::class,
             \App\Handler\User\UserHandler::class,
         ],
@@ -118,48 +118,48 @@ return static function (Mezzio\Application $app, MiddlewareFactory $factory, Con
     $app->post(
         '/api/login[/]',
         [
-            \App\Middleware\Authentication\LoginValidationMiddleware::class,
-            \App\Middleware\Authentication\LoginAuthenticationMiddleware::class,
-            \App\Handler\Authentication\LoginHandler::class,
+            \Core\Authentication\Middleware\LoginValidationMiddleware::class,
+            \Core\Authentication\Middleware\LoginAuthenticationMiddleware::class,
+            \Core\Authentication\Handler\LoginHandler::class,
         ],
-        \App\Handler\Authentication\LoginHandler::class
+        \Core\Authentication\Handler\LoginHandler::class
     );
     /** ToDo OpenApi */
     $app->get(
         '/api/logout[/]',
         [
-            \App\Handler\Authentication\LogoutHandler::class,
+            \Core\Authentication\Handler\LogoutHandler::class,
         ],
-        \App\Handler\Authentication\LogoutHandler::class
+        \Core\Authentication\Handler\LogoutHandler::class
     );
     /** ToDo OpenApi */
     $app->post(
         '/api/user/password/forgotten',
         [
-            \App\Middleware\Authentication\UserPasswordForgottenValidator::class,
-            \App\Middleware\Authentication\UserPasswordForgottenMiddleware::class,
-            \App\Handler\Authentication\UserPasswordForgottonHandler::class,
+            \Core\Authentication\Middleware\UserPasswordForgottenValidator::class,
+            \Core\Authentication\Middleware\UserPasswordForgottenMiddleware::class,
+            \Core\Authentication\Handler\UserPasswordForgottonHandler::class,
         ],
-        \App\Handler\Authentication\UserPasswordForgottonHandler::class
+        \Core\Authentication\Handler\UserPasswordForgottonHandler::class
     );
     /** ToDo OpenApi */
     $app->get(
         '/api/user/password/{token}[/]',
         [
-            \App\Middleware\Authentication\UserPasswordVerifyTokenMiddleware::class,
-            \App\Handler\Authentication\UserPasswordVerifyTokenHandler::class,
+            \Core\Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
+            \Core\Authentication\Handler\UserPasswordVerifyTokenHandler::class,
         ],
-        \App\Handler\Authentication\UserPasswordVerifyTokenHandler::class
+        \Core\Authentication\Handler\UserPasswordVerifyTokenHandler::class
     );
     /** ToDo OpenApi */
     $app->post(
         '/api/user/password/{token}[/]',
         [
-            \App\Middleware\Authentication\UserPasswordVerifyTokenMiddleware::class,
-            \App\Middleware\Authentication\UserPasswordChangeValidatorMiddleware::class,
-            \App\Middleware\Authentication\UserPasswordChangeMiddleware::class,
-            \App\Handler\Authentication\UserPasswordChangeHandler::class,
+            \Core\Authentication\Middleware\UserPasswordVerifyTokenMiddleware::class,
+            \Core\Authentication\Middleware\UserPasswordChangeValidatorMiddleware::class,
+            \Core\Authentication\Middleware\UserPasswordChangeMiddleware::class,
+            \Core\Authentication\Handler\UserPasswordChangeHandler::class,
         ],
-        \App\Handler\Authentication\UserPasswordChangeHandler::class
+        \Core\Authentication\Handler\UserPasswordChangeHandler::class
     );
 };
