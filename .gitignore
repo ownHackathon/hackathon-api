@@ -9,3 +9,4 @@
 /database/structure/update*.sql
 /public/api/doc/swagger.json
 coverage.xml
+/.env
