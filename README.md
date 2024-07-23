@@ -4,7 +4,7 @@ Evaluation project for the Hackathon Events on the Discord server from BlackScor
 ## Steps for an executable test environment
 
 1. Install `git` and `docker` on your maschine
-2. Run `git clone ggit@github.com:ownHackathon/hackathon-api.git`
+2. Run `git clone git@github.com:ownHackathon/hackathon-api.git`
 3. Optional: Check the configurations in `config/autoload`. In case of changes, copy te file and remove the `.dist` file extension and adjust
    the configuration file.
 4. Copy `.env.dist` and rename it `.env` and set correct your userid and groupid. You can find them out in the terminal via commands `id -u && id -g`
