@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Validator\UserPasswordChangeValidator;
+use Core\Validator\UserPasswordChangeValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

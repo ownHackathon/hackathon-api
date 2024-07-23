@@ -3,8 +3,8 @@
 namespace App\Table;
 
 use App\Entity\Event;
-use App\Exception\DuplicateEntryException;
 use App\Repository\EventRepository;
+use Core\Exception\DuplicateEntryException;
 
 readonly class EventTable extends AbstractTable implements EventRepository
 {

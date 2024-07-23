@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Hydrator;
 
-use App\Hydrator\DateTimeFormatterStrategyFactory;
+use Core\Hydrator\DateTimeFormatterStrategyFactory;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Mock\MockContainer;

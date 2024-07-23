@@ -3,8 +3,8 @@
 namespace App\Service\Project;
 
 use App\Entity\Project;
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\ProjectRepository;
+use Core\Hydrator\ReflectionHydrator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 

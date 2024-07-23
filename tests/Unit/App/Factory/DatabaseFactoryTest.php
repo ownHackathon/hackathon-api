@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Factory;
 
-use App\Factory\DatabaseFactory;
+use Core\Factory\DatabaseFactory;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;

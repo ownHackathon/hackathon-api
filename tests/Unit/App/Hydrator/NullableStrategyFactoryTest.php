@@ -2,8 +2,8 @@
 
 namespace Test\Unit\App\Hydrator;
 
-use App\Hydrator\DateTimeFormatterStrategyFactory;
-use App\Hydrator\NullableStrategyFactory;
+use Core\Hydrator\DateTimeFormatterStrategyFactory;
+use Core\Hydrator\NullableStrategyFactory;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use PHPUnit\Framework\TestCase;

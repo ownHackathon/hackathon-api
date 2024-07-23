@@ -2,8 +2,8 @@
 
 namespace App\Service\Participant;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\ParticipantRepository;
+use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;
 

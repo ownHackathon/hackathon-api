@@ -3,10 +3,10 @@
 namespace App\Middleware\Topic;
 
 use App\Entity\Topic;
-use App\Exception\DuplicateNameHttpException;
-use App\Exception\HttpException;
-use App\Hydrator\ReflectionHydrator;
 use App\Service\Topic\TopicPoolService;
+use Core\Exception\DuplicateNameHttpException;
+use Core\Exception\HttpException;
+use Core\Hydrator\ReflectionHydrator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Hydrator;
 
-use App\Hydrator\ClassMethodsHydratorFactory;
+use Core\Hydrator\ClassMethodsHydratorFactory;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Mock\MockContainer;

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Handler;
 
-use App\Hydrator\ReflectionHydrator;
+use Core\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Test\Unit\Mock\MockServerRequest;

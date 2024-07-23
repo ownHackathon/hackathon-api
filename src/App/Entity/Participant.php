@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Trait\CloneReadonlyClassWith;
+use Core\Trait\CloneReadonlyClassWith;
 use DateTimeImmutable;
 
 final readonly class Participant

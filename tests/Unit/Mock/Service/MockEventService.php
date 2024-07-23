@@ -3,8 +3,8 @@
 namespace Test\Unit\Mock\Service;
 
 use App\Entity\Event;
-use App\Hydrator\ReflectionHydrator;
 use App\Service\Event\EventService;
+use Core\Hydrator\ReflectionHydrator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use Test\Data\Entity\EventTestEntity;

@@ -3,8 +3,8 @@
 namespace App\Table;
 
 use App\Entity\Participant;
-use App\Exception\DuplicateEntryException;
 use App\Repository\ParticipantRepository;
+use Core\Exception\DuplicateEntryException;
 
 readonly class ParticipantTable extends AbstractTable implements ParticipantRepository
 {

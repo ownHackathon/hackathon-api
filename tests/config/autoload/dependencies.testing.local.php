@@ -12,10 +12,10 @@ return [
         'invokables' => [
         ],
         'factories' => [
-            'database' => App\Factory\DatabaseFactory::class,
-            'query' => App\Factory\QueryFactory::class,
-            'uuid' => App\Factory\UuidFactory::class,
-            'mailer' => App\Factory\MailFactory::class,
+            'database' => Core\Factory\DatabaseFactory::class,
+            'query' => Core\Factory\QueryFactory::class,
+            'uuid' => Core\Factory\UuidFactory::class,
+            'mailer' => Core\Factory\MailFactory::class,
             'logger' => Test\Functional\Mock\NullLoggerFactory::class,
         ],
     ],

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use App\Listener\LoggingErrorListenerDelegatorFactory;
+use Core\Listener\LoggingErrorListenerDelegatorFactory;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 
 return [
@@ -15,11 +15,11 @@ return [
         'invokables' => [
         ],
         'factories' => [
-            'database' => App\Factory\DatabaseFactory::class,
-            'query' => App\Factory\QueryFactory::class,
-            'uuid' => App\Factory\UuidFactory::class,
-            'mailer' => App\Factory\MailFactory::class,
-            'logger' => App\Factory\LoggerFactory::class,
+            'database' => \Core\Factory\DatabaseFactory::class,
+            'query' => \Core\Factory\QueryFactory::class,
+            'uuid' => \Core\Factory\UuidFactory::class,
+            'mailer' => \Core\Factory\MailFactory::class,
+            'logger' => \Core\Factory\LoggerFactory::class,
         ],
         'delegators' => [
             ErrorHandler::class => [

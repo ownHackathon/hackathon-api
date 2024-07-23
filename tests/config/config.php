@@ -13,6 +13,7 @@ $providers = [
     MezzioConfig::class,
     RouterConfig::class,
     \App\ConfigProvider::class,
+    \Core\ConfigProvider::class,
 ];
 
 if (getenv('APP_TESTING') !== false) {

@@ -2,8 +2,8 @@
 
 namespace App\Middleware\Topic;
 
-use App\Exception\InvalidArgumentHttpException;
-use App\Validator\TopicCreateValidator;
+use Core\Exception\InvalidArgumentHttpException;
+use Core\Validator\TopicCreateValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

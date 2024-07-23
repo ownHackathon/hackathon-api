@@ -4,9 +4,9 @@ namespace App\Service\User;
 
 use App\Entity\User;
 use App\Enum\UserRole;
-use App\Exception\DuplicateEntryException;
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
+use Core\Exception\DuplicateEntryException;
+use Core\Hydrator\ReflectionHydrator;
 use DateTime;
 use Ramsey\Uuid\UuidInterface;
 

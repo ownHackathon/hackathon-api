@@ -2,10 +2,10 @@
 
 namespace Test\Unit\App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\EventRepository;
 use App\Service\Event\EventService;
 use App\Service\Event\EventServiceFactory;
+use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Test\Unit\Mock\MockContainer;
 use Test\Unit\Mock\Table\MockEventTable;

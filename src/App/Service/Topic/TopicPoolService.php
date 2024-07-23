@@ -3,9 +3,9 @@
 namespace App\Service\Topic;
 
 use App\Entity\Topic;
-use App\Exception\HttpException;
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\TopicPoolRepository;
+use Core\Exception\HttpException;
+use Core\Hydrator\ReflectionHydrator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;

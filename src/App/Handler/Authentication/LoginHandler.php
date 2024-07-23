@@ -7,7 +7,7 @@ use App\Dto\UserContent\LoginTokenDto;
 use App\Dto\UserContent\LoginValidationFailureMessageDto;
 use App\Dto\UserContent\UserLogInDataDto;
 use App\Entity\User;
-use App\Token\JwtTokenGeneratorTrait;
+use Core\Token\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

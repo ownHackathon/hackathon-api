@@ -3,8 +3,8 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\User;
-use App\Exception\DuplicateEntryException;
 use App\Table\UserTable;
+use Core\Exception\DuplicateEntryException;
 use DateTime;
 use DateTimeImmutable;
 use InvalidArgumentException;

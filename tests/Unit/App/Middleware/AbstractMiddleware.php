@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Middleware;
 
-use App\Hydrator\ReflectionHydrator;
+use Core\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

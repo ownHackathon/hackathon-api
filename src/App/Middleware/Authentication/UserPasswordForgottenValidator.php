@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Authentication;
 
-use App\Validator\PasswordForgottenEmailValidator;
+use Core\Validator\PasswordForgottenEmailValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

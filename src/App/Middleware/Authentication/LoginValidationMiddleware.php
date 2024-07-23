@@ -3,7 +3,7 @@
 namespace App\Middleware\Authentication;
 
 use App\Dto\UserContent\LoginValidationFailureMessageDto;
-use App\Validator\LoginValidator;
+use Core\Validator\LoginValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

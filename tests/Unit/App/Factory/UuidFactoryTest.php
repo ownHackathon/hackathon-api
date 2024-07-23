@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Factory;
 
-use App\Factory\UuidFactory;
+use Core\Factory\UuidFactory;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\UuidInterface;
 use Test\Unit\Mock\MockContainer;

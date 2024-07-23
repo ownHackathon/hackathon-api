@@ -3,8 +3,8 @@
 namespace Test\Unit\Mock\Service;
 
 use App\Entity\User;
-use App\Hydrator\ReflectionHydrator;
 use App\Service\User\UserService;
+use Core\Hydrator\ReflectionHydrator;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Test\Data\Entity\UserTestEntity;

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Factory;
 
-use App\Factory\QueryFactory;
+use Core\Factory\QueryFactory;
 use Envms\FluentPDO\Query;
 use PDO;
 use PHPUnit\Framework\TestCase;

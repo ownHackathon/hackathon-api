@@ -2,7 +2,7 @@
 
 namespace App\Middleware\Event;
 
-use App\Validator\EventCreateValidator;
+use Core\Validator\EventCreateValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

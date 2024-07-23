@@ -3,8 +3,8 @@
 namespace App\Middleware\Event;
 
 use App\Entity\Event;
-use App\Hydrator\ReflectionHydrator;
 use App\Service\Event\EventService;
+use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
 use Psr\Container\ContainerInterface;

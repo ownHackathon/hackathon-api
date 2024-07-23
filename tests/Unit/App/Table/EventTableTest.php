@@ -3,11 +3,11 @@
 namespace Test\Unit\App\Table;
 
 use App\Entity\Event;
-use App\Exception\DuplicateEntryException;
 use App\Table\EventTable;
+use Core\Exception\DuplicateEntryException;
 use Test\Data\Entity\EventTestEntity;
-use Test\Unit\Mock\Database\MockQueryForCanNot;
 use Test\Data\TestConstants;
+use Test\Unit\Mock\Database\MockQueryForCanNot;
 
 /**
  * @property EventTable $table

@@ -2,8 +2,8 @@
 
 namespace Test\Unit\App\Middleware\Topic;
 
-use App\Exception\DuplicateNameHttpException;
 use App\Middleware\Topic\TopicCreateSubmitMiddleware;
+use Core\Exception\DuplicateNameHttpException;
 use Psr\Http\Message\ResponseInterface;
 use Ramsey\Uuid\Uuid;
 use Test\Data\Entity\TopicTestEntity;

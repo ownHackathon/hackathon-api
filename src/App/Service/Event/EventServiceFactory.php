@@ -3,9 +3,9 @@
 namespace App\Service\Event;
 
 use App\Enum\EventStatus;
-use App\Hydrator\ReflectionHydrator;
-use App\Hydrator\Strategy\UuidStrategy;
 use App\Repository\EventRepository;
+use Core\Hydrator\ReflectionHydrator;
+use Core\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Psr\Container\ContainerInterface;

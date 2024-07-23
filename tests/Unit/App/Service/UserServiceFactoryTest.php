@@ -2,10 +2,10 @@
 
 namespace Test\Unit\App\Service;
 
-use App\Hydrator\ReflectionHydrator;
 use App\Repository\UserRepository;
 use App\Service\User\UserService;
 use App\Service\User\UserServiceFactory;
+use Core\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Ramsey\Uuid\Uuid;

@@ -3,8 +3,8 @@
 namespace App\Table;
 
 use App\Entity\User;
-use App\Exception\DuplicateEntryException;
 use App\Repository\UserRepository;
+use Core\Exception\DuplicateEntryException;
 use DateTime;
 use InvalidArgumentException;
 

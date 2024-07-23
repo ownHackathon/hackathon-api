@@ -2,8 +2,8 @@
 
 namespace Test\Unit\App\Service;
 
-use App\Hydrator\ReflectionHydrator;
-use App\Hydrator\Strategy\UuidStrategy;
+use Core\Hydrator\ReflectionHydrator;
+use Core\Hydrator\Strategy\UuidStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Laminas\Hydrator\Strategy\NullableStrategy;

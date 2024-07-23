@@ -4,11 +4,6 @@ namespace App;
 
 use App\Handler\Authentication\LoginHandlerFactory;
 use App\Handler\Authentication\UserPasswordForgottonHandlerFactory;
-use App\Hydrator\ClassMethodsHydratorFactory;
-use App\Hydrator\DateTimeFormatterStrategyFactory;
-use App\Hydrator\DateTimeImmutableFormatterStrategyFactory;
-use App\Hydrator\NullableStrategyFactory;
-use App\Hydrator\ReflectionHydrator;
 use App\Middleware\Event\EventCreateMiddlewareFactory;
 use App\Repository\EventRepository;
 use App\Repository\ParticipantRepository;
@@ -35,28 +30,16 @@ use App\Table\ParticipantTable;
 use App\Table\ProjectTable;
 use App\Table\TopicPoolTable;
 use App\Table\UserTable;
-use App\Token\TokenService;
-use App\Validator\EventCreateValidator;
-use App\Validator\Input\EmailInput;
-use App\Validator\Input\Event\EventDescriptionInput;
-use App\Validator\Input\Event\EventDurationInput;
-use App\Validator\Input\Event\EventStartTimeInput;
-use App\Validator\Input\Event\EventTextInput;
-use App\Validator\Input\Event\EventTitleInput;
-use App\Validator\Input\PasswordInput;
-use App\Validator\Input\Topic\TopicDescriptionInput;
-use App\Validator\Input\Topic\TopicInput;
-use App\Validator\Input\UsernameInput;
-use App\Validator\LoginValidator;
-use App\Validator\PasswordForgottenEmailValidator;
-use App\Validator\RegisterValidator;
-use App\Validator\TopicCreateValidator;
-use App\Validator\UserPasswordChangeValidator;
+use Core\Hydrator\ReflectionHydrator;
+use Core\Token\TokenService;
+use Core\Validator\EventCreateValidator;
+use Core\Validator\LoginValidator;
+use Core\Validator\PasswordForgottenEmailValidator;
+use Core\Validator\RegisterValidator;
+use Core\Validator\TopicCreateValidator;
+use Core\Validator\UserPasswordChangeValidator;
 use Envms\FluentPDO\Query;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
-use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
@@ -77,17 +60,6 @@ class ConfigProvider
             'invokables' => [
                 LoginAuthenticationService::class,
 
-                EmailInput::class,
-                EventDescriptionInput::class,
-                EventDurationInput::class,
-                EventStartTimeInput::class,
-                EventTextInput::class,
-                EventTitleInput::class,
-                PasswordInput::class,
-                ReflectionHydrator::class,
-                TopicDescriptionInput::class,
-                TopicInput::class,
-                UsernameInput::class,
             ],
             'aliases' => [
                 EventRepository::class => EventTable::class,
@@ -97,10 +69,6 @@ class ConfigProvider
                 UserRepository::class => UserTable::class,
             ],
             'factories' => [
-                ClassMethodsHydrator::class => ClassMethodsHydratorFactory::class,
-                DateTimeFormatterStrategy::class => DateTimeFormatterStrategyFactory::class,
-                DateTimeImmutableFormatterStrategy::class => DateTimeImmutableFormatterStrategyFactory::class,
-                NullableStrategy::class => NullableStrategyFactory::class,
 
                 Handler\Authentication\LoginHandler::class => LoginHandlerFactory::class,
                 Handler\Authentication\UserPasswordForgottonHandler::class => UserPasswordForgottonHandlerFactory::class,
@@ -109,8 +77,6 @@ class ConfigProvider
                 Handler\Topic\TopicCreateHandler::class => ConfigAbstractFactory::class,
                 Handler\User\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\System\TestMailHandler::class => ConfigAbstractFactory::class,
-
-                Listener\LoggingErrorListener::class => Listener\LoggingErrorListenerFactory::class,
 
                 Middleware\Authentication\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Authentication\JwtAuthenticationMiddleware::class => Middleware\Authentication\JwtAuthenticationMiddlewareFactory::class,
@@ -154,13 +120,6 @@ class ConfigProvider
                 Table\ProjectTable::class => ConfigAbstractFactory::class,
                 Table\TopicPoolTable::class => ConfigAbstractFactory::class,
                 Table\UserTable::class => ConfigAbstractFactory::class,
-
-                Validator\EventCreateValidator::class => ConfigAbstractFactory::class,
-                Validator\LoginValidator::class => ConfigAbstractFactory::class,
-                Validator\PasswordForgottenEmailValidator::class => ConfigAbstractFactory::class,
-                Validator\RegisterValidator::class => ConfigAbstractFactory::class,
-                Validator\TopicCreateValidator::class => ConfigAbstractFactory::class,
-                Validator\UserPasswordChangeValidator::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -287,31 +246,6 @@ class ConfigProvider
             ],
             Table\UserTable::class => [
                 Query::class,
-            ],
-
-            Validator\EventCreateValidator::class => [
-                EventTitleInput::class,
-                EventDescriptionInput::class,
-                EventTextInput::class,
-                EventStartTimeInput::class,
-                EventDurationInput::class,
-            ],
-            Validator\LoginValidator::class => [
-                UsernameInput::class,
-                PasswordInput::class,
-            ],
-            Validator\PasswordForgottenEmailValidator::class => [
-                EmailInput::class,
-            ],
-            Validator\RegisterValidator::class => [
-                EmailInput::class,
-            ],
-            Validator\TopicCreateValidator::class => [
-                TopicInput::class,
-                TopicDescriptionInput::class,
-            ],
-            Validator\UserPasswordChangeValidator::class => [
-                PasswordInput::class,
             ],
         ];
     }

@@ -3,7 +3,7 @@
 namespace App\Middleware\Authentication;
 
 use App\Dto\System\HttpStatusCodeMessage;
-use App\Validator\RegisterValidator;
+use Core\Validator\RegisterValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

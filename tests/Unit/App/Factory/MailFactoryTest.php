@@ -2,7 +2,7 @@
 
 namespace Test\Unit\App\Factory;
 
-use App\Factory\MailFactory;
+use Core\Factory\MailFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\Mailer;
 use Test\Unit\Mock\MockContainer;
