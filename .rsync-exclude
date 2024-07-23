@@ -23,5 +23,5 @@
 /LICENSE
 /.github
 /docs
-.env
+.env*
 .rsync-exclude
