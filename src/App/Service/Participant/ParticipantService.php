@@ -22,7 +22,7 @@ readonly class ParticipantService
             return false;
         }
 
-        return $this->repository->insert($participant) !== false;
+        return $this->repository->insert($participant) !== 0;
     }
 
     public function remove(Participant $participant): bool
