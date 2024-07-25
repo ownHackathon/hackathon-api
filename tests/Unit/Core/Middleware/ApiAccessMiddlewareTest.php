@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Core\Middleware;
 
-use Core\Authentication\Middleware\ApiAccessMiddleware;
+use Core\Middleware\ApiAccessMiddleware;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

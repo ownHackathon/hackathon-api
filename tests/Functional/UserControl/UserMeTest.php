@@ -2,9 +2,9 @@
 
 namespace Test\Functional\UserControl;
 
-use App\Entity\User;
 use App\Enum\UserRole;
 use App\Service\User\UserService;
+use Core\Entity\User;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\ServerRequest;

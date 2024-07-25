@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Mock\Service;
 
-use App\Entity\User;
 use App\Service\User\UserService;
+use Core\Entity\User;
 use Core\Hydrator\ReflectionHydrator;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;

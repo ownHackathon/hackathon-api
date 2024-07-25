@@ -2,7 +2,7 @@
 
 namespace Core\Repository;
 
-use App\Entity\User;
+use Core\Entity\User;
 use DateTime;
 
 interface UserRepository extends Repository

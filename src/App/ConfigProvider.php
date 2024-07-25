@@ -32,10 +32,9 @@ use App\Validator\Input\Event\EventTitleInput;
 use App\Validator\Input\Topic\TopicDescriptionInput;
 use App\Validator\Input\Topic\TopicInput;
 use App\Validator\TopicCreateValidator;
-use Core\Authentication\Service\LoginAuthenticationService;
 use Core\Hydrator\ReflectionHydrator;
+use Core\Service\LoginAuthenticationService;
 use Envms\FluentPDO\Query;
-use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\Mailer;
@@ -73,7 +72,6 @@ class ConfigProvider
                 Handler\Event\EventHandler::class => ConfigAbstractFactory::class,
                 Handler\Event\EventParticipantSubscribeHandler::class => ConfigAbstractFactory::class,
                 Handler\Topic\TopicCreateHandler::class => ConfigAbstractFactory::class,
-                Handler\User\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\System\TestMailHandler::class => ConfigAbstractFactory::class,
 
                 Middleware\Event\EventCreateMiddleware::class => EventCreateMiddlewareFactory::class,
@@ -91,8 +89,6 @@ class ConfigProvider
                 Middleware\Topic\TopicListAvailableMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Topic\TopicListMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Topic\TopicCreateSubmitMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\User\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\User\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 Service\EMail\TopicCreateEMailService::class => TopicCreateEMailServiceFactory::class,
                 Service\Event\EventService::class => EventServiceFactory::class,
@@ -127,9 +123,6 @@ class ConfigProvider
             ],
             Handler\Topic\TopicCreateHandler::class => [
                 TopicCreateEMailService::class,
-            ],
-            Handler\User\UserHandler::class => [
-                ClassMethodsHydrator::class,
             ],
             Handler\System\TestMailHandler::class => [
                 Mailer::class,
@@ -180,12 +173,6 @@ class ConfigProvider
                 TopicPoolService::class,
                 ReflectionHydrator::class,
                 Uuid::class,
-            ],
-            Middleware\User\UpdateLastUserActionTimeMiddleware::class => [
-                UserService::class,
-            ],
-            Middleware\User\UserMiddleware::class => [
-                UserService::class,
             ],
             Table\EventTable::class => [
                 Query::class,

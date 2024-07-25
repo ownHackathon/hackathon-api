@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\User;
+namespace Core\Middleware;
 
-use App\Entity\User;
 use App\Service\User\UserService;
+use Core\Entity\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

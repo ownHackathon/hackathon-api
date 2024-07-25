@@ -2,7 +2,7 @@
 
 namespace Core\Table;
 
-use App\Entity\User;
+use Core\Entity\User;
 use Core\Exception\DuplicateEntryException;
 use Core\Repository\UserRepository;
 use DateTime;

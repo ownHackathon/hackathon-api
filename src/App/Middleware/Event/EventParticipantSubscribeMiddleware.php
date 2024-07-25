@@ -3,10 +3,10 @@
 namespace App\Middleware\Event;
 
 use App\Entity\Participant;
-use App\Entity\User;
 use App\Enum\EventStatus;
 use App\Service\Event\EventService;
 use App\Service\Participant\ParticipantService;
+use Core\Entity\User;
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

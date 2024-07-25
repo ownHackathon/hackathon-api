@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\User;
+namespace Core\Middleware;
 
-use App\Entity\User;
 use App\Service\User\UserService;
+use Core\Entity\User;
+use Core\Token\TokenService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -11,22 +12,28 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class UserMiddleware implements MiddlewareInterface
+readonly class UserPasswordForgottenMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserService $userService
+        private UserService $userService,
+        private TokenService $tokenService,
     ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $userUuid = $request->getAttribute('userUuid');
+        $data = $request->getParsedBody();
 
-        $user = $this->userService->findByUuid($userUuid);
+        $user = $this->userService->findByEMail($data['email']);
 
         if (!$user) {
-            return new JsonResponse(['message' => 'User could not be found'], HTTP::STATUS_NOT_FOUND);
+            return new JsonResponse(['message' => 'invalid E-Mai'], HTTP::STATUS_BAD_REQUEST);
         }
+
+        /** ToDo implements Token support */
+        $this->tokenService->generateToken();
+
+        $this->userService->update($user);
 
         return $handler->handle($request->withAttribute(User::class, $user));
     }

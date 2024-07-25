@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Middleware\User\UpdateLastUserActionTimeMiddleware;
-use Core\Authentication\Middleware\ApiAccessMiddleware;
-use Core\Authentication\Middleware\JwtAuthenticationMiddleware;
 use Core\Exception\HttpExceptionMiddleware;
+use Core\Middleware\ApiAccessMiddleware;
+use Core\Middleware\JwtAuthenticationMiddleware;
+use Core\Middleware\UpdateLastUserActionTimeMiddleware;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;

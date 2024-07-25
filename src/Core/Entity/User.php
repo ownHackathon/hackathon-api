@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Entity;
+namespace Core\Entity;
 
 use App\Enum\UserRole;
 use Core\Trait\CloneReadonlyClassWith;

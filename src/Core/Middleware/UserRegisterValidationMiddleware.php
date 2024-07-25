@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Middleware;
+namespace Core\Middleware;
 
-use Core\Dto\User\LoginValidationFailureMessageDto;
-use Core\Validator\LoginValidator;
+use Core\Dto\HttpStatusCodeMessage;
+use Core\Validator\RegisterValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -11,10 +11,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class LoginValidationMiddleware implements MiddlewareInterface
+readonly class UserRegisterValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private LoginValidator $validator,
+        private RegisterValidator $validator
     ) {
     }
 
@@ -25,11 +25,13 @@ readonly class LoginValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            // ToDo $this->validator->getMessage()
-            return new JsonResponse(
-                new LoginValidationFailureMessageDto('Login failed', $data),
-                HTTP::STATUS_BAD_REQUEST
-            );
+            return new JsonResponse([
+                new HttpStatusCodeMessage(
+                    HTTP::STATUS_BAD_REQUEST,
+                    'Registration failed',
+                    $this->validator->getMessages()
+                ),
+            ], HTTP::STATUS_BAD_REQUEST);
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));

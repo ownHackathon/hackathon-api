@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Middleware;
+namespace Core\Middleware;
 
 use App\Service\User\UserService;
 use Psr\Container\ContainerInterface;

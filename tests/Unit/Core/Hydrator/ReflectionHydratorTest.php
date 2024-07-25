@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Core\Hydrator;
 
-use App\Entity\User;
+use Core\Entity\User;
 use Core\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
 use Test\Data\Entity\UserTestEntity;

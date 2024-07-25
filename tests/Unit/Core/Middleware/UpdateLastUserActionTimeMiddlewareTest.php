@@ -2,9 +2,9 @@
 
 namespace Test\Unit\Core\Middleware;
 
-use App\Entity\User;
-use App\Middleware\User\UpdateLastUserActionTimeMiddleware;
 use App\Service\User\UserService;
+use Core\Entity\User;
+use Core\Middleware\UpdateLastUserActionTimeMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Test\Data\Entity\UserTestEntity;
 use Test\Unit\Mock\Service\MockUserService;

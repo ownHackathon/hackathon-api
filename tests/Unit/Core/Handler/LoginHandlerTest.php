@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Core\Handler;
 
-use App\Entity\User;
-use Core\Authentication\Handler\LoginHandler;
+use Core\Entity\User;
+use Core\Handler\LoginHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Test\Data\Entity\UserTestEntity;
 

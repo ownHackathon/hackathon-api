@@ -2,9 +2,9 @@
 
 namespace App\Handler\Event;
 
-use App\Entity\User;
 use App\Service\Participant\ParticipantService;
 use App\Service\Project\ProjectService;
+use Core\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

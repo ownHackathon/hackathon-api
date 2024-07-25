@@ -2,8 +2,8 @@
 
 namespace Test\Unit\App\Middleware\Event;
 
-use App\Entity\User;
 use App\Middleware\Event\EventCreateMiddleware;
+use Core\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

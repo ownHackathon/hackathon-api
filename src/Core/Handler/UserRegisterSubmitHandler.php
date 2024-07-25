@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Handler;
+namespace Core\Handler;
 
 use Core\Dto\HttpStatusCodeMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

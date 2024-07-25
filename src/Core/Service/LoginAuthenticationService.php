@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Service;
+namespace Core\Service;
 
-use App\Entity\User;
+use Core\Entity\User;
 
 use function password_verify;
 

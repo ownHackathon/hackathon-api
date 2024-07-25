@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Core\Service;
 
-use App\Entity\User;
 use App\Service\User\UserService;
+use Core\Entity\User;
 use Core\Exception\DuplicateEntryException;
 use Core\Hydrator\Strategy\UuidStrategy;
 use DateTimeImmutable;

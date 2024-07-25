@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Handler\User;
+namespace Core\Handler;
 
-use App\Entity\User;
+use Core\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Hydrator\ClassMethodsHydrator;

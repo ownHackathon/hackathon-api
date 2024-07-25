@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Core\Table;
 
-use App\Entity\User;
+use Core\Entity\User;
 use Core\Exception\DuplicateEntryException;
 use Core\Table\UserTable;
 use DateTime;

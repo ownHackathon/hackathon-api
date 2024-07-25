@@ -2,10 +2,10 @@
 
 namespace App\Middleware\Event;
 
-use App\Entity\User;
 use App\Enum\EventStatus;
 use App\Service\Event\EventService;
 use App\Service\Participant\ParticipantService;
+use Core\Entity\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

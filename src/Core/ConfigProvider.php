@@ -3,14 +3,8 @@
 namespace Core;
 
 use App\Service\User\UserService;
-use Core\Authentication\Handler;
-use Core\Authentication\Handler\LoginHandlerFactory;
-use Core\Authentication\Handler\UserPasswordForgottonHandlerFactory;
-use Core\Authentication\Middleware;
-use Core\Authentication\Service;
-use Core\Authentication\Service\ApiAccessService;
-use Core\Authentication\Service\ApiAccessServiceFactory;
-use Core\Authentication\Service\LoginAuthenticationService;
+use Core\Handler\LoginHandlerFactory;
+use Core\Handler\UserPasswordForgottonHandlerFactory;
 use Core\Hydrator\ClassMethodsHydratorFactory;
 use Core\Hydrator\DateTimeFormatterStrategyFactory;
 use Core\Hydrator\DateTimeImmutableFormatterStrategyFactory;
@@ -18,7 +12,11 @@ use Core\Hydrator\NullableStrategyFactory;
 use Core\Hydrator\ReflectionHydrator;
 use Core\Listener\LoggingErrorListener;
 use Core\Listener\LoggingErrorListenerFactory;
+use Core\Middleware\JwtAuthenticationMiddlewareFactory;
 use Core\Repository\UserRepository;
+use Core\Service\ApiAccessService;
+use Core\Service\ApiAccessServiceFactory;
+use Core\Service\LoginAuthenticationService;
 use Core\Table\UserTable;
 use Core\Token\TokenService;
 use Envms\FluentPDO\Query;
@@ -57,12 +55,13 @@ class ConfigProvider
                 DateTimeImmutableFormatterStrategy::class => DateTimeImmutableFormatterStrategyFactory::class,
 
                 Handler\LoginHandler::class => LoginHandlerFactory::class,
+                Handler\UserHandler::class => ConfigAbstractFactory::class,
                 Handler\UserPasswordForgottonHandler::class => UserPasswordForgottonHandlerFactory::class,
 
                 LoggingErrorListener::class => LoggingErrorListenerFactory::class,
 
                 Middleware\ApiAccessMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\JwtAuthenticationMiddleware::class => Middleware\JwtAuthenticationMiddlewareFactory::class,
+                Middleware\JwtAuthenticationMiddleware::class => JwtAuthenticationMiddlewareFactory::class,
                 Middleware\LoginAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\LoginValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserPasswordChangeMiddleware::class => ConfigAbstractFactory::class,
@@ -72,6 +71,8 @@ class ConfigProvider
                 Middleware\UserPasswordVerifyTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserRegisterMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\UserRegisterValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UpdateLastUserActionTimeMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\UserMiddleware::class => ConfigAbstractFactory::class,
 
                 NullableStrategy::class => NullableStrategyFactory::class,
 
@@ -90,6 +91,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            Handler\UserHandler::class => [
+                ClassMethodsHydrator::class,
+            ],
             Middleware\UserRegisterMiddleware::class => [
                 UserService::class,
                 ReflectionHydrator::class,
@@ -122,6 +126,12 @@ class ConfigProvider
             ],
             Middleware\LoginValidationMiddleware::class => [
                 Validator\LoginValidator::class,
+            ],
+            Middleware\UpdateLastUserActionTimeMiddleware::class => [
+                UserService::class,
+            ],
+            Middleware\UserMiddleware::class => [
+                UserService::class,
             ],
 
             Table\UserTable::class => [

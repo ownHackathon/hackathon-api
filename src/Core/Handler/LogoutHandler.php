@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Handler;
+namespace Core\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\RedirectResponse;

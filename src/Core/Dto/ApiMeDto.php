@@ -2,7 +2,7 @@
 
 namespace Core\Dto;
 
-use App\Entity\User;
+use Core\Entity\User;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]

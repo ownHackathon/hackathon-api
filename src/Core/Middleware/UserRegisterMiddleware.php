@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Middleware;
+namespace Core\Middleware;
 
-use App\Entity\User;
 use App\Enum\UserRole;
 use App\Service\User\UserService;
 use Core\Dto\HttpStatusCodeMessage;
+use Core\Entity\User;
 use Core\Exception\DuplicateEntryException;
 use Core\Hydrator\ReflectionHydrator;
 use DateTime;

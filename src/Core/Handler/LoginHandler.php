@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Handler;
+namespace Core\Handler;
 
-use App\Entity\User;
 use Core\Dto\SimpleMessageDto;
 use Core\Dto\User\LoginTokenDto;
 use Core\Dto\User\LoginValidationFailureMessageDto;
 use Core\Dto\User\UserLogInDataDto;
+use Core\Entity\User;
 use Core\Token\JwtTokenGeneratorTrait;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Core\Service;
 
-use Core\Authentication\Service\ApiAccessService;
+use Core\Service\ApiAccessService;
 
 class ApiAccessServiceTest extends AbstractService
 {

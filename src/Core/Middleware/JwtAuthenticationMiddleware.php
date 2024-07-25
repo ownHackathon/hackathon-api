@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Middleware;
+namespace Core\Middleware;
 
-use App\Entity\User;
 use App\Service\User\UserService;
+use Core\Entity\User;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;

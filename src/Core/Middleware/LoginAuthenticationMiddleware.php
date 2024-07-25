@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Core\Authentication\Middleware;
+namespace Core\Middleware;
 
-use App\Entity\User;
 use App\Service\User\UserService;
-use Core\Authentication\Service\LoginAuthenticationService;
 use Core\Dto\SimpleMessageDto;
+use Core\Entity\User;
+use Core\Service\LoginAuthenticationService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

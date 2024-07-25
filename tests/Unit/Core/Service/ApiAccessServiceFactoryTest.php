@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Core\Service;
 
-use Core\Authentication\Service\ApiAccessService;
-use Core\Authentication\Service\ApiAccessServiceFactory;
+use Core\Service\ApiAccessService;
+use Core\Service\ApiAccessServiceFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Test\Unit\Mock\MockContainer;
