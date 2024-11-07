@@ -1,0 +1,14 @@
+/config/config.php
+/config/container.php
+/config/pipeline.php
+/config/routes.php
+/config/autoload/*.global.php
+/data/
+/data/cache/
+/data/log/
+/public/*.txt
+/puplic/*.ico
+/public/api/*
+/public/api/.*
+/public/src/*
+/constants.php
