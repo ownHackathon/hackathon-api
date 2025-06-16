@@ -84,17 +84,8 @@
             <property name="maxLinesCount" value="1"/>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration">
-        <properties>
-            <property name="enableMultipleSpacesBetweenModifiersCheck"/>
-        </properties>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition">
-        <properties>
-            <property name="ignoreAssignmentsInsideFunctionCalls"/>
-        </properties>
-    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.DisallowTrailingMultiLineTernaryOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
