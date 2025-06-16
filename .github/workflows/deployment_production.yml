@@ -8,10 +8,10 @@ jobs:
   deployment_of_hackathon_to_production:
     env:
       VUE_APP_API_BASE_URL: 'https://hackathon.exdrals.de'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-dev
