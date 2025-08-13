@@ -29,7 +29,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 )
 ]
 #[OA\SecurityScheme(
-    securityScheme: 'Client Identification Number',
+    securityScheme: 'Client-Identification-String',
     type: 'apiKey',
     name: 'x-ident',
     in: 'header',
@@ -40,7 +40,7 @@ use Psr\Http\Server\RequestHandlerInterface;
             url: '/api'
         ),
     ],
-    security: [['accessToken' => []], ['Client Identification Number' => []], ['refreshToken' => []]]
+    security: [['accessToken' => []], ['Client-Identification-String' => []], ['refreshToken' => []]]
 )]
 readonly class SwaggerUIHandler implements RequestHandlerInterface
 {
