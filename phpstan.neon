@@ -1,0 +1,17 @@
+parameters:
+	level: 6
+	paths:
+		- src
+	ignoreErrors:
+		- identifier: missingType.iterableValue
+		- identifier: missingType.generics
+		- '#^Dead catch - PDOException is never thrown in the try block.$#'
+	bootstrapFiles:
+		- constants.php
+	tips:
+		treatPhpDocTypesAsCertain: false
+rules:
+	- PHPStan\Rules\Functions\ReturnNullsafeByRefRule
+includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- vendor/phpstan/phpstan/conf/bleedingEdge.neon

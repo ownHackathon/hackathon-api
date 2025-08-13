@@ -1,0 +1,84 @@
+<?php declare(strict_types=1);
+
+namespace ownHackathon\UnitTest\Mock\Table;
+
+use InvalidArgumentException;
+use Ramsey\Uuid\UuidInterface;
+use ownHackathon\App\Entity\AccountCollection;
+use ownHackathon\App\Hydrator\AccountHydrator;
+use ownHackathon\App\Table\AccountTable;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Store\AccountStoreInterface;
+use ownHackathon\Core\Type\Email;
+use ownHackathon\Core\Utils\UuidFactory;
+use ownHackathon\UnitTest\Mock\Constants\Account;
+use ownHackathon\UnitTest\Mock\Database\MockQuery;
+
+class MockAccountTable extends AccountTable implements AccountStoreInterface
+{
+    public function __construct()
+    {
+        parent::__construct(
+            new MockQuery(),
+            new AccountHydrator(new UuidFactory()),
+        );
+    }
+
+    public function getTableName(): string
+    {
+        return 'Account';
+    }
+
+    public function insert(AccountInterface $data): true
+    {
+        if ($data->getId() !== Account::ID) {
+            throw new DuplicateEntryException('Account', $data->getId());
+        }
+
+        return true;
+    }
+
+    public function update(AccountInterface $data): true
+    {
+        if ($data->getId() !== Account::ID) {
+            throw new InvalidArgumentException();
+        }
+
+        return true;
+    }
+
+    public function deleteById(int $id): true
+    {
+        if ($id !== Account::ID) {
+            throw new InvalidArgumentException();
+        }
+
+        return true;
+    }
+
+    public function findById(int $id): ?AccountInterface
+    {
+        return $id === Account::ID ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
+    }
+
+    public function findByUuid(UuidInterface $uuid): ?AccountInterface
+    {
+        return $uuid->getHex()->toString() === Account::UUID ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
+    }
+
+    public function findByName(string $name): ?AccountInterface
+    {
+        return $name === Account::NAME ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
+    }
+
+    public function findByEmail(Email $email): ?AccountInterface
+    {
+        return $email->toString() === Account::EMAIL ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
+    }
+
+    public function findAll(): AccountCollection
+    {
+        return $this->hydrator->hydrateCollection([Account::VALID_DATA]);
+    }
+}
