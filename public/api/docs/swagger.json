@@ -155,8 +155,7 @@
                             }
                         }
                     }
-                },
-                "deprecated": true
+                }
             }
         },
         "/account": {
