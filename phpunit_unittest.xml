@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.4/phpunit.xsd"
+        bootstrap="vendor/autoload.php"
+        executionOrder="depends,defects"
+        beStrictAboutOutputDuringTests="true"
+        failOnRisky="true"
+        failOnWarning="true"
+        colors="true"
+        cacheDirectory=".phpunit.cache"
+        beStrictAboutCoverageMetadata="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        testdox="true"
+>
+    <testsuites>
+        <testsuite name="AppTest">
+            <directory>tests/UnitTest/AppTest</directory>
+        </testsuite>
+        <testsuite name="CoreTest">
+            <directory>tests/UnitTest/CoreTest</directory>
+        </testsuite>
+        <testsuite name="GameTest">
+            <directory>tests/UnitTest/GameTest</directory>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <report>
+            <clover outputFile=".phpunit.cache/code-coverage/Stormannsgal@tests.xml"/>
+            <html outputDirectory=".phpunit.cache/build/coverage"/>
+        </report>
+    </coverage>
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+</phpunit>

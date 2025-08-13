@@ -1,0 +1,434 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ownHackathon API Overview",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/token/refresh": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Return of a new access token",
+                "operationId": "1ee7f36021506322a0e202b1fb32f278",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized access",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/account/activation/{token}": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Activate the account",
+                "operationId": "db81d65a9e026816e8f2ea40f73a394b",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "E-Mail for register Account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AccountRegistrationDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/account/password/forgotten": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Creates a token for password reset. Sending via E-Mail",
+                "operationId": "faec81c539d68fbab3b442b162ad7c84",
+                "requestBody": {
+                    "description": "Set Password for a Account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EMailDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/account/password/{token}": {
+            "patch": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Set Password to the account",
+                "operationId": "c5f1c414d69d6f318ab519d1746570e4",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Set Password for a Account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AccountPasswordDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": true
+            }
+        },
+        "/account": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Create new Account",
+                "description": "Create new Account",
+                "operationId": "8a212b9a005ff2dd5aeea1756d25bd05",
+                "requestBody": {
+                    "description": "E-Mail for register Account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EMailDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/account/authentication": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Attempts to log in an account using transferred data",
+                "operationId": "4573a8211c6a27b677250eb46ca168ee",
+                "requestBody": {
+                    "description": "Account data for authentication",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AccountAuthenticationData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthenticationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access not permitted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "tags": [
+                    "System Information"
+                ],
+                "summary": "Returns the current time in Unix format",
+                "operationId": "ffea4e020f3a4868f9f018e280509330",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ack": {
+                                            "description": "actually request time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AccessToken": {
+                "properties": {
+                    "accessToken": {
+                        "description": "The Token for authorized access",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AccountAuthenticationData": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "The E-Mail from Account",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "The Password from Account",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AccountPasswordDTO": {
+                "properties": {
+                    "password": {
+                        "description": "The Password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AccountPasswordTokenDTO": {
+                "properties": {
+                    "accountPasswordToken": {
+                        "description": "Token to set a new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AccountRegistrationDTO": {
+                "required": [
+                    "accountName",
+                    "password"
+                ],
+                "properties": {
+                    "accountName": {
+                        "description": "The Display Name for the Account",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "The Password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthenticationResponse": {
+                "properties": {
+                    "accessToken": {
+                        "description": "The access token after a valid log-in",
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "description": "The refresh token after a valid log-in",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EMailDTO": {
+                "properties": {
+                    "email": {
+                        "description": "The E-Mail",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "HttpFailureMessage": {
+                "properties": {
+                    "statusCode": {
+                        "description": "The Http Status Code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "The Failure Message",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RefreshToken": {
+                "properties": {
+                    "refreshToken": {
+                        "description": "The token after a valid log-in",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Token": {
+                "properties": {
+                    "token": {
+                        "description": "The Token",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "accessToken": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            },
+            "refreshToken": {
+                "type": "apiKey",
+                "name": "Authentication",
+                "in": "header"
+            },
+            "Client Identification Number": {
+                "type": "apiKey",
+                "name": "x-ident",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "accessToken": []
+        },
+        {
+            "Client Identification Number": []
+        },
+        {
+            "refreshToken": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Account",
+            "description": "Account"
+        },
+        {
+            "name": "System Information",
+            "description": "System Information"
+        }
+    ]
+}

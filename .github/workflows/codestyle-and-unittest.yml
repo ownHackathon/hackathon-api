@@ -4,9 +4,9 @@ on:
     branches:
       - '*'
       - '!master'
+      - '!develope'
     paths:
       - "**.php"
-  pull_request:
 
 jobs:
   phplint:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -34,12 +34,20 @@ jobs:
       - name: Run PHP Linter
         run: composer run-script phplint
 
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Lint failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   phpstan:
     name: PHP Stan
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -59,12 +67,20 @@ jobs:
       - name: Run PHP Stan
         run: composer run-script phpstan
 
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Stan failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   phpcs:
     name: PHP CodeSniffer
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -84,6 +100,14 @@ jobs:
       - name: Run PHP Codesniffer
         run: composer run-script phpcs
 
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: CodeSniffer failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   phpunit:
     name: PHP Unit Test
     needs:
@@ -93,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.2.2
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -113,6 +137,14 @@ jobs:
       - name: Run PHP Unit Test
         run: composer run-script unittest
 
+      - name: Test Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Unit Test failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
   phpfunctional:
     name: PHP Functional Test
     needs:
@@ -120,17 +152,36 @@ jobs:
       - phpstan
       - phpcs
     runs-on: ubuntu-latest
-
+    env:
+      DB_DATABASE: db
+      DB_USERNAME: dev
+      DB_PASSWORD: dev
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      MYSQL_ALLOW_EMPTY_PASSWORD: false
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      APP_ENV: action
+    services:
+      database-testing:
+        image: mariadb:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: db
+          MYSQL_USER: dev
+          MYSQL_PASSWORD: dev
+        ports:
+          - 3306:3306
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - uses: actions/checkout@v4.1.1
-
+      - uses: actions/checkout@v4.2.2
       - name: Install PHP with extensions.
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
-          extensions: pdo, pdo_sqlite
+          extensions: pdo
           ini-values: date.timezone='UTC'
-
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
@@ -146,5 +197,38 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run PHP Unit Test
+      - name: Run PHP Functional Test
         run: composer run-script functionaltest
+
+      - name: Test Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: Functional Test failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
+  message:
+    needs:
+      - phpcs
+      - phplint
+      - phpstan
+      - phpunit
+      - phpfunctional
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Info Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: info
+          details: Checks successfully executed on API.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: success()
+
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: Incorrect checks during the API check.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
