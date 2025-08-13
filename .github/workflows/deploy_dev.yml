@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -31,7 +31,7 @@ jobs:
         run: composer run-script phplint
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Lint failed.
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -64,7 +64,7 @@ jobs:
         run: composer run-script phpstan
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Stan failed.
@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -97,7 +97,7 @@ jobs:
         run: composer run-script phpcs
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: CodeSniffer failed.
@@ -113,7 +113,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -134,7 +134,7 @@ jobs:
         run: composer run-script unittest
 
       - name: Test Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Unit Test failed.
@@ -171,7 +171,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
       - name: Install PHP with extensions.
         uses: shivammathur/setup-php@v2
         with:
@@ -197,7 +197,7 @@ jobs:
         run: composer run-script functionaltest
 
       - name: Test Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Functional Test failed.
@@ -215,7 +215,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v5
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-dev
@@ -236,7 +236,7 @@ jobs:
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 
       - name: Deploay Info Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: info
           details: Successful deployment on build https://dev.stormannsgal.de
@@ -244,7 +244,7 @@ jobs:
         if: success()
 
       - name: Deplay Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Failure deployment on develope.
