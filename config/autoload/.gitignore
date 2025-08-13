@@ -1,4 +1,2 @@
-*.production.php
 local.php
-development.config.global.php
-development.local.php
+*.local.php
