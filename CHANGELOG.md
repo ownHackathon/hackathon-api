@@ -22,9 +22,7 @@ Example:
 
 ## Unreleased
 
-### Added <!-- for new feature -->
-- add Changelog #74 @BibaltiK
-- add Issues Templates #77 @BibaltiK
+<!-- ### Added --><!-- for new feature -->
 
 <!-- ### Changed --><!-- for changes in existing functionality. -->
 
