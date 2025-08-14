@@ -9,7 +9,7 @@ use ownHackathon\App\Entity\Account;
 use ownHackathon\App\Entity\AccountCollection;
 use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Enum\App\DateTimeFormat;
+use ownHackathon\Core\Enum\DateTimeFormat;
 use ownHackathon\Core\Type\Email;
 
 readonly class AccountHydrator implements AccountHydratorInterface
