@@ -33,8 +33,8 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
-        description: OAMessage::BAD_REQUEST,
+        response: HTTP::STATUS_UNAUTHORIZED,
+        description: OAMessage::UNAUTHORIZED_ACCESS,
         content: [new OA\JsonContent(ref: HttpFailureMessage::class)]
     )]
     #[OA\Response(

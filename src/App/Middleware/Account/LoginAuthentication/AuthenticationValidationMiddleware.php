@@ -33,9 +33,9 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
                 'Validator-Message:' => $this->validator->getMessages(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
-            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
+            return new JsonResponse($message, $message->statusCode);
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));
