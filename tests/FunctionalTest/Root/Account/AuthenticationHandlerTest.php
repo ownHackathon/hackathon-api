@@ -5,8 +5,6 @@ namespace ownHackathon\FunctionalTest\Root\Account;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\Attributes\DataProvider;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\App\Service\Token\RefreshTokenService;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
@@ -15,6 +13,8 @@ use ownHackathon\Core\Utils\UuidFactoryInterface;
 use ownHackathon\FunctionalTest\AbstractFunctional;
 use ownHackathon\UnitTest\JsonRequestHelper;
 use ownHackathon\UnitTest\Mock\Constants\Account;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function password_hash;
 use function rand;
@@ -50,7 +50,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
             ->withAddedHeader('x-ident', (string)rand());
         $response = $this->app->handle($request);
 
-        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
     }
 
     public function testNoDoubleSameLogins(): void
@@ -66,7 +66,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
 
         $response = $this->app->handle($request);
-        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
     }
 
     public function testAccountIsAlreadyAuthenticated(): void
