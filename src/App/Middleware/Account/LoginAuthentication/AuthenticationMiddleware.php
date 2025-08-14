@@ -35,7 +35,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
         if (!array_key_exists('email', $data)) {
             $this->logger->notice('Required argument was not passed to the route. Argument => email');
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -49,7 +49,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
                 'E-Mail:' => $email->toString(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -59,7 +59,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
                 'E-Mail:' => $email->toString(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

@@ -4,13 +4,13 @@ namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationMiddleware;
+use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\FunctionalTest\Mock\NullLogger;
 use ownHackathon\UnitTest\Mock\Constants\Account;
 use ownHackathon\UnitTest\Mock\Repository\MockAccountRepository;
 use ownHackathon\UnitTest\Mock\Service\MockAuthenticationService;
+use Psr\Http\Server\MiddlewareInterface;
 
 class AuthenticationMiddlewareTest extends AbstractTestMiddleware
 {
@@ -37,7 +37,6 @@ class AuthenticationMiddlewareTest extends AbstractTestMiddleware
         $request = $this->request->withParsedBody($bodyData);
         $response = $this->middleware->process($request, $this->handler);
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertNotInstanceOf(JsonResponse::class, $response);
     }
 
@@ -53,11 +52,10 @@ class AuthenticationMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', '400');
-        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
+        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
+        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
     }
 
     public function testRequestWithInvalidPassword(): void
@@ -72,10 +70,9 @@ class AuthenticationMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', '400');
-        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
+        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
+        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
     }
 }
