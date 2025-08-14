@@ -15,10 +15,11 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use Psr\Container\ContainerInterface;
+use ownHackathon\App\Middleware\Account\LastAktivityUpdaterMiddleware;
 use ownHackathon\App\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use ownHackathon\Core\Middleware\RouteNotFoundMiddleware;
+use Psr\Container\ContainerInterface;
 
 /**
  * Setup middleware pipeline:
@@ -41,6 +42,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
         ClientIdentificationMiddleware::class,
         RequestAuthenticationMiddleware::class,
+        LastAktivityUpdaterMiddleware::class,
 
         DispatchMiddleware::class,
 
