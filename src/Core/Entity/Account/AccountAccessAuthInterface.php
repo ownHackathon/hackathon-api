@@ -19,4 +19,6 @@ interface AccountAccessAuthInterface
     public function getClientIdentHash(): string;
 
     public function getCreatedAt(): DateTimeImmutable;
+
+    public function with(mixed ...$values): static;
 }
