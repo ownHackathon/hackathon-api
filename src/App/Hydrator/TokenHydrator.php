@@ -9,7 +9,7 @@ use ownHackathon\App\Entity\TokenCollection;
 use ownHackathon\App\Enum\TokenType;
 use ownHackathon\Core\Entity\TokenCollectionInterface;
 use ownHackathon\Core\Entity\TokenInterface;
-use ownHackathon\Core\Enum\App\DateTimeFormat;
+use ownHackathon\Core\Enum\DateTimeFormat;
 
 readonly class TokenHydrator implements TokenHydratorInterface
 {
