@@ -3,8 +3,8 @@
 namespace ownHackathon\Core\Entity\Account;
 
 use DateTimeImmutable;
-use Ramsey\Uuid\UuidInterface;
 use ownHackathon\Core\Type\Email;
+use Ramsey\Uuid\UuidInterface;
 
 interface AccountActivationInterface
 {
@@ -15,4 +15,6 @@ interface AccountActivationInterface
     public function getToken(): UuidInterface;
 
     public function getCreatedAt(): DateTimeImmutable;
+
+    public function with(mixed ...$values): static;
 }
