@@ -83,6 +83,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     $app->get(
         path: '/account/logout',
         middleware: [
+            App\Middleware\Token\AccessTokenValidationMiddleware::class,
             App\Middleware\Account\LogoutMiddleware::class,
             App\Handler\Account\LogoutHandler::class,
         ],
