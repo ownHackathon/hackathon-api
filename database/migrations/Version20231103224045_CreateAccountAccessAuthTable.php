@@ -13,7 +13,7 @@ final class Version20231103224045_CreateAccountAccessAuthTable extends AbstractM
         $table = $schema->createTable('AccountAccessAuth');
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
-        $table->addColumn('userId', Types::INTEGER, ['unsigned' => true,]);
+        $table->addColumn('accountId', Types::INTEGER, ['unsigned' => true,]);
         $table->addColumn('label', Types::STRING, ['length' => 64, 'default' => 'default']);
         $table->addColumn('refreshToken', Types::STRING, ['length' => 512,]);
         $table->addColumn('userAgent', Types::STRING, ['length' => 255, 'default' => 'unknown']);

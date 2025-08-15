@@ -4,7 +4,7 @@ namespace ownHackathon\App\Middleware\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\Core\Message\ResponseMessage;
@@ -33,7 +33,9 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
         $authorization = $request->getHeaderLine('Authorization');
 
         if (strlen($authorization) === 0) {
-            $this->logger->info('Guest call');
+            $this->logger->info('Guest call', [
+                'uri' => (string)$request->getUri(),
+            ]);
 
             return $handler->handle($request);
         }
@@ -44,7 +46,7 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
                 'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_EXPIRED);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_EXPIRED);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -58,7 +60,7 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
                 'uuid' => $authorization->uuid,
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

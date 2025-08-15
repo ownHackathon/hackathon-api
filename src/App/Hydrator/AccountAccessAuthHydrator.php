@@ -19,7 +19,7 @@ readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInt
     {
         return new AccountAccessAuth(
             id: $data['id'],
-            userId: $data['userId'],
+            accountId: $data['accountId'],
             label: $data['label'],
             refreshToken: $data['refreshToken'],
             userAgent: $data['userAgent'],
@@ -46,7 +46,7 @@ readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInt
     {
         return [
             'id' => $object->getId(),
-            'userId' => $object->getUserId(),
+            'accountId' => $object->getAccountId(),
             'label' => $object->getLabel(),
             'refreshToken' => $object->getRefreshToken(),
             'userAgent' => $object->getUserAgent(),

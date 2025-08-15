@@ -16,6 +16,8 @@ interface RouteName
 
     public const string ACCOUNT_PASSWORD_FORGOTTEN = 'account.forgotten.password';
 
+    public const string ACCOUNT_LOGOUT = 'account.logout';
+
     public const string ACCOUNT_LIST_ALL = 'account.list.all';
 
     public const string ACCESS_TOKEN_REFRESH = 'refresh.access.token';

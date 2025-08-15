@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Validator\AuthenticationValidator;
 use ownHackathon\Core\Message\ResponseMessage;
 
@@ -33,7 +33,7 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
                 'Validator-Message:' => $this->validator->getMessages(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

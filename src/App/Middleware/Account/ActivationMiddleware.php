@@ -11,7 +11,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use ownHackathon\App\DTO\AccountRegistrationDTO;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Entity\Account;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use ownHackathon\Core\Exception\DuplicateEntryException;
@@ -46,7 +46,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
                 'Token:' => $activationToken,
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
 
             return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
@@ -59,7 +59,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
                 'Invalid activation token:' => $activationToken,
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
 
             return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
@@ -82,7 +82,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
                 'Exception Message:' => $e->getMessage(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }

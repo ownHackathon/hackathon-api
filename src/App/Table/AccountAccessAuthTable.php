@@ -5,12 +5,12 @@ namespace ownHackathon\App\Table;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use PDOException;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
+use PDOException;
 
 use function is_array;
 use function sprintf;
@@ -63,10 +63,10 @@ class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthS
         return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
-    public function findByUserId(int $userId): AccountAccessAuthCollectionInterface
+    public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface
     {
         $result = $this->query->from($this->table)
-            ->where('userId', $userId)
+            ->where('userId', $accountId)
             ->fetchAll();
 
         return is_array($result)
@@ -74,6 +74,16 @@ class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthS
             : $this->hydrator->hydrateCollection(
                 []
             );
+    }
+
+    public function findByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('accountId', $accountId)
+            ->where('clientIdentHash', $clientHash)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
     public function findByLabel(string $label): AccountAccessAuthCollectionInterface

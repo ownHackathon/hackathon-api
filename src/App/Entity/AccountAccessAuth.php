@@ -13,7 +13,7 @@ readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collecti
 
     public function __construct(
         private int $id,
-        private int $userId,
+        private int $accountId,
         private string $label,
         private string $refreshToken,
         private string $userAgent,
@@ -27,9 +27,9 @@ readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collecti
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function getAccountId(): int
     {
-        return $this->userId;
+        return $this->accountId;
     }
 
     public function getLabel(): string

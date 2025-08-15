@@ -90,7 +90,7 @@ class AccountAccessAuthRepositoryTest extends TestCase
 
     public function testCanFindByUserId(): void
     {
-        $result = $this->repository->findByUserId(AccountAccessAuth::USER_ID);
+        $result = $this->repository->findByAccountId(AccountAccessAuth::USER_ID);
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
@@ -100,7 +100,7 @@ class AccountAccessAuthRepositoryTest extends TestCase
 
     public function testFindByUserIdIsEmpty(): void
     {
-        $result = $this->repository->findByUserId(AccountAccessAuth::USER_ID_INVALID);
+        $result = $this->repository->findByAccountId(AccountAccessAuth::USER_ID_INVALID);
 
         $this->assertInstanceOf(AccountAccessAuthCollection::class, $result);
         $this->assertEmpty($result);
