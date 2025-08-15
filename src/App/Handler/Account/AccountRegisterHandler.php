@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use ownHackathon\App\DTO\EMailDTO;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\Core\Message\OAMessage;
 
 readonly class AccountRegisterHandler implements RequestHandlerInterface
@@ -32,7 +32,7 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
         description: OAMessage::BAD_REQUEST,
-        content: [new OA\JsonContent(ref: HttpFailureMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

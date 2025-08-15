@@ -5,7 +5,7 @@ namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Service\Authentication\AuthenticationService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\Core\Message\ResponseMessage;
@@ -35,7 +35,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
         if (!array_key_exists('email', $data)) {
             $this->logger->notice('Required argument was not passed to the route. Argument => email');
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -49,7 +49,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
                 'E-Mail:' => $email->toString(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -59,7 +59,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
                 'E-Mail:' => $email->toString(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

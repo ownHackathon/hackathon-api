@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\Core\Message\OADataType;
 
 #[OA\Schema()]
-readonly class HttpFailureMessage
+readonly class HttpResponseMessage
 {
     public function __construct(
         #[OA\Property(
@@ -15,7 +15,7 @@ readonly class HttpFailureMessage
         )]
         public int $statusCode,
         #[OA\Property(
-            description: 'The Failure Message',
+            description: 'The Message',
             type: OADataType::STRING,
         )]
         public string $message,

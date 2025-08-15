@@ -30,7 +30,7 @@ class MockAccountAccessAuthTable extends AccountAccessAuthTable implements Accou
 
     public function insert(AccountAccessAuthInterface $data): true
     {
-        if ($data->getUserId() !== Account::ID) {
+        if ($data->getAccountId() !== Account::ID) {
             throw new DuplicateEntryException('AccountAccessAuth', $data->getId());
         }
 
@@ -60,9 +60,9 @@ class MockAccountAccessAuthTable extends AccountAccessAuthTable implements Accou
         return $id === AccountAccessAuth::ID ? $this->hydrator->hydrate(AccountAccessAuth::VALID_DATA) : null;
     }
 
-    public function findByUserId(int $userId): AccountAccessAuthCollectionInterface
+    public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface
     {
-        return $userId === AccountAccessAuth::USER_ID
+        return $accountId === AccountAccessAuth::USER_ID
             ? $this->hydrator->hydrateCollection([0 => AccountAccessAuth::VALID_DATA])
             : $this->hydrator->hydrateCollection(
                 []
