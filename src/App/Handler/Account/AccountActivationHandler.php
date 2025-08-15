@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use ownHackathon\App\DTO\AccountRegistrationDTO;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\Core\Message\OAMessage;
 
 class AccountActivationHandler implements RequestHandlerInterface
@@ -40,7 +40,7 @@ class AccountActivationHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
         description: OAMessage::BAD_REQUEST,
-        content: [new OA\JsonContent(ref: HttpFailureMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

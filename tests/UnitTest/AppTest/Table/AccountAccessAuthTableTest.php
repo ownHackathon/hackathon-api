@@ -110,18 +110,18 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByUserId(): void
     {
-        $result = $this->table->findByUserId(AccountAccessAuth::USER_ID);
+        $result = $this->table->findByAccountId(AccountAccessAuth::USER_ID);
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
-        $this->assertSame(AccountAccessAuth::USER_ID, $result[0]->getUserId());
+        $this->assertSame(AccountAccessAuth::USER_ID, $result[0]->getAccountId());
     }
 
     public function testFindByUserIdIsEmpty(): void
     {
         $table = new AccountAccessAuthTable(new MockQueryFailed(), $this->hydrator);
 
-        $result = $table->findByUserId(AccountAccessAuth::USER_ID);
+        $result = $table->findByAccountId(AccountAccessAuth::USER_ID);
 
         $this->assertInstanceOf(AccountAccessAuthCollection::class, $result);
         $this->assertEmpty($result);

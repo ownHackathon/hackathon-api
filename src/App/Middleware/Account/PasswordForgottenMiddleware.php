@@ -2,17 +2,19 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
+use ownHackathon\App\Service\Account\AccountService;
+use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\Service\Account\AccountService;
-use ownHackathon\Core\Type\Email;
+use Psr\Log\LoggerInterface;
 
 readonly class PasswordForgottenMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountService $accountService,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -25,6 +27,10 @@ readonly class PasswordForgottenMiddleware implements MiddlewareInterface
             $this->accountService->sendTokenForPasswordChange($email);
             return $handler->handle($request);
         }
+
+        $this->logger->alert('New password requested for non-existent account', [
+            'email:' => $email->toString(),
+        ]);
 
         return $handler->handle($request);
     }

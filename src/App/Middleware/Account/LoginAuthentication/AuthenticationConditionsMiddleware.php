@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpFailureMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\Core\Message\ResponseMessage;
 
 readonly class AuthenticationConditionsMiddleware implements MiddlewareInterface
@@ -29,7 +29,7 @@ readonly class AuthenticationConditionsMiddleware implements MiddlewareInterface
                 ]
             );
 
-            $message = HttpFailureMessage::create(
+            $message = HttpResponseMessage::create(
                 HTTP::STATUS_FORBIDDEN,
                 ResponseMessage::ACCOUNT_ALREADY_AUTHENTICATED
             );

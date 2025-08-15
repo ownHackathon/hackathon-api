@@ -82,6 +82,7 @@ class ConfigProvider
                 Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\ActivationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\LastAktivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Account\LogoutMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordChangeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\RegisterMiddleware::class => ConfigAbstractFactory::class,
@@ -91,7 +92,7 @@ class ConfigProvider
                 Middleware\Token\GenerateRefreshTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenAccountMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => InvokableFactory::class,
+                Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenValidationMiddleware::class => ConfigAbstractFactory::class,
                 Repository\AccountAccessAuthRepository::class => ConfigAbstractFactory::class,
                 Repository\AccountActivationRepository::class => ConfigAbstractFactory::class,
@@ -170,6 +171,10 @@ class ConfigProvider
             Middleware\Account\LastAktivityUpdaterMiddleware::class => [
                 AccountRepositoryInterface::class,
             ],
+            Middleware\Account\LogoutMiddleware::class => [
+                AccountAccessAuthRepositoryInterface::class,
+                LoggerInterface::class,
+            ],
             Middleware\Account\PasswordChangeMiddleware::class => [
                 AccountRepositoryInterface::class,
                 TokenRepositoryInterface::class,
@@ -178,12 +183,14 @@ class ConfigProvider
             ],
             Middleware\Account\PasswordForgottenMiddleware::class => [
                 AccountService::class,
+                LoggerInterface::class,
             ],
             Middleware\Account\RegisterMiddleware::class => [
                 AccountService::class,
                 AccountActivationRepositoryInterface::class,
                 ActivationTokenService::class,
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             Middleware\Account\RequestAuthenticationMiddleware::class => [
                 AccessTokenService::class,
@@ -202,12 +209,18 @@ class ConfigProvider
             ],
             Middleware\Token\RefreshTokenAccountMiddleware::class => [
                 AccountRepositoryInterface::class,
+                LoggerInterface::class,
             ],
             Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class => [
                 AccountAccessAuthRepositoryInterface::class,
+                LoggerInterface::class,
+            ],
+            Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => [
+                LoggerInterface::class,
             ],
             Middleware\Token\RefreshTokenValidationMiddleware::class => [
                 RefreshTokenService::class,
+                LoggerInterface::class,
             ],
 
             Repository\AccountAccessAuthRepository::class => [

@@ -3,16 +3,17 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use ownHackathon\App\Entity\AccountActivation;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\App\Service\Token\ActivationTokenService;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 
 readonly class RegisterMiddleware implements MiddlewareInterface
 {
@@ -21,6 +22,7 @@ readonly class RegisterMiddleware implements MiddlewareInterface
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private ActivationTokenService $activationTokenService,
         private UuidFactoryInterface $uuid,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -30,7 +32,12 @@ readonly class RegisterMiddleware implements MiddlewareInterface
         $email = $request->getAttribute(Email::class);
 
         if (!$this->accountService->isEmailAvailable($email)) {
+            $this->logger->warning('An account with the same email address already exists.', [
+                'email:' => $email->toString(),
+            ]);
+
             $this->accountService->sendTokenForPasswordChange($email);
+
             return $handler->handle($request);
         }
 

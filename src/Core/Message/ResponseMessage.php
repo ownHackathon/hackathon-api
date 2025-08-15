@@ -4,6 +4,8 @@ namespace ownHackathon\Core\Message;
 
 interface ResponseMessage
 {
+    public const string SUCCESS = 'Success';
+
     public const string ACCOUNT_ALREADY_AUTHENTICATED = 'There is currently successful authentication';
 
     public const string ACCOUNT_UNAUTHORIZED = 'unauthorized Account';

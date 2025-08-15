@@ -5,24 +5,25 @@ namespace ownHackathon\App\Handler\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\DTO\AuthenticationResponse;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\Core\Message\OAMessage;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\DTO\AccessToken;
-use ownHackathon\App\DTO\HttpResponseMessage;
-use ownHackathon\Core\Message\OAMessage;
 
-readonly class AccessTokenHandler implements RequestHandlerInterface
+class LogoutHandler implements RequestHandlerInterface
 {
     #[OA\Get(
-        path: '/token/refresh',
-        summary: 'Return of a new access token',
-        tags: ['Account'],
+        path: '/account/logout',
+        summary: 'Attempts to log out an account',
+        tags: ['Account']
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: OAMessage::SUCCESS,
-        content: [new OA\JsonContent(ref: AccessToken::class)]
+        content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
@@ -31,8 +32,8 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $accessToken = $request->getAttribute(AccessToken::class);
+        $response = HttpResponseMessage::create(HTTP::STATUS_OK, ResponseMessage::SUCCESS);
 
-        return new JsonResponse($accessToken, HTTP::STATUS_OK);
+        return new JsonResponse($response, $response->statusCode);
     }
 }
