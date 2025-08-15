@@ -1,5 +1,5 @@
-# (Black) Hackathon
-Evaluation project for the Hackathon Events on the Discord server from BlackScorp
+# ownHackathon
+Evalutation Project for Hackathons
 
 ## Steps for an executable test environment
 
@@ -14,15 +14,15 @@ Evaluation project for the Hackathon Events on the Discord server from BlackScor
 8. Run `docker-compose exec php composer run doctrine migrations:migrate`
 9. Run `docker-compose exec php composer run openapi`
 
-Done. You can now open http://localhost/api/doc/ Thanks and have fun.
+Done. You can now open http://localhost/api/docs/. Thank you and enjoy.
 
 See docker-compose.yml for existing services
 
-# unsupportet Script
+# unsupported Script
 
 You will find a script called `hackathon` under `/bin`. This offers possibilities to control the project
 
-- `./bin/hackathon setup` => start the docker container, run  composer install and seed Database Data
+- `./bin/hackathon setup` => start the docker container, run composer install and seed Database Data
 - `./bin/hackathon start` => start the docker container
 - `./bin/hackathon restart` => restart the docker container
 - `./bin/hackathon stop` => stop the docker container
