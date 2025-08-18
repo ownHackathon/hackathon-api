@@ -28,7 +28,7 @@ trait InvalidEMailAddressProviderTrait
             'message' => Assert::isType(DataType::STRING),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::EMAIL_INVALID, $content['message']);
+        $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
     }
 
     public static function invalidEMailAddressProvider(): array

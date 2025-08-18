@@ -66,7 +66,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
 
         $response = $this->app->handle($request);
-        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
+        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
     }
 
     public function testAccountIsAlreadyAuthenticated(): void
@@ -80,7 +80,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
             ->withAddedHeader('Authentication', 'Authentication');
 
         $response = $this->app->handle($request);
-        $this->assertSame(HTTP::STATUS_FORBIDDEN, $response->getStatusCode());
+        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
     }
 
     public function testAccountIsAlreadyAuthorized(): void
