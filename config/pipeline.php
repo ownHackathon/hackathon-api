@@ -26,8 +26,7 @@ use Psr\Container\ContainerInterface;
  */
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
-    $app->pipe('/api', [
-        //ErrorHandler::class,
+    $app->pipe([
         ApiErrorHandlerMiddleware::class,
         ServerUrlMiddleware::class,
         BodyParamsMiddleware::class,
