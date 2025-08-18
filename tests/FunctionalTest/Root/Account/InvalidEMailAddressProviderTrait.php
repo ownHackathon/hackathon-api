@@ -15,7 +15,7 @@ trait InvalidEMailAddressProviderTrait
     public function testEMailValidationInvalid(string $email): void
     {
         $request = new ServerRequest(
-            uri: '/api//account/password/forgotten',
+            uri: '/api/account/password/forgotten',
             method: 'POST'
         );
         $request = $request->withParsedBody(['email' => $email]);

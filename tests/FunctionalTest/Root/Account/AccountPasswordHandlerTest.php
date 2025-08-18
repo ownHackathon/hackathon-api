@@ -52,7 +52,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api//account/password/' . $this->token->getToken()->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -66,7 +66,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api//account/password/' . $this->token->getToken()->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -83,7 +83,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api//account/password/' . $this->token->getToken()->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW_INVALID]);
@@ -95,7 +95,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
     public function testTokenIsInvalid(): void
     {
         $request = new ServerRequest(
-            uri: '/api//account/password/InvalidToken',
+            uri: '/api/account/password/InvalidToken',
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -107,7 +107,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
     public function testTokenIsMissed(): void
     {
         $request = new ServerRequest(
-            uri: '/api//account/password/',
+            uri: '/api/account/password/',
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -121,7 +121,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api//account/password/' . $this->token->getToken()->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
