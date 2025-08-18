@@ -2,13 +2,10 @@
 
 namespace ownHackathon\UnitTest\AppTest\Middleware;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 use ownHackathon\App\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Service\Token\AccessTokenService;
-use ownHackathon\Core\Message\ResponseMessage;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Utils\UuidFactory;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
@@ -19,11 +16,8 @@ use ownHackathon\UnitTest\Mock\Repository\MockAccountRepository;
 use ownHackathon\UnitTest\Mock\Repository\MockAccountRepositoryAccountAuthenticationMiddlewareInvalidToken;
 use ownHackathon\UnitTest\Mock\Service\MockAccessTokenService;
 use ownHackathon\UnitTest\Mock\Service\MockAccessTokenServiceWithoutDuration;
-
-use function json_decode;
-use function property_exists;
-
-use const JSON_THROW_ON_ERROR;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 class AccountAuthenticationMiddlewareTest extends AbstractTestMiddleware
 {
@@ -74,7 +68,6 @@ class AccountAuthenticationMiddlewareTest extends AbstractTestMiddleware
         $response = $middleware->process($request, $handler);
         $header = $response->getHeaderLine('Authorization');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertNotInstanceOf(JsonResponse::class, $response);
         $this->assertSame('true', $header);
     }
@@ -92,13 +85,8 @@ class AccountAuthenticationMiddlewareTest extends AbstractTestMiddleware
             $this->logger,
         );
 
-        $response = $middleware->process($request, $this->handler);
-        $json = json_decode((string)$response->getBody(), null, 512, JSON_THROW_ON_ERROR);
-
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertTrue(property_exists($json, 'message') && $json->message === ResponseMessage::TOKEN_EXPIRED);
+        $this->expectException(HttpUnauthorizedException::class);
+        $middleware->process($request, $this->handler);
     }
 
     public function testTokenHasInvalid(): void
@@ -113,12 +101,7 @@ class AccountAuthenticationMiddlewareTest extends AbstractTestMiddleware
             $this->logger,
         );
 
-        $response = $middleware->process($request, $this->handler);
-        $json = json_decode((string)$response->getBody(), null, 512, JSON_THROW_ON_ERROR);
-
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertTrue(property_exists($json, 'message') && $json->message === ResponseMessage::TOKEN_INVALID);
+        $this->expectException(HttpUnauthorizedException::class);
+        $middleware->process($request, $this->handler);
     }
 }

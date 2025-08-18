@@ -2,21 +2,18 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
-use Laminas\Diactoros\Response\JsonResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Entity\Account;
 use ownHackathon\App\Enum\TokenType;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 readonly class PasswordChangeMiddleware implements MiddlewareInterface
 {
@@ -24,7 +21,6 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
         private AccountRepositoryInterface $accountRepository,
         private TokenRepositoryInterface $tokenRepository,
         private AccountService $accountService,
-        private LoggerInterface $logger,
     ) {
     }
 
@@ -60,12 +56,12 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
 
     private function errorResponse(string $logMessage, ?string $token): ResponseInterface
     {
-        $this->logger->notice($logMessage, [
-            'Token:' => $token,
-        ]);
-
-        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
-
-        return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
+        throw new HttpInvalidArgumentException(
+            $logMessage,
+            ResponseMessage::TOKEN_INVALID,
+            [
+                'Token:' => $token,
+            ]
+        );
     }
 }
