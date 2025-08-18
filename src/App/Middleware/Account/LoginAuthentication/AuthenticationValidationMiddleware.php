@@ -2,22 +2,18 @@
 
 namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
-use Laminas\Diactoros\Response\JsonResponse;
+use ownHackathon\App\Validator\AuthenticationValidator;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpResponseMessage;
-use ownHackathon\App\Validator\AuthenticationValidator;
-use ownHackathon\Core\Message\ResponseMessage;
 
 readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AuthenticationValidator $validator,
-        private LoggerInterface $logger,
     ) {
     }
 
@@ -28,14 +24,14 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            $this->logger->notice('Email and/or password are not valid', [
-                'E-Mail:' => $data['email'] ?? null,
-                'Validator-Message:' => $this->validator->getMessages(),
-            ]);
-
-            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
-
-            return new JsonResponse($message, $message->statusCode);
+            throw new HttpUnauthorizedException(
+                'Email and/or password are not valid',
+                ResponseMessage::DATA_INVALID,
+                [
+                    'E-Mail:' => $data['email'] ?? null,
+                    'Validator-Message:' => $this->validator->getMessages(),
+                ]
+            );
         }
 
         return $handler->handle($request->withParsedBody($this->validator->getValues()));

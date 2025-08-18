@@ -1,0 +1,51 @@
+<?php declare(strict_types=1);
+
+namespace ownHackathon\Core\Factory;
+
+use Fig\Http\Message\StatusCodeInterface;
+use Laminas\Diactoros\Response\JsonResponse;
+use Monolog\Level;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\Core\Exception\HttpException;
+use Psr\Log\LoggerInterface;
+use Throwable;
+
+use function sprintf;
+
+final readonly class ErrorResponseFactory
+{
+    public function __construct(
+        private LoggerInterface $logger,
+    ) {
+    }
+
+    public function createFromThrowable(Throwable $e): JsonResponse
+    {
+        $statusCode = 0;
+        $responseMessage = '';
+
+        if ($e instanceof HttpException) {
+            $statusCode = $e->getHttpStatusCode();
+            $logLevel = $e->getLogLevel();
+            $logContext = $e->getContext();
+            $responseMessage = $e->getResponseMessage();
+
+            $this->logger->log(
+                $logLevel->value,
+                sprintf('[%d] %s', $statusCode, $e->getMessage()),
+                $logContext
+            );
+        } else {
+            $statusCode = StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR;
+            $responseMessage = 'Internal Server Error';
+            $this->logger->log(
+                Level::Critical,
+                sprintf('[%d] Unhandled exception %s', $statusCode, $e->getMessage()),
+                ['exception' => $e]
+            );
+        }
+
+        $message = HttpResponseMessage::create($statusCode, $responseMessage);
+        return new JsonResponse($message, $message->statusCode);
+    }
+}

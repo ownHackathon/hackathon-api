@@ -2,19 +2,20 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
+use Monolog\Level;
 use ownHackathon\App\Service\Account\AccountService;
+use ownHackathon\Core\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
 
 readonly class PasswordForgottenMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountService $accountService,
-        private LoggerInterface $logger,
     ) {
     }
 
@@ -28,10 +29,13 @@ readonly class PasswordForgottenMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $this->logger->alert('New password requested for non-existent account', [
-            'email:' => $email->toString(),
-        ]);
-
-        return $handler->handle($request);
+        throw new HttpHandledInvalidArgumentAsSuccessException(
+            'New password requested for non-existent account',
+            ResponseMessage::DATA_INVALID,
+            [
+                'email:' => $email->toString(),
+            ],
+            Level::Alert
+        );
     }
 }

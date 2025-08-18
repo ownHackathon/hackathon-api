@@ -8,7 +8,7 @@
         failOnRisky="true"
         failOnWarning="true"
         colors="true"
-        cacheDirectory=".phpunit.cache"
+        cacheDirectory=".phpunit.functional.cache"
         beStrictAboutCoverageMetadata="true"
         displayDetailsOnTestsThatTriggerWarnings="true"
         testdox="true"
@@ -18,4 +18,15 @@
             <directory>tests/FunctionalTest</directory>
         </testsuite>
     </testsuites>
+    <coverage>
+        <report>
+            <clover outputFile=".phpunit.functional.cache/code-coverage/ownhackathon@tests.xml"/>
+            <html outputDirectory=".phpunit.functional.cache/build/coverage"/>
+        </report>
+    </coverage>
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
 </phpunit>

@@ -11,7 +11,6 @@ use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 use function is_dir;
 use function mkdir;
@@ -41,12 +40,12 @@ readonly class LoggerFactory
         $logger->pushHandler((new StreamHandler($path . 'default.log'))->setFormatter($formatter));
 
         $errorHandler = (new StreamHandler($path . 'error.log', Level::Error))->setFormatter($formatter);
-        $errorHandler = new FilterHandler($errorHandler, LogLevel::ERROR, LogLevel::ERROR);
+        $errorHandler = new FilterHandler($errorHandler, Level::Error, Level::Error);
 
         $logger->pushHandler($errorHandler);
 
         $errorHandler = (new StreamHandler($path . 'warning.log', Level::Warning))->setFormatter($formatter);
-        $errorHandler = new FilterHandler($errorHandler, LogLevel::WARNING, LogLevel::WARNING);
+        $errorHandler = new FilterHandler($errorHandler, Level::Error, Level::Error);
 
         $logger->pushHandler($errorHandler);
 
