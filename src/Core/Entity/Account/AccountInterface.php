@@ -24,5 +24,5 @@ interface AccountInterface
 
     public function getLastActionAt(): DateTimeImmutable;
 
-    public function with(mixed ...$values): static;
+    public function with(mixed ...$properties): self;
 }
