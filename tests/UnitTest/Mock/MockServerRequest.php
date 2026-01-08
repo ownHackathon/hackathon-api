@@ -2,6 +2,8 @@
 
 namespace ownHackathon\UnitTest\Mock;
 
+use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -18,37 +20,27 @@ class MockServerRequest implements ServerRequestInterface
     ) {
     }
 
-    public function getProtocolVersion()
-    {
-        // TODO: Implement getProtocolVersion() method.
-    }
-
-    public function withProtocolVersion($version)
-    {
-        // TODO: Implement withProtocolVersion() method.
-    }
-
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function hasHeader($name)
+    public function hasHeader($name): bool
     {
         return array_key_exists($name, $this->headers);
     }
 
-    public function getHeader($name)
+    public function getHeader($name): array
     {
-        return array_key_exists($name, $this->headers) ? $this->headers[$name] : null;
+        return array_key_exists($name, $this->headers) ? $this->headers[$name] : [];
     }
 
-    public function getHeaderLine($name)
+    public function getHeaderLine($name): string
     {
         return $this->headers[$name] ?? '';
     }
 
-    public function withHeader($name, $value)
+    public function withHeader($name, $value): MessageInterface
     {
         $header = clone $this;
         $header->headers[$name] = $value;
@@ -56,72 +48,15 @@ class MockServerRequest implements ServerRequestInterface
         return $header;
     }
 
-    public function withAddedHeader($name, $value)
-    {
-        // TODO: Implement withAddedHeader() method.
-    }
-
-    public function withoutHeader($name)
-    {
-        // TODO: Implement withoutHeader() method.
-    }
-
-    public function getBody()
+    /**
+     * @return StreamInterface|array
+     */
+    public function getBody(): StreamInterface
     {
         return $this->body;
     }
 
-    public function withBody(StreamInterface $body)
-    {
-        // TODO: Implement withBody() method.
-    }
-
-    public function getRequestTarget()
-    {
-        // TODO: Implement getRequestTarget() method.
-    }
-
-    public function withRequestTarget($requestTarget)
-    {
-        // TODO: Implement withRequestTarget() method.
-    }
-
-    public function getMethod()
-    {
-        // TODO: Implement getMethod() method.
-    }
-
-    public function withMethod($method)
-    {
-        // TODO: Implement withMethod() method.
-    }
-
-    public function getUri()
-    {
-        // TODO: Implement getUri() method.
-    }
-
-    public function withUri(UriInterface $uri, $preserveHost = false)
-    {
-        // TODO: Implement withUri() method.
-    }
-
-    public function getServerParams()
-    {
-        // TODO: Implement getServerParams() method.
-    }
-
-    public function getCookieParams()
-    {
-        // TODO: Implement getCookieParams() method.
-    }
-
-    public function withCookieParams(array $cookies)
-    {
-        // TODO: Implement withCookieParams() method.
-    }
-
-    public function getQueryParams()
+    public function getQueryParams(): array
     {
         return $this->queryParams;
     }
@@ -135,32 +70,17 @@ class MockServerRequest implements ServerRequestInterface
         return $queryParams;
     }
 
-    public function getUploadedFiles()
-    {
-        // TODO: Implement getUploadedFiles() method.
-    }
-
-    public function withUploadedFiles(array $uploadedFiles)
-    {
-        // TODO: Implement withUploadedFiles() method.
-    }
-
-    public function getParsedBody()
+    public function getParsedBody(): object|array|null
     {
         return $this->body;
     }
 
-    public function withParsedBody($data)
+    public function withParsedBody($data): ServerRequestInterface
     {
         $body = clone $this;
         $body->body = $data;
 
         return $body;
-    }
-
-    public function getAttributes()
-    {
-        // TODO: Implement getAttributes() method.
     }
 
     public function getAttribute($name, $default = null)
@@ -180,7 +100,92 @@ class MockServerRequest implements ServerRequestInterface
         return $attributes;
     }
 
-    public function withoutAttribute($name)
+    public function getProtocolVersion(): string
+    {
+        // TODO: Implement getProtocolVersion() method.
+    }
+
+    public function withProtocolVersion(string $version): MessageInterface
+    {
+        // TODO: Implement withProtocolVersion() method.
+    }
+
+    public function withAddedHeader(string $name, $value): MessageInterface
+    {
+        // TODO: Implement withAddedHeader() method.
+    }
+
+    public function withoutHeader(string $name): MessageInterface
+    {
+        // TODO: Implement withoutHeader() method.
+    }
+
+    public function withBody(StreamInterface $body): MessageInterface
+    {
+        // TODO: Implement withBody() method.
+    }
+
+    public function getRequestTarget(): string
+    {
+        // TODO: Implement getRequestTarget() method.
+    }
+
+    public function withRequestTarget(string $requestTarget): RequestInterface
+    {
+        // TODO: Implement withRequestTarget() method.
+    }
+
+    public function getMethod(): string
+    {
+        // TODO: Implement getMethod() method.
+    }
+
+    public function withMethod(string $method): RequestInterface
+    {
+        // TODO: Implement withMethod() method.
+    }
+
+    public function getUri(): UriInterface
+    {
+        return new \Laminas\Diactoros\Uri('http://example.com/');
+    }
+
+    public function withUri(UriInterface $uri, bool $preserveHost = false): RequestInterface
+    {
+        // TODO: Implement withUri() method.
+    }
+
+    public function getServerParams(): array
+    {
+        return [];
+    }
+
+    public function getCookieParams(): array
+    {
+        // TODO: Implement getCookieParams() method.
+    }
+
+    public function withCookieParams(array $cookies): ServerRequestInterface
+    {
+        // TODO: Implement withCookieParams() method.
+    }
+
+    public function getUploadedFiles(): array
+    {
+        // TODO: Implement getUploadedFiles() method.
+    }
+
+    public function withUploadedFiles(array $uploadedFiles): ServerRequestInterface
+    {
+        // TODO: Implement withUploadedFiles() method.
+    }
+
+    public function getAttributes(): array
+    {
+        // TODO: Implement getAttributes() method.
+    }
+
+    public function withoutAttribute(string $name): ServerRequestInterface
     {
         // TODO: Implement withoutAttribute() method.
     }

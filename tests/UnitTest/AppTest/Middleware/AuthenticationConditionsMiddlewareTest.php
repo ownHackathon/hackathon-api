@@ -17,7 +17,7 @@ class AuthenticationConditionsMiddlewareTest extends AbstractTestMiddleware
         $this->middleware = new AuthenticationConditionsMiddleware();
     }
 
-    public function testIsSuccessfull(): void
+    public function testIsSuccessfully(): void
     {
         $response = $this->middleware->process($this->request, $this->handler);
 
