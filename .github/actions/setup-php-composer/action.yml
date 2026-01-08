@@ -1,0 +1,30 @@
+# .github/actions/setup-php-composer/action.yml
+name: 'Setup PHP and Composer'
+description: 'Common setup for PHP jobs'
+inputs:
+  php-version:
+    description: 'PHP Version'
+    default: '8.4'
+  install-flags:
+    description: 'Composer install flags'
+    default: '--prefer-dist --no-progress'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        extensions: pdo, mbstring # hier Standard-Extensions ergänzen
+
+    - name: Cache Composer packages
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      shell: bash
+      run: composer install ${{ inputs.install-flags }}
