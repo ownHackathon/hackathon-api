@@ -20,5 +20,5 @@ interface AccountAccessAuthInterface
 
     public function getCreatedAt(): DateTimeImmutable;
 
-    public function with(mixed ...$values): static;
+    public function with(mixed ...$properties): self;
 }
