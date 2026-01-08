@@ -113,5 +113,5 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          details: ${{ job.status == 'success' && 'Successful deployment to https:\\dev.ownhackathon.de!' || 'Deployment failed!' }}
+          details: ${{ job.status == 'success' && 'Successful deployment to [Dev](https:\\dev.ownhackathon.de)!' || 'Deployment failed!' }}
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
