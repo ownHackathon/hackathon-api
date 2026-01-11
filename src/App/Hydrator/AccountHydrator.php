@@ -52,13 +52,13 @@ readonly class AccountHydrator implements AccountHydratorInterface
     public function extract(AccountInterface $object): array
     {
         return [
-            'id' => $object->getId(),
-            'uuid' => $object->getUuid()->getHex()->toString(),
-            'name' => $object->getName(),
-            'password' => $object->getPasswordHash(),
-            'email' => $object->getEMail()->toString(),
-            'registeredAt' => $object->getRegisteredAt()->format(DateTimeFormat::DEFAULT->value),
-            'lastActionAt' => $object->getLastActionAt()->format(DateTimeFormat::DEFAULT->value),
+            'id' => $object->id,
+            'uuid' => $object->uuid->getHex()->toString(),
+            'name' => $object->name,
+            'password' => $object->password,
+            'email' => $object->email->toString(),
+            'registeredAt' => $object->registeredAt->format(DateTimeFormat::DEFAULT->value),
+            'lastActionAt' => $object->lastActionAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 

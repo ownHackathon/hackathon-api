@@ -127,7 +127,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
             method: 'POST'
         );
         $request = $request->withParsedBody(
-            ['email' => $account->getEmail()->toString(), 'password' => 'I see your Token']
+            ['email' => $account->email->toString(), 'password' => 'I see your Token']
         );
 
         $response = $this->app->handle($request);

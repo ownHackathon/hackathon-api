@@ -86,7 +86,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
 
         /** @var TokenRepositoryInterface $tokenRepository */
         $tokenRepository = $this->container->get(TokenRepositoryInterface::class);
-        $tokenRepository->deleteByAccountId($account->getId());
+        $tokenRepository->deleteByAccountId($account->id);
 
         $request = new ServerRequest(
             uri: '/api/account',
@@ -95,7 +95,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
         $request = $request->withParsedBody(['email' => 'user@example.com']);
         $response = $this->app->handle($request);
 
-        $activationDataSet = $tokenRepository->findByAccountId($account->getId());
+        $activationDataSet = $tokenRepository->findByAccountId($account->id);
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
         $this->assertArrayHasKey(0, $activationDataSet);

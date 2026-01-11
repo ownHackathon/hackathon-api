@@ -22,7 +22,7 @@ readonly class GenerateAccessTokenMiddleware implements MiddlewareInterface
         /** @var AccountInterface $account */
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
-        $accessToken = $this->accessTokenService->generate($account->getUuid());
+        $accessToken = $this->accessTokenService->generate($account->uuid);
 
         $accessToken = AccessToken::fromString($accessToken);
 

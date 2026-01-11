@@ -75,7 +75,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $userAccount->getId(),
+            $userAccount->id,
             'Testing',
             $this->refreshToken,
             self::USER_AGENT,
@@ -115,7 +115,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $userAccount->getId(),
+            $userAccount->id,
             'Testing',
             $this->refreshToken,
             self::USER_AGENT,
@@ -149,7 +149,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $userAccount->getId(),
+            $userAccount->id,
             'Testing',
             $this->refreshToken,
             self::USER_AGENT,
@@ -202,7 +202,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $userAccount->getId(),
+            $userAccount->id,
             'Testing',
             $this->refreshToken,
             self::USER_AGENT,
@@ -236,7 +236,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $userAccount->getId(),
+            $userAccount->id,
             'Testing',
             $this->refreshToken,
             self::USER_AGENT,

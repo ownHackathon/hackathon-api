@@ -26,7 +26,7 @@ class AccessTokenServiceTest extends TestCase
 
         $service = new AccessTokenService($jwtTokenConfig);
 
-        $token = $service->generate($this->account->getUuid());
+        $token = $service->generate($this->account->uuid);
 
         $isValid = $service->isValid($token);
 
@@ -43,6 +43,6 @@ class AccessTokenServiceTest extends TestCase
 
         $this->expectException(DomainException::class);
 
-        $service->generate($this->account->getUuid());
+        $service->generate($this->account->uuid);
     }
 }

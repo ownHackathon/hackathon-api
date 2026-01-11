@@ -25,7 +25,7 @@ readonly class AccountService
     public function sendTokenForPasswordChange(Email $email): void
     {
         $account = $this->accountRepository->findByEmail($email);
-        $token = $this->createPasswordChangeTokenForUserId($account->getId());
+        $token = $this->createPasswordChangeTokenForUserId($account->id);
         $this->tokenRepository->insert($token);
         $this->tokenService->sendEmail($email, $token);
     }
