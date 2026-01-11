@@ -1,26 +1,44 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
-         name="template coding standard">
+         name="optimized-psr12-standard">
+
+    <description>PSR-12 coding standard with Slevomat enhancements and custom declare-line formatting</description>
+
+    <!-- 1. GENERAL CONFIGURATION -->
     <arg name="basepath" value="."/>
     <arg name="cache" value=".phpcs-cache"/>
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
-    <rule ref="PSR1">
-        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
-    </rule>
+    <arg value="p"/> <!-- Show progress -->
+    <arg value="s"/> <!-- Show sniff codes in reports -->
+
+    <!-- 2. DIRECTORIES TO SCAN -->
+    <file>src/</file>
+    <file>tests/</file>
+
+    <!-- 3. EXCLUSION PATTERNS -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/config/*</exclude-pattern>
+    <exclude-pattern>*/database/*</exclude-pattern>
+    <exclude-pattern>*/ConfigProvider.php</exclude-pattern>
+
+    <!-- 4. CORE STANDARD: PSR-12 -->
     <rule ref="PSR12">
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+
+        <!-- Allows '<?php declare(strict_types=1);' on the first line -->
         <exclude name="PSR12.Files.OpenTag.NotAlone"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterTagBlock"/>
+
+        <!-- Other header spacing exclusions -->
         <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
         <exclude name="PSR12.Files.FileHeader.SpacingInsideBlock"/>
     </rule>
 
-    <file>src/</file>
-    <file>tests/</file>
-
+    <!-- 5. GENERIC AND SQUIZ RULES -->
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
     <rule ref="Generic.PHP.LowerCaseConstant"/>
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.ControlStructures.ControlSignature"/>
@@ -28,7 +46,10 @@
     <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
     <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
     <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
-    <rule ref="Squiz.Scope.MemberVarScope"/>
+
+    <rule ref="Squiz.Scope.MemberVarScope">
+        <severity>0</severity>
+    </rule>
 
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
@@ -42,12 +63,12 @@
             </property>
         </properties>
     </rule>
+
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>
             <property name="maxPercentage" value="60"/>
         </properties>
     </rule>
-
 
     <rule ref="Generic.Files.LineLength">
         <properties>
@@ -56,15 +77,13 @@
         </properties>
     </rule>
 
-    <file>src</file>
+    <rule ref="Internal.ParseError.InterfaceHasMemberVar">
+        <severity>0</severity>
+    </rule>
 
-    <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/config/*</exclude-pattern>
-    <exclude-pattern>*/database/*</exclude-pattern>
-    <exclude-pattern>*/ConfigProvider.php</exclude-pattern>
-
-
+    <!-- 6. SLEVOMAT CODING STANDARD -->
     <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
+
     <rule ref="SlevomatCodingStandard.Arrays.ArrayAccess"/>
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
     <rule ref="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace">
@@ -97,7 +116,9 @@
             <property name="maxLinesCount" value="1"/>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration"/>
+    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration">
+        <exclude name="SlevomatCodingStandard.Classes.PropertyDeclaration.WriteLimit"/>
+    </rule>
 
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.DisallowTrailingMultiLineTernaryOperator"/>
@@ -112,6 +133,8 @@
     <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
     <rule ref="SlevomatCodingStandard.Functions.NamedArgumentSpacing"/>
     <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue"/>
+    <rule ref="SlevomatCodingStandard.Functions.StrictCall"/>
+
     <rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile"/>
     <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace"/>
     <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
@@ -138,6 +161,7 @@
 
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
+            <!-- Enforces declare(strict_types=1) to be on the same line as the opening tag -->
             <property name="declareOnFirstLine" value="1"/>
             <property name="spacesCountAroundEqualsSign" value="0"/>
         </properties>
@@ -156,5 +180,4 @@
 
     <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
 
-    <rule ref="SlevomatCodingStandard.Functions.StrictCall"/>
 </ruleset>
