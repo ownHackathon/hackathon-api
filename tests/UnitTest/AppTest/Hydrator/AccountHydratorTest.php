@@ -27,18 +27,19 @@ class AccountHydratorTest extends TestCase
         $account = $hydrator->hydrate(Account::VALID_DATA);
 
         $this->assertInstanceOf(AccountInterface::class, $account);
-        $this->assertSame(Account::ID, $account->getId());
+        $this->assertSame(Account::ID, $account->id);
     }
 
     public function testCanHydrateAccountCollection(): void
     {
         $hydrator = new AccountHydrator($this->uuidFactory);
 
+        /** @var AccountInterface[] $accounts | [] */
         $accounts = $hydrator->hydrateCollection([Account::VALID_DATA]);
 
         $this->assertInstanceOf(AccountCollectionInterface::class, $accounts);
         $this->assertInstanceOf(AccountInterface::class, $accounts[0]);
-        $this->assertSame(Account::ID, $accounts[0]->getId());
+        $this->assertSame(Account::ID, $accounts[0]->id);
     }
 
     public function testCanExtractAccount(): void
