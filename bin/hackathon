@@ -1,99 +1,112 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
-function composer_install() {
-    docker-compose exec php composer install
+# --- Konfiguration ---
+CONTAINER_PHP="php"
+DOCKER_COMPOSE="docker compose"
+
+# --- Hilfsfunktionen (Provisioning) ---
+
+# Hilfsfunktion für Statusmeldungen
+log() { echo -e "\033[0;32m[INFO]\033[0m $1"; }
+
+# 1. Startet die Container
+up() {
+    log "Starte Container..."
+    $DOCKER_COMPOSE up -d
 }
 
-function setup_database() {
-    docker-compose exec php composer run doctrine migrations:sync-metadata-storage
-    docker-compose exec php composer run doctrine migrations:migrate --no-interaction
+# 2. Installiert Abhängigkeiten (nur wenn nötig oder erzwungen)
+install_deps() {
+    if [ ! -d "./vendor" ] || [ "$1" == "--force" ]; then
+        log "Installiere PHP-Abhängigkeiten..."
+        $DOCKER_COMPOSE exec $CONTAINER_PHP composer install
+    fi
 }
 
-function docker_start() {
-    docker-compose up -d
+# 3. Bereitet die Datenbank vor (Warten + Migrationen)
+migrate_db() {
+    log "Warte auf Datenbank..."
+    $DOCKER_COMPOSE exec $CONTAINER_PHP php -r "
+        \$start = time();
+        while (true) {
+            try {
+                new PDO('mysql:host=db;port=3306', 'root', 'root');
+                break;
+            } catch (Exception \$e) {
+                if (time() - \$start > 30) exit(1);
+                echo '.'; sleep(1);
+            }
+        }"
+
+    log "Führe Migrationen aus..."
+    $DOCKER_COMPOSE exec $CONTAINER_PHP composer run doctrine migrations:sync-metadata-storage -- --no-interaction
+    $DOCKER_COMPOSE exec $CONTAINER_PHP composer run doctrine migrations:migrate -- --no-interaction
 }
 
-function docker_down() {
-    docker-compose down
+# Die "Bau-Kette" (wird von setup und reset genutzt)
+build_stack() {
+    up
+    install_deps "$1"
+    migrate_db
 }
 
-function docker_database_cleanup() {
-    docker volume rm hackathon-api_db
-    docker volume rm hackathon-api_db-testing
-}
-
-function docker_vendor_cleanup() {
-    rm -rf "./vendor"
-}
-
-function docker_cleanup() {
-    docker image rm ghcr.io/ownhackathon/hackathon-api-php:latest mariadb:latest mailhog/mailhog httpd:alpine
-    docker_database_cleanup
-    docker_vendor_cleanup
-}
+# --- Command Handler ---
 
 case $1 in
   "start")
-    docker_start
-    ;;
-
-  "restart")
-    docker-compose restart
+    up
     ;;
 
   "stop")
-    docker_down
+    $DOCKER_COMPOSE stop
     ;;
 
   "setup")
-    docker_start
-    composer_install
-    setup_database
-  ;;
+    build_stack
+    ;;
 
   "reset")
-    echo "turning down docker container"
-    docker_down
+    log "Reset-Vorgang gestartet..."
 
     case $2 in
       "all")
-        echo "cleanup system completely"
-        docker_cleanup
-      ;;
+        log "Modus: Alles (Volumes, Images, Vendor)"
+        $DOCKER_COMPOSE down -v --rmi local
+        [ -d "./vendor" ] && rm -rf "./vendor"
+        FORCE_FLAG="--force"
+        ;;
       "vendor")
-        echo "cleanup database with vendor"
-        docker_vendor_cleanup
-      ;;
+        log "Modus: Datenbank + Vendor"
+        $DOCKER_COMPOSE down -v
+        [ -d "./vendor" ] && rm -rf "./vendor"
+        FORCE_FLAG="--force"
+        ;;
       *)
-        echo "cleanup database"
-        docker_database_cleanup
+        log "Modus: Nur Datenbank (Standard)"
+        $DOCKER_COMPOSE down -v
+        FORCE_FLAG=""
         ;;
     esac
 
-    echo "turning on docker container"
-    docker_start
-
-    echo "check and install vendor"
-    composer_install
-
-    echo "wait for services"
-    sleep 10
-
-    echo "create database storage information an run migrations"
-    setup_database
-
-    echo "done"
-  ;;
-
-  "composer")
-    docker-compose run --rm php composer "${@:2}"
+    # Nach dem Abbau folgt immer der identische Aufbau
+    build_stack $FORCE_FLAG
+    log "Reset erfolgreich abgeschlossen."
     ;;
 
-  "indocker")
-    docker-compose run --rm php "${@:2}"
+  "composer")
+    $DOCKER_COMPOSE exec $CONTAINER_PHP composer "${@:2}"
+    ;;
+
+  "php"|"indocker")
+    $DOCKER_COMPOSE exec $CONTAINER_PHP "${@:2}"
     ;;
 
   *)
-
+    echo "Verwendung: $0 {start|stop|setup|reset|composer|php}"
+    echo ""
+    echo "Reset-Optionen:"
+    echo "  $0 reset          -> Löscht nur DB-Daten (behält Images & Vendor)"
+    echo "  $0 reset vendor   -> Löscht DB-Daten & Vendor-Ordner"
+    echo "  $0 reset all      -> Löscht ALLES (Volumes, lokale Images, Vendor)"
     ;;
 esac
