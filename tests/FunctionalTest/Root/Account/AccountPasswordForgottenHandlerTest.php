@@ -35,7 +35,7 @@ class AccountPasswordForgottenHandlerTest extends AbstractFunctional
         /** @var TokenRepositoryInterface $tokenRepository */
         $tokenRepository = $this->container->get(TokenRepositoryInterface::class);
 
-        $token = $tokenRepository->findByAccountId($account->getId());
+        $token = $tokenRepository->findByAccountId($account->id);
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
         $this->assertArrayHasKey(0, $token);

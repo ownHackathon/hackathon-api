@@ -38,7 +38,7 @@ readonly class LogoutMiddleware implements MiddlewareInterface
         $clientId = $request->getAttribute(ClientIdentification::class);
 
         $accountAccessAuth = $this->authRepository->findByAccountIdAndClientIdHash(
-            $account->getId(),
+            $account->id,
             $clientId->identificationHash
         );
 
@@ -47,7 +47,7 @@ readonly class LogoutMiddleware implements MiddlewareInterface
                 'Unauthorized access',
                 'Unauthorized access',
                 [
-                    'accountId' => $account->getId(),
+                    'accountId' => $account->id,
                     'clientIdentificationHash' => $clientId->identificationHash,
                 ],
                 Level::Warning

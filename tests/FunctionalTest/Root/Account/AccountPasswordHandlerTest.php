@@ -40,7 +40,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->account = $this->accountRepository->findByEmail(new Email('user@example.com'));
         $this->token = new Token(
             null,
-            $this->account->getId(),
+            $this->account->id,
             TokenType::EMail,
             $this->uuid->uuid7(),
             new DateTimeImmutable()
@@ -72,10 +72,10 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
         $this->app->handle($request);
 
-        $changedAccount = $this->accountRepository->findById($this->account->getId());
+        $changedAccount = $this->accountRepository->findById($this->account->id);
 
-        $this->assertNotSame($this->account->getPasswordHash(), $changedAccount->getPasswordHash());
-        $this->assertTrue(password_verify(self::PASSWORD_NEW, $changedAccount->getPasswordHash()));
+        $this->assertNotSame($this->account->password, $changedAccount->password);
+        $this->assertTrue(password_verify(self::PASSWORD_NEW, $changedAccount->password));
     }
 
     public function testChangedPasswordIsInvalid(): void
