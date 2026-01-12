@@ -1,34 +1,103 @@
 # ownHackathon
-Evalutation Project for Hackathons
+Evaluation Project for Hackathons
 
-## Steps for an executable test environment
+## Setup: Executable Test Environment
 
-1. Install `git` and `docker` on your maschine
-2. Run `git clone git@github.com:ownHackathon/hackathon-api.git`
-3. Optional: Check the configurations in `config/autoload`. In case of changes, copy te file and remove the `.dist` file extension and adjust
-   the configuration file.
-4. Copy `.env.dist` and rename it `.env` and set correct your userid and groupid. You can find them out in the terminal via commands `id -u && id -g`
-5. Run `docker-compose up -d`
-6. Run `docker-compose exec php composer install`
-7. Run `docker-compose exec php composer run doctrine migrations:sync-metadata-storage`
-8. Run `docker-compose exec php composer run doctrine migrations:migrate`
-9. Run `docker-compose exec php composer run openapi`
+Follow these steps to set up the project on your local machine.
 
-Done. You can now open http://localhost/api/docs/. Thank you and enjoy.
+### 1. Prerequisites
+Ensure you have `git` and `docker` (including the Docker Compose plugin) installed.
 
-See docker-compose.yml for existing services
+### 2. Clone the Repository
+```bash
+git clone git@github.com:ownHackathon/hackathon-api.git
+cd hackathon-api
+```
 
-# unsupported Script
+### 3. Environment Configuration
+Copy the environment template and adjust it:
+```bash
+cp .env.dist .env
+```
+Open the `.env` file and set your `USER_ID` and `GROUP_ID`. This ensures correct file permissions within the container. You can find your IDs by running:
+```bash
+id -u && id -g
+```
 
-You will find a script called `hackathon` under `/bin`. This offers possibilities to control the project
+### 4. Application Configuration (Optional)
+Check the configuration files in `config/autoload/`. If changes are needed:
+1. Copy the desired `.dist` file.
+2. Remove the `.dist` extension from the copy.
+3. Adjust the settings within the new file.
 
-- `./bin/hackathon setup` => start the docker container, run composer install and seed Database Data
-- `./bin/hackathon start` => start the docker container
-- `./bin/hackathon restart` => restart the docker container
-- `./bin/hackathon stop` => stop the docker container
-- `./bin/hackathon reset` => clean up Database
-- `./bin/hackathon reset vendor` => clean up vendor folder
-- `./bin/hackathon reset all` => clean up system completely
-- `./bin/hackathon composer` => run composer with own param e.g. `./bin/hackathon composer install`
-- `./bin/hackathon php` => run commands in php container e.g. `./bin/hackathon php php -v`
+### 5. Quick Setup (Recommended)
+We provide a management script to automate the infrastructure start, dependency installation, and database migrations.
 
+> [!CAUTION]
+> **NOTE:** This script is provided **as-is and unsupported**. Use it at your own risk.
+
+```bash
+# Make the script executable
+chmod +x bin/hackathon
+
+# Run the automated setup
+./bin/hackathon setup
+```
+
+*Alternatively, you can run the commands manually:*
+<details>
+<summary>Show manual steps</summary>
+
+```bash
+docker-compose up -d
+docker-compose exec php composer install
+docker-compose exec php composer run doctrine migrations:sync-metadata-storage
+docker-compose exec php composer run doctrine migrations:migrate
+docker-compose exec php composer run openapi
+```
+</details>
+
+---
+
+**Done!** You can now access the API documentation at:
+👉 **[http://localhost/api/docs/](http://localhost/api/docs/)**
+
+---
+
+## Unsupported Management CLI via `./bin/hackathon`
+
+The management script consolidates all essential developer commands.
+
+### Usage
+Run the script from the project root directory:
+```bash
+./bin/hackathon [COMMAND]
+```
+
+#### Infrastructure Commands
+*   **`start`**: Starts the Docker containers in the background.
+*   **`stop`**: Pauses the containers (state is preserved).
+*   **`down`**: Stops and removes containers and networks.
+*   **`setup`**: Complete initial setup (Start, Install, Migrate, OpenAPI).
+*   **`openapi`**: Regenerates the API documentation.
+
+#### Reset Functions (Destruction & Rebuild)
+*   **`reset`**: Deletes only the database volumes and re-runs migrations.
+*   **`reset vendor`**: Deletes both the database **and** the `vendor/` folder for a clean re-installation.
+*   **`reset all`**: Deletes everything: database, `vendor/` folder, and local Docker images.
+
+#### Development Utilities (Proxy Commands)
+These commands are executed directly inside the running PHP container:
+*   **`composer [...]`**: Passes commands through to Composer.
+*   *Example:* `./bin/hackathon composer update`
+*   **`php [...]`**: Executes PHP commands (automatically prefixes `php`).
+*   *Example:* `./bin/hackathon php bin/console debug:router`
+*   **`indocker [...]`**: Runs any system command inside the container.
+*   *Example:* `./bin/hackathon indocker ls -la`
+
+---
+
+### 💡 Pro-Tip
+You can create an alias in your `.bashrc` or `.zshrc` to work even faster:
+`alias h='./bin/hackathon'` -> Then simply use `h setup`.
+```
