@@ -3,9 +3,9 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use ownHackathon\App\Entity\Account;
-use ownHackathon\App\Enum\TokenType;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;

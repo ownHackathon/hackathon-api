@@ -3,11 +3,11 @@
 namespace ownHackathon\App\Entity;
 
 use DateTimeImmutable;
-use Ramsey\Uuid\UuidInterface;
-use ownHackathon\App\Enum\TokenType;
 use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\Utils\Collectible;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class Token implements TokenInterface, Collectible
 {
