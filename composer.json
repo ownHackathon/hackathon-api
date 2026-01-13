@@ -48,6 +48,9 @@
     "laminas/laminas-servicemanager": "^3.4",
     "laminas/laminas-stdlib": "^3.6",
     "laminas/laminas-validator": "^2.64",
+    "laminas/laminas-component-installer": "^2.6 || ^3.0",
+    "laminas/laminas-development-mode": "^3.3.0",
+    "mezzio/mezzio-tooling": "^2.12",
     "mezzio/mezzio": "^3.7",
     "mezzio/mezzio-cors": "^1.13",
     "mezzio/mezzio-fastroute": "^3.0.3",
@@ -55,7 +58,8 @@
     "monolog/monolog": "^3.9.0",
     "ramsey/uuid": "^4.7",
     "symfony/mailer": "^7.3",
-    "zircote/swagger-php": "^4.7"
+    "zircote/swagger-php": "^4.7",
+    "jetbrains/phpstorm-attributes": "^1.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
@@ -63,10 +67,6 @@
     "filp/whoops": "^2.7.1",
     "helmich/phpunit-json-assert": "^3.5",
     "helmich/phpunit-psr7-assert": "^4.4",
-    "jetbrains/phpstorm-attributes": "^1.0",
-    "laminas/laminas-component-installer": "^2.6 || ^3.0",
-    "laminas/laminas-development-mode": "^3.3.0",
-    "mezzio/mezzio-tooling": "^2.12",
     "overtrue/phplint": "^9.0",
     "phpstan/phpstan": "^2.1.33",
     "phpstan/phpstan-deprecation-rules": "^2.0.3",
