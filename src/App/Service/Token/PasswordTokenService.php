@@ -18,7 +18,7 @@ readonly class PasswordTokenService
 
     public function sendEmail(EmailType $email, TokenInterface $token): void
     {
-        $text = sprintf('Your token to reset your password: %s', $token->getToken()->getHex()->toString());
+        $text = sprintf('Your token to reset your password: %s', $token->token->getHex()->toString());
 
         $email = (new Email())
             ->from('no-reply@stormannsgal.de')
