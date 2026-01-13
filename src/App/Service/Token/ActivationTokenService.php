@@ -17,11 +17,11 @@ readonly class ActivationTokenService
 
     public function sendEmail(AccountActivationInterface $activation): void
     {
-        $text = sprintf('Your token to activate your Account: %s', $activation->getToken()->getHex()->toString());
+        $text = sprintf('Your token to activate your Account: %s', $activation->token->getHex()->toString());
 
         $email = (new Email())
             ->from('no-reply@stormannsgal.de')
-            ->to($activation->getEmail()->toString())
+            ->to($activation->email->toString())
             ->subject('Account Activation Code')
             ->text($text);
 

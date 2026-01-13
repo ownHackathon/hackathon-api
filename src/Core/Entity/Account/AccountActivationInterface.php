@@ -8,13 +8,13 @@ use Ramsey\Uuid\UuidInterface;
 
 interface AccountActivationInterface
 {
-    public function getId(): ?int;
+    public ?int $id { get; }
 
-    public function getEmail(): Email;
+    public Email $email { get; }
 
-    public function getToken(): UuidInterface;
+    public UuidInterface $token { get; }
 
-    public function getCreatedAt(): DateTimeImmutable;
+    public DateTimeImmutable $createdAt { get; }
 
     public function with(mixed ...$properties): self;
 }
