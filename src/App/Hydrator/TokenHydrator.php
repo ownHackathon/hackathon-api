@@ -43,11 +43,11 @@ readonly class TokenHydrator implements TokenHydratorInterface
     public function extract(TokenInterface $object): array
     {
         return [
-            'id' => $object->getId(),
-            'accountId' => $object->getAccountId(),
-            'tokenType' => $object->getTokenType()->value,
-            'token' => $object->getToken()->getHex(),
-            'createdAt' => $object->getCreatedAt()->format(DateTimeFormat::DEFAULT->value),
+            'id' => $object->id,
+            'accountId' => $object->accountId,
+            'tokenType' => $object->tokenType->value,
+            'token' => $object->token->getHex(),
+            'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 
