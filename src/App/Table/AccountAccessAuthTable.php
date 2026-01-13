@@ -33,7 +33,7 @@ class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthS
         try {
             $lastInsertId = $this->query->insertInto($this->table, $value)->execute();
         } catch (Exception | PDOException $e) {
-            return throw new DuplicateEntryException($this->getTableName(), $data->getId());
+            return throw new DuplicateEntryException($this->getTableName(), $data->id);
         }
 
         return true;
@@ -43,11 +43,11 @@ class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthS
     {
         $value = $this->hydrator->extract($data);
 
-        $result = $this->query->update($this->table, $value, $data->getId())->execute();
+        $result = $this->query->update($this->table, $value, $data->id)->execute();
 
         if ($result === false) {
             throw new InvalidArgumentException(
-                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data->getId())
+                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data->id)
             );
         }
 
