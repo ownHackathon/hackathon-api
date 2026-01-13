@@ -66,7 +66,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
             uuid: $this->uuid->uuid7(),
             name: $accountData->accountName,
             password: password_hash($accountData->password, PASSWORD_BCRYPT),
-            email: $persistActivationToken->getEmail(),
+            email: $persistActivationToken->email,
             registeredAt: new DateTimeImmutable(),
             lastActionAt: new DateTimeImmutable()
         );
@@ -84,7 +84,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
             );
         }
 
-        $this->accountActivationRepository->deleteById($persistActivationToken->getId());
+        $this->accountActivationRepository->deleteById($persistActivationToken->id);
 
         return $handler->handle($request);
     }

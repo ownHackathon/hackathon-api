@@ -37,7 +37,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
         $activationRepository->insert($testAccountActivate);
 
         $request = new ServerRequest(
-            uri: '/api/account/activation/' . $testAccountActivate->getToken()->getHex()->toString(),
+            uri: '/api/account/activation/' . $testAccountActivate->token->getHex()->toString(),
             method: 'POST'
         );
         $request = $request->withParsedBody([
@@ -47,7 +47,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
         $response = $this->app->handle($request);
 
         $emptyAccountActivate = $activationRepository->findByToken(
-            $testAccountActivate->getToken()->getHex()->toString()
+            $testAccountActivate->token->getHex()->toString()
         );
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
