@@ -42,10 +42,10 @@ readonly class AccountActivationHydrator implements AccountActivationHydratorInt
     public function extract(AccountActivationInterface $object): array
     {
         return [
-            'id' => $object->getId(),
-            'email' => $object->getEmail()->toString(),
-            'token' => $object->getToken()->getHex(),
-            'createdAt' => $object->getCreatedAt()->format(DateTimeFormat::DEFAULT->value),
+            'id' => $object->id,
+            'email' => $object->email->toString(),
+            'token' => $object->token->getHex(),
+            'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 
