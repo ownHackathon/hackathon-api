@@ -10,7 +10,7 @@ enum AccountRoles: int
     case User = 4;
     case Guest = 5;
 
-    public function getVisibleStatusName(): string
+    public function getAccountRoleName(): string
     {
         return match ($this) {
             AccountRoles::Owner => 'Eigentümer',
