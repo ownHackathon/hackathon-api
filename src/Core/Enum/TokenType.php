@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Enum;
+namespace ownHackathon\Core\Enum;
 
 enum TokenType: int
 {
