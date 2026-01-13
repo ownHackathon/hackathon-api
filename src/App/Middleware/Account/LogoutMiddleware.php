@@ -54,7 +54,7 @@ readonly class LogoutMiddleware implements MiddlewareInterface
             );
         }
 
-        $this->authRepository->deleteById($accountAccessAuth->getId());
+        $this->authRepository->deleteById($accountAccessAuth->id);
 
         return $handler->handle($request);
     }

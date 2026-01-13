@@ -96,7 +96,7 @@ class AccountAccessAuthTableTest extends TestCase
         $result = $this->table->findById(AccountAccessAuth::ID);
 
         $this->assertInstanceOf(AccountAccessAuthInterface::class, $result);
-        $this->assertSame(AccountAccessAuth::ID, $result->getId());
+        $this->assertSame(AccountAccessAuth::ID, $result->id);
     }
 
     public function testFindByIdIsEmpty(): void
@@ -110,11 +110,12 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByUserId(): void
     {
+        /** @var AccountAccessAuthCollectionInterface<AccountAccessAuthInterface> $result */
         $result = $this->table->findByAccountId(AccountAccessAuth::USER_ID);
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
-        $this->assertSame(AccountAccessAuth::USER_ID, $result[0]->getAccountId());
+        $this->assertSame(AccountAccessAuth::USER_ID, $result[0]->accountId);
     }
 
     public function testFindByUserIdIsEmpty(): void
@@ -129,11 +130,12 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByLabel(): void
     {
+        /** @var AccountAccessAuthCollectionInterface<AccountAccessAuthInterface> $result */
         $result = $this->table->findByLabel(AccountAccessAuth::LABEL);
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
-        $this->assertSame(AccountAccessAuth::LABEL, $result[0]->getLabel());
+        $this->assertSame(AccountAccessAuth::LABEL, $result[0]->label);
     }
 
     public function testFindByLabelIsEmpty(): void
@@ -148,10 +150,11 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByRefreshToken(): void
     {
+        /** @var AccountAccessAuthInterface $result */
         $result = $this->table->findByRefreshToken(AccountAccessAuth::REFRESH_TOKEN);
 
         $this->assertInstanceOf(AccountAccessAuthInterface::class, $result);
-        $this->assertSame(AccountAccessAuth::REFRESH_TOKEN, $result->getRefreshToken());
+        $this->assertSame(AccountAccessAuth::REFRESH_TOKEN, $result->refreshToken);
     }
 
     public function testFindByRefreshTokenIsEmpty(): void
@@ -165,11 +168,12 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByUserAgent(): void
     {
+        /** @var AccountAccessAuthCollectionInterface<AccountAccessAuthInterface> $result */
         $result = $this->table->findByUserAgent(AccountAccessAuth::USER_AGENT);
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
-        $this->assertSame(AccountAccessAuth::USER_AGENT, $result[0]->getUserAgent());
+        $this->assertSame(AccountAccessAuth::USER_AGENT, $result[0]->userAgent);
     }
 
     public function testFindByUserAgentIsEmpty(): void
@@ -184,10 +188,11 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindByClientIdentHash(): void
     {
+        /** @var AccountAccessAuthInterface $result */
         $result = $this->table->findByClientIdentHash(AccountAccessAuth::CLIENT_IDENT_HASH);
 
         $this->assertInstanceOf(AccountAccessAuthInterface::class, $result);
-        $this->assertSame(AccountAccessAuth::CLIENT_IDENT_HASH, $result->getClientIdentHash());
+        $this->assertSame(AccountAccessAuth::CLIENT_IDENT_HASH, $result->clientIdentHash);
     }
 
     public function testFindByClientIdentHashIsEmpty(): void
@@ -201,11 +206,12 @@ class AccountAccessAuthTableTest extends TestCase
 
     public function testCanFindAll(): void
     {
+        /** @var AccountAccessAuthCollectionInterface<AccountAccessAuthInterface> $result */
         $result = $this->table->findAll();
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $result);
         $this->assertArrayHasKey(0, $result);
-        $this->assertSame(AccountAccessAuth::ID, $result[0]->getId());
+        $this->assertSame(AccountAccessAuth::ID, $result[0]->id);
     }
 
     public function testFindAllIsEmpty(): void
