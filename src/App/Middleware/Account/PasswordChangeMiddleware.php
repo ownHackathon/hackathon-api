@@ -35,11 +35,11 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
 
         $persistedToken = $this->tokenRepository->findByToken($token);
 
-        if (!($persistedToken instanceof TokenInterface) || $persistedToken->getTokenType() !== TokenType::EMail) {
+        if (!($persistedToken instanceof TokenInterface) || $persistedToken->tokenType !== TokenType::EMail) {
             return $this->errorResponse('Invalid token was passed.', $token);
         }
 
-        $account = $this->accountRepository->findById($persistedToken->getAccountId());
+        $account = $this->accountRepository->findById($persistedToken->accountId);
 
         if (!($account instanceof Account)) {
             return $this->errorResponse('Invalid token was passed.', $token);
@@ -49,7 +49,7 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
         $account = $account->with(password: $hashedPassword);
 
         $this->accountRepository->update($account);
-        $this->tokenRepository->deleteById($persistedToken->getId());
+        $this->tokenRepository->deleteById($persistedToken->id);
 
         return $handler->handle($request);
     }
