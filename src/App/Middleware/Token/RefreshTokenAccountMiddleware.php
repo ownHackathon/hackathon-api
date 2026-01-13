@@ -27,15 +27,15 @@ readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);
 
         /** @var null|AccountInterface $account */
-        $account = $this->accountRepository->findById($accountAccessAuth->getAccountId());
+        $account = $this->accountRepository->findById($accountAccessAuth->accountId);
 
         if ($account === null) {
             throw new HttpUnauthorizedException(
                 'Account does not exist in the transmitted token',
                 ResponseMessage::TOKEN_INVALID,
                 [
-                    'AccessAuth ID:' => $accountAccessAuth->getId(),
-                    'Account ID:' => $accountAccessAuth->getAccountId(),
+                    'AccessAuth ID:' => $accountAccessAuth->id,
+                    'Account ID:' => $accountAccessAuth->accountId,
                 ],
                 Level::Warning
             );

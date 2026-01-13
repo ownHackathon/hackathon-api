@@ -30,8 +30,8 @@ class MockAccountAccessAuthTable extends AccountAccessAuthTable implements Accou
 
     public function insert(AccountAccessAuthInterface $data): true
     {
-        if ($data->getAccountId() !== Account::ID) {
-            throw new DuplicateEntryException('AccountAccessAuth', $data->getId());
+        if ($data->accountId !== Account::ID) {
+            throw new DuplicateEntryException('AccountAccessAuth', $data->id);
         }
 
         return true;
@@ -39,7 +39,7 @@ class MockAccountAccessAuthTable extends AccountAccessAuthTable implements Accou
 
     public function update(AccountAccessAuthInterface $data): true
     {
-        if ($data->getId() !== AccountAccessAuth::ID) {
+        if ($data->id !== AccountAccessAuth::ID) {
             throw new InvalidArgumentException();
         }
 
