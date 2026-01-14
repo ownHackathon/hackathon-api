@@ -5,12 +5,12 @@ namespace ownHackathon\App\Handler\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\DTO\EMail\EMail;
+use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\Core\Message\OAMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\DTO\EMailDTO;
-use ownHackathon\App\DTO\HttpResponseMessage;
-use ownHackathon\Core\Message\OAMessage;
 
 readonly class AccountRegisterHandler implements RequestHandlerInterface
 {
@@ -23,7 +23,7 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     #[OA\RequestBody(
         description: 'E-Mail for register Account',
         required: true,
-        content: new OA\JsonContent(ref: EMailDTO::class)
+        content: new OA\JsonContent(ref: EMail::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,

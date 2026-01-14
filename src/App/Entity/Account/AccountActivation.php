@@ -1,22 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Entity;
+namespace ownHackathon\App\Entity\Account;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Entity\TokenInterface;
-use ownHackathon\Core\Enum\TokenType;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use ownHackathon\Core\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class Token implements TokenInterface, Collectible
+readonly class AccountActivation implements AccountActivationInterface, Collectible
 {
     use CloneReadonlyClassWith;
 
     public function __construct(
         public ?int $id,
-        public int $accountId,
-        public TokenType $tokenType,
+        public Email $email,
         public UuidInterface $token,
         public DateTimeImmutable $createdAt,
     ) {

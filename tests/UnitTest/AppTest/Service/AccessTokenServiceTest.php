@@ -3,12 +3,12 @@
 namespace ownHackathon\UnitTest\AppTest\Service;
 
 use DomainException;
-use PHPUnit\Framework\TestCase;
-use ownHackathon\App\DTO\JwtTokenConfig;
+use ownHackathon\App\DTO\Token\JwtTokenConfig;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\UnitTest\Mock\Constants\Token;
 use ownHackathon\UnitTest\Mock\Entity\MockAccount;
+use PHPUnit\Framework\TestCase;
 
 class AccessTokenServiceTest extends TestCase
 {

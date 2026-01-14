@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Middleware\Token;
 
+use ownHackathon\App\DTO\Token\AccessToken;
+use ownHackathon\App\Service\Token\AccessTokenService;
+use ownHackathon\Core\Entity\Account\AccountInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\DTO\AccessToken;
-use ownHackathon\App\Service\Token\AccessTokenService;
-use ownHackathon\Core\Entity\Account\AccountInterface;
 
 readonly class GenerateAccessTokenMiddleware implements MiddlewareInterface
 {

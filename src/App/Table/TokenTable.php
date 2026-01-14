@@ -4,12 +4,12 @@ namespace ownHackathon\App\Table;
 
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use PDOException;
 use ownHackathon\App\Hydrator\TokenHydratorInterface;
-use ownHackathon\Core\Entity\TokenCollectionInterface;
-use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Store\TokenStoreInterface;
+use PDOException;
 
 use function is_array;
 use function sprintf;

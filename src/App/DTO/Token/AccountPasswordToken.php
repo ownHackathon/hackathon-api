@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO;
+namespace ownHackathon\App\DTO\Token;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Message\OADataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
-readonly class AccountPasswordTokenDTO
+readonly class AccountPasswordToken
 {
     public function __construct(
         #[OA\Property(
             description: 'Token to set a new password',
-            type: OADataType::STRING,
+            type: DataType::STRING->value,
         )]
         public string $accountPasswordToken,
     ) {

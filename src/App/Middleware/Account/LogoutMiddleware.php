@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use Monolog\Level;
-use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\Client\ClientIdentification;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;

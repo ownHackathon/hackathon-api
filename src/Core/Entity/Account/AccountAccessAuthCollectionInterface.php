@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Core\Entity\Account;
 
-use ownHackathon\App\Entity\AccountAccessAuth;
+use ownHackathon\App\Entity\Account\AccountAccessAuth;
 use ownHackathon\Core\Utils\CollectionInterface;
 
 /**
