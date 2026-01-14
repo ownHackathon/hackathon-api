@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Middleware\Token;
 
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\Service\Token\RefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\DTO\ClientIdentification;
-use ownHackathon\App\DTO\RefreshToken;
-use ownHackathon\App\Service\Token\RefreshTokenService;
 
 readonly class GenerateRefreshTokenMiddleware implements MiddlewareInterface
 {

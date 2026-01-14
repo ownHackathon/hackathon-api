@@ -3,8 +3,7 @@
 namespace ownHackathon\UnitTest\AppTest\Repository;
 
 use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
-use ownHackathon\App\Entity\AccountAccessAuthCollection;
+use ownHackathon\App\Entity\Account\AccountAccessAuthCollection;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\App\Repository\AccountAccessAuthRepository;
@@ -15,6 +14,7 @@ use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
 use ownHackathon\UnitTest\Mock\Table\MockAccountAccessAuthTable;
 use ownHackathon\UnitTest\Mock\Table\MockAccountAccessAuthTableFailed;
+use PHPUnit\Framework\TestCase;
 
 class AccountAccessAuthRepositoryTest extends TestCase
 {

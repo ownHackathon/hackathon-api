@@ -3,8 +3,8 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\DTO\AccountRegistrationDTO;
-use ownHackathon\App\Entity\Account;
+use ownHackathon\App\DTO\Account\AccountRegistration;
+use ownHackathon\App\Entity\Account\Account;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Exception\HttpDuplicateEntryException;
@@ -35,8 +35,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
     {
         $activationToken = $request->getAttribute('token');
 
-        /** @var AccountRegistrationDTO $accountData */
-        $accountData = $request->getAttribute(AccountRegistrationDTO::class);
+        /** @var AccountRegistration $accountData */
+        $accountData = $request->getAttribute(AccountRegistration::class);
 
         if ($activationToken === null) {
             throw new HttpInvalidArgumentException(

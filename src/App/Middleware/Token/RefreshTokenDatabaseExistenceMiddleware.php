@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Middleware\Token;
 
 use Monolog\Level;
-use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Message\ResponseMessage;

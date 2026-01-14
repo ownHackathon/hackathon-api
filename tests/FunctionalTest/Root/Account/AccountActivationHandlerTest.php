@@ -5,15 +5,15 @@ namespace ownHackathon\FunctionalTest\Root\Account;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use PHPUnit\Framework\Assert;
-use ownHackathon\App\Entity\AccountActivation;
-use ownHackathon\Core\Message\DataType;
+use ownHackathon\App\Entity\Account\AccountActivation;
+use ownHackathon\Core\Enum\DataType;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
 use ownHackathon\FunctionalTest\AbstractFunctional;
 use ownHackathon\UnitTest\JsonRequestHelper;
+use PHPUnit\Framework\Assert;
 
 class AccountActivationHandlerTest extends AbstractFunctional
 {
@@ -69,8 +69,8 @@ class AccountActivationHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);
@@ -88,8 +88,8 @@ class AccountActivationHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
@@ -110,8 +110,8 @@ class AccountActivationHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);

@@ -3,9 +3,9 @@
 namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\ClientIdentification;
-use ownHackathon\App\DTO\ClientIdentificationData;
-use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Client\ClientIdentificationData;
+use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\App\Hydrator\AccountHydrator;
 use ownHackathon\App\Hydrator\AccountHydratorInterface;
 use ownHackathon\App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;

@@ -1,22 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO;
+namespace ownHackathon\App\DTO\Account;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Message\OADataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema(required: ['email', 'password'])]
 readonly class AccountAuthenticationData
 {
     #[OA\Property(
         description: 'The E-Mail from Account',
-        type: OADataType::STRING,
+        type: DataType::STRING->value,
     )]
     public string $email;
 
     #[OA\Property(
         description: 'The Password from Account',
-        type: OADataType::STRING,
+        type: DataType::STRING->value,
     )]
     public string $password;
 

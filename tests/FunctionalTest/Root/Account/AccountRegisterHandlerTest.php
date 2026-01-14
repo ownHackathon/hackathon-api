@@ -4,10 +4,9 @@ namespace ownHackathon\FunctionalTest\Root\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use PHPUnit\Framework\Assert;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
-use ownHackathon\Core\Entity\TokenInterface;
-use ownHackathon\Core\Message\DataType;
+use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Enum\DataType;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
@@ -15,6 +14,7 @@ use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\FunctionalTest\AbstractFunctional;
 use ownHackathon\UnitTest\JsonRequestHelper;
+use PHPUnit\Framework\Assert;
 
 class AccountRegisterHandlerTest extends AbstractFunctional
 {
@@ -33,8 +33,8 @@ class AccountRegisterHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
@@ -53,8 +53,8 @@ class AccountRegisterHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);

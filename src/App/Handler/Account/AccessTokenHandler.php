@@ -5,12 +5,12 @@ namespace ownHackathon\App\Handler\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\App\DTO\Token\AccessToken;
+use ownHackathon\Core\Message\OAMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\App\DTO\AccessToken;
-use ownHackathon\App\DTO\HttpResponseMessage;
-use ownHackathon\Core\Message\OAMessage;
 
 readonly class AccessTokenHandler implements RequestHandlerInterface
 {

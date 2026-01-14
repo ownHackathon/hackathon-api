@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO;
+namespace ownHackathon\App\DTO\EMail;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Message\OADataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
-readonly class EMailDTO
+readonly class EMail
 {
     public function __construct(
         #[OA\Property(
             description: 'The E-Mail',
-            type: OADataType::STRING,
+            type: DataType::STRING->value,
         )]
         public string $email,
     ) {

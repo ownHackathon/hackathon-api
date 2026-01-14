@@ -8,7 +8,7 @@ use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\Core\Message\OADataType;
+use ownHackathon\Core\Enum\DataType;
 use ownHackathon\Core\Message\OAMessage;
 
 use function time;
@@ -29,7 +29,7 @@ readonly class PingHandler implements RequestHandlerInterface
                             new OA\Property(
                                 property: 'ack',
                                 description: 'actually request time',
-                                type: OADataType::STRING,
+                                type: DataType::STRING->value,
                             ),
                         ]
                     ),

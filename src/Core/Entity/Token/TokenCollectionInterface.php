@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Entity;
+namespace ownHackathon\Core\Entity\Token;
 
-use ownHackathon\App\Entity\Token;
+use ownHackathon\App\Entity\Token\Token;
 use ownHackathon\Core\Utils\CollectionInterface;
 
 /**

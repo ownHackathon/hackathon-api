@@ -2,9 +2,9 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
-use ownHackathon\App\Entity\Account;
+use ownHackathon\App\Entity\Account\Account;
 use ownHackathon\App\Service\Account\AccountService;
-use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Message\ResponseMessage;

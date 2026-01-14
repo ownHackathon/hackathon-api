@@ -3,8 +3,7 @@
 namespace ownHackathon\UnitTest\AppTest\Table;
 
 use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
-use ownHackathon\App\Entity\AccountAccessAuthCollection;
+use ownHackathon\App\Entity\Account\AccountAccessAuthCollection;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\App\Table\AccountAccessAuthTable;
@@ -15,6 +14,7 @@ use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
 use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
 use ownHackathon\UnitTest\Mock\Database\MockQuery;
 use ownHackathon\UnitTest\Mock\Database\MockQueryFailed;
+use PHPUnit\Framework\TestCase;
 
 class AccountAccessAuthTableTest extends TestCase
 {

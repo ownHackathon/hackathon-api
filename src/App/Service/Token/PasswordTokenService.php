@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Service\Token;
 
-use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 use ownHackathon\Core\Type\Email as EmailType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
