@@ -3,7 +3,7 @@
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use ownHackathon\App;
-use ownHackathon\Core\Message\RouteName;
+use ownHackathon\Core\Enum\Router\RouteIdent;
 use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
@@ -12,7 +12,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         middleware: [
             App\Handler\PingHandler::class,
         ],
-        name: RouteName::PING
+        name: RouteIdent::PING->value
     );
     $app->get(
         path: '/api/token/refresh[/]',
@@ -24,7 +24,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Token\GenerateAccessTokenMiddleware::class,
             App\Handler\Account\AccessTokenHandler::class,
         ],
-        name: RouteName::ACCESS_TOKEN_REFRESH
+        name: RouteIdent::ACCESS_TOKEN_REFRESH->value
     );
     $app->post(
         path: '/api/account/authentication[/]',
@@ -37,7 +37,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware::class,
             App\Handler\Account\AuthenticationHandler::class,
         ],
-        name: RouteName::ACCOUNT_AUTHENTICATE
+        name: RouteIdent::ACCOUNT_AUTHENTICATE->value
     );
 
     $app->post(
@@ -47,7 +47,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\RegisterMiddleware::class,
             App\Handler\Account\AccountRegisterHandler::class,
         ],
-        name: RouteName::ACCOUNT_CREATE
+        name: RouteIdent::ACCOUNT_CREATE->value
     );
 
     $app->post(
@@ -57,7 +57,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\ActivationMiddleware::class,
             App\Handler\Account\AccountActivationHandler::class,
         ],
-        name: RouteName::ACCOUNT_ACTIVATION
+        name: RouteIdent::ACCOUNT_ACTIVATION->value
     );
 
     $app->post(
@@ -67,7 +67,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\PasswordForgottenMiddleware::class,
             App\Handler\Account\AccountPasswordForgottenHandler::class,
         ],
-        name: RouteName::ACCOUNT_PASSWORD_FORGOTTEN
+        name: RouteIdent::ACCOUNT_PASSWORD_FORGOTTEN->value
     );
 
     $app->patch(
@@ -77,7 +77,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\PasswordChangeMiddleware::class,
             App\Handler\Account\AccountPasswordHandler::class,
         ],
-        name: RouteName::ACCOUNT_PASSWORD_SET
+        name: RouteIdent::ACCOUNT_PASSWORD_SET->value
     );
 
     $app->get(
@@ -87,6 +87,6 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Middleware\Account\LogoutMiddleware::class,
             App\Handler\Account\LogoutHandler::class,
         ],
-        name: RouteName::ACCOUNT_LOGOUT
+        name: RouteIdent::ACCOUNT_LOGOUT->value
     );
 };

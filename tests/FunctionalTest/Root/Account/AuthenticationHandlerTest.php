@@ -111,7 +111,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         /** @var UuidFactoryInterface $uuid */
         $uuid = $this->container->get(UuidFactoryInterface::class);
 
-        $account = new \ownHackathon\App\Entity\Account(
+        $account = new \ownHackathon\App\Entity\Account\Account(
             null,
             $uuid->uuid7(),
             'I see your Token',

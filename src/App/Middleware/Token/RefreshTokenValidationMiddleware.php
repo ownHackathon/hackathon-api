@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Middleware\Token;
 
-use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\App\Service\Token\RefreshTokenService;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Message\ResponseMessage;

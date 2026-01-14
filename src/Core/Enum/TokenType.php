@@ -4,6 +4,6 @@ namespace ownHackathon\Core\Enum;
 
 enum TokenType: int
 {
-    case EMail = 1;
-    case Default = 2;
+    case Default = 1;
+    case EMail = 2;
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO;
+namespace ownHackathon\App\DTO\Token;
 
 readonly class JwtTokenConfig
 {

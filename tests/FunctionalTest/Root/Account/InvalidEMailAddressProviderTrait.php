@@ -6,7 +6,7 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use ownHackathon\Core\Message\DataType;
+use ownHackathon\Core\Enum\DataType;
 use ownHackathon\Core\Message\ResponseMessage;
 
 trait InvalidEMailAddressProviderTrait
@@ -24,8 +24,8 @@ trait InvalidEMailAddressProviderTrait
 
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertThat($response, $this->bodyMatchesJson([
-            'statusCode' => Assert::isType(DataType::INT),
-            'message' => Assert::isType(DataType::STRING),
+            'statusCode' => Assert::isType(DataType::INTEGER->value),
+            'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);

@@ -2,8 +2,8 @@
 
 namespace ownHackathon\Core\Repository;
 
-use ownHackathon\Core\Entity\TokenCollectionInterface;
-use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {

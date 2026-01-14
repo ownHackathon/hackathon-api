@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO;
+namespace ownHackathon\App\DTO\Response;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Message\OADataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class HttpResponseMessage
@@ -11,12 +11,12 @@ readonly class HttpResponseMessage
     public function __construct(
         #[OA\Property(
             description: 'The Http Status Code',
-            type: OADataType::INTEGER,
+            type: DataType::INTEGER->value,
         )]
         public int $statusCode,
         #[OA\Property(
             description: 'The Message',
-            type: OADataType::STRING,
+            type: DataType::STRING->value,
         )]
         public string $message,
     ) {

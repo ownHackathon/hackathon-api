@@ -3,10 +3,10 @@
 namespace ownHackathon\App\Hydrator;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Token;
-use ownHackathon\App\Entity\TokenCollection;
-use ownHackathon\Core\Entity\TokenCollectionInterface;
-use ownHackathon\Core\Entity\TokenInterface;
+use ownHackathon\App\Entity\Token\Token;
+use ownHackathon\App\Entity\Token\TokenCollection;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 use ownHackathon\Core\Enum\DateTimeFormat;
 use ownHackathon\Core\Enum\TokenType;
 use Ramsey\Uuid\UuidFactoryInterface;
