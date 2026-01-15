@@ -52,8 +52,6 @@ check_initialization() {
     fi
 
     # 2. Check for database volumes
-    # We look for volumes that are labeled by Docker Compose for this project and the service 'database'
-    # This avoids guessing the exact string name (hackathonapi_db vs hackathon-api_db)
     local volume_exists=$(docker volume ls -q --filter "label=com.docker.compose.project" --filter "label=com.docker.compose.volume=db")
 
     if [ -z "$volume_exists" ]; then
@@ -109,19 +107,26 @@ cleanup_docker() {
 }
 
 cleanup_app() {
-    log "Cleaning application files and caches..."
+    log "Cleaning application files and caches (preserving .gitkeep)..."
+
+    # 1. Remove entire directories
     local dirs=(".phplint.cache" ".phpunit.cache" ".phpunit.functional.cache" "vendor")
     for dir in "${dirs[@]}"; do
         if [ -d "$dir" ]; then
             rm -rf "$dir" && log "-> $dir/ removed"
         fi
     done
+
+    # 2. Clear contents of directories, but EXCLUDE .gitkeep
     local content_dirs=("data/cache" "data/log")
     for c_dir in "${content_dirs[@]}"; do
         if [ -d "$c_dir" ]; then
-            find "$c_dir" -mindepth 1 -delete && log "-> contents of $c_dir/ cleared"
+            # find: mindepth 1 (only contents), ! -name (not .gitkeep), -delete (remove)
+            find "$c_dir" -mindepth 1 ! -name ".gitkeep" -delete && log "-> contents of $c_dir/ cleared (except .gitkeep)"
         fi
     done
+
+    # 3. Remove specific files
     if [ -f ".phpcs-cache" ]; then
         rm ".phpcs-cache" && log "-> .phpcs-cache removed"
     fi
@@ -224,7 +229,7 @@ case $1 in
         echo ""
         echo "Options:"
         echo -e "  ${GREEN}docker${NC}   - Remove all project containers, networks, volumes and ALL images"
-        echo -e "  ${GREEN}app${NC}      - Remove vendor/ folder, all cache directories and clear logs"
+        echo -e "  ${GREEN}app${NC}      - Remove vendor/ folder, all cache directories and clear logs (preserves .gitkeep)"
         echo -e "  ${GREEN}all${NC}      - Full cleanup (Combines both docker and app cleanup)"
         exit 1
         ;;
