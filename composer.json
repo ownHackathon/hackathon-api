@@ -101,7 +101,7 @@
     "development-status": "laminas-development-mode status",
     "doctrine": "php ./bin/migrations.php",
     "enable-codestandard": "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-    "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --configuration phpunit_functionaltest.xml",
+    "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --display-phpunit-deprecations --configuration phpunit_functionaltest.xml",
     "mezzio": "laminas --ansi",
     "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/docs/swagger.json",
     "phpcbf": "phpcbf --standard=phpcs.xml -p",
@@ -115,6 +115,6 @@
       "@unittest",
       "@functionaltest"
     ],
-    "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --configuration phpunit_unittest.xml"
+    "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --display-phpunit-deprecations --configuration phpunit_unittest.xml"
   }
 }
