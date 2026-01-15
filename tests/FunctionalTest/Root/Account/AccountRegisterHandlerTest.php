@@ -6,8 +6,8 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
@@ -37,7 +37,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
     }
 
     public function testBodyHasInvalidParameter(): void
@@ -57,7 +57,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
     }
 
     public function testActivationDataSetWasCreated(): void

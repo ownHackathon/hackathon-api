@@ -5,11 +5,11 @@ namespace ownHackathon\App\Handler;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\DataType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Message\OAMessage;
 
 use function time;
 
@@ -22,7 +22,7 @@ readonly class PingHandler implements RequestHandlerInterface
         responses: [
             new OA\Response(
                 response: HTTP::STATUS_OK,
-                description: OAMessage::SUCCESS,
+                description: StatusMessage::SUCCESS->value,
                 content: [
                     new OA\JsonContent(
                         properties: [

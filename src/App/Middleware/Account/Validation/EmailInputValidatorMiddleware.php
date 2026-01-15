@@ -5,8 +5,9 @@ namespace ownHackathon\App\Middleware\Account\Validation;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use ownHackathon\App\DTO\Response\HttpResponseMessage;
 use ownHackathon\App\Validator\EMailValidator;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,7 +23,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::EMAIL_INVALID);
+        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, StatusMessage::EMAIL_INVALID);
 
         $data = $request->getParsedBody();
 
@@ -30,8 +31,8 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->mailValidator->isValid()) {
             throw new HttpInvalidArgumentException(
-                'Invalid E-Mail',
-                ResponseMessage::DATA_INVALID,
+                LogMessage::EMAIL_INVALID,
+                StatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? null,
                     'Validator Message:' => $this->mailValidator->getMessages(),

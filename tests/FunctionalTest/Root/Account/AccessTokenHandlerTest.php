@@ -14,7 +14,7 @@ use ownHackathon\App\Repository\AccountRepository;
 use ownHackathon\App\Service\ClientIdentification\ClientIdentificationService;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\App\Service\Token\RefreshTokenService;
-use ownHackathon\Core\Message\ResponseMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\FunctionalTest\AbstractFunctional;
 use ownHackathon\UnitTest\JsonRequestHelper;
@@ -114,7 +114,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
     {
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
-            1,
+            null,
             $userAccount->id,
             'Testing',
             $this->refreshToken,
@@ -139,7 +139,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -173,7 +173,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -194,7 +194,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::TOKEN_NOT_PERSISTENT, $content['message']);
+        $this->assertSame(StatusMessage::TOKEN_NOT_PERSISTENT->value, $content['message']);
     }
 
     public function testUnexpectedClientIdentification(): void
@@ -226,7 +226,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::CLIENT_UNEXPECTED, $content['message']);
+        $this->assertSame(StatusMessage::CLIENT_UNEXPECTED->value, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -260,7 +260,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::CLIENT_UNEXPECTED, $content['message']);
+        $this->assertSame(StatusMessage::CLIENT_UNEXPECTED->value, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }

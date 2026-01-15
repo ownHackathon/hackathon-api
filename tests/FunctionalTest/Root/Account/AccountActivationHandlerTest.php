@@ -6,8 +6,8 @@ use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use ownHackathon\App\Entity\Account\AccountActivation;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
@@ -73,7 +73,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
     }
 
     public function testBodyIsInvalid(): void
@@ -92,7 +92,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
     }
 
     public function testTokenIsInvalidOrNotPersistent(): void
@@ -114,6 +114,6 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::TOKEN_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
     }
 }

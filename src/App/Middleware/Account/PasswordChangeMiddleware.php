@@ -5,9 +5,10 @@ namespace ownHackathon\App\Middleware\Account;
 use ownHackathon\App\Entity\Account\Account;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -30,19 +31,19 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
         $password = $request->getParsedBody()['password'];
 
         if ($token === null) {
-            return $this->errorResponse('No token was passed.', $token);
+            return $this->errorResponse(LogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token);
         }
 
         $persistedToken = $this->tokenRepository->findByToken($token);
 
         if (!($persistedToken instanceof TokenInterface) || $persistedToken->tokenType !== TokenType::EMail) {
-            return $this->errorResponse('Invalid token was passed.', $token);
+            return $this->errorResponse(LogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token);
         }
 
         $account = $this->accountRepository->findById($persistedToken->accountId);
 
         if (!($account instanceof Account)) {
-            return $this->errorResponse('Invalid token was passed.', $token);
+            return $this->errorResponse(LogMessage::PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND, $token);
         }
 
         $hashedPassword = $this->accountService->cryptPassword($password);
@@ -54,11 +55,11 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function errorResponse(string $logMessage, ?string $token): ResponseInterface
+    private function errorResponse(LogMessage $logMessage, ?string $token): ResponseInterface
     {
         throw new HttpInvalidArgumentException(
             $logMessage,
-            ResponseMessage::TOKEN_INVALID,
+            StatusMessage::TOKEN_INVALID,
             [
                 'Token:' => $token,
             ]
