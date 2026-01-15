@@ -5,8 +5,9 @@ namespace ownHackathon\App\Middleware\Account;
 use Monolog\Level;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -41,8 +42,8 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
 
         if (!$this->accessTokenService->isValid($authorization)) {
             throw new HttpUnauthorizedException(
-                'Request with expired Access Token received.',
-                ResponseMessage::TOKEN_EXPIRED,
+                LogMessage::ACCESS_TOKEN_EXPIRED,
+                StatusMessage::TOKEN_EXPIRED,
                 [
                     'uri' => (string)$request->getUri(),
                     'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
@@ -55,8 +56,8 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
         $account = $this->accountRepository->findByUuid($uuid);
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
-                'Request with invalid Access Token received (Account not found).',
-                ResponseMessage::TOKEN_INVALID,
+                LogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
+                StatusMessage::TOKEN_INVALID,
                 [
                     'uri' => (string)$request->getUri(),
                     'uuid' => $authorization->uuid,

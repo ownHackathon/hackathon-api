@@ -6,6 +6,7 @@ use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Monolog\Level;
 use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpException;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -21,8 +22,9 @@ final readonly class ErrorResponseFactory
 
     public function createFromThrowable(Throwable $e): JsonResponse
     {
-        $statusCode = 0;
-        $responseMessage = '';
+        $statusCode = StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR;
+        $responseMessage = StatusMessage::INTERNAL_SERVER_ERROR;
+
 
         if ($e instanceof HttpException) {
             $statusCode = $e->getHttpStatusCode();
@@ -36,8 +38,6 @@ final readonly class ErrorResponseFactory
                 $logContext
             );
         } else {
-            $statusCode = StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR;
-            $responseMessage = 'Internal Server Error';
             $this->logger->log(
                 Level::Critical,
                 sprintf('[%d] Unhandled exception %s', $statusCode, $e->getMessage()),

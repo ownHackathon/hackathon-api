@@ -53,8 +53,8 @@ services:
     logging:
       driver: 'none'  # disable saving logs
     ports:
-      - "1025:1025" # smtp server
-      - "8025:8025" # web ui
+      - "${MAILHOG_SMTP_PORT:-1025}:1025" # smtp server
+      - "${MAILHOG_WEBUI_PORT:-8025}:8025" # web ui
 
 volumes:
   db:

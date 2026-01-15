@@ -4,13 +4,15 @@ namespace ownHackathon\Core\Exception;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Monolog\Level;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use Throwable;
 
 final class HttpDuplicateEntryException extends HttpException
 {
     public function __construct(
-        string $logMessage,
-        string $responseMessage = '',
+        LogMessage $logMessage,
+        StatusMessage $responseMessage,
         array $context = [],
         Level $loglevel = Level::Warning,
         ?Throwable $previous = null
