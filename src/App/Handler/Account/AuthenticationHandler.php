@@ -10,7 +10,7 @@ use ownHackathon\App\DTO\Response\AuthenticationResponse;
 use ownHackathon\App\DTO\Response\HttpResponseMessage;
 use ownHackathon\App\DTO\Token\AccessToken;
 use ownHackathon\App\DTO\Token\RefreshToken;
-use ownHackathon\Core\Message\OAMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -29,17 +29,17 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: OAMessage::SUCCESS,
+        description: StatusMessage::SUCCESS->value,
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: OAMessage::UNAUTHORIZED_ACCESS,
+        description: StatusMessage::UNAUTHORIZED_ACCESS->value,
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_FORBIDDEN,
-        description: OAMessage::FORBIDDEN,
+        description: StatusMessage::FORBIDDEN->value,
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

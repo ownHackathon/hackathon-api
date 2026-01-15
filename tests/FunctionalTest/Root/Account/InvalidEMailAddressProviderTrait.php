@@ -4,10 +4,10 @@ namespace ownHackathon\FunctionalTest\Root\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\DataType;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Message\ResponseMessage;
 
 trait InvalidEMailAddressProviderTrait
 {
@@ -28,7 +28,7 @@ trait InvalidEMailAddressProviderTrait
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(ResponseMessage::DATA_INVALID, $content['message']);
+        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
     }
 
     public static function invalidEMailAddressProvider(): array

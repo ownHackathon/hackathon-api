@@ -2,8 +2,9 @@
 
 namespace ownHackathon\Core\Type;
 
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ValueError;
 
 use function sprintf;
@@ -62,8 +63,8 @@ final class Email implements TypeInterface
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             throw new HttpInvalidArgumentException(
-                'Value must be an e-mail',
-                ResponseMessage::DATA_INVALID,
+                LogMessage::EMAIL_FORMAT_REQUIRED,
+                StatusMessage::INVALID_DATA,
                 [
                     'email' => $value,
                 ]

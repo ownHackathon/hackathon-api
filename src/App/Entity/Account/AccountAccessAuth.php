@@ -12,7 +12,7 @@ readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collecti
     use CloneReadonlyClassWith;
 
     public function __construct(
-        public int $id,
+        public ?int $id,
         public int $accountId,
         public string $label,
         public string $refreshToken,

@@ -4,8 +4,9 @@ namespace ownHackathon\App\Middleware\Account;
 
 use Monolog\Level;
 use ownHackathon\App\Service\Account\AccountService;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,8 +31,8 @@ readonly class PasswordForgottenMiddleware implements MiddlewareInterface
         }
 
         throw new HttpHandledInvalidArgumentAsSuccessException(
-            'New password requested for non-existent account',
-            ResponseMessage::DATA_INVALID,
+            LogMessage::PASSWORD_REQUEST_MISSING_ACCOUNT,
+            StatusMessage::INVALID_DATA,
             [
                 'email:' => $email->toString(),
             ],

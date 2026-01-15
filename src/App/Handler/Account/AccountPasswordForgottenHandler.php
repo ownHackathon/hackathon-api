@@ -6,7 +6,7 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\DTO\EMail\EMail;
-use ownHackathon\Core\Message\OAMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -25,7 +25,7 @@ class AccountPasswordForgottenHandler implements RequestHandlerInterface
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: OAMessage::SUCCESS,
+        description: StatusMessage::SUCCESS->value,
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

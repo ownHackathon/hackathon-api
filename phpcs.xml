@@ -15,7 +15,6 @@
 
     <!-- 2. DIRECTORIES TO SCAN -->
     <file>src/</file>
-    <file>tests/</file>
 
     <!-- 3. EXCLUSION PATTERNS -->
     <exclude-pattern>*/vendor/*</exclude-pattern>

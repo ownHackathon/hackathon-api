@@ -5,8 +5,9 @@ namespace ownHackathon\App\Middleware\Token;
 use Monolog\Level;
 use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,8 +29,8 @@ readonly class RefreshTokenDatabaseExistenceMiddleware implements MiddlewareInte
         $persistToken = $this->accessAuthRepository->findByRefreshToken($refreshToken->refreshToken);
         if (!($persistToken instanceof AccountAccessAuthInterface)) {
             throw new HttpUnauthorizedException(
-                'Refresh token not recognized by the system.',
-                ResponseMessage::TOKEN_NOT_PERSISTENT,
+                LogMessage::REFRESH_TOKEN_NOT_FOUND,
+                StatusMessage::TOKEN_NOT_PERSISTENT,
                 [
                     'Refresh Token:' => $refreshToken,
                 ],

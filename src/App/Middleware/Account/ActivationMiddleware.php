@@ -6,10 +6,11 @@ use DateTimeImmutable;
 use ownHackathon\App\DTO\Account\AccountRegistration;
 use ownHackathon\App\Entity\Account\Account;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
@@ -40,8 +41,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
 
         if ($activationToken === null) {
             throw new HttpInvalidArgumentException(
-                'No activation token was passed.',
-                ResponseMessage::TOKEN_INVALID,
+                LogMessage::ACTIVATION_TOKEN_MISSING,
+                StatusMessage::TOKEN_INVALID,
                 [
                     'Token:' => $activationToken,
                 ]
@@ -53,8 +54,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
 
         if ($persistActivationToken === null) {
             throw new HttpInvalidArgumentException(
-                'Transferred activation key is invalid.',
-                ResponseMessage::TOKEN_INVALID,
+                LogMessage::ACTIVATION_TOKEN_MISSING,
+                StatusMessage::TOKEN_INVALID,
                 [
                     'Invalid activation token:' => $activationToken,
                 ]
@@ -75,8 +76,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
             $this->accountRepository->insert($account);
         } catch (DuplicateEntryException $e) {
             throw new HttpDuplicateEntryException(
-                'Account has already been created.',
-                ResponseMessage::DATA_INVALID,
+                LogMessage::ACCOUNT_ALREADY_EXISTS,
+                StatusMessage::INVALID_DATA,
                 [
                     'E-Mail' => $account->email->toString(),
                     'Exception Message:' => $e->getMessage(),

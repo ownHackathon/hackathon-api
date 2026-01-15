@@ -19,19 +19,18 @@ Copy the environment template and adjust it:
 ```bash
 cp .env.dist .env
 ```
-Open the `.env` file and set your `USER_ID` and `GROUP_ID`. This ensures correct file permissions within the container. You can find your IDs by running:
+Open the `.env` file and set your `USERMAP_UID` and `USERMAP_GID`. This ensures correct file permissions within the container. You can find your IDs by running:
 ```bash
 id -u && id -g
 ```
 
 ### 4. Application Configuration (Optional)
-Check the configuration files in `config/autoload/`. If changes are needed:
-1. Copy the desired `.dist` file.
-2. Remove the `.dist` extension from the copy.
-3. Adjust the settings within the new file.
+Check the configuration files in `config/autoload/`. If changes are needed, copy the desired `.dist` file, remove the extension, and adjust the settings.
 
 ### 5. Quick Setup (Recommended)
-We provide a management script to automate the infrastructure start, dependency installation, and database migrations.
+We provide a management script to automate the entire process (infrastructure start, dependency installation, database migrations, and documentation generation).
+
+**Once finished, the script automatically displays a table with all service URLs, ports, and database credentials.**
 
 > [!CAUTION]
 > **NOTE:** This script is provided **as-is and unsupported**. Use it at your own risk.
@@ -59,14 +58,9 @@ docker-compose exec php composer run openapi
 
 ---
 
-**Done!** You can now access the API documentation at:
-👉 **[http://localhost/api/docs/](http://localhost/api/docs/)**
-
----
-
 ## Unsupported Management CLI via `./bin/hackathon`
 
-The management script consolidates all essential developer commands.
+The management script consolidates all essential developer commands into a single tool.
 
 ### Usage
 Run the script from the project root directory:
@@ -75,29 +69,35 @@ Run the script from the project root directory:
 ```
 
 #### Infrastructure Commands
-*   **`start`**: Starts the Docker containers in the background.
-*   **`stop`**: Pauses the containers (state is preserved).
-*   **`down`**: Stops and removes containers and networks.
-*   **`setup`**: Complete initial setup (Start, Install, Migrate, OpenAPI).
+*   **`start`**: Starts the containers. **Note:** It checks for initialization (vendor/ and volumes) and prevents start if the project isn't set up.
+*   **`stop`** / **`down`**: Pauses containers or stops/removes containers and networks.
+*   **`setup`**: Complete initial setup (Start, Install, Migrate, OpenAPI, Info).
+*   **`services`**: Lists all available service names used in this project.
+*   **`logs [svc]`**: Tails logs for all or a specific service (e.g., `./bin/hackathon logs php`).
+*   **`info`**: Displays connectivity info (URLs, Ports, and DB Credentials) for running services.
 *   **`openapi`**: Regenerates the API documentation.
 
-#### Reset Functions (Destruction & Rebuild)
-*   **`reset`**: Deletes only the database volumes and re-runs migrations.
-*   **`reset vendor`**: Deletes both the database **and** the `vendor/` folder for a clean re-installation.
-*   **`reset all`**: Deletes everything: database, `vendor/` folder, and local Docker images.
+#### Cleanup & Reset
+*   **`clean {docker|app|all}`**:
+    *   `docker`: Removes containers, volumes, and **all** project images.
+    *   `app`: Removes `vendor/` and all cache files (`.phplint`, `.phpunit`, etc.).
+    *   `all`: Performs both docker and app cleanup.
+*   **`reset {database|vendor|all}`**:
+    *   `database`: Wipes database volumes and re-runs migrations.
+    *   `vendor`: Wipes and reinstalls the `vendor/` folder (Database remains untouched).
+    *   `all`: Wipes database, vendor, and all caches, followed by a fresh `setup`.
 
-#### Development Utilities (Proxy Commands)
-These commands are executed directly inside the running PHP container:
-*   **`composer [...]`**: Passes commands through to Composer.
-*   *Example:* `./bin/hackathon composer update`
-*   **`php [...]`**: Executes PHP commands (automatically prefixes `php`).
-*   *Example:* `./bin/hackathon php bin/console debug:router`
-*   **`indocker [...]`**: Runs any system command inside the container.
-*   *Example:* `./bin/hackathon indocker ls -la`
+#### Development & Utility Commands
+*   **`composer [...]`**: Run Composer commands in the PHP container.
+*   **`php [...]`**: Run PHP commands in the PHP container.
+*   **`test [...]`**: Shortcut to run PHPUnit tests (passes arguments to PHPUnit).
+*   **`bash`**: Direct interactive shell access to the PHP container.
+*   **`mysql`**: Direct access to the MariaDB database console.
+*   **`indocker [service] [command]`**: Access any specific container (`php`, `apache`, `database`, `database-testing`, `mailhog`).
 
 ---
 
 ### 💡 Pro-Tip
 You can create an alias in your `.bashrc` or `.zshrc` to work even faster:
-`alias h='./bin/hackathon'` -> Then simply use `h setup`.
+`alias h='./bin/hackathon'` -> Then simply use `h setup`, `h info`, `h bash` or `h test`.
 ```

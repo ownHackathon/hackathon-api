@@ -4,8 +4,9 @@ namespace ownHackathon\App\Middleware\Token;
 
 use Monolog\Level;
 use ownHackathon\App\Service\Token\AccessTokenService;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -24,8 +25,8 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
 
         if (empty($accessToken)) {
             throw new HttpUnauthorizedException(
-                'No AccessToken provided.',
-                ResponseMessage::ACCOUNT_UNAUTHORIZED,
+                LogMessage::ACCESS_TOKEN_MISSING,
+                StatusMessage::ACCOUNT_UNAUTHORIZED,
                 [],
                 Level::Warning
             );
@@ -33,8 +34,8 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
 
         if (!$this->tokenService->isValid($accessToken)) {
             throw new HttpUnauthorizedException(
-                'Expired access token.',
-                ResponseMessage::TOKEN_EXPIRED,
+                LogMessage::ACCESS_TOKEN_EXPIRED,
+                StatusMessage::TOKEN_EXPIRED,
                 [
                     'Access Token:' => $accessToken,
                 ],
