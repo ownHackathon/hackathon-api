@@ -78,14 +78,14 @@
   },
   "autoload": {
     "psr-4": {
-      "ownHackathon\\App\\": "src/App/",
-      "ownHackathon\\Core\\": "src/Core/"
+      "App\\": "src/App/",
+      "Core\\": "src/Core/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "ownHackathon\\FunctionalTest\\": "tests/FunctionalTest/",
-      "ownHackathon\\UnitTest\\": "tests/UnitTest/"
+      "FunctionalTest\\": "tests/FunctionalTest/",
+      "UnitTest\\": "tests/UnitTest/"
     }
   },
   "scripts": {

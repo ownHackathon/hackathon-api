@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Table;
+namespace UnitTest\AppTest\Table;
 
 use InvalidArgumentException;
-use ownHackathon\App\Entity\Account\AccountAccessAuthCollection;
-use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
-use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
-use ownHackathon\App\Table\AccountAccessAuthTable;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
-use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
-use ownHackathon\UnitTest\Mock\Database\MockQuery;
-use ownHackathon\UnitTest\Mock\Database\MockQueryFailed;
+use App\Entity\Account\AccountAccessAuthCollection;
+use App\Hydrator\AccountAccessAuthHydrator;
+use App\Hydrator\AccountAccessAuthHydratorInterface;
+use App\Table\AccountAccessAuthTable;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Entity\Account\AccountAccessAuthInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Store\AccountAccessAuthStoreInterface;
+use UnitTest\Mock\Constants\AccountAccessAuth;
+use UnitTest\Mock\Database\MockQuery;
+use UnitTest\Mock\Database\MockQueryFailed;
 use PHPUnit\Framework\TestCase;
 
 class AccountAccessAuthTableTest extends TestCase

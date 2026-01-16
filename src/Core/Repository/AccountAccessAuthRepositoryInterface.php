@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Repository;
+namespace Core\Repository;
 
-use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Entity\Account\AccountAccessAuthInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Exception;
+namespace Core\Exception;
 
 use Exception;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

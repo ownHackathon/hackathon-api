@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Service;
+namespace UnitTest\Mock\Service;
 
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Service\Token\RefreshTokenService;
+use App\DTO\Client\ClientIdentification;
+use App\DTO\Token\JwtTokenConfig;
+use App\Service\Token\RefreshTokenService;
 
 readonly class MockRefreshTokenService extends RefreshTokenService
 {

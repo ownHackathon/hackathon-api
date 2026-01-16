@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
+namespace App\Middleware\Account\LoginAuthentication;
 
-use ownHackathon\App\Validator\AuthenticationValidator;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use App\Validator\AuthenticationValidator;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
+use Core\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

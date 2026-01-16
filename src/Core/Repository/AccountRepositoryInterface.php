@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Repository;
+namespace Core\Repository;
 
 use Ramsey\Uuid\UuidInterface;
-use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Type\Email;
+use Core\Entity\Account\AccountCollectionInterface;
+use Core\Entity\Account\AccountInterface;
+use Core\Type\Email;
 
 interface AccountRepositoryInterface extends RepositoryInterface
 {

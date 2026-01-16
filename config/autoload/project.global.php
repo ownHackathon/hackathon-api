@@ -2,14 +2,15 @@
 
 return [
     'project' => [
-        'uri' => 'build.hackathon.exdrals.de',
+        'uri' => 'dev.ownhackathon.de',
     ],
     'api' => [
         'access' => [
             'domain' => [
                 'whitelist' => [
-                    'build.hackathon.exdrals.de',
-                    'hackathon.exdrals.de',
+                    'build.ownhackathon.de',
+                    'dev.ownhackathon.de',
+                    'ownhackathon.de',
                 ],
             ],
         ],

@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Middleware\Account;
+namespace App\Middleware\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\DTO\Account\AccountRegistration;
-use ownHackathon\App\Entity\Account\Account;
-use ownHackathon\Core\Entity\Account\AccountActivationInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Utils\UuidFactoryInterface;
+use App\DTO\Account\AccountRegistration;
+use App\Entity\Account\Account;
+use Core\Entity\Account\AccountActivationInterface;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
+use Core\Exception\DuplicateEntryException;
+use Core\Exception\HttpDuplicateEntryException;
+use Core\Exception\HttpInvalidArgumentException;
+use Core\Repository\AccountActivationRepositoryInterface;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

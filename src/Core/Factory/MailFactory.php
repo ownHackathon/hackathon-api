@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Factory;
+namespace Core\Factory;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;

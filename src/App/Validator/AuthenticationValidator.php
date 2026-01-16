@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Validator;
+namespace App\Validator;
 
 use Laminas\InputFilter\InputFilter;
-use ownHackathon\App\Validator\Input\EmailInput;
-use ownHackathon\App\Validator\Input\PasswordInput;
+use App\Validator\Input\EmailInput;
+use App\Validator\Input\PasswordInput;
 
 class AuthenticationValidator extends InputFilter
 {

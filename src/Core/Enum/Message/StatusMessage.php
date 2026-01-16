@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Enum\Message;
+namespace Core\Enum\Message;
 
 enum StatusMessage: string
 {

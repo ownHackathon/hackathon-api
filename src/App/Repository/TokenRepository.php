@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Repository;
+namespace App\Repository;
 
-use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
-use ownHackathon\Core\Entity\Token\TokenInterface;
-use ownHackathon\Core\Repository\TokenRepositoryInterface;
-use ownHackathon\Core\Store\TokenStoreInterface;
+use Core\Entity\Token\TokenCollectionInterface;
+use Core\Entity\Token\TokenInterface;
+use Core\Repository\TokenRepositoryInterface;
+use Core\Store\TokenStoreInterface;
 
 readonly class TokenRepository implements TokenRepositoryInterface
 {

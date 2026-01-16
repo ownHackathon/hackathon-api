@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Middleware;
+namespace UnitTest\AppTest\Middleware;
 
-use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use App\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware;
+use Core\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 

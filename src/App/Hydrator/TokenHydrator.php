@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Hydrator;
+namespace App\Hydrator;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Token\Token;
-use ownHackathon\App\Entity\Token\TokenCollection;
-use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
-use ownHackathon\Core\Entity\Token\TokenInterface;
-use ownHackathon\Core\Enum\DateTimeFormat;
-use ownHackathon\Core\Enum\TokenType;
+use App\Entity\Token\Token;
+use App\Entity\Token\TokenCollection;
+use Core\Entity\Token\TokenCollectionInterface;
+use Core\Entity\Token\TokenInterface;
+use Core\Enum\DateTimeFormat;
+use Core\Enum\TokenType;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class TokenHydrator implements TokenHydratorInterface

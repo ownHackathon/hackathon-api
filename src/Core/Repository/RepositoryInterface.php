@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Repository;
+namespace Core\Repository;
 
 interface RepositoryInterface
 {

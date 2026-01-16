@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Exception;
+namespace Core\Exception;
 
 use Monolog\Level;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
 use RuntimeException;
 use Throwable;
 

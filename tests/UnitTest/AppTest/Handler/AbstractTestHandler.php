@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Handler;
+namespace UnitTest\AppTest\Handler;
 
 use Helmich\JsonAssert\JsonAssertions;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use ownHackathon\UnitTest\Mock\MockServerRequest;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use UnitTest\Mock\MockServerRequest;
+use UnitTest\JsonRequestHelper;
 
 class AbstractTestHandler extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Utils;
+namespace Core\Utils;
 
 use ArrayAccess;
 use Countable;
