@@ -16,5 +16,5 @@ interface AccountActivationInterface
 
     public function getCreatedAt(): DateTimeImmutable;
 
-    public function with(mixed ...$properties): self;
+    public function with(mixed ...$values): static;
 }
