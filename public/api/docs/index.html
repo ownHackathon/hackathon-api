@@ -9,14 +9,6 @@
   />
   <title>SwaggerUI</title>
   <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.27.1/swagger-ui.css" />
-  <style>
-      .swagger-ui .topbar .download-url-wrapper {
-          display: none;
-      }
-      .link {
-          display: none;
-      }
-  </style>
 </head>
 <body>
 <div id="swagger-ui"></div>
@@ -32,12 +24,8 @@
         SwaggerUIStandalonePreset
       ],
       layout: "StandaloneLayout",
-      deepLinking: false,
     });
-
   };
-  document.querySelectorAll('link').forEach((element) => {
-    element.style.display = 'none'});
 </script>
 </body>
 </html>
