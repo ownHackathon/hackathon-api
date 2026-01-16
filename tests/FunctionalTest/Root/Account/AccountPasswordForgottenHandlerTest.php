@@ -22,7 +22,7 @@ class AccountPasswordForgottenHandlerTest extends AbstractFunctional
     public function testCreateTokenForPasswordChange(): void
     {
         $request = new ServerRequest(
-            uri: '/api/account/password/forgotten',
+            uri: '/api//account/password/forgotten',
             method: 'POST'
         );
         $request = $request->withParsedBody(['email' => self::EMAIL_VALID]);
@@ -45,7 +45,7 @@ class AccountPasswordForgottenHandlerTest extends AbstractFunctional
     public function testDontCreateTokenForPasswordChange(): void
     {
         $request = new ServerRequest(
-            uri: '/api/account/password/forgotten',
+            uri: '/api//account/password/forgotten',
             method: 'POST'
         );
         $request = $request->withParsedBody(['email' => self::EMAIL_INVALID]);
