@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Entity\Token;
+namespace ownHackathon\Core\Entity;
 
 use DateTimeImmutable;
 use ownHackathon\Core\Enum\TokenType;

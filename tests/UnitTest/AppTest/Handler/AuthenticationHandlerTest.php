@@ -4,8 +4,8 @@ namespace ownHackathon\UnitTest\AppTest\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\Token\AccessToken;
-use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\DTO\AccessToken;
+use ownHackathon\App\DTO\RefreshToken;
 use ownHackathon\App\Handler\Account\AuthenticationHandler;
 use ownHackathon\UnitTest\Mock\Constants\Token;
 

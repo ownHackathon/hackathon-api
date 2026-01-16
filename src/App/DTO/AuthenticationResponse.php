@@ -1,11 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO\Response;
+namespace ownHackathon\App\DTO;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\App\DTO\Token\AccessToken;
-use ownHackathon\App\DTO\Token\RefreshToken;
-use ownHackathon\Core\Enum\DataType;
+use ownHackathon\Core\Message\OADataType;
 
 #[OA\Schema()]
 readonly class AuthenticationResponse
@@ -13,12 +11,12 @@ readonly class AuthenticationResponse
     public function __construct(
         #[OA\Property(
             description: 'The access token after a valid log-in',
-            type: DataType::STRING->value,
+            type: OADataType::STRING,
         )]
         public string $accessToken,
         #[OA\Property(
             description: 'The refresh token after a valid log-in',
-            type: DataType::STRING->value,
+            type: OADataType::STRING,
         )]
         public string $refreshToken,
     ) {

@@ -5,12 +5,12 @@ namespace ownHackathon\App\Handler\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\DTO\Account\AccountPassword;
-use ownHackathon\App\DTO\Response\HttpResponseMessage;
-use ownHackathon\Core\Message\OAMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ownHackathon\App\DTO\AccountPasswordDTO;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\Core\Message\OAMessage;
 
 class AccountPasswordHandler implements RequestHandlerInterface
 {
@@ -31,7 +31,7 @@ class AccountPasswordHandler implements RequestHandlerInterface
     #[OA\RequestBody(
         description: 'Set Password for a Account',
         required: true,
-        content: new OA\JsonContent(ref: AccountPassword::class)
+        content: new OA\JsonContent(ref: AccountPasswordDTO::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,

@@ -3,13 +3,13 @@
 namespace ownHackathon\App\Hydrator;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Account\AccountActivation;
-use ownHackathon\App\Entity\Account\AccountActivationCollection;
+use Ramsey\Uuid\UuidFactoryInterface;
+use ownHackathon\App\Entity\AccountActivation;
+use ownHackathon\App\Entity\AccountActivationCollection;
 use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
 use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use ownHackathon\Core\Enum\DateTimeFormat;
 use ownHackathon\Core\Type\Email;
-use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountActivationHydrator implements AccountActivationHydratorInterface
 {

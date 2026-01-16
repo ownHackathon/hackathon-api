@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Middleware\ClientIdentification;
 
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Service\ClientIdentification\ClientIdentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\ClientIdentificationData;
+use ownHackathon\App\Service\ClientIdentification\ClientIdentificationService;
 
 readonly class ClientIdentificationMiddleware implements MiddlewareInterface
 {

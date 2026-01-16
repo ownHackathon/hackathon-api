@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Service\ClientIdentification;
 
-use ownHackathon\App\DTO\Client\ClientIdentificationData;
+use ownHackathon\App\DTO\ClientIdentificationData;
 
 use function hash;
 use function serialize;

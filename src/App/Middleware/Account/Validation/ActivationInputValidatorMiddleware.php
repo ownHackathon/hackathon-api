@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Middleware\Account\Validation;
 
-use ownHackathon\App\DTO\Account\AccountRegistration;
+use ownHackathon\App\DTO\AccountRegistrationDTO;
 use ownHackathon\App\Validator\AccountActivationValidator;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Message\ResponseMessage;
@@ -37,8 +37,8 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
 
         $data = $this->validator->getValues();
 
-        $response = AccountRegistration::fromString($data['accountName'], $data['password']);
+        $response = AccountRegistrationDTO::fromString($data['accountName'], $data['password']);
 
-        return $handler->handle($request->withAttribute(AccountRegistration::class, $response));
+        return $handler->handle($request->withAttribute(AccountRegistrationDTO::class, $response));
     }
 }

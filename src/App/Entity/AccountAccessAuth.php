@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Entity\Account;
+namespace ownHackathon\App\Entity;
 
 use DateTimeImmutable;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;

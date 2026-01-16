@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO\Token;
+namespace ownHackathon\App\DTO;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Enum\DataType;
+use ownHackathon\Core\Message\OADataType;
 
 #[OA\Schema()]
-readonly class RefreshToken
+readonly class Token
 {
     public function __construct(
         #[OA\Property(
-            description: 'The token after a valid log-in',
-            type: DataType::STRING->value,
+            description: 'The Token',
+            type: OADataType::STRING,
         )]
-        public string $refreshToken,
+        public string $token,
     ) {
     }
 

@@ -2,7 +2,7 @@
 
 namespace ownHackathon\UnitTest\Mock\Table;
 
-use ownHackathon\App\Entity\Account\AccountCollection;
+use ownHackathon\App\Entity\AccountCollection;
 use ownHackathon\App\Hydrator\AccountHydrator;
 use ownHackathon\App\Table\AccountTable;
 use ownHackathon\Core\Store\AccountStoreInterface;

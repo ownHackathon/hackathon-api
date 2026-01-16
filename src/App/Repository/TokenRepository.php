@@ -2,8 +2,8 @@
 
 namespace ownHackathon\App\Repository;
 
-use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
-use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Entity\TokenCollectionInterface;
+use ownHackathon\Core\Entity\TokenInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\Store\TokenStoreInterface;
 

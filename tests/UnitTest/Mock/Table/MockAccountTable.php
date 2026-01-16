@@ -3,7 +3,8 @@
 namespace ownHackathon\UnitTest\Mock\Table;
 
 use InvalidArgumentException;
-use ownHackathon\App\Entity\Account\AccountCollection;
+use Ramsey\Uuid\UuidInterface;
+use ownHackathon\App\Entity\AccountCollection;
 use ownHackathon\App\Hydrator\AccountHydrator;
 use ownHackathon\App\Table\AccountTable;
 use ownHackathon\Core\Entity\Account\AccountInterface;
@@ -13,7 +14,6 @@ use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\UuidFactory;
 use ownHackathon\UnitTest\Mock\Constants\Account;
 use ownHackathon\UnitTest\Mock\Database\MockQuery;
-use Ramsey\Uuid\UuidInterface;
 
 class MockAccountTable extends AccountTable implements AccountStoreInterface
 {

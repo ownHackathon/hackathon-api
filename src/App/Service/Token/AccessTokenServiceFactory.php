@@ -2,8 +2,8 @@
 
 namespace ownHackathon\App\Service\Token;
 
-use ownHackathon\App\DTO\Token\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
+use ownHackathon\App\DTO\JwtTokenConfig;
 
 readonly class AccessTokenServiceFactory
 {

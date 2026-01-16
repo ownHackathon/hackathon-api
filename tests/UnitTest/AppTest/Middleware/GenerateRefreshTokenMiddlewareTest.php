@@ -3,12 +3,12 @@
 namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Middleware\Token\GenerateRefreshTokenMiddleware;
-use ownHackathon\UnitTest\Mock\Service\MockRefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\ClientIdentificationData;
+use ownHackathon\App\Middleware\Token\GenerateRefreshTokenMiddleware;
+use ownHackathon\UnitTest\Mock\Service\MockRefreshTokenService;
 
 class GenerateRefreshTokenMiddlewareTest extends AbstractTestMiddleware
 {

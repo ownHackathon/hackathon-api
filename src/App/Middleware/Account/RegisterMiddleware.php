@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Account\AccountActivation;
+use ownHackathon\App\Entity\AccountActivation;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\App\Service\Token\ActivationTokenService;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
