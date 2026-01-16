@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Cors\Middleware\CorsMiddleware;
 use Mezzio\Handler\NotFoundHandler;
@@ -17,7 +18,6 @@ use Mezzio\Router\Middleware\RouteMiddleware;
 use ownHackathon\App\Middleware\Account\LastAktivityUpdaterMiddleware;
 use ownHackathon\App\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use ownHackathon\Core\Middleware\ApiErrorHandlerMiddleware;
 use ownHackathon\Core\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
@@ -27,8 +27,7 @@ use Psr\Container\ContainerInterface;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->pipe('/api', [
-        //ErrorHandler::class,
-        ApiErrorHandlerMiddleware::class,
+        ErrorHandler::class,
         ServerUrlMiddleware::class,
         BodyParamsMiddleware::class,
 

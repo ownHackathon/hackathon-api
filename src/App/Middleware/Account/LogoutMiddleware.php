@@ -2,21 +2,24 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
-use Monolog\Level;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 
 readonly class LogoutMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountAccessAuthRepositoryInterface $authRepository,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -26,12 +29,10 @@ readonly class LogoutMiddleware implements MiddlewareInterface
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
         if (!($account instanceof AccountInterface)) {
-            throw new HttpUnauthorizedException(
-                'Unauthorized access',
-                'Unauthorized access',
-                [],
-                Level::Warning
-            );
+            $this->logger->warning('Unauthorized access');
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, 'Unauthorized access');
+            return new JsonResponse($message, $message->statusCode);
         }
 
         /** @var ClientIdentification $clientId */
@@ -43,15 +44,13 @@ readonly class LogoutMiddleware implements MiddlewareInterface
         );
 
         if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
-            throw new HttpUnauthorizedException(
-                'Unauthorized access',
-                'Unauthorized access',
-                [
-                    'accountId' => $account->getId(),
-                    'clientIdentificationHash' => $clientId->identificationHash,
-                ],
-                Level::Warning
-            );
+            $this->logger->warning('Unauthorized access', [
+                'accountId' => $account->getId(),
+                'clientIdentificationHash' => $clientId->identificationHash,
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, 'Unauthorized access');
+            return new JsonResponse($message, $message->statusCode);
         }
 
         $this->authRepository->deleteById($accountAccessAuth->getId());

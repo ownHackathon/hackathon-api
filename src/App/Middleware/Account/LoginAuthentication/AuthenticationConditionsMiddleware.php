@@ -2,26 +2,39 @@
 
 namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Message\ResponseMessage;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\Core\Message\ResponseMessage;
 
 readonly class AuthenticationConditionsMiddleware implements MiddlewareInterface
 {
+    public function __construct(
+        private LoggerInterface $logger,
+    ) {
+    }
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if ($request->hasHeader('Authentication') || $request->hasHeader('Authorization')) {
-            throw new HttpUnauthorizedException(
+            $this->logger->notice(
                 'Login failed because the authentication or authorization header is already set.',
-                ResponseMessage::ACCOUNT_ALREADY_AUTHENTICATED,
                 [
-                    'uri' => (string)$request->getUri(),
-                    'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
+                    'Header:' => $request->getHeaders(),
                 ]
             );
+
+            $message = HttpResponseMessage::create(
+                HTTP::STATUS_FORBIDDEN,
+                ResponseMessage::ACCOUNT_ALREADY_AUTHENTICATED
+            );
+
+            return new JsonResponse($message, HTTP::STATUS_FORBIDDEN);
         }
 
         return $handler->handle($request);

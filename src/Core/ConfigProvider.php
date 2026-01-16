@@ -3,11 +3,11 @@
 namespace ownHackathon\Core;
 
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Psr\Log\LoggerInterface;
 use ownHackathon\App\Validator\Input\EmailInput;
 use ownHackathon\App\Validator\Input\PasswordInput;
 use ownHackathon\Core\Listener\LoggingErrorListener;
 use ownHackathon\Core\Listener\LoggingErrorListenerFactory;
-use Psr\Log\LoggerInterface;
 
 class ConfigProvider
 {
@@ -29,10 +29,8 @@ class ConfigProvider
             'aliases' => [
             ],
             'factories' => [
-                Factory\ErrorResponseFactory::class => ConfigAbstractFactory::class,
-                Middleware\ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
+                LoggingErrorListener::class => LoggingErrorListenerFactory::class,
                 Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
-
             ],
         ];
     }
@@ -40,12 +38,6 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Factory\ErrorResponseFactory::class => [
-                LoggerInterface::class,
-            ],
-            Middleware\ApiErrorHandlerMiddleware::class => [
-                Factory\ErrorResponseFactory::class,
-            ],
             Middleware\RouteNotFoundMiddleware::class => [
                 LoggerInterface::class,
             ],

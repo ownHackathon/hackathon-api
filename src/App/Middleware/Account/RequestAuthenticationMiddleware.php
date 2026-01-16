@@ -2,10 +2,11 @@
 
 namespace ownHackathon\App\Middleware\Account;
 
-use Monolog\Level;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Service\Token\AccessTokenService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
@@ -40,29 +41,28 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
         }
 
         if (!$this->accessTokenService->isValid($authorization)) {
-            throw new HttpUnauthorizedException(
-                'Request with expired Access Token received.',
-                ResponseMessage::TOKEN_EXPIRED,
-                [
-                    'uri' => (string)$request->getUri(),
-                    'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
-                ]
-            );
+            $this->logger->notice('Request with expired Access Token received.', [
+                'uri' => (string)$request->getUri(),
+                'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_EXPIRED);
+
+            return new JsonResponse($message, $message->statusCode);
         }
 
         $authorization = $this->accessTokenService->decode($authorization);
         $uuid = $this->uuid->fromString($authorization->uuid);
         $account = $this->accountRepository->findByUuid($uuid);
         if (!($account instanceof AccountInterface)) {
-            throw new HttpUnauthorizedException(
-                'Request with invalid Access Token received (Account not found).',
-                ResponseMessage::TOKEN_INVALID,
-                [
-                    'uri' => (string)$request->getUri(),
-                    'uuid' => $authorization->uuid,
-                ],
-                Level::Warning
-            );
+            $this->logger->notice('Request with invalid Access Token received (Account not found).', [
+                'uri' => (string)$request->getUri(),
+                'uuid' => $authorization->uuid,
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::TOKEN_INVALID);
+
+            return new JsonResponse($message, $message->statusCode);
         }
 
         $this->logger->info('Authenticated user call.', [
