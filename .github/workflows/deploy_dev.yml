@@ -235,14 +235,6 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
           remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 
-      - name: Clear remote cache folder
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          script:  rm -rf ${{ secrets.DEPLOY_PATH_API_DEV }}/data/cache/*
-
       - name: Deploay Info Success
         uses: rjstone/discord-webhook-notify@v2.2.1
         with:
