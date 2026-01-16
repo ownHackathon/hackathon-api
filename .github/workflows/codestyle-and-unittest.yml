@@ -11,7 +11,7 @@ on:
 jobs:
   phplint:
     name: PHP Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -36,7 +36,7 @@ jobs:
 
   phpstan:
     name: PHP Stan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -61,7 +61,7 @@ jobs:
 
   phpcs:
     name: PHP CodeSniffer
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -90,7 +90,7 @@ jobs:
       - phplint
       - phpstan
       - phpcs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -119,7 +119,7 @@ jobs:
       - phplint
       - phpstan
       - phpcs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v4.1.1
