@@ -45,13 +45,13 @@ readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInt
     public function extract(AccountAccessAuthInterface $object): array
     {
         return [
-            'id' => $object->id,
-            'accountId' => $object->accountId,
-            'label' => $object->label,
-            'refreshToken' => $object->refreshToken,
-            'userAgent' => $object->userAgent,
-            'clientIdentHash' => $object->clientIdentHash,
-            'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
+            'id' => $object->getId(),
+            'accountId' => $object->getAccountId(),
+            'label' => $object->getLabel(),
+            'refreshToken' => $object->getRefreshToken(),
+            'userAgent' => $object->getUserAgent(),
+            'clientIdentHash' => $object->getClientIdentHash(),
+            'createdAt' => $object->getCreatedAt()->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 

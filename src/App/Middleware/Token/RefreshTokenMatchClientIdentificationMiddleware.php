@@ -23,13 +23,13 @@ readonly class RefreshTokenMatchClientIdentificationMiddleware implements Middle
         /** @var ClientIdentification $clientIdentification */
         $clientIdentification = $request->getAttribute(ClientIdentification::class);
 
-        if ($accountAccessAuth->clientIdentHash !== $clientIdentification->identificationHash) {
+        if ($accountAccessAuth->getClientIdentHash() !== $clientIdentification->identificationHash) {
             throw new HttpUnauthorizedException(
                 'Client does not match expected client.',
                 ResponseMessage::CLIENT_UNEXPECTED,
                 [
-                    'expected:' => $accountAccessAuth->clientIdentHash,
-                    'expected UserAgent' => $accountAccessAuth->userAgent,
+                    'expected:' => $accountAccessAuth->getClientIdentHash(),
+                    'expected UserAgent' => $accountAccessAuth->getUserAgent(),
                     'current:' => $clientIdentification->identificationHash,
                     'current UserAgent:' => $clientIdentification->clientIdentificationData->userAgent,
                 ],

@@ -6,19 +6,19 @@ use DateTimeImmutable;
 
 interface AccountAccessAuthInterface
 {
-    public int $id { get; }
+    public function getId(): int;
 
-    public int $accountId { get; }
+    public function getAccountId(): int;
 
-    public string $label { get; }
+    public function getLabel(): string;
 
-    public string $refreshToken { get; }
+    public function getRefreshToken(): string;
 
-    public string $userAgent { get; }
+    public function getUserAgent(): string;
 
-    public string $clientIdentHash { get; }
+    public function getClientIdentHash(): string;
 
-    public DateTimeImmutable $createdAt { get; }
+    public function getCreatedAt(): DateTimeImmutable;
 
     public function with(mixed ...$properties): self;
 }
