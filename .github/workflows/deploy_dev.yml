@@ -241,7 +241,6 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          passphrase: ${{ secrets.DEPLOY_KEY_PASS }}
           script:  rm -rf ${{ secrets.DEPLOY_PATH_API_DEV }}/data/cache/*
 
       - name: Deploay Info Success
