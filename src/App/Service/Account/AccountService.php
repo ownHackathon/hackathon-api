@@ -4,9 +4,9 @@ namespace ownHackathon\App\Service\Account;
 
 use DateTimeImmutable;
 use ownHackathon\App\Entity\Token;
+use ownHackathon\App\Enum\TokenType;
 use ownHackathon\App\Service\Token\PasswordTokenService;
 use ownHackathon\Core\Entity\TokenInterface;
-use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\Type\Email;

@@ -3,8 +3,8 @@
 namespace ownHackathon\Core\Entity;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Enum\TokenType;
 use Ramsey\Uuid\UuidInterface;
+use ownHackathon\App\Enum\TokenType;
 
 interface TokenInterface
 {
