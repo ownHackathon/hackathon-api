@@ -13,7 +13,6 @@ services:
     container_name: hackathon-php
     user: "${USERMAP_UID:-1000}:${USERMAP_GID:-1000}"
     image: "ghcr.io/ownhackathon/hackathon-api-php:latest"
-    env_file: ".env"
     volumes:
       - ./:/var/www/html
       - ./docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/extra.ini

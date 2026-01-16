@@ -1,12 +1,13 @@
 #!/usr/bin/bash
+export APP_ENV=${APP_ENV:-develope}
 
 function composer_install() {
     docker-compose exec php composer install
 }
 
 function setup_database() {
-    docker-compose exec php composer run doctrine migrations:sync-metadata-storage
-    docker-compose exec php composer run doctrine migrations:migrate --no-interaction
+    docker-compose exec --env APP_ENV php composer run doctrine migrations:sync-metadata-storage
+    docker-compose exec --env APP_ENV php composer run doctrine migrations:migrate --no-interaction
 }
 
 function docker_start() {
@@ -19,7 +20,6 @@ function docker_down() {
 
 function docker_database_cleanup() {
     docker volume rm hackathon-api_db
-    docker volume rm hackathon-api_db-testing
 }
 
 function docker_vendor_cleanup() {
@@ -27,7 +27,7 @@ function docker_vendor_cleanup() {
 }
 
 function docker_cleanup() {
-    docker image rm ghcr.io/ownhackathon/hackathon-api-php:latest mariadb:latest mailhog/mailhog httpd:alpine
+    docker image rm -f ghcr.io/ownhackathon/hackathon-api-php:latest mariadb:latest mailhog/mailhog httpd:alpine
     docker_database_cleanup
     docker_vendor_cleanup
 }
@@ -51,6 +51,10 @@ case $1 in
     setup_database
   ;;
 
+  "clean")
+    docker_vendor_cleanup
+  ;;
+
   "reset")
     echo "turning down docker container"
     docker_down
@@ -61,7 +65,7 @@ case $1 in
         docker_cleanup
       ;;
       "vendor")
-        echo "cleanup database with vendor"
+        echo "cleanup vendor folder"
         docker_vendor_cleanup
       ;;
       *)
@@ -77,7 +81,7 @@ case $1 in
     composer_install
 
     echo "wait for services"
-    sleep 10
+    sleep 5
 
     echo "create database storage information an run migrations"
     setup_database
@@ -86,14 +90,10 @@ case $1 in
   ;;
 
   "composer")
-    docker-compose run --rm php composer "${@:2}"
+    docker-compose run --rm --env APP_ENV php composer "${@:2}"
     ;;
 
-  "indocker")
-    docker-compose run --rm php "${@:2}"
-    ;;
-
-  *)
-
+  "php")
+    docker-compose run --rm --env APP_ENV php "${@:2}"
     ;;
 esac
