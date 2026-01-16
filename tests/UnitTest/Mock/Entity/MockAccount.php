@@ -45,9 +45,4 @@ class MockAccount implements AccountInterface
     {
         // TODO: Implement getLastActionAt() method.
     }
-
-    public function with(...$values): static
-    {
-        // TODO: Implement with() method.
-    }
 }

@@ -3,8 +3,8 @@
 namespace ownHackathon\Core\Entity\Account;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Type\Email;
 use Ramsey\Uuid\UuidInterface;
+use ownHackathon\Core\Type\Email;
 
 interface AccountInterface
 {
@@ -23,6 +23,4 @@ interface AccountInterface
     public function getRegisteredAt(): DateTimeImmutable;
 
     public function getLastActionAt(): DateTimeImmutable;
-
-    public function with(mixed ...$values): static;
 }

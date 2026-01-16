@@ -5,6 +5,7 @@ namespace ownHackathon\App;
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Psr\Log\LoggerInterface;
 use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\App\Hydrator\AccountActivationHydratorInterface;
 use ownHackathon\App\Hydrator\AccountHydratorInterface;
@@ -33,7 +34,6 @@ use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\Store;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
 class ConfigProvider
@@ -81,7 +81,6 @@ class ConfigProvider
                 Middleware\Account\Validation\EmailInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\ActivationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\LastAktivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordChangeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\RegisterMiddleware::class => ConfigAbstractFactory::class,
@@ -166,9 +165,6 @@ class ConfigProvider
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
                 LoggerInterface::class,
-            ],
-            Middleware\Account\LastAktivityUpdaterMiddleware::class => [
-                AccountRepositoryInterface::class,
             ],
             Middleware\Account\PasswordChangeMiddleware::class => [
                 AccountRepositoryInterface::class,
