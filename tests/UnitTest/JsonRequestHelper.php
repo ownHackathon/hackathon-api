@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest;
+namespace ownHackathon\UnitTest;
 
 use Psr\Http\Message\ResponseInterface;
 

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\Token;
+namespace ownHackathon\App\Service\Token;
 
-use Core\Entity\Token\TokenInterface;
-use Core\Type\Email as EmailType;
+use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Type\Email as EmailType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 

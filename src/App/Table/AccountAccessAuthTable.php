@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace ownHackathon\App\Table;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use App\Hydrator\AccountAccessAuthHydratorInterface;
-use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Store\AccountAccessAuthStoreInterface;
+use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
 use PDOException;
 
 use function is_array;

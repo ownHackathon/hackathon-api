@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Logger;
+namespace ownHackathon\Core\Logger;
 
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;

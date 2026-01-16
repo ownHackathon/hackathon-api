@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\Token;
+namespace ownHackathon\App\Service\Token;
 
 use DomainException;
 use Firebase\JWT\BeforeValidException;

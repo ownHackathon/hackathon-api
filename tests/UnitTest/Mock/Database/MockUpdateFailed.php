@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Database;
+namespace ownHackathon\UnitTest\Mock\Database;
 
 use Envms\FluentPDO\Queries\Update;
 use Envms\FluentPDO\Query;

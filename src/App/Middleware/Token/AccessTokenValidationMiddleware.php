@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Token;
+namespace ownHackathon\App\Middleware\Token;
 
 use Monolog\Level;
-use App\Service\Token\AccessTokenService;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpUnauthorizedException;
+use ownHackathon\App\Service\Token\AccessTokenService;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

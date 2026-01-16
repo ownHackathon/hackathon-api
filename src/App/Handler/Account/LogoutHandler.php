@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Handler\Account;
+namespace ownHackathon\App\Handler\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use App\DTO\Response\AuthenticationResponse;
-use App\DTO\Response\HttpResponseMessage;
-use Core\Enum\Message\StatusMessage;
+use ownHackathon\App\DTO\Response\AuthenticationResponse;
+use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

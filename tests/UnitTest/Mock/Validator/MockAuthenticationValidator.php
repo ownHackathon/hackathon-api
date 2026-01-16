@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Validator;
+namespace ownHackathon\UnitTest\Mock\Validator;
 
-use App\Validator\AuthenticationValidator;
-use App\Validator\Input\EmailInput;
-use App\Validator\Input\PasswordInput;
+use ownHackathon\App\Validator\AuthenticationValidator;
+use ownHackathon\App\Validator\Input\EmailInput;
+use ownHackathon\App\Validator\Input\PasswordInput;
 
 class MockAuthenticationValidator extends AuthenticationValidator
 {

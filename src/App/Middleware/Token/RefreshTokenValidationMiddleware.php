@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Token;
+namespace ownHackathon\App\Middleware\Token;
 
-use App\DTO\Token\RefreshToken;
-use App\Service\Token\RefreshTokenService;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpUnauthorizedException;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\Service\Token\RefreshTokenService;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

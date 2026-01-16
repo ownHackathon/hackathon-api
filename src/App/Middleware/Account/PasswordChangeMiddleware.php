@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account;
+namespace ownHackathon\App\Middleware\Account;
 
-use App\Entity\Account\Account;
-use App\Service\Account\AccountService;
-use Core\Entity\Token\TokenInterface;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Enum\TokenType;
-use Core\Exception\HttpInvalidArgumentException;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Repository\TokenRepositoryInterface;
+use ownHackathon\App\Entity\Account\Account;
+use ownHackathon\App\Service\Account\AccountService;
+use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\TokenType;
+use ownHackathon\Core\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

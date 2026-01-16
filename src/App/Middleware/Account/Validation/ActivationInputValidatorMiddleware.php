@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account\Validation;
+namespace ownHackathon\App\Middleware\Account\Validation;
 
-use App\DTO\Account\AccountRegistration;
-use App\Validator\AccountActivationValidator;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpInvalidArgumentException;
+use ownHackathon\App\DTO\Account\AccountRegistration;
+use ownHackathon\App\Validator\AccountActivationValidator;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

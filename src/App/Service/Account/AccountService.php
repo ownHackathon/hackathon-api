@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\Account;
+namespace ownHackathon\App\Service\Account;
 
 use DateTimeImmutable;
-use App\Entity\Token\Token;
-use App\Service\Token\PasswordTokenService;
-use Core\Entity\Token\TokenInterface;
-use Core\Enum\TokenType;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Repository\TokenRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactoryInterface;
+use ownHackathon\App\Entity\Token\Token;
+use ownHackathon\App\Service\Token\PasswordTokenService;
+use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Enum\TokenType;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Repository\TokenRepositoryInterface;
+use ownHackathon\Core\Type\Email;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
 
 readonly class AccountService
 {

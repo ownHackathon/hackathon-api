@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO\Response;
+namespace ownHackathon\App\DTO\Response;
 
 use OpenApi\Attributes as OA;
-use App\DTO\Token\AccessToken;
-use App\DTO\Token\RefreshToken;
-use Core\Enum\DataType;
+use ownHackathon\App\DTO\Token\AccessToken;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class AuthenticationResponse

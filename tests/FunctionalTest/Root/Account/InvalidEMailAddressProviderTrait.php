@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace FunctionalTest\Root\Account;
+namespace ownHackathon\FunctionalTest\Root\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use Core\Enum\Message\StatusMessage;
-use Core\Enum\DataType;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\DataType;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 

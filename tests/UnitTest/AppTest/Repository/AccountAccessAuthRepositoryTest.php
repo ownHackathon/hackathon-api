@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Repository;
+namespace ownHackathon\UnitTest\AppTest\Repository;
 
 use InvalidArgumentException;
-use App\Entity\Account\AccountAccessAuthCollection;
-use App\Hydrator\AccountAccessAuthHydrator;
-use App\Hydrator\AccountAccessAuthHydratorInterface;
-use App\Repository\AccountAccessAuthRepository;
-use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
-use UnitTest\Mock\Constants\AccountAccessAuth;
-use UnitTest\Mock\Table\MockAccountAccessAuthTable;
-use UnitTest\Mock\Table\MockAccountAccessAuthTableFailed;
+use ownHackathon\App\Entity\Account\AccountAccessAuthCollection;
+use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
+use ownHackathon\App\Hydrator\AccountAccessAuthHydratorInterface;
+use ownHackathon\App\Repository\AccountAccessAuthRepository;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
+use ownHackathon\UnitTest\Mock\Table\MockAccountAccessAuthTable;
+use ownHackathon\UnitTest\Mock\Table\MockAccountAccessAuthTableFailed;
 use PHPUnit\Framework\TestCase;
 
 class AccountAccessAuthRepositoryTest extends TestCase

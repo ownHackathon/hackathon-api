@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account;
+namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use App\Entity\Account\AccountActivation;
-use App\Service\Account\AccountService;
-use App\Service\Token\ActivationTokenService;
-use Core\Enum\Message\LogMessage;
-use Core\Repository\AccountActivationRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactoryInterface;
+use ownHackathon\App\Entity\Account\AccountActivation;
+use ownHackathon\App\Service\Account\AccountService;
+use ownHackathon\App\Service\Token\ActivationTokenService;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\Core\Type\Email;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

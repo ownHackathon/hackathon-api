@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock;
+namespace ownHackathon\UnitTest\Mock;
 
 use Psr\Container\ContainerInterface;
 

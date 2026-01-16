@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Service;
+namespace ownHackathon\UnitTest\Mock\Service;
 
-use App\Service\Authentication\AuthenticationService;
-use UnitTest\Mock\Constants\Account;
+use ownHackathon\App\Service\Authentication\AuthenticationService;
+use ownHackathon\UnitTest\Mock\Constants\Account;
 
 readonly class MockAuthenticationService extends AuthenticationService
 {

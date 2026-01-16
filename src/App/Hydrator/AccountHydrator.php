@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Hydrator;
+namespace ownHackathon\App\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
-use App\Entity\Account\Account;
-use App\Entity\Account\AccountCollection;
-use Core\Entity\Account\AccountCollectionInterface;
-use Core\Entity\Account\AccountInterface;
-use Core\Enum\DateTimeFormat;
-use Core\Type\Email;
+use ownHackathon\App\Entity\Account\Account;
+use ownHackathon\App\Entity\Account\AccountCollection;
+use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Enum\DateTimeFormat;
+use ownHackathon\Core\Type\Email;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountHydrator implements AccountHydratorInterface

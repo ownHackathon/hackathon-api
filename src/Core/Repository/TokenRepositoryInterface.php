@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Repository;
+namespace ownHackathon\Core\Repository;
 
-use Core\Entity\Token\TokenCollectionInterface;
-use Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {

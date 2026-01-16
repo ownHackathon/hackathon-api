@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Token;
+namespace ownHackathon\App\Middleware\Token;
 
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Token\RefreshToken;
-use App\Service\Token\RefreshTokenService;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\Service\Token\RefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

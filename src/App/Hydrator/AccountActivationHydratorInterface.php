@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Hydrator;
+namespace ownHackathon\App\Hydrator;
 
-use Core\Entity\Account\AccountActivationCollectionInterface;
-use Core\Entity\Account\AccountActivationInterface;
-use Core\Hydrator\HydratorInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Hydrator\HydratorInterface;
 
 interface AccountActivationHydratorInterface extends HydratorInterface
 {

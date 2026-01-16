@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO\Account;
+namespace ownHackathon\App\DTO\Account;
 
 use OpenApi\Attributes as OA;
-use Core\Enum\DataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema(required: ['accountName', 'password'])]
 readonly class AccountRegistration

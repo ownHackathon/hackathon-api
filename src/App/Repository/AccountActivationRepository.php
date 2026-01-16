@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Repository;
+namespace ownHackathon\App\Repository;
 
-use Core\Entity\Account\AccountActivationCollectionInterface;
-use Core\Entity\Account\AccountActivationInterface;
-use Core\Repository\AccountActivationRepositoryInterface;
-use Core\Store\AccountActivationStoreInterface;
-use Core\Type\Email;
+use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\Core\Store\AccountActivationStoreInterface;
+use ownHackathon\Core\Type\Email;
 
 readonly class AccountActivationRepository implements AccountActivationRepositoryInterface
 {

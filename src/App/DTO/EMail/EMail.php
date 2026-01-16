@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO\EMail;
+namespace ownHackathon\App\DTO\EMail;
 
 use OpenApi\Attributes as OA;
-use Core\Enum\DataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class EMail

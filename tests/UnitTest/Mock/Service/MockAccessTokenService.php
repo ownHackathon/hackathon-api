@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Service;
+namespace ownHackathon\UnitTest\Mock\Service;
 
 use Firebase\JWT\JWT;
-use App\DTO\Token\JwtTokenConfig;
-use App\Service\Token\AccessTokenService;
+use ownHackathon\App\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\Service\Token\AccessTokenService;
 use Ramsey\Uuid\UuidInterface;
 
 use function time;

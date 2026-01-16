@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Hydrator;
+namespace ownHackathon\UnitTest\AppTest\Hydrator;
 
 use PHPUnit\Framework\TestCase;
-use App\Hydrator\AccountHydrator;
-use Core\Entity\Account\AccountCollectionInterface;
-use Core\Entity\Account\AccountInterface;
-use Core\Utils\UuidFactory;
-use Core\Utils\UuidFactoryInterface;
-use UnitTest\Mock\Constants\Account;
+use ownHackathon\App\Hydrator\AccountHydrator;
+use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Utils\UuidFactory;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
+use ownHackathon\UnitTest\Mock\Constants\Account;
 
 class AccountHydratorTest extends TestCase
 {

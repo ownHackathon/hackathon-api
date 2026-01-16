@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace ownHackathon\App\Table;
 
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
 use PDOException;
-use App\Hydrator\AccountActivationHydratorInterface;
-use Core\Entity\Account\AccountActivationCollectionInterface;
-use Core\Entity\Account\AccountActivationInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Store\AccountActivationStoreInterface;
-use Core\Type\Email;
+use ownHackathon\App\Hydrator\AccountActivationHydratorInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Store\AccountActivationStoreInterface;
+use ownHackathon\Core\Type\Email;
 
 use function is_array;
 use function sprintf;

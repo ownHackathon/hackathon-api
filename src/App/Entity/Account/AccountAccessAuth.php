@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Entity\Account;
+namespace ownHackathon\App\Entity\Account;
 
 use DateTimeImmutable;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Trait\CloneReadonlyClassWith;
-use Core\Utils\Collectible;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\Utils\Collectible;
 
 readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collectible
 {

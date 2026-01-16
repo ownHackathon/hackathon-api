@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\Token;
+namespace ownHackathon\App\Service\Token;
 
 use Firebase\JWT\JWT;
-use App\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\DTO\Token\JwtTokenConfig;
 use Ramsey\Uuid\UuidInterface;
 
 use function time;

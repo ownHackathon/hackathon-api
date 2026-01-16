@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace ownHackathon\App\Table;
 
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use App\Hydrator\TokenHydratorInterface;
-use Core\Entity\Token\TokenCollectionInterface;
-use Core\Entity\Token\TokenInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Store\TokenStoreInterface;
+use ownHackathon\App\Hydrator\TokenHydratorInterface;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Store\TokenStoreInterface;
 use PDOException;
 
 use function is_array;
