@@ -31,7 +31,7 @@ jobs:
         run: composer run-script phplint
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Lint failed.
@@ -64,7 +64,7 @@ jobs:
         run: composer run-script phpstan
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Stan failed.
@@ -97,7 +97,7 @@ jobs:
         run: composer run-script phpcs
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: CodeSniffer failed.
@@ -134,7 +134,7 @@ jobs:
         run: composer run-script unittest
 
       - name: Test Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Unit Test failed.
@@ -197,7 +197,7 @@ jobs:
         run: composer run-script functionaltest
 
       - name: Test Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Functional Test failed.
@@ -245,7 +245,7 @@ jobs:
           script:  rm -rf ${{ secrets.DEPLOY_PATH_API_DEV }}/data/cache/*
 
       - name: Deploay Info Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: info
           details: Successful deployment on build https://dev.hackathon.exdrals.de/api/docs
@@ -253,7 +253,7 @@ jobs:
         if: success()
 
       - name: Deplay Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Failure deployment on develope.
