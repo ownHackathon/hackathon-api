@@ -6,7 +6,7 @@ use DateTimeImmutable;
 
 interface AccountAccessAuthInterface
 {
-    public ?int $id { get; }
+    public int $id { get; }
 
     public int $accountId { get; }
 

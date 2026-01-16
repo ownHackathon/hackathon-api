@@ -3,25 +3,23 @@
 namespace ownHackathon\Core\Exception;
 
 use Monolog\Level;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use RuntimeException;
 use Throwable;
 
 abstract class HttpException extends RuntimeException
 {
     protected array $context = [];
-    protected StatusMessage $responseMessage;
+    protected string $responseMessage = '';
     protected Level $logLevel;
 
     public function __construct(
-        LogMessage $logMessage,
-        StatusMessage $responseMessage,
+        string $logMessage,
+        string $responseMessage = '',
         array $context = [],
         Level $loglevel = Level::Notice,
         ?Throwable $previous = null
     ) {
-        parent::__construct($logMessage->value, $this->getHttpStatusCode(), $previous);
+        parent::__construct($logMessage, $this->getHttpStatusCode(), $previous);
         $this->context = $context;
         $this->responseMessage = $responseMessage;
         $this->logLevel = $loglevel;
@@ -34,7 +32,7 @@ abstract class HttpException extends RuntimeException
         return $this->context;
     }
 
-    public function getResponseMessage(): StatusMessage
+    public function getResponseMessage(): string
     {
         return $this->responseMessage;
     }

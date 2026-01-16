@@ -3,9 +3,8 @@
 namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
 use ownHackathon\App\Validator\AuthenticationValidator;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -26,8 +25,8 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpUnauthorizedException(
-                LogMessage::EMAIL_INVALID,
-                StatusMessage::INVALID_DATA,
+                'Email and/or password are not valid',
+                ResponseMessage::DATA_INVALID,
                 [
                     'E-Mail:' => $data['email'] ?? null,
                     'Validator-Message:' => $this->validator->getMessages(),

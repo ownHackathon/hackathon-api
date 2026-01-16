@@ -6,8 +6,6 @@ use Monolog\Level;
 use ownHackathon\App\DTO\Client\ClientIdentification;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -29,8 +27,8 @@ readonly class LogoutMiddleware implements MiddlewareInterface
 
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
-                LogMessage::LOGOUT_REQUIRES_AUTHENTICATION,
-                StatusMessage::UNAUTHORIZED_ACCESS,
+                'Unauthorized access',
+                'Unauthorized access',
                 [],
                 Level::Warning
             );
@@ -46,8 +44,8 @@ readonly class LogoutMiddleware implements MiddlewareInterface
 
         if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
             throw new HttpUnauthorizedException(
-                LogMessage::LOGOUT_CLIENT_IDENTITY_MISMATCH,
-                StatusMessage::UNAUTHORIZED_ACCESS,
+                'Unauthorized access',
+                'Unauthorized access',
                 [
                     'accountId' => $account->id,
                     'clientIdentificationHash' => $clientId->identificationHash,

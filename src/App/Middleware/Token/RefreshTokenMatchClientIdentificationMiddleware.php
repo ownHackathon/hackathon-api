@@ -6,9 +6,8 @@ use Monolog\Level;
 use ownHackathon\App\DTO\Client\ClientIdentification;
 use ownHackathon\App\Entity\Account\AccountAccessAuth;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -26,8 +25,8 @@ readonly class RefreshTokenMatchClientIdentificationMiddleware implements Middle
 
         if ($accountAccessAuth->clientIdentHash !== $clientIdentification->identificationHash) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_CLIENT_MISMATCH,
-                StatusMessage::CLIENT_UNEXPECTED,
+                'Client does not match expected client.',
+                ResponseMessage::CLIENT_UNEXPECTED,
                 [
                     'expected:' => $accountAccessAuth->clientIdentHash,
                     'expected UserAgent' => $accountAccessAuth->userAgent,

@@ -6,9 +6,8 @@ use Monolog\Level;
 use ownHackathon\App\Entity\Account\AccountAccessAuth;
 use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -32,8 +31,8 @@ readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
 
         if ($account === null) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
-                StatusMessage::TOKEN_INVALID,
+                'Account does not exist in the transmitted token',
+                ResponseMessage::TOKEN_INVALID,
                 [
                     'AccessAuth ID:' => $accountAccessAuth->id,
                     'Account ID:' => $accountAccessAuth->accountId,
