@@ -33,19 +33,6 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_general_ci
 
-  database-testing:
-    image: mariadb:${MARIADB_VERSION:-latest}
-    container_name: hackathon-mariadb-testing
-    ports:
-      - "${MYSQL_TESTING_PORT:-3307}:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-db}
-      MYSQL_USER: ${MYSQL_USER:-dev}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-dev}
-    volumes:
-      - db-testing:/var/lib/mysql
-
   mailhog:
     image: mailhog/mailhog
     container_name: hackathon-mailhog
@@ -57,4 +44,3 @@ services:
 
 volumes:
   db:
-  db-testing:
