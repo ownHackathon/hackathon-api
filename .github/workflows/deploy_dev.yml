@@ -239,7 +239,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: info
-          details: Successful deployment on build https://dev.hackathon.exdrals.de/api/docs
+          details: Successful deployment on build https://dev.hackathon.exdrals.de
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
         if: success()
 
