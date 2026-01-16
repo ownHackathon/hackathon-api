@@ -27,6 +27,7 @@ class AccountPasswordHandler implements RequestHandlerInterface
                 schema: new OA\Schema(type: 'string')
             ),
         ],
+        deprecated: true,
     )]
     #[OA\RequestBody(
         description: 'Set Password for a Account',
