@@ -3,9 +3,8 @@
 namespace ownHackathon\App\Middleware\Account\Validation;
 
 use ownHackathon\App\Validator\PasswordValidator;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -26,8 +25,8 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpInvalidArgumentException(
-                LogMessage::PASSWORD_INVALID,
-                StatusMessage::INVALID_DATA,
+                'Invalid Password',
+                ResponseMessage::DATA_INVALID,
                 [
                     'Validator Message:' => $this->validator->getMessages(),
                 ]

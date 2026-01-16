@@ -4,9 +4,8 @@ namespace ownHackathon\App\Middleware\Account\Validation;
 
 use ownHackathon\App\DTO\Account\AccountRegistration;
 use ownHackathon\App\Validator\AccountActivationValidator;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -27,8 +26,8 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpInvalidArgumentException(
-                LogMessage::ACCOUNT_NAME_INVALID,
-                StatusMessage::INVALID_DATA,
+                'Name for Account and/or password are not valid',
+                ResponseMessage::DATA_INVALID,
                 [
                     'Account Name:' => $data['accountName'] ?? null,
                     'Validator-Message:' => $this->validator->getMessages(),

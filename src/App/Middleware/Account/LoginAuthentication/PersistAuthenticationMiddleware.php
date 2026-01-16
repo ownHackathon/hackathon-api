@@ -7,11 +7,10 @@ use ownHackathon\App\DTO\Client\ClientIdentification;
 use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\App\Entity\Account\AccountAccessAuth;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -39,8 +38,8 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
         // @phpstan-ignore-next-line
         if ($account === null || $clientIdent === null || $refreshToken === null) {
             throw new HttpUnauthorizedException(
-                LogMessage::AUTHENTICATION_PERSISTENCE_ERROR,
-                StatusMessage::INVALID_DATA,
+                'Authentication could not be permanently stored due to missing data.',
+                ResponseMessage::DATA_INVALID,
                 [
                     // @phpstan-ignore-next-line
                     'Account:' => isset($account) ? $account->email : null,
@@ -64,8 +63,8 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
             $this->repository->insert($accountAccessAuth);
         } catch (DuplicateEntryException $e) {
             throw new HttpDuplicateEntryException(
-                LogMessage::DUPLICATE_SOURCE_LOGIN,
-                StatusMessage::INVALID_DATA,
+                'Login is not possible due to a duplicate login from the same source.',
+                ResponseMessage::DATA_INVALID,
                 [
                     'Account' => $account->name,
                     'ClientID' => $clientIdent->identificationHash,

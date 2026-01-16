@@ -7,7 +7,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\DTO\Account\AccountPassword;
 use ownHackathon\App\DTO\Response\HttpResponseMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Message\OAMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -35,11 +35,11 @@ class AccountPasswordHandler implements RequestHandlerInterface
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        description: OAMessage::SUCCESS,
     )]
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
-        description: StatusMessage::BAD_REQUEST->value,
+        description: OAMessage::BAD_REQUEST,
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

@@ -4,9 +4,8 @@ namespace ownHackathon\App\Middleware\Token;
 
 use ownHackathon\App\DTO\Token\RefreshToken;
 use ownHackathon\App\Service\Token\RefreshTokenService;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -25,8 +24,8 @@ readonly class RefreshTokenValidationMiddleware implements MiddlewareInterface
 
         if (!$this->tokenService->isValid($refreshToken)) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_INVALID,
-                StatusMessage::TOKEN_INVALID,
+                'Invalid refresh token.',
+                ResponseMessage::TOKEN_INVALID,
                 [
                     'Refresh Token:' => $refreshToken,
                 ],

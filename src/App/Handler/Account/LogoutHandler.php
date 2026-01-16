@@ -7,7 +7,8 @@ use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\DTO\Response\AuthenticationResponse;
 use ownHackathon\App\DTO\Response\HttpResponseMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Message\OAMessage;
+use ownHackathon\Core\Message\ResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -21,17 +22,17 @@ class LogoutHandler implements RequestHandlerInterface
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        description: OAMessage::SUCCESS,
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: StatusMessage::UNAUTHORIZED_ACCESS->value,
+        description: OAMessage::UNAUTHORIZED_ACCESS,
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $response = HttpResponseMessage::create(HTTP::STATUS_OK, StatusMessage::SUCCESS);
+        $response = HttpResponseMessage::create(HTTP::STATUS_OK, ResponseMessage::SUCCESS);
 
         return new JsonResponse($response, $response->statusCode);
     }

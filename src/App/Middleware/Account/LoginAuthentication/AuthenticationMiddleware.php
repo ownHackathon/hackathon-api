@@ -6,9 +6,8 @@ use DateTimeImmutable;
 use Monolog\Level;
 use ownHackathon\App\Service\Authentication\AuthenticationService;
 use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
 use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
@@ -32,8 +31,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!array_key_exists('email', $data)) {
             throw new HttpUnauthorizedException(
-                LogMessage::REQUIRED_EMAIL_MISSING,
-                StatusMessage::INVALID_DATA
+                'Required argument was not passed to the route. Argument => email',
+                ResponseMessage::DATA_INVALID
             );
         }
 
@@ -43,8 +42,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCOUNT_NOT_FOUND,
-                StatusMessage::INVALID_DATA,
+                'An account with the specified email address was not found.',
+                ResponseMessage::DATA_INVALID,
                 [
                     'E-Mail:' => $email->toString(),
                 ],
@@ -54,8 +53,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!$this->service->isPasswordMatch($data['password'], $account->password)) {
             throw new HttpUnauthorizedException(
-                LogMessage::PASSWORD_INCORRECT,
-                StatusMessage::INVALID_DATA,
+                'Incorrect password',
+                ResponseMessage::DATA_INVALID,
                 [
                     'E-Mail:' => $email->toString(),
                 ],

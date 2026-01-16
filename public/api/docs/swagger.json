@@ -65,7 +65,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AccountRegistration"
+                                "$ref": "#/components/schemas/AccountRegistrationDTO"
                             }
                         }
                     }
@@ -75,7 +75,7 @@
                         "description": "Success"
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -100,7 +100,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/EMail"
+                                "$ref": "#/components/schemas/EMailDTO"
                             }
                         }
                     }
@@ -136,7 +136,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AccountPassword"
+                                "$ref": "#/components/schemas/AccountPasswordDTO"
                             }
                         }
                     }
@@ -146,7 +146,7 @@
                         "description": "Success"
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -163,16 +163,16 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Endpoint to register a new user account.",
-                "description": "Create Account",
+                "summary": "Create new Account",
+                "description": "Create new Account",
                 "operationId": "8a212b9a005ff2dd5aeea1756d25bd05",
                 "requestBody": {
-                    "description": "The email address for the new account",
+                    "description": "E-Mail for register Account",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/EMail"
+                                "$ref": "#/components/schemas/EMailDTO"
                             }
                         }
                     }
@@ -182,7 +182,7 @@
                         "description": "Success"
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -234,7 +234,7 @@
                         }
                     },
                     "403": {
-                        "description": "Access denied",
+                        "description": "Access not permitted",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -307,6 +307,15 @@
     },
     "components": {
         "schemas": {
+            "AccessToken": {
+                "properties": {
+                    "accessToken": {
+                        "description": "The Token for authorized access",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "AccountAuthenticationData": {
                 "required": [
                     "email",
@@ -324,7 +333,7 @@
                 },
                 "type": "object"
             },
-            "AccountPassword": {
+            "AccountPasswordDTO": {
                 "properties": {
                     "password": {
                         "description": "The Password",
@@ -333,7 +342,16 @@
                 },
                 "type": "object"
             },
-            "AccountRegistration": {
+            "AccountPasswordTokenDTO": {
+                "properties": {
+                    "accountPasswordToken": {
+                        "description": "Token to set a new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AccountRegistrationDTO": {
                 "required": [
                     "accountName",
                     "password"
@@ -345,15 +363,6 @@
                     },
                     "password": {
                         "description": "The Password",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "EMail": {
-                "properties": {
-                    "email": {
-                        "description": "The E-Mail",
                         "type": "string"
                     }
                 },
@@ -372,34 +381,23 @@
                 },
                 "type": "object"
             },
-            "HttpResponseMessage": {
+            "EMailDTO": {
                 "properties": {
-                    "statusCode": {
-                        "description": "The Http Status Code",
-                        "type": "integer",
-                        "example": 400
-                    },
-                    "message": {
-                        "description": "The Message",
-                        "type": "string",
-                        "example": "Bad request"
-                    }
-                },
-                "type": "object"
-            },
-            "AccessToken": {
-                "properties": {
-                    "accessToken": {
-                        "description": "The Token for authorized access",
+                    "email": {
+                        "description": "The E-Mail",
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "AccountPasswordToken": {
+            "HttpResponseMessage": {
                 "properties": {
-                    "accountPasswordToken": {
-                        "description": "Token to set a new password",
+                    "statusCode": {
+                        "description": "The Http Status Code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "The Message",
                         "type": "string"
                     }
                 },
