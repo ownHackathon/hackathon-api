@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Middleware\Account\Validation;
+namespace App\Middleware\Account\Validation;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
-use ownHackathon\App\DTO\Response\HttpResponseMessage;
-use ownHackathon\App\Validator\EMailValidator;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Type\Email;
+use App\DTO\Response\HttpResponseMessage;
+use App\Validator\EMailValidator;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
+use Core\Exception\HttpInvalidArgumentException;
+use Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

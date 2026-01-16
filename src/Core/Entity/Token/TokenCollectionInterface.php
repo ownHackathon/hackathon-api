@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Entity\Token;
+namespace Core\Entity\Token;
 
-use ownHackathon\App\Entity\Token\Token;
-use ownHackathon\Core\Utils\CollectionInterface;
+use App\Entity\Token\Token;
+use Core\Utils\CollectionInterface;
 
 /**
  * @method Token offsetGet(mixed $offset)

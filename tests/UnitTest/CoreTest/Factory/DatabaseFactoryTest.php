@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\CoreTest\Factory;
+namespace UnitTest\CoreTest\Factory;
 
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use ownHackathon\Core\Factory\DatabaseFactory;
-use ownHackathon\UnitTest\Mock\MockContainer;
+use Core\Factory\DatabaseFactory;
+use UnitTest\Mock\MockContainer;
 
 class DatabaseFactoryTest extends TestCase
 {

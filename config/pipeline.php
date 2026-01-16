@@ -14,11 +14,11 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use ownHackathon\App\Middleware\Account\LastAktivityUpdaterMiddleware;
-use ownHackathon\App\Middleware\Account\RequestAuthenticationMiddleware;
-use ownHackathon\App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use ownHackathon\Core\Middleware\ApiErrorHandlerMiddleware;
-use ownHackathon\Core\Middleware\RouteNotFoundMiddleware;
+use App\Middleware\Account\LastAktivityUpdaterMiddleware;
+use App\Middleware\Account\RequestAuthenticationMiddleware;
+use App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use Core\Middleware\ApiErrorHandlerMiddleware;
+use Core\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
 /**

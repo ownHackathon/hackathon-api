@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Type;
+namespace Core\Type;
 
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Exception\HttpInvalidArgumentException;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
+use Core\Exception\HttpInvalidArgumentException;
 use ValueError;
 
 use function sprintf;

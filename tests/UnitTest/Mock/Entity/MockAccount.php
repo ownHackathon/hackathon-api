@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Entity;
+namespace UnitTest\Mock\Entity;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\UnitTest\Mock\Constants\Account;
+use Core\Entity\Account\AccountInterface;
+use Core\Type\Email;
+use UnitTest\Mock\Constants\Account;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

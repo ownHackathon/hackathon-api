@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Middleware;
+namespace UnitTest\AppTest\Middleware;
 
 use Helmich\JsonAssert\JsonAssertions;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ownHackathon\UnitTest\Mock\MockRequestHandler;
-use ownHackathon\UnitTest\Mock\MockServerRequest;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use UnitTest\Mock\MockRequestHandler;
+use UnitTest\Mock\MockServerRequest;
+use UnitTest\JsonRequestHelper;
 
 abstract class AbstractTestMiddleware extends TestCase
 {

@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Table;
+namespace UnitTest\Mock\Table;
 
 use InvalidArgumentException;
-use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
-use ownHackathon\App\Table\AccountAccessAuthTable;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
-use ownHackathon\UnitTest\Mock\Constants\Account;
-use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
-use ownHackathon\UnitTest\Mock\Database\MockQuery;
+use App\Hydrator\AccountAccessAuthHydrator;
+use App\Table\AccountAccessAuthTable;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Entity\Account\AccountAccessAuthInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Store\AccountAccessAuthStoreInterface;
+use UnitTest\Mock\Constants\Account;
+use UnitTest\Mock\Constants\AccountAccessAuth;
+use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountAccessAuthTable extends AccountAccessAuthTable implements AccountAccessAuthStoreInterface
 {

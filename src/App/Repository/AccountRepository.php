@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Repository;
+namespace App\Repository;
 
 use Ramsey\Uuid\UuidInterface;
-use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Store\AccountStoreInterface;
-use ownHackathon\Core\Type\Email;
+use Core\Entity\Account\AccountCollectionInterface;
+use Core\Entity\Account\AccountInterface;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Store\AccountStoreInterface;
+use Core\Type\Email;
 
 readonly class AccountRepository implements AccountRepositoryInterface
 {

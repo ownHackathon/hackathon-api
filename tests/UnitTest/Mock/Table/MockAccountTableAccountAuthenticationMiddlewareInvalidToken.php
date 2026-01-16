@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Table;
+namespace UnitTest\Mock\Table;
 
 use InvalidArgumentException;
-use ownHackathon\App\Entity\Account\AccountCollection;
-use ownHackathon\App\Hydrator\AccountHydrator;
-use ownHackathon\App\Table\AccountTable;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Store\AccountStoreInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\Core\Utils\UuidFactory;
-use ownHackathon\UnitTest\Mock\Constants\Account;
-use ownHackathon\UnitTest\Mock\Database\MockQuery;
+use App\Entity\Account\AccountCollection;
+use App\Hydrator\AccountHydrator;
+use App\Table\AccountTable;
+use Core\Entity\Account\AccountInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Store\AccountStoreInterface;
+use Core\Type\Email;
+use Core\Utils\UuidFactory;
+use UnitTest\Mock\Constants\Account;
+use UnitTest\Mock\Database\MockQuery;
 use Ramsey\Uuid\UuidInterface;
 
 class MockAccountTableAccountAuthenticationMiddlewareInvalidToken extends AccountTable implements AccountStoreInterface

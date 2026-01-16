@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Entity\Token;
+namespace App\Entity\Token;
 
 use InvalidArgumentException;
-use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
-use ownHackathon\Core\Entity\Token\TokenInterface;
-use ownHackathon\Core\Utils\Collection;
+use Core\Entity\Token\TokenCollectionInterface;
+use Core\Entity\Token\TokenInterface;
+use Core\Utils\Collection;
 
 use function get_class;
 use function sprintf;

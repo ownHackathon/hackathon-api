@@ -1,12 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core;
+namespace Core;
 
+use App\Validator\Input\EmailInput;
+use App\Validator\Input\PasswordInput;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\App\Validator\Input\EmailInput;
-use ownHackathon\App\Validator\Input\PasswordInput;
-use ownHackathon\Core\Listener\LoggingErrorListener;
-use ownHackathon\Core\Listener\LoggingErrorListenerFactory;
 use Psr\Log\LoggerInterface;
 
 class ConfigProvider

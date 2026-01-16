@@ -1,22 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Table;
+namespace UnitTest\AppTest\Table;
 
 use Envms\FluentPDO\Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use ownHackathon\App\Hydrator\AccountHydrator;
-use ownHackathon\App\Hydrator\AccountHydratorInterface;
-use ownHackathon\App\Table\AccountTable;
-use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Store\AccountStoreInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\Core\Utils\UuidFactory;
-use ownHackathon\UnitTest\Mock\Constants\Account;
-use ownHackathon\UnitTest\Mock\Database\MockQuery;
-use ownHackathon\UnitTest\Mock\Database\MockQueryFailed;
+use App\Hydrator\AccountHydrator;
+use App\Hydrator\AccountHydratorInterface;
+use App\Table\AccountTable;
+use Core\Entity\Account\AccountCollectionInterface;
+use Core\Entity\Account\AccountInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Store\AccountStoreInterface;
+use Core\Type\Email;
+use Core\Utils\UuidFactory;
+use UnitTest\Mock\Constants\Account;
+use UnitTest\Mock\Database\MockQuery;
+use UnitTest\Mock\Database\MockQueryFailed;
 
 class AccountTableTest extends TestCase
 {

@@ -1,21 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Repository;
+namespace UnitTest\AppTest\Repository;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use ownHackathon\App\Hydrator\AccountHydrator;
-use ownHackathon\App\Hydrator\AccountHydratorInterface;
-use ownHackathon\App\Repository\AccountRepository;
-use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\Core\Utils\UuidFactory;
-use ownHackathon\UnitTest\Mock\Constants\Account;
-use ownHackathon\UnitTest\Mock\Table\MockAccountTable;
-use ownHackathon\UnitTest\Mock\Table\MockAccountTableFailed;
+use App\Hydrator\AccountHydrator;
+use App\Hydrator\AccountHydratorInterface;
+use App\Repository\AccountRepository;
+use Core\Entity\Account\AccountCollectionInterface;
+use Core\Entity\Account\AccountInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Type\Email;
+use Core\Utils\UuidFactory;
+use UnitTest\Mock\Constants\Account;
+use UnitTest\Mock\Table\MockAccountTable;
+use UnitTest\Mock\Table\MockAccountTableFailed;
 
 class AccountRepositoryTest extends TestCase
 {

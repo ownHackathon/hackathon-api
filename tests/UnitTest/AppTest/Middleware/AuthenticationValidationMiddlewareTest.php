@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Middleware;
+namespace UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\UnitTest\Mock\Validator\MockAuthenticationValidator;
-use ownHackathon\UnitTest\Mock\Validator\MockAuthenticationValidatorFailed;
+use App\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware;
+use Core\Exception\HttpUnauthorizedException;
+use UnitTest\Mock\Validator\MockAuthenticationValidator;
+use UnitTest\Mock\Validator\MockAuthenticationValidatorFailed;
 
 class AuthenticationValidationMiddlewareTest extends AbstractTestMiddleware
 {

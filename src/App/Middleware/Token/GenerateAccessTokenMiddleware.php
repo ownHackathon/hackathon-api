@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Middleware\Token;
+namespace App\Middleware\Token;
 
-use ownHackathon\App\DTO\Token\AccessToken;
-use ownHackathon\App\Service\Token\AccessTokenService;
-use ownHackathon\Core\Entity\Account\AccountInterface;
+use App\DTO\Token\AccessToken;
+use App\Service\Token\AccessTokenService;
+use Core\Entity\Account\AccountInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
