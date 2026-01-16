@@ -74,7 +74,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
     {
         $userAccount = $this->accountRepository->findByName('User');
         $accountAccessAuth = new AccountAccessAuth(
-            null,
+            1,
             $userAccount->id,
             'Testing',
             $this->refreshToken,
