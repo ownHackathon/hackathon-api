@@ -35,7 +35,7 @@ jobs:
         run: composer run-script phplint
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Lint failed.
@@ -68,7 +68,7 @@ jobs:
         run: composer run-script phpstan
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: PHP Stan failed.
@@ -101,7 +101,7 @@ jobs:
         run: composer run-script phpcs
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: CodeSniffer failed.
@@ -201,7 +201,7 @@ jobs:
         run: composer run-script functionaltest
 
       - name: Test Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Functional Test failed.
@@ -218,7 +218,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Info Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: info
           details: Checks successfully executed on API.
@@ -226,7 +226,7 @@ jobs:
         if: success()
 
       - name: Check Info Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.2.1
         with:
           severity: error
           details: Incorrect checks during the API check.
