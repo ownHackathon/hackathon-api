@@ -54,8 +54,7 @@
     "mezzio/mezzio-helpers": "^5.7",
     "monolog/monolog": "^3.9.0",
     "ramsey/uuid": "^4.7",
-    "symfony/mailer": "^7.3",
-    "zircote/swagger-php": "^4.7"
+    "symfony/mailer": "^7.3"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
@@ -74,7 +73,8 @@
     "phpunit/phpunit": "^10.0",
     "roave/security-advisories": "dev-master",
     "slevomat/coding-standard": "^8.15",
-    "squizlabs/php_codesniffer": "^4.0"
+    "squizlabs/php_codesniffer": "^4.0",
+    "zircote/swagger-php": "^4.7"
   },
   "autoload": {
     "psr-4": {
