@@ -3,13 +3,13 @@
 namespace ownHackathon\App\Hydrator;
 
 use DateTimeImmutable;
+use Ramsey\Uuid\UuidFactoryInterface;
 use ownHackathon\App\Entity\Token;
 use ownHackathon\App\Entity\TokenCollection;
+use ownHackathon\App\Enum\TokenType;
 use ownHackathon\Core\Entity\TokenCollectionInterface;
 use ownHackathon\Core\Entity\TokenInterface;
 use ownHackathon\Core\Enum\DateTimeFormat;
-use ownHackathon\Core\Enum\TokenType;
-use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class TokenHydrator implements TokenHydratorInterface
 {

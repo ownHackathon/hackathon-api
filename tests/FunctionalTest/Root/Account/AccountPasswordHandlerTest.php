@@ -7,7 +7,7 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use ownHackathon\App\Entity\Account;
 use ownHackathon\App\Entity\Token;
-use ownHackathon\Core\Enum\TokenType;
+use ownHackathon\App\Enum\TokenType;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\Type\Email;
