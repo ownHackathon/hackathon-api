@@ -88,7 +88,6 @@ class ConfigProvider
                 Middleware\Account\RegisterMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\RequestAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ClientIdentification\ClientIdentificationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Token\AccessTokenValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\GenerateAccessTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\GenerateRefreshTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenAccountMiddleware::class => ConfigAbstractFactory::class,
@@ -201,10 +200,6 @@ class ConfigProvider
             ],
             Middleware\ClientIdentification\ClientIdentificationMiddleware::class => [
                 ClientIdentificationService::class,
-            ],
-            Middleware\Token\AccessTokenValidationMiddleware::class => [
-                AccessTokenService::class,
-                LoggerInterface::class,
             ],
             Middleware\Token\GenerateAccessTokenMiddleware::class => [
                 AccessTokenService::class,
