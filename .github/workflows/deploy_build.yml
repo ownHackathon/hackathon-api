@@ -1,4 +1,4 @@
-name: Deployment on Development
+name: Deployment on Build
 on:
   push:
     branches: [ "master" ]
