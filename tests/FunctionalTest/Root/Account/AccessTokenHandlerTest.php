@@ -6,9 +6,11 @@ use DateTimeImmutable;
 use Envms\FluentPDO\Query;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Entity\Account\AccountAccessAuth;
+use PDO;
+use PHPUnit\Framework\Assert;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\ClientIdentificationData;
+use ownHackathon\App\Entity\AccountAccessAuth;
 use ownHackathon\App\Repository\AccountAccessAuthRepository;
 use ownHackathon\App\Repository\AccountRepository;
 use ownHackathon\App\Service\ClientIdentification\ClientIdentificationService;
@@ -18,8 +20,6 @@ use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\FunctionalTest\AbstractFunctional;
 use ownHackathon\UnitTest\JsonRequestHelper;
-use PDO;
-use PHPUnit\Framework\Assert;
 
 class AccessTokenHandlerTest extends AbstractFunctional
 {

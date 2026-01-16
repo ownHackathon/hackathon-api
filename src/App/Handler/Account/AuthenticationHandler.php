@@ -5,15 +5,15 @@ namespace ownHackathon\App\Handler\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\DTO\Account\AccountAuthenticationData;
-use ownHackathon\App\DTO\Response\AuthenticationResponse;
-use ownHackathon\App\DTO\Response\HttpResponseMessage;
-use ownHackathon\App\DTO\Token\AccessToken;
-use ownHackathon\App\DTO\Token\RefreshToken;
-use ownHackathon\Core\Message\OAMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ownHackathon\App\DTO\AccessToken;
+use ownHackathon\App\DTO\AccountAuthenticationData;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\AuthenticationResponse;
+use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\Core\Message\OAMessage;
 
 readonly class AuthenticationHandler implements RequestHandlerInterface
 {

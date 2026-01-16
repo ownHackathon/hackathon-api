@@ -3,9 +3,9 @@
 namespace ownHackathon\UnitTest\Mock\Service;
 
 use Firebase\JWT\JWT;
-use ownHackathon\App\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Service\Token\AccessTokenService;
 use Ramsey\Uuid\UuidInterface;
+use ownHackathon\App\DTO\JwtTokenConfig;
+use ownHackathon\App\Service\Token\AccessTokenService;
 
 use function time;
 

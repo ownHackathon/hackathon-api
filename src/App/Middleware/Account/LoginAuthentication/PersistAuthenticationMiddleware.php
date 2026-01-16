@@ -3,9 +3,9 @@
 namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
 use DateTimeImmutable;
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Token\RefreshToken;
-use ownHackathon\App\Entity\Account\AccountAccessAuth;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\App\Entity\AccountAccessAuth;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\Core\Exception\DuplicateEntryException;
 use ownHackathon\Core\Exception\HttpDuplicateEntryException;

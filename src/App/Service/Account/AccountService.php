@@ -3,9 +3,9 @@
 namespace ownHackathon\App\Service\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Token\Token;
+use ownHackathon\App\Entity\Token;
 use ownHackathon\App\Service\Token\PasswordTokenService;
-use ownHackathon\Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Entity\TokenInterface;
 use ownHackathon\Core\Enum\TokenType;
 use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Repository\TokenRepositoryInterface;

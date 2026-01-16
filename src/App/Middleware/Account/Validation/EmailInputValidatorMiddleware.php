@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Middleware\Account\Validation;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
-use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\App\Validator\EMailValidator;
 use ownHackathon\Core\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Message\ResponseMessage;

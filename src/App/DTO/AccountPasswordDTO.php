@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO\Account;
+namespace ownHackathon\App\DTO;
 
+use ownHackathon\Core\Message\OADataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
-readonly class AccountPassword
+readonly class AccountPasswordDTO
 {
     public function __construct(
         #[OA\Property(
             description: 'The Password',
-            type: DataType::STRING->value,
+            type: OADataType::STRING,
         )]
         public string $password,
     ) {

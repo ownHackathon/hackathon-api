@@ -2,8 +2,8 @@
 
 namespace ownHackathon\UnitTest\Mock\Service;
 
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\JwtTokenConfig;
 use ownHackathon\App\Service\Token\RefreshTokenService;
 
 readonly class MockRefreshTokenService extends RefreshTokenService

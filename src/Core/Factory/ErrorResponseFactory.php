@@ -5,7 +5,7 @@ namespace ownHackathon\Core\Factory;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Monolog\Level;
-use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpResponseMessage;
 use ownHackathon\Core\Exception\HttpException;
 use Psr\Log\LoggerInterface;
 use Throwable;
