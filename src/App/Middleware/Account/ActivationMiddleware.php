@@ -78,7 +78,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
                 'Account has already been created.',
                 ResponseMessage::DATA_INVALID,
                 [
-                    'E-Mail' => $account->email->toString(),
+                    'E-Mail' => $account->getEmail()->toString(),
                     'Exception Message:' => $e->getMessage(),
                 ]
             );

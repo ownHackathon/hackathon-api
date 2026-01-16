@@ -10,19 +10,19 @@ interface AccountInterface
 {
     public const string AUTHENTICATED = 'account.authenticated.class';
 
-    public ?int $id { get; }
+    public function getId(): ?int;
 
-    public UuidInterface $uuid { get; }
+    public function getUuid(): UuidInterface;
 
-    public string $name { get; }
+    public function getName(): string;
 
-    public string $password { get; }
+    public function getPasswordHash(): string;
 
-    public Email $email { get; }
+    public function getEMail(): Email;
 
-    public DateTimeImmutable $registeredAt { get; }
+    public function getRegisteredAt(): DateTimeImmutable;
 
-    public DateTimeImmutable $lastActionAt { get; }
+    public function getLastActionAt(): DateTimeImmutable;
 
     public function with(mixed ...$properties): self;
 }

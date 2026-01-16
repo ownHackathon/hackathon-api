@@ -39,7 +39,7 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
         try {
             $this->query->insertInto($this->table, $value)->execute();
         } catch (PDOException $e) {
-            throw new DuplicateEntryException($this->getTableName(), $data->id);
+            throw new DuplicateEntryException($this->getTableName(), $data->getId());
         }
 
         return true;
@@ -49,11 +49,11 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
     {
         $value = $this->hydrator->extract($data);
 
-        $result = $this->query->update($this->table, $value, $data->id)->execute();
+        $result = $this->query->update($this->table, $value, $data->getId())->execute();
 
         if ($result === false) {
             throw new InvalidArgumentException(
-                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data->id)
+                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data->getId())
             );
         }
 

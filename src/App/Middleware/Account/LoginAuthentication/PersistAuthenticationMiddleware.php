@@ -42,9 +42,10 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 ResponseMessage::DATA_INVALID,
                 [
                     // @phpstan-ignore-next-line
-                    'Account:' => isset($account) ? $account->email : null,
+                    'Account:' => isset($account) ? $account->getEMail() : null,
                     // @phpstan-ignore-next-line
                     'Client ID:' => $clientIdent ? $clientIdent->identificationHash : null,
+                    // @phpstan-ignore-next-line
                     'Refresh Token:' => $refreshToken ? 'placed' : null,
                 ]
             );
@@ -52,7 +53,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $account->id,
+            $account->getId(),
             'default',
             $refreshToken->refreshToken,
             $clientIdent->clientIdentificationData->userAgent,
@@ -66,7 +67,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 'Login is not possible due to a duplicate login from the same source.',
                 ResponseMessage::DATA_INVALID,
                 [
-                    'Account' => $account->name,
+                    'Account' => $account->getName(),
                     'ClientID' => $clientIdent->identificationHash,
                     'ErrorMessage' => $e->getMessage(),
                 ],
