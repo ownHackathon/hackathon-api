@@ -34,14 +34,9 @@ readonly class AccountAccessAuthRepository implements AccountAccessAuthRepositor
         return $this->store->findById($id);
     }
 
-    public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface
+    public function findByUserId(int $userId): AccountAccessAuthCollectionInterface
     {
-        return $this->store->findByAccountId($accountId);
-    }
-
-    public function findByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface
-    {
-        return $this->store->findByAccountIdAndClientIdHash($accountId, $clientHash);
+        return $this->store->findByUserId($userId);
     }
 
     public function findByLabel(string $label): AccountAccessAuthCollectionInterface

@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use ownHackathon\App\DTO\AccessToken;
-use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpFailureMessage;
 use ownHackathon\Core\Message\OAMessage;
 
 readonly class AccessTokenHandler implements RequestHandlerInterface
@@ -27,7 +27,7 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
         description: OAMessage::UNAUTHORIZED_ACCESS,
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpFailureMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

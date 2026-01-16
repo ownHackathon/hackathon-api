@@ -33,7 +33,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -79,7 +79,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -150,7 +150,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -186,7 +186,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -223,12 +223,12 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized access",
+                    "400": {
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -238,38 +238,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/account/logout": {
-            "get": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Attempts to log out an account",
-                "operationId": "1154528e1da5f90aa3b356c63502b533",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AuthenticationResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized access",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "#/components/schemas/HttpFailureMessage"
                                 }
                             }
                         }
@@ -390,14 +359,14 @@
                 },
                 "type": "object"
             },
-            "HttpResponseMessage": {
+            "HttpFailureMessage": {
                 "properties": {
                     "statusCode": {
                         "description": "The Http Status Code",
                         "type": "integer"
                     },
                     "message": {
-                        "description": "The Message",
+                        "description": "The Failure Message",
                         "type": "string"
                     }
                 },
