@@ -2,7 +2,6 @@
 
 namespace ownHackathon\UnitTest\Mock;
 
-use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -10,74 +9,74 @@ class MockResponse implements ResponseInterface
 {
     private array $headers = [];
 
-    public function getHeaderLine($name): string
+    public function getProtocolVersion()
+    {
+        // TODO: Implement getProtocolVersion() method.
+    }
+
+    public function withProtocolVersion($version)
+    {
+        // TODO: Implement withProtocolVersion() method.
+    }
+
+    public function getHeaders()
+    {
+        // TODO: Implement getHeaders() method.
+    }
+
+    public function hasHeader($name)
+    {
+        // TODO: Implement hasHeader() method.
+    }
+
+    public function getHeader($name)
+    {
+        // TODO: Implement getHeader() method.
+    }
+
+    public function getHeaderLine($name)
     {
         return $this->headers[$name] ?? '';
     }
 
-    public function withHeader($name, $value): MessageInterface
+    public function withHeader($name, $value)
     {
         $header = clone $this;
         $header->headers[$name] = $value;
         return $header;
     }
 
-    public function getProtocolVersion(): string
-    {
-        // TODO: Implement getProtocolVersion() method.
-    }
-
-    public function withProtocolVersion(string $version): MessageInterface
-    {
-        // TODO: Implement withProtocolVersion() method.
-    }
-
-    public function getHeaders(): array
-    {
-        // TODO: Implement getHeaders() method.
-    }
-
-    public function hasHeader(string $name): bool
-    {
-        // TODO: Implement hasHeader() method.
-    }
-
-    public function getHeader(string $name): array
-    {
-        // TODO: Implement getHeader() method.
-    }
-
-    public function withAddedHeader(string $name, $value): MessageInterface
+    public function withAddedHeader($name, $value)
     {
         // TODO: Implement withAddedHeader() method.
     }
 
-    public function withoutHeader(string $name): MessageInterface
+    public function withoutHeader($name)
     {
         // TODO: Implement withoutHeader() method.
     }
 
-    public function getBody(): StreamInterface
+    public function getBody()
     {
         // TODO: Implement getBody() method.
     }
 
-    public function withBody(StreamInterface $body): MessageInterface
+    public function withBody(StreamInterface $body)
     {
         // TODO: Implement withBody() method.
     }
 
-    public function getStatusCode(): int
+    public function getStatusCode()
     {
         // TODO: Implement getStatusCode() method.
     }
 
-    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface
+    public function withStatus($code, $reasonPhrase = '')
     {
         // TODO: Implement withStatus() method.
     }
 
-    public function getReasonPhrase(): string
+    public function getReasonPhrase()
     {
         // TODO: Implement getReasonPhrase() method.
     }

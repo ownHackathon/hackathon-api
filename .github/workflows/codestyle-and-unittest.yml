@@ -4,46 +4,164 @@ on:
     branches:
       - '*'
       - '!master'
-      - '!develop'
+      - '!develope'
     paths:
       - "**.php"
-  workflow_dispatch:
 
 jobs:
-  # 1. Job: Statische Analyse (Lint, Stan, CodeSniffer)
-  # Diese laufen zusammen, da sie keine Datenbank benötigen.
-  static-analysis:
-    name: PHP Quality Checks
+  phplint:
+    name: PHP Lint
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup PHP and Composer
-        uses: ./.github/actions/setup-php-composer
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
       - name: Run PHP Linter
         run: composer run-script phplint
 
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Lint failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
+  phpstan:
+    name: PHP Stan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
       - name: Run PHP Stan
         run: composer run-script phpstan
+
+      - name: Check Info Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Stan failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
+  phpcs:
+    name: PHP CodeSniffer
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
       - name: Run PHP Codesniffer
         run: composer run-script phpcs
 
-      - name: Notify Failure
-        if: failure()
+      - name: Check Info Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: error
-          details: Static Analysis (Lint/Stan/CS) failed.
+          details: CodeSniffer failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
 
-  # 2. Job: Tests (Unit & Functional)
-  # Dieser Job benötigt die MariaDB Service-Container
-  tests:
-    name: PHP Tests
-    needs: static-analysis
+  phpunit:
+    name: PHP Unit Test
+    needs:
+      - phplint
+      - phpstan
+      - phpcs
     runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP Unit Test
+        run: composer run-script unittest
+
+      - name: Test Info Failure
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          severity: error
+          details: PHP Unit Test failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
+
+  phpfunctional:
+    name: PHP Functional Test
+    needs:
+      - phplint
+      - phpstan
+      - phpcs
+    runs-on: ubuntu-latest
+    env:
+      DB_DATABASE: db
+      DB_USERNAME: dev
+      DB_PASSWORD: dev
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      MYSQL_ALLOW_EMPTY_PASSWORD: false
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      APP_ENV: action
     services:
       database-testing:
         image: mariadb:latest
@@ -56,52 +174,61 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
-    env:
-      DB_DATABASE: db
-      DB_USERNAME: dev
-      DB_PASSWORD: dev
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      APP_ENV: action
     steps:
       - uses: actions/checkout@v5
+      - name: Install PHP with extensions.
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: pdo
+          ini-values: date.timezone='UTC'
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-      - name: Setup PHP and Composer
-        uses: ./.github/actions/setup-php-composer
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-      - name: Run PHP Unit Test
-        run: composer run-script unittest
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
       - name: Run PHP Functional Test
         run: composer run-script functionaltest
 
-      - name: Notify Failure
-        if: failure()
+      - name: Test Info Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: error
-          details: Unit or Functional Tests failed.
+          details: Functional Test failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
 
-  # 3. Job: Abschluss-Benachrichtigung
-  final-status:
-    name: Final Status Message
-    needs: [static-analysis, tests]
-    if: always()
+  message:
+    needs:
+      - phpcs
+      - phplint
+      - phpstan
+      - phpunit
+      - phpfunctional
     runs-on: ubuntu-latest
     steps:
       - name: Check Info Success
-        if: ${{ needs.static-analysis.result == 'success' && needs.tests.result == 'success' }}
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: info
           details: Checks successfully executed on API.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: success()
 
       - name: Check Info Failure
-        if: ${{ needs.static-analysis.result != 'success' || needs.tests.result != 'success' }}
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: error
           details: Incorrect checks during the API check.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: failure()
