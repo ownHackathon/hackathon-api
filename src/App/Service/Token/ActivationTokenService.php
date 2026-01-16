@@ -19,7 +19,7 @@ readonly class ActivationTokenService
     {
         $text = sprintf('Your token to activate your Account: %s', $activation->token->getHex()->toString());
 
-        $email = new Email()
+        $email = (new Email())
             ->from('no-reply@stormannsgal.de')
             ->to($activation->email->toString())
             ->subject('Account Activation Code')

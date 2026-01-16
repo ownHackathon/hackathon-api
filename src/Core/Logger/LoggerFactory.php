@@ -37,20 +37,20 @@ readonly class LoggerFactory
 
         $logger = new Logger('log');
 
-        $logger->pushHandler(new StreamHandler($path . 'default.log')->setFormatter($formatter));
+        $logger->pushHandler((new StreamHandler($path . 'default.log'))->setFormatter($formatter));
 
-        $errorHandler = new StreamHandler($path . 'error.log', Level::Error)->setFormatter($formatter);
+        $errorHandler = (new StreamHandler($path . 'error.log', Level::Error))->setFormatter($formatter);
         $errorHandler = new FilterHandler($errorHandler, Level::Error, Level::Error);
 
         $logger->pushHandler($errorHandler);
 
-        $errorHandler = new StreamHandler($path . 'warning.log', Level::Warning)->setFormatter($formatter);
+        $errorHandler = (new StreamHandler($path . 'warning.log', Level::Warning))->setFormatter($formatter);
         $errorHandler = new FilterHandler($errorHandler, Level::Error, Level::Error);
 
         $logger->pushHandler($errorHandler);
 
         $logger->pushHandler(
-            new StreamHandler($path . 'critical.log', Level::Critical)->setFormatter($stackTraceFormater)
+            (new StreamHandler($path . 'critical.log', Level::Critical))->setFormatter($stackTraceFormater)
         );
         $logger->pushProcessor(new PsrLogMessageProcessor());
         $logger->pushProcessor(

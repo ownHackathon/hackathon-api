@@ -43,9 +43,9 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 StatusMessage::INVALID_DATA,
                 [
                     // @phpstan-ignore-next-line
-                    'Account:' => $account?->email,
+                    'Account:' => isset($account) ? $account->email : null,
                     // @phpstan-ignore-next-line
-                    'Client ID:' => $clientIdent?->identificationHash,
+                    'Client ID:' => $clientIdent ? $clientIdent->identificationHash : null,
                     'Refresh Token:' => $refreshToken ? 'placed' : null,
                 ]
             );
@@ -53,7 +53,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $account->id    ,
+            $account->id,
             'default',
             $refreshToken->refreshToken,
             $clientIdent->clientIdentificationData->userAgent,

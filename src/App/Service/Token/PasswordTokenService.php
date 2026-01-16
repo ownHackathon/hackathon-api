@@ -20,7 +20,7 @@ readonly class PasswordTokenService
     {
         $text = sprintf('Your token to reset your password: %s', $token->token->getHex()->toString());
 
-        $email = new Email()
+        $email = (new Email())
             ->from('no-reply@stormannsgal.de')
             ->to($email->toString())
             ->subject('Password Forgotten Code')
