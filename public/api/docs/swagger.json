@@ -402,7 +402,7 @@
                 "name": "Authentication",
                 "in": "header"
             },
-            "Client-Identification-String": {
+            "Client Identification Number": {
                 "type": "apiKey",
                 "name": "x-ident",
                 "in": "header"
@@ -414,7 +414,7 @@
             "accessToken": []
         },
         {
-            "Client-Identification-String": []
+            "Client Identification Number": []
         },
         {
             "refreshToken": []
