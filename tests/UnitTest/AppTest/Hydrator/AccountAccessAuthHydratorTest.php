@@ -17,7 +17,7 @@ class AccountAccessAuthHydratorTest extends TestCase
         $account = $hydrator->hydrate(AccountAccessAuth::VALID_DATA);
 
         $this->assertInstanceOf(AccountAccessAuthInterface::class, $account);
-        $this->assertSame(AccountAccessAuth::ID, $account->id);
+        $this->assertSame(AccountAccessAuth::ID, $account->getId());
     }
 
     public function testCanHydrateAccountAccessAuthCollection(): void
@@ -28,7 +28,7 @@ class AccountAccessAuthHydratorTest extends TestCase
 
         $this->assertInstanceOf(AccountAccessAuthCollectionInterface::class, $accounts);
         $this->assertInstanceOf(AccountAccessAuthInterface::class, $accounts[0]);
-        $this->assertSame(AccountAccessAuth::ID, $accounts[0]->id);
+        $this->assertSame(AccountAccessAuth::ID, $accounts[0]->getId());
     }
 
     public function testCanExtractAccountAccessAuth(): void
