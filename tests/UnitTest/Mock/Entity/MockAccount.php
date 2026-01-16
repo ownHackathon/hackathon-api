@@ -3,53 +3,50 @@
 namespace ownHackathon\UnitTest\Mock\Entity;
 
 use DateTimeImmutable;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use ownHackathon\Core\Entity\Account\AccountInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\UnitTest\Mock\Constants\Account;
-use Ramsey\Uuid\Nonstandard\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class MockAccount implements AccountInterface
 {
-    public int|null $id {
-        get {
-            return Account::ID;
-        }
+    public function getId(): int
+    {
+        // TODO: Implement getId() method.
     }
 
-    public UuidInterface $uuid {
-        get {
-            return Uuid::fromString(Account::UUID);
-        }
+    public function getUuid(): UuidInterface
+    {
+        return Uuid::fromString(Account::UUID);
     }
 
-    public string $name {
-        get {
-            return '';
-        }
-    }
-    public string $password {
-        get {
-            return '';
-        }
-    }
-    public Email $email {
-        get {
-            return new Email(Account::EMAIL);
-        }
-    }
-    public DateTimeImmutable $registeredAt {
-        get {
-            return new DateTimeImmutable();
-        }
-    }
-    public DateTimeImmutable $lastActionAt {
-        get {
-            return new DateTimeImmutable();
-        }
+    public function getName(): string
+    {
+        // TODO: Implement getName() method.
     }
 
-    public function with(...$properties): AccountInterface
+    public function getPasswordHash(): string
+    {
+        // TODO: Implement getPasswordHash() method.
+    }
+
+    public function getEMail(): Email
+    {
+        // TODO: Implement getEMail() method.
+    }
+
+    public function getRegisteredAt(): DateTimeImmutable
+    {
+        // TODO: Implement getRegisteredAt() method.
+    }
+
+    public function getLastActionAt(): DateTimeImmutable
+    {
+        // TODO: Implement getLastActionAt() method.
+    }
+
+    public function with(...$values): static
     {
         // TODO: Implement with() method.
     }

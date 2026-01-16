@@ -32,8 +32,8 @@ class MockAccountTable extends AccountTable implements AccountStoreInterface
 
     public function insert(AccountInterface $data): true
     {
-        if ($data->id !== Account::ID) {
-            throw new DuplicateEntryException('Account', $data->id);
+        if ($data->getId() !== Account::ID) {
+            throw new DuplicateEntryException('Account', $data->getId());
         }
 
         return true;
@@ -41,7 +41,7 @@ class MockAccountTable extends AccountTable implements AccountStoreInterface
 
     public function update(AccountInterface $data): true
     {
-        if ($data->id !== Account::ID) {
+        if ($data->getId() !== Account::ID) {
             throw new InvalidArgumentException();
         }
 

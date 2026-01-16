@@ -51,7 +51,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
             );
         }
 
-        if (!$this->service->isPasswordMatch($data['password'], $account->password)) {
+        if (!$this->service->isPasswordMatch($data['password'], $account->getPasswordHash())) {
             throw new HttpUnauthorizedException(
                 'Incorrect password',
                 ResponseMessage::DATA_INVALID,
