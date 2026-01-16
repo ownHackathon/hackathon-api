@@ -1,0 +1,121 @@
+name: Deployment on Development
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  # 1. Statische Analyse (Zusammengefasst, da sie keine DB brauchen)
+  static-analysis:
+    name: PHP Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-php-composer
+
+      - name: Validate Composer
+        run: composer validate --strict
+
+      - name: Run Checks
+        run: |
+          composer run-script phplint
+          composer run-script phpstan
+          composer run-script phpcs
+
+      - name: Notify Failure
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: Static Analysis (Lint/Stan/CS) failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+
+  # 2. Tests (Unit & Functional getrennt, da Functional DB braucht)
+  tests:
+    name: PHP Tests
+    needs: static-analysis
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: db
+          MYSQL_USER: dev
+          MYSQL_PASSWORD: dev
+        ports: ["3306:3306"]
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DB_DATABASE: db
+      DB_USERNAME: dev
+      DB_PASSWORD: dev
+      DB_HOST: 127.0.0.1
+      APP_ENV: action
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - name: Setup Environment
+        uses: ./.github/actions/setup-php-composer
+
+      - name: Run Unit Tests
+        run: composer run-script unittest
+
+      - name: Run Functional Tests
+        run: composer run-script functionaltest
+
+      - name: Notify Failure
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          details: PHP Tests failed.
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+
+  # 3. Deployment
+  deploy:
+    name: Deploy to Dev
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - name: Setup Environment (No Dev)
+        uses: ./.github/actions/setup-php-composer
+        with:
+          install-flags: '--prefer-dist --no-progress --no-dev'
+
+      - name: Build OpenAPI
+        run: composer run-script openapi
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@8.0.3
+        with:
+          switches: -avz --no-o --no-g --no-perms --no-t --omit-dir-times --delete --exclude-from='.rsync-exclude'
+          remote_path: ${{ secrets.DEPLOY_PATH_API_BUILD }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+          remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+
+      - name: Clear Cache
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          passphrase: ${{ secrets.DEPLOY_KEY_PASS }}
+          script: rm -rf ${{ secrets.DEPLOY_PATH_API_BUILD }}/data/cache/*
+
+      - name: Deployment Notification
+        if: always()
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: ${{ job.status == 'success' && 'info' || 'error' }}
+          details: >-
+            ${{ job.status == 'success' 
+                && '[🚀 Successful deployment to build!](https://build.ownhackathon.de/api/docs)' 
+                || format('[❌ Deployment failed! View Logs](https://github.com/{0}/actions/runs/{1})', github.repository, github.run_id) 
+            }}
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
