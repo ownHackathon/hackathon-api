@@ -52,7 +52,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api/account/password/' . $this->token->token->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -66,7 +66,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api/account/password/' . $this->token->token->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
@@ -83,7 +83,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api/account/password/' . $this->token->token->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW_INVALID]);
@@ -121,13 +121,13 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository->insert($this->token);
 
         $request = new ServerRequest(
-            uri: '/api/account/password/' . $this->token->token->getHex()->toString(),
+            uri: '/api/account/password/' . $this->token->getToken()->getHex()->toString(),
             method: 'PATCH'
         );
         $request = $request->withParsedBody(['password' => self::PASSWORD_NEW]);
         $this->app->handle($request);
 
-        $destroyedToken = $this->tokenRepository->findByToken($this->token->token->getHex()->toString());
+        $destroyedToken = $this->tokenRepository->findByToken($this->token->getToken()->getHex()->toString());
 
         $this->assertNull($destroyedToken);
     }

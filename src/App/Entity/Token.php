@@ -14,11 +14,36 @@ readonly class Token implements TokenInterface, Collectible
     use CloneReadonlyClassWith;
 
     public function __construct(
-        public ?int $id,
-        public int $accountId,
-        public TokenType $tokenType,
-        public UuidInterface $token,
-        public DateTimeImmutable $createdAt,
+        private ?int $id,
+        private int $accountId,
+        private TokenType $tokenType,
+        private UuidInterface $token,
+        private DateTimeImmutable $createdAt,
     ) {
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAccountId(): int
+    {
+        return $this->accountId;
+    }
+
+    public function getTokenType(): TokenType
+    {
+        return $this->tokenType;
+    }
+
+    public function getToken(): UuidInterface
+    {
+        return $this->token;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }
