@@ -4,7 +4,7 @@ namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\Core\Message\ResponseMessage;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use ownHackathon\App\DTO\ClientIdentification;
 use ownHackathon\App\DTO\ClientIdentificationData;
@@ -47,6 +47,7 @@ class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 
         $response = $middleware->process($request, $this->handler);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertNotInstanceOf(JsonResponse::class, $response);
     }
 
@@ -65,10 +66,11 @@ class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
-        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
+        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', '400');
+        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
     }
 
     public function testFindMissingClientIdentification(): void
@@ -85,10 +87,11 @@ class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
-        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
+        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', '400');
+        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
     }
 
     public function testFindMissingRefreshToken(): void
@@ -106,10 +109,11 @@ class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
-        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
+        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', '400');
+        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
     }
 
     public function testAccountAccessAuthHasDuplicat(): void
@@ -128,9 +132,10 @@ class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
-        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
+        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', '400');
+        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
     }
 }

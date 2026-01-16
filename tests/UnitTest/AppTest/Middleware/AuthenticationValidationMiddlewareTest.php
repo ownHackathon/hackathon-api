@@ -4,7 +4,7 @@ namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\Core\Message\ResponseMessage;
+use Psr\Http\Message\ResponseInterface;
 use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware;
 use ownHackathon\FunctionalTest\Mock\NullLogger;
 use ownHackathon\UnitTest\Mock\Validator\MockAuthenticationValidator;
@@ -21,6 +21,7 @@ class AuthenticationValidationMiddlewareTest extends AbstractTestMiddleware
 
         $response = $middleware->process($this->request, $this->handler);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertNotInstanceOf(JsonResponse::class, $response);
     }
 
@@ -35,9 +36,10 @@ class AuthenticationValidationMiddlewareTest extends AbstractTestMiddleware
 
         $json = $this->getContentAsJson($response);
 
+        $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertSame(StatusCodeInterface::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_UNAUTHORIZED);
-        $this->assertJsonValueEquals($json, '$.message', ResponseMessage::DATA_INVALID);
+        $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', '400');
+        $this->assertJsonValueEquals($json, '$.message', 'Invalid Data');
     }
 }

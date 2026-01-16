@@ -48,9 +48,9 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 // @phpstan-ignore-next-line
                 'Refresh Token:' => $refreshToken ? 'placed' : null,
             ]);
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
 
-            return new JsonResponse($message, $message->statusCode);
+            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
 
         $accountAccessAuth = new AccountAccessAuth(
@@ -71,9 +71,9 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 'ErrorMessage' => $e->getMessage(),
             ]);
 
-            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
 
-            return new JsonResponse($message, $message->statusCode);
+            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
 
         return $handler->handle($request);
