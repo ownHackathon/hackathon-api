@@ -8,15 +8,13 @@ use ownHackathon\App\Enum\TokenType;
 
 interface TokenInterface
 {
-    public ?int $id { get; }
+    public function getId(): ?int;
 
-    public int $accountId { get; }
+    public function getAccountId(): int;
 
-    public TokenType $tokenType { get; }
+    public function getTokenType(): TokenType;
 
-    public UuidInterface $token { get; }
+    public function getToken(): UuidInterface;
 
-    public DateTimeImmutable $createdAt { get; }
-
-    public function with(mixed ...$properties): self;
+    public function getCreatedAt(): DateTimeImmutable;
 }

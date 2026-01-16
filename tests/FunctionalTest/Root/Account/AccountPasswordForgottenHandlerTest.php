@@ -39,7 +39,7 @@ class AccountPasswordForgottenHandlerTest extends AbstractFunctional
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
         $this->assertArrayHasKey(0, $token);
-        $this->assertInstanceOf(UuidInterface::class, $token[0]->token);
+        $this->assertInstanceOf(UuidInterface::class, $token[0]->getToken());
     }
 
     public function testDontCreateTokenForPasswordChange(): void
