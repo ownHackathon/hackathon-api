@@ -17,7 +17,7 @@ class AbstractTable implements StoreInterface
 
     public function __construct(Query $query)
     {
-        $this->table = substr(new ReflectionClass($this)->getShortName(), 0, -5);
+        $this->table = substr((new ReflectionClass($this))->getShortName(), 0, -5);
         $this->query = $query;
     }
 
