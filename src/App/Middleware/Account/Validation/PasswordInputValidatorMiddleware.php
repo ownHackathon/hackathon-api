@@ -2,18 +2,22 @@
 
 namespace ownHackathon\App\Middleware\Account\Validation;
 
-use ownHackathon\App\Validator\PasswordValidator;
-use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\Validator\PasswordValidator;
+use ownHackathon\Core\Message\ResponseMessage;
 
 readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private PasswordValidator $validator,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -24,13 +28,11 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
         $this->validator->setData($data);
 
         if (!$this->validator->isValid()) {
-            throw new HttpInvalidArgumentException(
-                'Invalid Password',
-                ResponseMessage::DATA_INVALID,
-                [
-                    'Validator Message:' => $this->validator->getMessages(),
-                ]
-            );
+            $this->logger->notice('Invalid Password', [
+                'Validator Message:' => $this->validator->getMessages(),
+            ]);
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::PASSWORD_INVALID);
+            return new JsonResponse($message, $message->statusCode);
         }
 
         return $handler->handle($request);

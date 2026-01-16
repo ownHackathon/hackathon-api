@@ -2,10 +2,12 @@
 
 namespace ownHackathon\UnitTest\AppTest\Middleware;
 
-use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use Fig\Http\Message\StatusCodeInterface;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use ownHackathon\App\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware;
+use ownHackathon\FunctionalTest\Mock\NullLogger;
 
 class AuthenticationConditionsMiddlewareTest extends AbstractTestMiddleware
 {
@@ -14,7 +16,7 @@ class AuthenticationConditionsMiddlewareTest extends AbstractTestMiddleware
     protected function setUp(): void
     {
         parent::setUp();
-        $this->middleware = new AuthenticationConditionsMiddleware();
+        $this->middleware = new AuthenticationConditionsMiddleware(new NullLogger());
     }
 
     public function testIsSuccessfull(): void
@@ -28,15 +30,29 @@ class AuthenticationConditionsMiddlewareTest extends AbstractTestMiddleware
     {
         $request = $this->request->withHeader('Authentication', []);
 
-        $this->expectException(HttpUnauthorizedException::class);
-        $this->middleware->process($request, $this->handler);
+        $response = $this->middleware->process($request, $this->handler);
+
+        $json = $this->getContentAsJson($response);
+
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertSame(StatusCodeInterface::STATUS_FORBIDDEN, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_FORBIDDEN);
+        $this->assertJsonValueEquals($json, '$.message', 'There is currently successful authentication');
     }
 
     public function testRequestIsAuthorized(): void
     {
         $request = $this->request->withHeader('Authorization', []);
 
-        $this->expectException(HttpUnauthorizedException::class);
-        $this->middleware->process($request, $this->handler);
+        $response = $this->middleware->process($request, $this->handler);
+
+        $json = $this->getContentAsJson($response);
+
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertSame(StatusCodeInterface::STATUS_FORBIDDEN, $response->getStatusCode());
+        $this->assertJsonValueEquals($json, '$.statusCode', StatusCodeInterface::STATUS_FORBIDDEN);
+        $this->assertJsonValueEquals($json, '$.message', 'There is currently successful authentication');
     }
 }

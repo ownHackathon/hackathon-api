@@ -3,20 +3,22 @@
 namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\DTO\AccountRegistrationDTO;
-use ownHackathon\App\Entity\Account;
-use ownHackathon\Core\Entity\Account\AccountActivationInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Message\ResponseMessage;
-use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Utils\UuidFactoryInterface;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
+use ownHackathon\App\DTO\AccountRegistrationDTO;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\Entity\Account;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Message\ResponseMessage;
+use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
 
 use function password_hash;
 
@@ -28,6 +30,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private AccountRepositoryInterface $accountRepository,
         private UuidFactoryInterface $uuid,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -39,26 +42,26 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         $accountData = $request->getAttribute(AccountRegistrationDTO::class);
 
         if ($activationToken === null) {
-            throw new HttpInvalidArgumentException(
-                'No activation token was passed.',
-                ResponseMessage::TOKEN_INVALID,
-                [
-                    'Token:' => $activationToken,
-                ]
-            );
+            $this->logger->notice('No activation token was passed.', [
+                'Token:' => $activationToken,
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
+
+            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
 
         /** @var null|AccountActivationInterface $persistActivationToken */
         $persistActivationToken = $this->accountActivationRepository->findByToken($activationToken);
 
         if ($persistActivationToken === null) {
-            throw new HttpInvalidArgumentException(
-                'Transferred activation key is invalid.',
-                ResponseMessage::TOKEN_INVALID,
-                [
-                    'Invalid activation token:' => $activationToken,
-                ]
-            );
+            $this->logger->notice('Transferred activation key is invalid.', [
+                'Invalid activation token:' => $activationToken,
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::TOKEN_INVALID);
+
+            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
 
         $account = new Account(
@@ -74,14 +77,14 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         try {
             $this->accountRepository->insert($account);
         } catch (DuplicateEntryException $e) {
-            throw new HttpDuplicateEntryException(
-                'Account has already been created.',
-                ResponseMessage::DATA_INVALID,
-                [
-                    'E-Mail' => $account->getEmail()->toString(),
-                    'Exception Message:' => $e->getMessage(),
-                ]
-            );
+            $this->logger->notice('Account has already been created.', [
+                'E-Mail' => $account->getEmail()->toString(),
+                'Exception Message:' => $e->getMessage(),
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+
+            return new JsonResponse($message, HTTP::STATUS_BAD_REQUEST);
         }
 
         $this->accountActivationRepository->deleteById($persistActivationToken->getId());

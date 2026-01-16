@@ -3,24 +3,27 @@
 namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
 use DateTimeImmutable;
-use ownHackathon\App\DTO\ClientIdentification;
-use ownHackathon\App\DTO\RefreshToken;
-use ownHackathon\App\Entity\AccountAccessAuth;
-use ownHackathon\Core\Entity\Account\AccountInterface;
-use ownHackathon\Core\Exception\DuplicateEntryException;
-use ownHackathon\Core\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Message\ResponseMessage;
-use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
+use ownHackathon\App\DTO\ClientIdentification;
+use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\RefreshToken;
+use ownHackathon\App\Entity\AccountAccessAuth;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Message\ResponseMessage;
+use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 
 readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountAccessAuthRepositoryInterface $repository,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -37,18 +40,17 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 
         // @phpstan-ignore-next-line
         if ($account === null || $clientIdent === null || $refreshToken === null) {
-            throw new HttpUnauthorizedException(
-                'Authentication could not be permanently stored due to missing data.',
-                ResponseMessage::DATA_INVALID,
-                [
-                    // @phpstan-ignore-next-line
-                    'Account:' => isset($account) ? $account->getEMail() : null,
-                    // @phpstan-ignore-next-line
-                    'Client ID:' => $clientIdent ? $clientIdent->identificationHash : null,
-                    // @phpstan-ignore-next-line
-                    'Refresh Token:' => $refreshToken ? 'placed' : null,
-                ]
-            );
+            $this->logger->notice('Authentication could not be permanently stored due to missing data.', [
+                // @phpstan-ignore-next-line
+                'Account:' => isset($account) ? $account->getEMail() : null,
+                // @phpstan-ignore-next-line
+                'Client ID:' => $clientIdent ? $clientIdent->identificationHash : null,
+                // @phpstan-ignore-next-line
+                'Refresh Token:' => $refreshToken ? 'placed' : null,
+            ]);
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+
+            return new JsonResponse($message, $message->statusCode);
         }
 
         $accountAccessAuth = new AccountAccessAuth(
@@ -63,15 +65,15 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
         try {
             $this->repository->insert($accountAccessAuth);
         } catch (DuplicateEntryException $e) {
-            throw new HttpDuplicateEntryException(
-                'Login is not possible due to a duplicate login from the same source.',
-                ResponseMessage::DATA_INVALID,
-                [
-                    'Account' => $account->getName(),
-                    'ClientID' => $clientIdent->identificationHash,
-                    'ErrorMessage' => $e->getMessage(),
-                ],
-            );
+            $this->logger->warning('Login is not possible due to a duplicate login from the same source.', [
+                'Account' => $account->getName(),
+                'ClientID' => $clientIdent->identificationHash,
+                'ErrorMessage' => $e->getMessage(),
+            ]);
+
+            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+
+            return new JsonResponse($message, $message->statusCode);
         }
 
         return $handler->handle($request);

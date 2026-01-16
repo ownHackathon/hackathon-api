@@ -37,5 +37,10 @@ return [
             'uuid' => UuidFactory::class,
             'mailer' => MailFactory::class,
         ],
+        'delegators' => [
+            ErrorHandler::class => [
+                LoggingErrorListenerDelegatorFactory::class,
+            ],
+        ],
     ],
 ];
