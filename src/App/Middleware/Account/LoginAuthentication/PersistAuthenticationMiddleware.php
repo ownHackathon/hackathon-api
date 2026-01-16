@@ -53,7 +53,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 
         $accountAccessAuth = new AccountAccessAuth(
             1,
-            $account->id    ,
+            $account->id,
             'default',
             $refreshToken->refreshToken,
             $clientIdent->clientIdentificationData->userAgent,
