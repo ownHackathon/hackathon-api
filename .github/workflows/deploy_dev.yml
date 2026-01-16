@@ -10,7 +10,7 @@ jobs:
     name: PHP Quality Checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v5
 
       - name: Setup Environment
         uses: ./.github/actions/setup-php-composer
@@ -54,7 +54,7 @@ jobs:
       DB_HOST: 127.0.0.1
       APP_ENV: action
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v5
       - name: Setup Environment
         uses: ./.github/actions/setup-php-composer
 
@@ -78,7 +78,7 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v5
 
       - name: Setup Environment (No Dev)
         uses: ./.github/actions/setup-php-composer
@@ -89,7 +89,7 @@ jobs:
         run: composer run-script openapi
 
       - name: Deploy via rsync
-        uses: burnett01/rsync-deployments@8.0.3
+        uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avz --no-o --no-g --no-perms --no-t --omit-dir-times --delete --exclude-from='.rsync-exclude'
           remote_path: ${{ secrets.DEPLOY_PATH_API_DEV }}
