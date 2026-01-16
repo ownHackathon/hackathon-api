@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Validator;
+namespace App\Validator;
 
 use DateTime;
 use Exception;

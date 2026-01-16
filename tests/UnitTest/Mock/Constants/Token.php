@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Constants;
+namespace UnitTest\Mock\Constants;
 
 class Token
 {

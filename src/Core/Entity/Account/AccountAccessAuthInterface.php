@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Entity\Account;
+namespace Core\Entity\Account;
 
 use DateTimeImmutable;
 

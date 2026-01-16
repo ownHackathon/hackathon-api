@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root\Account;
+namespace FunctionalTest\Root\Account;
 
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\App\Entity\Account\AccountActivation;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\Core\Utils\UuidFactoryInterface;
-use ownHackathon\FunctionalTest\AbstractFunctional;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use App\Entity\Account\AccountActivation;
+use Core\Enum\Message\StatusMessage;
+use Core\Enum\DataType;
+use Core\Repository\AccountActivationRepositoryInterface;
+use Core\Type\Email;
+use Core\Utils\UuidFactoryInterface;
+use FunctionalTest\AbstractFunctional;
+use UnitTest\JsonRequestHelper;
 use PHPUnit\Framework\Assert;
 
 class AccountActivationHandlerTest extends AbstractFunctional

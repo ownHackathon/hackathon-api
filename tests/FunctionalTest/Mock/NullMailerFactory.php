@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Mock;
+namespace FunctionalTest\Mock;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;

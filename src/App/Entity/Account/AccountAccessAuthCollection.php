@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Entity\Account;
+namespace App\Entity\Account;
 
 use InvalidArgumentException;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
-use ownHackathon\Core\Utils\Collection;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Entity\Account\AccountAccessAuthInterface;
+use Core\Utils\Collection;
 
 use function get_class;
 use function sprintf;

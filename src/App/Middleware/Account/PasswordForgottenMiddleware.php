@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Middleware\Account;
+namespace App\Middleware\Account;
 
 use Monolog\Level;
-use ownHackathon\App\Service\Account\AccountService;
-use ownHackathon\Core\Enum\Message\LogMessage;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Type\Email;
+use App\Service\Account\AccountService;
+use Core\Enum\Message\LogMessage;
+use Core\Enum\Message\StatusMessage;
+use Core\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

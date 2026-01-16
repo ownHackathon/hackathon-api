@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\Mock\Table;
+namespace UnitTest\Mock\Table;
 
-use ownHackathon\App\Hydrator\AccountAccessAuthHydrator;
-use ownHackathon\App\Table\AccountAccessAuthTable;
-use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
-use ownHackathon\UnitTest\Mock\Database\MockQuery;
+use App\Hydrator\AccountAccessAuthHydrator;
+use App\Table\AccountAccessAuthTable;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Store\AccountAccessAuthStoreInterface;
+use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountAccessAuthTableFailed extends AccountAccessAuthTable implements AccountAccessAuthStoreInterface
 {

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Entity\Account;
+namespace Core\Entity\Account;
 
-use ownHackathon\App\Entity\Account\Account;
-use ownHackathon\Core\Utils\CollectionInterface;
+use App\Entity\Account\Account;
+use Core\Utils\CollectionInterface;
 
 /**
  * @method Account offsetGet(mixed $offset)

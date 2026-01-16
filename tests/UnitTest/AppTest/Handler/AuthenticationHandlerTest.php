@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Handler;
+namespace UnitTest\AppTest\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use ownHackathon\App\DTO\Token\AccessToken;
-use ownHackathon\App\DTO\Token\RefreshToken;
-use ownHackathon\App\Handler\Account\AuthenticationHandler;
-use ownHackathon\UnitTest\Mock\Constants\Token;
+use App\DTO\Token\AccessToken;
+use App\DTO\Token\RefreshToken;
+use App\Handler\Account\AuthenticationHandler;
+use UnitTest\Mock\Constants\Token;
 
 use function json_decode;
 use function property_exists;

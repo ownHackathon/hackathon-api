@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root\Account;
+namespace FunctionalTest\Root\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use Ramsey\Uuid\UuidInterface;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Repository\TokenRepositoryInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\FunctionalTest\AbstractFunctional;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\TokenRepositoryInterface;
+use Core\Type\Email;
+use FunctionalTest\AbstractFunctional;
+use UnitTest\JsonRequestHelper;
 
 class AccountPasswordForgottenHandlerTest extends AbstractFunctional
 {

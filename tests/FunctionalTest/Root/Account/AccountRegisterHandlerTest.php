@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root\Account;
+namespace FunctionalTest\Root\Account;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\Core\Entity\Account\AccountActivationInterface;
-use ownHackathon\Core\Entity\Token\TokenInterface;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Enum\DataType;
-use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Repository\TokenRepositoryInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\FunctionalTest\AbstractFunctional;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use Core\Entity\Account\AccountActivationInterface;
+use Core\Entity\Token\TokenInterface;
+use Core\Enum\Message\StatusMessage;
+use Core\Enum\DataType;
+use Core\Repository\AccountActivationRepositoryInterface;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\TokenRepositoryInterface;
+use Core\Type\Email;
+use FunctionalTest\AbstractFunctional;
+use UnitTest\JsonRequestHelper;
 use PHPUnit\Framework\Assert;
 
 class AccountRegisterHandlerTest extends AbstractFunctional

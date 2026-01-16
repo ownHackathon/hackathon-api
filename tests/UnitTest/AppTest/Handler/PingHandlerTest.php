@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\UnitTest\AppTest\Handler;
+namespace UnitTest\AppTest\Handler;
 
-use ownHackathon\App\Handler\PingHandler;
+use App\Handler\PingHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;

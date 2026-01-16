@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-use Laminas\Stratigility\Middleware\ErrorHandler;
-use ownHackathon\Core\Factory\DatabaseFactory;
-use ownHackathon\Core\Factory\MailFactory;
-use ownHackathon\Core\Factory\QueryFactory;
-use ownHackathon\Core\Factory\UuidFactory;
-use ownHackathon\Core\Listener\LoggingErrorListenerDelegatorFactory;
-use ownHackathon\Core\Logger\LoggerFactory;
+use Core\Utils\UuidFactoryInterface;
+use Core\Factory\DatabaseFactory;
+use Core\Factory\MailFactory;
+use Core\Factory\QueryFactory;
+use Core\Factory\UuidFactory;
+use Core\Logger\LoggerFactory;
 
 return [
     // Provides application-wide services.
@@ -21,7 +20,7 @@ return [
             PDO::class => 'database',
             Envms\FluentPDO\Query::class => 'query',
             Psr\Log\LoggerInterface::class => 'logger',
-            ownHackathon\Core\Utils\UuidFactoryInterface::class => 'uuid',
+            UuidFactoryInterface::class => 'uuid',
             Symfony\Component\Mailer\MailerInterface::class => 'mailer',
         ],
         // Use 'invokables' for constructor-less services, or services that do

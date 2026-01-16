@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root\Account;
+namespace FunctionalTest\Root\Account;
 
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\App\Entity\Account\Account;
-use ownHackathon\App\Entity\Token\Token;
-use ownHackathon\Core\Enum\TokenType;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Repository\TokenRepositoryInterface;
-use ownHackathon\Core\Type\Email;
-use ownHackathon\Core\Utils\UuidFactoryInterface;
-use ownHackathon\FunctionalTest\AbstractFunctional;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use App\Entity\Account\Account;
+use App\Entity\Token\Token;
+use Core\Enum\TokenType;
+use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\TokenRepositoryInterface;
+use Core\Type\Email;
+use Core\Utils\UuidFactoryInterface;
+use FunctionalTest\AbstractFunctional;
+use UnitTest\JsonRequestHelper;
 
 use function password_verify;
 

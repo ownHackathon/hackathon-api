@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root;
+namespace FunctionalTest\Root;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Helmich\Psr7Assert\Psr7Assertions;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use ownHackathon\FunctionalTest\AbstractFunctional;
+use FunctionalTest\AbstractFunctional;
 
 class PingHandlerTest extends AbstractFunctional
 {

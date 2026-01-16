@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\DTO\Token;
+namespace App\DTO\Token;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Enum\DataType;
+use Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class AccessToken

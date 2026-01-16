@@ -1,23 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\FunctionalTest\Root\Account;
+namespace FunctionalTest\Root\Account;
 
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\App\DTO\Client\ClientIdentification;
-use ownHackathon\App\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Entity\Account\AccountAccessAuth;
-use ownHackathon\App\Repository\AccountAccessAuthRepository;
-use ownHackathon\App\Repository\AccountRepository;
-use ownHackathon\App\Service\ClientIdentification\ClientIdentificationService;
-use ownHackathon\App\Service\Token\AccessTokenService;
-use ownHackathon\App\Service\Token\RefreshTokenService;
-use ownHackathon\Core\Enum\Message\StatusMessage;
-use ownHackathon\Core\Repository\AccountRepositoryInterface;
-use ownHackathon\FunctionalTest\AbstractFunctional;
-use ownHackathon\UnitTest\JsonRequestHelper;
+use App\DTO\Client\ClientIdentification;
+use App\DTO\Client\ClientIdentificationData;
+use App\Entity\Account\AccountAccessAuth;
+use App\Repository\AccountAccessAuthRepository;
+use App\Repository\AccountRepository;
+use App\Service\ClientIdentification\ClientIdentificationService;
+use App\Service\Token\AccessTokenService;
+use App\Service\Token\RefreshTokenService;
+use Core\Enum\Message\StatusMessage;
+use Core\Repository\AccountRepositoryInterface;
+use FunctionalTest\AbstractFunctional;
+use UnitTest\JsonRequestHelper;
 use PDO;
 use PHPUnit\Framework\Assert;
 

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Hydrator;
+namespace App\Hydrator;
 
 use DateTimeImmutable;
-use ownHackathon\App\Entity\Account\AccountActivation;
-use ownHackathon\App\Entity\Account\AccountActivationCollection;
-use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
-use ownHackathon\Core\Entity\Account\AccountActivationInterface;
-use ownHackathon\Core\Enum\DateTimeFormat;
-use ownHackathon\Core\Type\Email;
+use App\Entity\Account\AccountActivation;
+use App\Entity\Account\AccountActivationCollection;
+use Core\Entity\Account\AccountActivationCollectionInterface;
+use Core\Entity\Account\AccountActivationInterface;
+use Core\Enum\DateTimeFormat;
+use Core\Type\Email;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountActivationHydrator implements AccountActivationHydratorInterface
