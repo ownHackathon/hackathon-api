@@ -8,14 +8,14 @@ use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get(
-        path: '/api/ping[/]',
+        path: '/ping[/]',
         middleware: [
             App\Handler\PingHandler::class,
         ],
         name: RouteName::PING
     );
     $app->get(
-        path: '/api/token/refresh[/]',
+        path: '/token/refresh[/]',
         middleware: [
             App\Middleware\Token\RefreshTokenValidationMiddleware::class,
             App\Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class,
@@ -27,7 +27,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         name: RouteName::ACCESS_TOKEN_REFRESH
     );
     $app->post(
-        path: '/api/account/authentication[/]',
+        path: '/account/authentication[/]',
         middleware: [
             App\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class,
             App\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class,
@@ -41,7 +41,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->post(
-        path: '/api/account',
+        path: '/account',
         middleware: [
             App\Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
             App\Middleware\Account\RegisterMiddleware::class,
@@ -51,7 +51,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->post(
-        path: '/api/account/activation/[{token}[/]]',
+        path: '/account/activation/[{token}[/]]',
         middleware: [
             App\Middleware\Account\Validation\ActivationInputValidatorMiddleware::class,
             App\Middleware\Account\ActivationMiddleware::class,
@@ -61,7 +61,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->post(
-        path: '/api/account/password/forgotten[/]',
+        path: '/account/password/forgotten[/]',
         middleware: [
             App\Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
             App\Middleware\Account\PasswordForgottenMiddleware::class,
@@ -71,7 +71,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->patch(
-        path: '/api/account/password/[{token}[/]]',
+        path: '/account/password/[{token}[/]]',
         middleware: [
             App\Middleware\Account\Validation\PasswordInputValidatorMiddleware::class,
             App\Middleware\Account\PasswordChangeMiddleware::class,
@@ -81,7 +81,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->get(
-        path: '/api/account/logout',
+        path: '/account/logout',
         middleware: [
             App\Middleware\Token\AccessTokenValidationMiddleware::class,
             App\Middleware\Account\LogoutMiddleware::class,
