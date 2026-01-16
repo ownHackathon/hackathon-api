@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Utils;
+namespace ownHackathon\Core\Utils;
 
 use Closure;
-use Core\Exception\UndefinedOffsetException;
+use ownHackathon\Core\Exception\UndefinedOffsetException;
 
 use function array_filter;
 use function array_pop;

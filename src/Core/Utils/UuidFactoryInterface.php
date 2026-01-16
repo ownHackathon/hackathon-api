@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Utils;
+namespace ownHackathon\Core\Utils;
 
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;

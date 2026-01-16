@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO\Token;
+namespace ownHackathon\App\DTO\Token;
 
 use OpenApi\Attributes as OA;
-use Core\Enum\DataType;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class RefreshToken

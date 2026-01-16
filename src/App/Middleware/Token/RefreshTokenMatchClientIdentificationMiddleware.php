@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Token;
+namespace ownHackathon\App\Middleware\Token;
 
 use Monolog\Level;
-use App\DTO\Client\ClientIdentification;
-use App\Entity\Account\AccountAccessAuth;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpUnauthorizedException;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\Entity\Account\AccountAccessAuth;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Repository;
+namespace ownHackathon\App\Repository;
 
-use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
-use Core\Store\AccountAccessAuthStoreInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\Core\Store\AccountAccessAuthStoreInterface;
 
 readonly class AccountAccessAuthRepository implements AccountAccessAuthRepositoryInterface
 {

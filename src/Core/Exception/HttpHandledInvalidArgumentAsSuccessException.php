@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Core\Exception;
+namespace ownHackathon\Core\Exception;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Monolog\Level;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
 use Throwable;
 
 final class HttpHandledInvalidArgumentAsSuccessException extends HttpException

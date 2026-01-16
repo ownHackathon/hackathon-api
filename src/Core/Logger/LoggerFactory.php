@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Logger;
+namespace ownHackathon\Core\Logger;
 
 use DateTime;
 use Monolog\Formatter\LineFormatter;

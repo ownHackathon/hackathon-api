@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account\LoginAuthentication;
+namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
 use DateTimeImmutable;
 use Monolog\Level;
-use App\Service\Authentication\AuthenticationService;
-use Core\Entity\Account\AccountInterface;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Type\Email;
+use ownHackathon\App\Service\Authentication\AuthenticationService;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Type\Email;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\DTO\Response;
+namespace ownHackathon\App\DTO\Response;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use OpenApi\Attributes as OA;
-use Core\Enum\Message\StatusMessage;
-use Core\Enum\DataType;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Enum\DataType;
 
 #[OA\Schema()]
 readonly class HttpResponseMessage

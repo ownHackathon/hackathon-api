@@ -1,21 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Middleware;
+namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Client\ClientIdentificationData;
-use App\DTO\Token\RefreshToken;
-use App\Hydrator\AccountHydrator;
-use App\Hydrator\AccountHydratorInterface;
-use App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
-use Core\Entity\Account\AccountInterface;
-use Core\Exception\HttpDuplicateEntryException;
-use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
-use Core\Utils\UuidFactory;
-use UnitTest\Mock\Constants\Account;
-use UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Client\ClientIdentificationData;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\Hydrator\AccountHydrator;
+use ownHackathon\App\Hydrator\AccountHydratorInterface;
+use ownHackathon\App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\Core\Utils\UuidFactory;
+use ownHackathon\UnitTest\Mock\Constants\Account;
+use ownHackathon\UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
 
 class AccountAccessAuthPersistMiddlewareTest extends AbstractTestMiddleware
 {

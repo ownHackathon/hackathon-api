@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Core\Store;
+namespace ownHackathon\Core\Store;
 
-use Core\Entity\Account\AccountActivationCollectionInterface;
-use Core\Entity\Account\AccountActivationInterface;
-use Core\Type\Email;
+use ownHackathon\Core\Entity\Account\AccountActivationCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Type\Email;
 
 interface AccountActivationStoreInterface extends StoreInterface
 {

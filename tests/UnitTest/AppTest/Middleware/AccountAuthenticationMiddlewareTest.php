@@ -1,21 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Middleware;
+namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use App\Middleware\Account\RequestAuthenticationMiddleware;
-use App\Service\Token\AccessTokenService;
-use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Utils\UuidFactory;
-use Core\Utils\UuidFactoryInterface;
-use FunctionalTest\Mock\NullLogger;
-use UnitTest\Mock\Constants\Account;
-use UnitTest\Mock\MockAccountAuthenticationMiddlewareRequestHandler;
-use UnitTest\Mock\Repository\MockAccountRepository;
-use UnitTest\Mock\Repository\MockAccountRepositoryAccountAuthenticationMiddlewareInvalidToken;
-use UnitTest\Mock\Service\MockAccessTokenService;
-use UnitTest\Mock\Service\MockAccessTokenServiceWithoutDuration;
+use ownHackathon\App\Middleware\Account\RequestAuthenticationMiddleware;
+use ownHackathon\App\Service\Token\AccessTokenService;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Utils\UuidFactory;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
+use ownHackathon\FunctionalTest\Mock\NullLogger;
+use ownHackathon\UnitTest\Mock\Constants\Account;
+use ownHackathon\UnitTest\Mock\MockAccountAuthenticationMiddlewareRequestHandler;
+use ownHackathon\UnitTest\Mock\Repository\MockAccountRepository;
+use ownHackathon\UnitTest\Mock\Repository\MockAccountRepositoryAccountAuthenticationMiddlewareInvalidToken;
+use ownHackathon\UnitTest\Mock\Service\MockAccessTokenService;
+use ownHackathon\UnitTest\Mock\Service\MockAccessTokenServiceWithoutDuration;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Validator\Input;
+namespace ownHackathon\App\Validator\Input;
 
 use Laminas\InputFilter\Input;
 use Laminas\Validator\Hostname;

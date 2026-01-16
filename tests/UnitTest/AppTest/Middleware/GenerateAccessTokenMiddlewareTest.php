@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Middleware;
+namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use App\Middleware\Token\GenerateAccessTokenMiddleware;
-use Core\Entity\Account\AccountInterface;
-use UnitTest\Mock\Entity\MockAccount;
-use UnitTest\Mock\Service\MockAccessTokenService;
+use ownHackathon\App\Middleware\Token\GenerateAccessTokenMiddleware;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\UnitTest\Mock\Entity\MockAccount;
+use ownHackathon\UnitTest\Mock\Service\MockAccessTokenService;
 
 class GenerateAccessTokenMiddlewareTest extends AbstractTestMiddleware
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Table;
+namespace ownHackathon\App\Table;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
 use ReflectionClass;
-use Core\Store\StoreInterface;
+use ownHackathon\Core\Store\StoreInterface;
 
 use function substr;
 

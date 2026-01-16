@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\CoreTest\Factory;
+namespace ownHackathon\UnitTest\CoreTest\Factory;
 
 use Envms\FluentPDO\Query;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Core\Factory\QueryFactory;
-use UnitTest\Mock\Database\MockPDO;
-use UnitTest\Mock\MockContainer;
+use ownHackathon\Core\Factory\QueryFactory;
+use ownHackathon\UnitTest\Mock\Database\MockPDO;
+use ownHackathon\UnitTest\Mock\MockContainer;
 
 class QueryFactoryTest extends TestCase
 {

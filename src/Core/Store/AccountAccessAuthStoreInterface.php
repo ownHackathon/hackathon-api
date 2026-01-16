@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Store;
+namespace ownHackathon\Core\Store;
 
-use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Entity\Account\AccountAccessAuthInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountAccessAuthInterface;
 
 interface AccountAccessAuthStoreInterface extends StoreInterface
 {

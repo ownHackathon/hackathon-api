@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Type;
+namespace ownHackathon\Core\Type;
 
 use JsonSerializable;
 use Serializable;

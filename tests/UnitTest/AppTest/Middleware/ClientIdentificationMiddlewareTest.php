@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Middleware;
+namespace ownHackathon\UnitTest\AppTest\Middleware;
 
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use UnitTest\Mock\Service\MockClientIdentificationService;
+use ownHackathon\App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use ownHackathon\UnitTest\Mock\Service\MockClientIdentificationService;
 
 class ClientIdentificationMiddlewareTest extends AbstractTestMiddleware
 {

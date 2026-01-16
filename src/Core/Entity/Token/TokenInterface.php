@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Entity\Token;
+namespace ownHackathon\Core\Entity\Token;
 
 use DateTimeImmutable;
-use Core\Enum\TokenType;
+use ownHackathon\Core\Enum\TokenType;
 use Ramsey\Uuid\UuidInterface;
 
 interface TokenInterface

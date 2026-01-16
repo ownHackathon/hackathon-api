@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account\LoginAuthentication;
+namespace ownHackathon\App\Middleware\Account\LoginAuthentication;
 
 use DateTimeImmutable;
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Token\RefreshToken;
-use App\Entity\Account\AccountAccessAuth;
-use Core\Entity\Account\AccountInterface;
-use Core\Enum\Message\LogMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\DuplicateEntryException;
-use Core\Exception\HttpDuplicateEntryException;
-use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Token\RefreshToken;
+use ownHackathon\App\Entity\Account\AccountAccessAuth;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Enum\Message\LogMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\DuplicateEntryException;
+use ownHackathon\Core\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Repository\AccountAccessAuthRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

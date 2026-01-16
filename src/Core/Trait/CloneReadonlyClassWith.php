@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Trait;
+namespace ownHackathon\Core\Trait;
 
 /**
  * @see https://github.com/spatie/php-cloneable/

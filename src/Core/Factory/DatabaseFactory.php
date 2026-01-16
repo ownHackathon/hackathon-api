@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Factory;
+namespace ownHackathon\Core\Factory;
 
 use PDO;
 use Psr\Container\ContainerExceptionInterface;

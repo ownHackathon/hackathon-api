@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Core\Factory;
+namespace ownHackathon\Core\Factory;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Monolog\Level;
-use App\DTO\Response\HttpResponseMessage;
-use Core\Enum\Message\StatusMessage;
-use Core\Exception\HttpException;
+use ownHackathon\App\DTO\Response\HttpResponseMessage;
+use ownHackathon\Core\Enum\Message\StatusMessage;
+use ownHackathon\Core\Exception\HttpException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

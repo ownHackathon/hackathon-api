@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Service;
+namespace ownHackathon\UnitTest\AppTest\Service;
 
 use DomainException;
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Client\ClientIdentificationData;
-use App\DTO\Token\JwtTokenConfig;
-use App\Service\Token\RefreshTokenService;
-use UnitTest\Mock\Constants\Token;
+use ownHackathon\App\DTO\Client\ClientIdentification;
+use ownHackathon\App\DTO\Client\ClientIdentificationData;
+use ownHackathon\App\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\Service\Token\RefreshTokenService;
+use ownHackathon\UnitTest\Mock\Constants\Token;
 use PHPUnit\Framework\TestCase;
 
 class RefreshTokenServiceTest extends TestCase

@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace FunctionalTest\Root\Account;
+namespace ownHackathon\FunctionalTest\Root\Account;
 
-use App\Service\Token\AccessTokenService;
-use App\Service\Token\RefreshTokenService;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
-use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
+use ownHackathon\App\Service\Token\AccessTokenService;
+use ownHackathon\App\Service\Token\RefreshTokenService;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Type\Email;
+use ownHackathon\Core\Utils\UuidFactoryInterface;
+use ownHackathon\FunctionalTest\AbstractFunctional;
+use ownHackathon\UnitTest\JsonRequestHelper;
+use ownHackathon\UnitTest\Mock\Constants\Account;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use UnitTest\JsonRequestHelper;
-use UnitTest\Mock\Constants\Account;
 
 use function password_hash;
 use function rand;
@@ -111,7 +111,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         /** @var UuidFactoryInterface $uuid */
         $uuid = $this->container->get(UuidFactoryInterface::class);
 
-        $account = new \App\Entity\Account\Account(
+        $account = new \ownHackathon\App\Entity\Account\Account(
             null,
             $uuid->uuid7(),
             'I see your Token',

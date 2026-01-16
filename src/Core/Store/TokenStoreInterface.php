@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Core\Store;
+namespace ownHackathon\Core\Store;
 
-use Core\Entity\Token\TokenCollectionInterface;
-use Core\Entity\Token\TokenInterface;
+use ownHackathon\Core\Entity\Token\TokenCollectionInterface;
+use ownHackathon\Core\Entity\Token\TokenInterface;
 
 interface TokenStoreInterface extends StoreInterface
 {

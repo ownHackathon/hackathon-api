@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\AppTest\Service;
+namespace ownHackathon\UnitTest\AppTest\Service;
 
 use PHPUnit\Framework\TestCase;
-use App\Service\Authentication\AuthenticationService;
-use UnitTest\Mock\Constants\Account;
+use ownHackathon\App\Service\Authentication\AuthenticationService;
+use ownHackathon\UnitTest\Mock\Constants\Account;
 
 class AuthenticationServiceTest extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Core\Store;
+namespace ownHackathon\Core\Store;
 
 use Ramsey\Uuid\UuidInterface;
-use Core\Entity\Account\AccountCollectionInterface;
-use Core\Entity\Account\AccountInterface;
-use Core\Type\Email;
+use ownHackathon\Core\Entity\Account\AccountCollectionInterface;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Type\Email;
 
 interface AccountStoreInterface extends StoreInterface
 {

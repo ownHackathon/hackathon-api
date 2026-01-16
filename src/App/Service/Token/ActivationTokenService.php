@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Service\Token;
+namespace ownHackathon\App\Service\Token;
 
-use Core\Entity\Account\AccountActivationInterface;
+use ownHackathon\Core\Entity\Account\AccountActivationInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 

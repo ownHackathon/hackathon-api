@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Middleware\Account;
+namespace ownHackathon\App\Middleware\Account;
 
 use DateTimeImmutable;
-use Core\Entity\Account\AccountInterface;
-use Core\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Repository\AccountRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

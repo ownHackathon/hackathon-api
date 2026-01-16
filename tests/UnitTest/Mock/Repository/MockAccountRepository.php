@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Repository;
+namespace ownHackathon\UnitTest\Mock\Repository;
 
-use App\Repository\AccountRepository;
-use UnitTest\Mock\Table\MockAccountTable;
+use ownHackathon\App\Repository\AccountRepository;
+use ownHackathon\UnitTest\Mock\Table\MockAccountTable;
 
 readonly class MockAccountRepository extends AccountRepository
 {

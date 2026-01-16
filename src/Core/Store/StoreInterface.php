@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Core\Store;
+namespace ownHackathon\Core\Store;
 
 interface StoreInterface
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock\Database;
+namespace ownHackathon\UnitTest\Mock\Database;
 
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Query;
 use PDO;
-use UnitTest\Mock\Constants\Account;
-use UnitTest\Mock\Constants\AccountAccessAuth;
+use ownHackathon\UnitTest\Mock\Constants\Account;
+use ownHackathon\UnitTest\Mock\Constants\AccountAccessAuth;
 
 use function array_key_exists;
 

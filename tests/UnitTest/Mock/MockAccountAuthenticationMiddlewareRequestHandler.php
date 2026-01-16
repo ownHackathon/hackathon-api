@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace UnitTest\Mock;
+namespace ownHackathon\UnitTest\Mock;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Core\Entity\Account\AccountInterface;
+use ownHackathon\Core\Entity\Account\AccountInterface;
 
 class MockAccountAuthenticationMiddlewareRequestHandler implements RequestHandlerInterface
 {
