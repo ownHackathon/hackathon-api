@@ -6,6 +6,7 @@ DOCKER_COMPOSE="docker compose"
 
 # --- Hilfsfunktionen (Provisioning) ---
 
+# Hilfsfunktion für Statusmeldungen
 log() { echo -e "\033[0;32m[INFO]\033[0m $1"; }
 
 # 1. Startet die Container
@@ -14,13 +15,7 @@ up() {
     $DOCKER_COMPOSE up -d
 }
 
-# 2. Beendet und entfernt Container & Netzwerke (behält Volumes)
-down() {
-    log "Fahre Container herunter und entferne Netzwerke..."
-    $DOCKER_COMPOSE down
-}
-
-# 3. Installiert Abhängigkeiten (nur wenn nötig oder erzwungen)
+# 2. Installiert Abhängigkeiten (nur wenn nötig oder erzwungen)
 install_deps() {
     if [ ! -d "./vendor" ] || [ "$1" == "--force" ]; then
         log "Installiere PHP-Abhängigkeiten..."
@@ -28,7 +23,7 @@ install_deps() {
     fi
 }
 
-# 4. Bereitet die Datenbank vor (Warten + Migrationen)
+# 3. Bereitet die Datenbank vor (Warten + Migrationen)
 migrate_db() {
     log "Warte auf Datenbank..."
     $DOCKER_COMPOSE exec $CONTAINER_PHP php -r "
@@ -38,7 +33,7 @@ migrate_db() {
                 new PDO('mysql:host=db;port=3306', 'root', 'root');
                 break;
             } catch (Exception \$e) {
-                if (time() - \$start > 30) { echo 'Timeout!'; exit(1); }
+                if (time() - \$start > 30) exit(1);
                 echo '.'; sleep(1);
             }
         }"
@@ -48,18 +43,11 @@ migrate_db() {
     $DOCKER_COMPOSE exec $CONTAINER_PHP composer run doctrine migrations:migrate -- --no-interaction
 }
 
-generate_openapi() {
-    log "Generiere OpenAPI Dokumentation..."
-    $DOCKER_COMPOSE exec $CONTAINER_PHP composer run openapi
-}
-
-
-# Bau-Kette
+# Die "Bau-Kette" (wird von setup und reset genutzt)
 build_stack() {
     up
     install_deps "$1"
     migrate_db
-    generate_openapi
 }
 
 # --- Command Handler ---
@@ -70,21 +58,12 @@ case $1 in
     ;;
 
   "stop")
-    log "Stoppe Container (Pause)..."
     $DOCKER_COMPOSE stop
-    ;;
-
-  "down")
-    down
     ;;
 
   "setup")
     build_stack
     ;;
-
-   "openapi")
-      generate_openapi
-      ;;
 
   "reset")
     log "Reset-Vorgang gestartet..."
@@ -109,6 +88,7 @@ case $1 in
         ;;
     esac
 
+    # Nach dem Abbau folgt immer der identische Aufbau
     build_stack $FORCE_FLAG
     log "Reset erfolgreich abgeschlossen."
     ;;
@@ -117,39 +97,16 @@ case $1 in
     $DOCKER_COMPOSE exec $CONTAINER_PHP composer "${@:2}"
     ;;
 
-  "php")
-      # Hier wird 'php' automatisch vorangestellt
-      $DOCKER_COMPOSE exec $CONTAINER_PHP php "${@:2}"
-      ;;
-
-  "indocker")
-      # Hier wird der Befehl 1:1 durchgereicht
-      $DOCKER_COMPOSE exec $CONTAINER_PHP "${@:2}"
-      ;;
+  "php"|"indocker")
+    $DOCKER_COMPOSE exec $CONTAINER_PHP "${@:2}"
+    ;;
 
   *)
-      echo "Usage: $0 {start|stop|down|setup|reset|openapi|composer|php|indocker}"
-      echo ""
-      echo "Commands:"
-      echo "  start          - Start containers"
-      echo "  stop           - Stop containers (pause)"
-      echo "  down           - Remove containers & networks"
-      echo "  setup          - Prepare project (install, migrate & generate openapi)"
-      echo "  openapi        - Regenerate API documentation"
-      echo ""
-      echo "Reset Options:"
-      echo "  reset          - Delete database only"
-      echo "  reset vendor   - Delete database & vendor/ folder"
-      echo "  reset all      - Delete everything (volumes, local images, vendor/)"
-      echo ""
-      echo "Utility Commands (inside PHP container):"
-      echo "  composer [...] - Execute Composer commands"
-      echo "                   Ex: $0 composer install"
-      echo "  php [...]      - Execute PHP scripts/commands (prefixes 'php')"
-      echo "                   Ex: $0 php bin/console cache:clear"
-      echo "                   Ex: $0 php -v"
-      echo "  indocker [...] - Execute any system command in the container"
-      echo "                   Ex: $0 indocker ls -la"
-      exit 1
-      ;;
+    echo "Verwendung: $0 {start|stop|setup|reset|composer|php}"
+    echo ""
+    echo "Reset-Optionen:"
+    echo "  $0 reset          -> Löscht nur DB-Daten (behält Images & Vendor)"
+    echo "  $0 reset vendor   -> Löscht DB-Daten & Vendor-Ordner"
+    echo "  $0 reset all      -> Löscht ALLES (Volumes, lokale Images, Vendor)"
+    ;;
 esac
