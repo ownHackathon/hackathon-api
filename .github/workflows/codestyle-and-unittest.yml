@@ -16,7 +16,7 @@ jobs:
     name: PHP Quality Checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v5
 
       - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
@@ -64,7 +64,7 @@ jobs:
       DB_PORT: 3306
       APP_ENV: action
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v5
 
       - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
