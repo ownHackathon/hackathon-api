@@ -73,6 +73,7 @@
         "laminas/laminas-servicemanager": "^3.10",
         "laminas/laminas-stdlib": "^3.6.0",
         "laminas/laminas-validator": "^2.15",
+        "laminas/laminas-zendframework-bridge": "^1.4.0",
         "mezzio/mezzio": "^3.6.0",
         "mezzio/mezzio-fastroute": "^3.3.0",
         "mezzio/mezzio-helpers": "^5.7.0",
