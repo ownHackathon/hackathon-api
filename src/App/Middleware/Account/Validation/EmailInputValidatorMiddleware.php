@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpFailureMessage;
 use ownHackathon\App\Validator\EMailValidator;
 use ownHackathon\Core\Message\ResponseMessage;
 use ownHackathon\Core\Type\Email;
@@ -25,7 +25,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::EMAIL_INVALID);
+        $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::EMAIL_INVALID);
 
         $data = $request->getParsedBody();
 

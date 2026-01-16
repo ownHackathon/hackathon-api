@@ -2,9 +2,9 @@
 
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
+use Psr\Container\ContainerInterface;
 use ownHackathon\App;
 use ownHackathon\Core\Message\RouteName;
-use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get(
@@ -78,14 +78,5 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             App\Handler\Account\AccountPasswordHandler::class,
         ],
         name: RouteName::ACCOUNT_PASSWORD_SET
-    );
-
-    $app->get(
-        path: '/account/logout',
-        middleware: [
-            App\Middleware\Account\LogoutMiddleware::class,
-            App\Handler\Account\LogoutHandler::class,
-        ],
-        name: RouteName::ACCOUNT_LOGOUT
     );
 };

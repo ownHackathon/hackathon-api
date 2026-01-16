@@ -10,7 +10,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use ownHackathon\App\DTO\AccountRegistrationDTO;
-use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpFailureMessage;
 use ownHackathon\App\Validator\AccountActivationValidator;
 use ownHackathon\Core\Message\ResponseMessage;
 
@@ -34,7 +34,7 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
                 'Validator-Message:' => $this->validator->getMessages(),
             ]);
 
-            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

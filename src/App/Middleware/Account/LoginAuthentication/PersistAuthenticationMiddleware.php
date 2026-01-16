@@ -11,7 +11,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use ownHackathon\App\DTO\ClientIdentification;
-use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpFailureMessage;
 use ownHackathon\App\DTO\RefreshToken;
 use ownHackathon\App\Entity\AccountAccessAuth;
 use ownHackathon\Core\Entity\Account\AccountInterface;
@@ -48,7 +48,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 // @phpstan-ignore-next-line
                 'Refresh Token:' => $refreshToken ? 'placed' : null,
             ]);
-            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }
@@ -71,7 +71,7 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
                 'ErrorMessage' => $e->getMessage(),
             ]);
 
-            $message = HttpResponseMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_UNAUTHORIZED, ResponseMessage::DATA_INVALID);
 
             return new JsonResponse($message, $message->statusCode);
         }

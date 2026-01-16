@@ -8,7 +8,7 @@ interface AccountAccessAuthInterface
 {
     public function getId(): int;
 
-    public function getAccountId(): int;
+    public function getUserId(): int;
 
     public function getLabel(): string;
 

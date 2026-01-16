@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use ownHackathon\App\DTO\HttpResponseMessage;
+use ownHackathon\App\DTO\HttpFailureMessage;
 use ownHackathon\App\Validator\PasswordValidator;
 use ownHackathon\Core\Message\ResponseMessage;
 
@@ -31,7 +31,7 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
             $this->logger->notice('Invalid Password', [
                 'Validator Message:' => $this->validator->getMessages(),
             ]);
-            $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::PASSWORD_INVALID);
+            $message = HttpFailureMessage::create(HTTP::STATUS_BAD_REQUEST, ResponseMessage::PASSWORD_INVALID);
             return new JsonResponse($message, $message->statusCode);
         }
 

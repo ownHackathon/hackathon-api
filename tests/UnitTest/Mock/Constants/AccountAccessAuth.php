@@ -33,7 +33,7 @@ class AccountAccessAuth
     public const array VALID_DATA
         = [
             'id' => self::ID,
-            'accountId' => self::USER_ID,
+            'userId' => self::USER_ID,
             'label' => self::LABEL,
             'refreshToken' => self::REFRESH_TOKEN,
             'userAgent' => self::USER_AGENT,
@@ -44,7 +44,7 @@ class AccountAccessAuth
     public const array INVALID_DATA
         = [
             'id' => self::ID_INVALID,
-            'accountId' => self::USER_ID_INVALID,
+            'userId' => self::USER_ID_INVALID,
             'label' => self::LABEL_INVALID,
             'refreshToken' => self::REFRESH_TOKEN_INVALID,
             'userAgent' => self::USER_AGENT_INVALID,
