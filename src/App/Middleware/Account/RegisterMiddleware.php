@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use ownHackathon\App\Entity\Account\AccountActivation;
 use ownHackathon\App\Service\Account\AccountService;
 use ownHackathon\App\Service\Token\ActivationTokenService;
+use ownHackathon\Core\Enum\Message\LogMessage;
 use ownHackathon\Core\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\Core\Type\Email;
 use ownHackathon\Core\Utils\UuidFactoryInterface;
@@ -32,7 +33,7 @@ readonly class RegisterMiddleware implements MiddlewareInterface
         $email = $request->getAttribute(Email::class);
 
         if (!$this->accountService->isEmailAvailable($email)) {
-            $this->logger->warning('An account with the same email address already exists.', [
+            $this->logger->warning(LogMessage::ACCOUNT_ALREADY_EXISTS->value, [
                 'email:' => $email->toString(),
             ]);
 
