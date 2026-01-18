@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# --- Path Initialization ---
+# Get the directory of the script and switch to the project root (one level up)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR/.." || exit 1
+
 # --- Configuration ---
 CONTAINER_PHP="php"
 DOCKER_COMPOSE="docker compose"
