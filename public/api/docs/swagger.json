@@ -16,7 +16,7 @@
                     "Account"
                 ],
                 "summary": "Return of a new access token",
-                "operationId": "1ee7f36021506322a0e202b1fb32f278",
+                "operationId": "8153437a40e6c68ceb15c851fe31e2bc",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -47,7 +47,7 @@
                     "Account"
                 ],
                 "summary": "Activate the account",
-                "operationId": "db81d65a9e026816e8f2ea40f73a394b",
+                "operationId": "df8fdb2be361e5167853062f340f4425",
                 "parameters": [
                     {
                         "name": "token",
@@ -93,7 +93,7 @@
                     "Account"
                 ],
                 "summary": "Creates a token for password reset. Sending via E-Mail",
-                "operationId": "faec81c539d68fbab3b442b162ad7c84",
+                "operationId": "1ab5a49dfe70ff9e4be96e3b4fd58802",
                 "requestBody": {
                     "description": "Set Password for a Account",
                     "required": true,
@@ -118,7 +118,7 @@
                     "Account"
                 ],
                 "summary": "Set Password to the account",
-                "operationId": "c5f1c414d69d6f318ab519d1746570e4",
+                "operationId": "3dfa8cc9f974f6db93df1a49b170fc75",
                 "parameters": [
                     {
                         "name": "token",
@@ -165,7 +165,7 @@
                 ],
                 "summary": "Endpoint to register a new user account.",
                 "description": "Create Account",
-                "operationId": "8a212b9a005ff2dd5aeea1756d25bd05",
+                "operationId": "969568dfb3cf23c770ed1a16782476cd",
                 "requestBody": {
                     "description": "The email address for the new account",
                     "required": true,
@@ -200,7 +200,7 @@
                     "Account"
                 ],
                 "summary": "Attempts to log in an account using transferred data",
-                "operationId": "4573a8211c6a27b677250eb46ca168ee",
+                "operationId": "9b6381b1663be08be716cc9ca3f04d2b",
                 "requestBody": {
                     "description": "Account data for authentication",
                     "required": true,
@@ -252,7 +252,7 @@
                     "Account"
                 ],
                 "summary": "Attempts to log out an account",
-                "operationId": "1154528e1da5f90aa3b356c63502b533",
+                "operationId": "fd1f895986002b7c0d208a40b3cf9dd5",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -283,7 +283,7 @@
                     "System Information"
                 ],
                 "summary": "Returns the current time in Unix format",
-                "operationId": "ffea4e020f3a4868f9f018e280509330",
+                "operationId": "8756d19e2e4758137f374e8015adad45",
                 "responses": {
                     "200": {
                         "description": "Success",

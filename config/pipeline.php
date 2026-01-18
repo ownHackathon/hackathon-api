@@ -27,11 +27,11 @@ use Psr\Container\ContainerInterface;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->pipe([
+        CorsMiddleware::class,
         ApiErrorHandlerMiddleware::class,
         ServerUrlMiddleware::class,
         BodyParamsMiddleware::class,
 
-        CorsMiddleware::class,
         RouteMiddleware::class,
 
         ImplicitHeadMiddleware::class,
