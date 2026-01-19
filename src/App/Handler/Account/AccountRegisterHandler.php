@@ -6,8 +6,6 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use App\DTO\EMail\EMail;
-use App\DTO\Response\HttpResponseMessage;
-use Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,8 +14,10 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
 {
     #[OA\Post(
         path: '/account',
-        description: 'Create Account',
-        summary: 'Endpoint to register a new user account.',
+        description: "Starts the account process for the given email address. \n\n" .
+                     "**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. " .
+                     "The user will not know if an account already exists based on the API response.",
+        summary: 'Endpoint to register a new user account or request a password reset.',
         tags: ['Account'],
     )]
     #[OA\RequestBody(
@@ -27,12 +27,9 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
-    )]
-    #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
-        description: StatusMessage::BAD_REQUEST->value,
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        description: "The request was processed successfully. Depending on the state of the account, one of the following actions will occur:\n" .
+                     "1. **Account does not exist:** A token to activate the new account will be sent to the email address.\n" .
+                     '2. **Account already exists:** A token to reset the password will be sent to the email address.',
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

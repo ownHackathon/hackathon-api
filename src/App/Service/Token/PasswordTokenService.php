@@ -2,30 +2,63 @@
 
 namespace App\Service\Token;
 
+use App\Service\Email\EmailService;
 use Core\Entity\Token\TokenInterface;
 use Core\Type\Email as EmailType;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 use function sprintf;
 
 readonly class PasswordTokenService
 {
     public function __construct(
-        private MailerInterface $mailer,
+        private EmailService $emailService,
+        private string $projectUri,
     ) {
     }
 
     public function sendEmail(EmailType $email, TokenInterface $token): void
     {
-        $text = sprintf('Your token to reset your password: %s', $token->token->getHex()->toString());
+        $text = sprintf(
+            'Hallo!
 
-        $email = new Email()
-            ->from('no-reply@stormannsgal.de')
-            ->to($email->toString())
-            ->subject('Password Forgotten Code')
-            ->text($text);
+                    Vielen Dank für Ihr Interesse an unserem Service.
 
-        $this->mailer->send($email);
+                    Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren. 
+                    Da unter dieser Adresse bereits ein aktives Konto bei uns besteht, 
+                    senden wir Ihnen hiermit einen Link, mit dem Sie Ihr Passwort zurücksetzen können, 
+                    falls Sie den Zugriff auf Ihren Account wiederherstellen möchten.
+
+                    Klicken Sie auf den folgenden Link, um ein neues Passwort festzulegen:
+                    %s/app/account/password/%s
+
+                    Falls Sie keine Registrierung oder Passwortänderung veranlasst haben, 
+                    können Sie diese Nachricht einfach ignorieren. 
+                    Ihr Account bleibt weiterhin mit Ihrem bestehenden Passwort geschützt.
+
+                    Mit freundlichen Grüßen,
+                    Ihr Team von ownHackathon',
+            $this->projectUri,
+            $token->token->getHex()->toString()
+        );
+
+        $html = sprintf(
+            '<p>Hallo!</p>
+                    <p>Vielen Dank für Ihr Interesse an unserem Service.</p>
+                    <p>Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren. 
+                    Da unter dieser Adresse bereits ein aktives Konto bei uns besteht, 
+                    senden wir Ihnen hiermit einen Link, mit dem Sie Ihr Passwort zurücksetzen können, 
+                    falls Sie den Zugriff auf Ihren Account wiederherstellen möchten.</p>
+                    <p>Klicken Sie auf den folgenden Link, um ein neues Passwort festzulegen:<br>
+                    <a href=\'%s/app/account/password/%s\'>Passwort resetten</a></p>
+                    <p>Falls Sie keine Registrierung oder Passwortänderung veranlasst haben, 
+                    können Sie diese Nachricht einfach ignorieren. Ihr Account bleibt weiterhin mit 
+                    Ihrem bestehenden Passwort geschützt.</p>
+                    <p>Mit freundlichen Grüßen,<br>
+                    Ihr Team von ownHackathon</p>',
+            $this->projectUri,
+            $token->token->getHex()->toString()
+        );
+
+        $this->emailService->send($email, $text, $html, 'Passwort zurücksetzen Link');
     }
 }

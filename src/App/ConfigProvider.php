@@ -2,9 +2,6 @@
 
 namespace App;
 
-use Envms\FluentPDO\Query;
-use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use App\Hydrator\AccountAccessAuthHydratorInterface;
 use App\Hydrator\AccountActivationHydratorInterface;
 use App\Hydrator\AccountHydratorInterface;
@@ -12,9 +9,13 @@ use App\Hydrator\TokenHydratorInterface;
 use App\Service\Account\AccountService;
 use App\Service\Authentication\AuthenticationService;
 use App\Service\ClientIdentification\ClientIdentificationService;
+use App\Service\Email\EmailService;
+use App\Service\Email\EmailServiceFactory;
 use App\Service\Token\AccessTokenService;
 use App\Service\Token\ActivationTokenService;
+use App\Service\Token\ActivationTokenServiceFactory;
 use App\Service\Token\PasswordTokenService;
+use App\Service\Token\PasswordTokenServiceFactory;
 use App\Service\Token\RefreshTokenService;
 use App\Table\AccountAccessAuthTable;
 use App\Table\AccountActivationTable;
@@ -33,8 +34,10 @@ use Core\Repository\AccountRepositoryInterface;
 use Core\Repository\TokenRepositoryInterface;
 use Core\Store;
 use Core\Utils\UuidFactoryInterface;
+use Envms\FluentPDO\Query;
+use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Mailer\MailerInterface;
 
 class ConfigProvider
 {
@@ -102,9 +105,10 @@ class ConfigProvider
                 Service\Account\AccountService::class => ConfigAbstractFactory::class,
                 Service\Authentication\AuthenticationService::class => InvokableFactory::class,
                 Service\ClientIdentification\ClientIdentificationService::class => InvokableFactory::class,
+                EmailService::class => EmailServiceFactory::class,
                 Service\Token\AccessTokenService::class => Service\Token\AccessTokenServiceFactory::class,
-                Service\Token\ActivationTokenService::class => ConfigAbstractFactory::class,
-                Service\Token\PasswordTokenService::class => ConfigAbstractFactory::class,
+                Service\Token\ActivationTokenService::class => ActivationTokenServiceFactory::class,
+                Service\Token\PasswordTokenService::class => PasswordTokenServiceFactory::class,
                 Service\Token\RefreshTokenService::class => Service\Token\RefreshTokenServiceFactory::class,
                 Table\AccountAccessAuthTable::class => ConfigAbstractFactory::class,
                 Table\AccountActivationTable::class => ConfigAbstractFactory::class,
@@ -226,12 +230,6 @@ class ConfigProvider
                 TokenRepositoryInterface::class,
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
-            ],
-            Service\Token\ActivationTokenService::class => [
-                MailerInterface::class,
-            ],
-            Service\Token\PasswordTokenService::class => [
-                MailerInterface::class,
             ],
             Table\AccountAccessAuthTable::class => [
                 Query::class,
