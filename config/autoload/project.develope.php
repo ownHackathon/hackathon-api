@@ -2,7 +2,7 @@
 
 return [
     'project' => [
-        'uri' => 'http://localhost',
+        'uri' => 'http://localhost:5173',
     ],
     'api' => [
         'access' => [

@@ -163,8 +163,8 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Endpoint to register a new user account.",
-                "description": "Create Account",
+                "summary": "Endpoint to register a new user account or request a password reset.",
+                "description": "Starts the account process for the given email address. \n\n**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. The user will not know if an account already exists based on the API response.",
                 "operationId": "969568dfb3cf23c770ed1a16782476cd",
                 "requestBody": {
                     "description": "The email address for the new account",
@@ -179,17 +179,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
+                        "description": "The request was processed successfully. Depending on the state of the account, one of the following actions will occur:\n1. **Account does not exist:** A token to activate the new account will be sent to the email address.\n2. **Account already exists:** A token to reset the password will be sent to the email address."
                     }
                 }
             }

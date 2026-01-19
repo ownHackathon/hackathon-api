@@ -2,7 +2,8 @@
 
 return [
     'project' => [
-        'uri' => 'dev.ownhackathon.de',
+        'uri' => 'https:\\dev.ownhackathon.de',
+        'senderEmail' => 'no-replay@ownhackathon.de',
     ],
     'api' => [
         'access' => [
