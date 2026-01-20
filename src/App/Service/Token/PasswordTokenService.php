@@ -23,7 +23,7 @@ readonly class PasswordTokenService
 
                     Vielen Dank für Ihr Interesse an unserem Service.
 
-                    Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren. 
+                    Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren oder wollen Ihr Passwort zurücksetzen. 
                     Da unter dieser Adresse bereits ein aktives Konto bei uns besteht, 
                     senden wir Ihnen hiermit einen Link, mit dem Sie Ihr Passwort zurücksetzen können, 
                     falls Sie den Zugriff auf Ihren Account wiederherstellen möchten.
@@ -44,7 +44,7 @@ readonly class PasswordTokenService
         $html = sprintf(
             '<p>Hallo!</p>
                     <p>Vielen Dank für Ihr Interesse an unserem Service.</p>
-                    <p>Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren. 
+                    <p>Sie haben versucht, sich mit dieser E-Mail-Adresse neu zu registrieren oder wollen Ihr Passwort zurücksetzen. 
                     Da unter dieser Adresse bereits ein aktives Konto bei uns besteht, 
                     senden wir Ihnen hiermit einen Link, mit dem Sie Ihr Passwort zurücksetzen können, 
                     falls Sie den Zugriff auf Ihren Account wiederherstellen möchten.</p>
