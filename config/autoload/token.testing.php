@@ -12,7 +12,7 @@ return [
         'access' => [
             'key' => 'b:?Y@5JCWF:yi{o>irc(3$HFcR-#b\SA',
             'algorithmus' => 'HS512',
-            'duration' => 60 * 15,
+            'duration' => 60 * 5,
             'iss' => 'localhost',
             'aud' => 'localhost',
         ],
