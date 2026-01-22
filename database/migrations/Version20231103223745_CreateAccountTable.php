@@ -2,6 +2,7 @@
 
 namespace Migrations;
 
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
@@ -20,7 +21,11 @@ final class Version20231103223745_CreateAccountTable extends AbstractMigration
         $table->addColumn('registeredAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
         $table->addColumn('lastActionAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
-        $table->setPrimaryKey(['id']);
+        $table->addPrimaryKeyConstraint(
+            PrimaryKeyConstraint::editor()
+                ->setUnquotedColumnNames('id')
+                ->create()
+        );
         $table->addUniqueIndex(['uuid'], 'account_uuid_UNIQUE');
         $table->addUniqueIndex(['name'], 'account_name_UNIQUE');
         $table->addUniqueIndex(['email'], 'account_email_UNIQUE');

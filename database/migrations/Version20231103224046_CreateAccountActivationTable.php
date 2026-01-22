@@ -2,6 +2,7 @@
 
 namespace Migrations;
 
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
@@ -17,7 +18,11 @@ final class Version20231103224046_CreateAccountActivationTable extends AbstractM
         $table->addColumn('token', Types::STRING, ['length' => 32,]);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
-        $table->setPrimaryKey(['id']);
+        $table->addPrimaryKeyConstraint(
+            PrimaryKeyConstraint::editor()
+                ->setUnquotedColumnNames('id')
+                ->create()
+        );
         $table->addUniqueIndex(['token'], 'account_activation_token_UNIQUE');
     }
 

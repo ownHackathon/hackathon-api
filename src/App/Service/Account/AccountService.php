@@ -2,15 +2,15 @@
 
 namespace App\Service\Account;
 
-use DateTimeImmutable;
 use App\Entity\Token\Token;
 use App\Service\Token\PasswordTokenService;
 use Core\Entity\Token\TokenInterface;
 use Core\Enum\TokenType;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Repository\TokenRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
+use Core\Repository\Token\TokenRepositoryInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactoryInterface;
+use DateTimeImmutable;
 
 readonly class AccountService
 {

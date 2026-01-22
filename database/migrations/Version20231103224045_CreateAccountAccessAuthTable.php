@@ -2,6 +2,7 @@
 
 namespace Migrations;
 
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
@@ -20,7 +21,11 @@ final class Version20231103224045_CreateAccountAccessAuthTable extends AbstractM
         $table->addColumn('clientIdentHash', Types::STRING, ['length' => 128,]);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
-        $table->setPrimaryKey(['id']);
+        $table->addPrimaryKeyConstraint(
+            PrimaryKeyConstraint::editor()
+                ->setUnquotedColumnNames('id')
+                ->create()
+        );
         $table->addUniqueIndex(['refreshToken'], 'account_access_auth_refresh_token_UNIQUE');
         $table->addUniqueIndex(['clientIdentHash'], 'account_access_auth_client_ident_hash_UNIQUE');
     }

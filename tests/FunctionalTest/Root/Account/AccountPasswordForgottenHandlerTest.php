@@ -2,13 +2,13 @@
 
 namespace FunctionalTest\Root\Account;
 
+use Core\Repository\Account\AccountRepositoryInterface;
+use Core\Repository\Token\TokenRepositoryInterface;
+use Core\Type\Email;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
+use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use Ramsey\Uuid\UuidInterface;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Repository\TokenRepositoryInterface;
-use Core\Type\Email;
-use FunctionalTest\AbstractFunctional;
 use UnitTest\JsonRequestHelper;
 
 class AccountPasswordForgottenHandlerTest extends AbstractFunctional

@@ -2,24 +2,24 @@
 
 namespace FunctionalTest\Root\Account;
 
-use DateTimeImmutable;
-use Envms\FluentPDO\Query;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
-use Laminas\Diactoros\ServerRequest;
 use App\DTO\Client\ClientIdentification;
 use App\DTO\Client\ClientIdentificationData;
 use App\Entity\Account\AccountAccessAuth;
-use App\Repository\AccountAccessAuthRepository;
-use App\Repository\AccountRepository;
+use App\Repository\Account\AccountAccessAuthRepository;
+use App\Repository\Account\AccountRepository;
 use App\Service\ClientIdentification\ClientIdentificationService;
 use App\Service\Token\AccessTokenService;
 use App\Service\Token\RefreshTokenService;
 use Core\Enum\Message\StatusMessage;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
+use DateTimeImmutable;
+use Envms\FluentPDO\Query;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
-use UnitTest\JsonRequestHelper;
+use Laminas\Diactoros\ServerRequest;
 use PDO;
 use PHPUnit\Framework\Assert;
+use UnitTest\JsonRequestHelper;
 
 class AccessTokenHandlerTest extends AbstractFunctional
 {

@@ -2,7 +2,6 @@
 
 namespace App\Middleware\Account;
 
-use DateTimeImmutable;
 use App\DTO\Account\AccountRegistration;
 use App\Entity\Account\Account;
 use Core\Entity\Account\AccountActivationInterface;
@@ -11,9 +10,10 @@ use Core\Enum\Message\StatusMessage;
 use Core\Exception\DuplicateEntryException;
 use Core\Exception\HttpDuplicateEntryException;
 use Core\Exception\HttpInvalidArgumentException;
-use Core\Repository\AccountActivationRepositoryInterface;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountActivationRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
 use Core\Utils\UuidFactoryInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -73,7 +73,7 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         );
 
         try {
-            $this->accountRepository->insert($account);
+            $accountId = $this->accountRepository->insert($account);
         } catch (DuplicateEntryException $e) {
             throw new HttpDuplicateEntryException(
                 LogMessage::ACCOUNT_ALREADY_EXISTS,

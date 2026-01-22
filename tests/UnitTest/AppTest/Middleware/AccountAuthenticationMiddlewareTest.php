@@ -2,22 +2,22 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Laminas\Diactoros\Response\JsonResponse;
 use App\Middleware\Account\RequestAuthenticationMiddleware;
 use App\Service\Token\AccessTokenService;
 use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
 use Core\Utils\UuidFactory;
 use Core\Utils\UuidFactoryInterface;
 use FunctionalTest\Mock\NullLogger;
+use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\MockAccountAuthenticationMiddlewareRequestHandler;
 use UnitTest\Mock\Repository\MockAccountRepository;
 use UnitTest\Mock\Repository\MockAccountRepositoryAccountAuthenticationMiddlewareInvalidToken;
 use UnitTest\Mock\Service\MockAccessTokenService;
 use UnitTest\Mock\Service\MockAccessTokenServiceWithoutDuration;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 
 class AccountAuthenticationMiddlewareTest extends AbstractTestMiddleware
 {

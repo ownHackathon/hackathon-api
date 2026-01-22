@@ -2,10 +2,11 @@
 
 namespace App;
 
-use App\Hydrator\AccountAccessAuthHydratorInterface;
-use App\Hydrator\AccountActivationHydratorInterface;
-use App\Hydrator\AccountHydratorInterface;
-use App\Hydrator\TokenHydratorInterface;
+use App\Hydrator\Account\AccountAccessAuthHydratorInterface;
+use App\Hydrator\Account\AccountActivationHydratorInterface;
+use App\Hydrator\Account\AccountHydratorInterface;
+use App\Hydrator\Token\TokenHydratorInterface;
+use App\Hydrator\Workspace\WorkspaceHydratorInterface;
 use App\Service\Account\AccountService;
 use App\Service\Authentication\AuthenticationService;
 use App\Service\ClientIdentification\ClientIdentificationService;
@@ -17,10 +18,11 @@ use App\Service\Token\ActivationTokenServiceFactory;
 use App\Service\Token\PasswordTokenService;
 use App\Service\Token\PasswordTokenServiceFactory;
 use App\Service\Token\RefreshTokenService;
-use App\Table\AccountAccessAuthTable;
-use App\Table\AccountActivationTable;
-use App\Table\AccountTable;
-use App\Table\TokenTable;
+use App\Table\Account\AccountAccessAuthTable;
+use App\Table\Account\AccountActivationTable;
+use App\Table\Account\AccountTable;
+use App\Table\Token\TokenTable;
+use App\Table\Workspace\WorkspaceTable;
 use App\Validator\AccountActivationValidator;
 use App\Validator\AuthenticationValidator;
 use App\Validator\EMailValidator;
@@ -28,10 +30,11 @@ use App\Validator\Input\AccountNameInput;
 use App\Validator\Input\EmailInput;
 use App\Validator\Input\PasswordInput;
 use App\Validator\PasswordValidator;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
-use Core\Repository\AccountActivationRepositoryInterface;
-use Core\Repository\AccountRepositoryInterface;
-use Core\Repository\TokenRepositoryInterface;
+use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Core\Repository\Account\AccountActivationRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
+use Core\Repository\Token\TokenRepositoryInterface;
+use Core\Repository\Workspace\WorkspaceRepositoryInterface;
 use Core\Store;
 use Core\Utils\UuidFactoryInterface;
 use Envms\FluentPDO\Query;
@@ -53,28 +56,32 @@ class ConfigProvider
     {
         return [
             'aliases' => [
-                Hydrator\AccountAccessAuthHydratorInterface::class => Hydrator\AccountAccessAuthHydrator::class,
-                Hydrator\AccountActivationHydratorInterface::class => Hydrator\AccountActivationHydrator::class,
-                Hydrator\AccountHydratorInterface::class => Hydrator\AccountHydrator::class,
-                Hydrator\TokenHydratorInterface::class => Hydrator\TokenHydrator::class,
+                Hydrator\Account\AccountAccessAuthHydratorInterface::class => Hydrator\Account\AccountAccessAuthHydrator::class,
+                Hydrator\Account\AccountActivationHydratorInterface::class => Hydrator\Account\AccountActivationHydrator::class,
+                Hydrator\Account\AccountHydratorInterface::class => Hydrator\Account\AccountHydrator::class,
+                Hydrator\Token\TokenHydratorInterface::class => Hydrator\Token\TokenHydrator::class,
+                Hydrator\Workspace\WorkspaceHydratorInterface::class => Hydrator\Workspace\WorkspaceHydrator::class,
 
-                AccountRepositoryInterface::class => Repository\AccountRepository::class,
-                AccountActivationRepositoryInterface::class => Repository\AccountActivationRepository::class,
-                AccountAccessAuthRepositoryInterface::class => Repository\AccountAccessAuthRepository::class,
-                TokenRepositoryInterface::class => Repository\TokenRepository::class,
+                AccountRepositoryInterface::class => Repository\Account\AccountRepository::class,
+                AccountActivationRepositoryInterface::class => Repository\Account\AccountActivationRepository::class,
+                AccountAccessAuthRepositoryInterface::class => Repository\Account\AccountAccessAuthRepository::class,
+                TokenRepositoryInterface::class => Repository\Token\TokenRepository::class,
+                WorkspaceRepositoryInterface::class => Repository\Workspace\WorkspaceRepository::class,
 
-                Store\AccountStoreInterface::class => AccountTable::class,
-                Store\AccountAccessAuthStoreInterface::class => AccountAccessAuthTable::class,
-                Store\AccountActivationStoreInterface::class => AccountActivationTable::class,
-                Store\TokenStoreInterface::class => TokenTable::class,
+                Store\Account\AccountStoreInterface::class => AccountTable::class,
+                Store\Account\AccountAccessAuthStoreInterface::class => AccountAccessAuthTable::class,
+                Store\Account\AccountActivationStoreInterface::class => AccountActivationTable::class,
+                Store\Token\TokenStoreInterface::class => TokenTable::class,
+                Store\Workspace\WorkspaceStoreInterface::class => WorkspaceTable::class,
             ],
             'invokables' => [
             ],
             'factories' => [
-                Hydrator\AccountAccessAuthHydrator::class => InvokableFactory::class,
-                Hydrator\AccountActivationHydrator::class => ConfigAbstractFactory::class,
-                Hydrator\AccountHydrator::class => ConfigAbstractFactory::class,
-                Hydrator\TokenHydrator::class => ConfigAbstractFactory::class,
+                Hydrator\Account\AccountAccessAuthHydrator::class => InvokableFactory::class,
+                Hydrator\Account\AccountActivationHydrator::class => ConfigAbstractFactory::class,
+                Hydrator\Account\AccountHydrator::class => ConfigAbstractFactory::class,
+                Hydrator\Token\TokenHydrator::class => ConfigAbstractFactory::class,
+                Hydrator\Workspace\WorkspaceHydrator::class => InvokableFactory::class,
 
                 Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class => InvokableFactory::class,
                 Middleware\Account\LoginAuthentication\AuthenticationMiddleware::class => ConfigAbstractFactory::class,
@@ -98,10 +105,13 @@ class ConfigProvider
                 Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => InvokableFactory::class,
                 Middleware\Token\RefreshTokenValidationMiddleware::class => ConfigAbstractFactory::class,
-                Repository\AccountAccessAuthRepository::class => ConfigAbstractFactory::class,
-                Repository\AccountActivationRepository::class => ConfigAbstractFactory::class,
-                Repository\AccountRepository::class => ConfigAbstractFactory::class,
-                Repository\TokenRepository::class => ConfigAbstractFactory::class,
+
+                Repository\Account\AccountAccessAuthRepository::class => ConfigAbstractFactory::class,
+                Repository\Account\AccountActivationRepository::class => ConfigAbstractFactory::class,
+                Repository\Account\AccountRepository::class => ConfigAbstractFactory::class,
+                Repository\Token\TokenRepository::class => ConfigAbstractFactory::class,
+                Repository\Workspace\WorkspaceRepository::class => ConfigAbstractFactory::class,
+
                 Service\Account\AccountService::class => ConfigAbstractFactory::class,
                 Service\Authentication\AuthenticationService::class => InvokableFactory::class,
                 Service\ClientIdentification\ClientIdentificationService::class => InvokableFactory::class,
@@ -110,10 +120,12 @@ class ConfigProvider
                 Service\Token\ActivationTokenService::class => ActivationTokenServiceFactory::class,
                 Service\Token\PasswordTokenService::class => PasswordTokenServiceFactory::class,
                 Service\Token\RefreshTokenService::class => Service\Token\RefreshTokenServiceFactory::class,
-                Table\AccountAccessAuthTable::class => ConfigAbstractFactory::class,
-                Table\AccountActivationTable::class => ConfigAbstractFactory::class,
-                Table\AccountTable::class => ConfigAbstractFactory::class,
-                Table\TokenTable::class => ConfigAbstractFactory::class,
+
+                Table\Account\AccountAccessAuthTable::class => ConfigAbstractFactory::class,
+                Table\Account\AccountActivationTable::class => ConfigAbstractFactory::class,
+                Table\Account\AccountTable::class => ConfigAbstractFactory::class,
+                Table\Token\TokenTable::class => ConfigAbstractFactory::class,
+                Table\Workspace\WorkspaceTable::class => ConfigAbstractFactory::class,
 
                 Validator\Input\AccountNameInput::class => InvokableFactory::class,
                 Validator\Input\EmailInput::class => InvokableFactory::class,
@@ -129,13 +141,13 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            Hydrator\AccountActivationHydrator::class => [
+            Hydrator\Account\AccountActivationHydrator::class => [
                 UuidFactoryInterface::class,
             ],
-            Hydrator\AccountHydrator::class => [
+            Hydrator\Account\AccountHydrator::class => [
                 UuidFactoryInterface::class,
             ],
-            Hydrator\TokenHydrator::class => [
+            Hydrator\Token\TokenHydrator::class => [
                 UuidFactoryInterface::class,
             ],
 
@@ -212,17 +224,20 @@ class ConfigProvider
                 RefreshTokenService::class,
             ],
 
-            Repository\AccountAccessAuthRepository::class => [
-                Store\AccountAccessAuthStoreInterface::class,
+            Repository\Account\AccountAccessAuthRepository::class => [
+                Store\Account\AccountAccessAuthStoreInterface::class,
             ],
-            Repository\AccountActivationRepository::class => [
-                Store\AccountActivationStoreInterface::class,
+            Repository\Account\AccountActivationRepository::class => [
+                Store\Account\AccountActivationStoreInterface::class,
             ],
-            Repository\AccountRepository::class => [
-                Store\AccountStoreInterface::class,
+            Repository\Account\AccountRepository::class => [
+                Store\Account\AccountStoreInterface::class,
             ],
-            Repository\TokenRepository::class => [
-                Store\TokenStoreInterface::class,
+            Repository\Token\TokenRepository::class => [
+                Store\Token\TokenStoreInterface::class,
+            ],
+            Repository\Workspace\WorkspaceRepository::class => [
+                Store\Workspace\WorkspaceStoreInterface::class,
             ],
 
             Service\Account\AccountService::class => [
@@ -231,22 +246,27 @@ class ConfigProvider
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
             ],
-            Table\AccountAccessAuthTable::class => [
+            Table\Account\AccountAccessAuthTable::class => [
                 Query::class,
                 AccountAccessAuthHydratorInterface::class,
             ],
-            Table\AccountActivationTable::class => [
+            Table\Account\AccountActivationTable::class => [
                 Query::class,
                 AccountActivationHydratorInterface::class,
             ],
-            Table\AccountTable::class => [
+            Table\Account\AccountTable::class => [
                 Query::class,
                 AccountHydratorInterface::class,
             ],
-            Table\TokenTable::class => [
+            Table\Token\TokenTable::class => [
                 Query::class,
                 TokenHydratorInterface::class,
             ],
+            Table\Workspace\WorkspaceTable::class => [
+                Query::class,
+                WorkspaceHydratorInterface::class,
+            ],
+
             Validator\AccountActivationValidator::class => [
                 AccountNameInput::class,
                 PasswordInput::class,

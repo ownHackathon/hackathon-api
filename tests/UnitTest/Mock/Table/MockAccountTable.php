@@ -2,18 +2,18 @@
 
 namespace UnitTest\Mock\Table;
 
-use InvalidArgumentException;
 use App\Entity\Account\AccountCollection;
-use App\Hydrator\AccountHydrator;
-use App\Table\AccountTable;
+use App\Hydrator\Account\AccountHydrator;
+use App\Table\Account\AccountTable;
 use Core\Entity\Account\AccountInterface;
 use Core\Exception\DuplicateEntryException;
-use Core\Store\AccountStoreInterface;
+use Core\Store\Account\AccountStoreInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactory;
+use InvalidArgumentException;
+use Ramsey\Uuid\UuidInterface;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Database\MockQuery;
-use Ramsey\Uuid\UuidInterface;
 
 class MockAccountTable extends AccountTable implements AccountStoreInterface
 {
@@ -30,13 +30,13 @@ class MockAccountTable extends AccountTable implements AccountStoreInterface
         return 'Account';
     }
 
-    public function insert(AccountInterface $data): true
+    public function insert(AccountInterface $data): int
     {
         if ($data->id !== Account::ID) {
             throw new DuplicateEntryException('Account', $data->id);
         }
 
-        return true;
+        return 1;
     }
 
     public function update(AccountInterface $data): true

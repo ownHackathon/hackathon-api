@@ -2,18 +2,20 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Laminas\Diactoros\Response\JsonResponse;
 use App\DTO\Client\ClientIdentification;
 use App\DTO\Client\ClientIdentificationData;
 use App\DTO\Token\RefreshToken;
-use App\Hydrator\AccountHydrator;
-use App\Hydrator\AccountHydratorInterface;
+use App\Hydrator\Account\AccountHydrator;
+use App\Hydrator\Account\AccountHydratorInterface;
+use App\Hydrator\Account\WorkspaceHydrator;
+use App\Hydrator\Account\WorkspaceHydratorInterface;
 use App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
 use Core\Entity\Account\AccountInterface;
 use Core\Exception\HttpDuplicateEntryException;
 use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
+use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Core\Utils\UuidFactory;
+use Laminas\Diactoros\Response\JsonResponse;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
 

@@ -2,7 +2,6 @@
 
 namespace App\Middleware\Account\LoginAuthentication;
 
-use DateTimeImmutable;
 use App\DTO\Client\ClientIdentification;
 use App\DTO\Token\RefreshToken;
 use App\Entity\Account\AccountAccessAuth;
@@ -12,7 +11,8 @@ use Core\Enum\Message\StatusMessage;
 use Core\Exception\DuplicateEntryException;
 use Core\Exception\HttpDuplicateEntryException;
 use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
+use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

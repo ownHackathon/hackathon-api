@@ -1,0 +1,144 @@
+<?php declare(strict_types=1);
+
+namespace App\Table\Account;
+
+use App\Hydrator\Account\AccountAccessAuthHydratorInterface;
+use App\Table\AbstractTable;
+use Core\Entity\Account\AccountAccessAuthCollectionInterface;
+use Core\Entity\Account\AccountAccessAuthInterface;
+use Core\Exception\DuplicateEntryException;
+use Core\Store\Account\AccountAccessAuthStoreInterface;
+use Envms\FluentPDO\Exception;
+use Envms\FluentPDO\Query;
+use InvalidArgumentException;
+use PDOException;
+
+use function is_array;
+use function sprintf;
+
+class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthStoreInterface
+{
+    public function __construct(
+        protected Query $query,
+        protected AccountAccessAuthHydratorInterface $hydrator
+    ) {
+        parent::__construct($query);
+    }
+
+    public function insert(AccountAccessAuthInterface $data): true
+    {
+        $value = $this->hydrator->extract($data);
+
+        unset($value['id']);
+
+        try {
+            $lastInsertId = $this->query->insertInto($this->table, $value)->execute();
+        } catch (Exception | PDOException $e) {
+            return throw new DuplicateEntryException($this->getTableName(), $data->id);
+        }
+
+        return true;
+    }
+
+    public function update(AccountAccessAuthInterface $data): true
+    {
+        $value = $this->hydrator->extract($data);
+
+        $result = $this->query->update($this->table, $value, $data->id)->execute();
+
+        if ($result === false) {
+            throw new InvalidArgumentException(
+                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data->id)
+            );
+        }
+
+        return true;
+    }
+
+    public function findById(int $id): ?AccountAccessAuthInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('id', $id)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
+    }
+
+    public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('userId', $accountId)
+            ->fetchAll();
+
+        return is_array($result)
+            ? $this->hydrator->hydrateCollection($result)
+            : $this->hydrator->hydrateCollection(
+                []
+            );
+    }
+
+    public function findByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('accountId', $accountId)
+            ->where('clientIdentHash', $clientHash)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
+    }
+
+    public function findByLabel(string $label): AccountAccessAuthCollectionInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('label', $label)
+            ->fetchAll();
+
+        return is_array($result)
+            ? $this->hydrator->hydrateCollection($result)
+            : $this->hydrator->hydrateCollection(
+                []
+            );
+    }
+
+    public function findByRefreshToken(string $refreshToken): ?AccountAccessAuthInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('refreshToken', $refreshToken)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
+    }
+
+    public function findByUserAgent(string $userAgent): AccountAccessAuthCollectionInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('userAgent', $userAgent)
+            ->fetchAll();
+
+        return is_array($result)
+            ? $this->hydrator->hydrateCollection($result)
+            : $this->hydrator->hydrateCollection(
+                []
+            );
+    }
+
+    public function findByClientIdentHash(string $clientIdentHash): ?AccountAccessAuthInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('clientIdentHash', $clientIdentHash)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
+    }
+
+    public function findAll(): AccountAccessAuthCollectionInterface
+    {
+        $result = $this->query->from($this->table)->fetchAll();
+
+        return is_array($result)
+            ? $this->hydrator->hydrateCollection($result)
+            : $this->hydrator->hydrateCollection(
+                []
+            );
+    }
+}

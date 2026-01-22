@@ -2,14 +2,14 @@
 
 namespace App\Middleware\Account;
 
-use DateTimeImmutable;
 use App\Entity\Account\AccountActivation;
 use App\Service\Account\AccountService;
 use App\Service\Token\ActivationTokenService;
 use Core\Enum\Message\LogMessage;
-use Core\Repository\AccountActivationRepositoryInterface;
+use Core\Repository\Account\AccountActivationRepositoryInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactoryInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

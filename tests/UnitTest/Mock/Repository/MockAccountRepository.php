@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock\Repository;
 
-use App\Repository\AccountRepository;
+use App\Repository\Account\AccountRepository;
 use UnitTest\Mock\Table\MockAccountTable;
 
 readonly class MockAccountRepository extends AccountRepository

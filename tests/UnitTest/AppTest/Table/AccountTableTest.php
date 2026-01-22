@@ -2,18 +2,20 @@
 
 namespace UnitTest\AppTest\Table;
 
-use Envms\FluentPDO\Exception;
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
-use App\Hydrator\AccountHydrator;
-use App\Hydrator\AccountHydratorInterface;
-use App\Table\AccountTable;
+use App\Hydrator\Account\AccountHydrator;
+use App\Hydrator\Account\AccountHydratorInterface;
+use App\Hydrator\Account\WorkspaceHydrator;
+use App\Hydrator\Account\WorkspaceHydratorInterface;
+use App\Table\Account\AccountTable;
 use Core\Entity\Account\AccountCollectionInterface;
 use Core\Entity\Account\AccountInterface;
 use Core\Exception\DuplicateEntryException;
-use Core\Store\AccountStoreInterface;
+use Core\Store\Account\AccountStoreInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactory;
+use Envms\FluentPDO\Exception;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Database\MockQuery;
 use UnitTest\Mock\Database\MockQueryFailed;
@@ -43,8 +45,8 @@ class AccountTableTest extends TestCase
 
         $result = $this->table->insert($account);
 
-        $this->assertIsBool($result);
-        $this->assertTrue($result);
+        $this->assertIsInt($result);
+        $this->assertSame(Account::ID, $result);
     }
 
     public function testInsertAccountThrowsException(): void

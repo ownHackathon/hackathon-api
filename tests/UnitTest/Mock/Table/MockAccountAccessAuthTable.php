@@ -2,13 +2,13 @@
 
 namespace UnitTest\Mock\Table;
 
-use InvalidArgumentException;
-use App\Hydrator\AccountAccessAuthHydrator;
-use App\Table\AccountAccessAuthTable;
+use App\Hydrator\Account\AccountAccessAuthHydrator;
+use App\Table\Account\AccountAccessAuthTable;
 use Core\Entity\Account\AccountAccessAuthCollectionInterface;
 use Core\Entity\Account\AccountAccessAuthInterface;
 use Core\Exception\DuplicateEntryException;
-use Core\Store\AccountAccessAuthStoreInterface;
+use Core\Store\Account\AccountAccessAuthStoreInterface;
+use InvalidArgumentException;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 use UnitTest\Mock\Database\MockQuery;

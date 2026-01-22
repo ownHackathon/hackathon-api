@@ -2,19 +2,19 @@
 
 namespace UnitTest\AppTest\Repository;
 
-use InvalidArgumentException;
 use App\Entity\Account\AccountAccessAuthCollection;
-use App\Hydrator\AccountAccessAuthHydrator;
-use App\Hydrator\AccountAccessAuthHydratorInterface;
-use App\Repository\AccountAccessAuthRepository;
+use App\Hydrator\Account\AccountAccessAuthHydrator;
+use App\Hydrator\Account\AccountAccessAuthHydratorInterface;
+use App\Repository\Account\AccountAccessAuthRepository;
 use Core\Entity\Account\AccountAccessAuthCollectionInterface;
 use Core\Entity\Account\AccountAccessAuthInterface;
 use Core\Exception\DuplicateEntryException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
+use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 use UnitTest\Mock\Table\MockAccountAccessAuthTable;
 use UnitTest\Mock\Table\MockAccountAccessAuthTableFailed;
-use PHPUnit\Framework\TestCase;
 
 class AccountAccessAuthRepositoryTest extends TestCase
 {

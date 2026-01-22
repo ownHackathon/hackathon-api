@@ -2,17 +2,17 @@
 
 namespace UnitTest\AppTest\Repository;
 
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
-use App\Hydrator\AccountHydrator;
-use App\Hydrator\AccountHydratorInterface;
-use App\Repository\AccountRepository;
+use App\Hydrator\Account\AccountHydrator;
+use App\Hydrator\Account\AccountHydratorInterface;
+use App\Repository\Account\AccountRepository;
 use Core\Entity\Account\AccountCollectionInterface;
 use Core\Entity\Account\AccountInterface;
 use Core\Exception\DuplicateEntryException;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactory;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Table\MockAccountTable;
 use UnitTest\Mock\Table\MockAccountTableFailed;
@@ -35,8 +35,8 @@ class AccountRepositoryTest extends TestCase
     {
         $result = $this->repository->insert($this->hydrator->hydrate(Account::VALID_DATA));
 
-        $this->assertIsBool($result);
-        $this->assertTrue($result);
+        $this->assertIsInt($result);
+        $this->assertSame(Account::ID, $result);
     }
 
     public function testInsertAccountThrowsException(): void

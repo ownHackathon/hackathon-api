@@ -3,9 +3,9 @@
 namespace UnitTest\Mock\Table;
 
 use App\Entity\Account\AccountCollection;
-use App\Hydrator\AccountHydrator;
-use App\Table\AccountTable;
-use Core\Store\AccountStoreInterface;
+use App\Hydrator\Account\AccountHydrator;
+use App\Table\Account\AccountTable;
+use Core\Store\Account\AccountStoreInterface;
 use Core\Utils\UuidFactory;
 use UnitTest\Mock\Database\MockQuery;
 

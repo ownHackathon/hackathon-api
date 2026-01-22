@@ -4,7 +4,7 @@ namespace FunctionalTest\Root\Account;
 
 use App\Service\Token\AccessTokenService;
 use App\Service\Token\RefreshTokenService;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
 use Core\Type\Email;
 use Core\Utils\UuidFactoryInterface;
 use DateTimeImmutable;

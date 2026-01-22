@@ -2,9 +2,9 @@
 
 namespace App\Middleware\Account;
 
-use DateTimeImmutable;
 use Core\Entity\Account\AccountInterface;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

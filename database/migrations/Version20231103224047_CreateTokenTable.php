@@ -2,6 +2,7 @@
 
 namespace Migrations;
 
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
@@ -18,7 +19,11 @@ final class Version20231103224047_CreateTokenTable extends AbstractMigration
         $table->addColumn('tokenType', Types::SMALLINT, ['unsigned' => true, 'length' => 2,]);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
-        $table->setPrimaryKey(['id']);
+        $table->addPrimaryKeyConstraint(
+            PrimaryKeyConstraint::editor()
+                ->setUnquotedColumnNames('id')
+                ->create()
+        );
         $table->addUniqueIndex(['token'], 'token_token_UNIQUE');
     }
 

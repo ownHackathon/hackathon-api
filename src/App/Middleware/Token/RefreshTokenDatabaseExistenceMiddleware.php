@@ -2,13 +2,13 @@
 
 namespace App\Middleware\Token;
 
-use Monolog\Level;
 use App\DTO\Token\RefreshToken;
 use Core\Entity\Account\AccountAccessAuthInterface;
 use Core\Enum\Message\LogMessage;
 use Core\Enum\Message\StatusMessage;
 use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountAccessAuthRepositoryInterface;
+use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

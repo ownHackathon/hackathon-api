@@ -2,10 +2,10 @@
 
 namespace UnitTest\Mock\Table;
 
-use App\Hydrator\AccountAccessAuthHydrator;
-use App\Table\AccountAccessAuthTable;
+use App\Hydrator\Account\AccountAccessAuthHydrator;
+use App\Table\Account\AccountAccessAuthTable;
 use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Store\AccountAccessAuthStoreInterface;
+use Core\Store\Account\AccountAccessAuthStoreInterface;
 use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountAccessAuthTableFailed extends AccountAccessAuthTable implements AccountAccessAuthStoreInterface

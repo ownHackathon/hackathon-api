@@ -2,14 +2,14 @@
 
 namespace App\Middleware\Account;
 
-use Monolog\Level;
 use App\Service\Token\AccessTokenService;
 use Core\Entity\Account\AccountInterface;
 use Core\Enum\Message\LogMessage;
 use Core\Enum\Message\StatusMessage;
 use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\AccountRepositoryInterface;
+use Core\Repository\Account\AccountRepositoryInterface;
 use Core\Utils\UuidFactoryInterface;
+use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
