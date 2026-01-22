@@ -10,5 +10,7 @@ interface WorkspaceInterface
 
     public string $name { get; }
 
+    public string $slug { get; }
+
     public function with(mixed ...$properties): self;
 }

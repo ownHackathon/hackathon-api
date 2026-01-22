@@ -14,6 +14,7 @@ readonly class Workspace implements WorkspaceInterface, Collectible
         public ?int $id,
         public int $accountId,
         public string $name,
+        public string $slug,
     ) {
     }
 }
