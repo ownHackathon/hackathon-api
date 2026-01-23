@@ -2,12 +2,12 @@
 
 namespace App\Handler\Account;
 
+use App\DTO\Account\Account;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use App\DTO\Account\AccountRegistration;
 use App\DTO\Response\HttpResponseMessage;
-use Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,12 +16,16 @@ class AccountActivationHandler implements RequestHandlerInterface
 {
     #[OA\Post(
         path: '/account/activation/{token}',
-        summary: 'Activate the account',
+        operationId: 'accountActivation',
+        description: 'Completes the registration process. This endpoint validates the activation token ' .
+                     'from the email and creates the actual user account with the provided username and password. ' .
+                     "\n\nNote: The account is only persisted in the database after this step is successful.",
+        summary: 'Finalize account registration and activation',
         tags: ['Account'],
         parameters: [
             new OA\Parameter(
                 name: 'token',
-                description: 'Token',
+                description: 'The secret activation token received via email.',
                 in: 'path',
                 required: true,
                 schema: new OA\Schema(type: 'string')
@@ -29,21 +33,27 @@ class AccountActivationHandler implements RequestHandlerInterface
         ],
     )]
     #[OA\RequestBody(
-        description: 'E-Mail for register Account',
+        description: 'The account credentials to be set for the new account.',
         required: true,
         content: new OA\JsonContent(ref: AccountRegistration::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        response: HTTP::STATUS_CREATED,
+        description: 'Account successfully created and activated. The user can now log in.',
     )]
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
-        description: StatusMessage::BAD_REQUEST->value,
+        description: "Validation failed. This can happen if:\n" .
+                     "1. The token is invalid or has expired.\n" .
+                     "2. The password does not meet the security requirements.\n" .
+                     '3. The chosen account name is already taken.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new JsonResponse([], HTTP::STATUS_OK);
+        /** @var Account $account */
+        $account = $request->getAttribute(Account::class);
+
+        return new JsonResponse($account, HTTP::STATUS_CREATED, ['Location' => '/account/' . $account->uuid]);
     }
 }

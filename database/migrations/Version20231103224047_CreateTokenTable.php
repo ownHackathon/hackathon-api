@@ -15,7 +15,7 @@ final class Version20231103224047_CreateTokenTable extends AbstractMigration
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('accountId', Types::INTEGER, ['unsigned' => true,]);
-        $table->addColumn('token', Types::STRING, ['length' => 32,]);
+        $table->addColumn('token', Types::GUID, );
         $table->addColumn('tokenType', Types::SMALLINT, ['unsigned' => true, 'length' => 2,]);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 

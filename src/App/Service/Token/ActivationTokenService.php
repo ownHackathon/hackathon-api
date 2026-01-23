@@ -35,7 +35,7 @@ readonly class ActivationTokenService
                     Mit freundlichen Grüßen,
                     Ihr Team von ownHackathon',
             $this->projectUri,
-            $activation->token->getHex()->toString()
+            $activation->token->toString()
         );
 
         $html = sprintf(
@@ -52,7 +52,7 @@ readonly class ActivationTokenService
                     <p>Mit freundlichen Grüßen,<br>
                     Ihr Team von ownHackathon</p>',
             $this->projectUri,
-            $activation->token->getHex()->toString()
+            $activation->token->toString()
         );
 
         $this->emailService->send($activation->email, $text, $html, 'Account Aktivierung');

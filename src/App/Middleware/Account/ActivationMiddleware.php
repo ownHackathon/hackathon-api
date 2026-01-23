@@ -2,6 +2,7 @@
 
 namespace App\Middleware\Account;
 
+use App\DTO\Account\Account as AccountDTO;
 use App\DTO\Account\AccountRegistration;
 use App\Entity\Account\Account;
 use Core\Entity\Account\AccountActivationInterface;
@@ -87,6 +88,9 @@ readonly class ActivationMiddleware implements MiddlewareInterface
 
         $this->accountActivationRepository->deleteById($persistActivationToken->id);
 
-        return $handler->handle($request);
+        $account = $this->accountRepository->findById($accountId);
+        $account = AccountDTO::createFromAccount($account);
+
+        return $handler->handle($request->withAttribute(AccountDTO::class, $account));
     }
 }

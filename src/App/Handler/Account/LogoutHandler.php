@@ -16,17 +16,21 @@ class LogoutHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/account/logout',
-        summary: 'Attempts to log out an account',
+        operationId: 'logout',
+        description: 'Terminates the user session by invalidating the current access token. ' .
+                     'Clients should delete all locally stored tokens (Access Token and Refresh Token) after a successful logout.',
+        summary: 'Log out the current user',
+        security: [['accessToken' => []]],
         tags: ['Account']
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        description: 'Logout successful. The session has been invalidated.',
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: StatusMessage::UNAUTHORIZED_ACCESS->value,
+        description: 'Unauthorized. The access token is missing, expired, or already invalid.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

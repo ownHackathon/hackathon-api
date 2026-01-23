@@ -8,9 +8,9 @@ class Account
 
     public const int ID_INVALID = 2;
 
-    public const string UUID = '018b9740db6c7126b19c3ab9de2c001c';
+    public const string UUID = '019bec80-bced-7203-ba1e-386bcf805293';
 
-    public const string UUID_INVALID = '018b97468d1a73eca5177f94dda637d3';
+    public const string UUID_INVALID = '019bec80-cd26-7056-88d6-eb3bc6e526c4';
 
     public const int ROLE_ID = 1;
 

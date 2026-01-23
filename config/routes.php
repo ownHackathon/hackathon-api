@@ -80,12 +80,19 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->get(
-        path: '/api/account/logout',
+        path: '/api/account/logout[/]',
         middleware: [
             App\Middleware\Token\AccessTokenValidationMiddleware::class,
             App\Middleware\Account\LogoutMiddleware::class,
             App\Handler\Account\LogoutHandler::class,
         ],
         name: RouteIdent::ACCOUNT_LOGOUT->value
+    );
+    $app->get(
+        path: '/api[/]',
+        middleware: [
+            App\Handler\SwaggerUIHandler::class,
+        ],
+        name: RouteIdent::SWAGGER_UI->value
     );
 };

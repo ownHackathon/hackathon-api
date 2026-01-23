@@ -15,7 +15,7 @@ final class Version20231103224046_CreateAccountActivationTable extends AbstractM
 
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
         $table->addColumn('email', Types::STRING, ['length' => 512,]);
-        $table->addColumn('token', Types::STRING, ['length' => 32,]);
+        $table->addColumn('token', Types::GUID, );
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 
         $table->addPrimaryKeyConstraint(

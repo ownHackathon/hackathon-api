@@ -15,11 +15,12 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Return of a new access token",
-                "operationId": "8153437a40e6c68ceb15c851fe31e2bc",
+                "summary": "Refresh the access token",
+                "description": "Generates a new short-lived access token using a valid refresh token. \n\nThis endpoint allows the client to maintain a session without requiring the user to re-enter their credentials. The refresh token must be provided via the configured security mechanism (e.g., Authorization Header or HTTP-only Cookie).",
+                "operationId": "requestRegenerateAccessToken",
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Successfully issued a new access token.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -29,7 +30,7 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized access",
+                        "description": "Authentication failed. This happens if the refresh token is expired, revoked, or invalid. The user must perform a full login again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -38,7 +39,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "refreshToken": []
+                    }
+                ]
             }
         },
         "/account/activation/{token}": {
@@ -46,13 +52,14 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Activate the account",
-                "operationId": "df8fdb2be361e5167853062f340f4425",
+                "summary": "Finalize account registration and activation",
+                "description": "Completes the registration process. This endpoint validates the activation token from the email and creates the actual user account with the provided username and password. \n\nNote: The account is only persisted in the database after this step is successful.",
+                "operationId": "accountActivation",
                 "parameters": [
                     {
                         "name": "token",
                         "in": "path",
-                        "description": "Token",
+                        "description": "The secret activation token received via email.",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -60,7 +67,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "E-Mail for register Account",
+                    "description": "The account credentials to be set for the new account.",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -71,11 +78,11 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "Success"
+                    "201": {
+                        "description": "Account successfully created and activated. The user can now log in."
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Validation failed. This can happen if:\n1. The token is invalid or has expired.\n2. The password does not meet the security requirements.\n3. The chosen account name is already taken.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -92,10 +99,11 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Creates a token for password reset. Sending via E-Mail",
-                "operationId": "1ab5a49dfe70ff9e4be96e3b4fd58802",
+                "summary": "Request a token for password reset. Sending via E-Mail",
+                "description": "Initiates the password recovery process for the given email address. \n\n**Security Note:** To prevent user enumeration, this endpoint always returns a 200 OK status. An attacker cannot determine whether an account exists for a specific email address by observing the API response.",
+                "operationId": "requestPasswordReset",
                 "requestBody": {
-                    "description": "Set Password for a Account",
+                    "description": "The email address associated with the account.",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -107,7 +115,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "The request was accepted. If an account with the provided email address exists, an email containing a password reset link will be sent shortly."
                     }
                 }
             }
@@ -117,13 +125,14 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Set Password to the account",
-                "operationId": "3dfa8cc9f974f6db93df1a49b170fc75",
+                "summary": "Reset account password using a token",
+                "description": "Sets a new password for an account. This is the final step of the password recovery process. The request requires a valid, non-expired reset token that was previously sent to the user's email address.",
+                "operationId": "resetPasswordWithToken",
                 "parameters": [
                     {
                         "name": "token",
                         "in": "path",
-                        "description": "Token",
+                        "description": "The secret reset token received via email.",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -131,7 +140,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Set Password for a Account",
+                    "description": "The new password and its confirmation.",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -143,10 +152,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Password has been successfully updated. The user can now log in with the new credentials."
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Request failed due to validation errors. Possible reasons:\n1. The reset token is invalid or has already been used.\n2. The token has expired.\n3. The new password does not meet the security requirements (e.g., too short).",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -189,10 +198,11 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Attempts to log in an account using transferred data",
-                "operationId": "9b6381b1663be08be716cc9ca3f04d2b",
+                "summary": "Authenticate user and issue tokens",
+                "description": "Authenticates a user using their credentials. On success, it returns a short-lived **AccessToken** (for API authorization) and a long-lived **RefreshToken** (to obtain new access tokens).",
+                "operationId": "accountAuthentication",
                 "requestBody": {
-                    "description": "Account data for authentication",
+                    "description": "User credentials (email and password)",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -204,7 +214,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Authentication successful. The response contains both access and refresh tokens.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -214,7 +224,7 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized access",
+                        "description": "Invalid credentials. The email or password provided is incorrect.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -224,7 +234,7 @@
                         }
                     },
                     "403": {
-                        "description": "Access denied",
+                        "description": "Access denied. The credentials are correct, but the account is currently restricted. Possible reasons: Account is locked, disabled, or the email address has not been verified yet.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -241,11 +251,12 @@
                 "tags": [
                     "Account"
                 ],
-                "summary": "Attempts to log out an account",
-                "operationId": "fd1f895986002b7c0d208a40b3cf9dd5",
+                "summary": "Log out the current user",
+                "description": "Terminates the user session by invalidating the current access token. Clients should delete all locally stored tokens (Access Token and Refresh Token) after a successful logout.",
+                "operationId": "logout",
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Logout successful. The session has been invalidated.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -255,7 +266,7 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized access",
+                        "description": "Unauthorized. The access token is missing, expired, or already invalid.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -264,7 +275,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "accessToken": []
+                    }
+                ]
             }
         },
         "/ping": {
@@ -293,10 +309,79 @@
                     }
                 }
             }
+        },
+        "/workspace": {
+            "post": {
+                "tags": [
+                    "Workspace"
+                ],
+                "summary": "Create a new workspace",
+                "description": "Creates a new workspace for the authenticated user. Workspaces are used to group related resources (e.g., events).",
+                "operationId": "createWorkspace",
+                "requestBody": {
+                    "description": "The data for the new workspace. At a minimum, a name is required.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Workspace"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Workspace created successfully. The response contains the details of the newly created workspace.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Workspace"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input. The provided workspace name may be empty, too long, or contain invalid characters.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication failed. The access token is missing or invalid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "A workspace with this name already exists.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "Account": {},
             "AccountAuthenticationData": {
                 "required": [
                     "email",
@@ -340,6 +425,7 @@
                 },
                 "type": "object"
             },
+            "ApiMe": {},
             "EMail": {
                 "properties": {
                     "email": {
@@ -412,6 +498,18 @@
                     }
                 },
                 "type": "object"
+            },
+            "Workspace": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "The name from workspace",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -432,17 +530,6 @@
             }
         }
     },
-    "security": [
-        {
-            "accessToken": []
-        },
-        {
-            "Client-Identification-String": []
-        },
-        {
-            "refreshToken": []
-        }
-    ],
     "tags": [
         {
             "name": "Account",
@@ -451,6 +538,10 @@
         {
             "name": "System Information",
             "description": "System Information"
+        },
+        {
+            "name": "Workspace",
+            "description": "Workspace"
         }
     ]
 }

@@ -37,6 +37,7 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
 
         unset($value['id']);
 
+
         try {
             $lastInserId = $this->query->insertInto($this->table, $value)->execute();
         } catch (PDOException $e) {
@@ -73,7 +74,7 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
     public function findByUuid(UuidInterface $uuid): ?AccountInterface
     {
         $result = $this->query->from($this->table)
-            ->where('uuid', $uuid->getHex()->toString())
+            ->where('uuid', $uuid->toString())
             ->fetch();
 
         return is_array($result) ? $this->hydrator->hydrate($result) : null;

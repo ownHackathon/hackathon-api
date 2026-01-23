@@ -38,7 +38,7 @@ readonly class PasswordTokenService
                     Mit freundlichen Grüßen,
                     Ihr Team von ownHackathon',
             $this->projectUri,
-            $token->token->getHex()->toString()
+            $token->token->toString()
         );
 
         $html = sprintf(
@@ -56,7 +56,7 @@ readonly class PasswordTokenService
                     <p>Mit freundlichen Grüßen,<br>
                     Ihr Team von ownHackathon</p>',
             $this->projectUri,
-            $token->token->getHex()->toString()
+            $token->token->toString()
         );
 
         $this->emailService->send($email, $text, $html, 'Passwort zurücksetzen Link');

@@ -10,7 +10,6 @@ use App\DTO\Response\AuthenticationResponse;
 use App\DTO\Response\HttpResponseMessage;
 use App\DTO\Token\AccessToken;
 use App\DTO\Token\RefreshToken;
-use Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -19,27 +18,32 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
 {
     #[OA\Post(
         path: '/account/authentication',
-        summary: 'Attempts to log in an account using transferred data',
+        operationId: 'accountAuthentication',
+        description: 'Authenticates a user using their credentials. ' .
+                     'On success, it returns a short-lived **AccessToken** (for API authorization) ' .
+                     'and a long-lived **RefreshToken** (to obtain new access tokens).',
+        summary: 'Authenticate user and issue tokens',
         tags: ['Account']
     )]
     #[OA\RequestBody(
-        description: 'Account data for authentication',
+        description: 'User credentials (email and password)',
         required: true,
         content: new OA\JsonContent(ref: AccountAuthenticationData::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        description: 'Authentication successful. The response contains both access and refresh tokens.',
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: StatusMessage::UNAUTHORIZED_ACCESS->value,
+        description: 'Invalid credentials. The email or password provided is incorrect.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_FORBIDDEN,
-        description: StatusMessage::FORBIDDEN->value,
+        description: 'Access denied. The credentials are correct, but the account is currently restricted. ' .
+                     'Possible reasons: Account is locked, disabled, or the email address has not been verified yet.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

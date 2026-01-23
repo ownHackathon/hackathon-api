@@ -13,4 +13,6 @@ enum RouteIdent: string
     case ACCOUNT_LOGOUT = 'account.logout';
     case ACCOUNT_LIST_ALL = 'account.list.all';
     case ACCESS_TOKEN_REFRESH = 'refresh.access.token';
+
+    case SWAGGER_UI = 'swagger-ui.ui';
 }

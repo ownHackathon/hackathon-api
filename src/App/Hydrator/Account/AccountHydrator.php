@@ -53,7 +53,7 @@ readonly class AccountHydrator implements AccountHydratorInterface
     {
         return [
             'id' => $object->id,
-            'uuid' => $object->uuid->getHex()->toString(),
+            'uuid' => $object->uuid->toString(),
             'name' => $object->name,
             'password' => $object->password,
             'email' => $object->email->toString(),

@@ -46,7 +46,7 @@ readonly class TokenHydrator implements TokenHydratorInterface
             'id' => $object->id,
             'accountId' => $object->accountId,
             'tokenType' => $object->tokenType->value,
-            'token' => $object->token->getHex(),
+            'token' => $object->token->toString(),
             'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }

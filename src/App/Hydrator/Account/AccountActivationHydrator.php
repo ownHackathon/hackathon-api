@@ -44,7 +44,7 @@ readonly class AccountActivationHydrator implements AccountActivationHydratorInt
         return [
             'id' => $object->id,
             'email' => $object->email->toString(),
-            'token' => $object->token->getHex(),
+            'token' => $object->token->toString(),
             'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }

@@ -7,7 +7,6 @@ use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use App\DTO\Response\HttpResponseMessage;
 use App\DTO\Token\AccessToken;
-use Core\Enum\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,17 +15,24 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/token/refresh',
-        summary: 'Return of a new access token',
-        tags: ['Account'],
+        operationId: 'requestRegenerateAccessToken',
+        description: "Generates a new short-lived access token using a valid refresh token. \n\n" .
+                     'This endpoint allows the client to maintain a session without requiring the user ' .
+                     'to re-enter their credentials. The refresh token must be provided via the ' .
+                     'configured security mechanism (e.g., Authorization Header or HTTP-only Cookie).',
+        summary: 'Refresh the access token',
+        security: [['refreshToken' => []]],
+        tags: ['Account']
     )]
     #[OA\Response(
         response: HTTP::STATUS_OK,
-        description: StatusMessage::SUCCESS->value,
+        description: 'Successfully issued a new access token.',
         content: [new OA\JsonContent(ref: AccessToken::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
-        description: StatusMessage::UNAUTHORIZED_ACCESS->value,
+        description: 'Authentication failed. This happens if the refresh token is expired, ' .
+                     'revoked, or invalid. The user must perform a full login again.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface

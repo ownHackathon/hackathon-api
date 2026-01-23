@@ -40,13 +40,12 @@ use Psr\Http\Server\RequestHandlerInterface;
             url: '/api'
         ),
     ],
-    security: [['accessToken' => []], ['Client-Identification-String' => []], ['refreshToken' => []]]
 )]
 readonly class SwaggerUIHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $indexFile = ROOT_DIR . 'public/docs/index.html';
+        $indexFile = ROOT_DIR . 'public/api/docs/index.html';
 
         if (file_exists($indexFile)) {
             return new HtmlResponse(file_get_contents($indexFile));

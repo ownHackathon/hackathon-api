@@ -64,7 +64,7 @@ class MockAccountTable extends AccountTable implements AccountStoreInterface
 
     public function findByUuid(UuidInterface $uuid): ?AccountInterface
     {
-        return $uuid->getHex()->toString() === Account::UUID ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
+        return $uuid->toString() === Account::UUID ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
     }
 
     public function findByName(string $name): ?AccountInterface

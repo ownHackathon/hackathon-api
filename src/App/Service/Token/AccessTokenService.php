@@ -26,7 +26,7 @@ readonly class AccessTokenService
             'aud' => $this->config->aud,
             'iat' => $now,
             'exp' => $now + $this->config->duration,
-            'uuid' => $uuid->getHex()->toString(),
+            'uuid' => $uuid->toString(),
         ];
 
         return JWT::encode($payload, $this->config->key, $this->config->algorithmus);
