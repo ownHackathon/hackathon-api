@@ -7,7 +7,7 @@ use PDO;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Core\Factory\QueryFactory;
+use Shared\Infrastructure\Factory\QueryFactory;
 use UnitTest\Mock\Database\MockPDO;
 use UnitTest\Mock\MockContainer;
 

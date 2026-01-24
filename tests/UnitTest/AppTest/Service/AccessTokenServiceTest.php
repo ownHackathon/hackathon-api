@@ -2,13 +2,13 @@
 
 namespace UnitTest\AppTest\Service;
 
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use DomainException;
-use App\DTO\Token\JwtTokenConfig;
-use App\Service\Token\AccessTokenService;
-use Core\Entity\Account\AccountInterface;
+use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\Token;
 use UnitTest\Mock\Entity\MockAccount;
-use PHPUnit\Framework\TestCase;
 
 class AccessTokenServiceTest extends TestCase
 {

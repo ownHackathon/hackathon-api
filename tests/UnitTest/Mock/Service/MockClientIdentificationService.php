@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock\Service;
 
-use App\Service\ClientIdentification\ClientIdentificationService;
+use Exdrals\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 
 readonly class MockClientIdentificationService extends ClientIdentificationService
 {

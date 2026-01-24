@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Middleware;
 
+use Exdrals\Account\Identity\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
-use App\Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware;
-use Core\Exception\HttpUnauthorizedException;
+use Shared\Domain\Exception\HttpUnauthorizedException;
 use UnitTest\Mock\Validator\MockAuthenticationValidator;
 use UnitTest\Mock\Validator\MockAuthenticationValidatorFailed;
 

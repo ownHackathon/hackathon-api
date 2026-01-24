@@ -2,9 +2,9 @@
 
 namespace UnitTest\Mock\Service;
 
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Token\JwtTokenConfig;
-use App\Service\Token\RefreshTokenService;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 
 readonly class MockRefreshTokenService extends RefreshTokenService
 {

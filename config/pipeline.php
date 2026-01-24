@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use Exdrals\Account\Identity\Middleware\Account\LastAktivityUpdaterMiddleware;
+use Exdrals\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use Exdrals\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Mezzio\Application;
 use Mezzio\Cors\Middleware\CorsMiddleware;
 use Mezzio\Handler\NotFoundHandler;
@@ -14,12 +17,9 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use App\Middleware\Account\LastAktivityUpdaterMiddleware;
-use App\Middleware\Account\RequestAuthenticationMiddleware;
-use App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use Core\Middleware\ApiErrorHandlerMiddleware;
-use Core\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
+use Shared\Middleware\ApiErrorHandlerMiddleware;
+use Shared\Middleware\RouteNotFoundMiddleware;
 
 /**
  * Setup middleware pipeline:

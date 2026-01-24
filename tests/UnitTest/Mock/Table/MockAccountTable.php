@@ -2,16 +2,16 @@
 
 namespace UnitTest\Mock\Table;
 
-use App\Entity\Account\AccountCollection;
-use App\Hydrator\Account\AccountHydrator;
-use App\Table\Account\AccountTable;
-use Core\Entity\Account\AccountInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Store\Account\AccountStoreInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactory;
+use Exdrals\Account\Identity\Domain\AccountCollection;
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
 use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
+use Shared\Domain\Exception\DuplicateEntryException;
+use Shared\Utils\UuidFactory;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Database\MockQuery;
 

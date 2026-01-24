@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock\Repository;
 
-use App\Repository\Account\AccountRepository;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
 use UnitTest\Mock\Table\MockAccountTableAccountAuthenticationMiddlewareInvalidToken;
 
 readonly class MockAccountRepositoryAccountAuthenticationMiddlewareInvalidToken extends AccountRepository

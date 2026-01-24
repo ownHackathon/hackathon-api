@@ -2,10 +2,10 @@
 
 namespace UnitTest\AppTest\Middleware;
 
+use Exdrals\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use App\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use UnitTest\Mock\Service\MockClientIdentificationService;
 
 class ClientIdentificationMiddlewareTest extends AbstractTestMiddleware

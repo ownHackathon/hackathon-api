@@ -2,13 +2,13 @@
 
 namespace UnitTest\AppTest\Middleware;
 
+use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Account\Identity\Middleware\Token\GenerateRefreshTokenMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Client\ClientIdentificationData;
-use App\Middleware\Token\GenerateRefreshTokenMiddleware;
-use UnitTest\Mock\Service\MockRefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use UnitTest\Mock\Service\MockRefreshTokenService;
 
 class GenerateRefreshTokenMiddlewareTest extends AbstractTestMiddleware
 {

@@ -2,13 +2,13 @@
 
 namespace UnitTest\AppTest\Hydrator;
 
-use App\Hydrator\Account\AccountHydrator;
+use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use App\Hydrator\Account\WorkspaceHydrator;
-use Core\Entity\Account\AccountCollectionInterface;
-use Core\Entity\Account\AccountInterface;
-use Core\Utils\UuidFactory;
-use Core\Utils\UuidFactoryInterface;
 use PHPUnit\Framework\TestCase;
+use Shared\Utils\UuidFactory;
+use Shared\Utils\UuidFactoryInterface;
 use UnitTest\Mock\Constants\Account;
 
 class AccountHydratorTest extends TestCase

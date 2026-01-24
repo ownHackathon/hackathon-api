@@ -2,20 +2,20 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Client\ClientIdentificationData;
-use App\DTO\Token\RefreshToken;
-use App\Hydrator\Account\AccountHydrator;
-use App\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Account\Identity\DTO\Token\RefreshToken;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Account\Identity\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
 use App\Hydrator\Account\WorkspaceHydrator;
 use App\Hydrator\Account\WorkspaceHydratorInterface;
-use App\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
-use Core\Entity\Account\AccountInterface;
-use Core\Exception\HttpDuplicateEntryException;
-use Core\Exception\HttpUnauthorizedException;
-use Core\Repository\Account\AccountAccessAuthRepositoryInterface;
-use Core\Utils\UuidFactory;
 use Laminas\Diactoros\Response\JsonResponse;
+use Shared\Domain\Exception\HttpDuplicateEntryException;
+use Shared\Domain\Exception\HttpUnauthorizedException;
+use Shared\Utils\UuidFactory;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
 

@@ -2,12 +2,12 @@
 
 namespace UnitTest\Mock\Entity;
 
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Domain\Email;
 use DateTimeImmutable;
-use Core\Entity\Account\AccountInterface;
-use Core\Type\Email;
-use UnitTest\Mock\Constants\Account;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use UnitTest\Mock\Constants\Account;
 
 class MockAccount implements AccountInterface
 {

@@ -78,8 +78,10 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/App/",
-      "Core\\": "src/Core/"
+      "App\\" : "src/App/",
+      "Shared\\": "src/Shared/",
+      "Exdrals\\Account\\" : "src/App/Account/",
+      "Exdrals\\Account\\Identity\\" : "src/App/Account/Identity/src/"
     }
   },
   "autoload-dev": {

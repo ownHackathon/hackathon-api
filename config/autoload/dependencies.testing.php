@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-use Core\Factory\DatabaseFactory;
-use Core\Factory\QueryFactory;
-use Core\Factory\UuidFactory;
-use Core\Logger\LoggerFactory;
-use Core\Utils\UuidFactoryInterface;
 use FunctionalTest\Mock\NullMailerFactory;
+use Shared\Infrastructure\Factory\DatabaseFactory;
+use Shared\Infrastructure\Factory\QueryFactory;
+use Shared\Infrastructure\Factory\UuidFactory;
+use Shared\Infrastructure\Logger\LoggerFactory;
+use Shared\Utils\UuidFactoryInterface;
 
 return [
     'dependencies' => [
@@ -24,6 +24,11 @@ return [
             'logger' => LoggerFactory::class,
             'uuid' => UuidFactory::class,
             'mailer' => NullMailerFactory::class,
+        ],
+        'delegators' => [
+            \Mezzio\Application::class => [
+                \Mezzio\Container\ApplicationConfigInjectionDelegator::class,
+            ],
         ],
     ],
 ];

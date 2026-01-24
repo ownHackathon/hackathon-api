@@ -2,11 +2,11 @@
 
 namespace UnitTest\AppTest\Middleware;
 
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Middleware\Token\GenerateAccessTokenMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use App\Middleware\Token\GenerateAccessTokenMiddleware;
-use Core\Entity\Account\AccountInterface;
 use UnitTest\Mock\Entity\MockAccount;
 use UnitTest\Mock\Service\MockAccessTokenService;
 

@@ -2,16 +2,15 @@
 
 namespace FunctionalTest\Root\Account;
 
-use App\DTO\Client\ClientIdentification;
-use App\DTO\Client\ClientIdentificationData;
-use App\Entity\Account\AccountAccessAuth;
-use App\Repository\Account\AccountAccessAuthRepository;
-use App\Repository\Account\AccountRepository;
-use App\Service\ClientIdentification\ClientIdentificationService;
-use App\Service\Token\AccessTokenService;
-use App\Service\Token\RefreshTokenService;
-use Core\Enum\Message\StatusMessage;
-use Core\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Account\Identity\Domain\AccountAccessAuth;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -19,6 +18,7 @@ use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PDO;
 use PHPUnit\Framework\Assert;
+use Shared\Domain\Enum\Message\StatusMessage;
 use UnitTest\JsonRequestHelper;
 
 class AccessTokenHandlerTest extends AbstractFunctional

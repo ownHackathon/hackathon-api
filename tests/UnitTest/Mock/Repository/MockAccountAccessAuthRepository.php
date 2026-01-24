@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock\Repository;
 
-use App\Repository\Account\AccountAccessAuthRepository;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
 use UnitTest\Mock\Table\MockAccountAccessAuthTable;
 
 readonly class MockAccountAccessAuthRepository extends AccountAccessAuthRepository

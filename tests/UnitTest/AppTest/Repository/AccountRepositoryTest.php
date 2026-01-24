@@ -2,17 +2,17 @@
 
 namespace UnitTest\AppTest\Repository;
 
-use App\Hydrator\Account\AccountHydrator;
-use App\Hydrator\Account\AccountHydratorInterface;
-use App\Repository\Account\AccountRepository;
-use Core\Entity\Account\AccountCollectionInterface;
-use Core\Entity\Account\AccountInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Repository\Account\AccountRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactory;
+use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Shared\Domain\Exception\DuplicateEntryException;
+use Shared\Utils\UuidFactory;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Table\MockAccountTable;
 use UnitTest\Mock\Table\MockAccountTableFailed;

@@ -2,17 +2,17 @@
 
 namespace FunctionalTest\Root\Account;
 
-use App\Entity\Account\Account;
-use App\Entity\Token\Token;
-use Core\Enum\TokenType;
-use Core\Repository\Account\AccountRepositoryInterface;
-use Core\Repository\Token\TokenRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactoryInterface;
+use Exdrals\Account\Identity\Domain\Account;
+use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Account\Identity\Domain\Token;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
+use Shared\Domain\Enum\TokenType;
+use Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 
 use function password_verify;

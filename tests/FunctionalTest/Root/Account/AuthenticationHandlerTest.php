@@ -2,22 +2,24 @@
 
 namespace FunctionalTest\Root\Account;
 
-use App\Service\Token\AccessTokenService;
-use App\Service\Token\RefreshTokenService;
-use Core\Repository\Account\AccountRepositoryInterface;
-use Core\Type\Email;
-use Core\Utils\UuidFactoryInterface;
+use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 use UnitTest\Mock\Constants\Account;
 
 use function password_hash;
 use function rand;
+
+use function var_dump;
 
 use const PASSWORD_DEFAULT;
 
@@ -111,7 +113,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         /** @var UuidFactoryInterface $uuid */
         $uuid = $this->container->get(UuidFactoryInterface::class);
 
-        $account = new \App\Entity\Account\Account(
+        $account = new \Exdrals\Account\Identity\Domain\Account(
             null,
             $uuid->uuid7(),
             'I see your Token',
@@ -131,6 +133,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         );
 
         $response = $this->app->handle($request);
+        var_dump($response->getStatusCode());die();
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());

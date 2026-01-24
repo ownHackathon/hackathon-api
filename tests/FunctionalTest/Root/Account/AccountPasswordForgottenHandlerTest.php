@@ -2,9 +2,9 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Core\Repository\Account\AccountRepositoryInterface;
-use Core\Repository\Token\TokenRepositoryInterface;
-use Core\Type\Email;
+use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;

@@ -2,11 +2,11 @@
 
 namespace UnitTest\Mock\Table;
 
-use App\Entity\Account\AccountCollection;
-use App\Hydrator\Account\AccountHydrator;
-use App\Table\Account\AccountTable;
-use Core\Store\Account\AccountStoreInterface;
-use Core\Utils\UuidFactory;
+use Exdrals\Account\Identity\Domain\AccountCollection;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
+use Shared\Utils\UuidFactory;
 use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountTableFailed extends AccountTable implements AccountStoreInterface

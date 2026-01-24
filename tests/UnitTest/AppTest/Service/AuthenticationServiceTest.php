@@ -2,8 +2,8 @@
 
 namespace UnitTest\AppTest\Service;
 
+use Exdrals\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use PHPUnit\Framework\TestCase;
-use App\Service\Authentication\AuthenticationService;
 use UnitTest\Mock\Constants\Account;
 
 class AuthenticationServiceTest extends TestCase

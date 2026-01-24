@@ -2,16 +2,16 @@
 
 namespace UnitTest\AppTest\Table;
 
-use App\Entity\Account\AccountAccessAuthCollection;
-use App\Hydrator\Account\AccountAccessAuthHydrator;
-use App\Hydrator\Account\AccountAccessAuthHydratorInterface;
-use App\Table\Account\AccountAccessAuthTable;
-use Core\Entity\Account\AccountAccessAuthCollectionInterface;
-use Core\Entity\Account\AccountAccessAuthInterface;
-use Core\Exception\DuplicateEntryException;
-use Core\Store\Account\AccountAccessAuthStoreInterface;
+use Exdrals\Account\Identity\Domain\AccountAccessAuthCollection;
+use Exdrals\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthTable;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Shared\Domain\Exception\DuplicateEntryException;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 use UnitTest\Mock\Database\MockQuery;
 use UnitTest\Mock\Database\MockQueryFailed;

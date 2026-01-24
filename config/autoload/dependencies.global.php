@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Core\Utils\UuidFactoryInterface;
-use Core\Factory\DatabaseFactory;
-use Core\Factory\MailFactory;
-use Core\Factory\QueryFactory;
-use Core\Factory\UuidFactory;
-use Core\Logger\LoggerFactory;
+use Shared\Infrastructure\Factory\DatabaseFactory;
+use Shared\Infrastructure\Factory\MailFactory;
+use Shared\Infrastructure\Factory\QueryFactory;
+use Shared\Infrastructure\Factory\UuidFactory;
+use Shared\Infrastructure\Logger\LoggerFactory;
+use Shared\Utils\UuidFactoryInterface;
 
 return [
     // Provides application-wide services.
@@ -35,6 +35,11 @@ return [
             'logger' => LoggerFactory::class,
             'uuid' => UuidFactory::class,
             'mailer' => MailFactory::class,
+        ],
+        'delegators' => [
+            \Mezzio\Application::class => [
+                \Mezzio\Container\ApplicationConfigInjectionDelegator::class,
+            ],
         ],
     ],
 ];

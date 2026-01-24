@@ -1,0 +1,62 @@
+<?php declare(strict_types=1);
+
+namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
+
+use Exdrals\Account\Identity\Domain\AccountActivation;
+use Exdrals\Account\Identity\Domain\AccountActivationCollection;
+use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
+use Exdrals\Account\Identity\Domain\AccountActivationInterface;
+use Exdrals\Account\Identity\Domain\Email;
+use DateTimeImmutable;
+use Ramsey\Uuid\UuidFactoryInterface;
+use Shared\Domain\Enum\DateTimeFormat;
+
+readonly class AccountActivationHydrator implements AccountActivationHydratorInterface
+{
+    public function __construct(
+        private UuidFactoryInterface $uuid,
+    ) {
+    }
+
+    public function hydrate(array $data): AccountActivationInterface
+    {
+        return new AccountActivation(
+            id: $data['id'],
+            email: new Email($data['email']),
+            token: $this->uuid->fromString($data['token']),
+            createdAt: new DateTimeImmutable($data['createdAt']),
+        );
+    }
+
+    public function hydrateCollection(array $data): AccountActivationCollectionInterface
+    {
+        $collection = new AccountActivationCollection();
+
+        foreach ($data as $entity) {
+            $collection[] = $this->hydrate($entity);
+        }
+
+        return $collection;
+    }
+
+    public function extract(AccountActivationInterface $object): array
+    {
+        return [
+            'id' => $object->id,
+            'email' => $object->email->toString(),
+            'token' => $object->token->toString(),
+            'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
+        ];
+    }
+
+    public function extractCollection(AccountActivationCollectionInterface $collection): array
+    {
+        $data = [];
+
+        foreach ($collection as $entity) {
+            $data[] = $this->extract($entity);
+        }
+
+        return $data;
+    }
+}

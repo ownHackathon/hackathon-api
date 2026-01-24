@@ -174,7 +174,7 @@
                 ],
                 "summary": "Endpoint to register a new user account or request a password reset.",
                 "description": "Starts the account process for the given email address. \n\n**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. The user will not know if an account already exists based on the API response.",
-                "operationId": "969568dfb3cf23c770ed1a16782476cd",
+                "operationId": "03d5cf4ea4accb34a2bb86b27098efec",
                 "requestBody": {
                     "description": "The email address for the new account",
                     "required": true,
@@ -289,7 +289,7 @@
                     "System Information"
                 ],
                 "summary": "Returns the current time in Unix format",
-                "operationId": "8756d19e2e4758137f374e8015adad45",
+                "operationId": "887ad193abf91988bb9dcb3be905db26",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -308,74 +308,6 @@
                         }
                     }
                 }
-            }
-        },
-        "/workspace": {
-            "post": {
-                "tags": [
-                    "Workspace"
-                ],
-                "summary": "Create a new workspace",
-                "description": "Creates a new workspace for the authenticated user. Workspaces are used to group related resources (e.g., events).",
-                "operationId": "createWorkspace",
-                "requestBody": {
-                    "description": "The data for the new workspace. At a minimum, a name is required.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Workspace"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Workspace created successfully. The response contains the details of the newly created workspace.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Workspace"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input. The provided workspace name may be empty, too long, or contain invalid characters.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Authentication failed. The access token is missing or invalid.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "A workspace with this name already exists.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "accessToken": []
-                    }
-                ]
             }
         }
     },
@@ -498,18 +430,6 @@
                     }
                 },
                 "type": "object"
-            },
-            "Workspace": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "description": "The name from workspace",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
             }
         },
         "securitySchemes": {
@@ -538,10 +458,6 @@
         {
             "name": "System Information",
             "description": "System Information"
-        },
-        {
-            "name": "Workspace",
-            "description": "Workspace"
         }
     ]
 }
