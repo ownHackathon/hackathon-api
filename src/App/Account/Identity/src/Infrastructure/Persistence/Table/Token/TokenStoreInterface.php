@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Token;
+namespace Exdrals\Identity\Infrastructure\Persistence\Table\Token;
 
-use Exdrals\Account\Identity\Domain\TokenCollectionInterface;
-use Exdrals\Account\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Domain\TokenCollectionInterface;
+use Exdrals\Identity\Domain\TokenInterface;
 use Shared\Infrastructure\Persistence\StoreInterface;
 
 interface TokenStoreInterface extends StoreInterface

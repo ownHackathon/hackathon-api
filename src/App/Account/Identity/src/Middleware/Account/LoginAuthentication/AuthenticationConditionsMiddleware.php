@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\LoginAuthentication;
+namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

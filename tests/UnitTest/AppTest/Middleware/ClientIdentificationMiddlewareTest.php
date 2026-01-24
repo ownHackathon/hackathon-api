@@ -2,7 +2,7 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use Exdrals\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;

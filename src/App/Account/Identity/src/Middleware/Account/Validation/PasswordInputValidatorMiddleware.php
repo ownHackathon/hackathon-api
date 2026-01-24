@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\Validation;
+namespace Exdrals\Identity\Middleware\Account\Validation;
 
-use Exdrals\Account\Identity\Infrastructure\Validator\PasswordValidator;
+use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

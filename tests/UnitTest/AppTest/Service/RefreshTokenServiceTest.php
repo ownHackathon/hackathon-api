@@ -2,10 +2,10 @@
 
 namespace UnitTest\AppTest\Service;
 
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
-use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\Token;

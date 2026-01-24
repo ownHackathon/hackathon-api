@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Account;
+namespace Exdrals\Identity\DTO\Account;
 
-use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]

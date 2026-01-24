@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\Validation;
+namespace Exdrals\Identity\Middleware\Account\Validation;
 
-use Exdrals\Account\Identity\DTO\Account\AccountRegistration;
-use Exdrals\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
+use Exdrals\Identity\DTO\Account\AccountRegistration;
+use Exdrals\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

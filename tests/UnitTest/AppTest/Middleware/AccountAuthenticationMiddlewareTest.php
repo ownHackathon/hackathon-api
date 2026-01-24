@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Exdrals\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use FunctionalTest\Mock\NullLogger;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;

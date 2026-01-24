@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account;
+namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Account\Identity\Domain\Account;
-use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\DTO\Account\Account as AccountDTO;
-use Exdrals\Account\Identity\DTO\Account\AccountRegistration;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Domain\Account;
+use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\DTO\Account\Account as AccountDTO;
+use Exdrals\Identity\DTO\Account\AccountRegistration;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

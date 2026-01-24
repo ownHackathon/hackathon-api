@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Token;
+namespace Exdrals\Identity\DTO\Token;
 
 readonly class JwtTokenConfig
 {

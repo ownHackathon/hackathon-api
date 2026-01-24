@@ -174,7 +174,7 @@
                 ],
                 "summary": "Endpoint to register a new user account or request a password reset.",
                 "description": "Starts the account process for the given email address. \n\n**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. The user will not know if an account already exists based on the API response.",
-                "operationId": "03d5cf4ea4accb34a2bb86b27098efec",
+                "operationId": "f2e8a6c958dae94077b92efeb33a4152",
                 "requestBody": {
                     "description": "The email address for the new account",
                     "required": true,

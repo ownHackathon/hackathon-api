@@ -2,11 +2,11 @@
 
 namespace UnitTest\Mock\Table;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthTable;
+use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthTable;
 use InvalidArgumentException;
 use Shared\Domain\Exception\DuplicateEntryException;
 use UnitTest\Mock\Constants\Account;

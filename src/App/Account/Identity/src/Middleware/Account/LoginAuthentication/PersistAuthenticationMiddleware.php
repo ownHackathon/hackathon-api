@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\LoginAuthentication;
+namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuth;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Token\RefreshToken;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Identity\Domain\AccountAccessAuth;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Token\RefreshToken;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

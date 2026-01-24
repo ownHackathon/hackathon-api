@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Handler;
 
-use Exdrals\Account\Identity\DTO\Token\AccessToken;
-use Exdrals\Account\Identity\DTO\Token\RefreshToken;
-use Exdrals\Account\Identity\Handler\AuthenticationHandler;
+use Exdrals\Identity\DTO\Token\AccessToken;
+use Exdrals\Identity\DTO\Token\RefreshToken;
+use Exdrals\Identity\Handler\AuthenticationHandler;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use UnitTest\Mock\Constants\Token;

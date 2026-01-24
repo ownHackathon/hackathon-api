@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Validator\Input;
+namespace Exdrals\Identity\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
 

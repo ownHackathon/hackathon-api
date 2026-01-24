@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Token;
+namespace Exdrals\Identity\Middleware\Token;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuth;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\Domain\AccountAccessAuth;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

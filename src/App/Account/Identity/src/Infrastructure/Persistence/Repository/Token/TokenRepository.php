@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token;
+namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Token;
 
-use Exdrals\Account\Identity\Domain\TokenCollectionInterface;
-use Exdrals\Account\Identity\Domain\TokenInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Token\TokenStoreInterface;
+use Exdrals\Identity\Domain\TokenCollectionInterface;
+use Exdrals\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Token\TokenStoreInterface;
 
 readonly class TokenRepository implements TokenRepositoryInterface
 {

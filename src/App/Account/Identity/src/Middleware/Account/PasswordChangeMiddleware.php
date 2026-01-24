@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account;
+namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Account\Identity\Domain\Account;
-use Exdrals\Account\Identity\Domain\TokenInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Identity\Domain\Account;
+use Exdrals\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

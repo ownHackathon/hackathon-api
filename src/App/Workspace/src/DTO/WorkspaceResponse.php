@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Workspace\DTO;
 
-use Exdrals\Account\Identity\DTO\Account\Account;
+use Exdrals\Identity\DTO\Account\Account;
 use OpenApi\Attributes as OA;
 use ownHackathon\Workspace\Domain\Workspace;
 use Shared\Domain\Enum\DataType;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
+namespace Exdrals\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\DTO\Token\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
 
 readonly class AccessTokenServiceFactory

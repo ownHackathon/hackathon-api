@@ -2,7 +2,7 @@
 
 namespace Shared\Infrastructure\Factory;
 
-use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Monolog\Level;

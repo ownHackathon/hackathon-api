@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock\Service;
 
-use Exdrals\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use UnitTest\Mock\Constants\Account;
 
 readonly class MockAuthenticationService extends AuthenticationService

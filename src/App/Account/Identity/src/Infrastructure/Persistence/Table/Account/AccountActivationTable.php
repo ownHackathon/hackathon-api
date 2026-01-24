@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Envms\FluentPDO\Query;
-use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
+use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
+use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
 use InvalidArgumentException;
 use PDOException;
 use Shared\Domain\Exception\DuplicateEntryException;

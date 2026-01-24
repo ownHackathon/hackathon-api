@@ -3,11 +3,11 @@
 namespace UnitTest\Mock\Table;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountCollection;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
+use Exdrals\Identity\Domain\AccountCollection;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
 use InvalidArgumentException;
 use Ramsey\Uuid\UuidInterface;
 use Shared\Domain\Exception\DuplicateEntryException;

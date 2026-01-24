@@ -2,8 +2,8 @@
 
 namespace ownHackathon\Workspace\Handler;
 
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

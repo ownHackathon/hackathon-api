@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Handler;
+namespace Exdrals\Identity\Handler;
 
-use Exdrals\Account\Identity\DTO\Account\AccountAuthenticationData;
-use Exdrals\Account\Identity\DTO\Response\AuthenticationResponse;
-use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
-use Exdrals\Account\Identity\DTO\Token\AccessToken;
-use Exdrals\Account\Identity\DTO\Token\RefreshToken;
+use Exdrals\Identity\DTO\Account\AccountAuthenticationData;
+use Exdrals\Identity\DTO\Response\AuthenticationResponse;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\DTO\Token\AccessToken;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

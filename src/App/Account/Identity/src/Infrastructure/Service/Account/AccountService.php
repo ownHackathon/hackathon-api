@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Account;
+namespace Exdrals\Identity\Infrastructure\Service\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Domain\Token;
-use Exdrals\Account\Identity\Domain\TokenInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
+use Exdrals\Identity\Domain\Token;
+use Exdrals\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Shared\Domain\Enum\TokenType;
 use Shared\Utils\UuidFactoryInterface;
 

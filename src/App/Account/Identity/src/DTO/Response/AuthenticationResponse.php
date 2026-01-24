@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Response;
+namespace Exdrals\Identity\DTO\Response;
 
-use Exdrals\Account\Identity\DTO\Token\AccessToken;
-use Exdrals\Account\Identity\DTO\Token\RefreshToken;
+use Exdrals\Identity\DTO\Token\AccessToken;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use OpenApi\Attributes as OA;
 use Shared\Domain\Enum\DataType;
 

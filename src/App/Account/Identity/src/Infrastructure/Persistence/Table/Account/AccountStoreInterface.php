@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Identity\Domain\AccountInterface;
 use Ramsey\Uuid\UuidInterface;
 use Shared\Infrastructure\Persistence\StoreInterface;
 

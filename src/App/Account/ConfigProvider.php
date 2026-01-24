@@ -9,7 +9,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
-            Identity\ConfigProvider::class,
+            \Exdrals\Identity\ConfigProvider::class,
         ]);
 
         return $aggregator->getMergedConfig();

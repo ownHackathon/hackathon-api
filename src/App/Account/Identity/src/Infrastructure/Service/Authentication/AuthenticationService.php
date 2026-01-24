@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Authentication;
+namespace Exdrals\Identity\Infrastructure\Service\Authentication;
 
 readonly class AuthenticationService
 {

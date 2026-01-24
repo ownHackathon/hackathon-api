@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\ClientIdentification;
+namespace Exdrals\Identity\Middleware\ClientIdentification;
 
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
-use Exdrals\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

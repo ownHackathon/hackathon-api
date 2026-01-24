@@ -2,15 +2,15 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuth;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Identity\Domain\AccountAccessAuth;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
 use Fig\Http\Message\StatusCodeInterface as HTTP;

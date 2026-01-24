@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Token;
+namespace Exdrals\Identity\Middleware\Token;
 
-use Exdrals\Account\Identity\DTO\Token\RefreshToken;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Identity\DTO\Token\RefreshToken;
+use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
+namespace Exdrals\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Token\JwtTokenConfig;
 use Firebase\JWT\JWT;
 use Shared\Trait\JwtTokenTrait;
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Handler;
+namespace Exdrals\Identity\Handler;
 
-use Exdrals\Account\Identity\DTO\EMail\EMail;
+use Exdrals\Identity\DTO\EMail\EMail;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

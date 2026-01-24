@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account;
+namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

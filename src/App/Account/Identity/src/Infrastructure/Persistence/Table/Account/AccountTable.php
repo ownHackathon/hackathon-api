@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use InvalidArgumentException;
 use PDOException;
 use Ramsey\Uuid\UuidInterface;

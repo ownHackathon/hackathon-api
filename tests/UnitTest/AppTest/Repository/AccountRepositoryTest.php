@@ -3,12 +3,12 @@
 namespace UnitTest\AppTest\Repository;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DuplicateEntryException;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Exdrals\Account\Identity\Middleware\Account\LastAktivityUpdaterMiddleware;
-use Exdrals\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
-use Exdrals\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use Exdrals\Identity\Middleware\Account\LastAktivityUpdaterMiddleware;
+use Exdrals\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use Exdrals\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Mezzio\Application;
 use Mezzio\Cors\Middleware\CorsMiddleware;
 use Mezzio\Handler\NotFoundHandler;

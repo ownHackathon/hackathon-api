@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
+namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface AccountAccessAuthHydratorInterface extends HydratorInterface

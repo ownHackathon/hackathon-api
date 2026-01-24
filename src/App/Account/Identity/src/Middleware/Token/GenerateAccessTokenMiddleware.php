@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Token;
+namespace Exdrals\Identity\Middleware\Token;
 
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\DTO\Token\AccessToken;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\DTO\Token\AccessToken;
+use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

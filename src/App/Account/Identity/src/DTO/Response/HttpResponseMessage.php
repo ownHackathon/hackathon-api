@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Response;
+namespace Exdrals\Identity\DTO\Response;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use OpenApi\Attributes as OA;

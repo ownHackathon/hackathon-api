@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Token;
+namespace Exdrals\Identity\Infrastructure\Hydrator\Token;
 
-use Exdrals\Account\Identity\Domain\Token;
-use Exdrals\Account\Identity\Domain\TokenCollection;
-use Exdrals\Account\Identity\Domain\TokenCollectionInterface;
-use Exdrals\Account\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Domain\Token;
+use Exdrals\Identity\Domain\TokenCollection;
+use Exdrals\Identity\Domain\TokenCollectionInterface;
+use Exdrals\Identity\Domain\TokenInterface;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidFactoryInterface;
 use Shared\Domain\Enum\DateTimeFormat;

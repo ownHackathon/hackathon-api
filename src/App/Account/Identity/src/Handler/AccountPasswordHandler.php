@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Handler;
+namespace Exdrals\Identity\Handler;
 
-use Exdrals\Account\Identity\DTO\Account\AccountPassword;
-use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\DTO\Account\AccountPassword;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

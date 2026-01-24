@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Domain;
+namespace Exdrals\Identity\Domain;
 
 use DateTimeImmutable;
 use Shared\Trait\CloneReadonlyClassWith;

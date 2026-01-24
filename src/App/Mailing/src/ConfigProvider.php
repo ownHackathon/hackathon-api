@@ -2,7 +2,7 @@
 
 namespace Exdrals\Mailing;
 
-use Exdrals\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
+use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Shared\Infrastructure\Factory\MailFactory;

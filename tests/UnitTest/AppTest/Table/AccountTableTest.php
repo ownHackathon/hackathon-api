@@ -4,12 +4,12 @@ namespace UnitTest\AppTest\Table;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Envms\FluentPDO\Exception;
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
+use Exdrals\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
+use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DuplicateEntryException;

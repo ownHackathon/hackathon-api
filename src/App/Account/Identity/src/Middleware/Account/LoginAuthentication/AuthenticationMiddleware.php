@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\LoginAuthentication;
+namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

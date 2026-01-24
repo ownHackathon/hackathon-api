@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
+use Exdrals\Identity\Domain\AccountActivationInterface;
 use Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
+namespace Exdrals\Identity\Infrastructure\Service\Token;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Mailing\Infrastructure\EmailService;
-use Exdrals\Account\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Domain\TokenInterface;
 
 use function sprintf;
 

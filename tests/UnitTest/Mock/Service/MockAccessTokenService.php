@@ -2,8 +2,8 @@
 
 namespace UnitTest\Mock\Service;
 
-use Exdrals\Account\Identity\DTO\Token\JwtTokenConfig;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Firebase\JWT\JWT;
 use Ramsey\Uuid\UuidInterface;
 

@@ -3,11 +3,11 @@
 namespace FunctionalTest\Root\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\TokenInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Domain\TokenInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;

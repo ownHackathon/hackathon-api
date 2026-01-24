@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
+namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Domain\AccountActivation;
-use Exdrals\Account\Identity\Domain\AccountActivationCollection;
-use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Domain\AccountActivation;
+use Exdrals\Identity\Domain\AccountActivationCollection;
+use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
+use Exdrals\Identity\Domain\AccountActivationInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 use Shared\Domain\Enum\DateTimeFormat;
 

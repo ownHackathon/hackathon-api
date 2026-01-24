@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Account\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Account\Identity\DTO\Client\ClientIdentificationData;
-use Exdrals\Account\Identity\Middleware\Token\GenerateRefreshTokenMiddleware;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Identity\Middleware\Token\GenerateRefreshTokenMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;

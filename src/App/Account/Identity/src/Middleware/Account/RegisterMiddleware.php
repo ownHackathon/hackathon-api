@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account;
+namespace Exdrals\Identity\Middleware\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Domain\AccountActivation;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Account\AccountService;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
+use Exdrals\Identity\Domain\AccountActivation;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

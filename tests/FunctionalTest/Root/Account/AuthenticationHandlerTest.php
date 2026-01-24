@@ -4,9 +4,9 @@ namespace FunctionalTest\Root\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -112,7 +112,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         /** @var UuidFactoryInterface $uuid */
         $uuid = $this->container->get(UuidFactoryInterface::class);
 
-        $account = new \Exdrals\Account\Identity\Domain\Account(
+        $account = new \Exdrals\Identity\Domain\Account(
             null,
             $uuid->uuid7(),
             'I see your Token',

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class AccountRepository implements AccountRepositoryInterface

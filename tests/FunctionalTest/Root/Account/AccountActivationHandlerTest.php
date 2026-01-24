@@ -4,8 +4,8 @@ namespace FunctionalTest\Root\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Account\Identity\Domain\AccountActivation;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Identity\Domain\AccountActivation;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;

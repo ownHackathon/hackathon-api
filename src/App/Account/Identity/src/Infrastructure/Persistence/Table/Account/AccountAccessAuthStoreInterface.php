@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
+namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Shared\Infrastructure\Persistence\StoreInterface;
 
 interface AccountAccessAuthStoreInterface extends StoreInterface

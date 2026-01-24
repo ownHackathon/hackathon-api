@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Account;
+namespace Exdrals\Identity\DTO\Account;
 
 use OpenApi\Attributes as OA;
 use Shared\Domain\Enum\DataType;

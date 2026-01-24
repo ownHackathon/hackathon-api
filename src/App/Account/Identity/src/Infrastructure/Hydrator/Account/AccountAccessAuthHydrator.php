@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
+namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 
-use Exdrals\Account\Identity\Domain\AccountAccessAuth;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthCollection;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Domain\AccountAccessAuth;
+use Exdrals\Identity\Domain\AccountAccessAuthCollection;
+use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
+use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use DateTimeImmutable;
 use Exception;
 use Shared\Domain\Enum\DateTimeFormat;

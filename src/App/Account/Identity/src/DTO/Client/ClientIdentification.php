@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\DTO\Client;
+namespace Exdrals\Identity\DTO\Client;
 
 readonly class ClientIdentification
 {

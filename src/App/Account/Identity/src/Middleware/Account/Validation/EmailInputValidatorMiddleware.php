@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Middleware\Account\Validation;
+namespace Exdrals\Identity\Middleware\Account\Validation;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
-use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
