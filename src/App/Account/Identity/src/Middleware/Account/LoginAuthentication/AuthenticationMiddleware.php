@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use Exdrals\Mailing\Exception\InvalidArgumentException;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -37,7 +38,18 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
             );
         }
 
-        $email = new EmailType($data['email']);
+        try {
+            $email = new EmailType($data['email']);
+        } catch (InvalidArgumentException) {
+            throw new HttpUnauthorizedException(
+                LogMessage::EMAIL_INVALID,
+                StatusMessage::INVALID_DATA,
+                [
+                    'E-Mail:' => $data['email'] ?? 'unknown',
+                ],
+                Level::Warning
+            );
+        }
 
         $account = $this->accountRepository->findByEmail($email);
 

@@ -2,7 +2,7 @@
 
 namespace Exdrals\Mailing\Domain;
 
-use InvalidArgumentException;
+use Exdrals\Mailing\Exception\InvalidArgumentException;
 
 use function sprintf;
 
