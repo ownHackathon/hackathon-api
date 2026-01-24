@@ -2,7 +2,7 @@
 
 namespace Exdrals\Account\Identity\Middleware\Account;
 
-use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Infrastructure\Service\Account\AccountService;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
@@ -22,8 +22,8 @@ readonly class PasswordForgottenMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Email $email */
-        $email = $request->getAttribute(Email::class);
+        /** @var EmailType $email */
+        $email = $request->getAttribute(EmailType::class);
 
         if (!$this->accountService->isEmailAvailable($email)) {
             $this->accountService->sendTokenForPasswordChange($email);

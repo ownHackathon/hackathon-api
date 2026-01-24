@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
@@ -45,7 +45,7 @@ readonly class AccountRepository implements AccountRepositoryInterface
         return $this->store->findByName($name);
     }
 
-    public function findByEmail(Email $email): ?AccountInterface
+    public function findByEmail(EmailType $email): ?AccountInterface
     {
         return $this->store->findByEmail($email);
     }

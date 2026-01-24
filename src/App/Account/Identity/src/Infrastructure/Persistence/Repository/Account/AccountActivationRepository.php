@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountActivationStoreInterface;
 
 readonly class AccountActivationRepository implements AccountActivationRepositoryInterface
@@ -29,7 +29,7 @@ readonly class AccountActivationRepository implements AccountActivationRepositor
         return $this->store->findById($id);
     }
 
-    public function findEmail(Email $email): AccountActivationCollectionInterface
+    public function findEmail(EmailType $email): AccountActivationCollectionInterface
     {
         return $this->store->findByEmail($email);
     }
@@ -49,7 +49,7 @@ readonly class AccountActivationRepository implements AccountActivationRepositor
         return $this->store->deleteById($id);
     }
 
-    public function deleteByEmail(Email $email): true
+    public function deleteByEmail(EmailType $email): true
     {
         return $this->store->deleteByEmail($email);
     }

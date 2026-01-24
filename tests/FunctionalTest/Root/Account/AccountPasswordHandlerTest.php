@@ -2,12 +2,12 @@
 
 namespace FunctionalTest\Root\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
 use Exdrals\Account\Identity\Domain\Account;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Domain\Token;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -37,7 +37,7 @@ class AccountPasswordHandlerTest extends AbstractFunctional
         $this->tokenRepository = $this->container->get(TokenRepositoryInterface::class);
         $this->uuid = $this->container->get(UuidFactoryInterface::class);
 
-        $this->account = $this->accountRepository->findByEmail(new Email('user@example.com'));
+        $this->account = $this->accountRepository->findByEmail(new EmailType('user@example.com'));
         $this->token = new Token(
             null,
             $this->account->id,

@@ -2,16 +2,14 @@
 
 namespace UnitTest\AppTest\Table;
 
+use Exdrals\Mailing\Domain\EmailType;
+use Envms\FluentPDO\Exception;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
-use App\Hydrator\Account\WorkspaceHydrator;
-use App\Hydrator\Account\WorkspaceHydratorInterface;
-use Envms\FluentPDO\Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DuplicateEntryException;
@@ -158,7 +156,7 @@ class AccountTableTest extends TestCase
 
     public function testCanFindByEmail(): void
     {
-        $account = $this->table->findByEmail(new Email(Account::EMAIL));
+        $account = $this->table->findByEmail(new EmailType(Account::EMAIL));
 
         $this->assertInstanceOf(AccountInterface::class, $account);
         $this->assertSame(Account::VALID_DATA, $this->hydrator->extract($account));
@@ -166,7 +164,7 @@ class AccountTableTest extends TestCase
 
     public function testFindByEmailIsEmpty(): void
     {
-        $result = $this->table->findByEmail(new Email(Account::EMAIL_INVALID));
+        $result = $this->table->findByEmail(new EmailType(Account::EMAIL_INVALID));
 
         $this->assertNull($result);
     }

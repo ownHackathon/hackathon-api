@@ -2,6 +2,7 @@
 
 namespace Exdrals\Account\Identity\Domain;
 
+use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
@@ -17,7 +18,7 @@ interface AccountInterface
 
     public string $password { get; }
 
-    public Email $email { get; }
+    public EmailType $email { get; }
 
     public DateTimeImmutable $registeredAt { get; }
 

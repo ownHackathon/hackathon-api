@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Infrastructure\Persistence\Table;
+namespace ownHackathon\Workspace\Infrastructure\Persistence\Table;
 
-use App\Workspace\Domain\WorkspaceCollectionInterface;
-use App\Workspace\Domain\WorkspaceInterface;
+use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\Workspace\Domain\WorkspaceInterface;
 use Shared\Infrastructure\Persistence\StoreInterface;
 
 interface WorkspaceStoreInterface extends StoreInterface

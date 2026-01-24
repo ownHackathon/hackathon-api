@@ -5,7 +5,6 @@ namespace UnitTest\AppTest\Hydrator;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use App\Hydrator\Account\WorkspaceHydrator;
 use PHPUnit\Framework\TestCase;
 use Shared\Utils\UuidFactory;
 use Shared\Utils\UuidFactoryInterface;

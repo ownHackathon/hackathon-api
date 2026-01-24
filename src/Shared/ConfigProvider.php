@@ -2,8 +2,6 @@
 
 namespace Shared;
 
-use Exdrals\Account\Identity\Infrastructure\Validator\Input\EmailInput;
-use Exdrals\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Psr\Log\LoggerInterface;
 
@@ -21,8 +19,6 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                EmailInput::class => EmailInput::class,
-                PasswordInput::class => PasswordInput::class,
             ],
             'aliases' => [
             ],

@@ -2,8 +2,8 @@
 
 namespace FunctionalTest\Root\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Domain\TokenInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
@@ -71,7 +71,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
 
         /** @var AccountActivationRepositoryInterface $repository */
         $repository = $this->container->get(AccountActivationRepositoryInterface::class);
-        $activationDataSet = $repository->findEmail(new Email('Tester@example.com'));
+        $activationDataSet = $repository->findEmail(new EmailType('Tester@example.com'));
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
         $this->assertArrayHasKey(0, $activationDataSet);
@@ -82,7 +82,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
     {
         /** @var AccountRepositoryInterface $accountRepository */
         $accountRepository = $this->container->get(AccountRepositoryInterface::class);
-        $account = $accountRepository->findByEmail(new Email('user@example.com'));
+        $account = $accountRepository->findByEmail(new EmailType('user@example.com'));
 
         /** @var TokenRepositoryInterface $tokenRepository */
         $tokenRepository = $this->container->get(TokenRepositoryInterface::class);

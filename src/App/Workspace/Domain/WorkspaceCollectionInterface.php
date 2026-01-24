@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Domain;
+namespace ownHackathon\Workspace\Domain;
 
 use Shared\Utils\CollectionInterface;
 

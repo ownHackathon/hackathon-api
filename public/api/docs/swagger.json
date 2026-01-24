@@ -283,6 +283,74 @@
                 ]
             }
         },
+        "/workspace": {
+            "post": {
+                "tags": [
+                    "Workspace"
+                ],
+                "summary": "Create a new workspace",
+                "description": "Creates a new workspace for the authenticated user. Workspaces are used to group related resources (e.g., events).",
+                "operationId": "createWorkspace",
+                "requestBody": {
+                    "description": "The data for the new workspace. At a minimum, a name is required.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Workspace created successfully. The response contains the details of the newly created workspace.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkspaceResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input. The provided workspace name may be empty, too long, or contain invalid characters.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication failed. The access token is missing or invalid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "A workspace with this name already exists.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": []
+                    }
+                ]
+            }
+        },
         "/ping": {
             "get": {
                 "tags": [
@@ -430,6 +498,39 @@
                     }
                 },
                 "type": "object"
+            },
+            "WorkspaceRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "The name from workspace",
+                        "type": "string",
+                        "example": "My own workspace"
+                    }
+                },
+                "type": "object"
+            },
+            "WorkspaceResponse": {
+                "properties": {
+                    "ownerUuid": {
+                        "description": "The Uuid from owner for this workspace",
+                        "type": "string",
+                        "example": "019becbe-f952-7b82-82fa-f41f8ae24599"
+                    },
+                    "name": {
+                        "description": "The name from workspace",
+                        "type": "string",
+                        "example": "My own workspace"
+                    },
+                    "slug": {
+                        "description": "The slug for this workspace",
+                        "type": "string",
+                        "example": "my-own-workspace"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -454,6 +555,10 @@
         {
             "name": "Account",
             "description": "Account"
+        },
+        {
+            "name": "Workspace",
+            "description": "Workspace"
         },
         {
             "name": "System Information",

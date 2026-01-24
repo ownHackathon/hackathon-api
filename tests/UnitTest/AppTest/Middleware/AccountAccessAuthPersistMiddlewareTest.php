@@ -10,8 +10,6 @@ use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Exdrals\Account\Identity\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
-use App\Hydrator\Account\WorkspaceHydrator;
-use App\Hydrator\Account\WorkspaceHydratorInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Shared\Domain\Exception\HttpDuplicateEntryException;
 use Shared\Domain\Exception\HttpUnauthorizedException;

@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Middleware\Account\Validation;
 
-use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
 use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
-use Exdrals\Account\Identity\Infrastructure\Validator\EMailValidator;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -40,8 +40,19 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
             );
         }
 
-        $email = new Email($data['email']);
+        try {
+            $email = new EmailType($data['email']);
+        } catch (\InvalidArgumentException) {
+            throw new HttpInvalidArgumentException(
+                LogMessage::EMAIL_INVALID,
+                StatusMessage::INVALID_DATA,
+                [
+                    'E-Mail:' => $data['email'] ?? null,
+                    'Validator Message:' => $this->mailValidator->getMessages(),
+                ]
+            );
+        }
 
-        return $handler->handle($request->withAttribute(Email::class, $email));
+        return $handler->handle($request->withAttribute(EmailType::class, $email));
     }
 }

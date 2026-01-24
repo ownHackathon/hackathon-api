@@ -2,12 +2,12 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
 use Exdrals\Account\Identity\Domain\AccountActivation;
 use Exdrals\Account\Identity\Domain\AccountActivationCollection;
 use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\Email;
-use DateTimeImmutable;
 use Ramsey\Uuid\UuidFactoryInterface;
 use Shared\Domain\Enum\DateTimeFormat;
 
@@ -22,7 +22,7 @@ readonly class AccountActivationHydrator implements AccountActivationHydratorInt
     {
         return new AccountActivation(
             id: $data['id'],
-            email: new Email($data['email']),
+            email: new EmailType($data['email']),
             token: $this->uuid->fromString($data['token']),
             createdAt: new DateTimeImmutable($data['createdAt']),
         );

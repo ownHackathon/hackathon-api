@@ -2,9 +2,9 @@
 
 namespace UnitTest\Mock\Table;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountCollection;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
@@ -72,7 +72,7 @@ class MockAccountTable extends AccountTable implements AccountStoreInterface
         return $name === Account::NAME ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
     }
 
-    public function findByEmail(Email $email): ?AccountInterface
+    public function findByEmail(EmailType $email): ?AccountInterface
     {
         return $email->toString() === Account::EMAIL ? $this->hydrator->hydrate(Account::VALID_DATA) : null;
     }

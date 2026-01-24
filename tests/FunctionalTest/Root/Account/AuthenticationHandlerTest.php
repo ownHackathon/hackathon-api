@@ -2,11 +2,11 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use DateTimeImmutable;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -18,7 +18,6 @@ use UnitTest\Mock\Constants\Account;
 
 use function password_hash;
 use function rand;
-
 use function var_dump;
 
 use const PASSWORD_DEFAULT;
@@ -118,7 +117,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
             $uuid->uuid7(),
             'I see your Token',
             password_hash('I see your Token', PASSWORD_DEFAULT),
-            new Email('iseeyourtoken@example.com'),
+            new EmailType('iseeyourtoken@example.com'),
             new DateTimeImmutable(),
             new DateTimeImmutable()
         );
@@ -133,7 +132,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         );
 
         $response = $this->app->handle($request);
-        var_dump($response->getStatusCode());die();
+
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());

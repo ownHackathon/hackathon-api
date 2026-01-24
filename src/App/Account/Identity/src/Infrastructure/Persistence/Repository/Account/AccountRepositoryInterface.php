@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Ramsey\Uuid\UuidInterface;
 use Shared\Infrastructure\Persistence\RepositoryInterface;
 
@@ -20,7 +20,7 @@ interface AccountRepositoryInterface extends RepositoryInterface
 
     public function findByName(string $name): ?AccountInterface;
 
-    public function findByEmail(Email $email): ?AccountInterface;
+    public function findByEmail(EmailType $email): ?AccountInterface;
 
     public function findAll(): AccountCollectionInterface;
 }

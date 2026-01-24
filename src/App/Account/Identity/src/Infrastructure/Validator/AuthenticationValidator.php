@@ -2,7 +2,7 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Validator;
 
-use Exdrals\Account\Identity\Infrastructure\Validator\Input\EmailInput;
+use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Exdrals\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
 

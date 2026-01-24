@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Infrastructure\Service\Email;
+namespace Exdrals\Mailing\Infrastructure;
 
-use Exdrals\Account\Identity\Domain\Email as EmailType;
+use Exdrals\Mailing\Domain\EmailType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 

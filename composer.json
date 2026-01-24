@@ -78,10 +78,11 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\" : "src/App/",
+      "ownHackathon\\" : "src/App/",
       "Shared\\": "src/Shared/",
       "Exdrals\\Account\\" : "src/App/Account/",
-      "Exdrals\\Account\\Identity\\" : "src/App/Account/Identity/src/"
+      "Exdrals\\Account\\Identity\\" : "src/App/Account/Identity/src/",
+      "Exdrals\\Mailing\\"  : "src/App/Mailing/src/"
     }
   },
   "autoload-dev": {

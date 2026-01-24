@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Infrastructure\Hydrator\Workspace;
+namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
-use App\Workspace\Domain\WorkspaceCollectionInterface;
-use App\Workspace\Domain\WorkspaceInterface;
+use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\Workspace\Domain\WorkspaceInterface;
 use Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface WorkspaceHydratorInterface extends HydratorInterface

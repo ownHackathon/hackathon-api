@@ -2,12 +2,12 @@
 
 namespace Exdrals\Account\Identity\Middleware\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
 use Exdrals\Account\Identity\Domain\AccountActivation;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Account\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
-use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -29,8 +29,8 @@ readonly class RegisterMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var Email $email */
-        $email = $request->getAttribute(Email::class);
+        /** @var EmailType $email */
+        $email = $request->getAttribute(EmailType::class);
 
         if (!$this->accountService->isEmailAvailable($email)) {
             $this->logger->warning(LogMessage::ACCOUNT_ALREADY_EXISTS->value, [

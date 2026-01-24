@@ -2,8 +2,8 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
 
+use Exdrals\Mailing\Infrastructure\EmailService;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Email\EmailService;
 
 use function sprintf;
 

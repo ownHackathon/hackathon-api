@@ -1,16 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Account\Identity\Domain;
+namespace Exdrals\Mailing\Domain;
 
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpInvalidArgumentException;
-use Shared\Type\TypeInterface;
-use ValueError;
+use InvalidArgumentException;
 
 use function sprintf;
 
-final class Email implements TypeInterface
+final class EmailType
 {
     private string $value;
 
@@ -48,7 +44,7 @@ final class Email implements TypeInterface
     {
         // @codeCoverageIgnoreStart
         if (!isset($data['string'])) {
-            throw new ValueError(sprintf('%s(): Argument #1 ($data) is invalid', __METHOD__));
+            throw new InvalidArgumentException(sprintf('%s(): Argument #1 ($data) is invalid', __METHOD__));
         }
         // @codeCoverageIgnoreEnd
 
@@ -63,12 +59,8 @@ final class Email implements TypeInterface
     private function prepareValue(string $value): string
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new HttpInvalidArgumentException(
-                LogMessage::EMAIL_FORMAT_REQUIRED,
-                StatusMessage::INVALID_DATA,
-                [
-                    'email' => $value,
-                ]
+            throw new InvalidArgumentException(
+                sprintf('Value must be a valid email address: %s', $value)
             );
         }
 

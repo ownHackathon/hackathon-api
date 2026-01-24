@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+use Mezzio\Application;
+use Mezzio\Container\ApplicationConfigInjectionDelegator;
 use Shared\Infrastructure\Factory\DatabaseFactory;
-use Shared\Infrastructure\Factory\MailFactory;
 use Shared\Infrastructure\Factory\QueryFactory;
 use Shared\Infrastructure\Factory\UuidFactory;
 use Shared\Infrastructure\Logger\LoggerFactory;
@@ -21,7 +22,6 @@ return [
             Envms\FluentPDO\Query::class => 'query',
             Psr\Log\LoggerInterface::class => 'logger',
             UuidFactoryInterface::class => 'uuid',
-            Symfony\Component\Mailer\MailerInterface::class => 'mailer',
         ],
         // Use 'invokables' for constructor-less services, or services that do
         // not require arguments to the constructor. Map a service name to the
@@ -34,11 +34,10 @@ return [
             'query' => QueryFactory::class,
             'logger' => LoggerFactory::class,
             'uuid' => UuidFactory::class,
-            'mailer' => MailFactory::class,
         ],
         'delegators' => [
-            \Mezzio\Application::class => [
-                \Mezzio\Container\ApplicationConfigInjectionDelegator::class,
+            Application::class => [
+                ApplicationConfigInjectionDelegator::class,
             ],
         ],
     ],

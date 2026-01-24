@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Infrastructure\Hydrator\Workspace;
+namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
-use App\Workspace\Domain\Workspace;
-use App\Workspace\Domain\WorkspaceCollection;
-use App\Workspace\Domain\WorkspaceCollectionInterface;
-use App\Workspace\Domain\WorkspaceInterface;
 use Exception;
+use ownHackathon\Workspace\Domain\Workspace;
+use ownHackathon\Workspace\Domain\WorkspaceCollection;
+use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\Workspace\Domain\WorkspaceInterface;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {

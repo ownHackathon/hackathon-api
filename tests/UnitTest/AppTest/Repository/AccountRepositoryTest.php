@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Repository;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
@@ -126,7 +126,7 @@ class AccountRepositoryTest extends TestCase
 
     public function testCanFindByEmail(): void
     {
-        $result = $this->repository->findByEmail(new Email(Account::EMAIL));
+        $result = $this->repository->findByEmail(new EmailType(Account::EMAIL));
 
         $this->assertInstanceOf(AccountInterface::class, $result);
         $this->assertSame(Account::VALID_DATA, $this->hydrator->extract($result));
@@ -134,7 +134,7 @@ class AccountRepositoryTest extends TestCase
 
     public function testFindByEmailIsEmpty(): void
     {
-        $result = $this->repository->findByEmail(new Email(Account::EMAIL_INVALID));
+        $result = $this->repository->findByEmail(new EmailType(Account::EMAIL_INVALID));
 
         $this->assertNull($result);
     }

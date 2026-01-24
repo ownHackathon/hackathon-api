@@ -2,11 +2,11 @@
 
 namespace Exdrals\Account\Identity\Middleware\Account\LoginAuthentication;
 
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use DateTimeImmutable;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -37,7 +37,7 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
             );
         }
 
-        $email = new Email($data['email']);
+        $email = new EmailType($data['email']);
 
         $account = $this->accountRepository->findByEmail($email);
 

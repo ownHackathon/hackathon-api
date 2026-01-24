@@ -2,11 +2,11 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
+use Envms\FluentPDO\Query;
 use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
-use Envms\FluentPDO\Query;
 use InvalidArgumentException;
 use PDOException;
 use Shared\Domain\Exception\DuplicateEntryException;
@@ -63,7 +63,7 @@ class AccountActivationTable extends AbstractTable implements AccountActivationS
         return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
-    public function findByEmail(Email $email): AccountActivationCollectionInterface
+    public function findByEmail(EmailType $email): AccountActivationCollectionInterface
     {
         $result = $this->query->from($this->table)
             ->where('email', $email->toString())
@@ -88,7 +88,7 @@ class AccountActivationTable extends AbstractTable implements AccountActivationS
         return is_array($result) ? $this->hydrator->hydrateCollection($result) : $this->hydrator->hydrateCollection([]);
     }
 
-    public function deleteByEmail(Email $email): true
+    public function deleteByEmail(EmailType $email): true
     {
         $result = $this->query->delete($this->table)
             ->where('email', $email->toString())

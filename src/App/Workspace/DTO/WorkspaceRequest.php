@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\DTO;
+namespace ownHackathon\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
 use Shared\Domain\Enum\DataType;

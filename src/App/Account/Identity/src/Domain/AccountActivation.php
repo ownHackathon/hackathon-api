@@ -2,6 +2,7 @@
 
 namespace Exdrals\Account\Identity\Domain;
 
+use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 use Shared\Trait\CloneReadonlyClassWith;
@@ -13,7 +14,7 @@ readonly class AccountActivation implements AccountActivationInterface, Collecti
 
     public function __construct(
         public ?int $id,
-        public Email $email,
+        public EmailType $email,
         public UuidInterface $token,
         public DateTimeImmutable $createdAt,
     ) {

@@ -2,9 +2,9 @@
 
 namespace UnitTest\Mock\Entity;
 
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
+use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
+use Exdrals\Account\Identity\Domain\AccountInterface;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use UnitTest\Mock\Constants\Account;
@@ -33,9 +33,9 @@ class MockAccount implements AccountInterface
             return '';
         }
     }
-    public Email $email {
+    public EmailType $email {
         get {
-            return new Email(Account::EMAIL);
+            return new EmailType(Account::EMAIL);
         }
     }
     public DateTimeImmutable $registeredAt {

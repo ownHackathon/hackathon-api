@@ -2,13 +2,13 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Hydrator\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
+use DateTimeImmutable;
+use Exception;
 use Exdrals\Account\Identity\Domain\Account;
 use Exdrals\Account\Identity\Domain\AccountCollection;
 use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
-use DateTimeImmutable;
-use Exception;
 use Ramsey\Uuid\UuidFactoryInterface;
 use Shared\Domain\Enum\DateTimeFormat;
 
@@ -29,7 +29,7 @@ readonly class AccountHydrator implements AccountHydratorInterface
             uuid: $this->uuid->fromString($data['uuid']),
             name: $data['name'],
             password: $data['password'],
-            email: new Email($data['email']),
+            email: new EmailType($data['email']),
             registeredAt: new DateTimeImmutable($data['registeredAt']),
             lastActionAt: new DateTimeImmutable($data['lastActionAt']),
         );

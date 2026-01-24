@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Handler;
+namespace ownHackathon\Workspace\Handler;
 
 use Exdrals\Account\Identity\Domain\AccountInterface;
 use Exdrals\Account\Identity\DTO\Response\HttpResponseMessage;
-use App\Workspace\Domain\Workspace;
-use App\Workspace\DTO\WorkspaceRequest;
-use App\Workspace\DTO\WorkspaceResponse;
+use ownHackathon\Workspace\Domain\Workspace;
+use ownHackathon\Workspace\DTO\WorkspaceRequest;
+use ownHackathon\Workspace\DTO\WorkspaceResponse;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

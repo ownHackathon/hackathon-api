@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Infrastructure\Persistence\Table;
+namespace ownHackathon\Workspace\Infrastructure\Persistence\Table;
 
-use App\Workspace\Domain\WorkspaceCollectionInterface;
-use App\Workspace\Domain\WorkspaceInterface;
-use App\Workspace\Infrastructure\Hydrator\Workspace\WorkspaceHydratorInterface;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
+use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\Workspace\Domain\WorkspaceInterface;
+use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use PDOException;
 use Shared\Domain\Exception\DuplicateEntryException;
 use Shared\Infrastructure\Persistence\AbstractTable;

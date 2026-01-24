@@ -2,7 +2,7 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Account\Identity\Infrastructure\Service\Email\EmailService;
+use Exdrals\Mailing\Infrastructure\EmailService;
 use Psr\Container\ContainerInterface;
 
 readonly class ActivationTokenServiceFactory

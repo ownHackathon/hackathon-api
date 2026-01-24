@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account;
 
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Account\Identity\Domain\AccountActivationCollectionInterface;
 use Exdrals\Account\Identity\Domain\AccountActivationInterface;
-use Exdrals\Account\Identity\Domain\Email;
 use Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
@@ -15,11 +15,11 @@ interface AccountActivationRepositoryInterface extends RepositoryInterface
 
     public function findById(int $id): ?AccountActivationInterface;
 
-    public function findEmail(Email $email): AccountActivationCollectionInterface;
+    public function findEmail(EmailType $email): AccountActivationCollectionInterface;
 
     public function findByToken(string $token): ?AccountActivationInterface;
 
     public function findAll(): AccountActivationCollectionInterface;
 
-    public function deleteByEmail(Email $email): true;
+    public function deleteByEmail(EmailType $email): true;
 }

@@ -2,9 +2,9 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Account\Identity\Domain\Email as EmailType;
+use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Mailing\Infrastructure\EmailService;
 use Exdrals\Account\Identity\Domain\TokenInterface;
-use Exdrals\Account\Identity\Infrastructure\Service\Email\EmailService;
 
 use function sprintf;
 

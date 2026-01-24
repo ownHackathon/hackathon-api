@@ -2,10 +2,10 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Account\Identity\Domain\AccountActivation;
-use Exdrals\Account\Identity\Domain\Email;
-use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
+use Exdrals\Account\Identity\Domain\AccountActivation;
+use Exdrals\Account\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -29,7 +29,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
 
         $testAccountActivate = new AccountActivation(
             id: null,
-            email: new Email('test@example.com'),
+            email: new EmailType('test@example.com'),
             token: $uuid->uuid7(),
             createdAt: new DateTimeImmutable()
         );

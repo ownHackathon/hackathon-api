@@ -20,9 +20,6 @@
         <testsuite name="CoreTest">
             <directory>tests/UnitTest/CoreTest</directory>
         </testsuite>
-        <testsuite name="GameTest">
-            <directory>tests/UnitTest/GameTest</directory>
-        </testsuite>
     </testsuites>
     <coverage>
         <report>

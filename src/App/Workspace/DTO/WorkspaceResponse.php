@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\DTO;
+namespace ownHackathon\Workspace\DTO;
 
 use Exdrals\Account\Identity\DTO\Account\Account;
-use App\Workspace\Domain\Workspace;
+use ownHackathon\Workspace\Domain\Workspace;
 use OpenApi\Attributes as OA;
 use Shared\Domain\Enum\DataType;
 

@@ -2,6 +2,8 @@
 
 namespace Exdrals\Account\Identity;
 
+use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
+use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Envms\FluentPDO\Query;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
 use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
@@ -24,9 +26,7 @@ use Exdrals\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Exdrals\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Exdrals\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Exdrals\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
-use Exdrals\Account\Identity\Infrastructure\Validator\EMailValidator;
 use Exdrals\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
-use Exdrals\Account\Identity\Infrastructure\Validator\Input\EmailInput;
 use Exdrals\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -182,7 +182,7 @@ readonly class ConfigProvider
                 Infrastructure\Service\Account\AccountService::class => ConfigAbstractFactory::class,
                 Infrastructure\Service\Authentication\AuthenticationService::class => InvokableFactory::class,
                 Infrastructure\Service\ClientIdentification\ClientIdentificationService::class => InvokableFactory::class,
-                Infrastructure\Service\Email\EmailService::class => Infrastructure\Service\Email\EmailServiceFactory::class,
+                \Exdrals\Mailing\Infrastructure\EmailService::class => \Exdrals\Mailing\Infrastructure\EmailServiceFactory::class,
                 Infrastructure\Service\Token\AccessTokenService::class => Infrastructure\Service\Token\AccessTokenServiceFactory::class,
                 Infrastructure\Service\Token\ActivationTokenService::class => Infrastructure\Service\Token\ActivationTokenServiceFactory::class,
                 Infrastructure\Service\Token\PasswordTokenService::class => Infrastructure\Service\Token\PasswordTokenServiceFactory::class,
@@ -192,11 +192,11 @@ readonly class ConfigProvider
                 Infrastructure\Persistence\Table\Account\AccountTable::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Table\Token\TokenTable::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\Input\AccountNameInput::class => InvokableFactory::class,
-                Infrastructure\Validator\Input\EmailInput::class => InvokableFactory::class,
+                \Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput::class => InvokableFactory::class,
                 Infrastructure\Validator\Input\PasswordInput::class => InvokableFactory::class,
                 Infrastructure\Validator\AccountActivationValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\AuthenticationValidator::class => ConfigAbstractFactory::class,
-                Infrastructure\Validator\EMailValidator::class => ConfigAbstractFactory::class,
+                \Exdrals\Mailing\Infrastructure\Validator\EMailValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\PasswordValidator::class => ConfigAbstractFactory::class,
             ],
 
@@ -329,7 +329,7 @@ readonly class ConfigProvider
                 EmailInput::class,
                 PasswordInput::class,
             ],
-            Infrastructure\Validator\EMailValidator::class => [
+            \Exdrals\Mailing\Infrastructure\Validator\EMailValidator::class => [
                 EmailInput::class,
             ],
             Infrastructure\Validator\PasswordValidator::class => [

@@ -2,12 +2,12 @@
 
 namespace Exdrals\Account\Identity\Infrastructure\Persistence\Table\Account;
 
-use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Account\Identity\Domain\AccountInterface;
-use Exdrals\Account\Identity\Domain\Email;
-use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
+use Exdrals\Account\Identity\Domain\AccountCollectionInterface;
+use Exdrals\Account\Identity\Domain\AccountInterface;
+use Exdrals\Account\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use InvalidArgumentException;
 use PDOException;
 use Ramsey\Uuid\UuidInterface;
@@ -88,7 +88,7 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
         return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
-    public function findByEmail(Email $email): ?AccountInterface
+    public function findByEmail(EmailType $email): ?AccountInterface
     {
         $result = $this->query->from($this->table)
             ->where('email', $email->toString())
