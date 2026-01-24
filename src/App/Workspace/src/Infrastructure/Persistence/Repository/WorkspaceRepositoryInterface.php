@@ -4,7 +4,7 @@ namespace ownHackathon\Workspace\Infrastructure\Persistence\Repository;
 
 use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\Workspace\Domain\WorkspaceInterface;
-use Shared\Infrastructure\Persistence\RepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface WorkspaceRepositoryInterface extends RepositoryInterface
 {

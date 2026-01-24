@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
+use Envms\FluentPDO\Exception;
+use Envms\FluentPDO\Query;
 use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
-use Envms\FluentPDO\Exception;
-use Envms\FluentPDO\Query;
 use InvalidArgumentException;
 use PDOException;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;

@@ -6,7 +6,7 @@ use Exdrals\Mailing\Exception\InvalidArgumentException;
 
 use function sprintf;
 
-final class EmailType
+final class EmailType implements \Exdrals\Shared\Type\TypeInterface
 {
     private string $value;
 

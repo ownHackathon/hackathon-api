@@ -6,8 +6,8 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Shared\Domain\Enum\DataType;
-use Shared\Domain\Enum\Message\StatusMessage;
+use Exdrals\Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Message\StatusMessage;
 
 trait InvalidEMailAddressProviderTrait
 {
@@ -28,7 +28,7 @@ trait InvalidEMailAddressProviderTrait
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
+        $this->assertSame(StatusMessage::INVALID_DATA, $content['message']);
     }
 
     public static function invalidEMailAddressProvider(): array

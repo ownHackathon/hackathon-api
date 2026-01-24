@@ -5,7 +5,7 @@ namespace UnitTest\AppTest\Handler;
 use Laminas\Diactoros\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Shared\Handler\PingHandler;
+use Exdrals\Shared\Handler\PingHandler;
 
 use function json_decode;
 use function property_exists;

@@ -11,7 +11,7 @@ use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccess
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 use UnitTest\Mock\Table\MockAccountAccessAuthTable;
 use UnitTest\Mock\Table\MockAccountAccessAuthTableFailed;

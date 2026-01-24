@@ -2,10 +2,10 @@
 
 namespace Exdrals\Identity\DTO\Response;
 
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use OpenApi\Attributes as OA;
-use Shared\Domain\Enum\DataType;
-use Shared\Domain\Enum\Message\StatusMessage;
+use Exdrals\Shared\Domain\Enum\DataType;
 
 #[OA\Schema()]
 readonly class HttpResponseMessage
@@ -20,13 +20,13 @@ readonly class HttpResponseMessage
         #[OA\Property(
             description: 'The Message',
             type: DataType::STRING->value,
-            example: StatusMessage::BAD_REQUEST->value
+            example: IdentityStatusMessage::BAD_REQUEST
         )]
-        public StatusMessage $message,
+        public string $message,
     ) {
     }
 
-    public static function create(int $statusCode, StatusMessage $message): self
+    public static function create(int $statusCode, string $message): self
     {
         return new self($statusCode, $message);
     }

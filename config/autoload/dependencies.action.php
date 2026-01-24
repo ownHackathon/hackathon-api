@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
 use FunctionalTest\Mock\NullMailerFactory;
-use Shared\Infrastructure\Factory\DatabaseFactory;
-use Shared\Infrastructure\Factory\QueryFactory;
-use Shared\Infrastructure\Factory\UuidFactory;
-use Shared\Infrastructure\Logger\LoggerFactory;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Infrastructure\Factory\DatabaseFactory;
+use Exdrals\Shared\Infrastructure\Factory\QueryFactory;
+use Exdrals\Shared\Infrastructure\Factory\UuidFactory;
+use Exdrals\Shared\Infrastructure\Logger\LoggerFactory;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 return [
     'dependencies' => [

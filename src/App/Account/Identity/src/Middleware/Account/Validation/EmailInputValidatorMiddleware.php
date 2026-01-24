@@ -2,18 +2,18 @@
 
 namespace Exdrals\Identity\Middleware\Account\Validation;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Mailing\Exception\InvalidArgumentException;
 use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
-use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpInvalidArgumentException;
+use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 
 readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 {
@@ -24,7 +24,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, StatusMessage::EMAIL_INVALID);
+        $message = HttpResponseMessage::create(HTTP::STATUS_BAD_REQUEST, IdentityStatusMessage::EMAIL_INVALID);
 
         $data = $request->getParsedBody();
 
@@ -32,8 +32,8 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->mailValidator->isValid()) {
             throw new HttpInvalidArgumentException(
-                LogMessage::EMAIL_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::EMAIL_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? null,
                     'Validator Message:' => $this->mailValidator->getMessages(),
@@ -45,8 +45,8 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
             $email = new EmailType($data['email']);
         } catch (InvalidArgumentException) {
             throw new HttpInvalidArgumentException(
-                LogMessage::EMAIL_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::EMAIL_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? 'unknown',
                 ]

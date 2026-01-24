@@ -3,6 +3,8 @@
 namespace Exdrals\Identity\Middleware\Account;
 
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Monolog\Level;
@@ -11,10 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 use function strlen;
 
@@ -42,8 +42,8 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
 
         if (!$this->accessTokenService->isValid($authorization)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCESS_TOKEN_EXPIRED,
-                StatusMessage::TOKEN_EXPIRED,
+                IdentityLogMessage::ACCESS_TOKEN_EXPIRED,
+                IdentityStatusMessage::TOKEN_EXPIRED,
                 [
                     'uri' => (string)$request->getUri(),
                     'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
@@ -56,8 +56,8 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
         $account = $this->accountRepository->findByUuid($uuid);
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
-                StatusMessage::TOKEN_INVALID,
+                IdentityLogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
+                IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'uri' => (string)$request->getUri(),
                     'uuid' => $authorization->uuid,

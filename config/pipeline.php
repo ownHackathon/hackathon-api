@@ -18,8 +18,8 @@ use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
-use Shared\Middleware\ApiErrorHandlerMiddleware;
-use Shared\Middleware\RouteNotFoundMiddleware;
+use Exdrals\Shared\Middleware\ApiErrorHandlerMiddleware;
+use Exdrals\Shared\Middleware\RouteNotFoundMiddleware;
 
 /**
  * Setup middleware pipeline:

@@ -2,7 +2,7 @@
 
 namespace Exdrals\Identity\Domain;
 
-use Shared\Utils\CollectionInterface;
+use Exdrals\Shared\Utils\CollectionInterface;
 
 /**
  * @method Token offsetGet(mixed $offset)

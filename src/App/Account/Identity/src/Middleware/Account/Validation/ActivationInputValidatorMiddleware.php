@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Middleware\Account\Validation;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Account\AccountRegistration;
 use Exdrals\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpInvalidArgumentException;
+use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 
 readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
 {
@@ -27,8 +27,8 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpInvalidArgumentException(
-                LogMessage::ACCOUNT_NAME_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::ACCOUNT_NAME_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'Account Name:' => $data['accountName'] ?? null,
                     'Validator-Message:' => $this->validator->getMessages(),

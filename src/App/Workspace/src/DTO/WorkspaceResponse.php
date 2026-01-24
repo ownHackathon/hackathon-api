@@ -5,7 +5,7 @@ namespace ownHackathon\Workspace\DTO;
 use Exdrals\Identity\DTO\Account\Account;
 use OpenApi\Attributes as OA;
 use ownHackathon\Workspace\Domain\Workspace;
-use Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Enum\DataType;
 
 #[OA\Schema()]
 readonly class WorkspaceResponse

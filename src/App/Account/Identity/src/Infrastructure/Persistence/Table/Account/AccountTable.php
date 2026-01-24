@@ -2,17 +2,17 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use InvalidArgumentException;
 use PDOException;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;

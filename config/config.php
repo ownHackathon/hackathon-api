@@ -34,7 +34,7 @@ $aggregator = new ConfigAggregator([
     },
     // Default App module config
     \ownHackathon\ConfigProvider::class,
-    \Shared\ConfigProvider::class,
+    \Exdrals\Shared\ConfigProvider::class,
 
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):

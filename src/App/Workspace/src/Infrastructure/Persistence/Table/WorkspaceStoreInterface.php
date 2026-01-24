@@ -4,7 +4,7 @@ namespace ownHackathon\Workspace\Infrastructure\Persistence\Table;
 
 use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\Workspace\Domain\WorkspaceInterface;
-use Shared\Infrastructure\Persistence\StoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\StoreInterface;
 
 interface WorkspaceStoreInterface extends StoreInterface
 {

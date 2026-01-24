@@ -5,7 +5,7 @@ namespace UnitTest\AppTest\Middleware;
 use Exdrals\Identity\Middleware\Account\LoginAuthentication\AuthenticationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Server\MiddlewareInterface;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Repository\MockAccountRepository;
 use UnitTest\Mock\Service\MockAuthenticationService;

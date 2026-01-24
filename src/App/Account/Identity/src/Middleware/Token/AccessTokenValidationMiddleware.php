@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Middleware\Token;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
 {
@@ -25,8 +25,8 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
 
         if (empty($accessToken)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCESS_TOKEN_MISSING,
-                StatusMessage::ACCOUNT_UNAUTHORIZED,
+                IdentityLogMessage::ACCESS_TOKEN_MISSING,
+                IdentityStatusMessage::ACCOUNT_UNAUTHORIZED,
                 [],
                 Level::Warning
             );
@@ -34,8 +34,8 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
 
         if (!$this->tokenService->isValid($accessToken)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCESS_TOKEN_EXPIRED,
-                StatusMessage::TOKEN_EXPIRED,
+                IdentityLogMessage::ACCESS_TOKEN_EXPIRED,
+                IdentityStatusMessage::TOKEN_EXPIRED,
                 [
                     'Access Token:' => $accessToken,
                 ],

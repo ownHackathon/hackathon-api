@@ -2,23 +2,23 @@
 
 namespace Exdrals\Identity\Middleware\Account;
 
+use DateTimeImmutable;
 use Exdrals\Identity\Domain\Account;
 use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Account\Account as AccountDTO;
 use Exdrals\Identity\DTO\Account\AccountRegistration;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Domain\Exception\HttpDuplicateEntryException;
-use Shared\Domain\Exception\HttpInvalidArgumentException;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 use function password_hash;
 
@@ -42,8 +42,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
 
         if ($activationToken === null) {
             throw new HttpInvalidArgumentException(
-                LogMessage::ACTIVATION_TOKEN_MISSING,
-                StatusMessage::TOKEN_INVALID,
+                IdentityLogMessage::ACTIVATION_TOKEN_MISSING,
+                IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'Token:' => $activationToken,
                 ]
@@ -55,8 +55,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
 
         if ($persistActivationToken === null) {
             throw new HttpInvalidArgumentException(
-                LogMessage::ACTIVATION_TOKEN_MISSING,
-                StatusMessage::TOKEN_INVALID,
+                IdentityLogMessage::ACTIVATION_TOKEN_MISSING,
+                IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'Invalid activation token:' => $activationToken,
                 ]
@@ -77,8 +77,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
             $accountId = $this->accountRepository->insert($account);
         } catch (DuplicateEntryException $e) {
             throw new HttpDuplicateEntryException(
-                LogMessage::ACCOUNT_ALREADY_EXISTS,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail' => $account->email->toString(),
                     'Exception Message:' => $e->getMessage(),

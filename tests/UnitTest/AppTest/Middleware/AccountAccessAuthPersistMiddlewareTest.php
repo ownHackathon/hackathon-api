@@ -11,9 +11,9 @@ use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Exdrals\Identity\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
 use Laminas\Diactoros\Response\JsonResponse;
-use Shared\Domain\Exception\HttpDuplicateEntryException;
-use Shared\Domain\Exception\HttpUnauthorizedException;
-use Shared\Utils\UuidFactory;
+use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Utils\UuidFactory;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
 

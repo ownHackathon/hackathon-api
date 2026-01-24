@@ -3,7 +3,7 @@
 namespace Exdrals\Identity\DTO\Account;
 
 use OpenApi\Attributes as OA;
-use Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Enum\DataType;
 
 #[OA\Schema(required: ['email', 'password'])]
 readonly class AccountAuthenticationData

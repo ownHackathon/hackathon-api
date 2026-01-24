@@ -2,19 +2,19 @@
 
 namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
+use Exdrals\Mailing\Domain\EmailType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 readonly class RegisterMiddleware implements MiddlewareInterface
 {
@@ -33,7 +33,7 @@ readonly class RegisterMiddleware implements MiddlewareInterface
         $email = $request->getAttribute(EmailType::class);
 
         if (!$this->accountService->isEmailAvailable($email)) {
-            $this->logger->warning(LogMessage::ACCOUNT_ALREADY_EXISTS->value, [
+            $this->logger->warning(IdentityLogMessage::ACCOUNT_ALREADY_EXISTS, [
                 'email:' => $email->toString(),
             ]);
 

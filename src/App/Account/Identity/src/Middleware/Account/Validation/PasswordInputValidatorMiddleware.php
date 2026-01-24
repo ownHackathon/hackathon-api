@@ -2,14 +2,14 @@
 
 namespace Exdrals\Identity\Middleware\Account\Validation;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpInvalidArgumentException;
+use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 
 readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
 {
@@ -26,8 +26,8 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpInvalidArgumentException(
-                LogMessage::PASSWORD_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::PASSWORD_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'Validator Message:' => $this->validator->getMessages(),
                 ]

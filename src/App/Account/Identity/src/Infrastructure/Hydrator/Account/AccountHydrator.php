@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Exception;
 use Exdrals\Identity\Domain\Account;
 use Exdrals\Identity\Domain\AccountCollection;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Ramsey\Uuid\UuidFactoryInterface;
-use Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Shared\Domain\Enum\DateTimeFormat;
 
 readonly class AccountHydrator implements AccountHydratorInterface
 {

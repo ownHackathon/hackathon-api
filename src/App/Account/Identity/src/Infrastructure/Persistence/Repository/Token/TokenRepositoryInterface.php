@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Token;
 
 use Exdrals\Identity\Domain\TokenCollectionInterface;
 use Exdrals\Identity\Domain\TokenInterface;
-use Shared\Infrastructure\Persistence\RepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {

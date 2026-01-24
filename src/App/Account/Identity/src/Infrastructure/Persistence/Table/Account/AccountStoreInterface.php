@@ -2,11 +2,11 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Infrastructure\Persistence\StoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\StoreInterface;
 
 interface AccountStoreInterface extends StoreInterface
 {

@@ -2,14 +2,14 @@
 
 namespace Exdrals\Identity\Infrastructure\Hydrator\Token;
 
+use DateTimeImmutable;
+use Exdrals\Identity\Domain\Enum\TokenType;
 use Exdrals\Identity\Domain\Token;
 use Exdrals\Identity\Domain\TokenCollection;
 use Exdrals\Identity\Domain\TokenCollectionInterface;
 use Exdrals\Identity\Domain\TokenInterface;
-use DateTimeImmutable;
 use Ramsey\Uuid\UuidFactoryInterface;
-use Shared\Domain\Enum\DateTimeFormat;
-use Shared\Domain\Enum\TokenType;
+use Exdrals\Shared\Domain\Enum\DateTimeFormat;
 
 readonly class TokenHydrator implements TokenHydratorInterface
 {

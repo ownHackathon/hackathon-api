@@ -2,11 +2,11 @@
 
 namespace Exdrals\Identity\Domain;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
+use Exdrals\Mailing\Domain\EmailType;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Trait\CloneReadonlyClassWith;
-use Shared\Utils\Collectible;
+use Exdrals\Shared\Trait\CloneReadonlyClassWith;
+use Exdrals\Shared\Utils\Collectible;
 
 readonly class AccountActivation implements AccountActivationInterface, Collectible
 {

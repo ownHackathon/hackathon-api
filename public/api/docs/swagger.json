@@ -504,7 +504,7 @@
                     "name"
                 ],
                 "properties": {
-                    "name": {
+                    "workspaceName": {
                         "description": "The name from workspace",
                         "type": "string",
                         "example": "My own workspace"

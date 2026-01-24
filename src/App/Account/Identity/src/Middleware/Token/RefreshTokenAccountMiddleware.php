@@ -5,15 +5,15 @@ namespace Exdrals\Identity\Middleware\Token;
 use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
 {
@@ -32,8 +32,8 @@ readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
 
         if ($account === null) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
-                StatusMessage::TOKEN_INVALID,
+                IdentityLogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
+                IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'AccessAuth ID:' => $accountAccessAuth->id,
                     'Account ID:' => $accountAccessAuth->accountId,

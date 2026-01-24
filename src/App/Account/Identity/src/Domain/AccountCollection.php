@@ -3,7 +3,7 @@
 namespace Exdrals\Identity\Domain;
 
 use InvalidArgumentException;
-use Shared\Utils\Collection;
+use Exdrals\Shared\Utils\Collection;
 
 use function get_class;
 use function sprintf;

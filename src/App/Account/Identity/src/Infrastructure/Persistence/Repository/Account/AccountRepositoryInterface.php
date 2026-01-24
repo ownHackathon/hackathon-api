@@ -2,11 +2,11 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Infrastructure\Persistence\RepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface AccountRepositoryInterface extends RepositoryInterface
 {

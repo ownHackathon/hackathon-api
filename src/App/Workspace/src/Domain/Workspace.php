@@ -2,8 +2,8 @@
 
 namespace ownHackathon\Workspace\Domain;
 
-use Shared\Trait\CloneReadonlyClassWith;
-use Shared\Utils\Collectible;
+use Exdrals\Shared\Trait\CloneReadonlyClassWith;
+use Exdrals\Shared\Utils\Collectible;
 
 readonly class Workspace implements WorkspaceInterface, Collectible
 {

@@ -4,7 +4,7 @@ namespace Exdrals\Identity\DTO\Account;
 
 use Exdrals\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
-use Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Shared\Domain\Enum\DateTimeFormat;
 
 #[OA\Schema()]
 readonly class Account

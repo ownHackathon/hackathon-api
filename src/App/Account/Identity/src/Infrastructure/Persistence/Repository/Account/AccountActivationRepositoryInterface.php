@@ -2,10 +2,10 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
 use Exdrals\Identity\Domain\AccountActivationInterface;
-use Shared\Infrastructure\Persistence\RepositoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
 {

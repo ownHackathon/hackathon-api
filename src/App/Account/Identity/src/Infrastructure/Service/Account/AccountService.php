@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Infrastructure\Service\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
+use Exdrals\Identity\Domain\Enum\TokenType;
 use Exdrals\Identity\Domain\Token;
 use Exdrals\Identity\Domain\TokenInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use Shared\Domain\Enum\TokenType;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 readonly class AccountService
 {

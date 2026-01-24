@@ -4,15 +4,15 @@ namespace Exdrals\Identity\Middleware\Token;
 
 use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class RefreshTokenMatchClientIdentificationMiddleware implements MiddlewareInterface
 {
@@ -26,8 +26,8 @@ readonly class RefreshTokenMatchClientIdentificationMiddleware implements Middle
 
         if ($accountAccessAuth->clientIdentHash !== $clientIdentification->identificationHash) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_CLIENT_MISMATCH,
-                StatusMessage::CLIENT_UNEXPECTED,
+                IdentityLogMessage::REFRESH_TOKEN_CLIENT_MISMATCH,
+                IdentityStatusMessage::CLIENT_UNEXPECTED,
                 [
                     'expected:' => $accountAccessAuth->clientIdentHash,
                     'expected UserAgent' => $accountAccessAuth->userAgent,

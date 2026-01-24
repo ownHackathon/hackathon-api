@@ -2,20 +2,20 @@
 
 namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Mailing\Exception\InvalidArgumentException;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 use function array_key_exists;
 
@@ -33,8 +33,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!array_key_exists('email', $data)) {
             throw new HttpUnauthorizedException(
-                LogMessage::REQUIRED_EMAIL_MISSING,
-                StatusMessage::INVALID_DATA
+                IdentityLogMessage::REQUIRED_EMAIL_MISSING,
+                IdentityStatusMessage::INVALID_DATA
             );
         }
 
@@ -42,8 +42,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
             $email = new EmailType($data['email']);
         } catch (InvalidArgumentException) {
             throw new HttpUnauthorizedException(
-                LogMessage::EMAIL_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::EMAIL_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? 'unknown',
                 ],
@@ -55,8 +55,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
-                LogMessage::ACCOUNT_NOT_FOUND,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::ACCOUNT_NOT_FOUND,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $email->toString(),
                 ],
@@ -66,8 +66,8 @@ readonly class AuthenticationMiddleware implements MiddlewareInterface
 
         if (!$this->service->isPasswordMatch($data['password'], $account->password)) {
             throw new HttpUnauthorizedException(
-                LogMessage::PASSWORD_INCORRECT,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::PASSWORD_INCORRECT,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $email->toString(),
                 ],

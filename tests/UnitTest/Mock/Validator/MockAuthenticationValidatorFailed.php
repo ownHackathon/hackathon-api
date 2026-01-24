@@ -2,8 +2,8 @@
 
 namespace UnitTest\Mock\Validator;
 
-use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
+use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 
 class MockAuthenticationValidatorFailed extends AuthenticationValidator

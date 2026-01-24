@@ -6,7 +6,7 @@ use Exdrals\Identity\Domain\AccountCollection;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountTable;
-use Shared\Utils\UuidFactory;
+use Exdrals\Shared\Utils\UuidFactory;
 use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountTableFailed extends AccountTable implements AccountStoreInterface

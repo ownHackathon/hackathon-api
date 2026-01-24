@@ -6,8 +6,8 @@ use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use PHPUnit\Framework\TestCase;
-use Shared\Utils\UuidFactory;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Utils\UuidFactory;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\Mock\Constants\Account;
 
 class AccountHydratorTest extends TestCase

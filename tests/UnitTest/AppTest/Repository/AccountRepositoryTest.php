@@ -2,17 +2,17 @@
 
 namespace UnitTest\AppTest\Repository;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Utils\UuidFactory;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Utils\UuidFactory;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Table\MockAccountTable;
 use UnitTest\Mock\Table\MockAccountTableFailed;

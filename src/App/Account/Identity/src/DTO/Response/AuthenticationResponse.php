@@ -5,7 +5,7 @@ namespace Exdrals\Identity\DTO\Response;
 use Exdrals\Identity\DTO\Token\AccessToken;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use OpenApi\Attributes as OA;
-use Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Enum\DataType;
 
 #[OA\Schema()]
 readonly class AuthenticationResponse

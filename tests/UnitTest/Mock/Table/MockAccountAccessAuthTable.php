@@ -8,7 +8,7 @@ use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
 use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthTable;
 use InvalidArgumentException;
-use Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 use UnitTest\Mock\Database\MockQuery;

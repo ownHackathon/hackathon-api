@@ -3,7 +3,7 @@
 namespace Exdrals\Identity\DTO\Token;
 
 use OpenApi\Attributes as OA;
-use Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Enum\DataType;
 
 #[OA\Schema()]
 readonly class Token

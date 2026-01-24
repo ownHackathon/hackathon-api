@@ -2,23 +2,22 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 use UnitTest\Mock\Constants\Account;
 
 use function password_hash;
 use function rand;
-use function var_dump;
 
 use const PASSWORD_DEFAULT;
 

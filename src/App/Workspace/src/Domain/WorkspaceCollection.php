@@ -4,7 +4,7 @@ namespace ownHackathon\Workspace\Domain;
 
 use Exdrals\Identity\Domain\AccountInterface;
 use InvalidArgumentException;
-use Shared\Utils\Collection;
+use Exdrals\Shared\Utils\Collection;
 
 use function get_class;
 use function sprintf;

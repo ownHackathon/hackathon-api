@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Shared\Infrastructure\Persistence\StoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\StoreInterface;
 
 interface AccountAccessAuthStoreInterface extends StoreInterface
 {

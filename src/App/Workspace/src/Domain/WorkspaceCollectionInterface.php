@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Workspace\Domain;
 
-use Shared\Utils\CollectionInterface;
+use Exdrals\Shared\Utils\CollectionInterface;
 
 /**
  * @method Workspace offsetGet(mixed $offset)

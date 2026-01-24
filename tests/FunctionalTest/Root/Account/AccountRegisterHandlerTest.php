@@ -2,18 +2,19 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Domain\TokenInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use Shared\Domain\Enum\DataType;
 use Shared\Domain\Enum\Message\StatusMessage;
+use Exdrals\Shared\Domain\Enum\DataType;
 use UnitTest\JsonRequestHelper;
 
 class AccountRegisterHandlerTest extends AbstractFunctional
@@ -37,7 +38,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::INVALID_DATA, $content['message']);
     }
 
     public function testBodyHasInvalidParameter(): void
@@ -57,7 +58,7 @@ class AccountRegisterHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::INVALID_DATA, $content['message']);
     }
 
     public function testActivationDataSetWasCreated(): void

@@ -3,8 +3,8 @@
 namespace Exdrals\Identity\Domain;
 
 use DateTimeImmutable;
+use Exdrals\Identity\Domain\Enum\TokenType;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Domain\Enum\TokenType;
 
 interface TokenInterface
 {

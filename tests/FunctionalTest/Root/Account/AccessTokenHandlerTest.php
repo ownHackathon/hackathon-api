@@ -2,7 +2,10 @@
 
 namespace FunctionalTest\Root\Account;
 
+use DateTimeImmutable;
+use Envms\FluentPDO\Query;
 use Exdrals\Identity\Domain\AccountAccessAuth;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Client\ClientIdentificationData;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
@@ -11,8 +14,6 @@ use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountReposi
 use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use DateTimeImmutable;
-use Envms\FluentPDO\Query;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -139,7 +140,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::TOKEN_INVALID, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -173,7 +174,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::TOKEN_INVALID, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -194,7 +195,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(StatusMessage::TOKEN_NOT_PERSISTENT->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::TOKEN_NOT_PERSISTENT, $content['message']);
     }
 
     public function testUnexpectedClientIdentification(): void
@@ -226,7 +227,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(StatusMessage::CLIENT_UNEXPECTED->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::CLIENT_UNEXPECTED, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }
@@ -260,7 +261,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
-        $this->assertSame(StatusMessage::CLIENT_UNEXPECTED->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::CLIENT_UNEXPECTED, $content['message']);
 
         $this->accountAccessAuthRepository->deleteById($accountAccessAuthId);
     }

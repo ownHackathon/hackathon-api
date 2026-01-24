@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Persistence\Table\Token;
 
 use Exdrals\Identity\Domain\TokenCollectionInterface;
 use Exdrals\Identity\Domain\TokenInterface;
-use Shared\Infrastructure\Persistence\StoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\StoreInterface;
 
 interface TokenStoreInterface extends StoreInterface
 {

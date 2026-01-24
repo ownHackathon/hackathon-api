@@ -2,17 +2,17 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use Shared\Domain\Enum\DataType;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 
 class AccountActivationHandlerTest extends AbstractFunctional
@@ -73,7 +73,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::TOKEN_INVALID, $content['message']);
     }
 
     public function testBodyIsInvalid(): void
@@ -92,7 +92,7 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::INVALID_DATA->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::INVALID_DATA, $content['message']);
     }
 
     public function testTokenIsInvalidOrNotPersistent(): void
@@ -114,6 +114,6 @@ class AccountActivationHandlerTest extends AbstractFunctional
             'message' => Assert::isType(DataType::STRING->value),
         ]));
         $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
-        $this->assertSame(StatusMessage::TOKEN_INVALID->value, $content['message']);
+        $this->assertSame(IdentityStatusMessage::TOKEN_INVALID, $content['message']);
     }
 }

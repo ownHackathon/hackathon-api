@@ -2,8 +2,8 @@
 
 namespace Exdrals\Identity\Infrastructure\Validator;
 
-use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
+use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Laminas\InputFilter\InputFilter;
 
 class AuthenticationValidator extends InputFilter

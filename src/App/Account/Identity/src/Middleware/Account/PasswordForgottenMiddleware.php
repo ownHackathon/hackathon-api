@@ -2,16 +2,16 @@
 
 namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Mailing\Domain\EmailType;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use Exdrals\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
 
 readonly class PasswordForgottenMiddleware implements MiddlewareInterface
 {
@@ -31,8 +31,8 @@ readonly class PasswordForgottenMiddleware implements MiddlewareInterface
         }
 
         throw new HttpHandledInvalidArgumentAsSuccessException(
-            LogMessage::PASSWORD_REQUEST_MISSING_ACCOUNT,
-            StatusMessage::INVALID_DATA,
+            IdentityLogMessage::PASSWORD_REQUEST_MISSING_ACCOUNT,
+            IdentityStatusMessage::INVALID_DATA,
             [
                 'email:' => $email->toString(),
             ],

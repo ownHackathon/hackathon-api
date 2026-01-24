@@ -2,21 +2,21 @@
 
 namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
+use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
-use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Domain\Exception\HttpDuplicateEntryException;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
 {
@@ -39,8 +39,8 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
         // @phpstan-ignore-next-line
         if ($account === null || $clientIdent === null || $refreshToken === null) {
             throw new HttpUnauthorizedException(
-                LogMessage::AUTHENTICATION_PERSISTENCE_ERROR,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::AUTHENTICATION_PERSISTENCE_ERROR,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     // @phpstan-ignore-next-line
                     'Account:' => $account?->email,
@@ -64,8 +64,8 @@ readonly class PersistAuthenticationMiddleware implements MiddlewareInterface
             $this->repository->insert($accountAccessAuth);
         } catch (DuplicateEntryException $e) {
             throw new HttpDuplicateEntryException(
-                LogMessage::DUPLICATE_SOURCE_LOGIN,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::DUPLICATE_SOURCE_LOGIN,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'Account' => $account->name,
                     'ClientID' => $clientIdent->identificationHash,

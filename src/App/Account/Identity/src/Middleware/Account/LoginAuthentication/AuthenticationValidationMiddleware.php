@@ -2,14 +2,14 @@
 
 namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 {
@@ -26,8 +26,8 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 
         if (!$this->validator->isValid()) {
             throw new HttpUnauthorizedException(
-                LogMessage::EMAIL_INVALID,
-                StatusMessage::INVALID_DATA,
+                IdentityLogMessage::EMAIL_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? null,
                     'Validator-Message:' => $this->validator->getMessages(),

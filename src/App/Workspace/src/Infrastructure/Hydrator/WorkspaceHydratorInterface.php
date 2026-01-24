@@ -4,7 +4,7 @@ namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
 use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\Workspace\Domain\WorkspaceInterface;
-use Shared\Infrastructure\Hydrator\HydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface WorkspaceHydratorInterface extends HydratorInterface
 {

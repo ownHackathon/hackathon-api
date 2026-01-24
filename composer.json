@@ -79,9 +79,9 @@
   "autoload": {
     "psr-4": {
       "ownHackathon\\" : "src/App/",
+      "ownHackathon\\Account\\" : "src/App/Account/",
       "ownHackathon\\Workspace\\" : "src/App/Workspace/src/",
-      "Shared\\": "src/Shared/",
-      "Exdrals\\Account\\" : "src/App/Account/",
+      "Exdrals\\Shared\\": "src/Shared/src",
       "Exdrals\\Identity\\" : "src/App/Account/Identity/src/",
       "Exdrals\\Mailing\\"  : "src/App/Mailing/src/"
     }

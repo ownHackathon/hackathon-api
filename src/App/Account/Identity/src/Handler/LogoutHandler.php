@@ -2,6 +2,7 @@
 
 namespace Exdrals\Identity\Handler;
 
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Response\AuthenticationResponse;
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -10,7 +11,6 @@ use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\StatusMessage;
 
 class LogoutHandler implements RequestHandlerInterface
 {
@@ -18,7 +18,7 @@ class LogoutHandler implements RequestHandlerInterface
         path: '/account/logout',
         operationId: 'logout',
         description: 'Terminates the user session by invalidating the current access token. ' .
-                     'Clients should delete all locally stored tokens (Access Token and Refresh Token) after a successful logout.',
+        'Clients should delete all locally stored tokens (Access Token and Refresh Token) after a successful logout.',
         summary: 'Log out the current user',
         security: [['accessToken' => []]],
         tags: ['Account']
@@ -35,7 +35,7 @@ class LogoutHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $response = HttpResponseMessage::create(HTTP::STATUS_OK, StatusMessage::SUCCESS);
+        $response = HttpResponseMessage::create(HTTP::STATUS_OK, IdentityStatusMessage::SUCCESS);
 
         return new JsonResponse($response, $response->statusCode);
     }

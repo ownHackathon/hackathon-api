@@ -2,8 +2,6 @@
 
 namespace Exdrals\Identity;
 
-use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
-use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Envms\FluentPDO\Query;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
@@ -29,10 +27,12 @@ use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
+use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
+use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Log\LoggerInterface;
-use Shared\Utils\UuidFactoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 readonly class ConfigProvider
 {
@@ -191,9 +191,10 @@ readonly class ConfigProvider
                 Infrastructure\Persistence\Table\Account\AccountActivationTable::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Table\Account\AccountTable::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Table\Token\TokenTable::class => ConfigAbstractFactory::class,
-                Infrastructure\Validator\Input\AccountNameInput::class => InvokableFactory::class,
+
                 \Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput::class => InvokableFactory::class,
-                Infrastructure\Validator\Input\PasswordInput::class => InvokableFactory::class,
+                \Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput::class => InvokableFactory::class,
+                \Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput::class => InvokableFactory::class,
                 Infrastructure\Validator\AccountActivationValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\AuthenticationValidator::class => ConfigAbstractFactory::class,
                 \Exdrals\Mailing\Infrastructure\Validator\EMailValidator::class => ConfigAbstractFactory::class,

@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
 use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Shared\Infrastructure\Persistence\RepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\RepositoryInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {

@@ -5,7 +5,7 @@ namespace UnitTest\AppTest\Middleware;
 use Exdrals\Identity\Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 class AuthenticationConditionsMiddlewareTest extends AbstractTestMiddleware
 {

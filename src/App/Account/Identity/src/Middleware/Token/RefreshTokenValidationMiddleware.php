@@ -2,15 +2,15 @@
 
 namespace Exdrals\Identity\Middleware\Token;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
+use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Shared\Domain\Enum\Message\LogMessage;
-use Shared\Domain\Enum\Message\StatusMessage;
-use Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class RefreshTokenValidationMiddleware implements MiddlewareInterface
 {
@@ -25,8 +25,8 @@ readonly class RefreshTokenValidationMiddleware implements MiddlewareInterface
 
         if (!$this->tokenService->isValid($refreshToken)) {
             throw new HttpUnauthorizedException(
-                LogMessage::REFRESH_TOKEN_INVALID,
-                StatusMessage::TOKEN_INVALID,
+                IdentityLogMessage::REFRESH_TOKEN_INVALID,
+                IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'Refresh Token:' => $refreshToken,
                 ],

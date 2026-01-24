@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Hydrator\Token;
 
 use Exdrals\Identity\Domain\TokenCollectionInterface;
 use Exdrals\Identity\Domain\TokenInterface;
-use Shared\Infrastructure\Hydrator\HydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface TokenHydratorInterface extends HydratorInterface
 {

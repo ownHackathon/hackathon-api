@@ -5,7 +5,7 @@ namespace Exdrals\Identity\Infrastructure\Service\Token;
 use Exdrals\Identity\DTO\Token\JwtTokenConfig;
 use Firebase\JWT\JWT;
 use Ramsey\Uuid\UuidInterface;
-use Shared\Trait\JwtTokenTrait;
+use Exdrals\Shared\Trait\JwtTokenTrait;
 
 use function time;
 

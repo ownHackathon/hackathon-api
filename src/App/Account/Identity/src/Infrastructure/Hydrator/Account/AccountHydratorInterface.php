@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
-use Shared\Infrastructure\Hydrator\HydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface AccountHydratorInterface extends HydratorInterface
 {

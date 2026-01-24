@@ -9,8 +9,8 @@ use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use PDOException;
-use Shared\Domain\Exception\DuplicateEntryException;
-use Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;
