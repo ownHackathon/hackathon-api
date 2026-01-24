@@ -59,7 +59,7 @@ readonly class ConfigProvider
                     Handler\AccessTokenHandler::class,
                 ],
                 'allowed_methods' => ['GET'],
-                'name' => 'api_token_refresh',
+                'name' => 'api_identity_token_refresh',
             ],
             [
                 'path' => '/api/account/authentication[/]',
@@ -73,7 +73,7 @@ readonly class ConfigProvider
                     Handler\AuthenticationHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
-                'name' => 'api_account_authentication',
+                'name' => 'api_identity_authentication',
             ],
             [
                 'path' => '/api/account',
@@ -83,7 +83,7 @@ readonly class ConfigProvider
                     Handler\AccountRegisterHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
-                'name' => 'api_account_register',
+                'name' => 'api_identity_register',
             ],
             [
                 'path' => '/api/account/activation/[{token}[/]]',
@@ -93,7 +93,7 @@ readonly class ConfigProvider
                     Handler\AccountActivationHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
-                'name' => 'api_account_activation',
+                'name' => 'api_identity_activation',
             ],
             [
                 'path' => '/api/account/password/forgotten[/]',
@@ -103,7 +103,7 @@ readonly class ConfigProvider
                     Handler\AccountPasswordForgottenHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
-                'name' => 'api_account_password_forgotten',
+                'name' => 'api_identity_password_forgotten',
             ],
             [
                 'path' => '/api/account/password/[{token}[/]]',
@@ -113,7 +113,7 @@ readonly class ConfigProvider
                     Handler\AccountPasswordHandler::class,
                 ],
                 'allowed_methods' => ['PATCH'],
-                'name' => 'api_account_password_change',
+                'name' => 'api_identity_password_change',
             ],
             [
                 'path' => '/api/account/logout[/]',
@@ -123,7 +123,7 @@ readonly class ConfigProvider
                     Handler\LogoutHandler::class,
                 ],
                 'allowed_methods' => ['GET'],
-                'name' => 'api_account_logout',
+                'name' => 'api_identity_logout',
             ],
         ];
     }
