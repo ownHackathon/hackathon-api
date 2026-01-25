@@ -80,4 +80,13 @@ abstract class AbstractFunctional extends TestCase
             )
         );
     }
+
+    public function resetDatabase(): void
+    {
+        system('php ' . dirname(__FILE__) . '/../../bin/migrations.php migrations:sync-metadata-storage --quiet');
+        system('php ' . dirname(__FILE__) . '/../../bin/migrations.php migrations:migrate --no-interaction --quiet');
+        // phpcs:ignore
+        system('php ' . dirname(__FILE__) . '/../../bin/migrations.php migrations:migrate Migrations\\\Version20231103223745_CreateAccountTable --no-interaction --quiet');
+        system('php ' . dirname(__FILE__) . '/../../bin/migrations.php migrations:migrate --no-interaction --quiet');
+    }
 }

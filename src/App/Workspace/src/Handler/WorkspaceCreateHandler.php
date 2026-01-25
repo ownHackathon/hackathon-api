@@ -53,8 +53,10 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
     {
         $workspace = $request->getAttribute(Workspace::class);
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+
         $response = WorkspaceResponse::fromEntity($workspace, $account);
 
-        return new JsonResponse($response, HTTP::STATUS_CREATED);
+
+        return new JsonResponse($response, HTTP::STATUS_CREATED, headers: ['Location' => '/api/workspace/' . $workspace->slug]);
     }
 }

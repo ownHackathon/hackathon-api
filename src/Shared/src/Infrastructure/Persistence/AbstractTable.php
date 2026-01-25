@@ -11,6 +11,8 @@ use function substr;
 
 class AbstractTable implements StoreInterface
 {
+    public const int MYSQL_ERROR_DUPLICATED_ENTRY = 1062;
+
     protected string $table;
     protected Query $query;
 

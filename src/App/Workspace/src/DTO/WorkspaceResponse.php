@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Workspace\DTO;
 
-use Exdrals\Identity\DTO\Account\Account;
+use Exdrals\Identity\Domain\Account;
 use OpenApi\Attributes as OA;
 use ownHackathon\Workspace\Domain\Workspace;
 use Exdrals\Shared\Domain\Enum\DataType;
@@ -35,7 +35,7 @@ readonly class WorkspaceResponse
     public static function fromEntity(Workspace $workspace, Account $account): self
     {
         return new self(
-            ownerUuid: $account->uuid,
+            ownerUuid: $account->uuid->toString(),
             name: $workspace->name,
             slug: $workspace->slug,
         );

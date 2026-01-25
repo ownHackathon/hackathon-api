@@ -3,6 +3,7 @@
 namespace Exdrals\Shared;
 
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Log\LoggerInterface;
 use Exdrals\Shared;
 
@@ -27,7 +28,8 @@ class ConfigProvider
                 Infrastructure\Factory\ErrorResponseFactory::class => ConfigAbstractFactory::class,
                 Middleware\ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
-
+                Shared\Infrastructure\Service\SlugService::class => InvokableFactory::class,
+                Shared\Middleware\RequireLoginMiddleware::class => InvokableFactory::class,
             ],
         ];
     }

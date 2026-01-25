@@ -3,6 +3,7 @@
 namespace ownHackathon\Workspace\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
+use Laminas\Validator\Regex;
 
 class WorkspaceNameInput extends Input
 {
@@ -21,6 +22,16 @@ class WorkspaceNameInput extends Input
                 'min' => 3,
                 'max' => 64,
             ]
+        );
+
+        $this->getValidatorChain()->attachByName(
+            'Regex',
+            [
+                'pattern' => '/^[a-zA-Z0-9 _-]+$/',
+                'messages' => [
+                    Regex::NOT_MATCH => 'Es sind nur Buchstaben, Leerzeichen, Unterstriche und Bindestriche erlaubt.',
+                ],
+            ],
         );
     }
 }

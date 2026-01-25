@@ -66,7 +66,7 @@ class AuthenticationHandlerTest extends AbstractFunctional
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
 
         $response = $this->app->handle($request);
-        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
+        $this->assertSame(HTTP::STATUS_CONFLICT, $response->getStatusCode());
     }
 
     public function testAccountIsAlreadyAuthenticated(): void

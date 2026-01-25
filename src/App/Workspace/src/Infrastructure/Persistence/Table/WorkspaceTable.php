@@ -4,13 +4,13 @@ namespace ownHackathon\Workspace\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 use InvalidArgumentException;
 use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use PDOException;
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;
@@ -25,8 +25,8 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
     }
 
     /**
-     * @throws Exception
-     * @throws DuplicateEntryException
+     * @throws PDOException
+     * @throws DuplicateEntryException|Exception
      */
     public function insert(WorkspaceInterface $data): true
     {
@@ -37,7 +37,10 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
         try {
             $this->query->insertInto($this->table, $value)->execute();
         } catch (PDOException $e) {
-            throw new DuplicateEntryException($this->getTableName(), $data->id);
+            if ($e->errorInfo[1] === self::MYSQL_ERROR_DUPLICATED_ENTRY) {
+                throw new DuplicateEntryException($this->getTableName(), $data->id);
+            }
+            throw $e;
         }
 
         return true;

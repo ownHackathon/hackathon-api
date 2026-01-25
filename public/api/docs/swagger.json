@@ -357,7 +357,7 @@
                     "System Information"
                 ],
                 "summary": "Returns the current time in Unix format",
-                "operationId": "887ad193abf91988bb9dcb3be905db26",
+                "operationId": "8ec21fd921a6805a478fc95c7820e576",
                 "responses": {
                     "200": {
                         "description": "Success",

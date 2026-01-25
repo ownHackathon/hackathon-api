@@ -7,8 +7,9 @@ use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 
 class WorkspaceNameValidator extends InputFilter
 {
-    public function __construct(WorkspaceNameInput $workspaceNameInput)
-    {
-        $this->add($workspaceNameInput);
+    public function __construct(
+        readonly private WorkspaceNameInput $workspaceNameInput
+    ) {
+        $this->add($this->workspaceNameInput);
     }
 }

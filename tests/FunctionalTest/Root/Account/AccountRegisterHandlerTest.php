@@ -13,7 +13,6 @@ use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use Shared\Domain\Enum\Message\StatusMessage;
 use Exdrals\Shared\Domain\Enum\DataType;
 use UnitTest\JsonRequestHelper;
 

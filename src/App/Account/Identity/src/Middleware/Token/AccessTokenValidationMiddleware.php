@@ -26,7 +26,7 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
         if (empty($accessToken)) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::ACCESS_TOKEN_MISSING,
-                IdentityStatusMessage::ACCOUNT_UNAUTHORIZED,
+                IdentityStatusMessage::UNAUTHORIZED_ACCESS,
                 [],
                 Level::Warning
             );

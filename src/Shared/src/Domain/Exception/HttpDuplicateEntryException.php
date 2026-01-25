@@ -20,6 +20,6 @@ final class HttpDuplicateEntryException extends HttpException
 
     public function getHttpStatusCode(): int
     {
-        return StatusCodeInterface::STATUS_BAD_REQUEST;
+        return StatusCodeInterface::STATUS_CONFLICT;
     }
 }

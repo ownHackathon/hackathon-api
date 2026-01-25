@@ -14,6 +14,8 @@ use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterf
 use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceNameValidator;
+use ownHackathon\Workspace\Middleware\WorkspaceCreateMiddleware;
+use ownHackathon\Workspace\Middleware\WorkspaceNameInputValidatorMiddleware;
 
 class ConfigProvider
 {
@@ -30,8 +32,11 @@ class ConfigProvider
     {
         return [
             [
-                'path' => '/api/workspace',
+                'path' => '/api/workspace[/]',
                 'middleware' => [
+                    \Exdrals\Shared\Middleware\RequireLoginMiddleware::class,
+                    WorkspaceNameInputValidatorMiddleware::class,
+                    WorkspaceCreateMiddleware::class,
                     WorkspaceCreateHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
@@ -55,7 +60,11 @@ class ConfigProvider
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
                 WorkspaceNameInput::class => InvokableFactory::class,
-                WorkspaceNameValidator::class => InvokableFactory::class,
+                WorkspaceNameValidator::class => ConfigAbstractFactory::class,
+
+                WorkspaceNameInputValidatorMiddleware::class => ConfigAbstractFactory::class,
+
+                WorkspaceCreateMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -63,6 +72,9 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            WorkspaceNameInputValidatorMiddleware::class => [
+                WorkspaceNameValidator::class,
+            ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,
             ],
@@ -70,6 +82,13 @@ class ConfigProvider
                 Query::class,
                 WorkspaceHydratorInterface::class,
             ],
+            WorkspaceNameValidator::class => [
+                WorkspaceNameInput::class,
+            ],
+            WorkspaceCreateMiddleware::class => [
+                WorkspaceRepositoryInterface::class,
+                \Exdrals\Shared\Infrastructure\Service\SlugService::class
+            ]
         ];
     }
 }

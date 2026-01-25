@@ -118,6 +118,7 @@ readonly class ConfigProvider
             [
                 'path' => '/api/account/logout[/]',
                 'middleware' => [
+                    \Exdrals\Shared\Middleware\RequireLoginMiddleware::class,
                     Middleware\Token\AccessTokenValidationMiddleware::class,
                     Middleware\Account\LogoutMiddleware::class,
                     Handler\LogoutHandler::class,
