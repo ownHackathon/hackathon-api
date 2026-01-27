@@ -3,13 +3,20 @@
 namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
 use Exception;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\Workspace\Domain\Workspace;
 use ownHackathon\Workspace\Domain\WorkspaceCollection;
-use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
-use ownHackathon\Workspace\Domain\WorkspaceInterface;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {
+    public function __construct(
+        private UuidFactoryInterface $uuid,
+    ) {
+    }
+
     /**
      * @throws Exception
      */
@@ -17,6 +24,7 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
     {
         return new Workspace(
             id: $data['id'],
+            uuid: $this->uuid->fromString($data['uuid']),
             accountId: $data['accountId'],
             name: $data['name'],
             slug: $data['slug'],
@@ -41,6 +49,7 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
     {
         return [
             'id' => $object->id,
+            'uuid' => $object->uuid->toString(),
             'accountId' => $object->accountId,
             'name' => $object->name,
             'slug' => $object->slug,

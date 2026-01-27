@@ -3,18 +3,7 @@
 namespace Exdrals\Identity;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Token\TokenHydratorInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountActivationStoreInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Token\TokenStoreInterface;
+use Exdrals\Identity\Handler\AuthenticationHandler;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
@@ -27,12 +16,28 @@ use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
+use Exdrals\Identity\Middleware\Token\GenerateAccessTokenMiddleware;
+use Exdrals\Mailing\Infrastructure\EmailService;
+use Exdrals\Mailing\Infrastructure\EmailServiceFactory;
 use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
 use Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountAccessAuthStoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountActivationStoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountStoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
+use Exdrals\Shared\Middleware\RequireLoginMiddleware;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Log\LoggerInterface;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 readonly class ConfigProvider
 {
@@ -55,7 +60,7 @@ readonly class ConfigProvider
                     Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class,
                     Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class,
                     Middleware\Token\RefreshTokenAccountMiddleware::class,
-                    Middleware\Token\GenerateAccessTokenMiddleware::class,
+                    GenerateAccessTokenMiddleware::class,
                     Handler\AccessTokenHandler::class,
                 ],
                 'allowed_methods' => ['GET'],
@@ -66,10 +71,6 @@ readonly class ConfigProvider
                 'middleware' => [
                     Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class,
                     Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class,
-                    Middleware\Account\LoginAuthentication\AuthenticationMiddleware::class,
-                    Middleware\Token\GenerateRefreshTokenMiddleware::class,
-                    Middleware\Token\GenerateAccessTokenMiddleware::class,
-                    Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware::class,
                     Handler\AuthenticationHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
@@ -118,7 +119,7 @@ readonly class ConfigProvider
             [
                 'path' => '/api/account/logout[/]',
                 'middleware' => [
-                    \Exdrals\Shared\Middleware\RequireLoginMiddleware::class,
+                    RequireLoginMiddleware::class,
                     Middleware\Token\AccessTokenValidationMiddleware::class,
                     Middleware\Account\LogoutMiddleware::class,
                     Handler\LogoutHandler::class,
@@ -133,19 +134,19 @@ readonly class ConfigProvider
     {
         return [
             'aliases' => [
-                Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface::class => Infrastructure\Hydrator\Account\AccountAccessAuthHydrator::class,
-                Infrastructure\Hydrator\Account\AccountActivationHydratorInterface::class => Infrastructure\Hydrator\Account\AccountActivationHydrator::class,
-                Infrastructure\Hydrator\Account\AccountHydratorInterface::class => Infrastructure\Hydrator\Account\AccountHydrator::class,
-                Infrastructure\Hydrator\Token\TokenHydratorInterface::class => Infrastructure\Hydrator\Token\TokenHydrator::class,
+                AccountAccessAuthHydratorInterface::class => Infrastructure\Hydrator\Account\AccountAccessAuthHydrator::class,
+                AccountActivationHydratorInterface::class => Infrastructure\Hydrator\Account\AccountActivationHydrator::class,
+                AccountHydratorInterface::class => Infrastructure\Hydrator\Account\AccountHydrator::class,
+                TokenHydratorInterface::class => Infrastructure\Hydrator\Token\TokenHydrator::class,
 
-                Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountRepository::class,
-                Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountActivationRepository::class,
-                Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository::class,
-                Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface::class => Infrastructure\Persistence\Repository\Token\TokenRepository::class,
-                Infrastructure\Persistence\Table\Account\AccountStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountTable::class,
-                Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountAccessAuthTable::class,
-                Infrastructure\Persistence\Table\Account\AccountActivationStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountActivationTable::class,
-                Infrastructure\Persistence\Table\Token\TokenStoreInterface::class => Infrastructure\Persistence\Table\Token\TokenTable::class,
+                AccountRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountRepository::class,
+                AccountActivationRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountActivationRepository::class,
+                AccountAccessAuthRepositoryInterface::class => Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository::class,
+                TokenRepositoryInterface::class => Infrastructure\Persistence\Repository\Token\TokenRepository::class,
+                AccountStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountTable::class,
+                AccountAccessAuthStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountAccessAuthTable::class,
+                AccountActivationStoreInterface::class => Infrastructure\Persistence\Table\Account\AccountActivationTable::class,
+                TokenStoreInterface::class => Infrastructure\Persistence\Table\Token\TokenTable::class,
             ],
             'invokables' => [
             ],
@@ -155,14 +156,12 @@ readonly class ConfigProvider
                 Infrastructure\Hydrator\Account\AccountHydrator::class => ConfigAbstractFactory::class,
                 Infrastructure\Hydrator\Token\TokenHydrator::class => ConfigAbstractFactory::class,
                 Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class => InvokableFactory::class,
-                Middleware\Account\LoginAuthentication\AuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\ActivationInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\EmailInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\ActivationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\LastAktivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Account\LastActivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\LogoutMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordChangeMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\PasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
@@ -170,8 +169,6 @@ readonly class ConfigProvider
                 Middleware\Account\RequestAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ClientIdentification\ClientIdentificationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\AccessTokenValidationMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Token\GenerateAccessTokenMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Token\GenerateRefreshTokenMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenAccountMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => InvokableFactory::class,
@@ -183,7 +180,7 @@ readonly class ConfigProvider
                 Infrastructure\Service\Account\AccountService::class => ConfigAbstractFactory::class,
                 Infrastructure\Service\Authentication\AuthenticationService::class => InvokableFactory::class,
                 Infrastructure\Service\ClientIdentification\ClientIdentificationService::class => InvokableFactory::class,
-                \Exdrals\Mailing\Infrastructure\EmailService::class => \Exdrals\Mailing\Infrastructure\EmailServiceFactory::class,
+                EmailService::class => EmailServiceFactory::class,
                 Infrastructure\Service\Token\AccessTokenService::class => Infrastructure\Service\Token\AccessTokenServiceFactory::class,
                 Infrastructure\Service\Token\ActivationTokenService::class => Infrastructure\Service\Token\ActivationTokenServiceFactory::class,
                 Infrastructure\Service\Token\PasswordTokenService::class => Infrastructure\Service\Token\PasswordTokenServiceFactory::class,
@@ -193,13 +190,16 @@ readonly class ConfigProvider
                 Infrastructure\Persistence\Table\Account\AccountTable::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Table\Token\TokenTable::class => ConfigAbstractFactory::class,
 
-                \Exdrals\Mailing\Infrastructure\Validator\Input\EmailInput::class => InvokableFactory::class,
-                \Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput::class => InvokableFactory::class,
-                \Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput::class => InvokableFactory::class,
+                EmailInput::class => InvokableFactory::class,
+                PasswordInput::class => InvokableFactory::class,
+                AccountNameInput::class => InvokableFactory::class,
                 Infrastructure\Validator\AccountActivationValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\AuthenticationValidator::class => ConfigAbstractFactory::class,
-                \Exdrals\Mailing\Infrastructure\Validator\EMailValidator::class => ConfigAbstractFactory::class,
+                EMailValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\PasswordValidator::class => ConfigAbstractFactory::class,
+                AuthenticationHandler::class => ConfigAbstractFactory::class,
+
+                GenerateAccessTokenMiddleware::class => ConfigAbstractFactory::class,
             ],
 
         ];
@@ -217,15 +217,8 @@ readonly class ConfigProvider
             Infrastructure\Hydrator\Token\TokenHydrator::class => [
                 UuidFactoryInterface::class,
             ],
-            Middleware\Account\LoginAuthentication\AuthenticationMiddleware::class => [
-                AuthenticationService::class,
-                AccountRepositoryInterface::class,
-            ],
             Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class => [
                 AuthenticationValidator::class,
-            ],
-            Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware::class => [
-                AccountAccessAuthRepositoryInterface::class,
             ],
             Middleware\Account\Validation\ActivationInputValidatorMiddleware::class => [
                 AccountActivationValidator::class,
@@ -241,7 +234,7 @@ readonly class ConfigProvider
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
             ],
-            Middleware\Account\LastAktivityUpdaterMiddleware::class => [
+            Middleware\Account\LastActivityUpdaterMiddleware::class => [
                 AccountRepositoryInterface::class,
             ],
             Middleware\Account\LogoutMiddleware::class => [
@@ -273,12 +266,6 @@ readonly class ConfigProvider
             ],
             Middleware\Token\AccessTokenValidationMiddleware::class => [
                 AccessTokenService::class,
-            ],
-            Middleware\Token\GenerateAccessTokenMiddleware::class => [
-                AccessTokenService::class,
-            ],
-            Middleware\Token\GenerateRefreshTokenMiddleware::class => [
-                RefreshTokenService::class,
             ],
             Middleware\Token\RefreshTokenAccountMiddleware::class => [
                 AccountRepositoryInterface::class,
@@ -331,11 +318,22 @@ readonly class ConfigProvider
                 EmailInput::class,
                 PasswordInput::class,
             ],
-            \Exdrals\Mailing\Infrastructure\Validator\EMailValidator::class => [
+            EMailValidator::class => [
                 EmailInput::class,
             ],
             Infrastructure\Validator\PasswordValidator::class => [
                 PasswordInput::class,
+            ],
+            AuthenticationHandler::class => [
+                AccountRepositoryInterface::class,
+                AccountAccessAuthRepositoryInterface::class,
+                RefreshTokenService::class,
+                AccessTokenService::class,
+                AuthenticationService::class,
+            ],
+
+            GenerateAccessTokenMiddleware::class => [
+                AccessTokenService::class,
             ],
         ];
     }

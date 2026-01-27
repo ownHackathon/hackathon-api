@@ -2,7 +2,7 @@
 
 namespace Exdrals\Shared\Middleware;
 
-use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 use Exdrals\Shared\Domain\Message\LogMessage;
 use Exdrals\Shared\Domain\Message\StatusMessage;

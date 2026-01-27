@@ -2,10 +2,10 @@
 
 namespace UnitTest\Mock\Table;
 
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthTable;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthCollectionInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountAccessAuthStoreInterface;
 use UnitTest\Mock\Database\MockQuery;
 
 class MockAccountAccessAuthTableFailed extends AccountAccessAuthTable implements AccountAccessAuthStoreInterface

@@ -3,6 +3,7 @@
 namespace Exdrals\Identity\Domain;
 
 use DateTimeImmutable;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
 use Exdrals\Shared\Trait\CloneReadonlyClassWith;
 use Exdrals\Shared\Utils\Collectible;
 

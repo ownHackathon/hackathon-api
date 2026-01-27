@@ -7,9 +7,10 @@ use Envms\FluentPDO\Query;
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 use InvalidArgumentException;
-use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
-use ownHackathon\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use PDOException;
 
 use function is_array;
@@ -28,14 +29,14 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
      * @throws PDOException
      * @throws DuplicateEntryException|Exception
      */
-    public function insert(WorkspaceInterface $data): true
+    public function insert(WorkspaceInterface $data): int
     {
         $value = $this->hydrator->extract($data);
 
         unset($value['id']);
 
         try {
-            $this->query->insertInto($this->table, $value)->execute();
+            $lastInsertId = $this->query->insertInto($this->table, $value)->execute();
         } catch (PDOException $e) {
             if ($e->errorInfo[1] === self::MYSQL_ERROR_DUPLICATED_ENTRY) {
                 throw new DuplicateEntryException($this->getTableName(), $data->id);
@@ -43,7 +44,7 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
             throw $e;
         }
 
-        return true;
+        return (int)$lastInsertId;
     }
 
     public function update(WorkspaceInterface $data): true

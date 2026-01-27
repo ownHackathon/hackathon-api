@@ -2,9 +2,10 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountAccessAuthStoreInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountAccessAuthStoreInterface;
 
 readonly class AccountAccessAuthRepository implements AccountAccessAuthRepositoryInterface
 {

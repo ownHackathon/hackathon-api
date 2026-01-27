@@ -2,9 +2,11 @@
 
 namespace ownHackathon\Workspace\Domain;
 
-use Exdrals\Identity\Domain\AccountInterface;
-use InvalidArgumentException;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Utils\Collection;
+use InvalidArgumentException;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
 
 use function get_class;
 use function sprintf;

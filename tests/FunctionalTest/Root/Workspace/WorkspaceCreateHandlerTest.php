@@ -4,16 +4,16 @@ namespace FunctionalTest\Root\Workspace;
 
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
+use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\Workspace\Domain\Workspace;
-use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
 use PHPUnit\Framework\Assert;
 use UnitTest\JsonRequestHelper;
 
@@ -22,18 +22,22 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
     use JsonRequestHelper;
 
     public string $accessToken;
+    public UuidFactoryInterface $uuid;
 
     public function setUp(): void
     {
         parent::setUp();
 
+        /** @var UuidFactoryInterface this->uuid */
+        $this->uuid = $this->container->get(UuidFactoryInterface::class);
+
         /** @var AccountRepositoryInterface $accountRepository */
         $accountRepository = $this->container->get(AccountRepositoryInterface::class);
         /** @var UuidFactoryInterface $uuid */
-        $uuid = $this->container->get(UuidFactoryInterface::class);
+
         $account = new Account(
             null,
-            $uuid->uuid7(),
+            $this->uuid->uuid7(),
             'I see your Token',
             password_hash('I see your Token', PASSWORD_DEFAULT),
             new EmailType('iseeyourtoken@example.com'),
@@ -129,6 +133,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
 
         $workspace = new Workspace(
             id: null,
+            uuid: $this->uuid->uuid7(),
             accountId: 1,
             name: 'Duplicated Entry',
             slug: 'duplicated-entry',

@@ -4,7 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Service\Token;
 
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Mailing\Infrastructure\EmailService;
-use Exdrals\Identity\Domain\TokenInterface;
+use Exdrals\Shared\Domain\Token\TokenInterface;
 
 use function sprintf;
 

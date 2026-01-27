@@ -3,13 +3,14 @@
 namespace Exdrals\Identity\Infrastructure\Persistence\Table\Token;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Identity\Domain\TokenCollectionInterface;
-use Exdrals\Identity\Domain\TokenInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Domain\Token\TokenCollectionInterface;
+use Exdrals\Shared\Domain\Token\TokenInterface;
+use Exdrals\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
 use InvalidArgumentException;
 use PDOException;
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;

@@ -4,15 +4,16 @@ namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
-use Exdrals\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Account\AccountCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountStoreInterface;
 use InvalidArgumentException;
 use PDOException;
 use Ramsey\Uuid\UuidInterface;
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;
@@ -38,12 +39,12 @@ class AccountTable extends AbstractTable implements AccountStoreInterface
 
 
         try {
-            $lastInserId = $this->query->insertInto($this->table, $value)->execute();
+            $lastInsertId = $this->query->insertInto($this->table, $value)->execute();
         } catch (PDOException $e) {
             throw new DuplicateEntryException($this->getTableName(), $data->id);
         }
 
-        return (int)$lastInserId;
+        return (int)$lastInsertId;
     }
 
     public function update(AccountInterface $data): true

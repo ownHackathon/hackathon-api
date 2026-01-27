@@ -79,6 +79,7 @@
   "autoload": {
     "psr-4": {
       "ownHackathon\\" : "src/App/",
+      "ownHackathon\\Shared\\" : "src/App/Shared/src/",
       "ownHackathon\\Account\\" : "src/App/Account/",
       "ownHackathon\\Workspace\\" : "src/App/Workspace/src/",
       "Exdrals\\Shared\\": "src/Shared/src",
@@ -116,7 +117,6 @@
       "@development-enable"
     ],
     "test": [
-      "@unittest",
       "@functionaltest"
     ],
     "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --display-phpunit-deprecations --configuration phpunit_unittest.xml"

@@ -2,18 +2,18 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Client\ClientIdentificationData;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydratorInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Exdrals\Identity\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
-use Laminas\Diactoros\Response\JsonResponse;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
 use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountHydratorInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Exdrals\Shared\Utils\UuidFactory;
+use Laminas\Diactoros\Response\JsonResponse;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\Repository\MockAccountAccessAuthRepository;
 

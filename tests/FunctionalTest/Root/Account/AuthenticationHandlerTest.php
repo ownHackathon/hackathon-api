@@ -3,16 +3,16 @@
 namespace FunctionalTest\Root\Account;
 
 use DateTimeImmutable;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 use UnitTest\Mock\Constants\Account;
 

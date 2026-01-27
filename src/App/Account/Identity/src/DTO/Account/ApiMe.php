@@ -2,7 +2,7 @@
 
 namespace Exdrals\Identity\DTO\Account;
 
-use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]

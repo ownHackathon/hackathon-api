@@ -2,9 +2,9 @@
 
 namespace Exdrals\Identity\Middleware\Token;
 
-use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\DTO\Token\AccessToken;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -23,8 +23,6 @@ readonly class GenerateAccessTokenMiddleware implements MiddlewareInterface
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
         $accessToken = $this->accessTokenService->generate($account->uuid);
-
-        $accessToken = AccessToken::fromString($accessToken);
 
         return $handler->handle($request->withAttribute(AccessToken::class, $accessToken));
     }

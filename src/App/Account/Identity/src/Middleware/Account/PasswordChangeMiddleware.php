@@ -3,18 +3,18 @@
 namespace Exdrals\Identity\Middleware\Account;
 
 use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Domain\Enum\TokenType;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\Domain\TokenInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Shared\Domain\Enum\Token\TokenType;
+use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
+use Exdrals\Shared\Domain\Token\TokenInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 
 readonly class PasswordChangeMiddleware implements MiddlewareInterface
 {

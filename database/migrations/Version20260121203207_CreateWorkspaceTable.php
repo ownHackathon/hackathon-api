@@ -13,14 +13,17 @@ final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
     {
         $table = $schema->createTable('Workspace');
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
+        $table->addColumn('uuid', Types::GUID, );
         $table->addColumn('accountId', Types::INTEGER, ['unsigned' => true,]);
         $table->addColumn('name', Types::STRING, ['length' => 64, 'notnull' => true,]);
         $table->addColumn('slug', Types::STRING, ['length' => 64, 'notnull' => true,]);
+
         $table->addPrimaryKeyConstraint(
             PrimaryKeyConstraint::editor()
                 ->setUnquotedColumnNames('id')
                 ->create()
         );
+        $table->addUniqueIndex(['uuid'], 'workspace_uuid_UNIQUE');
         $table->addUniqueIndex(['name'], 'workspace_name_UNIQUE');
         $table->addUniqueIndex(['slug'], 'workspace_slug_UNIQUE');
     }

@@ -2,9 +2,9 @@
 
 namespace UnitTest\Mock\Entity;
 
-use Exdrals\Mailing\Domain\EmailType;
 use DateTimeImmutable;
-use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use UnitTest\Mock\Constants\Account;

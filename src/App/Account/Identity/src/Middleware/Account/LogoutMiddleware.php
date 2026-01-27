@@ -2,18 +2,18 @@
 
 namespace Exdrals\Identity\Middleware\Account;
 
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class LogoutMiddleware implements MiddlewareInterface
 {

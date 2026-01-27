@@ -51,7 +51,6 @@ class AccountActivationHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var Account $account */
         $account = $request->getAttribute(Account::class);
 
         return new JsonResponse($account, HTTP::STATUS_CREATED, ['Location' => '/account/' . $account->uuid]);

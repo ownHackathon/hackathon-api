@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Exdrals\Identity\Middleware\Account\LastAktivityUpdaterMiddleware;
+use Exdrals\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
 use Exdrals\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use Exdrals\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Mezzio\Application;
@@ -42,7 +42,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
         ClientIdentificationMiddleware::class,
         RequestAuthenticationMiddleware::class,
-        LastAktivityUpdaterMiddleware::class,
+        LastActivityUpdaterMiddleware::class,
 
         DispatchMiddleware::class,
 

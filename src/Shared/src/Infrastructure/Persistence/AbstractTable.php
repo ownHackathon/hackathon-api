@@ -4,6 +4,7 @@ namespace Exdrals\Shared\Infrastructure\Persistence;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
+use Exdrals\Shared\Infrastructure\Persistence\Store\StoreInterface;
 use InvalidArgumentException;
 use ReflectionClass;
 

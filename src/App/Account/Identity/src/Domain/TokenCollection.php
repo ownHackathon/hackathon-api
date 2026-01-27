@@ -2,8 +2,10 @@
 
 namespace Exdrals\Identity\Domain;
 
-use InvalidArgumentException;
+use Exdrals\Shared\Domain\Token\TokenCollectionInterface;
+use Exdrals\Shared\Domain\Token\TokenInterface;
 use Exdrals\Shared\Utils\Collection;
+use InvalidArgumentException;
 
 use function get_class;
 use function sprintf;

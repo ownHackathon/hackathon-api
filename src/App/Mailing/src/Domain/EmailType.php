@@ -66,4 +66,9 @@ final class EmailType implements \Exdrals\Shared\Type\TypeInterface
 
         return $value;
     }
+
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
 }

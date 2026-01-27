@@ -2,10 +2,11 @@
 
 namespace Exdrals\Identity\Infrastructure\Service\Token;
 
+use Exdrals\Identity\DTO\Token\AccessToken;
 use Exdrals\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Shared\Trait\JwtTokenTrait;
 use Firebase\JWT\JWT;
 use Ramsey\Uuid\UuidInterface;
-use Exdrals\Shared\Trait\JwtTokenTrait;
 
 use function time;
 
@@ -18,7 +19,7 @@ readonly class AccessTokenService
     ) {
     }
 
-    public function generate(UuidInterface $uuid): string
+    public function generate(UuidInterface $uuid): AccessToken
     {
         $now = time();
 
@@ -30,6 +31,7 @@ readonly class AccessTokenService
             'uuid' => $uuid->toString(),
         ];
 
-        return JWT::encode($payload, $this->config->key, $this->config->algorithmus);
+        $token = JWT::encode($payload, $this->config->key, $this->config->algorithmus);
+        return AccessToken::fromString($token);
     }
 }

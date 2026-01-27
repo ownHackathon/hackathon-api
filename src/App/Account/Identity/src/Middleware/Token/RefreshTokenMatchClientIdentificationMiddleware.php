@@ -3,16 +3,18 @@
 namespace Exdrals\Identity\Middleware\Token;
 
 use Exdrals\Identity\Domain\AccountAccessAuth;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+
+use function var_dump;
 
 readonly class RefreshTokenMatchClientIdentificationMiddleware implements MiddlewareInterface
 {

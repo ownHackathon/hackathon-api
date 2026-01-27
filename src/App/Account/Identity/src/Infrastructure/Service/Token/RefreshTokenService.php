@@ -4,6 +4,7 @@ namespace Exdrals\Identity\Infrastructure\Service\Token;
 
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use Firebase\JWT\JWT;
 use Exdrals\Shared\Trait\JwtTokenTrait;
 
@@ -18,7 +19,7 @@ readonly class RefreshTokenService
     ) {
     }
 
-    public function generate(ClientIdentification $clientIdentification): string
+    public function generate(ClientIdentification $clientIdentification): RefreshToken
     {
         $now = time();
 
@@ -30,6 +31,8 @@ readonly class RefreshTokenService
             'ident' => $clientIdentification->identificationHash,
         ];
 
-        return JWT::encode($payload, $this->config->key, $this->config->algorithmus);
+        $token = JWT::encode($payload, $this->config->key, $this->config->algorithmus);
+
+        return RefreshToken::fromString($token);
     }
 }

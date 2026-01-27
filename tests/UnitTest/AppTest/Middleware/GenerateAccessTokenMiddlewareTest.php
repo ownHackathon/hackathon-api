@@ -2,8 +2,8 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Middleware\Token\GenerateAccessTokenMiddleware;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;

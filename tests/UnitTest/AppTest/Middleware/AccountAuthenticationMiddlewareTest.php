@@ -2,16 +2,16 @@
 
 namespace UnitTest\AppTest\Middleware;
 
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Utils\UuidFactory;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use FunctionalTest\Mock\NullLogger;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
-use Exdrals\Shared\Utils\UuidFactory;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\Mock\Constants\Account;
 use UnitTest\Mock\MockAccountAuthenticationMiddlewareRequestHandler;
 use UnitTest\Mock\Repository\MockAccountRepository;

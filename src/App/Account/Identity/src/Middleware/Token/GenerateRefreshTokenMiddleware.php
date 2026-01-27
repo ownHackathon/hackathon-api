@@ -23,7 +23,7 @@ readonly class GenerateRefreshTokenMiddleware implements MiddlewareInterface
 
         $refreshToken = $this->tokenService->generate($clientIdentification);
 
-        $refreshToken = RefreshToken::fromString($refreshToken);
+
 
         return $handler->handle($request->withAttribute(RefreshToken::class, $refreshToken));
     }

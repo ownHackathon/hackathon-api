@@ -4,6 +4,8 @@ namespace ownHackathon\Workspace\Domain;
 
 use Exdrals\Shared\Trait\CloneReadonlyClassWith;
 use Exdrals\Shared\Utils\Collectible;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class Workspace implements WorkspaceInterface, Collectible
 {
@@ -11,6 +13,7 @@ readonly class Workspace implements WorkspaceInterface, Collectible
 
     public function __construct(
         public ?int $id,
+        public UuidInterface $uuid,
         public int $accountId,
         public string $name,
         public string $slug,

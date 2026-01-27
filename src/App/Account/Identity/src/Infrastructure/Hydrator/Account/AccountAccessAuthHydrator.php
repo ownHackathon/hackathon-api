@@ -6,9 +6,10 @@ use DateTimeImmutable;
 use Exception;
 use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\AccountAccessAuthCollection;
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
 use Exdrals\Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountAccessAuthHydratorInterface;
 
 readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
 {

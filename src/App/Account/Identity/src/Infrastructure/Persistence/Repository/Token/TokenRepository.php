@@ -2,9 +2,10 @@
 
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Token;
 
-use Exdrals\Identity\Domain\TokenCollectionInterface;
-use Exdrals\Identity\Domain\TokenInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Token\TokenStoreInterface;
+use Exdrals\Shared\Domain\Token\TokenCollectionInterface;
+use Exdrals\Shared\Domain\Token\TokenInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
 
 readonly class TokenRepository implements TokenRepositoryInterface
 {

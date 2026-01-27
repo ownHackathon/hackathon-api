@@ -2,9 +2,9 @@
 
 namespace UnitTest\AppTest\Hydrator;
 
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountAccessAuthHydrator;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
 use PHPUnit\Framework\TestCase;
 use UnitTest\Mock\Constants\AccountAccessAuth;
 

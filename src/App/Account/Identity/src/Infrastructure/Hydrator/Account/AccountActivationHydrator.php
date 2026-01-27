@@ -5,11 +5,12 @@ namespace Exdrals\Identity\Infrastructure\Hydrator\Account;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
 use Exdrals\Identity\Domain\AccountActivationCollection;
-use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Identity\Domain\AccountActivationInterface;
 use Exdrals\Mailing\Domain\EmailType;
-use Ramsey\Uuid\UuidFactoryInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationInterface;
 use Exdrals\Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
+use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountActivationHydrator implements AccountActivationHydratorInterface
 {

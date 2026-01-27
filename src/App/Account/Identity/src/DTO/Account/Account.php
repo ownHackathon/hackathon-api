@@ -2,18 +2,47 @@
 
 namespace Exdrals\Identity\DTO\Account;
 
-use Exdrals\Identity\Domain\AccountInterface;
-use OpenApi\Attributes as OA;
+use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Domain\Enum\DataType;
 use Exdrals\Shared\Domain\Enum\DateTimeFormat;
+use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(
+    description: 'Detailed information about a user account'
+)]
 readonly class Account
 {
     public function __construct(
+        #[OA\Property(
+            description: 'The unique identifier of the account',
+            format: 'uuid',
+            example: '019becbe-f952-7b82-82fa-f41f8ae24599'
+        )]
         public string $uuid,
+        #[OA\Property(
+            description: 'The display name of the account holder',
+            example: 'Max Mustermann'
+        )]
         public string $name,
+        #[OA\Property(
+            description: 'The email address associated with the account',
+            format: 'email',
+            example: 'max.mustermann@example.com'
+        )]
         public string $email,
+        #[OA\Property(
+            description: 'The timestamp when the account was registered',
+            type: DataType::STRING->value,
+            format: DateTimeFormat::DEFAULT->value,
+            example: '2024-01-20 14:30:00'
+        )]
         public string $registeredAt,
+        #[OA\Property(
+            description: 'The timestamp of the last activity on this account',
+            type: DataType::STRING->value,
+            format: DateTimeFormat::DEFAULT->value,
+            example: '2024-05-15 10:00:00'
+        )]
         public string $lastActionAt,
     ) {
     }

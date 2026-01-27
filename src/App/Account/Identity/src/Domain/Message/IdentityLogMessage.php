@@ -13,6 +13,7 @@ interface IdentityLogMessage extends LogMessage
     public const string PASSWORD_REQUEST_MISSING_ACCOUNT = 'New password requested for a non-existent account';
     public const string PASSWORD_INCORRECT = 'Incorrect password provided';
     public const string PASSWORD_INVALID = 'Invalid password provided';
+    public const string ACCOUNT_UPDATE_UNKNOWN_ERROR = 'Unknown error when updating an account';
 
     // --- 2. Input & Routing Errors ---
     public const string REQUIRED_EMAIL_MISSING = 'Required email argument was not provided to the route';

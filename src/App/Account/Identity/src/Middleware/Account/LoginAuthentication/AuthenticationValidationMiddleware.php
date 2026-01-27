@@ -4,12 +4,13 @@ namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
 
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use Exdrals\Identity\DTO\Account\AuthenticationRequest;
 use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
 readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 {
@@ -35,6 +36,8 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
             );
         }
 
-        return $handler->handle($request->withParsedBody($this->validator->getValues()));
+        $response = AuthenticationRequest::fromArray($this->validator->getValues());
+
+        return $handler->handle($request->withAttribute(AuthenticationRequest::class, $response));
     }
 }

@@ -2,18 +2,18 @@
 
 namespace FunctionalTest\Root\Account;
 
-use Exdrals\Identity\Domain\AccountActivationInterface;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\Domain\TokenInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Account\AccountActivationInterface;
+use Exdrals\Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Domain\Token\TokenInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use Exdrals\Shared\Domain\Enum\DataType;
 use UnitTest\JsonRequestHelper;
 
 class AccountRegisterHandlerTest extends AbstractFunctional

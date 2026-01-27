@@ -3,7 +3,7 @@
 namespace Exdrals\Identity\Infrastructure\Service\Token;
 
 use Exdrals\Mailing\Infrastructure\EmailService;
-use Exdrals\Identity\Domain\AccountActivationInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationInterface;
 
 use function sprintf;
 

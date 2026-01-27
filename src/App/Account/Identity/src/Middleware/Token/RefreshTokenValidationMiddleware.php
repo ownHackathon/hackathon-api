@@ -12,6 +12,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 
+use function var_dump;
+
 readonly class RefreshTokenValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(

@@ -5,14 +5,14 @@ namespace FunctionalTest\Root\Account;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Enum\DataType;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\Assert;
-use Exdrals\Shared\Domain\Enum\DataType;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 
 class AccountActivationHandlerTest extends AbstractFunctional

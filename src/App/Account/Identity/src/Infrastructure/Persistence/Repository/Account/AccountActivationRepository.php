@@ -3,9 +3,10 @@
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Identity\Domain\AccountActivationInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountActivationStoreInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountActivationStoreInterface;
 
 readonly class AccountActivationRepository implements AccountActivationRepositoryInterface
 {

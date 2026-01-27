@@ -5,16 +5,16 @@ namespace Exdrals\Identity\Middleware\Account;
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 
 readonly class RegisterMiddleware implements MiddlewareInterface
 {

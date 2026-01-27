@@ -3,14 +3,15 @@
 namespace Exdrals\Identity\Infrastructure\Persistence\Table\Account;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Identity\Domain\AccountActivationInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Account\AccountActivationCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountActivationInterface;
+use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use Exdrals\Shared\Infrastructure\Hydrator\Account\AccountActivationHydratorInterface;
+use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountActivationStoreInterface;
 use InvalidArgumentException;
 use PDOException;
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 
 use function is_array;
 use function sprintf;

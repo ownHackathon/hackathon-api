@@ -2,6 +2,7 @@
 
 namespace Exdrals\Shared;
 
+use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Log\LoggerInterface;
@@ -30,6 +31,7 @@ class ConfigProvider
                 Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
                 Shared\Infrastructure\Service\SlugService::class => InvokableFactory::class,
                 Shared\Middleware\RequireLoginMiddleware::class => InvokableFactory::class,
+                Shared\Middleware\FluentTransactionMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -45,6 +47,9 @@ class ConfigProvider
             ],
             Middleware\RouteNotFoundMiddleware::class => [
                 LoggerInterface::class,
+            ],
+            Shared\Middleware\FluentTransactionMiddleware::class => [
+                Query::class,
             ],
         ];
     }

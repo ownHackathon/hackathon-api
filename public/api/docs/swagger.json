@@ -284,6 +284,41 @@
             }
         },
         "/workspace": {
+            "get": {
+                "tags": [
+                    "Workspace"
+                ],
+                "summary": "Returns a collection of all workspaces owned by or associated with the currently authenticated user.",
+                "description": "List all workspaces for the authenticated account",
+                "operationId": "findWorkspaces",
+                "responses": {
+                    "200": {
+                        "description": "A list of workspaces belonging to the user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkspaceList"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication failed. The access token is missing or invalid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Workspace"
@@ -381,7 +416,41 @@
     },
     "components": {
         "schemas": {
-            "Account": {},
+            "Account": {
+                "description": "Detailed information about a user account",
+                "properties": {
+                    "uuid": {
+                        "description": "The unique identifier of the account",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "019becbe-f952-7b82-82fa-f41f8ae24599"
+                    },
+                    "name": {
+                        "description": "The display name of the account holder",
+                        "type": "string",
+                        "example": "Max Mustermann"
+                    },
+                    "email": {
+                        "description": "The email address associated with the account",
+                        "type": "string",
+                        "format": "email",
+                        "example": "max.mustermann@example.com"
+                    },
+                    "registeredAt": {
+                        "description": "The timestamp when the account was registered",
+                        "type": "string",
+                        "format": "Y-m-d H:i:s",
+                        "example": "2024-01-20 14:30:00"
+                    },
+                    "lastActionAt": {
+                        "description": "The timestamp of the last activity on this account",
+                        "type": "string",
+                        "format": "Y-m-d H:i:s",
+                        "example": "2024-05-15 10:00:00"
+                    }
+                },
+                "type": "object"
+            },
             "AccountAuthenticationData": {
                 "required": [
                     "email",
@@ -499,6 +568,18 @@
                 },
                 "type": "object"
             },
+            "WorkspaceList": {
+                "properties": {
+                    "workspaces": {
+                        "description": "A list of workspaces",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceResponse"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "WorkspaceRequest": {
                 "required": [
                     "name"
@@ -514,6 +595,11 @@
             },
             "WorkspaceResponse": {
                 "properties": {
+                    "uuid": {
+                        "description": "The unique identifier of the workspace",
+                        "type": "string",
+                        "example": "019becbe-f952-7b82-82fa-f41f8ae24599"
+                    },
                     "ownerUuid": {
                         "description": "The Uuid from owner for this workspace",
                         "type": "string",

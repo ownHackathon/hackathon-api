@@ -3,9 +3,10 @@
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository\Account;
 
 use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\Account\AccountStoreInterface;
+use Exdrals\Shared\Domain\Account\AccountCollectionInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountStoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class AccountRepository implements AccountRepositoryInterface

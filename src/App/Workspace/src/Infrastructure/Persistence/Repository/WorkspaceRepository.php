@@ -3,9 +3,10 @@
 namespace ownHackathon\Workspace\Infrastructure\Persistence\Repository;
 
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Workspace\Domain\WorkspaceCollectionInterface;
-use ownHackathon\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use PDOException;
 
 readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
@@ -19,7 +20,7 @@ readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
      * @throws PDOException
      * @throws DuplicateEntryException
      */
-    public function insert(WorkspaceInterface $data): true
+    public function insert(WorkspaceInterface $data): int
     {
         return $this->store->insert($data);
     }

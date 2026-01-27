@@ -10,12 +10,12 @@ final class Version20990921210157_InsertWorkspaceTestData extends AbstractMigrat
     public function up(Schema $schema): void
     {
         $sql = <<<SQL
-              INSERT INTO `Workspace` (`accountId`, `name`, `slug`) VALUES
-                (1, 'Owner', 'owner'),
-                (2, 'Administrator', 'administrator'),
-                (3, 'Moderator', 'moderator'),
-                (4, 'User', 'user'),
-                (5, 'Account Name', 'account-name');
+              INSERT INTO `Workspace` (`uuid`, `accountId`, `name`, `slug`) VALUES
+                (UUID_v7(), 1, 'Owner', 'owner'),
+                (UUID_v7(), 2, 'Administrator', 'administrator'),
+                (UUID_v7(), 3, 'Moderator', 'moderator'),
+                (UUID_v7(), 4, 'User', 'user'),
+                (UUID_v7(), 5, 'Account Name', 'account-name');
         SQL;
 
         $this->addSql($sql);

@@ -4,15 +4,15 @@ namespace FunctionalTest\Root\Account;
 
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Domain\Enum\TokenType;
 use Exdrals\Identity\Domain\Token;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use Exdrals\Mailing\Domain\EmailType;
+use Exdrals\Shared\Domain\Enum\Token\TokenType;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
 use UnitTest\JsonRequestHelper;
 
 use function password_verify;

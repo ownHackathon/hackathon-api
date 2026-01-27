@@ -2,7 +2,7 @@
 
 namespace UnitTest\Mock;
 
-use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Shared\Domain\Account\AccountInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

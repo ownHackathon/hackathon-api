@@ -3,10 +3,11 @@
 namespace Exdrals\Identity\Domain;
 
 use DateTimeImmutable;
-use Exdrals\Identity\Domain\Enum\TokenType;
-use Ramsey\Uuid\UuidInterface;
+use Exdrals\Shared\Domain\Enum\Token\TokenType;
+use Exdrals\Shared\Domain\Token\TokenInterface;
 use Exdrals\Shared\Trait\CloneReadonlyClassWith;
 use Exdrals\Shared\Utils\Collectible;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class Token implements TokenInterface, Collectible
 {

@@ -8,12 +8,13 @@ use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepository;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
@@ -21,6 +22,8 @@ use PDO;
 use PHPUnit\Framework\Assert;
 use Shared\Domain\Enum\Message\StatusMessage;
 use UnitTest\JsonRequestHelper;
+
+use function var_dump;
 
 class AccessTokenHandlerTest extends AbstractFunctional
 {
@@ -42,7 +45,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
     private ClientIdentification $clientIdentification;
     private ClientIdentificationService $clientIdentificationService;
     private RefreshTokenService $refreshTokenService;
-    private string $refreshToken;
+    private RefreshToken $refreshToken;
     private PDO $PDO;
 
     protected function setUp(): void
@@ -78,7 +81,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             null,
             $userAccount->id,
             'Testing',
-            $this->refreshToken,
+            $this->refreshToken->refreshToken,
             self::USER_AGENT,
             $this->clientIdentificationService->getClientIdentificationHash($this->clientIdentificationData),
             new DateTimeImmutable()
@@ -91,12 +94,13 @@ class AccessTokenHandlerTest extends AbstractFunctional
             method: 'GET',
             headers: [
                 'x-ident' => self::CLIENT_IDENTIFICATION,
-                'Authentication' => $this->refreshToken,
+                'Authentication' => $this->refreshToken->refreshToken,
                 'User-Agent' => self::USER_AGENT,
             ]
         );
 
         $response = $this->app->handle($request);
+
         $content = $this->getContentAsJson($response);
 
         $this->assertSame(HTTP::STATUS_OK, $response->getStatusCode());
@@ -118,7 +122,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             null,
             $userAccount->id,
             'Testing',
-            $this->refreshToken,
+            $this->refreshToken->refreshToken,
             self::USER_AGENT,
             $this->clientIdentificationService->getClientIdentificationHash($this->clientIdentificationData),
             new DateTimeImmutable()
@@ -152,7 +156,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             1,
             $userAccount->id,
             'Testing',
-            $this->refreshToken,
+            $this->refreshToken->refreshToken,
             self::USER_AGENT,
             $this->clientIdentificationService->getClientIdentificationHash($this->clientIdentificationData),
             new DateTimeImmutable()
@@ -186,7 +190,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             method: 'GET',
             headers: [
                 'x-ident' => self::CLIENT_IDENTIFICATION,
-                'Authentication' => $this->refreshToken,
+                'Authentication' => $this->refreshToken->refreshToken,
                 'User-Agent' => self::USER_AGENT,
             ]
         );
@@ -205,7 +209,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             1,
             $userAccount->id,
             'Testing',
-            $this->refreshToken,
+            $this->refreshToken->refreshToken,
             self::USER_AGENT,
             $this->clientIdentificationService->getClientIdentificationHash($this->clientIdentificationData),
             new DateTimeImmutable()
@@ -218,7 +222,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             method: 'GET',
             headers: [
                 'x-ident' => self::UNEXPECTED_CLIENT_IDENTIFICATION,
-                'Authentication' => $this->refreshToken,
+                'Authentication' => $this->refreshToken->refreshToken,
                 'User-Agent' => self::USER_AGENT,
             ]
         );
@@ -239,7 +243,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             1,
             $userAccount->id,
             'Testing',
-            $this->refreshToken,
+            $this->refreshToken->refreshToken,
             self::USER_AGENT,
             $this->clientIdentificationService->getClientIdentificationHash($this->clientIdentificationData),
             new DateTimeImmutable()
@@ -252,7 +256,7 @@ class AccessTokenHandlerTest extends AbstractFunctional
             method: 'GET',
             headers: [
                 'x-ident' => self::CLIENT_IDENTIFICATION,
-                'Authentication' => $this->refreshToken,
+                'Authentication' => $this->refreshToken->refreshToken,
                 'User-Agent' => self::UNEXPECTED_USER_AGENT,
             ]
         );
