@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account\LoginAuthentication;
+namespace Exdrals\Identity\Middleware\Account\Authentication;
 
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;

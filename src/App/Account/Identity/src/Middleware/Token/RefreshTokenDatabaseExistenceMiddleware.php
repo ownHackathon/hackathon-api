@@ -14,8 +14,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-use function var_dump;
-
 readonly class RefreshTokenDatabaseExistenceMiddleware implements MiddlewareInterface
 {
     public function __construct(

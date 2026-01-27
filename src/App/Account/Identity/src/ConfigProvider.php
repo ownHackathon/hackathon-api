@@ -3,6 +3,7 @@
 namespace Exdrals\Identity;
 
 use Envms\FluentPDO\Query;
+use Exdrals\Identity\Handler\AccessTokenHandler;
 use Exdrals\Identity\Handler\AuthenticationHandler;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
@@ -16,7 +17,6 @@ use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
-use Exdrals\Identity\Middleware\Token\GenerateAccessTokenMiddleware;
 use Exdrals\Mailing\Infrastructure\EmailService;
 use Exdrals\Mailing\Infrastructure\EmailServiceFactory;
 use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
@@ -57,10 +57,7 @@ readonly class ConfigProvider
                 'path' => '/api/token/refresh[/]',
                 'middleware' => [
                     Middleware\Token\RefreshTokenValidationMiddleware::class,
-                    Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class,
-                    Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class,
-                    Middleware\Token\RefreshTokenAccountMiddleware::class,
-                    GenerateAccessTokenMiddleware::class,
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Handler\AccessTokenHandler::class,
                 ],
                 'allowed_methods' => ['GET'],
@@ -69,8 +66,8 @@ readonly class ConfigProvider
             [
                 'path' => '/api/account/authentication[/]',
                 'middleware' => [
-                    Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class,
-                    Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class,
+                    Middleware\Account\Authentication\AuthenticationConditionsMiddleware::class,
+                    Middleware\Account\Authentication\AuthenticationValidationMiddleware::class,
                     Handler\AuthenticationHandler::class,
                 ],
                 'allowed_methods' => ['POST'],
@@ -155,8 +152,8 @@ readonly class ConfigProvider
                 Infrastructure\Hydrator\Account\AccountActivationHydrator::class => ConfigAbstractFactory::class,
                 Infrastructure\Hydrator\Account\AccountHydrator::class => ConfigAbstractFactory::class,
                 Infrastructure\Hydrator\Token\TokenHydrator::class => ConfigAbstractFactory::class,
-                Middleware\Account\LoginAuthentication\AuthenticationConditionsMiddleware::class => InvokableFactory::class,
-                Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Account\Authentication\AuthenticationConditionsMiddleware::class => InvokableFactory::class,
+                Middleware\Account\Authentication\AuthenticationValidationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\ActivationInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\EmailInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
@@ -198,8 +195,7 @@ readonly class ConfigProvider
                 EMailValidator::class => ConfigAbstractFactory::class,
                 Infrastructure\Validator\PasswordValidator::class => ConfigAbstractFactory::class,
                 AuthenticationHandler::class => ConfigAbstractFactory::class,
-
-                GenerateAccessTokenMiddleware::class => ConfigAbstractFactory::class,
+                AccessTokenHandler::class => ConfigAbstractFactory::class,
             ],
 
         ];
@@ -217,7 +213,7 @@ readonly class ConfigProvider
             Infrastructure\Hydrator\Token\TokenHydrator::class => [
                 UuidFactoryInterface::class,
             ],
-            Middleware\Account\LoginAuthentication\AuthenticationValidationMiddleware::class => [
+            Middleware\Account\Authentication\AuthenticationValidationMiddleware::class => [
                 AuthenticationValidator::class,
             ],
             Middleware\Account\Validation\ActivationInputValidatorMiddleware::class => [
@@ -331,9 +327,8 @@ readonly class ConfigProvider
                 AccessTokenService::class,
                 AuthenticationService::class,
             ],
-
-            GenerateAccessTokenMiddleware::class => [
-                AccessTokenService::class,
+            AccessTokenHandler::class => [
+                RefreshTokenService::class,
             ],
         ];
     }

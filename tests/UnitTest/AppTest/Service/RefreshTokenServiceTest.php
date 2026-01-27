@@ -31,7 +31,7 @@ class RefreshTokenServiceTest extends TestCase
 
         $token = $service->generate($this->client);
 
-        $isValid = $service->isValid($token);
+        $isValid = $service->isValid($token->refreshToken);
 
         $this->assertTrue($isValid);
     }

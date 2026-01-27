@@ -6,7 +6,7 @@ use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Client\ClientIdentificationData;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Hydrator\Account\AccountHydrator;
-use Exdrals\Identity\Middleware\Account\LoginAuthentication\PersistAuthenticationMiddleware;
+use Exdrals\Identity\Middleware\Account\Authentication\PersistAuthenticationMiddleware;
 use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
 use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;

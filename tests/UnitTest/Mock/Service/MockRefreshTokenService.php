@@ -4,6 +4,7 @@ namespace UnitTest\Mock\Service;
 
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Token\JwtTokenConfig;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 
 readonly class MockRefreshTokenService extends RefreshTokenService
@@ -15,8 +16,8 @@ readonly class MockRefreshTokenService extends RefreshTokenService
         parent::__construct($config);
     }
 
-    public function generate(ClientIdentification $clientIdentification): string
+    public function generate(?ClientIdentification $clientIdentification): RefreshToken
     {
-        return 'test successfully';
+        return RefreshToken::fromString('test successfully');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace UnitTest\Mock\Service;
 
+use Exdrals\Identity\DTO\Token\AccessToken;
 use Exdrals\Identity\DTO\Token\JwtTokenConfig;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Firebase\JWT\JWT;
@@ -18,7 +19,7 @@ readonly class MockAccessTokenServiceWithoutDuration extends AccessTokenService
         parent::__construct($config);
     }
 
-    public function generate(UuidInterface $uuid): string
+    public function generate(UuidInterface $uuid): AccessToken
     {
         $now = time();
 
@@ -30,6 +31,6 @@ readonly class MockAccessTokenServiceWithoutDuration extends AccessTokenService
             'uuid' => $uuid->toString(),
         ];
 
-        return JWT::encode($payload, $this->config->key, $this->config->algorithmus);
+        return AccessToken::fromString(JWT::encode($payload, $this->config->key, $this->config->algorithmus));
     }
 }
