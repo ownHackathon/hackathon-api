@@ -1,22 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account;
+namespace Exdrals\Identity\Infrastructure\Service\Account;
 
 use Exdrals\Identity\Domain\Account;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Identity\DTO\Account\AccountPassword;
+use Exdrals\Identity\DTO\Token\Token;
 use Exdrals\Shared\Domain\Enum\Token\TokenType;
 use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 use Exdrals\Shared\Domain\Token\TokenInterface;
 use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class PasswordChangeMiddleware implements MiddlewareInterface
+readonly class PasswordChangeService
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
@@ -25,37 +22,32 @@ readonly class PasswordChangeMiddleware implements MiddlewareInterface
     ) {
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function change(Token $token, AccountPassword $password): void
     {
-        $token = $request->getAttribute('token');
-        $password = $request->getParsedBody()['password'];
-
-        if ($token === null) {
-            return $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token);
+        if ($token->token === null) {
+            $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token->token);
         }
 
-        $persistedToken = $this->tokenRepository->findByToken($token);
+        $persistedToken = $this->tokenRepository->findByToken($token->token);
 
         if (!($persistedToken instanceof TokenInterface) || $persistedToken->tokenType !== TokenType::EMail) {
-            return $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token);
+            $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token->token);
         }
 
         $account = $this->accountRepository->findById($persistedToken->accountId);
 
         if (!($account instanceof Account)) {
-            return $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND, $token);
+            $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND, $token->token);
         }
 
-        $hashedPassword = $this->accountService->cryptPassword($password);
+        $hashedPassword = $this->accountService->cryptPassword($password->password);
         $account = $account->with(password: $hashedPassword);
 
         $this->accountRepository->update($account);
         $this->tokenRepository->deleteById($persistedToken->id);
-
-        return $handler->handle($request);
     }
 
-    private function errorResponse(string $logMessage, ?string $token): ResponseInterface
+    private function errorResponse(string $logMessage, ?string $token): void
     {
         throw new HttpInvalidArgumentException(
             $logMessage,

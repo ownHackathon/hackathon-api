@@ -4,6 +4,8 @@ namespace Exdrals\Identity\Handler;
 
 use Exdrals\Identity\DTO\Account\AccountPassword;
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\DTO\Token\Token;
+use Exdrals\Identity\Infrastructure\Service\Account\PasswordChangeService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -13,11 +15,16 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AccountPasswordHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private PasswordChangeService $passwordChangeService,
+    ) {
+    }
+
     #[OA\Patch(
         path: '/account/password/{token}',
         operationId: 'resetPasswordWithToken',
         description: 'Sets a new password for an account. This is the final step of the password recovery process. ' .
-                     "The request requires a valid, non-expired reset token that was previously sent to the user's email address.",
+        "The request requires a valid, non-expired reset token that was previously sent to the user's email address.",
         summary: 'Reset account password using a token',
         tags: ['Account'],
         parameters: [
@@ -42,13 +49,18 @@ class AccountPasswordHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,
         description: "Request failed due to validation errors. Possible reasons:\n" .
-                     "1. The reset token is invalid or has already been used.\n" .
-                     "2. The token has expired.\n" .
-                     '3. The new password does not meet the security requirements (e.g., too short).',
+        "1. The reset token is invalid or has already been used.\n" .
+        "2. The token has expired.\n" .
+        '3. The new password does not meet the security requirements (e.g., too short).',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $token = Token::fromString($request->getAttribute('token'));
+        $password = $request->getAttribute(AccountPassword::class);
+
+        $this->passwordChangeService->change($token, $password);
+
         return new JsonResponse([], HTTP::STATUS_OK);
     }
 }

@@ -1,45 +1,30 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account;
+namespace Exdrals\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\AccountActivation;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Identity\Domain\Exception\DuplicateEMailException;
 use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
 
-readonly class RegisterMiddleware implements MiddlewareInterface
+readonly class AccountRegisterService
 {
     public function __construct(
         private AccountService $accountService,
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private ActivationTokenService $activationTokenService,
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
     ) {
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function register(EmailType $email): void
     {
-        /** @var EmailType $email */
-        $email = $request->getAttribute(EmailType::class);
-
         if (!$this->accountService->isEmailAvailable($email)) {
-            $this->logger->warning(IdentityLogMessage::ACCOUNT_ALREADY_EXISTS, [
-                'email:' => $email->toString(),
-            ]);
-
             $this->accountService->sendTokenForPasswordChange($email);
-
-            return $handler->handle($request);
+            throw new DuplicateEmailException($email->toString());
         }
 
         $activation = new AccountActivation(
@@ -52,7 +37,5 @@ readonly class RegisterMiddleware implements MiddlewareInterface
         $this->accountActivationRepository->insert($activation);
 
         $this->activationTokenService->sendEmail($activation);
-
-        return $handler->handle($request);
     }
 }

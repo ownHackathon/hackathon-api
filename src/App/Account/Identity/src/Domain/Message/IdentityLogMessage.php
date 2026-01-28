@@ -37,6 +37,7 @@ interface IdentityLogMessage extends LogMessage
     public const string PASSWORD_CHANGE_TOKEN_MISSING = 'Password reset token was not provided';
     public const string PASSWORD_CHANGE_TOKEN_INVALID = 'Password reset token is invalid';
     public const string PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND = 'No account found for the provided password reset token';
+    public const string PASSWORD_CHANGE_EMAIL_NOT_FOUND = 'No account found for the provided email';
 
     // --- 7. Access Tokens (Session) ---
     public const string ACCESS_TOKEN_MISSING = 'No access token provided';

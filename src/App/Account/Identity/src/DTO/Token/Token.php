@@ -13,11 +13,11 @@ readonly class Token
             description: 'The Token',
             type: DataType::STRING->value,
         )]
-        public string $token,
+        public ?string $token,
     ) {
     }
 
-    public static function fromString(string $token): self
+    public static function fromString(?string $token): self
     {
         return new self($token);
     }

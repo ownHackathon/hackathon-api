@@ -2,7 +2,6 @@
 
 namespace Exdrals\Identity\Middleware\Token;
 
-use Exdrals\Identity\Domain\AccountAccessAuth;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
@@ -24,13 +23,10 @@ readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AccountAccessAuth $accountAccessAuth */
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);
-
-        /** @var null|AccountInterface $account */
         $account = $this->accountRepository->findById($accountAccessAuth->accountId);
 
-        if ($account === null) {
+        if (!$account instanceof AccountAccessAuthInterface) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_INVALID,

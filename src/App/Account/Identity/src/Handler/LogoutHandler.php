@@ -2,11 +2,17 @@
 
 namespace Exdrals\Identity\Handler;
 
+use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Response\AuthenticationResponse;
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
+use Monolog\Level;
 use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,6 +20,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LogoutHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private AccountService $accountService,
+    ) {
+    }
+
     #[OA\Get(
         path: '/account/logout',
         operationId: 'logout',
@@ -35,6 +46,20 @@ class LogoutHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        $clientId = $request->getAttribute(ClientIdentification::class);
+
+        if (!($account instanceof AccountInterface)) {
+            throw new HttpUnauthorizedException(
+                IdentityLogMessage::LOGOUT_REQUIRES_AUTHENTICATION,
+                IdentityStatusMessage::UNAUTHORIZED_ACCESS,
+                [],
+                Level::Warning
+            );
+        }
+
+        $this->accountService->logout($account, $clientId);
+
         $response = HttpResponseMessage::create(HTTP::STATUS_OK, IdentityStatusMessage::SUCCESS);
 
         return new JsonResponse($response, $response->statusCode);

@@ -3,6 +3,8 @@
 namespace Exdrals\Identity\Handler;
 
 use Exdrals\Identity\DTO\EMail\EMail;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterService;
+use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -12,6 +14,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly class AccountRegisterHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private AccountRegisterService $accountRegisterService,
+    ) {
+    }
+
     #[OA\Post(
         path: '/account',
         description: "Starts the account process for the given email address. \n\n" .
@@ -33,6 +40,11 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $email = $request->getAttribute(EmailType::class);
+
+        $this->accountRegisterService->register($email);
+
+
         return new JsonResponse([], HTTP::STATUS_OK);
     }
 }

@@ -3,6 +3,8 @@
 namespace Exdrals\Identity\Handler;
 
 use Exdrals\Identity\DTO\EMail\EMail;
+use Exdrals\Identity\Infrastructure\Service\Account\PasswordService;
+use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -12,6 +14,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AccountPasswordForgottenHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private PasswordService $passwordService,
+    ) {
+    }
+
     #[OA\Post(
         path: '/account/password/forgotten',
         operationId: 'requestPasswordReset',
@@ -33,6 +40,9 @@ class AccountPasswordForgottenHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $email = $request->getAttribute(EmailType::class);
+        $this->passwordService->sendTokenForInitiateResetPassword($email);
+
         return new JsonResponse([], HTTP::STATUS_OK);
     }
 }

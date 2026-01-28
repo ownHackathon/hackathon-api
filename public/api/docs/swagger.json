@@ -207,7 +207,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AccountAuthenticationData"
+                                "$ref": "#/components/schemas/AuthenticationRequest"
                             }
                         }
                     }
@@ -451,23 +451,6 @@
                 },
                 "type": "object"
             },
-            "AccountAuthenticationData": {
-                "required": [
-                    "email",
-                    "password"
-                ],
-                "properties": {
-                    "email": {
-                        "description": "The E-Mail from Account",
-                        "type": "string"
-                    },
-                    "password": {
-                        "description": "The Password from Account",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "AccountPassword": {
                 "properties": {
                     "password": {
@@ -495,6 +478,23 @@
                 "type": "object"
             },
             "ApiMe": {},
+            "AuthenticationRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "The E-Mail from Account",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "The Password from Account",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "EMail": {
                 "properties": {
                     "email": {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account;
+namespace Exdrals\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
 use Exdrals\Identity\Domain\Account;
@@ -16,16 +16,8 @@ use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivati
 use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-use function password_hash;
-
-use const PASSWORD_BCRYPT;
-
-readonly class ActivationMiddleware implements MiddlewareInterface
+readonly class AccountCreatorService
 {
     public function __construct(
         private AccountActivationRepositoryInterface $accountActivationRepository,
@@ -34,11 +26,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
     ) {
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function create(AccountRegistration $accountRegistration, ?string $activationToken): AccountDTO
     {
-        $activationToken = $request->getAttribute('token');
-        $accountData = $request->getAttribute(AccountRegistration::class);
-
         if ($activationToken === null) {
             throw new HttpInvalidArgumentException(
                 IdentityLogMessage::ACTIVATION_TOKEN_MISSING,
@@ -64,8 +53,8 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         $account = new Account(
             id: null,
             uuid: $this->uuid->uuid7(),
-            name: $accountData->accountName,
-            password: password_hash($accountData->password, PASSWORD_BCRYPT),
+            name: $accountRegistration->accountName,
+            password: password_hash($accountRegistration->password, PASSWORD_BCRYPT),
             email: $persistActivationToken->email,
             registeredAt: new DateTimeImmutable(),
             lastActionAt: new DateTimeImmutable()
@@ -98,8 +87,6 @@ readonly class ActivationMiddleware implements MiddlewareInterface
         }
 
         $account = $this->accountRepository->findById($accountId);
-        $account = AccountDTO::createFromAccount($account);
-
-        return $handler->handle($request->withAttribute(AccountDTO::class, $account));
+        return AccountDTO::createFromAccount($account);
     }
 }

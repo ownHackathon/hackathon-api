@@ -4,8 +4,17 @@ namespace Exdrals\Identity;
 
 use Envms\FluentPDO\Query;
 use Exdrals\Identity\Handler\AccessTokenHandler;
+use Exdrals\Identity\Handler\AccountPasswordForgottenHandler;
+use Exdrals\Identity\Handler\AccountPasswordHandler;
+use Exdrals\Identity\Handler\AccountRegisterHandler;
 use Exdrals\Identity\Handler\AuthenticationHandler;
+use Exdrals\Identity\Handler\LogoutHandler;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountCreatorService;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterService;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Exdrals\Identity\Infrastructure\Service\Account\PasswordChangeService;
+use Exdrals\Identity\Infrastructure\Service\Account\PasswordService;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
@@ -17,6 +26,7 @@ use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
+use Exdrals\Identity\Middleware\IdentityExceptionMappingMiddleware;
 use Exdrals\Mailing\Infrastructure\EmailService;
 use Exdrals\Mailing\Infrastructure\EmailServiceFactory;
 use Exdrals\Mailing\Infrastructure\Validator\EMailValidator;
@@ -37,6 +47,7 @@ use Exdrals\Shared\Middleware\RequireLoginMiddleware;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Mezzio\Helper\UrlHelper;
 use Psr\Log\LoggerInterface;
 
 readonly class ConfigProvider
@@ -55,73 +66,82 @@ readonly class ConfigProvider
         return [
             [
                 'path' => '/api/token/refresh[/]',
+                'allowed_methods' => ['GET'],
                 'middleware' => [
                     Middleware\Token\RefreshTokenValidationMiddleware::class,
                     Middleware\IdentityExceptionMappingMiddleware::class,
                     Handler\AccessTokenHandler::class,
                 ],
-                'allowed_methods' => ['GET'],
                 'name' => 'api_identity_token_refresh',
             ],
             [
                 'path' => '/api/account/authentication[/]',
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     Middleware\Account\Authentication\AuthenticationConditionsMiddleware::class,
                     Middleware\Account\Authentication\AuthenticationValidationMiddleware::class,
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Handler\AuthenticationHandler::class,
                 ],
-                'allowed_methods' => ['POST'],
                 'name' => 'api_identity_authentication',
             ],
             [
-                'path' => '/api/account',
+                'path' => '/api/account[/]',
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
-                    Middleware\Account\RegisterMiddleware::class,
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Handler\AccountRegisterHandler::class,
                 ],
-                'allowed_methods' => ['POST'],
                 'name' => 'api_identity_register',
             ],
             [
+                'path' => '/api/account/[{accountUuid:[0-9a-fA-F\-]+}[/]]',
+                'allowed_methods' => ['GET'],
+                'middleware' => [
+                    RequireLoginMiddleware::class,
+                ],
+                'name' => 'api_account_detail',
+            ],
+            [
                 'path' => '/api/account/activation/[{token}[/]]',
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     Middleware\Account\Validation\ActivationInputValidatorMiddleware::class,
-                    Middleware\Account\ActivationMiddleware::class,
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Handler\AccountActivationHandler::class,
                 ],
-                'allowed_methods' => ['POST'],
                 'name' => 'api_identity_activation',
             ],
             [
                 'path' => '/api/account/password/forgotten[/]',
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
-                    Middleware\Account\PasswordForgottenMiddleware::class,
+                    IdentityExceptionMappingMiddleware::class,
                     Handler\AccountPasswordForgottenHandler::class,
                 ],
-                'allowed_methods' => ['POST'],
                 'name' => 'api_identity_password_forgotten',
             ],
             [
                 'path' => '/api/account/password/[{token}[/]]',
+                'allowed_methods' => ['PATCH'],
                 'middleware' => [
                     Middleware\Account\Validation\PasswordInputValidatorMiddleware::class,
-                    Middleware\Account\PasswordChangeMiddleware::class,
+                    IdentityExceptionMappingMiddleware::class,
                     Handler\AccountPasswordHandler::class,
                 ],
-                'allowed_methods' => ['PATCH'],
                 'name' => 'api_identity_password_change',
             ],
             [
                 'path' => '/api/account/logout[/]',
+                'allowed_methods' => ['GET'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
                     Middleware\Token\AccessTokenValidationMiddleware::class,
-                    Middleware\Account\LogoutMiddleware::class,
+                    IdentityExceptionMappingMiddleware::class,
                     Handler\LogoutHandler::class,
                 ],
-                'allowed_methods' => ['GET'],
                 'name' => 'api_identity_logout',
             ],
         ];
@@ -157,12 +177,8 @@ readonly class ConfigProvider
                 Middleware\Account\Validation\ActivationInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\EmailInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\ActivationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Account\LastActivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\LogoutMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\PasswordChangeMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\PasswordForgottenMiddleware::class => ConfigAbstractFactory::class,
-                Middleware\Account\RegisterMiddleware::class => ConfigAbstractFactory::class,
+                Infrastructure\Service\Account\PasswordChangeService::class => ConfigAbstractFactory::class,
                 Middleware\Account\RequestAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\ClientIdentification\ClientIdentificationMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\AccessTokenValidationMiddleware::class => ConfigAbstractFactory::class,
@@ -196,6 +212,15 @@ readonly class ConfigProvider
                 Infrastructure\Validator\PasswordValidator::class => ConfigAbstractFactory::class,
                 AuthenticationHandler::class => ConfigAbstractFactory::class,
                 AccessTokenHandler::class => ConfigAbstractFactory::class,
+                AccountAuthenticationService::class => ConfigAbstractFactory::class,
+                AccountRegisterHandler::class => ConfigAbstractFactory::class,
+                AccountRegisterService::class => ConfigAbstractFactory::class,
+                Handler\AccountActivationHandler::class => ConfigAbstractFactory::class,
+                AccountCreatorService::class => ConfigAbstractFactory::class,
+                AccountPasswordForgottenHandler::class => ConfigAbstractFactory::class,
+                PasswordService::class => ConfigAbstractFactory::class,
+                AccountPasswordHandler::class => ConfigAbstractFactory::class,
+                LogoutHandler::class => ConfigAbstractFactory::class,
             ],
 
         ];
@@ -225,31 +250,13 @@ readonly class ConfigProvider
             Middleware\Account\Validation\PasswordInputValidatorMiddleware::class => [
                 PasswordValidator::class,
             ],
-            Middleware\Account\ActivationMiddleware::class => [
-                AccountActivationRepositoryInterface::class,
-                AccountRepositoryInterface::class,
-                UuidFactoryInterface::class,
-            ],
             Middleware\Account\LastActivityUpdaterMiddleware::class => [
                 AccountRepositoryInterface::class,
             ],
-            Middleware\Account\LogoutMiddleware::class => [
-                AccountAccessAuthRepositoryInterface::class,
-            ],
-            Middleware\Account\PasswordChangeMiddleware::class => [
+            Infrastructure\Service\Account\PasswordChangeService::class => [
                 AccountRepositoryInterface::class,
                 TokenRepositoryInterface::class,
                 AccountService::class,
-            ],
-            Middleware\Account\PasswordForgottenMiddleware::class => [
-                AccountService::class,
-            ],
-            Middleware\Account\RegisterMiddleware::class => [
-                AccountService::class,
-                AccountActivationRepositoryInterface::class,
-                ActivationTokenService::class,
-                UuidFactoryInterface::class,
-                LoggerInterface::class,
             ],
             Middleware\Account\RequestAuthenticationMiddleware::class => [
                 AccessTokenService::class,
@@ -286,6 +293,7 @@ readonly class ConfigProvider
             ],
             Infrastructure\Service\Account\AccountService::class => [
                 AccountRepositoryInterface::class,
+                AccountAccessAuthRepositoryInterface::class,
                 TokenRepositoryInterface::class,
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
@@ -321,14 +329,48 @@ readonly class ConfigProvider
                 PasswordInput::class,
             ],
             AuthenticationHandler::class => [
-                AccountRepositoryInterface::class,
-                AccountAccessAuthRepositoryInterface::class,
-                RefreshTokenService::class,
-                AccessTokenService::class,
-                AuthenticationService::class,
+                AccountAuthenticationService::class,
             ],
             AccessTokenHandler::class => [
                 RefreshTokenService::class,
+            ],
+            AccountAuthenticationService::class => [
+                AccountRepositoryInterface::class,
+                AccountAccessAuthRepositoryInterface::class,
+                AuthenticationService::class,
+                RefreshTokenService::class,
+                AccessTokenService::class,
+                AccountService::class,
+            ],
+            AccountRegisterHandler::class => [
+                AccountRegisterService::class,
+            ],
+            AccountRegisterService::class => [
+                AccountService::class,
+                AccountActivationRepositoryInterface::class,
+                ActivationTokenService::class,
+                UuidFactoryInterface::class,
+            ],
+            Handler\AccountActivationHandler::class => [
+                AccountCreatorService::class,
+                UrlHelper::class,
+            ],
+            AccountCreatorService::class => [
+                AccountActivationRepositoryInterface::class,
+                AccountRepositoryInterface::class,
+                UuidFactoryInterface::class,
+            ],
+            AccountPasswordForgottenHandler::class => [
+                PasswordService::class,
+            ],
+            PasswordService::class => [
+                AccountService::class,
+            ],
+            AccountPasswordHandler::class => [
+                PasswordChangeService::class,
+            ],
+            LogoutHandler::class => [
+                AccountService::class,
             ],
         ];
     }

@@ -4,6 +4,7 @@ namespace Exdrals\Identity\Middleware\Account\Validation;
 
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use Exdrals\Identity\DTO\Account\AccountPassword;
 use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,6 +35,7 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
             );
         }
 
-        return $handler->handle($request);
+        $password = AccountPassword::fromString($this->validator->getValues()['password']);
+        return $handler->handle($request->withAttribute(AccountPassword::class, $password));
     }
 }

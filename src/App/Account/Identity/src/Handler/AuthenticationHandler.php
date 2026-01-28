@@ -2,27 +2,13 @@
 
 namespace Exdrals\Identity\Handler;
 
-use DateTimeImmutable;
-use Exdrals\Identity\Domain\AccountAccessAuth;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Account\AuthenticationRequest;
 use Exdrals\Identity\DTO\Client\ClientIdentification;
 use Exdrals\Identity\DTO\Response\AuthenticationResponse;
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
-use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use Exdrals\Mailing\Domain\EmailType;
-use Exdrals\Shared\Domain\Account\AccountInterface;
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
-use Exdrals\Shared\Domain\Exception\HttpUnauthorizedException;
-use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepositoryInterface;
-use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountRepositoryInterface;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
-use Monolog\Level;
 use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -31,11 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 readonly class AuthenticationHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private AccountRepositoryInterface $accountRepository,
-        private AccountAccessAuthRepositoryInterface $accountAccessAuthRepository,
-        private RefreshTokenService $refreshTokenService,
-        private AccessTokenService $accessTokenService,
-        private AuthenticationService $authenticationService,
+        private AccountAuthenticationService $authService,
     ) {
     }
 
@@ -72,63 +54,9 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getAttribute(AuthenticationRequest::class);
-
-        $account = $this->accountRepository->findByEmail(EmailType::fromString($data->email));
-
-        if (!($account instanceof AccountInterface)) {
-            throw new HttpUnauthorizedException(
-                IdentityLogMessage::ACCOUNT_NOT_FOUND,
-                IdentityStatusMessage::INVALID_DATA,
-                [
-                    'E-Mail:' => $data->email,
-                ],
-                Level::Warning
-            );
-        }
-
-        if (!$this->authenticationService->isPasswordMatch($data->password, $account->password)) {
-            throw new HttpUnauthorizedException(
-                IdentityLogMessage::PASSWORD_INCORRECT,
-                IdentityStatusMessage::INVALID_DATA,
-                [
-                    'E-Mail:' => $data->email,
-                ],
-                Level::Warning
-            );
-        }
-
-        $account = $account->with(lastActionAt: new DateTimeImmutable());
-
-        $this->accountRepository->update($account);
-
         $clientId = $request->getAttribute(ClientIdentification::class);
-        $refreshToken = $this->refreshTokenService->generate($clientId);
-        $accessToken = $this->accessTokenService->generate($account->uuid);
 
-        $accountAccessAuth = new AccountAccessAuth(
-            null,
-            $account->id,
-            'default',
-            $refreshToken->refreshToken,
-            $clientId->clientIdentificationData->userAgent,
-            $clientId->identificationHash,
-            new DateTimeImmutable()
-        );
-        try {
-            $this->accountAccessAuthRepository->insert($accountAccessAuth);
-        } catch (DuplicateEntryException $e) {
-            throw new HttpDuplicateEntryException(
-                IdentityLogMessage::DUPLICATE_SOURCE_LOGIN,
-                IdentityStatusMessage::INVALID_DATA,
-                [
-                    'Account' => $account->name,
-                    'ClientID' => $clientId->identificationHash,
-                    'ErrorMessage' => $e->getMessage(),
-                ],
-            );
-        }
-
-        $response = AuthenticationResponse::from($accessToken, $refreshToken);
+        $response = $this->authService->authenticate($data, $clientId);
 
         return new JsonResponse($response, HTTP::STATUS_OK);
     }
