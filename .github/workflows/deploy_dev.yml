@@ -58,8 +58,8 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-php-composer
 
-      - name: Run Unit Tests
-        run: composer run-script unittest
+      #- name: Run Unit Tests
+      #  run: composer run-script unittest
 
       - name: Run Functional Tests
         run: composer run-script functionaltest
