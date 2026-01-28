@@ -1,28 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Persistence\Table;
+namespace ownHackathon\Shared\Domain\Persistence\Repository;
 
-use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use Exdrals\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
+use ownHackathon\Shared\Domain\ValueObject\Pagination;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use PDOException;
 
-interface WorkspaceStoreInterface extends StoreInterface
+interface WorkspaceRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @throws DuplicateEntryException
-     * @throws PDOException
-     */
     public function insert(WorkspaceInterface $data): int;
 
     public function update(WorkspaceInterface $data): true;
 
     public function findById(int $id): ?WorkspaceInterface;
 
-    public function findByAccountId(int $accountId): WorkspaceCollectionInterface;
+    public function findByAccountId(int $accountId, Pagination $pagination): WorkspaceCollectionInterface;
 
     public function findByName(string $name): ?WorkspaceInterface;
 
     public function findAll(): WorkspaceCollectionInterface;
+
+    public function countByAccount(int $accountId): int;
 }

@@ -10,19 +10,21 @@ use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
+use ownHackathon\Shared\Domain\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\Shared\Domain\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\Shared\Domain\Persistence\Table\WorkspaceStoreInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCreatorInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\Workspace\Handler\FindWorkspacesForAuthenticatedAccountHandler;
+use ownHackathon\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\Workspace\Handler\WorkspaceCreateHandler;
 use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
 use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
+use ownHackathon\Workspace\Infrastructure\Service\PaginationService;
+use ownHackathon\Workspace\Infrastructure\Service\WorkspaceCreator;
 use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceNameValidator;
 use ownHackathon\Workspace\Middleware\WorkspaceNameValidatorMiddleware;
-use ownHackathon\Workspace\Service\WorkspaceCreator;
 
 class ConfigProvider
 {
@@ -40,30 +42,31 @@ class ConfigProvider
         return [
             [
                 'path' => '/api/workspace[/]',
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
                     WorkspaceNameValidatorMiddleware::class,
                     FluentTransactionMiddleware::class,
                     WorkspaceCreateHandler::class,
                 ],
-                'allowed_methods' => ['POST'],
                 'name' => 'api_workspace_create',
             ],
             [
-                'path' => '/api/workspace[/]',
+                'path' => '/api/me/workspaces[/]',
+                'allowed_methods' => ['GET'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
-                    FindWorkspacesForAuthenticatedAccountHandler::class,
+                    PaginationMiddleware::class,
+                    ListOwnWorkspacesHandler::class,
                 ],
-                'allowed_methods' => ['GET'],
-                'name' => 'api_workspace_list_for_auth_account',
+                'name' => 'api_workspace_list_own_workspaces',
             ],
             [
                 'path' => '/api/workspace/{slug}',
+                'allowed_methods' => ['GET'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
                 ],
-                'allowed_methods' => ['GET'],
                 'name' => 'api_workspace_detail',
             ],
         ];
@@ -90,6 +93,8 @@ class ConfigProvider
                 WorkspaceNameValidatorMiddleware::class => ConfigAbstractFactory::class,
                 WorkspaceCreator::class => ConfigAbstractFactory::class,
                 WorkspaceCreateHandler::class => ConfigAbstractFactory::class,
+                ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
+                PaginationService::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -122,6 +127,13 @@ class ConfigProvider
                 WorkspaceCreatorInterface::class,
                 UrlHelper::class,
             ],
+            ListOwnWorkspacesHandler::class => [
+                WorkspaceRepositoryInterface::class,
+                PaginationService::class,
+            ],
+            PaginationService::class => [
+                WorkspaceRepositoryInterface::class,
+            ]
         ];
     }
 }

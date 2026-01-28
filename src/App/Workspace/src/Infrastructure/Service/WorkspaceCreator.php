@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Service;
+namespace ownHackathon\Workspace\Infrastructure\Service;
 
 use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use Exdrals\Shared\Infrastructure\Service\SlugService;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Shared\Domain\Persistence\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCreatorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use ownHackathon\Workspace\Domain\Workspace;
 use ownHackathon\Workspace\DTO\WorkspaceRequest;

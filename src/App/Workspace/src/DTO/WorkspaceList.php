@@ -18,4 +18,9 @@ readonly class WorkspaceList
         public array $workspaces
     ) {
     }
+
+    public static function fromArray(array $array): WorkspaceList
+    {
+        return new self($array);
+    }
 }

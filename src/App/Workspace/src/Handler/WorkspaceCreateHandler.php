@@ -56,7 +56,7 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_CONFLICT, // 409 for duplicate resources
+        response: HTTP::STATUS_CONFLICT,
         description: 'A workspace with this name already exists.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
@@ -64,7 +64,6 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
     {
         $workspace = $request->getAttribute(WorkspaceRequest::class);
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
-        assert($account instanceof AccountInterface);
 
         try {
             $workspace = $this->workspaceCreator->create($workspace, $account);

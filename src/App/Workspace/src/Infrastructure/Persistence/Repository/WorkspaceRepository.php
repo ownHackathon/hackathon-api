@@ -3,10 +3,11 @@
 namespace ownHackathon\Workspace\Infrastructure\Persistence\Repository;
 
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Shared\Domain\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\Shared\Domain\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\Shared\Domain\ValueObject\Pagination;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use PDOException;
 
 readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
@@ -40,9 +41,9 @@ readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
         return $this->store->findById($id);
     }
 
-    public function findByAccountId(int $accountId): WorkspaceCollectionInterface
+    public function findByAccountId(int $accountId, Pagination $pagination): WorkspaceCollectionInterface
     {
-        return $this->store->findByAccountId($accountId);
+        return $this->store->findByAccountId($accountId, $pagination);
     }
 
     public function findByName(string $name): ?WorkspaceInterface
@@ -53,5 +54,10 @@ readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
     public function findAll(): WorkspaceCollectionInterface
     {
         return $this->store->findAll();
+    }
+
+    public function countByAccount(int $accountId): int
+    {
+        return $this->store->countByAccount($accountId);
     }
 }

@@ -7,10 +7,11 @@ use Envms\FluentPDO\Query;
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use Exdrals\Shared\Infrastructure\Persistence\AbstractTable;
 use InvalidArgumentException;
+use ownHackathon\Shared\Domain\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\Shared\Domain\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\Shared\Domain\ValueObject\Pagination;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use PDOException;
 
 use function is_array;
@@ -80,10 +81,12 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
         return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
-    public function findByAccountId(int $accountId): WorkspaceCollectionInterface
+    public function findByAccountId(int $accountId, Pagination $pagination): WorkspaceCollectionInterface
     {
         $result = $this->query->from($this->table)
             ->where('accountId', $accountId)
+            ->limit($pagination->limit)
+            ->offset($pagination->offset)
             ->fetchAll();
 
         return is_array($result) ? $this->hydrator->hydrateCollection($result) : $this->hydrator->hydrateCollection([]);
@@ -94,5 +97,14 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
         $result = $this->query->from($this->table)->fetchAll();
 
         return is_array($result) ? $this->hydrator->hydrateCollection($result) : $this->hydrator->hydrateCollection([]);
+    }
+
+    public function countByAccount(int $accountId): int
+    {
+        $result = $this->query->from($this->table)
+            ->where('accountId', $accountId)
+            ->count();
+
+        return (int)$result;
     }
 }

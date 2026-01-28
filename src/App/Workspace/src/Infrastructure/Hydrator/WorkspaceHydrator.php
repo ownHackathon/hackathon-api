@@ -4,9 +4,9 @@ namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
 use Exception;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Shared\Domain\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\Workspace\Domain\Workspace;
 use ownHackathon\Workspace\Domain\WorkspaceCollection;
 

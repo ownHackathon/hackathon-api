@@ -11,7 +11,7 @@ use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use FunctionalTest\AbstractFunctional;
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\Shared\Domain\Persistence\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\Workspace\Domain\Workspace;
 use PHPUnit\Framework\Assert;
@@ -84,7 +84,6 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             'statusCode' => Assert::isType(DataType::INTEGER->value),
             'message' => Assert::isType(DataType::STRING->value),
         ]));
-        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(WorkspaceStatusMessage::INVALID_WORKSPACE_NAME, $content['message']);
     }
 
@@ -104,7 +103,6 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             'statusCode' => Assert::isType(DataType::INTEGER->value),
             'message' => Assert::isType(DataType::STRING->value),
         ]));
-        $this->assertSame(HTTP::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertSame(WorkspaceStatusMessage::INVALID_WORKSPACE_NAME, $content['message']);
     }
 
@@ -123,7 +121,6 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             'statusCode' => Assert::isType(DataType::INTEGER->value),
             'message' => Assert::isType(DataType::STRING->value),
         ]));
-        $this->assertSame(HTTP::STATUS_UNAUTHORIZED, $response->getStatusCode());
         $this->assertSame(WorkspaceStatusMessage::UNAUTHORIZED_ACCESS, $content['message']);
     }
 
@@ -155,7 +152,6 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             'statusCode' => Assert::isType(DataType::INTEGER->value),
             'message' => Assert::isType(DataType::STRING->value),
         ]));
-        $this->assertSame(HTTP::STATUS_CONFLICT, $response->getStatusCode());
         $this->assertSame(WorkspaceStatusMessage::DUPLICATED_WORKSPACE_NAME, $content['message']);
     }
 

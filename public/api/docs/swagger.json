@@ -283,7 +283,7 @@
                 ]
             }
         },
-        "/workspace": {
+        "/me/workspaces": {
             "get": {
                 "tags": [
                     "Workspace"
@@ -291,6 +291,31 @@
                 "summary": "Returns a collection of all workspaces owned by or associated with the currently authenticated user.",
                 "description": "List all workspaces for the authenticated account",
                 "operationId": "findWorkspaces",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The page number to retrieve.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of items to return per page.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 250,
+                            "minimum": 1
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "A list of workspaces belonging to the user.",
@@ -318,7 +343,9 @@
                         "accessToken": []
                     }
                 ]
-            },
+            }
+        },
+        "/workspace": {
             "post": {
                 "tags": [
                     "Workspace"
