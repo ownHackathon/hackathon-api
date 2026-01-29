@@ -6,16 +6,16 @@ use Exdrals\Shared\Domain\Exception\HttpInvalidArgumentException;
 use ownHackathon\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceNameValidator;
+use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class WorkspaceNameValidatorMiddleware implements MiddlewareInterface
+readonly class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private WorkspaceNameValidator $validator,
+        private WorkspaceCreateValidator $validator,
     ) {
     }
 
@@ -34,7 +34,7 @@ readonly class WorkspaceNameValidatorMiddleware implements MiddlewareInterface
             );
         }
 
-        $workspaceName = WorkspaceRequest::fromString($this->validator->getValidInput()['workspaceName']->getValue());
+        $workspaceName = WorkspaceRequest::fromArray($this->validator->getValues());
 
         return $handler->handle($request->withAttribute(WorkspaceRequest::class, $workspaceName));
     }

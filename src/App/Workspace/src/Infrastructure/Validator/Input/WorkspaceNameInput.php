@@ -9,7 +9,7 @@ class WorkspaceNameInput extends Input
 {
     public function __construct()
     {
-        parent::__construct('workspaceName');
+        parent::__construct('name');
 
         $this->setRequired(true);
 

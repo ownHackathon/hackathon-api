@@ -94,7 +94,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             method: 'POST',
             headers: ['Authorization' => $this->accessToken],
         );
-        $request = $request->withParsedBody(['workspaceName' => 'Das ist Türlicht falsch']);
+        $request = $request->withParsedBody(['name' => 'Das ist Türlicht falsch']);
         $response = $this->app->handle($request);
         $content = $this->getContentAsJson($response);
 
@@ -112,7 +112,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             uri: '/api/workspace',
             method: 'POST',
         );
-        $request = $request->withParsedBody(['workspaceName' => 'Das ist Türlicht falsch']);
+        $request = $request->withParsedBody(['name' => 'Das ist Türlicht falsch']);
         $response = $this->app->handle($request);
         $content = $this->getContentAsJson($response);
 
@@ -134,6 +134,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             accountId: 1,
             name: 'Duplicated Entry',
             slug: 'duplicated-entry',
+            description: 'My own workspace is so wonderfully',
         );
 
         $workspaceRepository->insert($workspace);
@@ -143,7 +144,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             method: 'POST',
             headers: ['Authorization' => $this->accessToken],
         );
-        $request = $request->withParsedBody(['workspaceName' => 'Duplicated Entry']);
+        $request = $request->withParsedBody(['name' => 'Duplicated Entry']);
         $response = $this->app->handle($request);
         $content = $this->getContentAsJson($response);
 
@@ -162,7 +163,7 @@ class WorkspaceCreateHandlerTest extends AbstractFunctional
             method: 'POST',
             headers: ['Authorization' => $this->accessToken],
         );
-        $request = $request->withParsedBody(['workspaceName' => 'Created Workspace']);
+        $request = $request->withParsedBody(['name' => 'Created Workspace']);
         $response = $this->app->handle($request);
         $content = $this->getContentAsJson($response);
 

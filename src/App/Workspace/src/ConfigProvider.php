@@ -22,9 +22,10 @@ use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceReposi
 use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use ownHackathon\Workspace\Infrastructure\Service\PaginationService;
 use ownHackathon\Workspace\Infrastructure\Service\WorkspaceCreator;
+use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
 use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
-use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceNameValidator;
-use ownHackathon\Workspace\Middleware\WorkspaceNameValidatorMiddleware;
+use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use ownHackathon\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 
 class ConfigProvider
 {
@@ -45,7 +46,7 @@ class ConfigProvider
                 'allowed_methods' => ['POST'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
-                    WorkspaceNameValidatorMiddleware::class,
+                    WorkspaceCreateValidatorMiddleware::class,
                     FluentTransactionMiddleware::class,
                     WorkspaceCreateHandler::class,
                 ],
@@ -88,9 +89,9 @@ class ConfigProvider
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
                 WorkspaceNameInput::class => InvokableFactory::class,
-                WorkspaceNameValidator::class => ConfigAbstractFactory::class,
-
-                WorkspaceNameValidatorMiddleware::class => ConfigAbstractFactory::class,
+                WorkspaceDescriptionInput::class => InvokableFactory::class,
+                WorkspaceCreateValidator::class => ConfigAbstractFactory::class,
+                WorkspaceCreateValidatorMiddleware::class => ConfigAbstractFactory::class,
                 WorkspaceCreator::class => ConfigAbstractFactory::class,
                 WorkspaceCreateHandler::class => ConfigAbstractFactory::class,
                 ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
@@ -105,9 +106,6 @@ class ConfigProvider
             WorkspaceHydrator::class => [
                 UuidFactoryInterface::class,
             ],
-            WorkspaceNameValidatorMiddleware::class => [
-                WorkspaceNameValidator::class,
-            ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,
             ],
@@ -115,8 +113,12 @@ class ConfigProvider
                 Query::class,
                 WorkspaceHydratorInterface::class,
             ],
-            WorkspaceNameValidator::class => [
+            WorkspaceCreateValidator::class => [
                 WorkspaceNameInput::class,
+                WorkspaceDescriptionInput::class,
+            ],
+            WorkspaceCreateValidatorMiddleware::class => [
+                WorkspaceCreateValidator::class,
             ],
             WorkspaceCreator::class => [
                 WorkspaceRepositoryInterface::class,
@@ -133,7 +135,7 @@ class ConfigProvider
             ],
             PaginationService::class => [
                 WorkspaceRepositoryInterface::class,
-            ]
+            ],
         ];
     }
 }

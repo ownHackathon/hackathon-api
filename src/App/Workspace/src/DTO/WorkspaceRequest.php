@@ -2,8 +2,8 @@
 
 namespace ownHackathon\Workspace\DTO;
 
-use OpenApi\Attributes as OA;
 use Exdrals\Shared\Domain\Enum\DataType;
+use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['name'])]
 readonly class WorkspaceRequest
@@ -14,12 +14,21 @@ readonly class WorkspaceRequest
             type: DataType::STRING->value,
             example: 'My own workspace'
         )]
-        public string $workspaceName,
+        public string $name,
+        #[OA\Property(
+            description: 'The description from workspace',
+            type: DataType::STRING->value,
+            example: 'My own workspace is wonderfully'
+        )]
+        public ?string $description,
     ) {
     }
 
-    public static function fromString(string $workspaceName): self
+    public static function fromArray(array $workspace): self
     {
-        return new self($workspaceName);
+        return new self(
+            $workspace['name'],
+            $workspace['description'],
+        );
     }
 }

@@ -72,12 +72,12 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
 
         $metaData = $this->paginationService->getMetaDataByAccountId($pagination, $account->id);
 
-        $response = [];
         $workspaces = [];
         if ($metaData->totalItems > 0 && $pagination->page <= $metaData->totalPages) {
             $workspaces = $this->workspaceRepository->findByAccountId($account->id, $pagination);
         }
 
+        $response = [];
         foreach ($workspaces as $workspace) {
             $response[] = WorkspaceResponse::fromEntity($workspace, $account);
         }

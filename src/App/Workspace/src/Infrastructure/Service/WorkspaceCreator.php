@@ -23,14 +23,15 @@ readonly class WorkspaceCreator implements WorkspaceCreatorInterface
 
     public function create(WorkspaceRequest $workspace, AccountInterface $owner): Workspace
     {
-        $slug = $this->slugService->getSlugFromString($workspace->workspaceName);
+        $slug = $this->slugService->getSlugFromString($workspace->name);
 
         $workspace = new Workspace(
             id: null,
             uuid: $this->uuid->uuid7(),
             accountId: $owner->id,
-            name: $workspace->workspaceName,
+            name: $workspace->name,
             slug: $slug,
+            description: $workspace->description
         );
 
         try {

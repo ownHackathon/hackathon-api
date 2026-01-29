@@ -35,6 +35,12 @@ readonly class WorkspaceResponse
             example: 'my-own-workspace'
         )]
         public string $slug,
+        #[OA\Property(
+            description: 'The desciption for this workspace',
+            type: DataType::STRING->value,
+            example: 'My own workspace is wonderfully'
+        )]
+        public ?string $description,
     ) {
     }
 
@@ -45,6 +51,7 @@ readonly class WorkspaceResponse
             ownerUuid: $account->uuid->toString(),
             name: $workspace->name,
             slug: $workspace->slug,
+            description: $workspace->description,
         );
     }
 }

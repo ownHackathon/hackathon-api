@@ -72,7 +72,7 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
                 WorkspaceLogMessage::DUPLICATED_WORKSPACE_NAME,
                 WorkspaceStatusMessage::DUPLICATED_WORKSPACE_NAME,
                 [
-                    'Workspace:' => $workspace->workspaceName,
+                    'Workspace:' => $workspace->name,
                 ]
             );
         }

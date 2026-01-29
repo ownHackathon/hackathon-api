@@ -612,10 +612,15 @@
                     "name"
                 ],
                 "properties": {
-                    "workspaceName": {
+                    "name": {
                         "description": "The name from workspace",
                         "type": "string",
                         "example": "My own workspace"
+                    },
+                    "description": {
+                        "description": "The description from workspace",
+                        "type": "string",
+                        "example": "My own workspace is wonderfully"
                     }
                 },
                 "type": "object"
@@ -641,6 +646,11 @@
                         "description": "The slug for this workspace",
                         "type": "string",
                         "example": "my-own-workspace"
+                    },
+                    "description": {
+                        "description": "The desciption for this workspace",
+                        "type": "string",
+                        "example": "My own workspace is wonderfully"
                     }
                 },
                 "type": "object"

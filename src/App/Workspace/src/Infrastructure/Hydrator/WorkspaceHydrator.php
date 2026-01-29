@@ -28,6 +28,7 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
             accountId: $data['accountId'],
             name: $data['name'],
             slug: $data['slug'],
+            description: $data['description'],
         );
     }
 
@@ -53,6 +54,7 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
             'accountId' => $object->accountId,
             'name' => $object->name,
             'slug' => $object->slug,
+            'description' => $object->description,
         ];
     }
 
