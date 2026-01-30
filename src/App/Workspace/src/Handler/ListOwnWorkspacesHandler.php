@@ -4,11 +4,12 @@ namespace ownHackathon\Workspace\Handler;
 
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
 use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Shared\Domain\Enum\DataType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\Shared\Domain\ValueObject\Pagination;
-use ownHackathon\Workspace\DTO\WorkspaceList;
+use ownHackathon\Workspace\DTO\PaginationMeta;
 use ownHackathon\Workspace\DTO\WorkspaceResponse;
 use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\Workspace\Infrastructure\Service\PaginationService;
@@ -26,7 +27,7 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
 
     #[OA\Get(
         path: '/me/workspaces',
-        operationId: 'findWorkspaces',
+        operationId: 'findOwnWorkspaces',
         description: 'List all workspaces for the authenticated account',
         summary: 'Returns a collection of all workspaces owned by or associated with the currently authenticated user.',
         security: [['accessToken' => []]],
@@ -58,7 +59,21 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_OK,
         description: 'A list of workspaces belonging to the user.',
-        content: new OA\JsonContent(ref: WorkspaceList::class)
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'workspaces',
+                    type: 'array',
+                    items: new OA\Items(ref: WorkspaceResponse::class)
+                ),
+                new OA\Property(
+                    property: 'meta',
+                    ref: PaginationMeta::class,
+                    type: DataType::OBJECT->value
+                ),
+            ],
+            type: DataType::OBJECT->value
+        )
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
@@ -86,7 +101,7 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
             'workspaces' => $response,
             'meta' => [
                 'currentPage' => $metaData->currentPage,
-                'maxPages' => $metaData->totalPages,
+                'totalPages' => $metaData->totalPages,
                 'totalItems' => $metaData->totalItems,
             ],
         ], HTTP::STATUS_OK);

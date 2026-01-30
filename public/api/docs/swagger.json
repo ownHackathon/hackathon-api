@@ -290,7 +290,7 @@
                 ],
                 "summary": "Returns a collection of all workspaces owned by or associated with the currently authenticated user.",
                 "description": "List all workspaces for the authenticated account",
-                "operationId": "findWorkspaces",
+                "operationId": "findOwnWorkspaces",
                 "parameters": [
                     {
                         "name": "page",
@@ -322,7 +322,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/WorkspaceList"
+                                    "properties": {
+                                        "workspaces": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WorkspaceResponse"
+                                            }
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationMeta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -591,6 +602,25 @@
                     "token": {
                         "description": "The Token",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PaginationMeta": {
+                "title": "Pagination Meta",
+                "description": "Info about the number of pages and limits",
+                "properties": {
+                    "currentPage": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "example": 100
                     }
                 },
                 "type": "object"
