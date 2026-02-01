@@ -47,6 +47,7 @@ interface IdentityLogMessage extends LogMessage
     // --- 8. Refresh Tokens ---
     public const string REFRESH_TOKEN_MISSING = 'No refresh token provided';
     public const string REFRESH_TOKEN_INVALID = 'The provided refresh token is invalid';
+    public const string REFRESH_TOKEN_EXPIRED = 'The provided refresh token is expired';
     public const string REFRESH_TOKEN_NOT_FOUND = 'The provided refresh token is unrecognized';
     public const string REFRESH_TOKEN_CLIENT_MISMATCH = 'The refresh token was issued to a different client';
     public const string REFRESH_TOKEN_ACCOUNT_NOT_FOUND = 'The account associated with the refresh token was not found';

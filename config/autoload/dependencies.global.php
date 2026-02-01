@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Exdrals\Shared\Infrastructure\Factory\MailFactory;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
 use Exdrals\Shared\Infrastructure\Factory\DatabaseFactory;

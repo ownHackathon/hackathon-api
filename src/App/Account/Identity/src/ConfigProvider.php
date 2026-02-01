@@ -21,6 +21,7 @@ use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenServiceInterface;
 use Exdrals\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
@@ -43,6 +44,7 @@ use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountAccessAuthSto
 use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountActivationStoreInterface;
 use Exdrals\Shared\Infrastructure\Persistence\Store\Account\AccountStoreInterface;
 use Exdrals\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
+use Exdrals\Shared\Middleware\FluentTransactionMiddleware;
 use Exdrals\Shared\Middleware\RequireLoginMiddleware;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -65,60 +67,55 @@ readonly class ConfigProvider
     {
         return [
             [
-                'path' => '/api/token/refresh[/]',
-                'allowed_methods' => ['GET'],
-                'middleware' => [
-                    Middleware\Token\RefreshTokenValidationMiddleware::class,
-                    Middleware\IdentityExceptionMappingMiddleware::class,
-                    Handler\AccessTokenHandler::class,
-                ],
-                'name' => 'api_identity_token_refresh',
-            ],
-            [
-                'path' => '/api/account/authentication[/]',
-                'allowed_methods' => ['POST'],
-                'middleware' => [
-                    Middleware\Account\Authentication\AuthenticationConditionsMiddleware::class,
-                    Middleware\Account\Authentication\AuthenticationValidationMiddleware::class,
-                    Middleware\IdentityExceptionMappingMiddleware::class,
-                    Handler\AuthenticationHandler::class,
-                ],
-                'name' => 'api_identity_authentication',
-            ],
-            [
                 'path' => '/api/account[/]',
                 'allowed_methods' => ['POST'],
                 'middleware' => [
-                    Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
                     Middleware\IdentityExceptionMappingMiddleware::class,
+                    Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
                     Handler\AccountRegisterHandler::class,
                 ],
                 'name' => 'api_identity_register',
             ],
             [
-                'path' => '/api/account/[{accountUuid:[0-9a-fA-F\-]+}[/]]',
-                'allowed_methods' => ['GET'],
-                'middleware' => [
-                    RequireLoginMiddleware::class,
-                ],
-                'name' => 'api_account_detail',
-            ],
-            [
                 'path' => '/api/account/activation/[{token}[/]]',
                 'allowed_methods' => ['POST'],
                 'middleware' => [
-                    Middleware\Account\Validation\ActivationInputValidatorMiddleware::class,
                     Middleware\IdentityExceptionMappingMiddleware::class,
+                    Middleware\Account\Validation\ActivationInputValidatorMiddleware::class,
+                    FluentTransactionMiddleware::class,
                     Handler\AccountActivationHandler::class,
                 ],
                 'name' => 'api_identity_activation',
             ],
+
+            [
+                'path' => '/api/account/authentication[/]',
+                'allowed_methods' => ['POST'],
+                'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
+                    Middleware\Account\Authentication\AuthenticationConditionsMiddleware::class,
+                    Middleware\Account\Authentication\AuthenticationValidationMiddleware::class,
+                    Handler\AuthenticationHandler::class,
+                ],
+                'name' => 'api_identity_authentication',
+            ],
+            [
+                'path' => '/api/token/refresh[/]',
+                'allowed_methods' => ['GET'],
+                'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
+                    Middleware\Token\RefreshTokenValidationMiddleware::class,
+                    Handler\AccessTokenHandler::class,
+                ],
+                'name' => 'api_identity_token_refresh',
+            ],
+
             [
                 'path' => '/api/account/password/forgotten[/]',
                 'allowed_methods' => ['POST'],
                 'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Middleware\Account\Validation\EmailInputValidatorMiddleware::class,
-                    IdentityExceptionMappingMiddleware::class,
                     Handler\AccountPasswordForgottenHandler::class,
                 ],
                 'name' => 'api_identity_password_forgotten',
@@ -127,22 +124,32 @@ readonly class ConfigProvider
                 'path' => '/api/account/password/[{token}[/]]',
                 'allowed_methods' => ['PATCH'],
                 'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     Middleware\Account\Validation\PasswordInputValidatorMiddleware::class,
-                    IdentityExceptionMappingMiddleware::class,
                     Handler\AccountPasswordHandler::class,
                 ],
                 'name' => 'api_identity_password_change',
             ],
+
             [
                 'path' => '/api/account/logout[/]',
                 'allowed_methods' => ['GET'],
                 'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
                     RequireLoginMiddleware::class,
                     Middleware\Token\AccessTokenValidationMiddleware::class,
-                    IdentityExceptionMappingMiddleware::class,
                     Handler\LogoutHandler::class,
                 ],
                 'name' => 'api_identity_logout',
+            ],
+            [
+                'path' => '/api/account/[{accountUuid:[0-9a-fA-F\-]+}[/]]',
+                'allowed_methods' => ['GET'],
+                'middleware' => [
+                    Middleware\IdentityExceptionMappingMiddleware::class,
+                    RequireLoginMiddleware::class,
+                ],
+                'name' => 'api_account_detail',
             ],
         ];
     }

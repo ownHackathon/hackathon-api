@@ -39,6 +39,10 @@ readonly class PingHandler implements RequestHandlerInterface
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new JsonResponse(['ack' => time()]);
+        return new JsonResponse([
+            'ack' => time(),
+            'message' => 'pong',
+            'php_version' => PHP_VERSION,
+        ]);
     }
 }

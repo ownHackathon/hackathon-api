@@ -48,6 +48,7 @@ $aggregator = new ConfigAggregator([
             getenv('APP_ENV') ?: 'production'
         )
     ),
+
     // Load development config if it exists
     new PhpFileProvider(realpath(__DIR__) . '/development.config.php'),
 ], $cacheConfig['config_cache_path']);

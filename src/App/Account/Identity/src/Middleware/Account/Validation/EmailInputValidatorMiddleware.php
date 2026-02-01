@@ -42,7 +42,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
         }
 
         try {
-            $email = new EmailType($data['email']);
+            $email = new EmailType($this->mailValidator->getValues()['email']);
         } catch (InvalidArgumentException) {
             throw new HttpInvalidArgumentException(
                 IdentityLogMessage::EMAIL_INVALID,
