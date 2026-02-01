@@ -10,7 +10,7 @@ use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Shared\Infrastructure\Persistence\Repository\Account\AccountActivationRepositoryInterface;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 
-readonly class AccountRegisterService
+readonly class AccountRegisterService implements AccountRegisterServiceInterface
 {
     public function __construct(
         private AccountService $accountService,

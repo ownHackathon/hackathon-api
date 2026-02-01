@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace FunctionalTest\Mock;
+namespace Tests\Integration\Mock;
 
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\MailerInterface;

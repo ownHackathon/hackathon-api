@@ -69,11 +69,8 @@ jobs:
       - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
 
-      - name: Run PHP Unit Test
-        run: composer run-script unittest
-
-      - name: Run PHP Functional Test
-        run: composer run-script functionaltest
+      - name: Run PHP Integration Test
+        run: composer run-script pest
 
       - name: Notify Failure
         if: failure()

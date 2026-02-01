@@ -11,6 +11,9 @@ parameters:
 	checkUninitializedProperties: true
 	tips:
 		treatPhpDocTypesAsCertain: false
+	excludePaths:
+		- tests/*
+		- tests
 rules:
 	- PHPStan\Rules\Functions\ReturnNullsafeByRefRule
 includes:

@@ -5,7 +5,7 @@ return [
         'refresh' => [
             'key' => 'ixo>+W%!Rf/\@)m2UMok:/A_gL<dz.v*',
             'algorithmus' => 'HS512',
-            'duration' => 60 * 60 * 60 * 100000,
+            'duration' => 60 * 60 * 24 * 7 * 12,
             'iss' => 'localhost',
             'aud' => 'localhost',
         ],

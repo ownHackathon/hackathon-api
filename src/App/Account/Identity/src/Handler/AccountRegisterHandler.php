@@ -3,7 +3,7 @@
 namespace Exdrals\Identity\Handler;
 
 use Exdrals\Identity\DTO\EMail\EMail;
-use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterService;
+use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
 use Exdrals\Mailing\Domain\EmailType;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -15,7 +15,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 readonly class AccountRegisterHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private AccountRegisterService $accountRegisterService,
+        private AccountRegisterServiceInterface $accountRegisterService,
     ) {
     }
 
