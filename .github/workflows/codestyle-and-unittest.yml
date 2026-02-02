@@ -69,8 +69,17 @@ jobs:
       - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
 
-      - name: Run PHP Integration Test
-        run: ./vendor/bin/pest --compact
+      - name: setting up database
+        run: php tests/setup-db.php
+        env:
+          APP_ENV: action
+          DB_HOST: 127.0.0.1
+
+      - name: Run Tests
+        run: ./vendor/bin/pest --configuration=phpunit.xml --compact
+        env:
+          APP_ENV: action
+          DB_HOST: 127.0.0.1
 
       - name: Notify Failure
         if: failure()
