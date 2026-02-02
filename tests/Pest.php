@@ -15,8 +15,10 @@ use Tests\TestIntegrationCase;
 */
 
 (function () {
-    putenv('APP_ENV=testing');
-    $_ENV['APP_ENV'] = 'testing';
+    if (!getenv('APP_ENV')) {
+        putenv('APP_ENV=testing');
+        $_ENV['APP_ENV'] = 'testing';
+    }
 
     $dbHost = getenv('DB_HOST') ?: (getenv('GITHUB_ACTIONS') ? '127.0.0.1' : 'database-testing');
     $dbPort = (int)(getenv('DB_PORT') ?: 3306);
