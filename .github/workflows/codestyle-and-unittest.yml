@@ -77,7 +77,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: error
-          details: Unit or Functional Tests failed.
+          details: Integration Tests failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
 
   # 3. Job: Abschluss-Benachrichtigung
