@@ -15,25 +15,21 @@ use Tests\TestIntegrationCase;
 */
 
 (function () {
-    if (!getenv('APP_ENV')) {
-        putenv('APP_ENV=testing');
-        $_ENV['APP_ENV'] = 'testing';
-    }
+    // 1. APP_ENV Logik: Priorität für GHA (action)
+    $appEnv = getenv('APP_ENV') ?: 'testing';
+    putenv("APP_ENV=$appEnv");
+    $_ENV['APP_ENV'] = $appEnv;
 
+    // 2. DB Host Erkennung
     $dbHost = getenv('DB_HOST') ?: (getenv('GITHUB_ACTIONS') ? '127.0.0.1' : 'database-testing');
     $dbPort = (int)(getenv('DB_PORT') ?: 3306);
 
-    fwrite(STDOUT, "\n[Docker-Setup] Warte auf database-testing...\n");
+    fwrite(STDOUT, "\n[Setup-Neu] Nutze Umgebung: $appEnv\n");
+    fwrite(STDOUT, "[Setup-Neu] Warte auf Datenbank $dbHost:$dbPort...\n");
 
     $bin = __DIR__ . '/../bin/migrations.php';
-    if (!file_exists($bin)) {
-        fwrite(STDERR, "[Error] Migrations-Binärdatei nicht gefunden unter: $bin\n");
-        exit(1);
-    }
-    $maxTries = 15;
-    $wait = 1; // Sekunde
+    $maxTries = 20; // Mehr Puffer für GHA
 
-    // 2. Verbindungs-Check
     $connected = false;
     for ($i = 0; $i < $maxTries; $i++) {
         $fp = @fsockopen($dbHost, $dbPort, $errno, $errstr, 2);
@@ -43,27 +39,24 @@ use Tests\TestIntegrationCase;
             break;
         }
         fwrite(STDOUT, '.');
-        sleep($wait);
+        sleep(1);
     }
 
     if (!$connected) {
-        fwrite(STDERR, "\n[Error] Datenbank $dbHost ist nicht erreichbar!\n");
+        fwrite(STDERR, "\n[Error] Datenbank nicht erreichbar!\n");
         exit(1);
     }
 
-    fwrite(STDOUT, "\n[Docker-Setup] Starte Migrationen...\n");
+    fwrite(STDOUT, "\n[Setup-Neu] Migrationen starten...\n");
 
-    // WICHTIG: Nutze im Befehl den Pfad innerhalb des Containers
     $resultCode = 0;
     passthru("php $bin migrations:migrate --no-interaction --quiet first", $resultCode);
     passthru("php $bin migrations:migrate --no-interaction --quiet", $resultCode);
 
     if ($resultCode !== 0) {
-        fwrite(STDERR, "[Error] Migrationen im Docker-Netzwerk fehlgeschlagen!\n");
         exit($resultCode);
     }
-
-    fwrite(STDOUT, "[Docker-Setup] Datenbank bereit.\n\n");
+    fwrite(STDOUT, "[Setup-Neu] Datenbank bereit.\n\n");
 })();
 
 uses(TestIntegrationCase::class)->beforeEach(function () {
