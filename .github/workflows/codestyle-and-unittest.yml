@@ -70,7 +70,7 @@ jobs:
         uses: ./.github/actions/setup-php-composer
 
       - name: Run PHP Integration Test
-        run: composer run-script pest
+        run: ./vendor/bin/pest --configuration phpunit.xml --compact
 
       - name: Notify Failure
         if: failure()
