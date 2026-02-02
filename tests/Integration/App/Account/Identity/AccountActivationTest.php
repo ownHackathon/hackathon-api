@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tests\Integration\Account\Identity;
+
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\App\Account\Identity\Factory\AccountActivationFactory;

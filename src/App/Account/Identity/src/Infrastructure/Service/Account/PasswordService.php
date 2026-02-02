@@ -29,7 +29,5 @@ readonly class PasswordService
         }
 
         $this->accountService->sendTokenForPasswordChange($email);
-
-        return;
     }
 }

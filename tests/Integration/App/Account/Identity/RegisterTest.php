@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Account\Identity\Register;
+namespace Tests\Integration\Account\Identity;
 
 use Exception;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
 use Faker\Factory as Faker;
-use Mockery;
 use Fig\Http\Message\StatusCodeInterface as Http;
+use Mockery;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 
 test('Valid email address and activation token sent', function () {
