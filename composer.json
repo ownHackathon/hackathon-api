@@ -118,14 +118,9 @@
     "phpcs": "phpcs --standard=phpcs.xml -s -p",
     "phplint": "vendor/bin/phplint",
     "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-    "pest-setup": "php ./test/setup-db.php",
-    "pest-run": "vendor/bin/pest",
+    "pest": "vendor/bin/pest",
     "post-create-project-cmd": [
       "@development-enable"
-    ],
-    "pest": [
-      "@pest-setup",
-      "@pest-run"
     ],
     "test": [
       "@pest"
