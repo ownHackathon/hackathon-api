@@ -28,8 +28,8 @@ $_ENV['APP_ENV'] = $appEnv;
     $dbHost = getenv('DB_HOST') ?: (getenv('GITHUB_ACTIONS') ? '127.0.0.1' : 'database-testing');
     $dbPort = (int)(getenv('DB_PORT') ?: 3306);
 
-    fwrite(STDOUT, "\n[Setup-Neu] Nutze Umgebung: $appEnv\n");
-    fwrite(STDOUT, "[Setup-Neu] Warte auf Datenbank $dbHost:$dbPort...\n");
+    fwrite(STDOUT, "\n[Setup] Environment: $appEnv\n");
+    fwrite(STDOUT, "[Setup] Waiting for database $dbHost:$dbPort...\n");
 
     $bin = __DIR__ . '/../bin/migrations.php';
     $maxTries = 20; // Mehr Puffer für GHA
@@ -47,11 +47,11 @@ $_ENV['APP_ENV'] = $appEnv;
     }
 
     if (!$connected) {
-        fwrite(STDERR, "\n[Error] Datenbank nicht erreichbar!\n");
+        fwrite(STDERR, "\n[Error] Database not accessible!\n");
         exit(1);
     }
 
-    fwrite(STDOUT, "\n[Setup-Neu] Migrationen starten...\n");
+    fwrite(STDOUT, "[Setup] Start migrations...\n");
 
     $resultCode = 0;
     passthru("php $bin migrations:migrate --no-interaction --quiet first", $resultCode);
@@ -60,7 +60,7 @@ $_ENV['APP_ENV'] = $appEnv;
     if ($resultCode !== 0) {
         exit($resultCode);
     }
-    fwrite(STDOUT, "[Setup-Neu] Datenbank bereit.\n\n");
+    fwrite(STDOUT, "[Setup] Database ready.\n\n");
 })();
 
 uses(TestIntegrationCase::class)->beforeEach(function () {
