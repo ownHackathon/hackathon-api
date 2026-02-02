@@ -17,23 +17,36 @@ use Tests\TestIntegrationCase;
 (function () {
     putenv('APP_ENV=testing');
     $_ENV['APP_ENV'] = 'testing';
+
+    $dbHost = getenv('DB_HOST') ?: (getenv('GITHUB_ACTIONS') ? '127.0.0.1' : 'database-testing');
+    $dbPort = (int)(getenv('DB_PORT') ?: 3306);
+
     fwrite(STDOUT, "\n[Docker-Setup] Warte auf database-testing...\n");
 
     $bin = __DIR__ . '/../bin/migrations.php';
-    $maxTries = 10;
+    if (!file_exists($bin)) {
+        fwrite(STDERR, "[Error] Migrations-Binärdatei nicht gefunden unter: $bin\n");
+        exit(1);
+    }
+    $maxTries = 15;
     $wait = 1; // Sekunde
 
-    // Versuche eine Verbindung aufzubauen, bevor die Migrationen starten
-    // (Verhindert Absturz, falls DB noch am Booten ist)
+    // 2. Verbindungs-Check
+    $connected = false;
     for ($i = 0; $i < $maxTries; $i++) {
-        // Wir prüfen einfach, ob wir den Port erreichen können
-        $fp = @fsockopen('database-testing', 3306, $errno, $errstr, 2);
+        $fp = @fsockopen($dbHost, $dbPort, $errno, $errstr, 2);
         if ($fp) {
             fclose($fp);
+            $connected = true;
             break;
         }
         fwrite(STDOUT, '.');
         sleep($wait);
+    }
+
+    if (!$connected) {
+        fwrite(STDERR, "\n[Error] Datenbank $dbHost ist nicht erreichbar!\n");
+        exit(1);
     }
 
     fwrite(STDOUT, "\n[Docker-Setup] Starte Migrationen...\n");
