@@ -24,7 +24,7 @@ readonly class TokenHydrator implements TokenHydratorInterface
         return new Token(
             id: $data['id'],
             accountId: $data['accountId'],
-            tokenType: TokenType::EMail,
+            tokenType: TokenType::from((int) $data['tokenType']),
             token: $this->uuid->fromString($data['token']),
             createdAt: new DateTimeImmutable($data['createdAt']),
         );
