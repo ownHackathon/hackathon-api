@@ -52,22 +52,28 @@ abstract class TestIntegrationCase extends BaseTestCase
         return $this->container;
     }
 
-    /**
-     * Hilfsmethode, um einen GET Request zu erstellen
-     */
     public function createGetRequest(string $path): ServerRequest
     {
         return (new ServerRequestFactory())
             ->createServerRequest('GET', new Uri($path));
     }
 
-    /**
-     * Hilfsmethode, um einen POST Request mit JSON Body zu erstellen
-     */
     public function createJsonPostRequest(string $path, array $data): ServerRequest
     {
         $request = (new ServerRequestFactory())
             ->createServerRequest('POST', new Uri($path))
+            ->withHeader('Content-Type', 'application/json');
+
+        $request->getBody()->write(json_encode($data));
+        $request->getBody()->rewind();
+
+        return $request;
+    }
+
+    public function createJsonPatchRequest(string $path, array $data): ServerRequest
+    {
+        $request = (new ServerRequestFactory())
+            ->createServerRequest('PATCH', new Uri($path))
             ->withHeader('Content-Type', 'application/json');
 
         $request->getBody()->write(json_encode($data));
