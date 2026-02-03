@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Domain\Token;
-use Exdrals\Identity\DTO\Client\ClientIdentification;
+use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Exdrals\Mailing\Domain\EmailType;
 use Exdrals\Shared\Domain\Account\AccountAccessAuthInterface;
@@ -69,29 +69,29 @@ readonly class AccountService
         );
     }
 
-    public function logout(?AccountInterface $account, ClientIdentification $clientId): void
+    public function logout(AccountInterface $account, RefreshToken $refreshToken): void
     {
-        if (!($account instanceof AccountInterface)) {
+        $accountAccessAuth = $this->authRepository->findByRefreshToken($refreshToken->refreshToken);
+
+        if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
             throw new HttpUnauthorizedException(
-                IdentityLogMessage::LOGOUT_REQUIRES_AUTHENTICATION,
+                IdentityLogMessage::LOGOUT_REFRESH_TOKEN_MISMATCH,
                 IdentityStatusMessage::UNAUTHORIZED_ACCESS,
-                [],
+                [
+                    'accountId' => $account->id,
+                    'refreshToken' => $refreshToken->refreshToken,
+                ],
                 Level::Warning
             );
         }
 
-        $accountAccessAuth = $this->authRepository->findByAccountIdAndClientIdHash(
-            $account->id,
-            $clientId->identificationHash
-        );
-
-        if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
+        if ($account->id !== $accountAccessAuth->accountId) {
             throw new HttpUnauthorizedException(
-                IdentityLogMessage::LOGOUT_CLIENT_IDENTITY_MISMATCH,
+                IdentityLogMessage::LOGOUT_REFRESH_TOKEN_MISMATCH,
                 IdentityStatusMessage::UNAUTHORIZED_ACCESS,
                 [
                     'accountId' => $account->id,
-                    'clientIdentificationHash' => $clientId->identificationHash,
+                    'refreshToken' => $refreshToken->refreshToken,
                 ],
                 Level::Warning
             );
