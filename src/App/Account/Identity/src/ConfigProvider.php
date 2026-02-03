@@ -15,14 +15,12 @@ use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterService;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
 use Exdrals\Identity\Infrastructure\Service\Account\PasswordChangeService;
 use Exdrals\Identity\Infrastructure\Service\Account\PasswordService;
-use Exdrals\Identity\Infrastructure\Service\Account\PasswordServiceInterface;
 use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use Exdrals\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenServiceInterface;
 use Exdrals\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Exdrals\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
@@ -133,11 +131,12 @@ readonly class ConfigProvider
 
             [
                 'path' => '/api/account/logout[/]',
-                'allowed_methods' => ['GET'],
+                'allowed_methods' => ['POST'],
                 'middleware' => [
                     Middleware\IdentityExceptionMappingMiddleware::class,
                     RequireLoginMiddleware::class,
                     Middleware\Token\AccessTokenValidationMiddleware::class,
+                    Middleware\Token\RefreshTokenViaBodyValidationMiddleware::class,
                     Handler\LogoutHandler::class,
                 ],
                 'name' => 'api_identity_logout',
@@ -193,6 +192,7 @@ readonly class ConfigProvider
                 Middleware\Token\RefreshTokenDatabaseExistenceMiddleware::class => ConfigAbstractFactory::class,
                 Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware::class => InvokableFactory::class,
                 Middleware\Token\RefreshTokenValidationMiddleware::class => ConfigAbstractFactory::class,
+                Middleware\Token\RefreshTokenViaBodyValidationMiddleware::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Repository\Account\AccountActivationRepository::class => ConfigAbstractFactory::class,
                 Infrastructure\Persistence\Repository\Account\AccountRepository::class => ConfigAbstractFactory::class,
@@ -284,6 +284,9 @@ readonly class ConfigProvider
                 AccountAccessAuthRepositoryInterface::class,
             ],
             Middleware\Token\RefreshTokenValidationMiddleware::class => [
+                RefreshTokenService::class,
+            ],
+            Middleware\Token\RefreshTokenViaBodyValidationMiddleware::class => [
                 RefreshTokenService::class,
             ],
             Infrastructure\Persistence\Repository\Account\AccountAccessAuthRepository::class => [

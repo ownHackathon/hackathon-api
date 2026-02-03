@@ -247,26 +247,54 @@
             }
         },
         "/account/logout": {
-            "get": {
+            "post": {
                 "tags": [
                     "Account"
                 ],
-                "summary": "Log out the current user",
-                "description": "Terminates the user session by invalidating the current access token. Clients should delete all locally stored tokens (Access Token and Refresh Token) after a successful logout.",
+                "summary": "Log out the current user and invalidate the session",
+                "description": "Terminates the user session by invalidating the provided refresh token in the database. The access token must be provided in the header for authentication, while the refresh token is required in the request body to identify the specific session to be closed.",
                 "operationId": "logout",
+                "requestBody": {
+                    "description": "The refresh token that should be invalidated.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "refreshToken": {
+                                        "description": "The full refresh token string",
+                                        "type": "string",
+                                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Logout successful. The session has been invalidated.",
+                        "description": "Logout successful. The refresh token has been deleted and the session is invalidated.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AuthenticationResponse"
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request. The refresh token is missing in the body or is malformed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HttpResponseMessage"
                                 }
                             }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized. The access token is missing, expired, or already invalid.",
+                        "description": "Unauthorized. The access token is missing, expired, or the user could not be identified.",
                         "content": {
                             "application/json": {
                                 "schema": {

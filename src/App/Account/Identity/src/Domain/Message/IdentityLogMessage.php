@@ -28,6 +28,7 @@ interface IdentityLogMessage extends LogMessage
     // --- 4. Logout Context ---
     public const string LOGOUT_REQUIRES_AUTHENTICATION = 'Logout failed: User is not authenticated';
     public const string LOGOUT_CLIENT_IDENTITY_MISMATCH = 'Logout failed: Client identification mismatch for the account';
+    public const string LOGOUT_REFRESH_TOKEN_MISMATCH = 'Logout failed: Refresh Token mismatch for the account';
 
     // --- 5. Activation Tokens ---
     public const string ACTIVATION_TOKEN_MISSING = 'No activation token was provided';
