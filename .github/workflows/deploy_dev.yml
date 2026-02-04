@@ -4,25 +4,28 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
 
+  workflow_dispatch:
+
 jobs:
-  # 1. Statische Analyse (Zusammengefasst, da sie keine DB brauchen)
+  # 1. Job: Statische Analyse (Lint, Stan, CodeSniffer)
+  # Diese laufen zusammen, da sie keine Datenbank benötigen.
   static-analysis:
     name: PHP Quality Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6.0.2
 
-      - name: Setup Environment
+      - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
 
-      - name: Validate Composer
-        run: composer validate --strict
+      - name: Run PHP Linter
+        run: composer run-script phplint
 
-      - name: Run Checks
-        run: |
-          composer run-script phplint
-          composer run-script phpstan
-          composer run-script phpcs
+      - name: Run PHP Stan
+        run: composer run-script phpstan
+
+      - name: Run PHP Codesniffer
+        run: composer run-script phpcs
 
       - name: Notify Failure
         if: failure()
@@ -32,44 +35,49 @@ jobs:
           details: Static Analysis (Lint/Stan/CS) failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
 
-  # 2. Tests (Unit & Functional getrennt, da Functional DB braucht)
+  # 2. Job: Tests (Unit & Functional)
+  # Dieser Job benötigt die MariaDB Service-Container
   tests:
     name: PHP Tests
     needs: static-analysis
     runs-on: ubuntu-latest
     services:
-      mariadb:
+      database-testing:
         image: mariadb:latest
         env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: db
           MYSQL_USER: dev
           MYSQL_PASSWORD: dev
-        ports: ["3306:3306"]
+        ports:
+          - 3306:3306
         options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
     env:
       DB_DATABASE: db
       DB_USERNAME: dev
       DB_PASSWORD: dev
       DB_HOST: 127.0.0.1
+      DB_PORT: 3306
       APP_ENV: action
     steps:
       - uses: actions/checkout@v6.0.2
-      - name: Setup Environment
+
+      - name: Setup PHP and Composer
         uses: ./.github/actions/setup-php-composer
 
-      #- name: Run Unit Tests
-      #  run: composer run-script unittest
-
-      - name: Run Functional Tests
-        run: composer run-script functionaltest
+      - name: Run Tests
+        run: ./vendor/bin/pest --configuration=phpunit.xml --compact
+        env:
+          APP_ENV: action
+          DB_HOST: 127.0.0.1
 
       - name: Notify Failure
         if: failure()
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           severity: error
-          details: PHP Tests failed.
+          details: Integration Tests failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
 
   # 3. Deployment
