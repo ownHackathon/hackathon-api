@@ -93,8 +93,6 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FunctionalTest\\": "tests/FunctionalTest/",
-      "UnitTest\\": "tests/UnitTest/",
       "Tests\\": "tests/"
     }
   },

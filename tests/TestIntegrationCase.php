@@ -11,8 +11,10 @@ use PDO;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
+use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
+use Tests\Integration\JsonFactory;
 
-// <--- Wichtig
+use function array_merge;
 
 abstract class TestIntegrationCase extends BaseTestCase
 {
@@ -36,16 +38,11 @@ abstract class TestIntegrationCase extends BaseTestCase
 
     public function getContainer(): ContainerInterface
     {
-        // Singleton-Logik: Container nur einmal pro Testlauf laden, um Performance zu sparen
         if ($this->container === null) {
-            // Pfad anpassen: Gehen Sie vom 'tests'-Ordner zurück ins Root-Verzeichnis
-            // Meistens liegt die container.php in config/container.php
             $path = __DIR__ . '/../config/container.php';
-
             if (!file_exists($path)) {
                 throw new RuntimeException("Container-Konfiguration nicht gefunden unter: $path");
             }
-
             $this->container = require $path;
         }
 
@@ -95,19 +92,22 @@ abstract class TestIntegrationCase extends BaseTestCase
         $sql = "INSERT INTO $table ($cols) VALUES ($placeholders)";
         $pdo->prepare($sql)->execute(array_values($data));
     }
-    /*
-    test('user can log in', function ()
+
+    public function createAndLoginUser(): array
     {
-        // Vorbereitung (Arrange)
-        insert('users', [
-            'email' => 'user@example.com',
-            'password' => password_hash('secret', PASSWORD_DEFAULT),
-        ]);
+        $account = AccountFactory::create();
 
-        // Ausführung (Act)
-        $response = $this->app->handle(...);
+        $request = $this->createJsonPostRequest(
+            '/api/account/authentication',
+            [
+                'email' => $account['email'],
+                'password' => $account['password'],
+            ]
+        );
+        $response = $this->app->handle($request);
 
-        expect($response->getStatusCode())->toBe(200);
-    });
-    */
+        $responseDate = JsonFactory::create($response);
+
+        return array_merge($account, $responseDate);
+    }
 }
