@@ -4,8 +4,6 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
 
-  workflow_dispatch:
-
 jobs:
   # 1. Job: Statische Analyse (Lint, Stan, CodeSniffer)
   # Diese laufen zusammen, da sie keine Datenbank benötigen.
