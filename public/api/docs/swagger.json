@@ -273,7 +273,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Logout successful. The refresh token has been deleted and the session is invalidated.",
                         "content": {
                             "application/json": {

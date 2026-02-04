@@ -15,6 +15,9 @@ use Tests\TestIntegrationCase;
 */
 // 1. APP_ENV Logik: Priorität für GHA (action)
 $appEnv = getenv('APP_ENV') ?: 'testing';
+if ($appEnv !== 'action') {
+    $appEnv = 'testing';
+}
 putenv("APP_ENV=$appEnv");
 $_ENV['APP_ENV'] = $appEnv;
 
