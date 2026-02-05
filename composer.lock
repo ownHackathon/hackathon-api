@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5d9ef0b441a66ec0eb67bdb20fba3b6",
+    "content-hash": "497bea8a3045e06d048ba8897d7f5f9b",
     "packages": [
         {
             "name": "brick/math",
-            "version": "0.14.5",
+            "version": "0.14.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "618a8077b3c326045e10d5788ed713b341fcfe40"
+                "reference": "32498d5e1897e7642c0b961ace2df6d7dc9a3bc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/618a8077b3c326045e10d5788ed713b341fcfe40",
-                "reference": "618a8077b3c326045e10d5788ed713b341fcfe40",
+                "url": "https://api.github.com/repos/brick/math/zipball/32498d5e1897e7642c0b961ace2df6d7dc9a3bc3",
+                "reference": "32498d5e1897e7642c0b961ace2df6d7dc9a3bc3",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.14.5"
+                "source": "https://github.com/brick/math/tree/0.14.6"
             },
             "funding": [
                 {
@@ -64,7 +64,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-03T18:06:51+00:00"
+            "time": "2026-02-05T07:59:58+00:00"
         },
         {
             "name": "brick/varexporter",
@@ -316,6 +316,155 @@
                 "source": "https://github.com/envms/fluentpdo/tree/v2.2.4"
             },
             "time": "2022-01-27T21:49:44+00:00"
+        },
+        {
+            "name": "exdrals/core",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Exdrals/core.git",
+                "reference": "14f6b2ad9811aba648be442bf3971cf7e7afbd36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Exdrals/core/zipball/14f6b2ad9811aba648be442bf3971cf7e7afbd36",
+                "reference": "14f6b2ad9811aba648be442bf3971cf7e7afbd36",
+                "shasum": ""
+            },
+            "require": {
+                "envms/fluentpdo": "^2.2",
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "ext-pdo": "*",
+                "firebase/php-jwt": "^6.0",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "laminas/laminas-component-installer": "^2.6 || ^3.0",
+                "laminas/laminas-config-aggregator": "^1.6",
+                "laminas/laminas-development-mode": "^3.3.0",
+                "laminas/laminas-diactoros": "^3.8.0",
+                "laminas/laminas-inputfilter": "^2.30",
+                "laminas/laminas-servicemanager": "^3.4",
+                "laminas/laminas-stdlib": "^3.6",
+                "laminas/laminas-validator": "^2.64",
+                "mezzio/mezzio": "^3",
+                "mezzio/mezzio-cors": "^1.13",
+                "mezzio/mezzio-fastroute": "^3.0.3",
+                "mezzio/mezzio-helpers": "^5.7",
+                "mezzio/mezzio-tooling": "^2.12",
+                "monolog/monolog": "^3.9.0",
+                "php": "^8.4.0",
+                "ramsey/uuid": "^4.7",
+                "symfony/mailer": "^6.4",
+                "zircote/swagger-php": "^6"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "component-auto-installs": [
+                        "mezzio/mezzio",
+                        "mezzio/mezzio-helpers",
+                        "mezzio/mezzio-router",
+                        "laminas/laminas-httphandlerrunner",
+                        "mezzio/mezzio-fastroute"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Exdrals\\Core\\": "src/",
+                    "Exdrals\\Token\\": "src/Token/src/",
+                    "Exdrals\\Shared\\": "src/Shared/src",
+                    "Exdrals\\Mailing\\": "src/Mailing/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "core library for personal projects",
+            "homepage": "https://github.com/exdrals",
+            "keywords": [
+                "opensource"
+            ],
+            "support": {
+                "docs": "https://github.com/exdrals/core",
+                "issues": "https://github.com/exdrals/core/issues",
+                "source": "https://github.com/exdrals/core"
+            },
+            "time": "2026-02-05T22:49:44+00:00"
+        },
+        {
+            "name": "exdrals/identity",
+            "version": "v0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Exdrals/identity.git",
+                "reference": "e33be562269cc5bc76dbfdd6a9c0b75ebe551737"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Exdrals/identity/zipball/e33be562269cc5bc76dbfdd6a9c0b75ebe551737",
+                "reference": "e33be562269cc5bc76dbfdd6a9c0b75ebe551737",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "ext-pdo": "*",
+                "php": "~8.4.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+                "doctrine/migrations": "^3.6",
+                "exdrals/core": "^0",
+                "fakerphp/faker": "^1.24",
+                "filp/whoops": "^2.7.1",
+                "helmich/phpunit-json-assert": "^3.5",
+                "helmich/phpunit-psr7-assert": "^4.4",
+                "mockery/mockery": "^1.6",
+                "overtrue/phplint": "^9.0",
+                "pestphp/pest": "^v3.7",
+                "phpstan/phpstan": "^2.1.33",
+                "phpstan/phpstan-deprecation-rules": "^2.0.3",
+                "phpunit/php-code-coverage": "^11.0.0",
+                "phpunit/phpunit": "^11.5.0",
+                "roave/security-advisories": "dev-master",
+                "slevomat/coding-standard": "^8.15",
+                "squizlabs/php_codesniffer": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "component-auto-installs": [
+                        "mezzio/mezzio",
+                        "mezzio/mezzio-helpers",
+                        "mezzio/mezzio-router",
+                        "laminas/laminas-httphandlerrunner",
+                        "mezzio/mezzio-fastroute"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Exdrals\\Identity\\": "src/Identity/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "offers authentication for personal projects",
+            "homepage": "https://github.com/exdrals",
+            "keywords": [
+                "hackathon",
+                "opensource"
+            ],
+            "support": {
+                "docs": "https://github.com/exdrals/identity",
+                "issues": "https://github.com/exdrals/identity/issues",
+                "source": "https://github.com/exdrals/identity"
+            },
+            "time": "2026-02-05T23:39:43+00:00"
         },
         {
             "name": "fig/http-message-util",
@@ -7301,12 +7450,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "258cd5fdcb59c29f421927b2cf77f48de9458a98"
+                "reference": "7ea2d110787f6807213e27a1255c6b858ad99d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/258cd5fdcb59c29f421927b2cf77f48de9458a98",
-                "reference": "258cd5fdcb59c29f421927b2cf77f48de9458a98",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7ea2d110787f6807213e27a1255c6b858ad99d89",
+                "reference": "7ea2d110787f6807213e27a1255c6b858ad99d89",
                 "shasum": ""
             },
             "conflict": {
@@ -7786,7 +7935,7 @@
                 "microsoft/microsoft-graph": ">=1.16,<1.109.1|>=2,<2.0.1",
                 "microsoft/microsoft-graph-beta": "<2.0.1",
                 "microsoft/microsoft-graph-core": "<2.0.2",
-                "microweber/microweber": "<=2.0.19",
+                "microweber/microweber": "<2.0.20",
                 "mikehaertl/php-shellcommand": "<1.6.1",
                 "mineadmin/mineadmin": "<=3.0.9",
                 "miniorange/miniorange-saml": "<1.4.3",
@@ -8311,7 +8460,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-04T22:06:32+00:00"
+            "time": "2026-02-05T22:08:29+00:00"
         },
         {
             "name": "sebastian/cli-parser",

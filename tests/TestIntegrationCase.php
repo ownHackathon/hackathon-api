@@ -11,7 +11,7 @@ use PDO;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
-use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
+use Tests\Integration\App\Factory\AccountFactory;
 use Tests\Integration\JsonFactory;
 
 use function array_merge;

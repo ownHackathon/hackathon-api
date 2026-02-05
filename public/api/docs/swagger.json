@@ -10,305 +10,31 @@
         }
     ],
     "paths": {
-        "/token/refresh": {
+        "/ping": {
             "get": {
                 "tags": [
-                    "Account"
+                    "System Information"
                 ],
-                "summary": "Refresh the access token",
-                "description": "Generates a new short-lived access token using a valid refresh token. \n\nThis endpoint allows the client to maintain a session without requiring the user to re-enter their credentials. The refresh token must be provided via the configured security mechanism (e.g., Authorization Header or HTTP-only Cookie).",
-                "operationId": "requestRegenerateAccessToken",
+                "summary": "Returns the current time in Unix format",
+                "operationId": "b8e0f8d7333cccda411833fd8b3e4f30",
                 "responses": {
                     "200": {
-                        "description": "Successfully issued a new access token.",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Authentication failed. This happens if the refresh token is expired, revoked, or invalid. The user must perform a full login again.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "refreshToken": []
-                    }
-                ]
-            }
-        },
-        "/account/activation/{token}": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Finalize account registration and activation",
-                "description": "Completes the registration process. This endpoint validates the activation token from the email and creates the actual user account with the provided username and password. \n\nNote: The account is only persisted in the database after this step is successful.",
-                "operationId": "accountActivation",
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "path",
-                        "description": "The secret activation token received via email.",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "The account credentials to be set for the new account.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AccountRegistration"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Account successfully created and activated. The user can now log in."
-                    },
-                    "400": {
-                        "description": "Validation failed. This can happen if:\n1. The token is invalid or has expired.\n2. The password does not meet the security requirements.\n3. The chosen account name is already taken.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "properties": {
+                                        "ack": {
+                                            "description": "actually request time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
                     }
                 }
-            }
-        },
-        "/account/password/forgotten": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Request a token for password reset. Sending via E-Mail",
-                "description": "Initiates the password recovery process for the given email address. \n\n**Security Note:** To prevent user enumeration, this endpoint always returns a 200 OK status. An attacker cannot determine whether an account exists for a specific email address by observing the API response.",
-                "operationId": "requestPasswordReset",
-                "requestBody": {
-                    "description": "The email address associated with the account.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/EMail"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request was accepted. If an account with the provided email address exists, an email containing a password reset link will be sent shortly."
-                    }
-                }
-            }
-        },
-        "/account/password/{token}": {
-            "patch": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Reset account password using a token",
-                "description": "Sets a new password for an account. This is the final step of the password recovery process. The request requires a valid, non-expired reset token that was previously sent to the user's email address.",
-                "operationId": "resetPasswordWithToken",
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "path",
-                        "description": "The secret reset token received via email.",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "The new password and its confirmation.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AccountPassword"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Password has been successfully updated. The user can now log in with the new credentials."
-                    },
-                    "400": {
-                        "description": "Request failed due to validation errors. Possible reasons:\n1. The reset token is invalid or has already been used.\n2. The token has expired.\n3. The new password does not meet the security requirements (e.g., too short).",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/account": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Endpoint to register a new user account or request a password reset.",
-                "description": "Starts the account process for the given email address. \n\n**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. The user will not know if an account already exists based on the API response.",
-                "operationId": "f2e8a6c958dae94077b92efeb33a4152",
-                "requestBody": {
-                    "description": "The email address for the new account",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/EMail"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request was processed successfully. Depending on the state of the account, one of the following actions will occur:\n1. **Account does not exist:** A token to activate the new account will be sent to the email address.\n2. **Account already exists:** A token to reset the password will be sent to the email address."
-                    }
-                }
-            }
-        },
-        "/account/authentication": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Authenticate user and issue tokens",
-                "description": "Authenticates a user using their credentials. On success, it returns a short-lived **AccessToken** (for API authorization) and a long-lived **RefreshToken** (to obtain new access tokens).",
-                "operationId": "accountAuthentication",
-                "requestBody": {
-                    "description": "User credentials (email and password)",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AuthenticationRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Authentication successful. The response contains both access and refresh tokens.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AuthenticationResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid credentials. The email or password provided is incorrect.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access denied. The credentials are correct, but the account is currently restricted. Possible reasons: Account is locked, disabled, or the email address has not been verified yet.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/account/logout": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Log out the current user and invalidate the session",
-                "description": "Terminates the user session by invalidating the provided refresh token in the database. The access token must be provided in the header for authentication, while the refresh token is required in the request body to identify the specific session to be closed.",
-                "operationId": "logout",
-                "requestBody": {
-                    "description": "The refresh token that should be invalidated.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "refreshToken": {
-                                        "description": "The full refresh token string",
-                                        "type": "string",
-                                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "204": {
-                        "description": "Logout successful. The refresh token has been deleted and the session is invalidated.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request. The refresh token is missing in the body or is malformed.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized. The access token is missing, expired, or the user could not be identified.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "accessToken": []
-                    }
-                ]
             }
         },
         "/me/workspaces": {
@@ -371,7 +97,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "Exdrals\\Identity\\DTO\\Response\\HttpResponseMessage"
                                 }
                             }
                         }
@@ -419,7 +145,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "Exdrals\\Identity\\DTO\\Response\\HttpResponseMessage"
                                 }
                             }
                         }
@@ -429,7 +155,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "Exdrals\\Identity\\DTO\\Response\\HttpResponseMessage"
                                 }
                             }
                         }
@@ -439,7 +165,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/HttpResponseMessage"
+                                    "$ref": "Exdrals\\Identity\\DTO\\Response\\HttpResponseMessage"
                                 }
                             }
                         }
@@ -451,189 +177,10 @@
                     }
                 ]
             }
-        },
-        "/ping": {
-            "get": {
-                "tags": [
-                    "System Information"
-                ],
-                "summary": "Returns the current time in Unix format",
-                "operationId": "8ec21fd921a6805a478fc95c7820e576",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "ack": {
-                                            "description": "actually request time",
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "components": {
         "schemas": {
-            "Account": {
-                "description": "Detailed information about a user account",
-                "properties": {
-                    "uuid": {
-                        "description": "The unique identifier of the account",
-                        "type": "string",
-                        "format": "uuid",
-                        "example": "019becbe-f952-7b82-82fa-f41f8ae24599"
-                    },
-                    "name": {
-                        "description": "The display name of the account holder",
-                        "type": "string",
-                        "example": "Max Mustermann"
-                    },
-                    "email": {
-                        "description": "The email address associated with the account",
-                        "type": "string",
-                        "format": "email",
-                        "example": "max.mustermann@example.com"
-                    },
-                    "registeredAt": {
-                        "description": "The timestamp when the account was registered",
-                        "type": "string",
-                        "format": "Y-m-d H:i:s",
-                        "example": "2024-01-20 14:30:00"
-                    },
-                    "lastActionAt": {
-                        "description": "The timestamp of the last activity on this account",
-                        "type": "string",
-                        "format": "Y-m-d H:i:s",
-                        "example": "2024-05-15 10:00:00"
-                    }
-                },
-                "type": "object"
-            },
-            "AccountPassword": {
-                "properties": {
-                    "password": {
-                        "description": "The Password",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "AccountRegistration": {
-                "required": [
-                    "accountName",
-                    "password"
-                ],
-                "properties": {
-                    "accountName": {
-                        "description": "The Display Name for the Account",
-                        "type": "string"
-                    },
-                    "password": {
-                        "description": "The Password",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "ApiMe": {},
-            "AuthenticationRequest": {
-                "required": [
-                    "email",
-                    "password"
-                ],
-                "properties": {
-                    "email": {
-                        "description": "The E-Mail from Account",
-                        "type": "string"
-                    },
-                    "password": {
-                        "description": "The Password from Account",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "EMail": {
-                "properties": {
-                    "email": {
-                        "description": "The E-Mail",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "AuthenticationResponse": {
-                "properties": {
-                    "accessToken": {
-                        "description": "The access token after a valid log-in",
-                        "type": "string"
-                    },
-                    "refreshToken": {
-                        "description": "The refresh token after a valid log-in",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "HttpResponseMessage": {
-                "properties": {
-                    "statusCode": {
-                        "description": "The Http Status Code",
-                        "type": "integer",
-                        "example": 400
-                    },
-                    "message": {
-                        "description": "The Message",
-                        "type": "string",
-                        "example": "Bad request"
-                    }
-                },
-                "type": "object"
-            },
-            "AccessToken": {
-                "properties": {
-                    "accessToken": {
-                        "description": "The Token for authorized access",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "AccountPasswordToken": {
-                "properties": {
-                    "accountPasswordToken": {
-                        "description": "Token to set a new password",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "RefreshToken": {
-                "properties": {
-                    "refreshToken": {
-                        "description": "The token after a valid log-in",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Token": {
-                "properties": {
-                    "token": {
-                        "description": "The Token",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "PaginationMeta": {
                 "title": "Pagination Meta",
                 "description": "Info about the number of pages and limits",
@@ -734,16 +281,12 @@
     },
     "tags": [
         {
-            "name": "Account",
-            "description": "Account"
+            "name": "System Information",
+            "description": "System Information"
         },
         {
             "name": "Workspace",
             "description": "Workspace"
-        },
-        {
-            "name": "System Information",
-            "description": "System Information"
         }
     ]
 }

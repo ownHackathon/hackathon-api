@@ -12,7 +12,7 @@ use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\Migrations\Tools\Console\Command;
 use Symfony\Component\Console\Application;
 
-$env = getenv('APP_ENV') ?: '';
+$env = getenv('APP_ENV') ?? 'global';
 
 $dbParams = (require realpath(__DIR__) . sprintf('/../config/autoload/database.%s.php', $env))['database'];
 $dbParams['driver'] = 'pdo_' . $dbParams['driver'];
@@ -25,10 +25,10 @@ $configuration = new Configuration();
 
 $configuration->setCustomTemplate(__DIR__ . '/../config/migrations.template.tpl');
 
-$configuration->addMigrationsDirectory('Migrations', $config['migrations_paths']['Migrations']);
-if (array_key_exists('TestDataMigrations', $config['migrations_paths'])) {
-    $configuration->addMigrationsDirectory('TestDataMigrations', $config['migrations_paths']['TestDataMigrations']);
+foreach ($config['migrations_paths'] as $key => $path) {
+  $configuration->addMigrationsDirectory($key, $path);
 }
+
 $configuration->setAllOrNothing($config['all_or_nothing']);
 $configuration->setCheckDatabasePlatform($config['check_database_platform']);
 $configuration->setTransactional($config['transactional']);

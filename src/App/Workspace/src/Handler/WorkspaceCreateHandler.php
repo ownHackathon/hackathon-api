@@ -2,8 +2,8 @@
 
 namespace ownHackathon\Workspace\Handler;
 
+use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\DTO\Response\HttpResponseMessage;
-use Exdrals\Shared\Domain\Account\AccountInterface;
 use Exdrals\Shared\Domain\Exception\HttpDuplicateEntryException;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Workspace\Infrastructure\Service;
 
-use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Shared\Domain\Exception\DuplicateEntryException;
 use Exdrals\Shared\Infrastructure\Service\SlugService;
 use Exdrals\Shared\Utils\UuidFactoryInterface;

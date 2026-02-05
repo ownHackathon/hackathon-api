@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Shared\Domain\Workspace;
 
-use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Identity\Domain\AccountInterface;
 use ownHackathon\Workspace\DTO\WorkspaceRequest;
 
 interface WorkspaceCreatorInterface
