@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Workspace\Domain;
 
-use Exdrals\Shared\Domain\Account\AccountInterface;
+use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Shared\Utils\Collection;
 use InvalidArgumentException;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;

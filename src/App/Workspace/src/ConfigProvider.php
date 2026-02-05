@@ -3,9 +3,9 @@
 namespace ownHackathon\Workspace;
 
 use Envms\FluentPDO\Query;
+use Exdrals\Identity\Middleware\RequireLoginMiddleware;
 use Exdrals\Shared\Infrastructure\Service\SlugService;
 use Exdrals\Shared\Middleware\FluentTransactionMiddleware;
-use Exdrals\Shared\Middleware\RequireLoginMiddleware;
 use Exdrals\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
