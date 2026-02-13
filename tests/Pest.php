@@ -135,6 +135,19 @@ expect()->extend('toNotHaveRecord', function (array $criteria) {
     return $this;
 });
 
+expect()->extend('toHaveSubset', function (array $subset) {
+    if (! is_array($this->value)) {
+        throw new InvalidArgumentException('toHaveSubset can only be used on arrays.');
+    }
+
+    foreach ($subset as $key => $value) {
+        $this->toHaveKey($key);
+
+        expect($this->value[$key])->toEqual($value);
+    }
+
+    return $this;
+});
 /*
 |--------------------------------------------------------------------------
 | Functions

@@ -66,7 +66,7 @@
     "psr-4": {
       "ownHackathon\\": "src/App/",
       "ownHackathon\\Shared\\": "src/App/Shared/src/",
-      "ownHackathon\\Account\\": "src/App/Account/",
+      "ownHackathon\\Migrations\\": "database/migrations/",
       "ownHackathon\\Workspace\\": "src/App/Workspace/src/"
     }
   },
@@ -89,7 +89,7 @@
     "doctrine": "php ./bin/migrations.php",
     "enable-codestandard": "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
     "mezzio": "laminas --ansi",
-    "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/docs/swagger.json",
+    "openapi": "php ./vendor/bin/openapi ./src ./vendor/exdrals/identity/src -f json -o ./public/api/docs/swagger.json",
     "phpcbf": "phpcbf --standard=phpcs.xml -p",
     "phpcs": "phpcs --standard=phpcs.xml -s -p",
     "phplint": "vendor/bin/phplint",

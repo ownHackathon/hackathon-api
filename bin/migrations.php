@@ -16,7 +16,7 @@ $env = getenv('APP_ENV') ?? 'global';
 
 $dbParams = (require realpath(__DIR__) . sprintf('/../config/autoload/database.%s.php', $env))['database'];
 $dbParams['driver'] = 'pdo_' . $dbParams['driver'];
-
+$env = 'global';
 $config = (require realpath(__DIR__) . sprintf('/../config/autoload/migrations.%s.php', $env))['migrations'];
 
 $connection = DriverManager::getConnection($dbParams);

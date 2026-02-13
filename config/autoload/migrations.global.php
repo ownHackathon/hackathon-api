@@ -11,7 +11,6 @@ return [
         ],
 
         'migrations_paths' => [
-            'Exdrals\\Identity\\Migrations' => 'vendor/exdrals/identity/database/migrations',
             'ownHackathon\\Migrations' => 'database/migrations',
         ],
 

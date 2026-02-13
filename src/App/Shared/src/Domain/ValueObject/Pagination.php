@@ -15,6 +15,7 @@ readonly class Pagination
     {
         $page = max(1, (int)($params['page'] ?? 1));
         $limit = max(1, min(250, (int)($params['limit'] ?? $defaultLimit)));
+
         $offset = ($page - 1) * $limit;
 
         return new self($page, $limit, $offset);

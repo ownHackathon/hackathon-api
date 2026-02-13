@@ -2,8 +2,10 @@
 
 namespace Tests\Integration\Workspace;
 
+use Exdrals\Shared\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
+use Tests\Integration\JsonFactory;
 
 use function expect;
 
@@ -20,13 +22,27 @@ test('Workspace was created', function () {
     )
     ->withHeader('Authorization', $account['accessToken']);
 
+    $slug = $this->getContainer()->get(SlugService::class)->getSlugFromString($name);
+
     $response = $this->app->handle($request);
+
     expect($response->getStatusCode())->toBe(Http::STATUS_CREATED)
+    ->and($response->getHeader('Location')[0])->toBe('/api/workspace/' . $slug)
+        ->and(JsonFactory::create($response))
+        ->toBeArray()
+        ->toHaveKeys(['uuid', 'ownerUuid', 'name', 'slug', 'description'])
+        ->toHaveSubset([
+            'ownerUuid' => $account['uuid'],
+            'name' => $name,
+            'description' => $description,
+            'slug' => $slug,
+        ])
     ->and('Workspace')->toHaveRecord(
         [
                 'accountId' => $account['id'],
                 'name' => $name,
                 'description' => $description,
+                'slug' => $slug,
             ]
     );
 });
