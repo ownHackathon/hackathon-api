@@ -37,20 +37,36 @@
     }
   },
   "require": {
-    "php": "~8.4.0",
+    "php": "^8.4.0",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-pdo": "*",
-    "exdrals/core": "^0.1.0",
-    "exdrals/identity": "^0.1.0"
+    "envms/fluentpdo": "^2.2",
+    "firebase/php-jwt": "^6.0",
+    "laminas/laminas-config-aggregator": "^1.6",
+    "laminas/laminas-diactoros": "^3.8.0",
+    "laminas/laminas-inputfilter": "^2.30",
+    "laminas/laminas-servicemanager": "^3.4",
+    "laminas/laminas-stdlib": "^3.6",
+    "laminas/laminas-validator": "^2.64",
+    "laminas/laminas-component-installer": "^2.6 || ^3.0",
+    "laminas/laminas-development-mode": "^3.3.0",
+    "mezzio/mezzio-tooling": "^2.12",
+    "mezzio/mezzio": "^3",
+    "mezzio/mezzio-cors": "^1.13",
+    "mezzio/mezzio-fastroute": "^3.0.3",
+    "mezzio/mezzio-helpers": "^5.7",
+    "monolog/monolog": "^3.9.0",
+    "ramsey/uuid": "^4.7",
+    "symfony/mailer": "^6.4",
+    "zircote/swagger-php": "^6",
+    "jetbrains/phpstorm-attributes": "^1.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
     "doctrine/migrations": "^3.6",
     "fakerphp/faker": "^1.24",
     "filp/whoops": "^2.7.1",
-    "helmich/phpunit-json-assert": "^3.5",
-    "helmich/phpunit-psr7-assert": "^4.4",
     "mockery/mockery": "^1.6",
     "overtrue/phplint": "^9.0",
     "pestphp/pest": "^v3.7",
@@ -64,10 +80,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ownHackathon\\": "src/App/",
-      "ownHackathon\\Shared\\": "src/App/Shared/src/",
-      "ownHackathon\\Migrations\\": "database/migrations/",
-      "ownHackathon\\Workspace\\": "src/App/Workspace/src/"
+      "Exdrals\\Shared\\": "src/Core/Shared/",
+      "Exdrals\\Mailing\\": "src/Core/Mailing/",
+      "Exdrals\\Token\\": "src/Core/Token/",
+      "Exdrals\\Core\\": "src/Core/",
+      "Exdrals\\Identity\\": "src/App/Account/Identity/",
+      "ownHackathon\\": "src/App/"
     }
   },
   "autoload-dev": {
@@ -89,7 +107,7 @@
     "doctrine": "php ./bin/migrations.php",
     "enable-codestandard": "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
     "mezzio": "laminas --ansi",
-    "openapi": "php ./vendor/bin/openapi ./src ./vendor/exdrals/identity/src -f json -o ./public/api/docs/swagger.json",
+    "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/docs/swagger.json",
     "phpcbf": "phpcbf --standard=phpcs.xml -p",
     "phpcs": "phpcs --standard=phpcs.xml -s -p",
     "phplint": "vendor/bin/phplint",

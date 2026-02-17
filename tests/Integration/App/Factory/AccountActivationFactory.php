@@ -4,8 +4,8 @@ namespace Tests\Integration\App\Factory;
 
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
-use Exdrals\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
+use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
 use Faker\Factory as Faker;
 
 class AccountActivationFactory

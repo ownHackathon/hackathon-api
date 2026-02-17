@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Exdrals\Shared\Domain\Enum\Router\RouteIdent;
+use Exdrals\Core\Shared\Domain\Enum\Router\RouteIdent;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use ownHackathon\Shared\Handler\PingHandler;

@@ -3,7 +3,7 @@
 namespace Tests\Integration\App\Workspace\Factory;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Shared\Infrastructure\Service\SlugService;
+use Exdrals\Core\Shared\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use Tests\Integration\App\Factory\AccountFactory;
 

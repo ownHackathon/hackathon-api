@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-use Exdrals\Shared\Infrastructure\Factory\DatabaseFactory;
-use Exdrals\Shared\Infrastructure\Factory\QueryFactory;
-use Exdrals\Shared\Infrastructure\Factory\UuidFactory;
-use Exdrals\Shared\Utils\UuidFactoryInterface;
-use Tests\Integration\Mock\NullMailerFactory;
+use Exdrals\Core\Shared\Infrastructure\Factory\DatabaseFactory;
+use Exdrals\Core\Shared\Infrastructure\Factory\QueryFactory;
+use Exdrals\Core\Shared\Infrastructure\Factory\UuidFactory;
+use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
 use Tests\Integration\Mock\NullLoggerFactory;
+use Tests\Integration\Mock\NullMailerFactory;
 
 return [
     'dependencies' => [

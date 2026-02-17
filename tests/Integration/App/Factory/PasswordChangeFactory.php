@@ -3,7 +3,7 @@
 namespace Tests\Integration\App\Factory;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Shared\Domain\Enum\Token\TokenType;
+use Exdrals\Core\Shared\Domain\Enum\Token\TokenType;
 use Faker\Factory as Faker;
 
 readonly class PasswordChangeFactory

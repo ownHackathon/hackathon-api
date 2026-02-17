@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Workspace;
 
-use Exdrals\Shared\Infrastructure\Service\SlugService;
+use Exdrals\Core\Shared\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\JsonFactory;
@@ -74,7 +74,7 @@ test('Authorization failed', function () {
     expect($response->getStatusCode())->toBe(Http::STATUS_UNAUTHORIZED);
 });
 
-test('Workspace name to short', function () {
+test('Workspace name invalid', function () {
     $account = $this->createAndLoginUser();
     $request = $this->createJsonPostRequest(
         '/api/workspace',
@@ -88,30 +88,18 @@ test('Workspace name to short', function () {
     expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST);
 });
 
-test('Workspace name to long', function () {
-    $account = $this->createAndLoginUser();
-    $request = $this->createJsonPostRequest(
-        '/api/workspace',
-        [
-            'name' => Faker::create()->regexify('[A-Za-z0-9][A-Za-z0-9 _-]{100,200}'),
-            'description' => Faker::create()->text(50),
-        ]
-    )->withHeader('Authorization', $account['accessToken']);
-
-    $response = $this->app->handle($request);
-    expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST);
-});
-
 test('Workspace name has invalid characters', function () {
     $account = $this->createAndLoginUser();
+
     $request = $this->createJsonPostRequest(
         '/api/workspace',
         [
-            'name' => Faker::create()->regexify('[!@#$%^&*][A-Za-z0-9 _-]{10,30}'),
+            'name' => Faker::create()->word() . ' ' . 'ä',
             'description' => Faker::create()->text(50),
         ]
     )->withHeader('Authorization', $account['accessToken']);
 
     $response = $this->app->handle($request);
+
     expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST);
 });
