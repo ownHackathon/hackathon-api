@@ -41,7 +41,7 @@
     "ext-openssl": "*",
     "ext-pdo": "*",
     "envms/fluentpdo": "^2.2",
-    "firebase/php-jwt": "^6.0",
+    "firebase/php-jwt": "^7.0",
     "laminas/laminas-config-aggregator": "^1.6",
     "laminas/laminas-diactoros": "^3.8.0",
     "laminas/laminas-inputfilter": "^2.30",
