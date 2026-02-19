@@ -25,6 +25,8 @@ interface WorkspaceStoreInterface extends StoreInterface
 
     public function findByName(string $name): ?WorkspaceInterface;
 
+    public function findBySlug(string $slug): ?WorkspaceInterface;
+
     public function findAll(): WorkspaceCollectionInterface;
 
     public function countByAccount(int $accountId): int;

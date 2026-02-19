@@ -6,6 +6,7 @@ use Envms\FluentPDO\Query;
 use Exdrals\Core\Shared\Infrastructure\Service\SlugService;
 use Exdrals\Core\Shared\Middleware\FluentTransactionMiddleware;
 use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
+use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Exdrals\Identity\Middleware\RequireLoginMiddleware;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -18,6 +19,7 @@ use ownHackathon\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
 use ownHackathon\Shared\Middleware\PaginationMiddleware;
 use ownHackathon\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\Workspace\Handler\WorkspaceCreateHandler;
+use ownHackathon\Workspace\Handler\WorkspaceHandler;
 use ownHackathon\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
 use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
@@ -64,10 +66,11 @@ class ConfigProvider
                 'name' => 'api_workspace_list_own_workspaces',
             ],
             [
-                'path' => '/api/workspace/{slug}',
+                'path' => '/api/workspace/{slug:[a-zA-Z0-9\-]+}[/]',
                 'allowed_methods' => ['GET'],
                 'middleware' => [
                     RequireLoginMiddleware::class,
+                    WorkspaceHandler::class,
                 ],
                 'name' => 'api_workspace_detail',
             ],
@@ -97,6 +100,7 @@ class ConfigProvider
                 WorkspaceCreateHandler::class => ConfigAbstractFactory::class,
                 ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
                 PaginationService::class => ConfigAbstractFactory::class,
+                WorkspaceHandler::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -138,6 +142,10 @@ class ConfigProvider
                 WorkspaceRepositoryInterface::class,
                 PaginationTotalPages::class,
             ],
+            WorkspaceHandler::class => [
+                WorkspaceRepositoryInterface::class,
+                AccountRepositoryInterface::class,
+            ]
         ];
     }
 }

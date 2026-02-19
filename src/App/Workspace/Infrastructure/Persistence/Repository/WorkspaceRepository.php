@@ -51,6 +51,11 @@ readonly class WorkspaceRepository implements WorkspaceRepositoryInterface
         return $this->store->findByName($name);
     }
 
+    public function findBySlug(string $slug): ?WorkspaceInterface
+    {
+        return $this->store->findBySlug($slug);
+    }
+
     public function findAll(): WorkspaceCollectionInterface
     {
         return $this->store->findAll();

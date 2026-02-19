@@ -72,15 +72,6 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
         return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
-    public function findByName(string $name): ?WorkspaceInterface
-    {
-        $result = $this->query->from($this->table)
-            ->where('name', $name)
-            ->fetch();
-
-        return is_array($result) ? $this->hydrator->hydrate($result) : null;
-    }
-
     public function findByAccountId(int $accountId, Pagination $pagination): WorkspaceCollectionInterface
     {
         $result = $this->query->from($this->table)
@@ -90,6 +81,24 @@ class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
             ->fetchAll();
 
         return is_array($result) ? $this->hydrator->hydrateCollection($result) : $this->hydrator->hydrateCollection([]);
+    }
+
+    public function findByName(string $name): ?WorkspaceInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('name', $name)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
+    }
+
+    public function findBySlug(string $slug): ?WorkspaceInterface
+    {
+        $result = $this->query->from($this->table)
+            ->where('slug', $slug)
+            ->fetch();
+
+        return is_array($result) ? $this->hydrator->hydrate($result) : null;
     }
 
     public function findAll(): WorkspaceCollectionInterface

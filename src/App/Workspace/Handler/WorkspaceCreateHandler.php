@@ -4,11 +4,11 @@ namespace ownHackathon\Workspace\Handler;
 
 use Exdrals\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
 use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use Exdrals\Identity\Domain\AccountInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
-use Exdrals\Identity\Domain\AccountInterface;
 use ownHackathon\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
 use ownHackathon\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use ownHackathon\Workspace\Domain\Message\WorkspaceLogMessage;
@@ -78,6 +78,7 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
         }
 
         $location = $this->urlHelper->generate('api_workspace_detail', ['slug' => $workspace->slug]);
+        $location = $location !== '/' ? rtrim($location, '/') : $location;
 
         $response = WorkspaceResponse::fromEntity($workspace, $account);
 
