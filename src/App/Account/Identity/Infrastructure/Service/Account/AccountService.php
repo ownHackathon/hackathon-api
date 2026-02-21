@@ -33,7 +33,7 @@ readonly class AccountService
 
     public function sendTokenForPasswordChange(EmailType $email): void
     {
-        $account = $this->accountRepository->findByEmail($email);
+        $account = $this->accountRepository->findOneByEmail($email);
         $token = $this->createPasswordChangeTokenForUserId($account->id);
         $this->tokenRepository->insert($token);
         $this->tokenService->sendEmail($email, $token);
@@ -41,7 +41,7 @@ readonly class AccountService
 
     public function isEmailAvailable(EmailType $email): bool
     {
-        $account = $this->accountRepository->findByEmail($email);
+        $account = $this->accountRepository->findOneByEmail($email);
 
         return $account === null;
     }
@@ -71,7 +71,7 @@ readonly class AccountService
 
     public function logout(AccountInterface $account, RefreshToken $refreshToken): void
     {
-        $accountAccessAuth = $this->authRepository->findByRefreshToken($refreshToken->refreshToken);
+        $accountAccessAuth = $this->authRepository->findOneByRefreshToken($refreshToken->refreshToken);
 
         if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
             throw new HttpUnauthorizedException(

@@ -3,55 +3,84 @@
 namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
 
 use Exdrals\Core\Mailing\Domain\EmailType;
+use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 use Exdrals\Identity\Domain\AccountCollectionInterface;
 use Exdrals\Identity\Domain\AccountInterface;
+use Exdrals\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class AccountRepository implements AccountRepositoryInterface
+readonly class AccountRepository extends AbstractRepository implements AccountRepositoryInterface
 {
     public function __construct(
         private AccountStoreInterface $store,
+        private AccountHydratorInterface $hydrator,
     ) {
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 
     public function insert(AccountInterface $data): int
     {
-        return $this->store->insert($data);
+        $data = $this->hydrator->extract($data);
+
+        return $this->store->persist($data);
     }
 
     public function update(AccountInterface $data): true
     {
-        return $this->store->update($data);
+        $data = $this->hydrator->extract($data);
+
+        return $this->store->update($data['id'], $data);
     }
 
     public function deleteById(int $id): true
     {
-        return $this->store->deleteById($id);
+        return $this->store->remove(['id' => $id]);
     }
 
-    public function findById(int $id): ?AccountInterface
+    public function findOneById(int $id): ?AccountInterface
     {
-        return $this->store->findById($id);
+        $result = $this->store->fetchOne(['id' => $id]);
+
+        return $this->mapToEntity($result);
     }
 
-    public function findByUuid(UuidInterface $uuid): ?AccountInterface
+    public function findOneByUuid(UuidInterface $uuid): ?AccountInterface
     {
-        return $this->store->findByUuid($uuid);
+        $result = $this->store->fetchOne(['uuid' => $uuid]);
+
+        return $this->mapToEntity($result);
     }
 
-    public function findByName(string $name): ?AccountInterface
+    public function findOneByName(string $name): ?AccountInterface
     {
-        return $this->store->findByName($name);
+        $result = $this->store->fetchOne(['name' => $name]);
+
+        return $this->mapToEntity($result);
     }
 
-    public function findByEmail(EmailType $email): ?AccountInterface
+    public function findOneByEmail(EmailType $email): ?AccountInterface
     {
-        return $this->store->findByEmail($email);
+        $result = $this->store->fetchOne(['email' => $email]);
+
+        return $this->mapToEntity($result);
     }
 
     public function findAll(): AccountCollectionInterface
     {
-        return $this->store->findAll();
+        $result = $this->store->fetchAll();
+
+        return $this->mapToCollection($result);
     }
 }

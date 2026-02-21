@@ -113,10 +113,10 @@ class ConfigProvider
             ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,
+                WorkspaceHydratorInterface::class,
             ],
             WorkspaceTable::class => [
                 Query::class,
-                WorkspaceHydratorInterface::class,
             ],
             WorkspaceCreateValidator::class => [
                 WorkspaceNameInput::class,

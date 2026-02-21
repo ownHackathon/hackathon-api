@@ -22,7 +22,7 @@ interface AccountInterface
 
     public DateTimeImmutable $registeredAt { get; }
 
-    public DateTimeImmutable $lastActionAt { get; }
+    public ?DateTimeImmutable $lastActionAt { get; }
 
     public function with(mixed ...$properties): self;
 }

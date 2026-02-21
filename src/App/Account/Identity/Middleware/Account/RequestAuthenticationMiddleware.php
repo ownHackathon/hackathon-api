@@ -4,12 +4,12 @@ namespace Exdrals\Identity\Middleware\Account;
 
 use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
 use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Monolog\Level;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
+use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -53,7 +53,7 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
 
         $authorization = $this->accessTokenService->decode($authorization);
         $uuid = $this->uuid->fromString($authorization->uuid);
-        $account = $this->accountRepository->findByUuid($uuid);
+        $account = $this->accountRepository->findOneByUuid($uuid);
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,

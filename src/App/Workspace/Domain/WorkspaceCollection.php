@@ -4,7 +4,6 @@ namespace ownHackathon\Workspace\Domain;
 
 use Exdrals\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
-use Exdrals\Identity\Domain\AccountInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
 
@@ -23,7 +22,7 @@ class WorkspaceCollection extends Collection implements WorkspaceCollectionInter
                 sprintf(
                     '%s must be an instance of %s',
                     get_class($value),
-                    AccountInterface::class
+                    WorkspaceInterface::class
                 )
             );
         }

@@ -13,13 +13,13 @@ final class Version20231103223745_CreateAccountTable extends AbstractMigration
     {
         $table = $schema->createTable('Account');
 
-        $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
+        $table->addColumn('id', Types::INTEGER, ['autoincrement' => true,]);
         $table->addColumn('uuid', Types::GUID, );
-        $table->addColumn('name', Types::STRING, ['length' => 64, 'notnull' => false,]);
-        $table->addColumn('password', Types::STRING, ['length' => 255, 'notnull' => false,]);
+        $table->addColumn('name', Types::STRING, ['length' => 64,]);
+        $table->addColumn('password', Types::STRING, ['length' => 255,]);
         $table->addColumn('email', Types::STRING, ['length' => 512,]);
         $table->addColumn('registeredAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
-        $table->addColumn('lastActionAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+        $table->addColumn('lastActionAt', Types::DATETIME_IMMUTABLE, ['notnull' => false]);
 
         $table->addPrimaryKeyConstraint(
             PrimaryKeyConstraint::editor()

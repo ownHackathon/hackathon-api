@@ -12,6 +12,7 @@ class ConfigProvider
             \Exdrals\Identity\ConfigProvider::class,
             Shared\ConfigProvider::class,
             Workspace\ConfigProvider::class,
+            Event\ConfigProvider::class,
         ]);
 
         return $aggregator->getMergedConfig();

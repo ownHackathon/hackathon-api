@@ -3,7 +3,6 @@
 namespace Exdrals\Identity\Infrastructure\Service\Token;
 
 use Exdrals\Core\Shared\Trait\JwtTokenTrait;
-use Firebase\JWT\JWT;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Domain\Exception\AccountNotFoundException;
@@ -15,6 +14,7 @@ use Exdrals\Identity\DTO\Token\JwtTokenConfig;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use Firebase\JWT\JWT;
 
 use function time;
 
@@ -71,7 +71,7 @@ readonly class RefreshTokenService
         RefreshToken $refreshToken,
         ClientIdentification $client
     ): AccountAccessAuthInterface {
-        $accountAccessAuth = $this->accessAuthRepository->findByRefreshToken($refreshToken->refreshToken);
+        $accountAccessAuth = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
         if (!$accountAccessAuth instanceof AccountAccessAuthInterface) {
             throw new InvalidRefreshTokenException($refreshToken->refreshToken);
         }
@@ -92,7 +92,7 @@ readonly class RefreshTokenService
      */
     private function findAccountOrThrow(AccountAccessAuthInterface $accountAccessAuth): AccountInterface
     {
-        $account = $this->accountRepository->findById($accountAccessAuth->accountId);
+        $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
         if (!$account instanceof AccountInterface) {
             throw new AccountNotFoundException(
                 accountId: $accountAccessAuth->accountId,

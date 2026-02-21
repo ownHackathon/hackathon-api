@@ -31,7 +31,7 @@ readonly class AccountHydrator implements AccountHydratorInterface
             password: $data['password'],
             email: new EmailType($data['email']),
             registeredAt: new DateTimeImmutable($data['registeredAt']),
-            lastActionAt: new DateTimeImmutable($data['lastActionAt']),
+            lastActionAt: $data['lastActionAt'] ? new DateTimeImmutable($data['lastActionAt']) : null,
         );
     }
 
@@ -58,7 +58,7 @@ readonly class AccountHydrator implements AccountHydratorInterface
             'password' => $object->password,
             'email' => $object->email->toString(),
             'registeredAt' => $object->registeredAt->format(DateTimeFormat::DEFAULT->value),
-            'lastActionAt' => $object->lastActionAt->format(DateTimeFormat::DEFAULT->value),
+            'lastActionAt' => $object->lastActionAt?->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 

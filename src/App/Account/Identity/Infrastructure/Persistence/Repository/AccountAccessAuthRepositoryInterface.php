@@ -8,23 +8,23 @@ use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {
-    public function insert(AccountAccessAuthInterface $accountAccessAuth): true;
+    public function insert(AccountAccessAuthInterface $accountAccessAuth): int;
 
     public function update(AccountAccessAuthInterface $accountAccessAuth): true;
 
-    public function findById(int $id): ?AccountAccessAuthInterface;
+    public function findOneById(int $id): ?AccountAccessAuthInterface;
 
     public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface;
 
-    public function findByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface;
+    public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface;
 
     public function findByLabel(string $label): AccountAccessAuthCollectionInterface;
 
-    public function findByRefreshToken(string $refreshToken): ?AccountAccessAuthInterface;
+    public function findOneByRefreshToken(string $refreshToken): ?AccountAccessAuthInterface;
 
     public function findByUserAgent(string $userAgent): AccountAccessAuthCollectionInterface;
 
-    public function findByClientIdentHash(string $clientIdentHash): ?AccountAccessAuthInterface;
+    public function findOneByClientIdentHash(string $clientIdentHash): ?AccountAccessAuthInterface;
 
     public function findAll(): AccountAccessAuthCollectionInterface;
 }

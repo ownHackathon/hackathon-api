@@ -5,13 +5,14 @@ namespace Exdrals\Core\Shared\Domain\Exception;
 use Exception;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 
+use function print_r;
 use function sprintf;
 
 class DuplicateEntryException extends Exception
 {
-    public function __construct(string $entity, ?int $id)
+    public function __construct(string $entity, array $conflictIdentifier)
     {
-        $message = sprintf('Entry for Entity %s with id %d already exists', $entity, $id);
+        $message = sprintf('Entry for Entity %s already exists with: %s', $entity, print_r($conflictIdentifier, true));
 
         parent::__construct($message, HTTP::STATUS_BAD_REQUEST);
     }

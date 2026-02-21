@@ -23,8 +23,8 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
     {
         $slug = $request->getAttribute('slug');
 
-        $workspace = $this->workspaceRepository->findBySlug($slug);
-        $account = $this->accountRepository->findById($workspace->accountId);
+        $workspace = $this->workspaceRepository->findOneBySlug($slug);
+        $account = $this->accountRepository->findOneById($workspace->accountId);
 
         $response = Workspace::fromArray(
             [

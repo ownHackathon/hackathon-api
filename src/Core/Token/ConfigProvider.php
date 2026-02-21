@@ -56,10 +56,10 @@ readonly class ConfigProvider
             ],
             TokenRepository::class => [
                 TokenStoreInterface::class,
+                TokenHydratorInterface::class,
             ],
             TokenTable::class => [
                 Query::class,
-                TokenHydratorInterface::class,
             ],
         ];
     }

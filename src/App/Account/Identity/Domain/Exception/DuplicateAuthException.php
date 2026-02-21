@@ -12,6 +12,10 @@ class DuplicateAuthException extends DuplicateEntryException
         public string $clientId,
         public string $errorMessage,
     ) {
-        parent::__construct($this->account, $this->accountId);
+        parent::__construct($this->account, [
+            'accountId' => $this->accountId,
+            'clientId' => $this->clientId,
+            'errorMessage' => $this->errorMessage,
+        ]);
     }
 }

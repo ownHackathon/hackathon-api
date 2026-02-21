@@ -3,12 +3,12 @@
 namespace Exdrals\Identity\Middleware\Token;
 
 use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
-use Monolog\Level;
 use Exdrals\Identity\Domain\AccountAccessAuthInterface;
 use Exdrals\Identity\Domain\AccountInterface;
 use Exdrals\Identity\Domain\Message\IdentityLogMessage;
 use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use Monolog\Level;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -24,7 +24,7 @@ readonly class RefreshTokenAccountMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);
-        $account = $this->accountRepository->findById($accountAccessAuth->accountId);
+        $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
 
         if (!$account instanceof AccountAccessAuthInterface) {
             throw new HttpUnauthorizedException(

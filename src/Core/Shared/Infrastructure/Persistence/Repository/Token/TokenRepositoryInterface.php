@@ -8,15 +8,15 @@ use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterfac
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {
-    public function insert(TokenInterface $data): true;
+    public function insert(TokenInterface $data): int;
 
     public function update(TokenInterface $data): true;
 
-    public function findById(int $id): ?TokenInterface;
+    public function findOneById(int $id): ?TokenInterface;
 
     public function findByAccountId(int $accountId): TokenCollectionInterface;
 
-    public function findByToken(string $token): ?TokenInterface;
+    public function findOneByToken(string $token): ?TokenInterface;
 
     public function findAll(): TokenCollectionInterface;
 

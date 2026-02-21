@@ -80,9 +80,6 @@
   },
   "autoload": {
     "psr-4": {
-      "Exdrals\\Shared\\": "src/Core/Shared/",
-      "Exdrals\\Mailing\\": "src/Core/Mailing/",
-      "Exdrals\\Token\\": "src/Core/Token/",
       "Exdrals\\Core\\": "src/Core/",
       "Exdrals\\Identity\\": "src/App/Account/Identity/",
       "ownHackathon\\": "src/App/"

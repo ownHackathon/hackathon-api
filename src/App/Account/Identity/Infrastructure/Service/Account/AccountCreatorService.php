@@ -38,7 +38,7 @@ readonly class AccountCreatorService
             );
         }
 
-        $persistActivationToken = $this->accountActivationRepository->findByToken($activationToken);
+        $persistActivationToken = $this->accountActivationRepository->findOneByToken($activationToken);
 
         if (!$persistActivationToken instanceof AccountActivationInterface) {
             throw new HttpInvalidArgumentException(
@@ -86,7 +86,7 @@ readonly class AccountCreatorService
             );
         }
 
-        $account = $this->accountRepository->findById($accountId);
+        $account = $this->accountRepository->findOneById($accountId);
         return AccountDTO::createFromAccount($account);
     }
 }

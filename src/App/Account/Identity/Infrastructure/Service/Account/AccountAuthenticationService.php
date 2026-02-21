@@ -38,7 +38,7 @@ readonly class AccountAuthenticationService
      */
     public function authenticate(AuthenticationRequest $auth, ClientIdentification $clientId): AuthenticationResponse
     {
-        $account = $this->accountRepository->findByEmail(EmailType::fromString($auth->email));
+        $account = $this->accountRepository->findOneByEmail(EmailType::fromString($auth->email));
         if (!($account instanceof AccountInterface)) {
             throw new AccountNotFoundException(email: $auth->email);
         }

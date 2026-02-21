@@ -16,7 +16,7 @@ readonly class Workspace
     {
         return new self(
             $data['name'],
-            $data['description'],
+            $data['description'] ?? '',
             $data['owner'],
             $data['ownerUuid']
         );

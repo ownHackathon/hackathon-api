@@ -28,13 +28,13 @@ readonly class PasswordChangeService
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token->token);
         }
 
-        $persistedToken = $this->tokenRepository->findByToken($token->token);
+        $persistedToken = $this->tokenRepository->findOneByToken($token->token);
 
         if (!($persistedToken instanceof TokenInterface) || $persistedToken->tokenType !== TokenType::EMail) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token->token);
         }
 
-        $account = $this->accountRepository->findById($persistedToken->accountId);
+        $account = $this->accountRepository->findOneById($persistedToken->accountId);
 
         if (!($account instanceof Account)) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND, $token->token);

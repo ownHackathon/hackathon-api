@@ -19,7 +19,7 @@ readonly class Account implements AccountInterface, Collectible
         public string $password,
         public EmailType $email,
         public DateTimeImmutable $registeredAt,
-        public DateTimeImmutable $lastActionAt,
+        public ?DateTimeImmutable $lastActionAt,
     ) {
     }
 }

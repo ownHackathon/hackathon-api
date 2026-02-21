@@ -9,15 +9,15 @@ use Exdrals\Identity\Domain\AccountActivationInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
 {
-    public function insert(AccountActivationInterface $data): true;
+    public function insert(AccountActivationInterface $data): int;
 
     public function update(AccountActivationInterface $data): true;
 
-    public function findById(int $id): ?AccountActivationInterface;
+    public function findOneById(int $id): ?AccountActivationInterface;
 
-    public function findEmail(EmailType $email): AccountActivationCollectionInterface;
+    public function findByEmail(EmailType $email): AccountActivationCollectionInterface;
 
-    public function findByToken(string $token): ?AccountActivationInterface;
+    public function findOneByToken(string $token): ?AccountActivationInterface;
 
     public function findAll(): AccountActivationCollectionInterface;
 
