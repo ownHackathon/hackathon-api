@@ -18,5 +18,7 @@ interface WorkspaceInterface
 
     public ?string $description { get; }
 
+    public ?string $details { get; }
+
     public function with(mixed ...$properties): self;
 }
