@@ -18,6 +18,7 @@ final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
         $table->addColumn('name', Types::STRING, ['length' => 64,]);
         $table->addColumn('slug', Types::STRING, ['length' => 64,]);
         $table->addColumn('description', Types::STRING, ['length' => 255, 'notnull' => false, 'default' => '']);
+        $table->addColumn('details', Types::TEXT, ['notnull' => false, 'default' => '']);
 
         $table->addPrimaryKeyConstraint(
             PrimaryKeyConstraint::editor()

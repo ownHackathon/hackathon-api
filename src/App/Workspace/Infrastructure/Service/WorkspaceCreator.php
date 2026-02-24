@@ -31,7 +31,8 @@ readonly class WorkspaceCreator implements WorkspaceCreatorInterface
             accountId: $owner->id,
             name: $workspace->name,
             slug: $slug,
-            description: $workspace->description
+            description: $workspace->description,
+            details: $workspace->details,
         );
 
         try {

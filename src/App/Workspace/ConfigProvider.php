@@ -9,7 +9,6 @@ use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Exdrals\Identity\Middleware\RequireLoginMiddleware;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
 use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
@@ -26,6 +25,7 @@ use ownHackathon\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use ownHackathon\Workspace\Infrastructure\Service\PaginationService;
 use ownHackathon\Workspace\Infrastructure\Service\WorkspaceCreator;
 use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
+use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use ownHackathon\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
@@ -87,13 +87,14 @@ class ConfigProvider
                 WorkspaceCreatorInterface::class => WorkspaceCreator::class,
             ],
             'invokables' => [
+                WorkspaceNameInput::class,
+                WorkspaceDescriptionInput::class,
+                WorkspaceDetailsInput::class,
             ],
             'factories' => [
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
-                WorkspaceNameInput::class => InvokableFactory::class,
-                WorkspaceDescriptionInput::class => InvokableFactory::class,
                 WorkspaceCreateValidator::class => ConfigAbstractFactory::class,
                 WorkspaceCreateValidatorMiddleware::class => ConfigAbstractFactory::class,
                 WorkspaceCreator::class => ConfigAbstractFactory::class,
@@ -121,6 +122,7 @@ class ConfigProvider
             WorkspaceCreateValidator::class => [
                 WorkspaceNameInput::class,
                 WorkspaceDescriptionInput::class,
+                WorkspaceDetailsInput::class,
             ],
             WorkspaceCreateValidatorMiddleware::class => [
                 WorkspaceCreateValidator::class,

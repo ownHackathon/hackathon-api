@@ -21,14 +21,21 @@ readonly class WorkspaceRequest
             example: 'My own workspace is wonderfully'
         )]
         public ?string $description,
+        #[OA\Property(
+            description: 'The details from workspace',
+            type: DataType::STRING->value,
+            example: 'My own workspace is wonderfully'
+        )]
+        public ?string $details,
     ) {
     }
 
     public static function fromArray(array $workspace): self
     {
         return new self(
-            $workspace['name'],
-            $workspace['description'],
+            name: $workspace['name'],
+            description: $workspace['description'],
+            details: $workspace['details'],
         );
     }
 }
