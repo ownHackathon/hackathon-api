@@ -2,7 +2,10 @@
 
 namespace ownHackathon\Workspace\Infrastructure\Hydrator;
 
+use DateTimeImmutable;
 use Exception;
+use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
+use Exdrals\Core\Shared\Domain\Enum\Visibility;
 use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
@@ -30,6 +33,9 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
             slug: $data['slug'],
             description: $data['description'],
             details: $data['details'],
+            visibility: Visibility::tryFrom($data['visibility']),
+            createdAt: new DateTimeImmutable($data['createdAt']),
+            updatedAt: new DateTimeImmutable($data['updatedAt']),
         );
     }
 
@@ -57,6 +63,9 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
             'slug' => $object->slug,
             'description' => $object->description,
             'details' => $object->details,
+            'visibility' => $object->visibility->value,
+            'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),
+            'updatedAt' => $object->updatedAt->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 

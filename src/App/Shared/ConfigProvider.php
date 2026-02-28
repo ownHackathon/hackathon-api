@@ -6,6 +6,7 @@ use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use ownHackathon\Shared\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\Shared\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {
@@ -30,6 +31,7 @@ class ConfigProvider
 
             ],
             'invokables' => [
+                VisibilityInput::class,
             ],
             'factories' => [
                 PaginationMiddleware::class => InvokableFactory::class,

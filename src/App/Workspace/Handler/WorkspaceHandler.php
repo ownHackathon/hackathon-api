@@ -2,6 +2,7 @@
 
 namespace ownHackathon\Workspace\Handler;
 
+use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
 use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -32,6 +33,10 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 'description' => $workspace->description,
                 'owner' => $account->name,
                 'ownerUuid' => $account->uuid->toString(),
+                'details' => $workspace->details,
+                'visibility' => $workspace->visibility->value,
+                'createdAt' => $workspace->createdAt->format(DateTimeFormat::DEFAULT->value),
+                'updatedAt' => $workspace->updatedAt->format(DateTimeFormat::DEFAULT->value),
             ]
         );
 

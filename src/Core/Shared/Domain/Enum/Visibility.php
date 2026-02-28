@@ -11,7 +11,7 @@ enum Visibility: int
     case PUBLIC = 5;
 
 
-    public function getEventVisibilityName(): string
+    public function getVisibilityName(): string
     {
         return match ($this) {
             Visibility::PRIVATE => 'Private',

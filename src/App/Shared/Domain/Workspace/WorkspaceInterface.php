@@ -2,6 +2,8 @@
 
 namespace ownHackathon\Shared\Domain\Workspace;
 
+use DateTimeImmutable;
+use Exdrals\Core\Shared\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
 interface WorkspaceInterface
@@ -19,6 +21,12 @@ interface WorkspaceInterface
     public ?string $description { get; }
 
     public ?string $details { get; }
+
+    public Visibility $visibility { get; }
+
+    public DateTimeImmutable $createdAt { get; }
+
+    public DateTimeImmutable $updatedAt { get; }
 
     public function with(mixed ...$properties): self;
 }

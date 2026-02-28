@@ -5,7 +5,7 @@ namespace ownHackathon\Workspace\DTO;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema(required: ['name'])]
+#[OA\Schema(required: ['name', 'visibility'])]
 readonly class WorkspaceRequest
 {
     public function __construct(
@@ -27,6 +27,12 @@ readonly class WorkspaceRequest
             example: 'My own workspace is wonderfully'
         )]
         public ?string $details,
+        #[OA\Property(
+            description: 'The visibility from workspace',
+            type: DataType::INTEGER->value,
+            example: '5'
+        )]
+        public int $visibility
     ) {
     }
 
@@ -34,8 +40,9 @@ readonly class WorkspaceRequest
     {
         return new self(
             name: $workspace['name'],
-            description: $workspace['description'],
-            details: $workspace['details'],
+            description: $workspace['description'] ?? null,
+            details: $workspace['details'] ?? null,
+            visibility: (int)$workspace['visibility']
         );
     }
 }

@@ -16,6 +16,7 @@ use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface
 use ownHackathon\Shared\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
 use ownHackathon\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\Shared\Validator\Input\VisibilityInput;
 use ownHackathon\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\Workspace\Handler\WorkspaceCreateHandler;
 use ownHackathon\Workspace\Handler\WorkspaceHandler;
@@ -123,6 +124,7 @@ class ConfigProvider
                 WorkspaceNameInput::class,
                 WorkspaceDescriptionInput::class,
                 WorkspaceDetailsInput::class,
+                VisibilityInput::class,
             ],
             WorkspaceCreateValidatorMiddleware::class => [
                 WorkspaceCreateValidator::class,

@@ -2,6 +2,8 @@
 
 namespace ownHackathon\Workspace\Infrastructure\Service;
 
+use DateTimeImmutable;
+use Exdrals\Core\Shared\Domain\Enum\Visibility;
 use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
 use Exdrals\Core\Shared\Infrastructure\Service\SlugService;
 use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
@@ -33,6 +35,9 @@ readonly class WorkspaceCreator implements WorkspaceCreatorInterface
             slug: $slug,
             description: $workspace->description,
             details: $workspace->details,
+            visibility: Visibility::tryFrom($workspace->visibility),
+            createdAt: new DateTimeImmutable(),
+            updatedAt: new DateTimeImmutable(),
         );
 
         try {

@@ -2,6 +2,8 @@
 
 namespace ownHackathon\Workspace\Domain;
 
+use DateTimeImmutable;
+use Exdrals\Core\Shared\Domain\Enum\Visibility;
 use Exdrals\Core\Shared\Trait\CloneReadonlyClassWith;
 use Exdrals\Core\Shared\Utils\Collectible;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
@@ -19,6 +21,9 @@ readonly class Workspace implements WorkspaceInterface, Collectible
         public string $slug,
         public ?string $description,
         public ?string $details,
+        public Visibility $visibility,
+        public DateTimeImmutable $createdAt,
+        public DateTimeImmutable $updatedAt,
     ) {
     }
 }
