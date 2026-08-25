@@ -35,7 +35,7 @@ readonly class WorkspaceCreator implements WorkspaceCreatorInterface
             slug: $slug,
             description: $workspace->description,
             details: $workspace->details,
-            visibility: Visibility::tryFrom($workspace->visibility),
+            visibility: Visibility::tryFrom($workspace->visibility) ?? Visibility::PUBLIC,
             createdAt: new DateTimeImmutable(),
             updatedAt: new DateTimeImmutable(),
         );
