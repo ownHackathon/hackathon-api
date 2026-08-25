@@ -33,8 +33,8 @@ $aggregator = new ConfigAggregator([
         return [];
     },
     // Default App module config
+    \Exdrals\Core\ConfigProvider::class,
     \ownHackathon\ConfigProvider::class,
-    \Exdrals\Shared\ConfigProvider::class,
 
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):
@@ -44,10 +44,11 @@ $aggregator = new ConfigAggregator([
     //   - `*.local.php`
     new PhpFileProvider(
         realpath(__DIR__) . sprintf(
-            '/autoload/{,*.}{global,local,%s}.php',
+            '/autoload/{,*.}{global,%s,local}.php',
             getenv('APP_ENV') ?: 'production'
         )
     ),
+
     // Load development config if it exists
     new PhpFileProvider(realpath(__DIR__) . '/development.config.php'),
 ], $cacheConfig['config_cache_path']);

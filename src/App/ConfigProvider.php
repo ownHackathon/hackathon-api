@@ -9,9 +9,10 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
-            \ownHackathon\Account\ConfigProvider::class,
-            \Exdrals\Mailing\ConfigProvider::class,
-            \ownHackathon\Workspace\ConfigProvider::class,
+            \Exdrals\Identity\ConfigProvider::class,
+            Shared\ConfigProvider::class,
+            Workspace\ConfigProvider::class,
+            Event\ConfigProvider::class,
         ]);
 
         return $aggregator->getMergedConfig();

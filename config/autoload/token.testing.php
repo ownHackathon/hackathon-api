@@ -5,14 +5,14 @@ return [
         'refresh' => [
             'key' => 'ixo>+W%!Rf/\@)m2UMok:/A_gL<dz.v*',
             'algorithmus' => 'HS512',
-            'duration' => 60 * 60 * 24 * 7 * 12,
+            'duration' => 60 * 60 * 60 * 100000,
             'iss' => 'localhost',
             'aud' => 'localhost',
         ],
         'access' => [
             'key' => 'b:?Y@5JCWF:yi{o>irc(3$HFcR-#b\SA',
             'algorithmus' => 'HS512',
-            'duration' => 60 * 5,
+            'duration' => 60 * 60,
             'iss' => 'localhost',
             'aud' => 'localhost',
         ],

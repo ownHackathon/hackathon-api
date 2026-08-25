@@ -14,7 +14,6 @@ coverage.xml
 /.phpunit.result.cache
 /clover.xml
 /coveralls-upload.json
-/phpunit.xml
 /public/test.php
 /tmp
 .env

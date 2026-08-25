@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Migrations;
+namespace ownHackathon\Migrations;
 
 use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
@@ -12,15 +12,23 @@ final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
     public function up(Schema $schema): void
     {
         $table = $schema->createTable('Workspace');
-        $table->addColumn('id', Types::INTEGER, ['autoincrement' => true, 'unsigned' => true,]);
+        $table->addColumn('id', Types::INTEGER, ['autoincrement' => true,]);
+        $table->addColumn('uuid', Types::GUID,);
         $table->addColumn('accountId', Types::INTEGER, ['unsigned' => true,]);
-        $table->addColumn('name', Types::STRING, ['length' => 64, 'notnull' => true,]);
-        $table->addColumn('slug', Types::STRING, ['length' => 64, 'notnull' => true,]);
+        $table->addColumn('name', Types::STRING, ['length' => 64,]);
+        $table->addColumn('slug', Types::STRING, ['length' => 64,]);
+        $table->addColumn('description', Types::STRING, ['length' => 255, 'notnull' => false, 'default' => '']);
+        $table->addColumn('details', Types::TEXT, ['notnull' => false, 'default' => '']);
+        $table->addColumn('visibility', Types::SMALLINT, ['unsigned' => true, 'length' => 2, 'default' => 5]);
+        $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+        $table->addColumn('updatedAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
+
         $table->addPrimaryKeyConstraint(
             PrimaryKeyConstraint::editor()
                 ->setUnquotedColumnNames('id')
                 ->create()
         );
+        $table->addUniqueIndex(['uuid'], 'workspace_uuid_UNIQUE');
         $table->addUniqueIndex(['name'], 'workspace_name_UNIQUE');
         $table->addUniqueIndex(['slug'], 'workspace_slug_UNIQUE');
     }

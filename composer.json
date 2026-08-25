@@ -17,7 +17,8 @@
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "laminas/laminas-component-installer": true
+      "laminas/laminas-component-installer": true,
+      "pestphp/pest-plugin": true
     },
     "platform": {
       "php": "8.4.16"
@@ -36,7 +37,7 @@
     }
   },
   "require": {
-    "php": "~8.4.0",
+    "php": "^8.4.0",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-pdo": "*",
@@ -57,39 +58,36 @@
     "mezzio/mezzio-helpers": "^5.7",
     "monolog/monolog": "^3.9.0",
     "ramsey/uuid": "^4.7",
-    "symfony/mailer": "^8",
+    "symfony/mailer": "^6.4",
     "zircote/swagger-php": "^6",
     "jetbrains/phpstorm-attributes": "^1.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
     "doctrine/migrations": "^3.6",
+    "fakerphp/faker": "^1.24",
     "filp/whoops": "^2.7.1",
-    "helmich/phpunit-json-assert": "^3.5",
-    "helmich/phpunit-psr7-assert": "^4.4",
+    "mockery/mockery": "^1.6",
     "overtrue/phplint": "^9.0",
+    "pestphp/pest": "^v3.7",
     "phpstan/phpstan": "^2.1.33",
     "phpstan/phpstan-deprecation-rules": "^2.0.3",
-    "phpunit/php-code-coverage": "^10.0",
-    "phpunit/phpunit": "^10.0",
+    "phpunit/php-code-coverage": "^11.0.0",
+    "phpunit/phpunit": "^11.5.0",
     "roave/security-advisories": "dev-master",
     "slevomat/coding-standard": "^8.15",
     "squizlabs/php_codesniffer": "^4.0"
   },
   "autoload": {
     "psr-4": {
-      "ownHackathon\\" : "src/App/",
-      "ownHackathon\\Account\\" : "src/App/Account/",
-      "ownHackathon\\Workspace\\" : "src/App/Workspace/src/",
-      "Exdrals\\Shared\\": "src/Shared/src",
-      "Exdrals\\Identity\\" : "src/App/Account/Identity/src/",
-      "Exdrals\\Mailing\\"  : "src/App/Mailing/src/"
+      "Exdrals\\Core\\": "src/Core/",
+      "Exdrals\\Identity\\": "src/App/Account/Identity/",
+      "ownHackathon\\": "src/App/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "FunctionalTest\\": "tests/FunctionalTest/",
-      "UnitTest\\": "tests/UnitTest/"
+      "Tests\\": "tests/"
     }
   },
   "scripts": {
@@ -105,20 +103,18 @@
     "development-status": "laminas-development-mode status",
     "doctrine": "php ./bin/migrations.php",
     "enable-codestandard": "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-    "functionaltest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --display-phpunit-deprecations --configuration phpunit_functionaltest.xml",
     "mezzio": "laminas --ansi",
     "openapi": "php ./vendor/bin/openapi ./src -f json -o ./public/api/docs/swagger.json",
     "phpcbf": "phpcbf --standard=phpcs.xml -p",
     "phpcs": "phpcs --standard=phpcs.xml -s -p",
     "phplint": "vendor/bin/phplint",
     "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+    "pest": "vendor/bin/pest",
     "post-create-project-cmd": [
       "@development-enable"
     ],
     "test": [
-      "@unittest",
-      "@functionaltest"
-    ],
-    "unittest": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors=always --display-phpunit-deprecations --configuration phpunit_unittest.xml"
+      "@pest"
+    ]
   }
 }
