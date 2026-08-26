@@ -5,7 +5,7 @@ namespace Exdrals\Core\Mailing\DTO;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['email'])]
 readonly class EMail
 {
     public function __construct(

@@ -12,6 +12,7 @@ readonly class Token
         #[OA\Property(
             description: 'The Token',
             type: DataType::STRING->value,
+            nullable: true,
         )]
         public ?string $token,
     ) {

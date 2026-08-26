@@ -3,23 +3,25 @@
 namespace ownHackathon\Workspace\DTO;
 
 use Exdrals\Core\Shared\Domain\Enum\DataType;
-use OpenApi\Attributes as OA;
 use Exdrals\Identity\Domain\AccountInterface;
+use OpenApi\Attributes as OA;
 use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
 readonly class WorkspaceResponse
 {
     public function __construct(
         #[OA\Property(
             description: 'The unique identifier of the workspace',
             type: DataType::STRING->value,
+            format: 'uuid',
             example: '019becbe-f952-7b82-82fa-f41f8ae24599'
         )]
         public string $uuid,
         #[OA\Property(
             description: 'The Uuid from owner for this workspace',
             type: DataType::STRING->value,
+            format: 'uuid',
             example: '019becbe-f952-7b82-82fa-f41f8ae24599'
         )]
         public string $ownerUuid,
@@ -38,7 +40,8 @@ readonly class WorkspaceResponse
         #[OA\Property(
             description: 'The desciption for this workspace',
             type: DataType::STRING->value,
-            example: 'My own workspace is wonderfully'
+            example: 'My own workspace is wonderfully',
+            nullable: true
         )]
         public ?string $description,
     ) {

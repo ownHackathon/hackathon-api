@@ -3,6 +3,7 @@
 namespace Exdrals\Identity\Handler;
 
 use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use Exdrals\Identity\DTO\Account\Account as AccountResponse;
 use Exdrals\Identity\DTO\Account\AccountRegistration;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountCreatorService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
@@ -47,6 +48,7 @@ readonly class AccountActivationHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_CREATED,
         description: 'Account successfully created and activated. The user can now log in.',
+        content: new OA\JsonContent(ref: AccountResponse::class)
     )]
     #[OA\Response(
         response: HTTP::STATUS_BAD_REQUEST,

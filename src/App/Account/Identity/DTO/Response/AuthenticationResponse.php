@@ -7,7 +7,7 @@ use Exdrals\Identity\DTO\Token\AccessToken;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['accessToken', 'refreshToken'])]
 readonly class AuthenticationResponse
 {
     public function __construct(

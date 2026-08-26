@@ -5,7 +5,7 @@ namespace Exdrals\Identity\DTO\Token;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['accessToken'])]
 readonly class AccessToken
 {
     public function __construct(

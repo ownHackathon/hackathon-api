@@ -29,8 +29,10 @@ readonly class PingHandler implements RequestHandlerInterface
                             new OA\Property(
                                 property: 'ack',
                                 description: 'actually request time',
-                                type: DataType::STRING->value,
+                                type: DataType::INTEGER->value,
                             ),
+                            new OA\Property(property: 'message', type: DataType::STRING->value, example: 'pong'),
+                            new OA\Property(property: 'php_version', type: DataType::STRING->value, example: '8.4.15'),
                         ]
                     ),
                 ]

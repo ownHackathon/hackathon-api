@@ -5,7 +5,7 @@ namespace Exdrals\Identity\DTO\Account;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['password'])]
 readonly class AccountPassword
 {
     public function __construct(

@@ -4,6 +4,7 @@ namespace Exdrals\Identity\Handler;
 
 use Exdrals\Core\Mailing\Domain\EmailType;
 use Exdrals\Core\Mailing\DTO\EMail;
+use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -21,6 +22,7 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
 
     #[OA\Post(
         path: '/account',
+        operationId: 'registerAccount',
         description: "Starts the account process for the given email address. \n\n" .
                      "**Security Note:** This endpoint always returns a 200 OK status to prevent user enumeration. " .
                      "The user will not know if an account already exists based on the API response.",
@@ -37,6 +39,11 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
         description: "The request was processed successfully. Depending on the state of the account, one of the following actions will occur:\n" .
                      "1. **Account does not exist:** A token to activate the new account will be sent to the email address.\n" .
                      '2. **Account already exists:** A token to reset the password will be sent to the email address.',
+    )]
+    #[OA\Response(
+        response: HTTP::STATUS_BAD_REQUEST,
+        description: 'The provided email address is invalid.',
+        content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

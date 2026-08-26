@@ -6,7 +6,8 @@ use OpenApi\Attributes as OA;
 
 #[OA\Schema(
     title: 'Pagination Meta',
-    description: 'Info about the number of pages and limits'
+    description: 'Info about the number of pages and limits',
+    required: ['currentPage', 'totalPages', 'totalItems']
 )]
 readonly class PaginationMeta
 {

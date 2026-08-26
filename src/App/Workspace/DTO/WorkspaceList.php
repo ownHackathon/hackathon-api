@@ -5,7 +5,7 @@ namespace ownHackathon\Workspace\DTO;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['workspaces'])]
 readonly class WorkspaceList
 {
     public function __construct(

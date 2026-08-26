@@ -30,7 +30,8 @@ readonly class WorkspaceRequest
         #[OA\Property(
             description: 'The visibility from workspace',
             type: DataType::INTEGER->value,
-            example: '700'
+            enum: [100, 200, 300, 400, 500, 600, 700],
+            example: 700
         )]
         public int $visibility
     ) {

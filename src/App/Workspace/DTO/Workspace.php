@@ -9,7 +9,7 @@ readonly class Workspace
         public string $description,
         public string $owner,
         public string $ownerUuid,
-        public string $details,
+        public ?string $details,
         public int $visibility,
         public string $createdAt,
         public string $updatedAt,

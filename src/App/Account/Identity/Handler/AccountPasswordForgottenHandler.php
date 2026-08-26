@@ -4,6 +4,7 @@ namespace Exdrals\Identity\Handler;
 
 use Exdrals\Core\Mailing\Domain\EmailType;
 use Exdrals\Core\Mailing\DTO\EMail;
+use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Exdrals\Identity\Infrastructure\Service\Account\PasswordService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -37,6 +38,11 @@ readonly class AccountPasswordForgottenHandler implements RequestHandlerInterfac
         response: HTTP::STATUS_OK,
         description: 'The request was accepted. If an account with the provided email address exists, ' .
                      'an email containing a password reset link will be sent shortly.',
+    )]
+    #[OA\Response(
+        response: HTTP::STATUS_BAD_REQUEST,
+        description: 'The provided email address is invalid.',
+        content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

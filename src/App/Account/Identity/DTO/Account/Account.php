@@ -8,7 +8,8 @@ use Exdrals\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    description: 'Detailed information about a user account'
+    description: 'Detailed information about a user account',
+    required: ['uuid', 'name', 'email', 'registeredAt', 'lastActionAt']
 )]
 readonly class Account
 {
@@ -33,14 +34,14 @@ readonly class Account
         #[OA\Property(
             description: 'The timestamp when the account was registered',
             type: DataType::STRING->value,
-            format: DateTimeFormat::DEFAULT->value,
+            pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$',
             example: '2024-01-20 14:30:00'
         )]
         public string $registeredAt,
         #[OA\Property(
             description: 'The timestamp of the last activity on this account',
             type: DataType::STRING->value,
-            format: DateTimeFormat::DEFAULT->value,
+            pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$',
             example: '2024-05-15 10:00:00'
         )]
         public string $lastActionAt,

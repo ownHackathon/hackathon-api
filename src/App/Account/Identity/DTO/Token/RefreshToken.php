@@ -5,7 +5,7 @@ namespace Exdrals\Identity\DTO\Token;
 use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema()]
+#[OA\Schema(required: ['refreshToken'])]
 readonly class RefreshToken
 {
     public function __construct(

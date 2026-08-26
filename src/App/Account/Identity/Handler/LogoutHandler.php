@@ -3,13 +3,12 @@
 namespace Exdrals\Identity\Handler;
 
 use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
-use Laminas\Diactoros\Response\JsonResponse;
-use OpenApi\Attributes as OA;
 use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Exdrals\Identity\DTO\Token\RefreshToken;
 use Exdrals\Identity\Infrastructure\Service\Account\AccountService;
+use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Laminas\Diactoros\Response\EmptyResponse;
+use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -49,12 +48,6 @@ class LogoutHandler implements RequestHandlerInterface
     #[OA\Response(
         response: HTTP::STATUS_NO_CONTENT,
         description: 'Logout successful. The refresh token has been deleted and the session is invalidated.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
-    )]
-    #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
-        description: 'Bad Request. The refresh token is missing in the body or is malformed.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     #[OA\Response(
         response: HTTP::STATUS_UNAUTHORIZED,
@@ -68,8 +61,6 @@ class LogoutHandler implements RequestHandlerInterface
 
         $this->accountService->logout($account, $refreshToken);
 
-        $response = HttpResponseMessage::create(HTTP::STATUS_NO_CONTENT, IdentityStatusMessage::SUCCESS);
-
-        return new JsonResponse($response, $response->statusCode);
+        return new EmptyResponse(HTTP::STATUS_NO_CONTENT);
     }
 }
