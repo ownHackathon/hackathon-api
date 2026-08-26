@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Token\Duse Exdrals\Core\Shared\Domain\Enum\DataType;use OpenApi\Attributes as OA;
+namespace ownHackathon\Core\Token\DTO;
 
-s as OA;
+use OpenApi\Attributes as OA;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 
 #[OA\Schema()]
 readonly class Token
