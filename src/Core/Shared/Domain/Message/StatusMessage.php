@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Message;
+namespace ownHackathon\Core\Shared\Domain\Message;
 
 interface StatusMessage
 {

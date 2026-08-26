@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Validator\Input;
+namespace ownHackathon\App\Workspace\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
 

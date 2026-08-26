@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Handler;
+namespace ownHackathon\App\Workspace\Handler;
 
-use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Workspace\DTO\Workspace;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Workspace\DTO\Workspace;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

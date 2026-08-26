@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Hydrator;
+namespace ownHackathon\App\Shared\Infrastructure\Hydrator;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Shared\Domain\Event\EventCollectionInterface;
-use ownHackathon\Shared\Domain\Event\EventInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\App\Shared\Domain\Event\EventCollectionInterface;
+use ownHackathon\App\Shared\Domain\Event\EventInterface;
 
 interface EventHydratorInterface extends HydratorInterface
 {

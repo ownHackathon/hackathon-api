@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
-use Exdrals\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Domain\AccountActivationInterface;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\DTO\Account\Account as AccountDTO;
-use Exdrals\Identity\DTO\Account\AccountRegistration;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Account;
+use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
+use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use InvalidArgumentException;
 
 readonly class AccountCreatorService

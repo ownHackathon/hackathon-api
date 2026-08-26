@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Shared\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
 
 interface WorkspaceRepositoryInterface extends RepositoryInterface
 {

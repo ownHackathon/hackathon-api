@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain\Message;
+namespace ownHackathon\App\Account\Identity\Domain\Message;
 
-use Exdrals\Core\Shared\Domain\Message\StatusMessage;
+use ownHackathon\Core\Shared\Domain\Message\StatusMessage;
 
 interface IdentityStatusMessage extends StatusMessage
 {

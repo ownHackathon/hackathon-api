@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\DTO\Client;
+namespace ownHackathon\App\Account\Identity\DTO\Client;
 
 readonly class ClientIdentificationData
 {

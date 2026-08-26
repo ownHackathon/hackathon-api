@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\DTO\Account;
+namespace ownHackathon\App\Account\Identity\DTO\Account;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
-use Exdrals\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['account', 'hasWorkspace'])]

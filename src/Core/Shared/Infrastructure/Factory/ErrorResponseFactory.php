@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Factory;
+namespace ownHackathon\Core\Shared\Infrastructure\Factory;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpException;
-use Exdrals\Core\Shared\Domain\Message\StatusMessage;
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Monolog\Level;
+use ownHackathon\Core\Shared\Domain\Exception\HttpException;
+use ownHackathon\Core\Shared\Domain\Message\StatusMessage;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

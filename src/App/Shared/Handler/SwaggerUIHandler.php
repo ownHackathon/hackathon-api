@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Handler;
+namespace ownHackathon\App\Shared\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\HtmlResponse;
@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 #[OA\Info(
     version: '0.1.0',
-    title: 'ownHackathon API Overview',
+    title: 'ownHackathon\App API Overview',
 )]
 #[OA\SecurityScheme(
     securityScheme: 'accessToken',

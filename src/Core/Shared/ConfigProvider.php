@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared;
+namespace ownHackathon\Core\Shared;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
@@ -25,11 +25,11 @@ class ConfigProvider
             'aliases' => [
             ],
             'factories' => [
-                \Exdrals\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class => ConfigAbstractFactory::class,
-                \Exdrals\Core\Shared\Middleware\ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
-                \Exdrals\Core\Shared\Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
-                \Exdrals\Core\Shared\Infrastructure\Service\SlugService::class => InvokableFactory::class,
-                \Exdrals\Core\Shared\Middleware\FluentTransactionMiddleware::class => ConfigAbstractFactory::class,
+                \ownHackathon\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class => ConfigAbstractFactory::class,
+                \ownHackathon\Core\Shared\Middleware\ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
+                \ownHackathon\Core\Shared\Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
+                \ownHackathon\Core\Shared\Infrastructure\Service\SlugService::class => InvokableFactory::class,
+                \ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware::class => ConfigAbstractFactory::class,
             ],
         ];
     }
@@ -37,16 +37,16 @@ class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
-            \Exdrals\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class => [
+            \ownHackathon\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class => [
                 LoggerInterface::class,
             ],
-            \Exdrals\Core\Shared\Middleware\ApiErrorHandlerMiddleware::class => [
-                \Exdrals\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class,
+            \ownHackathon\Core\Shared\Middleware\ApiErrorHandlerMiddleware::class => [
+                \ownHackathon\Core\Shared\Infrastructure\Factory\ErrorResponseFactory::class,
             ],
-            \Exdrals\Core\Shared\Middleware\RouteNotFoundMiddleware::class => [
+            \ownHackathon\Core\Shared\Middleware\RouteNotFoundMiddleware::class => [
                 LoggerInterface::class,
             ],
-            \Exdrals\Core\Shared\Middleware\FluentTransactionMiddleware::class => [
+            \ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware::class => [
                 Query::class,
             ],
         ];

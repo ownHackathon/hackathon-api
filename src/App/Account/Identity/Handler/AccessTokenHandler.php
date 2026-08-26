@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Handler;
+namespace ownHackathon\App\Account\Identity\Handler;
 
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use Exdrals\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Identity\DTO\Token\AccessToken;
-use Exdrals\Identity\DTO\Token\RefreshToken;
-use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
+use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
+use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

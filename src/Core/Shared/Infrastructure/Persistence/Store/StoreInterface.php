@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Persistence\Store;
+namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Store;
 
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
 
 interface StoreInterface
 {

@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Handler;
+namespace ownHackathon\App\Workspace\Handler;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use Exdrals\Identity\Domain\AccountInterface;
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
-use ownHackathon\Workspace\DTO\PaginationMeta;
-use ownHackathon\Workspace\DTO\WorkspaceResponse;
-use ownHackathon\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
-use ownHackathon\Workspace\Infrastructure\Service\PaginationService;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Workspace\DTO\PaginationMeta;
+use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
+use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
+use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

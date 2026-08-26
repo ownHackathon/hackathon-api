@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Hydrator;
+namespace ownHackathon\App\Shared\Infrastructure\Hydrator;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface WorkspaceHydratorInterface extends HydratorInterface
 {

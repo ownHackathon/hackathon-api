@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Mailing;
+namespace ownHackathon\Core\Shared\Domain\Mailing;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\Domain\EmailType;
 
 interface MailerInterface
 {

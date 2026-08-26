@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Validator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
-use Exdrals\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
-use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
+use ownHackathon\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
 
 class AuthenticationValidator extends InputFilter

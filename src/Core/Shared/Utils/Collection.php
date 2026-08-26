@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Utils;
+namespace ownHackathon\Core\Shared\Utils;
 
 use Closure;
-use Exdrals\Core\Shared\Domain\Exception\UndefinedOffsetException;
+use ownHackathon\Core\Shared\Domain\Exception\UndefinedOffsetException;
 
 use function array_filter;
 use function array_pop;

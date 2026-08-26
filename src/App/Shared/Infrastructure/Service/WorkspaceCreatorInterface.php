@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Service;
+namespace ownHackathon\App\Shared\Infrastructure\Service;
 
-use Exdrals\Identity\Domain\AccountInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Workspace\DTO\WorkspaceRequest;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 
 interface WorkspaceCreatorInterface
 {

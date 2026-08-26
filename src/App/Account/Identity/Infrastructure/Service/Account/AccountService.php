@@ -1,24 +1,24 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Domain\Enum\Token\TokenType;
-use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Core\Token\Domain\Token;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\DTO\Token\RefreshToken;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use Monolog\Level;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
+use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Token\Domain\Token;
 
 readonly class AccountService
 {

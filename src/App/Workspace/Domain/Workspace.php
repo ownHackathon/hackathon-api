@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Domain;
+namespace ownHackathon\App\Workspace\Domain;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\Visibility;
-use Exdrals\Core\Shared\Trait\CloneReadonlyClassWith;
-use Exdrals\Core\Shared\Utils\Collectible;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\Shared\Utils\Collectible;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class Workspace implements WorkspaceInterface, Collectible

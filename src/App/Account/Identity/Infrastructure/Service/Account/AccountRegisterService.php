@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Identity\Domain\AccountActivation;
-use Exdrals\Identity\Domain\Exception\DuplicateEMailException;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Service\Token\ActivationTokenService;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountActivation;
+use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
 
 readonly class AccountRegisterService implements AccountRegisterServiceInterface
 {

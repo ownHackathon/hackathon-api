@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Mailing;
+namespace ownHackathon\Core\Mailing;
 
-use Exdrals\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
-use Exdrals\Core\Shared\Infrastructure\Factory\MailFactory;
+use ownHackathon\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
+use ownHackathon\Core\Shared\Infrastructure\Factory\MailFactory;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 readonly class ConfigProvider

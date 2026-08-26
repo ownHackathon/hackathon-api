@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Token;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Core\Shared\Trait\JwtTokenTrait;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Domain\Exception\AccountNotFoundException;
-use Exdrals\Identity\Domain\Exception\InvalidRefreshTokenException;
-use Exdrals\Identity\Domain\Exception\SecurityBreachException;
-use Exdrals\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Identity\DTO\Token\AccessToken;
-use Exdrals\Identity\DTO\Token\JwtTokenConfig;
-use Exdrals\Identity\DTO\Token\RefreshToken;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Firebase\JWT\JWT;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use ownHackathon\App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
+use ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException;
+use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
+use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
+use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Shared\Trait\JwtTokenTrait;
 
 use function time;
 

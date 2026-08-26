@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Exception;
+namespace ownHackathon\Core\Shared\Domain\Exception;
 
 use Exception;
 

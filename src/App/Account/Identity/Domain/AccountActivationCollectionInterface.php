@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain;
+namespace ownHackathon\App\Account\Identity\Domain;
 
-use Exdrals\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\Shared\Utils\CollectionInterface;
 
 /**
  * @method AccountActivation offsetGet(mixed $offset)

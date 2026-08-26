@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\DTO\Account;
+namespace ownHackathon\App\Account\Identity\DTO\Account;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 
 #[OA\Schema(required: ['password'])]
 readonly class AccountPassword

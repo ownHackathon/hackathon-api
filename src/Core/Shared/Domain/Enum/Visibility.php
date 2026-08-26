@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Enum;
+namespace ownHackathon\Core\Shared\Domain\Enum;
 
 enum Visibility: int
 {

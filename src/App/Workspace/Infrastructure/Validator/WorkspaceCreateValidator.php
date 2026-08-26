@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Validator;
+namespace ownHackathon\App\Workspace\Infrastructure\Validator;
 
 use Laminas\InputFilter\InputFilter;
-use ownHackathon\Shared\Validator\Input\VisibilityInput;
-use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
-use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
-use ownHackathon\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
+use ownHackathon\App\Shared\Validator\Input\VisibilityInput;
+use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
+use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
+use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 
 class WorkspaceCreateValidator extends InputFilter
 {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Middleware;
+namespace ownHackathon\App\Shared\Middleware;
 
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

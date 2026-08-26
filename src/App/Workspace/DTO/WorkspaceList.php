@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\DTO;
+namespace ownHackathon\App\Workspace\DTO;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 
 #[OA\Schema(required: ['workspaces'])]
 readonly class WorkspaceList

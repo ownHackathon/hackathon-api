@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Persistence\Repository;
+namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 
 readonly abstract class AbstractRepository implements RepositoryInterface
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\DTO;
+namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
 

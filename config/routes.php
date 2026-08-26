@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-use Exdrals\Core\Shared\Domain\Enum\Router\RouteIdent;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
-use ownHackathon\Shared\Handler\PingHandler;
-use ownHackathon\Shared\Handler\SwaggerUIHandler;
+use ownHackathon\App\Shared\Handler\PingHandler;
+use ownHackathon\App\Shared\Handler\SwaggerUIHandler;
+use ownHackathon\Core\Shared\Domain\Enum\Router\RouteIdent;
 use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {

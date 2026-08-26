@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Workspace\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
 use PDOException;
 
 readonly class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain;
+namespace ownHackathon\App\Account\Identity\Domain;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Trait\CloneReadonlyClassWith;
-use Exdrals\Core\Shared\Utils\Collectible;
+use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\Shared\Utils\Collectible;
 
 readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collectible
 {

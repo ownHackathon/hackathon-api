@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware;
+namespace ownHackathon\App\Account\Identity\Middleware;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
-use Exdrals\Core\Shared\Domain\Message\LogMessage;
-use Exdrals\Core\Shared\Domain\Message\StatusMessage;
-use Exdrals\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Shared\Domain\Message\LogMessage;
+use ownHackathon\Core\Shared\Domain\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use Exdrals\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class AccountRepository extends AbstractRepository implements AccountRepositoryInterface

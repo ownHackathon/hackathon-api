@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account;
+namespace ownHackathon\App\Account\Identity\Middleware\Account;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Monolog\Level;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

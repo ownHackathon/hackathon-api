@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Validator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
 use Laminas\InputFilter\InputFilter;
-use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 
 class PasswordValidator extends InputFilter
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Enum\Token;
+namespace ownHackathon\Core\Shared\Domain\Enum\Token;
 
 enum TokenType: int
 {

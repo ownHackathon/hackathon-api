@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Token;
+namespace ownHackathon\Core\Token;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Core\Token\Infrastructure\Hydrator\TokenHydrator;
-use Exdrals\Core\Token\Infrastructure\Persistence\Repository\TokenRepository;
-use Exdrals\Core\Token\Infrastructure\Persistence\Table\TokenTable;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Token\Infrastructure\Hydrator\TokenHydrator;
+use ownHackathon\Core\Token\Infrastructure\Persistence\Repository\TokenRepository;
+use ownHackathon\Core\Token\Infrastructure\Persistence\Table\TokenTable;
 
 readonly class ConfigProvider
 {

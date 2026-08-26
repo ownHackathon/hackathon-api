@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\ClientIdentification;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\ClientIdentification;
 
-use Exdrals\Identity\DTO\Client\ClientIdentificationData;
+use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
 
 use function hash;
 use function serialize;

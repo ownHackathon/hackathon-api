@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use Exdrals\Core\Shared\Domain\Enum\Token\TokenType;
-use Exdrals\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Core\Token\DTO\Token;
-use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\DTO\Account\AccountPassword;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
+use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use ownHackathon\Core\Token\DTO\Token;
+use ownHackathon\App\Account\Identity\Domain\Account;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 
 readonly class PasswordChangeService
 {

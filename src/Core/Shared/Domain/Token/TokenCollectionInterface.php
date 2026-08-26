@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Token;
+namespace ownHackathon\Core\Shared\Domain\Token;
 
-use Exdrals\Core\Shared\Utils\CollectionInterface;
-use Exdrals\Core\Token\Domain\Token;
+use ownHackathon\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\Token\Domain\Token;
 
 /**
  * @method Token offsetGet(mixed $offset)

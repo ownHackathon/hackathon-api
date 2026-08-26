@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Exdrals\Core\Shared\Middleware\ApiErrorHandlerMiddleware;
-use Exdrals\Core\Shared\Middleware\RouteNotFoundMiddleware;
 use Mezzio\Application;
 use Mezzio\Cors\Middleware\CorsMiddleware;
 use Mezzio\Handler\NotFoundHandler;
@@ -16,9 +14,11 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use Exdrals\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
-use Exdrals\Identity\Middleware\Account\RequestAuthenticationMiddleware;
-use Exdrals\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
+use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use ownHackathon\Core\Shared\Middleware\ApiErrorHandlerMiddleware;
+use ownHackathon\Core\Shared\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
 /**

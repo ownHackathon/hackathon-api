@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Persistence\Contract;
+namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Contract;
 
 interface TransactionManagerInterface
 {

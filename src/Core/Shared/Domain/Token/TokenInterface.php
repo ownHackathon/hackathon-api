@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Domain\Token;
+namespace ownHackathon\Core\Shared\Domain\Token;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\Token\TokenType;
+use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
 use Ramsey\Uuid\UuidInterface;
 
 interface TokenInterface

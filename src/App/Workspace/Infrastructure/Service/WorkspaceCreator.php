@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Service;
+namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\Visibility;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Core\Shared\Infrastructure\Service\SlugService;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use Exdrals\Identity\Domain\AccountInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
-use ownHackathon\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
-use ownHackathon\Workspace\Domain\Workspace;
-use ownHackathon\Workspace\DTO\WorkspaceRequest;
+use ownHackathon\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
+use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
+use ownHackathon\App\Workspace\Domain\Workspace;
+use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 
 readonly class WorkspaceCreator implements WorkspaceCreatorInterface
 {

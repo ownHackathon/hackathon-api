@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Middleware;
+namespace ownHackathon\Core\Shared\Middleware;
 
-use Exdrals\Core\Shared\Infrastructure\Factory\ErrorResponseFactory;
+use ownHackathon\Core\Shared\Infrastructure\Factory\ErrorResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Table;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table;
 
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 
 interface AccountAccessAuthStoreInterface extends StoreInterface
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared;
+namespace ownHackathon\App\Shared;
 
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use ownHackathon\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\Shared\Middleware\PaginationMiddleware;
-use ownHackathon\Shared\Validator\Input\VisibilityInput;
+use ownHackathon\App\Shared\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\App\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\App\Shared\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {

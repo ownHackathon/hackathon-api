@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Exdrals\Core\Shared\Infrastructure\Factory\DatabaseFactory;
-use Exdrals\Core\Shared\Infrastructure\Factory\QueryFactory;
-use Exdrals\Core\Shared\Infrastructure\Factory\UuidFactory;
-use Exdrals\Core\Shared\Infrastructure\Logger\LoggerFactory;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Shared\Infrastructure\Factory\DatabaseFactory;
+use ownHackathon\Core\Shared\Infrastructure\Factory\QueryFactory;
+use ownHackathon\Core\Shared\Infrastructure\Factory\UuidFactory;
+use ownHackathon\Core\Shared\Infrastructure\Logger\LoggerFactory;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
 

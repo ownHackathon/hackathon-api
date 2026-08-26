@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Event\Infrastructure\Persistence\Table;
+namespace ownHackathon\App\Event\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
 use PDOException;
 
 class EventTable extends AbstractTable implements EventStoreInterface

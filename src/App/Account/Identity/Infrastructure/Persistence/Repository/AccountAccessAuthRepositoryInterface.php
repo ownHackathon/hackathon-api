@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {

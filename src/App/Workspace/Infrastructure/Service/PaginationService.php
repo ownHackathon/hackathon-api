@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Service;
+namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
-use ownHackathon\Workspace\DTO\PaginationMeta;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Shared\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Workspace\DTO\PaginationMeta;
 
 readonly class PaginationService
 {

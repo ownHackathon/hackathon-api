@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-use Exdrals\Core\Shared\Infrastructure\Factory\DatabaseFactory;
-use Exdrals\Core\Shared\Infrastructure\Factory\QueryFactory;
-use Exdrals\Core\Shared\Infrastructure\Factory\UuidFactory;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Shared\Infrastructure\Factory\DatabaseFactory;
+use ownHackathon\Core\Shared\Infrastructure\Factory\QueryFactory;
+use ownHackathon\Core\Shared\Infrastructure\Factory\UuidFactory;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 use Tests\Integration\Mock\NullLoggerFactory;
 use Tests\Integration\Mock\NullMailerFactory;
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Domain\Workspace;
+namespace ownHackathon\App\Shared\Domain\Workspace;
 
-use Exdrals\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\Shared\Utils\CollectionInterface;
 
 /**
  * @method WorkspaceInterface offsetGet(mixed $offset)

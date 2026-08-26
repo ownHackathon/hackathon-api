@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Identity\Domain\AccountActivationInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
 
 readonly class AccountActivationRepository extends AbstractRepository implements AccountActivationRepositoryInterface
 {

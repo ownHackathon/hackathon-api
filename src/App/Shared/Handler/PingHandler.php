@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Handler;
+namespace ownHackathon\App\Shared\Handler;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
-use Exdrals\Core\Shared\Domain\Message\StatusMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Shared\Domain\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

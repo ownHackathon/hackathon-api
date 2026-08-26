@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Token\Domain;
+namespace ownHackathon\Core\Token\Domain;
 
-use Exdrals\Core\Shared\Domain\Token\TokenCollectionInterface;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
+use ownHackathon\Core\Shared\Domain\Token\TokenCollectionInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Utils\Collection;
 
 use function get_class;
 use function sprintf;

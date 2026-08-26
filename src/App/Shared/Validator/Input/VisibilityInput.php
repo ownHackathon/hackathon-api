@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Validator\Input;
+namespace ownHackathon\App\Shared\Validator\Input;
 
 use Laminas\Filter\Digits;
 use Laminas\Filter\StringTrim;

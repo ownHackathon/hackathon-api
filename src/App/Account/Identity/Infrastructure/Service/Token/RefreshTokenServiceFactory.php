@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Token;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
-use Exdrals\Identity\DTO\Token\JwtTokenConfig;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Psr\Container\ContainerInterface;
 
 readonly class RefreshTokenServiceFactory

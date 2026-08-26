@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Token\Infrastructure\Persistence\Repository;
+namespace ownHackathon\Core\Token\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Domain\Token\TokenCollectionInterface;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenCollectionInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\Token\TokenStoreInterface;
 
 readonly class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
 {

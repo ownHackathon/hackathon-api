@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon;
+namespace ownHackathon\App;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 
@@ -9,7 +9,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
-            \Exdrals\Identity\ConfigProvider::class,
+            \ownHackathon\App\Account\Identity\ConfigProvider::class,
             Shared\ConfigProvider::class,
             Workspace\ConfigProvider::class,
             Event\ConfigProvider::class,

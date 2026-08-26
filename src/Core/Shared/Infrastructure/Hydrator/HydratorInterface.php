@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Hydrator;
+namespace ownHackathon\Core\Shared\Infrastructure\Hydrator;
 
 interface HydratorInterface
 {

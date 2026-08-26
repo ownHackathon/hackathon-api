@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Mailing\Infrastructure;
+namespace ownHackathon\Core\Mailing\Infrastructure;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\Domain\EmailType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 

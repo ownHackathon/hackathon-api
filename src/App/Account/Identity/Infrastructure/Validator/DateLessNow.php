@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Validator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
 use DateTime;
 use Exception;

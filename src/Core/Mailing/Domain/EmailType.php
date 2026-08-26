@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Mailing\Domain;
+namespace ownHackathon\Core\Mailing\Domain;
 
-use Exdrals\Core\Mailing\Exception\InvalidArgumentException;
+use ownHackathon\Core\Mailing\Exception\InvalidArgumentException;
 
 use function sprintf;
 
-final class EmailType implements \Exdrals\Core\Shared\Type\TypeInterface
+final class EmailType implements \ownHackathon\Core\Shared\Type\TypeInterface
 {
     private string $value;
 

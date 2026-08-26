@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Mailing\Infrastructure\Validator\Input;
+namespace ownHackathon\Core\Mailing\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
 use Laminas\Validator\Hostname;

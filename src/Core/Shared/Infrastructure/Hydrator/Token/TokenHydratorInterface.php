@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Hydrator\Token;
+namespace ownHackathon\Core\Shared\Infrastructure\Hydrator\Token;
 
-use Exdrals\Core\Shared\Domain\Token\TokenCollectionInterface;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenCollectionInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface TokenHydratorInterface extends HydratorInterface
 {

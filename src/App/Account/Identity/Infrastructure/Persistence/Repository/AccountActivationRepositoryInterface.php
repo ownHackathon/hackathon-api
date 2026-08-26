@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
-use Exdrals\Identity\Domain\AccountActivationCollectionInterface;
-use Exdrals\Identity\Domain\AccountActivationInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
 {

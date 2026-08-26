@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Trait;
+namespace ownHackathon\Core\Shared\Trait;
 
 use DomainException;
 use Firebase\JWT\BeforeValidException;

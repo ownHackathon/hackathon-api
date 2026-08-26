@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Event\Domain;
+namespace ownHackathon\App\Event\Domain;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\Visibility;
-use Exdrals\Core\Shared\Trait\CloneReadonlyClassWith;
-use Exdrals\Core\Shared\Utils\Collectible;
-use ownHackathon\Event\Domain\Enum\EventStatus;
-use ownHackathon\Shared\Domain\Event\EventInterface;
+use ownHackathon\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\Shared\Utils\Collectible;
+use ownHackathon\App\Event\Domain\Enum\EventStatus;
+use ownHackathon\App\Shared\Domain\Event\EventInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class Event implements EventInterface, Collectible

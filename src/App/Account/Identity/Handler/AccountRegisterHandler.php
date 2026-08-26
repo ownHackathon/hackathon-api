@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Handler;
+namespace ownHackathon\App\Account\Identity\Handler;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Mailing\DTO\EMail;
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use Exdrals\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\DTO\EMail;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;

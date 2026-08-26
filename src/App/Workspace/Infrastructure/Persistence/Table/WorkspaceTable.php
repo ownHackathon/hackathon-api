@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Persistence\Table;
+namespace ownHackathon\App\Workspace\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
 use PDOException;
 
 class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface

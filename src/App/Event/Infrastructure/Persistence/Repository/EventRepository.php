@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Event\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Event\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use ownHackathon\Shared\Domain\Event\EventCollectionInterface;
-use ownHackathon\Shared\Domain\Event\EventInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\EventHydratorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\App\Shared\Domain\Event\EventCollectionInterface;
+use ownHackathon\App\Shared\Domain\Event\EventInterface;
+use ownHackathon\App\Shared\Infrastructure\Hydrator\EventHydratorInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 
 readonly class EventRepository extends AbstractRepository implements EventRepositoryInterface
 {

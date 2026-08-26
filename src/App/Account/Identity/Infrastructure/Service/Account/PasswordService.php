@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Monolog\Level;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 
 readonly class PasswordService
 {

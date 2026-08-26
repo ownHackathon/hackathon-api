@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Infrastructure\Hydrator;
+namespace ownHackathon\App\Workspace\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
-use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Core\Shared\Domain\Enum\Visibility;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\Workspace\Domain\Workspace;
-use ownHackathon\Workspace\Domain\WorkspaceCollection;
+use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\App\Workspace\Domain\Workspace;
+use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Hydrator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
-use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Identity\Domain\AccountAccessAuth;
-use Exdrals\Identity\Domain\AccountAccessAuthCollection;
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollection;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
 
 readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
 {

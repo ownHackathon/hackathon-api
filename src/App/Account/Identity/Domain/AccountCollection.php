@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain;
+namespace ownHackathon\App\Account\Identity\Domain;
 
-use Exdrals\Core\Shared\Utils\Collection;
+use ownHackathon\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
 
 use function get_class;

@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Handler;
+namespace ownHackathon\App\Workspace\Handler;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use Exdrals\Identity\Domain\AccountInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
-use ownHackathon\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
-use ownHackathon\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
-use ownHackathon\Workspace\Domain\Message\WorkspaceLogMessage;
-use ownHackathon\Workspace\Domain\Message\WorkspaceStatusMessage;
-use ownHackathon\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\Workspace\DTO\WorkspaceResponse;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
+use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
+use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
+use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
+use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
+use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
+use ownHackathon\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

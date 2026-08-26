@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Domain\Message;
+namespace ownHackathon\App\Workspace\Domain\Message;
 
-use Exdrals\Core\Shared\Domain\Message\LogMessage;
+use ownHackathon\Core\Shared\Domain\Message\LogMessage;
 
 interface WorkspaceLogMessage extends LogMessage
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\Service;
+namespace ownHackathon\App\Shared\Infrastructure\Service;
 
 readonly class PaginationTotalPages
 {

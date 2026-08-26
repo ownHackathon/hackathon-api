@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Table;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
 use PDOException;
 
 class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthStoreInterface

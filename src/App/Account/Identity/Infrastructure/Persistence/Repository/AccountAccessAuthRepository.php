@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
-use Exdrals\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
 
 readonly class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
 {

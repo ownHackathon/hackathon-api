@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Mailing\DTO;
+namespace ownHackathon\Core\Mailing\DTO;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['email'])]

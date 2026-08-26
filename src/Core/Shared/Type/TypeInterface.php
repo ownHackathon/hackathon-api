@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Type;
+namespace ownHackathon\Core\Shared\Type;
 
 use JsonSerializable;
 use Serializable;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Factory;
+namespace ownHackathon\Core\Shared\Infrastructure\Factory;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\Mailer;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\DTO\Response;
+namespace ownHackathon\App\Account\Identity\DTO\Response;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
-use Exdrals\Identity\DTO\Token\AccessToken;
-use Exdrals\Identity\DTO\Token\RefreshToken;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
+use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['accessToken', 'refreshToken'])]

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\DTO;
+namespace ownHackathon\App\Workspace\DTO;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
-use Exdrals\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
 
 #[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
 readonly class WorkspaceResponse

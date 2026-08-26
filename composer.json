@@ -80,9 +80,16 @@
   },
   "autoload": {
     "psr-4": {
-      "Exdrals\\Core\\": "src/Core/",
-      "Exdrals\\Identity\\": "src/App/Account/Identity/",
-      "ownHackathon\\": "src/App/"
+      "ownHackathon\\App\\Account\\Identity\\": "src/App/Account/Identity/",
+      "ownHackathon\\App\\Event\\": "src/App/Event/",
+      "ownHackathon\\App\\Shared\\": "src/App/Shared/",
+      "ownHackathon\\App\\Workspace\\": "src/App/Workspace/",
+      "ownHackathon\\Core\\Mailing\\": "src/Core/Mailing/",
+      "ownHackathon\\Core\\Shared\\": "src/Core/Shared/",
+      "ownHackathon\\Core\\Token\\": "src/Core/Token/",
+      "ownHackathon\\App\\": "src/App/",
+      "ownHackathon\\Core\\": "src/Core/",
+      "ownHackathon\\": "src/"
     }
   },
   "autoload-dev": {

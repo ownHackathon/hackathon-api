@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\DTO;
+namespace ownHackathon\Core\Shared\Infrastructure\DTO;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 
 #[OA\Schema(required: ['statusCode', 'message'])]
 readonly class HttpResponseMessage

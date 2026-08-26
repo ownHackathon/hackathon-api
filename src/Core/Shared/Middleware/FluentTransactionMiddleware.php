@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Middleware;
+namespace ownHackathon\Core\Shared\Middleware;
 
 use Envms\FluentPDO\Query;
 use Psr\Http\Message\ResponseInterface;

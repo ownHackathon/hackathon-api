@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Event\Domain;
+namespace ownHackathon\App\Event\Domain;
 
-use Exdrals\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
-use ownHackathon\Shared\Domain\Event\EventCollectionInterface;
-use ownHackathon\Shared\Domain\Event\EventInterface;
+use ownHackathon\App\Shared\Domain\Event\EventCollectionInterface;
+use ownHackathon\App\Shared\Domain\Event\EventInterface;
+use ownHackathon\Core\Shared\Utils\Collection;
 
 class EventCollection extends Collection implements EventCollectionInterface
 {

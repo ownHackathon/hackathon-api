@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain\Enum;
+namespace ownHackathon\App\Account\Identity\Domain\Enum;
 
 enum AccountVisibleStatus: int
 {

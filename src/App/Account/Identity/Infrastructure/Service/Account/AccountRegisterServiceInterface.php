@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\Domain\EmailType;
 
 interface AccountRegisterServiceInterface
 {

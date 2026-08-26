@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Hydrator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Identity\Domain\Account;
-use Exdrals\Identity\Domain\AccountCollection;
-use Exdrals\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Account;
+use ownHackathon\App\Account\Identity\Domain\AccountCollection;
+use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountHydrator implements AccountHydratorInterface

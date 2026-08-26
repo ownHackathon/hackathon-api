@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware;
+namespace ownHackathon\App\Account\Identity\Middleware;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
-use Exdrals\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use Exdrals\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
 use Monolog\Level;
-use Exdrals\Identity\Domain\Exception\AccountNotFoundException;
-use Exdrals\Identity\Domain\Exception\DuplicateAuthException;
-use Exdrals\Identity\Domain\Exception\DuplicateEMailException;
-use Exdrals\Identity\Domain\Exception\InvalidRefreshTokenException;
-use Exdrals\Identity\Domain\Exception\PasswordMismatchException;
-use Exdrals\Identity\Domain\Exception\SecurityBreachException;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
+use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
+use ownHackathon\App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
+use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

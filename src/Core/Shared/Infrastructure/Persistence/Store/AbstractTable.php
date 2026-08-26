@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Persistence\Store;
+namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Store;
 
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
 use InvalidArgumentException;
-use ownHackathon\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
 use PDOException;
 use ReflectionClass;
 

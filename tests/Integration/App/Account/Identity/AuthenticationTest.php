@@ -2,8 +2,8 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
-use Exdrals\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
+use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Hydrator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
 
-use Exdrals\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthCollectionInterface;
-use Exdrals\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 
 interface AccountAccessAuthHydratorInterface extends HydratorInterface
 {

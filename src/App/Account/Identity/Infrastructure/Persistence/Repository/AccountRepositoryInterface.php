@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Persistence\Repository;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
-use Exdrals\Identity\Domain\AccountCollectionInterface;
-use Exdrals\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
 interface AccountRepositoryInterface extends RepositoryInterface

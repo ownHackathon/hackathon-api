@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core;
+namespace ownHackathon\Core;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 

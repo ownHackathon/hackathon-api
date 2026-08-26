@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Domain;
+namespace ownHackathon\App\Workspace\Domain;
 
-use Exdrals\Core\Shared\Utils\Collection;
+use ownHackathon\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
+use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
 
 use function get_class;
 use function sprintf;

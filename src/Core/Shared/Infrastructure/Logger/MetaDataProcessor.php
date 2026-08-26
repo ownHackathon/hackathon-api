@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Logger;
+namespace ownHackathon\Core\Shared\Infrastructure\Logger;
 
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;

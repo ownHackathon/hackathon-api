@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Utils;
+namespace ownHackathon\Core\Shared\Utils;
 
 use ArrayAccess;
 use Countable;

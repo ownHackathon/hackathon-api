@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Shared\Infrastructure\Persistence\Repository\Token;
+namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token;
 
-use Exdrals\Core\Shared\Domain\Token\TokenCollectionInterface;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenCollectionInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\RepositoryInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {

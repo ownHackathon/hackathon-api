@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\DTO\Token;
+namespace ownHackathon\App\Account\Identity\DTO\Token;
 
-use Exdrals\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]

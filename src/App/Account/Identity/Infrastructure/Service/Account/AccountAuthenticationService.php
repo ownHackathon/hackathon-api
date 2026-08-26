@@ -1,23 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Service\Account;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Domain\Exception\DuplicateEntryException;
-use Exdrals\Identity\Domain\AccountAccessAuth;
-use Exdrals\Identity\Domain\AccountInterface;
-use Exdrals\Identity\Domain\Exception\AccountNotFoundException;
-use Exdrals\Identity\Domain\Exception\DuplicateAuthException;
-use Exdrals\Identity\Domain\Exception\PasswordMismatchException;
-use Exdrals\Identity\DTO\Account\AuthenticationRequest;
-use Exdrals\Identity\DTO\Client\ClientIdentification;
-use Exdrals\Identity\DTO\Response\AuthenticationResponse;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
-use Exdrals\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use Exdrals\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Exdrals\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
+use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
+use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
+use ownHackathon\App\Account\Identity\DTO\Response\AuthenticationResponse;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 
 readonly class AccountAuthenticationService
 {

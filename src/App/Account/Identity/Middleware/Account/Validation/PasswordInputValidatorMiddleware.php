@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account\Validation;
+namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
 
-use Exdrals\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
-use Exdrals\Identity\DTO\Account\AccountPassword;
-use Exdrals\Identity\Infrastructure\Validator\PasswordValidator;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\PasswordValidator;
+use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

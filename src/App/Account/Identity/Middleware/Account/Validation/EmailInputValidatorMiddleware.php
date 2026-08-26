@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Middleware\Account\Validation;
+namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Mailing\Exception\InvalidArgumentException;
-use Exdrals\Core\Mailing\Infrastructure\Validator\EMailValidator;
-use Exdrals\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use Exdrals\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use Exdrals\Identity\Domain\Message\IdentityLogMessage;
-use Exdrals\Identity\Domain\Message\IdentityStatusMessage;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\Exception\InvalidArgumentException;
+use ownHackathon\Core\Mailing\Infrastructure\Validator\EMailValidator;
+use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

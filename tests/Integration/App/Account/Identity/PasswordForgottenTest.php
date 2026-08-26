@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Account\Identity;
+namespace Tests\Integration\App\Account\Identity;
 
-use Exdrals\Core\Mailing\Domain\EmailType;
-use Exdrals\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
-use Exdrals\Identity\Infrastructure\Service\Account\PasswordService;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordService;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 
 test('Test successful with valid account', function () {

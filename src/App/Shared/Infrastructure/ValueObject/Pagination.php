@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Infrastructure\ValueObject;
+namespace ownHackathon\App\Shared\Infrastructure\ValueObject;
 
 readonly class Pagination
 {

@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Event;
+namespace ownHackathon\App\Event;
 
 use Envms\FluentPDO\Query;
-use Exdrals\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\Event\Infrastructure\Hydrator\EventHydrator;
-use ownHackathon\Event\Infrastructure\Persistence\Repository\EventRepository;
-use ownHackathon\Event\Infrastructure\Persistence\Table\EventTable;
-use ownHackathon\Shared\Infrastructure\Hydrator\EventHydratorInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
-use ownHackathon\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
+use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
+use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
+use ownHackathon\App\Shared\Infrastructure\Hydrator\EventHydratorInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
+use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
 
 class ConfigProvider
 {

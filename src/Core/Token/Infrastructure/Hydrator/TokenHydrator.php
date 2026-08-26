@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Core\Token\Infrastructure\Hydrator;
+namespace ownHackathon\Core\Token\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\DateTimeFormat;
-use Exdrals\Core\Shared\Domain\Enum\Token\TokenType;
-use Exdrals\Core\Shared\Domain\Token\TokenCollectionInterface;
-use Exdrals\Core\Shared\Domain\Token\TokenInterface;
-use Exdrals\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
-use Exdrals\Core\Token\Domain\Token;
-use Exdrals\Core\Token\Domain\TokenCollection;
+use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
+use ownHackathon\Core\Shared\Domain\Token\TokenCollectionInterface;
+use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\Core\Shared\Infrastructure\Hydrator\Token\TokenHydratorInterface;
+use ownHackathon\Core\Token\Domain\Token;
+use ownHackathon\Core\Token\Domain\TokenCollection;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class TokenHydrator implements TokenHydratorInterface

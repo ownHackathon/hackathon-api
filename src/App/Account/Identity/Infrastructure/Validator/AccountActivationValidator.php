@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Infrastructure\Validator;
+namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
-use Exdrals\Identity\Infrastructure\Validator\Input\AccountNameInput;
-use Exdrals\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 
 class AccountActivationValidator extends InputFilter
 {

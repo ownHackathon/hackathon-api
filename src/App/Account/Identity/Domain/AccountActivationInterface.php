@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Exdrals\Identity\Domain;
+namespace ownHackathon\App\Account\Identity\Domain;
 
 use DateTimeImmutable;
-use Exdrals\Core\Mailing\Domain\EmailType;
+use ownHackathon\Core\Mailing\Domain\EmailType;
 use Ramsey\Uuid\UuidInterface;
 
 interface AccountActivationInterface

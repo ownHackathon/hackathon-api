@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Workspace\Domain\Exception;
+namespace ownHackathon\App\Workspace\Domain\Exception;
 
 use DomainException;
 

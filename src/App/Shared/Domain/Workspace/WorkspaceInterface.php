@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Shared\Domain\Workspace;
+namespace ownHackathon\App\Shared\Domain\Workspace;
 
 use DateTimeImmutable;
-use Exdrals\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\Core\Shared\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
 interface WorkspaceInterface
