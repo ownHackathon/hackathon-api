@@ -21,7 +21,11 @@ if ($appEnv !== 'action') {
 putenv("APP_ENV=$appEnv");
 $_ENV['APP_ENV'] = $appEnv;
 
-(function () {
+if (! array_reduce(
+    $_SERVER['argv'] ?? [],
+    static fn (bool $hasUnitPath, string $argument): bool => $hasUnitPath || str_contains($argument, 'tests/Unit'),
+    false,
+)) {
     // 1. APP_ENV Logik: Priorität für GHA (action)
     $appEnv = getenv('APP_ENV') ?: 'testing';
     putenv("APP_ENV=$appEnv");
@@ -64,7 +68,7 @@ $_ENV['APP_ENV'] = $appEnv;
         exit($resultCode);
     }
     fwrite(STDOUT, "[Setup] Database ready.\n\n");
-})();
+}
 
 uses(TestIntegrationCase::class)->beforeEach(function () {
     /** @var PDO $pdo */
