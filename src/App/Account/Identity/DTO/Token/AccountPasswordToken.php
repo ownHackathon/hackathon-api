@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Token;
 
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]

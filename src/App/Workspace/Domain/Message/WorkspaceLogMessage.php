@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Domain\Message;
 
-use ownHackathon\Core\Shared\Domain\Message\LogMessage;
+use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
 
 interface WorkspaceLogMessage extends LogMessage
 {

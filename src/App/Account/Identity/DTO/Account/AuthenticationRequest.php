@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Account\Identity\DTO\Account;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['email', 'password'])]
 readonly class AuthenticationRequest

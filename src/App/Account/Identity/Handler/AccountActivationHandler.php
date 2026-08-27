@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountResponse;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountCreatorService;
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

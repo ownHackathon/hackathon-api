@@ -14,7 +14,7 @@ use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
 use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\Core\Shared\Trait\JwtTokenTrait;
+use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
 
 use function time;
 

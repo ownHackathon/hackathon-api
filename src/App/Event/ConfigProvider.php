@@ -10,7 +10,7 @@ use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 class ConfigProvider
 {

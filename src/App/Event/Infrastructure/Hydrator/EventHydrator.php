@@ -9,9 +9,9 @@ use ownHackathon\App\Event\Domain\Event;
 use ownHackathon\App\Event\Domain\EventCollection;
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
-use ownHackathon\Core\Shared\Domain\Enum\Visibility;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class EventHydrator implements EventHydratorInterface
 {

@@ -5,7 +5,7 @@ namespace ownHackathon\App\Workspace\DTO;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
 readonly class WorkspaceResponse

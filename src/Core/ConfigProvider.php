@@ -9,7 +9,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
-            Shared\ConfigProvider::class,
+            Persistence\ConfigProvider::class,
         ]);
 
         return $aggregator->getMergedConfig();

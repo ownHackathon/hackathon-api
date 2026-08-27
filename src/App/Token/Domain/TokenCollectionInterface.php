@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Token\Domain;
 
-use ownHackathon\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method Token offsetGet(mixed $offset)

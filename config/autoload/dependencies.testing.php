@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use ownHackathon\Core\Shared\Infrastructure\Factory\DatabaseFactory;
-use ownHackathon\Core\Shared\Infrastructure\Factory\QueryFactory;
-use ownHackathon\Core\Shared\Infrastructure\Factory\UuidFactory;
-use ownHackathon\Core\Shared\Infrastructure\Logger\LoggerFactory;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Persistence\Factory\DatabaseFactory;
+use ownHackathon\Core\Persistence\Factory\QueryFactory;
+use ownHackathon\Core\SharedKernel\Factory\UuidFactory;
+use ownHackathon\Core\Observability\LoggerFactory;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
 use Tests\Integration\Mock\NullMailerFactory;

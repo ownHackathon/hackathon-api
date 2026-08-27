@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Event\Infrastructure\Persistence\Table;
 
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 interface EventStoreInterface extends StoreInterface
 {

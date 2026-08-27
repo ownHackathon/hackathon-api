@@ -2,8 +2,8 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Account;
 
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Serialization\DataType;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
 

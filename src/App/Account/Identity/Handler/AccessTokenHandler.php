@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
 use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Workspace\Domain;
 
 use InvalidArgumentException;
-use ownHackathon\Core\Shared\Utils\Collection;
+use ownHackathon\Core\SharedKernel\Utils\Collection;
 
 use function get_class;
 use function sprintf;

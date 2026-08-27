@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Repository;
 use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
 interface AccountRepositoryInterface extends RepositoryInterface

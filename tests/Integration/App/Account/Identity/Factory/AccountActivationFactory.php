@@ -4,8 +4,8 @@ namespace Tests\Integration\App\Account\Identity\Factory;
 
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Faker\Factory as Faker;
 
 class AccountActivationFactory

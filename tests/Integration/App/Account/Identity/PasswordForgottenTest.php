@@ -3,7 +3,7 @@
 namespace Tests\Integration\App\Account\Identity;
 
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\App\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordService;

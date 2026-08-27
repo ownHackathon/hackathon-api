@@ -4,7 +4,7 @@ namespace Tests\Integration\App\Factory;
 
 use DateTimeImmutable;
 use Envms\FluentPDO\Query;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use Faker\Factory as Faker;
 
 class AccountAccessAuthFactory

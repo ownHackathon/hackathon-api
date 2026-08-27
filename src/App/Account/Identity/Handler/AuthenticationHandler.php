@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
 use ownHackathon\App\Account\Identity\DTO\Response\AuthenticationResponse;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

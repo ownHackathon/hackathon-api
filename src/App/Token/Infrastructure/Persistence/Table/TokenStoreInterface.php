@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Token\Infrastructure\Persistence\Table;
 
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 interface TokenStoreInterface extends StoreInterface
 {

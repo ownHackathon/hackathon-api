@@ -7,9 +7,9 @@ use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 readonly class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
 {

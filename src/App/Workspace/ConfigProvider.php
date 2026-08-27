@@ -24,12 +24,12 @@ use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsIn
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
-use ownHackathon\Core\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
-use ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware;
-use ownHackathon\Core\Shared\Middleware\PaginationMiddleware;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\Core\Shared\Validator\Input\VisibilityInput;
+use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
+use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
+use ownHackathon\App\Workspace\Middleware\PaginationMiddleware;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use ownHackathon\App\Workspace\Infrastructure\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {
@@ -91,6 +91,7 @@ class ConfigProvider
                 WorkspaceNameInput::class,
                 WorkspaceDescriptionInput::class,
                 WorkspaceDetailsInput::class,
+                VisibilityInput::class,
             ],
             'factories' => [
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
@@ -103,6 +104,9 @@ class ConfigProvider
                 ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
                 PaginationService::class => ConfigAbstractFactory::class,
                 WorkspaceHandler::class => ConfigAbstractFactory::class,
+                PaginationMiddleware::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                PaginationTotalPages::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                SlugService::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],
         ];
     }

@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Mailing;
 
 use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\Core\Shared\Infrastructure\Factory\MailFactory;
+use ownHackathon\App\Mailing\Infrastructure\Factory\MailFactory;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 readonly class ConfigProvider

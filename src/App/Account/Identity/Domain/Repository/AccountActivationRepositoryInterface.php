@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Repository;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
 {

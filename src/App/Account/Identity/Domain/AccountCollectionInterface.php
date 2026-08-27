@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Domain;
 
-use ownHackathon\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method Account offsetGet(mixed $offset)

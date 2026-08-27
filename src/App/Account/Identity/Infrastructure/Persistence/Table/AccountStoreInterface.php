@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table;
 
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 interface AccountStoreInterface extends StoreInterface
 {

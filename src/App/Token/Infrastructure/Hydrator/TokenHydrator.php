@@ -8,7 +8,7 @@ use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenCollection;
 use ownHackathon\App\Token\Domain\TokenCollectionInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class TokenHydrator implements TokenHydratorInterface

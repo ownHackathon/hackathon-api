@@ -8,7 +8,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountService;
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

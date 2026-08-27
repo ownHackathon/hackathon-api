@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['name', 'visibility'])]
 readonly class WorkspaceRequest

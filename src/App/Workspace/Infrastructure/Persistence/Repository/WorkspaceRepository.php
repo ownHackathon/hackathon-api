@@ -7,10 +7,10 @@ use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Pagination;
 use PDOException;
 
 readonly class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface

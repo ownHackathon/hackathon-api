@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Mailing\DTO;
 
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['email'])]

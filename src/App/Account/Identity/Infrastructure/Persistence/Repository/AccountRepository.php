@@ -8,9 +8,9 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterfa
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class AccountRepository extends AbstractRepository implements AccountRepositoryInterface

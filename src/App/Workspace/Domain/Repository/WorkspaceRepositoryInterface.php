@@ -4,8 +4,8 @@ namespace ownHackathon\App\Workspace\Domain\Repository;
 
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
-use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Pagination;
 
 interface WorkspaceRepositoryInterface extends RepositoryInterface
 {

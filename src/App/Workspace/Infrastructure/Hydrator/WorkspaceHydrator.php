@@ -8,9 +8,9 @@ use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
-use ownHackathon\Core\Shared\Domain\Enum\Visibility;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {

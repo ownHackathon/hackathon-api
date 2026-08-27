@@ -4,7 +4,7 @@ namespace ownHackathon\App\Token;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;

@@ -4,7 +4,7 @@ namespace ownHackathon\App\Token\Infrastructure\Hydrator;
 
 use ownHackathon\App\Token\Domain\TokenCollectionInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 
 interface TokenHydratorInterface extends HydratorInterface
 {

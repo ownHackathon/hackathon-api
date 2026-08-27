@@ -4,8 +4,8 @@ namespace ownHackathon\App\Token\Domain;
 
 use DateTimeImmutable;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
-use ownHackathon\Core\Shared\Utils\Collectible;
+use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
+use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class Token implements TokenInterface, Collectible

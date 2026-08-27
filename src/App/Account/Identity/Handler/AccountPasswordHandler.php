@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
+use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use ownHackathon\App\Token\DTO\Token;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;

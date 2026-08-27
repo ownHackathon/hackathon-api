@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountHydrator implements AccountHydratorInterface

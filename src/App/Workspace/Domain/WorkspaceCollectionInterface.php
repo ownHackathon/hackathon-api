@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Domain;
 
-use ownHackathon\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method WorkspaceInterface offsetGet(mixed $offset)

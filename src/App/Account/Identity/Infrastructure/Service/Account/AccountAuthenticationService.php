@@ -17,7 +17,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\Auth
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 
 readonly class AccountAuthenticationService
 {

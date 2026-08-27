@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class AccountRegisterService implements AccountRegisterServiceInterface
 {

@@ -4,7 +4,7 @@ namespace ownHackathon\App\Event\Domain\Repository;
 
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
 
 interface EventRepositoryInterface extends RepositoryInterface
 {

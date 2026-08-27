@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Domain\Message;
 
-use ownHackathon\Core\Shared\Domain\Message\StatusMessage;
+use ownHackathon\Core\SharedKernel\Domain\Message\StatusMessage;
 
 interface IdentityStatusMessage extends StatusMessage
 {

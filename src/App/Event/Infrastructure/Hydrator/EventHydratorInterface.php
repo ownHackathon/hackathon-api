@@ -4,7 +4,7 @@ namespace ownHackathon\App\Event\Infrastructure\Hydrator;
 
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 
 interface EventHydratorInterface extends HydratorInterface
 {

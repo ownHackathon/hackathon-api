@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Response;
 
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use OpenApi\Attributes as OA;

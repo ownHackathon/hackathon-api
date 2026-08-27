@@ -9,10 +9,9 @@ use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsExcept
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\Core\Shared\Domain\Enum\Visibility;
-use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class WorkspaceCreator implements WorkspaceCreatorInterface
 {

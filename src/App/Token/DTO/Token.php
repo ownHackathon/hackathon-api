@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Token\DTO;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema()]
 readonly class Token

@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Workspace\Domain;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Shared\Domain\Enum\Visibility;
+use ownHackathon\App\Workspace\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
 interface WorkspaceInterface

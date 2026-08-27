@@ -7,9 +7,9 @@ use ownHackathon\App\Token\Domain\TokenCollectionInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 readonly class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
 {

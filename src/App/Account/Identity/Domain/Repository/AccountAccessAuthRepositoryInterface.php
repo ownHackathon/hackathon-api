@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Repository;
 
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {

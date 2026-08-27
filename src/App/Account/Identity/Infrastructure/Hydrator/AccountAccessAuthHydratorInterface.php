@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
 
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 
 interface AccountAccessAuthHydratorInterface extends HydratorInterface
 {

@@ -6,7 +6,7 @@ use Monolog\Level;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

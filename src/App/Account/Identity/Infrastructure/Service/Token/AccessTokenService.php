@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 use Firebase\JWT\JWT;
 use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
-use ownHackathon\Core\Shared\Trait\JwtTokenTrait;
+use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
 use Ramsey\Uuid\UuidInterface;
 
 use function time;

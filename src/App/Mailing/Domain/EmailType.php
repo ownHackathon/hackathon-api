@@ -6,7 +6,7 @@ use ownHackathon\App\Mailing\Exception\InvalidArgumentException;
 
 use function sprintf;
 
-final class EmailType implements \ownHackathon\Core\Shared\Type\TypeInterface
+final class EmailType implements \ownHackathon\Core\SharedKernel\Type\TypeInterface
 {
     private string $value;
 

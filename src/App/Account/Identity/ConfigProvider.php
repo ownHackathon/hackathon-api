@@ -72,8 +72,8 @@ use ownHackathon\App\Mailing\Infrastructure\EmailService;
 use ownHackathon\App\Mailing\Infrastructure\EmailServiceFactory;
 use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
 use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use Psr\Log\LoggerInterface;
 

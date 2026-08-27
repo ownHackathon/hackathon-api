@@ -4,7 +4,7 @@ namespace ownHackathon\App\Token\Domain\Repository;
 
 use ownHackathon\App\Token\Domain\TokenCollectionInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
+use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface
 {

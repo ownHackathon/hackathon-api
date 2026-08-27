@@ -4,8 +4,8 @@ namespace ownHackathon\App\Workspace\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Persistence\Store\AbstractTable;
 use PDOException;
 
 class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface

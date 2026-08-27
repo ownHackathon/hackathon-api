@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Event\Domain;
 
-use ownHackathon\Core\Shared\Utils\CollectionInterface;
+use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method EventInterface offsetGet(mixed $offset)

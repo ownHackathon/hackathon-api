@@ -2,9 +2,9 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware;
 
-use ownHackathon\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use ownHackathon\App\Http\Exception\HttpDuplicateEntryException;
+use ownHackathon\App\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
 use Monolog\Level;
 use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;

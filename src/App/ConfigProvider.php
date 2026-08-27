@@ -10,6 +10,7 @@ class ConfigProvider
     {
         $aggregator = new ConfigAggregator([
             Account\ConfigProvider::class,
+            Http\ConfigProvider::class,
             Mailing\ConfigProvider::class,
             Token\ConfigProvider::class,
             Workspace\ConfigProvider::class,

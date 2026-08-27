@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
 
-use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
+use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;

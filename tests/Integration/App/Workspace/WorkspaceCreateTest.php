@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Workspace;
 
-use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
+use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\JsonFactory;

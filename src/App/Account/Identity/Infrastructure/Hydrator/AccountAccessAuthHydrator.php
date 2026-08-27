@@ -8,7 +8,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Clock\DateTimeFormat;
 
 readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
 {

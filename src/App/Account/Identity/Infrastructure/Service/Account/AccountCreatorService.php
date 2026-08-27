@@ -12,10 +12,10 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationReposit
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
-use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\Shared\Domain\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use ownHackathon\App\Http\Exception\HttpDuplicateEntryException;
+use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class AccountCreatorService
 {

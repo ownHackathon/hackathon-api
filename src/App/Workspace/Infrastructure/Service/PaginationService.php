@@ -4,8 +4,7 @@ namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\PaginationMeta;
-use ownHackathon\Core\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Persistence\Pagination;
 
 readonly class PaginationService
 {

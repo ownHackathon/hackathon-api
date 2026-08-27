@@ -8,7 +8,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountActivationCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountActivationHydrator implements AccountActivationHydratorInterface

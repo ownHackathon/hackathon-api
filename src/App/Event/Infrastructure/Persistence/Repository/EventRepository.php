@@ -7,9 +7,9 @@ use ownHackathon\App\Event\Domain\EventInterface;
 use ownHackathon\App\Event\Domain\Repository\EventRepositoryInterface;
 use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
-use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
+use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Repository\AbstractRepository;
+use ownHackathon\Core\Persistence\Store\StoreInterface;
 
 readonly class EventRepository extends AbstractRepository implements EventRepositoryInterface
 {
