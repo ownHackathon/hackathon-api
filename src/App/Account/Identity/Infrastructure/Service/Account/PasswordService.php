@@ -3,10 +3,6 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 
 readonly class PasswordService
 {
@@ -18,14 +14,7 @@ readonly class PasswordService
     public function sendTokenForInitiateResetPassword(EmailType $email): void
     {
         if ($this->accountService->isEmailAvailable($email)) {
-            throw new HttpHandledInvalidArgumentAsSuccessException(
-                IdentityLogMessage::PASSWORD_REQUEST_MISSING_ACCOUNT,
-                IdentityStatusMessage::INVALID_DATA,
-                [
-                    'email:' => $email->toString(),
-                ],
-                Level::Warning
-            );
+            return;
         }
 
         $this->accountService->sendTokenForPasswordChange($email);
