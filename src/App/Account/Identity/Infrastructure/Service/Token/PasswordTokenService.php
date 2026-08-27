@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
 use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Mailing\Application\Port\MailerInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
 
 use function sprintf;
@@ -11,7 +11,7 @@ use function sprintf;
 readonly class PasswordTokenService
 {
     public function __construct(
-        private EmailService $emailService,
+        private MailerInterface $emailService,
         private string $projectUri,
     ) {
     }

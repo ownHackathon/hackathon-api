@@ -68,8 +68,6 @@ use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenDatabaseExist
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenValidationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use ownHackathon\App\Mailing\Infrastructure\EmailService;
-use ownHackathon\App\Mailing\Infrastructure\EmailServiceFactory;
 use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
 use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
@@ -222,7 +220,6 @@ readonly class ConfigProvider
                 AccountService::class => ConfigAbstractFactory::class,
                 AuthenticationService::class => InvokableFactory::class,
                 ClientIdentificationService::class => InvokableFactory::class,
-                EmailService::class => EmailServiceFactory::class,
                 AccessTokenService::class => AccessTokenServiceFactory::class,
                 ActivationTokenService::class => ActivationTokenServiceFactory::class,
                 PasswordTokenService::class => PasswordTokenServiceFactory::class,

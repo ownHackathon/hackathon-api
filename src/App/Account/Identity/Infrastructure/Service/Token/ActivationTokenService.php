@@ -3,14 +3,14 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\App\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Mailing\Application\Port\MailerInterface;
 
 use function sprintf;
 
 readonly class ActivationTokenService
 {
     public function __construct(
-        private EmailService $emailService,
+        private MailerInterface $emailService,
         private string $projectUri,
     ) {
     }
