@@ -29,6 +29,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAc
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthTable;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationTable;
+use Psr\Log\LoggerInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountTable;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
@@ -73,7 +74,6 @@ use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use Psr\Log\LoggerInterface;
 
 readonly class ConfigProvider
 {
@@ -258,9 +258,11 @@ readonly class ConfigProvider
         return [
             AccountActivationHydrator::class => [
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             AccountHydrator::class => [
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             AuthenticationValidationMiddleware::class => [
                 AuthenticationValidator::class,

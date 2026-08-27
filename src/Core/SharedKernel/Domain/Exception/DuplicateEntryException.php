@@ -3,7 +3,7 @@
 namespace ownHackathon\Core\SharedKernel\Domain\Exception;
 
 use Exception;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 
 use function print_r;
 use function sprintf;
@@ -14,6 +14,6 @@ class DuplicateEntryException extends Exception
     {
         $message = sprintf('Entry for Entity %s already exists with: %s', $entity, print_r($conflictIdentifier, true));
 
-        parent::__construct($message, HTTP::STATUS_BAD_REQUEST);
+        parent::__construct($message, Http::STATUS_BAD_REQUEST);
     }
 }

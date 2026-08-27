@@ -21,7 +21,7 @@ use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenCollection;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\DTO\PaginationMeta;
@@ -79,13 +79,13 @@ test('DTO factories create their expected values', function () {
             'owner' => 'Owner',
             'ownerUuid' => 'owner-uuid',
             'details' => null,
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
             'createdAt' => 'created',
             'updatedAt' => 'updated',
         ]))->toMatchObject(['name' => 'Name', 'description' => ''])
         ->and(WorkspaceList::fromArray(['one']))->toMatchObject(['workspaces' => ['one']])
-        ->and(WorkspaceRequest::fromArray(['name' => 'Name', 'visibility' => '700']))
-        ->toMatchObject(['name' => 'Name', 'description' => null, 'details' => null, 'visibility' => 700])
+        ->and(WorkspaceRequest::fromArray(['name' => 'Name', 'visibility' => (string) Visibility::PUBLIC->value]))
+        ->toMatchObject(['name' => 'Name', 'description' => null, 'details' => null, 'visibility' => Visibility::PUBLIC->value])
         ->and(WorkspaceResponse::fromEntity($workspace, $account))
         ->toMatchObject([
             'ownerUuid' => $account->uuid->toString(),
@@ -94,17 +94,19 @@ test('DTO factories create their expected values', function () {
         ]);
 });
 
-test('enum names and visibility comparison are complete', function () {
+test('enum names and visibility rules are complete', function () {
     foreach (EventStatus::cases() as $status) {
         expect($status->getEventStatusName())->toBeString()->not->toBe('');
     }
 
     foreach (Visibility::cases() as $visibility) {
-        expect($visibility->getVisibilityName())->toBeString()->not->toBe('')
-            ->and($visibility->isAtLeast(Visibility::PRIVATE))->toBeTrue();
+        expect($visibility->getVisibilityName())->toBeString()->not->toBe('');
     }
 
-    expect(Visibility::PRIVATE->isAtLeast(Visibility::PUBLIC))->toBeFalse();
+    expect(Visibility::PUBLIC->isVisibleTo(null, false))->toBeTrue()
+        ->and(Visibility::REGISTERED->isVisibleTo(null, false))->toBeFalse()
+        ->and(Visibility::UNLISTED->isVisibleTo(null, true))->toBeTrue()
+        ->and(Visibility::UNLISTED->isVisibleTo(null, false))->toBeFalse();
 });
 
 test('collections accept matching entities and expose collection operations', function () {

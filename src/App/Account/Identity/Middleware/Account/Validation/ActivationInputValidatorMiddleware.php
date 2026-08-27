@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
 {
@@ -23,22 +24,38 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $this->validator->setData($data);
-
-        if (!$this->validator->isValid()) {
+        if (!is_array($data)) {
             throw new HttpInvalidArgumentException(
                 IdentityLogMessage::ACCOUNT_NAME_INVALID,
                 IdentityStatusMessage::INVALID_DATA,
-                [
-                    'Account Name:' => $data['accountName'] ?? null,
-                    'Validator-Message:' => $this->validator->getMessages(),
-                ]
             );
         }
 
-        $data = $this->validator->getValues();
+        try {
+            $this->validator->setData($data);
 
-        $response = AccountRegistration::fromString($data['accountName'], $data['password']);
+            if (!$this->validator->isValid()) {
+                throw new HttpInvalidArgumentException(
+                    IdentityLogMessage::ACCOUNT_NAME_INVALID,
+                    IdentityStatusMessage::INVALID_DATA,
+                    [
+                        'Account Name:' => $data['accountName'] ?? null,
+                        'Validator-Message:' => $this->validator->getMessages(),
+                    ]
+                );
+            }
+
+            $data = $this->validator->getValues();
+
+            $response = AccountRegistration::fromString($data['accountName'], $data['password']);
+        } catch (HttpInvalidArgumentException $e) {
+            throw $e;
+        } catch (Throwable) {
+            throw new HttpInvalidArgumentException(
+                IdentityLogMessage::ACCOUNT_NAME_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
+            );
+        }
 
         return $handler->handle($request->withAttribute(AccountRegistration::class, $response));
     }

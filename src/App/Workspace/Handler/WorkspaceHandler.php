@@ -5,10 +5,13 @@ namespace ownHackathon\App\Workspace\Handler;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicyInterface;
 use ownHackathon\App\Workspace\DTO\Workspace;
 use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -18,6 +21,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
     public function __construct(
         private WorkspaceRepositoryInterface $workspaceRepository,
         private AccountRepositoryInterface $accountRepository,
+        private WorkspaceVisibilityPolicyInterface $workspaceVisibilityPolicy,
     ) {
     }
 
@@ -65,11 +69,12 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 new OA\Property(
                     property: 'visibility',
                     description: 'The visibility level of the workspace: ' .
-                        '100 = Private, 200 = Internal, 300 = Friends only, 400 = Invite only, ' .
-                        '500 = Registered User, 600 = Unlisted, 700 = Public.',
+                        Visibility::UNLISTED->value . ' = Unlisted, ' .
+                        Visibility::REGISTERED->value . ' = Registered User, ' .
+                        Visibility::PUBLIC->value . ' = Public.',
                     type: 'integer',
-                    enum: [100, 200, 300, 400, 500, 600, 700],
-                    example: 700,
+                    enum: [Visibility::UNLISTED->value, Visibility::REGISTERED->value, Visibility::PUBLIC->value],
+                    example: Visibility::PUBLIC->value,
                 ),
                 new OA\Property(property: 'createdAt', description: 'The creation date of the workspace.', type: 'string', example: '2026-08-26 12:00:00'),
                 new OA\Property(property: 'updatedAt', description: 'The date the workspace was last updated.', type: 'string', example: '2026-08-26 12:00:00'),
@@ -102,6 +107,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $slug = $request->getAttribute('slug');
+        $user = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
         $workspace = $this->workspaceRepository->findOneBySlug($slug);
         if ($workspace === null) {
@@ -112,6 +118,10 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
         }
 
         $account = $this->accountRepository->findOneById($workspace->accountId);
+
+        if (!$this->workspaceVisibilityPolicy->isAvailableFor($workspace, $user)) {
+            return new JsonResponse(['Workspace not found'], Http::STATUS_NOT_FOUND);
+        }
 
         $response = Workspace::fromArray(
             [

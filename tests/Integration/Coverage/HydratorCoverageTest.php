@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
 use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Mailing\Domain\EmailType;
@@ -87,7 +87,7 @@ test('all entity hydrators hydrate, extract and handle collections', function ()
 
     $workspaceHydrator = new WorkspaceHydrator($uuid);
     $workspace = $workspaceHydrator->hydrate($data);
-    expect($workspaceHydrator->extract($workspace))->toHaveSubset(['name' => 'Name', 'visibility' => 700])
+    expect($workspaceHydrator->extract($workspace))->toHaveSubset(['name' => 'Name', 'visibility' => Visibility::PUBLIC->value])
         ->and($workspaceHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($workspaceHydrator->extractCollection($workspaceHydrator->hydrateCollection([$data])))->toHaveCount(1);
 

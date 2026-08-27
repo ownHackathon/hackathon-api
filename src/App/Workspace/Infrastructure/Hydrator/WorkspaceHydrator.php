@@ -9,13 +9,15 @@ use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -24,6 +26,22 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
      */
     public function hydrate(array $data): WorkspaceInterface
     {
+        $visibilityValue = $data['visibility'] ?? null;
+        $visibility = is_int($visibilityValue) || is_string($visibilityValue)
+            ? Visibility::tryFrom((int) $visibilityValue)
+            : null;
+
+        if ($visibility === null) {
+            $this->logger?->warning(
+                'Invalid workspace visibility; falling back to unlisted.',
+                [
+                    'workspaceId' => $data['id'] ?? null,
+                    'visibility' => $visibilityValue,
+                ],
+            );
+            $visibility = Visibility::UNLISTED;
+        }
+
         return new Workspace(
             id: $data['id'],
             uuid: $this->uuid->fromString($data['uuid']),
@@ -32,7 +50,7 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
             slug: $data['slug'],
             description: $data['description'],
             details: $data['details'],
-            visibility: Visibility::tryFrom($data['visibility']),
+            visibility: $visibility,
             createdAt: new DateTimeImmutable($data['createdAt']),
             updatedAt: new DateTimeImmutable($data['updatedAt']),
         );
@@ -46,7 +64,14 @@ readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
         $collection = new WorkspaceCollection();
 
         foreach ($data as $entity) {
-            $collection[] = $this->hydrate($entity);
+            try {
+                $collection[] = $this->hydrate($entity);
+            } catch (\Throwable $exception) {
+                $this->logger?->warning('Invalid workspace persistence data skipped.', [
+                    'workspaceId' => $entity['id'] ?? null,
+                    'exception' => $exception,
+                ]);
+            }
         }
 
         return $collection;

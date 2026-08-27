@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
@@ -36,17 +36,17 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: AuthenticationRequest::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: 'Authentication successful. The response contains both access and refresh tokens.',
         content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
     )]
     #[OA\Response(
-        response: HTTP::STATUS_UNAUTHORIZED,
+        response: Http::STATUS_UNAUTHORIZED,
         description: 'Invalid credentials. The email or password provided is incorrect.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
     #[OA\Response(
-        response: HTTP::STATUS_FORBIDDEN,
+        response: Http::STATUS_FORBIDDEN,
         description: 'Access denied. The credentials are correct, but the account is currently restricted. ' .
         'Possible reasons: Account is locked, disabled, or the email address has not been verified yet.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
@@ -58,6 +58,6 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
 
         $response = $this->authService->authenticate($data, $clientId);
 
-        return new JsonResponse($response, HTTP::STATUS_OK);
+        return new JsonResponse($response, Http::STATUS_OK);
     }
 }

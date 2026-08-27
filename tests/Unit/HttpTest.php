@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\ServerRequest;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Monolog\Level;
@@ -22,11 +23,11 @@ use function test;
 
 test('HTTP exceptions expose status context and message', function (): void {
     $exception = new HttpDuplicateEntryException('log', 'response', ['field' => 'name']);
-    expect($exception->getCode())->toBe(409)
+    expect($exception->getCode())->toBe(Http::STATUS_CONFLICT)
         ->and($exception->getContext())->toBe(['field' => 'name'])
         ->and($exception->getResponseMessage())->toBe('response')
-        ->and((new HttpInvalidArgumentException('a', 'b'))->getHttpStatusCode())->toBe(400)
-        ->and((new HttpUnauthorizedException('a', 'b'))->getHttpStatusCode())->toBe(401);
+        ->and((new HttpInvalidArgumentException('a', 'b'))->getHttpStatusCode())->toBe(Http::STATUS_BAD_REQUEST)
+        ->and((new HttpUnauthorizedException('a', 'b'))->getHttpStatusCode())->toBe(Http::STATUS_UNAUTHORIZED);
 });
 
 test('duplicate entry exception preserves all constructor data and uses conflict status', function (): void {
@@ -40,8 +41,8 @@ test('duplicate entry exception preserves all constructor data and uses conflict
     );
 
     expect($exception->getMessage())->toBe('Duplicate workspace')
-        ->and($exception->getCode())->toBe(409)
-        ->and($exception->getHttpStatusCode())->toBe(409)
+        ->and($exception->getCode())->toBe(Http::STATUS_CONFLICT)
+        ->and($exception->getHttpStatusCode())->toBe(Http::STATUS_CONFLICT)
         ->and($exception->getResponseMessage())->toBe('workspace name already in use')
         ->and($exception->getContext())->toBe(['Workspace:' => 'existing-workspace'])
         ->and($exception->getLogLevel())->toBe(Level::Error)
@@ -67,8 +68,8 @@ test('handled invalid argument exception exposes a successful response status', 
     );
 
     expect($exception->getMessage())->toBe('Invalid account state')
-        ->and($exception->getCode())->toBe(200)
-        ->and($exception->getHttpStatusCode())->toBe(200)
+        ->and($exception->getCode())->toBe(Http::STATUS_OK)
+        ->and($exception->getHttpStatusCode())->toBe(Http::STATUS_OK)
         ->and($exception->getResponseMessage())->toBe('account already activated')
         ->and($exception->getContext())->toBe(['account' => 'user@example.test'])
         ->and($exception->getLogLevel())->toBe(Level::Info)
@@ -86,7 +87,7 @@ test('handled invalid argument exception uses notice log level by default', func
 test('ping handler returns runtime information', function (): void {
     $response = (new PingHandler())->handle(new ServerRequest());
     $body = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
-    expect($response->getStatusCode())->toBe(200)
+    expect($response->getStatusCode())->toBe(Http::STATUS_OK)
         ->and($body['message'])->toBe('pong')
         ->and($body['php_version'])->toBe(PHP_VERSION)
         ->and($body['ack'])->toBeInt();
@@ -99,7 +100,7 @@ test('error response factory maps handled and unhandled exceptions', function ()
 
     $handled = $factory->createFromThrowable(new \ownHackathon\App\Http\Exception\HttpInvalidArgumentException('log', 'bad'));
     $unhandled = $factory->createFromThrowable(new \RuntimeException('failure'));
-    expect($handled->getStatusCode())->toBe(400)->and($unhandled->getStatusCode())->toBe(500);
+    expect($handled->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST)->and($unhandled->getStatusCode())->toBe(Http::STATUS_INTERNAL_SERVER_ERROR);
 });
 
 test('route-not-found middleware logs and delegates', function (): void {
@@ -119,7 +120,7 @@ test('swagger handler serves the documentation page', function (): void {
     $body = (string) $response->getBody();
 
     expect($response)->toBeInstanceOf(HtmlResponse::class)
-        ->and($response->getStatusCode())->toBe(200)
+        ->and($response->getStatusCode())->toBe(Http::STATUS_OK)
         ->and($response->getHeaderLine('content-type'))->toContain('text/html')
         ->and($body)->toContain('<title>ownHackathon - SwaggerUI</title>')
         ->and($body)->toContain('<div id="swagger-ui"></div>')
@@ -137,6 +138,6 @@ test('swagger handler returns the same documentation for any request method', fu
     $headResponse = $handler->handle((new ServerRequest())->withMethod('HEAD'));
 
     expect((string) $getResponse->getBody())->toBe((string) $headResponse->getBody())
-        ->and($headResponse->getStatusCode())->toBe(200)
+        ->and($headResponse->getStatusCode())->toBe(Http::STATUS_OK)
         ->and($headResponse->getHeaderLine('content-type'))->toContain('text/html');
 });

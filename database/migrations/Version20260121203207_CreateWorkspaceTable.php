@@ -6,6 +6,7 @@ use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 
 final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
 {
@@ -19,7 +20,7 @@ final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
         $table->addColumn('slug', Types::STRING, ['length' => 64,]);
         $table->addColumn('description', Types::STRING, ['length' => 255, 'notnull' => false, 'default' => '']);
         $table->addColumn('details', Types::TEXT, ['notnull' => false, 'default' => '']);
-        $table->addColumn('visibility', Types::SMALLINT, ['unsigned' => true, 'length' => 2, 'default' => 700]);
+        $table->addColumn('visibility', Types::SMALLINT, ['unsigned' => true, 'length' => 2, 'default' => Visibility::PUBLIC->value]);
         $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
         $table->addColumn('updatedAt', Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP',]);
 

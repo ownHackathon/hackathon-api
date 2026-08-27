@@ -18,7 +18,15 @@ readonly abstract class AbstractRepository implements RepositoryInterface
 
     protected function mapToEntity(mixed $result): mixed
     {
-        return is_array($result) ? $this->getHydrator()->hydrate($result) : null;
+        if (!is_array($result)) {
+            return null;
+        }
+
+        try {
+            return $this->getHydrator()->hydrate($result);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     protected function mapToCollection(mixed $result): mixed

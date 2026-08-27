@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Http\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
@@ -51,6 +51,6 @@ readonly class SwaggerUIHandler implements RequestHandlerInterface
             return new HtmlResponse(file_get_contents($indexFile));
         }
 
-        return new JsonResponse([], HTTP::STATUS_NO_CONTENT);
+        return new JsonResponse([], Http::STATUS_NO_CONTENT);
     }
 }

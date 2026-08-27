@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use ownHackathon\Core\Clock\Duration;
+
 return [
     'project' => [
         'uri' => 'https:\\dev.ownhackathon.de',
@@ -18,7 +20,7 @@ return [
     ],
     'event' => [
         'participant' => [
-            'subscribe_delay' => 30,
+            'subscribe_delay' => Duration::HALF_MINUTE,
         ],
     ],
 ];

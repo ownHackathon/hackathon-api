@@ -4,11 +4,15 @@ namespace ownHackathon\App\Workspace;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Middleware\RequireLoginMiddleware;
+use ownHackathon\App\Http\Validator\Input\VisibilityInput;
 use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicy;
+use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceCreateHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceHandler;
@@ -29,7 +33,7 @@ use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
-use ownHackathon\App\Workspace\Infrastructure\Validator\Input\VisibilityInput;
+use Psr\Log\LoggerInterface;
 
 class ConfigProvider
 {
@@ -70,7 +74,6 @@ class ConfigProvider
                 'path' => '/api/workspace/{slug:[a-zA-Z0-9\-]+}[/]',
                 'allowed_methods' => ['GET'],
                 'middleware' => [
-                    RequireLoginMiddleware::class,
                     WorkspaceHandler::class,
                 ],
                 'name' => 'api_workspace_detail',
@@ -86,14 +89,15 @@ class ConfigProvider
                 WorkspaceRepositoryInterface::class => WorkspaceRepository::class,
                 WorkspaceStoreInterface::class => WorkspaceTable::class,
                 WorkspaceCreatorInterface::class => WorkspaceCreator::class,
+                WorkspaceVisibilityPolicyInterface::class => WorkspaceVisibilityPolicy::class,
             ],
             'invokables' => [
                 WorkspaceNameInput::class,
                 WorkspaceDescriptionInput::class,
                 WorkspaceDetailsInput::class,
-                VisibilityInput::class,
             ],
             'factories' => [
+                WorkspaceVisibilityPolicy::class => InvokableFactory::class,
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
@@ -115,6 +119,7 @@ class ConfigProvider
         return [
             WorkspaceHydrator::class => [
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,
@@ -152,6 +157,7 @@ class ConfigProvider
             WorkspaceHandler::class => [
                 WorkspaceRepositoryInterface::class,
                 AccountRepositoryInterface::class,
+                WorkspaceVisibilityPolicyInterface::class,
             ]
         ];
     }

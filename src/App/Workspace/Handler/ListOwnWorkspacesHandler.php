@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
@@ -40,8 +40,8 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
         required: false,
         schema: new OA\Schema(
             type: 'integer',
-            default: 1,
-            minimum: 1
+            default: Pagination::MIN_PAGE,
+            minimum: Pagination::MIN_PAGE
         )
     )]
     #[OA\Parameter(
@@ -51,13 +51,13 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
         required: false,
         schema: new OA\Schema(
             type: 'integer',
-            default: 5,
-            maximum: 250,
-            minimum: 1
+            default: Pagination::DEFAULT_LIMIT,
+            maximum: Pagination::MAX_LIMIT,
+            minimum: Pagination::MIN_PAGE
         )
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: 'A list of workspaces belonging to the user.',
         content: new OA\JsonContent(
             properties: [
@@ -76,7 +76,7 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
         )
     )]
     #[OA\Response(
-        response: HTTP::STATUS_UNAUTHORIZED,
+        response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. The access token is missing or invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
@@ -102,6 +102,6 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
                 'totalPages' => $metaData->totalPages,
                 'totalItems' => $metaData->totalItems,
             ],
-        ], HTTP::STATUS_OK);
+        ], Http::STATUS_OK);
     }
 }

@@ -6,7 +6,7 @@ use ownHackathon\App\Http\DTO\HttpResponseMessage;
 use ownHackathon\App\Token\DTO\Token;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
@@ -43,11 +43,11 @@ class AccountPasswordHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: AccountPassword::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: 'Password has been successfully updated. The user can now log in with the new credentials.',
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
+        response: Http::STATUS_BAD_REQUEST,
         description: "Request failed due to validation errors. Possible reasons:\n" .
         "1. The reset token is invalid or has already been used.\n" .
         "2. The token has expired.\n" .
@@ -61,6 +61,6 @@ class AccountPasswordHandler implements RequestHandlerInterface
 
         $this->passwordChangeService->change($token, $password);
 
-        return new JsonResponse([], HTTP::STATUS_OK);
+        return new JsonResponse([], Http::STATUS_OK);
     }
 }

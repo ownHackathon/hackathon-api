@@ -9,12 +9,14 @@ use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterfac
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Clock\DateTimeFormat;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountActivationHydrator implements AccountActivationHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -33,7 +35,14 @@ readonly class AccountActivationHydrator implements AccountActivationHydratorInt
         $collection = new AccountActivationCollection();
 
         foreach ($data as $entity) {
-            $collection[] = $this->hydrate($entity);
+            try {
+                $collection[] = $this->hydrate($entity);
+            } catch (\Throwable $exception) {
+                $this->logger?->warning('Invalid account activation persistence data skipped.', [
+                    'activationId' => $entity['id'] ?? null,
+                    'exception' => $exception,
+                ]);
+            }
         }
 
         return $collection;

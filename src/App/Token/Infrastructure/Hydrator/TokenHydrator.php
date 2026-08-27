@@ -9,12 +9,14 @@ use ownHackathon\App\Token\Domain\TokenCollection;
 use ownHackathon\App\Token\Domain\TokenCollectionInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class TokenHydrator implements TokenHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -34,7 +36,14 @@ readonly class TokenHydrator implements TokenHydratorInterface
         $collection = new TokenCollection();
 
         foreach ($data as $entity) {
-            $collection[] = $this->hydrate($entity);
+            try {
+                $collection[] = $this->hydrate($entity);
+            } catch (\Throwable $exception) {
+                $this->logger?->warning('Invalid token persistence data skipped.', [
+                    'tokenId' => $entity['id'] ?? null,
+                    'exception' => $exception,
+                ]);
+            }
         }
 
         return $collection;

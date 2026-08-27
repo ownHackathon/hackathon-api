@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
 {
@@ -23,20 +24,36 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $this->validator->setData($data);
-
-        if (!$this->validator->isValid()) {
+        if (!is_array($data)) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::EMAIL_INVALID,
                 IdentityStatusMessage::INVALID_DATA,
-                [
-                    'E-Mail:' => $data['email'] ?? null,
-                    'Validator-Message:' => $this->validator->getMessages(),
-                ]
             );
         }
 
-        $response = AuthenticationRequest::fromArray($this->validator->getValues());
+        try {
+            $this->validator->setData($data);
+
+            if (!$this->validator->isValid()) {
+                throw new HttpUnauthorizedException(
+                    IdentityLogMessage::EMAIL_INVALID,
+                    IdentityStatusMessage::INVALID_DATA,
+                    [
+                        'E-Mail:' => $data['email'] ?? null,
+                        'Validator-Message:' => $this->validator->getMessages(),
+                    ]
+                );
+            }
+
+            $response = AuthenticationRequest::fromArray($this->validator->getValues());
+        } catch (HttpUnauthorizedException $e) {
+            throw $e;
+        } catch (Throwable) {
+            throw new HttpUnauthorizedException(
+                IdentityLogMessage::EMAIL_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
+            );
+        }
 
         return $handler->handle($request->withAttribute(AuthenticationRequest::class, $response));
     }

@@ -11,7 +11,7 @@ use ownHackathon\App\Account\Identity\Domain\Enum\AccountVisibleStatus;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\Core\Persistence\Pagination;
 use ownHackathon\Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
 use Ramsey\Uuid\Uuid;
@@ -55,12 +55,14 @@ test('email type supports factories and serialization', function (): void {
         ->toThrow(\ownHackathon\App\Mailing\Exception\InvalidArgumentException::class);
 });
 
-test('enums expose names and visibility ordering', function (): void {
+test('enums expose names and visibility rules', function (): void {
     expect(AccountRoles::Owner->getAccountRoleName())->toBe('Eigentümer')
         ->and(AccountVisibleStatus::DO_NOT_DISTURB->getVisibleStatusName())->toBe('Bitte nicht stören')
         ->and(EventStatus::RUNNING->getEventStatusName())->toBe('Running')
-        ->and(Visibility::PUBLIC->isAtLeast(Visibility::PRIVATE))->toBeTrue()
-        ->and(Visibility::PRIVATE->isAtLeast(Visibility::PUBLIC))->toBeFalse()
+        ->and(Visibility::PUBLIC->isVisibleTo(null, false))->toBeTrue()
+        ->and(Visibility::REGISTERED->isVisibleTo(null, false))->toBeFalse()
+        ->and(Visibility::UNLISTED->isVisibleTo(null, true))->toBeTrue()
+        ->and(Visibility::UNLISTED->isVisibleTo(null, false))->toBeFalse()
         ->and(TokenType::EMail->value)->toBe(2);
 });
 

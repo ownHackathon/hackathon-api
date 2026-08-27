@@ -22,7 +22,7 @@ use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;

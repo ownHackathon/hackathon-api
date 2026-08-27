@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
@@ -33,12 +33,12 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
         tags: ['Account']
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: 'Successfully issued a new access token.',
         content: [new OA\JsonContent(ref: AccessToken::class)]
     )]
     #[OA\Response(
-        response: HTTP::STATUS_UNAUTHORIZED,
+        response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. This happens if the refresh token is expired, ' .
         'revoked, or invalid. The user must perform a full login again.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
@@ -50,6 +50,6 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
 
         $refreshedAccessToken = $this->refreshTokenService->refresh($refreshToken, $clientIdentification);
 
-        return new JsonResponse($refreshedAccessToken, HTTP::STATUS_OK);
+        return new JsonResponse($refreshedAccessToken, Http::STATUS_OK);
     }
 }

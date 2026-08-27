@@ -14,7 +14,9 @@ use ownHackathon\App\Workspace\DTO\PaginationMeta;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactory;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
+use Psr\Log\LoggerInterface;
 
 use function expect;
 use function test;
@@ -25,7 +27,7 @@ test('DTO factories map input values', function (): void {
     expect((array) AccountRegistration::fromString('Alice', 'secret'))
         ->toBe(['accountName' => 'Alice', 'password' => 'secret'])
         ->and(ClientIdentificationData::create(null, 'agent')->ident)->toBe('unsecure')
-        ->and(WorkspaceRequest::fromArray(['name' => 'Team', 'visibility' => '700'])->visibility)->toBe(700)
+        ->and(WorkspaceRequest::fromArray(['name' => 'Team', 'visibility' => (string) Visibility::PUBLIC->value])->visibility)->toBe(Visibility::PUBLIC->value)
         ->and(PaginationMeta::fromValues(10, 2, 1))->toEqual(new PaginationMeta(1, 2, 10));
 });
 
@@ -47,7 +49,7 @@ test('hydrators round trip representative entities', function (): void {
     $data = [
         'id' => 1, 'uuid' => TEST_UUID, 'accountId' => 2, 'name' => 'Team', 'password' => 'hash',
         'email' => 'alice@example.com', 'registeredAt' => '2024-01-01 10:00:00', 'lastActionAt' => null,
-        'slug' => 'team', 'description' => 'Description', 'details' => null, 'visibility' => 700,
+        'slug' => 'team', 'description' => 'Description', 'details' => null, 'visibility' => Visibility::PUBLIC->value,
         'createdAt' => '2024-01-01 10:00:00', 'updatedAt' => '2024-01-02 10:00:00',
         'workspaceId' => 3, 'topicId' => null, 'status' => 1,
         'beginsOn' => '2024-01-03 10:00:00', 'endsOn' => '2024-01-04 10:00:00',
@@ -60,4 +62,102 @@ test('hydrators round trip representative entities', function (): void {
         ->and($workspaceHydrator->extract($workspaceHydrator->hydrate($data))['slug'])->toBe('team')
         ->and($tokenHydrator->extract($tokenHydrator->hydrate($data))['tokenType'])->toBe(2)
         ->and((new EventHydrator($uuid))->hydrateCollection([$data]))->toHaveCount(1);
+});
+
+test('workspace hydrator falls back to unlisted for invalid visibility values', function (mixed $invalidVisibility): void {
+    $data = [
+        'id' => 1,
+        'uuid' => TEST_UUID,
+        'accountId' => 2,
+        'name' => 'Team',
+        'slug' => 'team',
+        'description' => null,
+        'details' => null,
+        'visibility' => $invalidVisibility,
+        'createdAt' => '2024-01-01 10:00:00',
+        'updatedAt' => '2024-01-02 10:00:00',
+    ];
+
+    $workspace = (new WorkspaceHydrator(new UuidFactory()))->hydrate($data);
+
+    expect($workspace->visibility)->toBe(Visibility::UNLISTED);
+})->with([
+    'legacy value' => Visibility::PUBLIC->value + 1,
+    'null value' => null,
+    'invalid string' => 'invalid',
+]);
+
+test('workspace hydrator falls back to unlisted when visibility is missing', function (): void {
+    $data = [
+        'id' => 1,
+        'uuid' => TEST_UUID,
+        'accountId' => 2,
+        'name' => 'Team',
+        'slug' => 'team',
+        'description' => null,
+        'details' => null,
+        'createdAt' => '2024-01-01 10:00:00',
+        'updatedAt' => '2024-01-02 10:00:00',
+    ];
+
+    $workspace = (new WorkspaceHydrator(new UuidFactory()))->hydrate($data);
+
+    expect($workspace->visibility)->toBe(Visibility::UNLISTED);
+});
+
+test('event hydrator falls back to unlisted for invalid visibility values', function (): void {
+    $data = [
+        'id' => 1,
+        'uuid' => TEST_UUID,
+        'workspaceId' => 2,
+        'topicId' => null,
+        'name' => 'Event',
+        'slug' => 'event',
+        'description' => null,
+        'details' => null,
+        'status' => 1,
+        'visibility' => Visibility::PUBLIC->value + 1,
+        'beginsOn' => '2024-01-03 10:00:00',
+        'endsOn' => '2024-01-04 10:00:00',
+        'createdAt' => '2024-01-01 10:00:00',
+    ];
+
+    $event = (new EventHydrator(new UuidFactory()))->hydrate($data);
+
+    expect($event->visibility)->toBe(Visibility::UNLISTED);
+});
+
+test('collection hydrators skip invalid persistence rows and log the data issue', function (): void {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->exactly(4))->method('warning');
+    $uuid = new UuidFactory();
+
+    $workspaceData = [
+        'id' => 1, 'uuid' => TEST_UUID, 'accountId' => 2, 'name' => 'Team', 'slug' => 'team',
+        'description' => null, 'details' => null, 'visibility' => Visibility::PUBLIC->value,
+        'createdAt' => '2024-01-01 10:00:00', 'updatedAt' => '2024-01-02 10:00:00',
+    ];
+    $eventData = [
+        'id' => 1, 'uuid' => TEST_UUID, 'workspaceId' => 2, 'topicId' => null, 'name' => 'Event',
+        'slug' => 'event', 'description' => null, 'details' => null, 'status' => 1,
+        'visibility' => Visibility::PUBLIC->value, 'beginsOn' => '2024-01-03 10:00:00',
+        'endsOn' => '2024-01-04 10:00:00', 'createdAt' => '2024-01-01 10:00:00',
+    ];
+
+    expect((new WorkspaceHydrator($uuid, $logger))->hydrateCollection([
+        $workspaceData,
+        [...$workspaceData, 'id' => 2, 'uuid' => 'invalid'],
+    ]))->toHaveCount(1)
+        ->and((new EventHydrator($uuid, $logger))->hydrateCollection([
+            $eventData,
+            [...$eventData, 'id' => 2, 'status' => 999],
+        ]))->toHaveCount(1)
+        ->and((new AccountHydrator($uuid, $logger))->hydrateCollection([
+            ['id' => 1, 'uuid' => TEST_UUID, 'name' => 'Alice', 'password' => 'hash', 'email' => 'alice@example.com', 'registeredAt' => '2024-01-01', 'lastActionAt' => null],
+            ['id' => 2, 'uuid' => 'invalid', 'name' => 'Broken', 'password' => 'hash', 'email' => 'alice@example.com', 'registeredAt' => '2024-01-01', 'lastActionAt' => null],
+        ]))->toHaveCount(1)
+        ->and((new TokenHydrator($uuid, $logger))->hydrateCollection([
+            ['id' => 1, 'accountId' => 1, 'tokenType' => 2, 'token' => TEST_UUID, 'createdAt' => '2024-01-01'],
+            ['id' => 2, 'accountId' => 1, 'tokenType' => 999, 'token' => TEST_UUID, 'createdAt' => '2024-01-01'],
+        ]))->toHaveCount(1);
 });

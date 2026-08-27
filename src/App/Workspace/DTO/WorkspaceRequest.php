@@ -4,6 +4,7 @@ namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 
 #[OA\Schema(required: ['name', 'visibility'])]
 readonly class WorkspaceRequest
@@ -28,10 +29,13 @@ readonly class WorkspaceRequest
         )]
         public ?string $details,
         #[OA\Property(
-            description: 'The visibility from workspace',
+            description: 'The visibility from workspace: ' .
+                Visibility::UNLISTED->value . ' = Unlisted, ' .
+                Visibility::REGISTERED->value . ' = Registered User, ' .
+                Visibility::PUBLIC->value . ' = Public.',
             type: DataType::INTEGER->value,
-            enum: [100, 200, 300, 400, 500, 600, 700],
-            example: 700
+            enum: [Visibility::UNLISTED->value, Visibility::REGISTERED->value, Visibility::PUBLIC->value],
+            example: Visibility::PUBLIC->value
         )]
         public int $visibility
     ) {

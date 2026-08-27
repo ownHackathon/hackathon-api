@@ -7,6 +7,7 @@ use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use PDO;
 use Tests\Integration\JsonFactory;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 
 use function expect;
 
@@ -19,7 +20,7 @@ test('Workspace was created', function () {
         [
             'name' => $name,
             'description' => $description,
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]
     )
     ->withHeader('Authorization', $account['accessToken']);
@@ -57,7 +58,7 @@ test('Workspace creation returns the complete response contract', function () {
         $this->createJsonPostRequest('/api/workspace/', [
             'name' => $name,
             'description' => 'Description',
-            'visibility' => 100,
+            'visibility' => Visibility::UNLISTED->value,
         ])->withHeader('Authorization', $account['accessToken'])
     );
     $data = JsonFactory::create($response);
@@ -77,7 +78,7 @@ test('Workspace creation persists optional fields, visibility and the authentica
             'name' => 'Workspace with all fields',
             'description' => '  a description  ',
             'details' => '  private details  ',
-            'visibility' => 600,
+            'visibility' => Visibility::UNLISTED->value,
         ])->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -87,14 +88,14 @@ test('Workspace creation persists optional fields, visibility and the authentica
             'name' => 'Workspace with all fields',
             'description' => 'a description',
             'details' => 'private details',
-            'visibility' => 600,
+            'visibility' => Visibility::UNLISTED->value,
         ]);
 });
 
 test('Workspace name accepts the minimum and maximum length', function (string $name) {
     $account = $this->createAndLoginUser();
     $response = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -107,7 +108,7 @@ test('Workspace name accepts the minimum and maximum length', function (string $
 test('Workspace name rejects values outside its length boundaries', function (string $name) {
     $account = $this->createAndLoginUser();
     $response = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -123,7 +124,7 @@ test('Workspace description accepts 255 characters and rejects 256 characters', 
         $this->createJsonPostRequest('/api/workspace', [
             'name' => 'Description boundary ' . $length,
             'description' => str_repeat('d', $length),
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ])->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -136,7 +137,7 @@ test('Workspace description accepts 255 characters and rejects 256 characters', 
 test('Workspace creation rejects a missing name', function () {
     $account = $this->createAndLoginUser();
     $response = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -146,7 +147,7 @@ test('Workspace creation rejects a missing name', function () {
 test('Workspace creation rejects null and incorrectly typed names', function (mixed $name) {
     $account = $this->createAndLoginUser();
     $response = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -169,7 +170,7 @@ test('Workspace creation accepts every supported visibility value', function (in
 
     expect($response->getStatusCode())->toBe(Http::STATUS_CREATED)
         ->and('Workspace')->toHaveRecord(['name' => $name, 'visibility' => $visibility]);
-})->with([100, 200, 300, 400, 500, 600, 700]);
+})->with([Visibility::UNLISTED->value, Visibility::REGISTERED->value, Visibility::PUBLIC->value]);
 
 test('Workspace creation rejects invalid visibility values', function (mixed $visibility) {
     $account = $this->createAndLoginUser();
@@ -182,17 +183,17 @@ test('Workspace creation rejects invalid visibility values', function (mixed $vi
 
     expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST);
 })->with([
-    'below minimum' => 99,
-    'above maximum' => 701,
+    'below minimum' => Visibility::UNLISTED->value - 1,
+    'above maximum' => Visibility::PUBLIC->value + 1,
     'zero' => 0,
-    'text injection' => '700 OR 1=1',
-    'array' => [['700']],
+    'text injection' => '300 OR 1=1',
+    'array' => [['300']],
 ]);
 
 test('Workspace creation defaults omitted optional fields safely', function () {
     $account = $this->createAndLoginUser();
     $response = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => 'Defaults workspace', 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => 'Defaults workspace', 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $account['accessToken'])
     );
 
@@ -202,7 +203,7 @@ test('Workspace creation defaults omitted optional fields safely', function () {
             'name' => 'Defaults workspace',
             'description' => null,
             'details' => null,
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]);
 });
 
@@ -210,11 +211,11 @@ test('Duplicate workspace names return conflict and do not create a second row',
     $firstAccount = $this->createAndLoginUser();
     $name = 'Globally unique workspace';
     $firstResponse = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $firstAccount['accessToken'])
     );
     $secondResponse = $this->app->handle(
-        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => 700])
+        $this->createJsonPostRequest('/api/workspace', ['name' => $name, 'visibility' => Visibility::PUBLIC->value])
             ->withHeader('Authorization', $firstAccount['accessToken'])
     );
     /** @var PDO $pdo */
@@ -245,7 +246,7 @@ test('Authorization missed', function () {
         [
             'name' => Faker::create()->regexify('[A-Za-z0-9][A-Za-z0-9 _-]{10,30}'),
             'description' => Faker::create()->text(50),
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]
     );
 
@@ -260,7 +261,7 @@ test('Authorization failed', function () {
         [
             'name' => Faker::create()->regexify('[A-Za-z0-9][A-Za-z0-9 _-]{10,30}'),
             'description' => Faker::create()->text(50),
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]
     )->withHeader('Authorization', $account['refreshToken']);
 
@@ -275,7 +276,7 @@ test('Workspace name invalid', function () {
         [
             'name' => '12',
             'description' => Faker::create()->text(50),
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]
     )->withHeader('Authorization', $account['accessToken']);
 
@@ -291,7 +292,7 @@ test('Workspace name has invalid characters', function () {
         [
             'name' => Faker::create()->word() . ' ' . 'ä',
             'description' => Faker::create()->text(50),
-            'visibility' => 700,
+            'visibility' => Visibility::PUBLIC->value,
         ]
     )->withHeader('Authorization', $account['accessToken']);
 

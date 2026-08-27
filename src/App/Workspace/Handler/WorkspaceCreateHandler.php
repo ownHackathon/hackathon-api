@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
@@ -41,22 +41,22 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: WorkspaceRequest::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_CREATED,
+        response: Http::STATUS_CREATED,
         description: 'Workspace created successfully. The response contains the details of the newly created workspace.',
         content: new OA\JsonContent(ref: WorkspaceResponse::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
+        response: Http::STATUS_BAD_REQUEST,
         description: 'Invalid input. The provided workspace name may be empty, too long, or contain invalid characters.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_UNAUTHORIZED,
+        response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. The access token is missing or invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_CONFLICT,
+        response: Http::STATUS_CONFLICT,
         description: 'A workspace with this name already exists.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
@@ -82,7 +82,7 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
 
         $response = WorkspaceResponse::fromEntity($workspace, $account);
 
-        return new JsonResponse($response, HTTP::STATUS_CREATED, headers: [
+        return new JsonResponse($response, Http::STATUS_CREATED, headers: [
             'Location' => $location,
         ]);
     }

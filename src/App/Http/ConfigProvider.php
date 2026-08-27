@@ -9,6 +9,7 @@ use ownHackathon\App\Http\Handler\SwaggerUIHandler;
 use ownHackathon\App\Http\Middleware\ApiErrorHandlerMiddleware;
 use ownHackathon\App\Http\Middleware\PaginationMiddleware;
 use ownHackathon\App\Http\Middleware\RouteNotFoundMiddleware;
+use ownHackathon\App\Http\Validator\Input\VisibilityInput;
 use Psr\Log\LoggerInterface;
 
 class ConfigProvider
@@ -20,6 +21,7 @@ class ConfigProvider
                 'invokables' => [
                     PingHandler::class,
                     SwaggerUIHandler::class,
+                    VisibilityInput::class,
                 ],
                 'factories' => [
                     ErrorResponseFactory::class => ConfigAbstractFactory::class,

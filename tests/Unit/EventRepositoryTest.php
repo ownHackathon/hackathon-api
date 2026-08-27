@@ -9,7 +9,7 @@ use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -74,4 +74,13 @@ test('event repository maps empty reads to null and empty collections', function
     expect($repository->findOneById(1))->toBeNull()
         ->and($repository->findByWorkspaceId(1))->toBe($empty)
         ->and($repository->findeAll())->toBe($empty);
+});
+
+test('event repository treats an invalid persisted entity as not found', function (): void {
+    $store = $this->createMock(EventStoreInterface::class);
+    $hydrator = $this->createMock(EventHydratorInterface::class);
+    $store->method('fetchOne')->willReturn(['id' => 1]);
+    $hydrator->method('hydrate')->willThrowException(new \UnexpectedValueException('invalid persisted data'));
+
+    expect((new EventRepository($store, $hydrator))->findOneById(1))->toBeNull();
 });

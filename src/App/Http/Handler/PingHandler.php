@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Http\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
@@ -21,7 +21,7 @@ readonly class PingHandler implements RequestHandlerInterface
         tags: ['System Information'],
         responses: [
             new OA\Response(
-                response: HTTP::STATUS_OK,
+                response: Http::STATUS_OK,
                 description: StatusMessage::SUCCESS,
                 content: [
                     new OA\JsonContent(

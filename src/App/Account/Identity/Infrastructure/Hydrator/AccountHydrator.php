@@ -10,12 +10,14 @@ use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Clock\DateTimeFormat;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly class AccountHydrator implements AccountHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -43,7 +45,14 @@ readonly class AccountHydrator implements AccountHydratorInterface
         $collection = new AccountCollection();
 
         foreach ($data as $entity) {
-            $collection[] = $this->hydrate($entity);
+            try {
+                $collection[] = $this->hydrate($entity);
+            } catch (\Throwable $exception) {
+                $this->logger?->warning('Invalid account persistence data skipped.', [
+                    'accountId' => $entity['id'] ?? null,
+                    'exception' => $exception,
+                ]);
+            }
         }
 
         return $collection;

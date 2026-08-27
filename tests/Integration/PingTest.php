@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Psr\Http\Message\ResponseInterface;
 
 test('GET /api/ping returns successful json response', function () {
@@ -10,7 +11,7 @@ test('GET /api/ping returns successful json response', function () {
     $response = $this->app->handle($request);
 
     // 3. Status Code prüfen
-    expect($response->getStatusCode())->toBe(200);
+    expect($response->getStatusCode())->toBe(Http::STATUS_OK);
 
     // 4. Body prüfen
     $body = (string)$response->getBody();

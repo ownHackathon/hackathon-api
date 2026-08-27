@@ -52,7 +52,18 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
         }
 
         $authorization = $this->accessTokenService->decode($authorization);
-        $uuid = $this->uuid->fromString($authorization->uuid);
+        try {
+            $uuid = $this->uuid->fromString($authorization->uuid);
+        } catch (\Throwable) {
+            throw new HttpUnauthorizedException(
+                IdentityLogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
+                IdentityStatusMessage::TOKEN_INVALID,
+                [
+                    'uuid' => $authorization->uuid ?? null,
+                ],
+                Level::Warning,
+            );
+        }
         $account = $this->accountRepository->findOneByUuid($uuid);
         if (!($account instanceof AccountInterface)) {
             throw new HttpUnauthorizedException(

@@ -10,13 +10,15 @@ use ownHackathon\App\Event\Domain\EventCollection;
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\App\Workspace\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 readonly class EventHydrator implements EventHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -25,6 +27,22 @@ readonly class EventHydrator implements EventHydratorInterface
      */
     public function hydrate(array $data): EventInterface
     {
+        $visibilityValue = $data['visibility'] ?? null;
+        $visibility = is_int($visibilityValue) || is_string($visibilityValue)
+            ? Visibility::tryFrom((int) $visibilityValue)
+            : null;
+
+        if ($visibility === null) {
+            $this->logger?->warning(
+                'Invalid event visibility; falling back to unlisted.',
+                [
+                    'eventId' => $data['id'] ?? null,
+                    'visibility' => $visibilityValue,
+                ],
+            );
+            $visibility = Visibility::UNLISTED;
+        }
+
         return new Event(
             id: $data['id'],
             uuid: $this->uuid->fromString($data['uuid']),
@@ -35,7 +53,7 @@ readonly class EventHydrator implements EventHydratorInterface
             description: $data['description'],
             details: $data['details'],
             status: EventStatus::from($data['status']),
-            visibility: Visibility::from($data['visibility']),
+            visibility: $visibility,
             beginsOn: new DateTimeImmutable($data['beginsOn']),
             endsOn: new DateTimeImmutable($data['endsOn']),
             createdAt: new DateTimeImmutable($data['createdAt']),
@@ -50,7 +68,14 @@ readonly class EventHydrator implements EventHydratorInterface
         $collection = new EventCollection();
 
         foreach ($data as $entity) {
-            $collection[] = $this->hydrate($entity);
+            try {
+                $collection[] = $this->hydrate($entity);
+            } catch (\Throwable $exception) {
+                $this->logger?->warning('Invalid event persistence data skipped.', [
+                    'eventId' => $entity['id'] ?? null,
+                    'exception' => $exception,
+                ]);
+            }
         }
 
         return $collection;

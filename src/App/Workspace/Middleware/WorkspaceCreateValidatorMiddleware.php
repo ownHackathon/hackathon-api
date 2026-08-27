@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 readonly class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
 {
@@ -22,19 +23,36 @@ readonly class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();
-        $this->validator->setData($data);
 
-        if (!$this->validator->isValid()) {
+        if (!is_array($data)) {
             throw new HttpInvalidArgumentException(
                 WorkspaceLogMessage::INVALID_WORKSPACE_NAME,
                 WorkspaceStatusMessage::INVALID_WORKSPACE_NAME,
-                [
-                    'Validator Message:' => $this->validator->getMessages(),
-                ]
             );
         }
 
-        $workspaceName = WorkspaceRequest::fromArray($this->validator->getValues());
+        try {
+            $this->validator->setData($data);
+
+            if (!$this->validator->isValid()) {
+                throw new HttpInvalidArgumentException(
+                    WorkspaceLogMessage::INVALID_WORKSPACE_NAME,
+                    WorkspaceStatusMessage::INVALID_WORKSPACE_NAME,
+                    [
+                        'Validator Message:' => $this->validator->getMessages(),
+                    ]
+                );
+            }
+
+            $workspaceName = WorkspaceRequest::fromArray($this->validator->getValues());
+        } catch (HttpInvalidArgumentException $e) {
+            throw $e;
+        } catch (Throwable) {
+            throw new HttpInvalidArgumentException(
+                WorkspaceLogMessage::INVALID_WORKSPACE_NAME,
+                WorkspaceStatusMessage::INVALID_WORKSPACE_NAME,
+            );
+        }
 
         return $handler->handle($request->withAttribute(WorkspaceRequest::class, $workspaceName));
     }

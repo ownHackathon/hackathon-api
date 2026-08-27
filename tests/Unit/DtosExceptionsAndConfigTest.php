@@ -43,7 +43,7 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
     expect($config->duration)->toBe(60);
     expect(Workspace::fromArray([
         'name' => 'Team', 'owner' => 'Alice', 'ownerUuid' => 'owner', 'details' => null,
-        'visibility' => 700, 'createdAt' => 'created', 'updatedAt' => 'updated',
+        'visibility' => \ownHackathon\Core\SharedKernel\Domain\Enum\Visibility::PUBLIC->value, 'createdAt' => 'created', 'updatedAt' => 'updated',
     ])->description)->toBe('');
     expect(WorkspaceList::fromArray(['one'])->workspaces)->toBe(['one']);
     expect(AuthenticationResponse::from(new AccessToken('a'), new RefreshToken('r')))

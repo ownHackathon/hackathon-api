@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Infrastructure\Validator\Input;
+namespace ownHackathon\App\Http\Validator\Input;
 
 use Laminas\Filter\Digits;
 use Laminas\Filter\StringTrim;
 use Laminas\InputFilter\Input;
 use Laminas\Validator\NumberComparison;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 
 class VisibilityInput extends Input
 {
@@ -22,8 +23,8 @@ class VisibilityInput extends Input
         $this->getValidatorChain()->attachByName(
             NumberComparison::class,
             [
-                'min' => 100,
-                'max' => 700,
+                'min' => Visibility::UNLISTED->value,
+                'max' => Visibility::PUBLIC->value,
             ],
         );
     }

@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordService;
@@ -35,12 +35,12 @@ readonly class AccountPasswordForgottenHandler implements RequestHandlerInterfac
         content: new OA\JsonContent(ref: EMail::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: 'The request was accepted. If an account with the provided email address exists, ' .
                      'an email containing a password reset link will be sent shortly.',
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
+        response: Http::STATUS_BAD_REQUEST,
         description: 'The provided email address is invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
@@ -49,6 +49,6 @@ readonly class AccountPasswordForgottenHandler implements RequestHandlerInterfac
         $email = $request->getAttribute(EmailType::class);
         $this->passwordService->sendTokenForInitiateResetPassword($email);
 
-        return new JsonResponse([], HTTP::STATUS_OK);
+        return new JsonResponse([], Http::STATUS_OK);
     }
 }

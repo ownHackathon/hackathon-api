@@ -8,6 +8,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenSe
 use Tests\Integration\App\Factory\AccountFactory;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;
 use Tests\Integration\JsonFactory;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 
 use function array_keys;
 use function expect;
@@ -30,10 +31,49 @@ test('authenticated user can retrieve a workspace by slug', function () {
         ]);
 });
 
-test('workspace details require authentication', function () {
-    $response = $this->app->handle($this->createGetRequest('/api/workspace/not-found'));
+test('public workspace details can be read without authentication', function () {
+    $owner = AccountFactory::create();
+    $workspace = CreateWorkspacesFactory::create([
+        'accountId' => $owner['id'],
+        'visibility' => Visibility::PUBLIC->value,
+    ]);
 
-    expect($response->getStatusCode())->toBe(Http::STATUS_UNAUTHORIZED);
+    $response = $this->app->handle(
+        $this->createGetRequest('/api/workspace/' . $workspace['slug'])
+    );
+
+    expect($response->getStatusCode())->toBe(Http::STATUS_OK)
+        ->and(JsonFactory::create($response))->toHaveSubset(['name' => $workspace['name']]);
+});
+
+test('private workspace details are hidden from unauthenticated users', function () {
+    $owner = AccountFactory::create();
+    $workspace = CreateWorkspacesFactory::create([
+        'accountId' => $owner['id'],
+        'visibility' => Visibility::UNLISTED->value,
+    ]);
+
+    $response = $this->app->handle(
+        $this->createGetRequest('/api/workspace/' . $workspace['slug'])
+    );
+
+    expect($response->getStatusCode())->toBe(Http::STATUS_NOT_FOUND);
+});
+
+test('workspace with invalid visibility remains readable without causing a server error', function () {
+    $account = $this->createAndLoginUser();
+    $workspace = CreateWorkspacesFactory::create([
+        'accountId' => $account['id'],
+        'visibility' => Visibility::PUBLIC->value + 1,
+    ]);
+
+    $response = $this->app->handle(
+        $this->createGetRequest('/api/workspace/' . $workspace['slug'])
+            ->withHeader('Authorization', $account['accessToken'])
+    );
+
+    expect($response->getStatusCode())->toBe(Http::STATUS_OK)
+        ->and(JsonFactory::create($response)['visibility'])->toBe(Visibility::UNLISTED->value);
 });
 
 test('authenticated workspace lookup returns not found for an unknown slug', function () {
@@ -81,17 +121,14 @@ test('workspace detail route rejects methods other than GET', function () {
     expect($response->getStatusCode())->toBe(Http::STATUS_METHOD_NOT_ALLOWED);
 });
 
-test('workspace details reject an empty or bearer-prefixed authorization value', function (string $authorization) {
+test('workspace details reject an invalid authorization value', function () {
     $response = $this->app->handle(
         $this->createGetRequest('/api/workspace/unknown-workspace')
-            ->withHeader('Authorization', $authorization)
+            ->withHeader('Authorization', 'Bearer not-a-jwt')
     );
 
     expect($response->getStatusCode())->toBe(Http::STATUS_UNAUTHORIZED);
-})->with([
-    'empty value' => '',
-    'bearer prefix' => 'Bearer not-a-jwt',
-]);
+});
 
 test('workspace details support a trailing slash', function () {
     $account = $this->createAndLoginUser();
@@ -126,7 +163,7 @@ test('workspace details return nullable fields and visibility', function () {
         'accountId' => $account['id'],
         'description' => null,
         'details' => null,
-        'visibility' => 100,
+        'visibility' => Visibility::UNLISTED->value,
     ]);
     $response = $this->app->handle(
         $this->createGetRequest('/api/workspace/' . $workspace['slug'])
@@ -138,7 +175,7 @@ test('workspace details return nullable fields and visibility', function () {
         ->and($data)->toHaveKeys(['name', 'description', 'owner', 'ownerUuid', 'details', 'visibility', 'createdAt', 'updatedAt'])
         ->and($data['description'])->toBe('')
         ->and($data['details'])->toBeNull()
-        ->and($data['visibility'])->toBe(100);
+        ->and($data['visibility'])->toBe(Visibility::UNLISTED->value);
 });
 
 test('workspace details can be read by another authenticated account without changing the owner', function () {
@@ -166,7 +203,7 @@ test('workspace details can be read by another authenticated account without cha
 
 test('workspace details preserve all supported visibility values', function () {
     $account = $this->createAndLoginUser();
-    $visibilities = [100, 200, 300, 400, 500, 600, 700];
+    $visibilities = [Visibility::UNLISTED->value, Visibility::REGISTERED->value, Visibility::PUBLIC->value];
 
     foreach ($visibilities as $visibility) {
         $workspace = CreateWorkspacesFactory::create([

@@ -22,9 +22,17 @@ readonly class RefreshTokenViaBodyValidationMiddleware implements MiddlewareInte
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $refreshToken = $request->getParsedBody();
+
+        if (!is_array($refreshToken)) {
+            throw new HttpUnauthorizedException(
+                IdentityLogMessage::REFRESH_TOKEN_INVALID,
+                IdentityStatusMessage::TOKEN_INVALID,
+            );
+        }
+
         $refreshToken = $refreshToken['refreshToken'] ?? null;
 
-        if (!$refreshToken || !$this->tokenService->isValid($refreshToken)) {
+        if (!is_string($refreshToken) || $refreshToken === '' || !$this->tokenService->isValid($refreshToken)) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::REFRESH_TOKEN_INVALID,
                 IdentityStatusMessage::TOKEN_INVALID,

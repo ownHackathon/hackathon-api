@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\EmptyResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
@@ -46,11 +46,11 @@ class LogoutHandler implements RequestHandlerInterface
         )
     )]
     #[OA\Response(
-        response: HTTP::STATUS_NO_CONTENT,
+        response: Http::STATUS_NO_CONTENT,
         description: 'Logout successful. The refresh token has been deleted and the session is invalidated.',
     )]
     #[OA\Response(
-        response: HTTP::STATUS_UNAUTHORIZED,
+        response: Http::STATUS_UNAUTHORIZED,
         description: 'Unauthorized. The access token is missing, expired, or the user could not be identified.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
     )]
@@ -61,6 +61,6 @@ class LogoutHandler implements RequestHandlerInterface
 
         $this->accountService->logout($account, $refreshToken);
 
-        return new EmptyResponse(HTTP::STATUS_NO_CONTENT);
+        return new EmptyResponse(Http::STATUS_NO_CONTENT);
     }
 }

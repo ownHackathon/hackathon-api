@@ -3,6 +3,7 @@
 namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Persistence\Pagination;
 
 #[OA\Schema(
     title: 'Pagination Meta',
@@ -12,7 +13,7 @@ use OpenApi\Attributes as OA;
 readonly class PaginationMeta
 {
     public function __construct(
-        #[OA\Property(example: 1)]
+        #[OA\Property(example: Pagination::MIN_PAGE)]
         public int $currentPage,
         #[OA\Property(example: 10)]
         public int $totalPages,

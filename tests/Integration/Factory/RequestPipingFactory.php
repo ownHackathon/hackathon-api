@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Factory;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -32,7 +32,7 @@ class RequestPipingFactory
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 $this->savedRequest = $request;
-                return new EmptyResponse(HTTP::STATUS_NO_CONTENT);
+                return new EmptyResponse(Http::STATUS_NO_CONTENT);
             }
         };
         $middleware->process($originalRequest, $dummyNextHandler);

@@ -11,6 +11,7 @@ use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 class ConfigProvider
 {
@@ -51,6 +52,7 @@ class ConfigProvider
         return [
             EventHydrator::class => [
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             EventTable::class => [
                 Query::class,

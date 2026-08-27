@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
@@ -46,12 +46,12 @@ readonly class AccountActivationHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: AccountRegistration::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_CREATED,
+        response: Http::STATUS_CREATED,
         description: 'Account successfully created and activated. The user can now log in.',
         content: new OA\JsonContent(ref: AccountResponse::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
+        response: Http::STATUS_BAD_REQUEST,
         description: "Validation failed. This can happen if:\n" .
         "1. The token is invalid or has expired.\n" .
         "2. The password does not meet the security requirements.\n" .
@@ -67,6 +67,6 @@ readonly class AccountActivationHandler implements RequestHandlerInterface
 
         $location = $this->urlHelper->generate('api_account_detail', ['accountUuid' => $account->uuid]);
 
-        return new JsonResponse($account, HTTP::STATUS_CREATED, ['Location' => $location]);
+        return new JsonResponse($account, Http::STATUS_CREATED, ['Location' => $location]);
     }
 }

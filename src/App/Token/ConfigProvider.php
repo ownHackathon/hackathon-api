@@ -11,6 +11,7 @@ use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenTable;
+use Psr\Log\LoggerInterface;
 
 readonly class ConfigProvider
 {
@@ -53,6 +54,7 @@ readonly class ConfigProvider
         return [
             TokenHydrator::class => [
                 UuidFactoryInterface::class,
+                LoggerInterface::class,
             ],
             TokenRepository::class => [
                 TokenStoreInterface::class,

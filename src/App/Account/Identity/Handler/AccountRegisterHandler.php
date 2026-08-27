@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use Fig\Http\Message\StatusCodeInterface as HTTP;
+use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
@@ -35,13 +35,13 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
         content: new OA\JsonContent(ref: EMail::class)
     )]
     #[OA\Response(
-        response: HTTP::STATUS_OK,
+        response: Http::STATUS_OK,
         description: "The request was processed successfully. Depending on the state of the account, one of the following actions will occur:\n" .
                      "1. **Account does not exist:** A token to activate the new account will be sent to the email address.\n" .
                      '2. **Account already exists:** A token to reset the password will be sent to the email address.',
     )]
     #[OA\Response(
-        response: HTTP::STATUS_BAD_REQUEST,
+        response: Http::STATUS_BAD_REQUEST,
         description: 'The provided email address is invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class)
     )]
@@ -52,6 +52,6 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
         $this->accountRegisterService->register($email);
 
 
-        return new JsonResponse([], HTTP::STATUS_OK);
+        return new JsonResponse([], Http::STATUS_OK);
     }
 }

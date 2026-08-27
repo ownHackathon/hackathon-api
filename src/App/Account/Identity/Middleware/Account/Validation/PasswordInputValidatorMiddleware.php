@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
 {
@@ -23,19 +24,35 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $this->validator->setData($data);
-
-        if (!$this->validator->isValid()) {
+        if (!is_array($data)) {
             throw new HttpInvalidArgumentException(
                 IdentityLogMessage::PASSWORD_INVALID,
                 IdentityStatusMessage::INVALID_DATA,
-                [
-                    'Validator Message:' => $this->validator->getMessages(),
-                ]
             );
         }
 
-        $password = AccountPassword::fromString($this->validator->getValues()['password']);
+        try {
+            $this->validator->setData($data);
+
+            if (!$this->validator->isValid()) {
+                throw new HttpInvalidArgumentException(
+                    IdentityLogMessage::PASSWORD_INVALID,
+                    IdentityStatusMessage::INVALID_DATA,
+                    [
+                        'Validator Message:' => $this->validator->getMessages(),
+                    ]
+                );
+            }
+
+            $password = AccountPassword::fromString($this->validator->getValues()['password']);
+        } catch (HttpInvalidArgumentException $e) {
+            throw $e;
+        } catch (Throwable) {
+            throw new HttpInvalidArgumentException(
+                IdentityLogMessage::PASSWORD_INVALID,
+                IdentityStatusMessage::INVALID_DATA,
+            );
+        }
         return $handler->handle($request->withAttribute(AccountPassword::class, $password));
     }
 }
