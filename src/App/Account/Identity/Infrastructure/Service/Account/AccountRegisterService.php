@@ -5,7 +5,6 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivation;
-use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use ownHackathon\App\Mailing\Domain\EmailType;
@@ -25,7 +24,7 @@ readonly class AccountRegisterService implements AccountRegisterServiceInterface
     {
         if (!$this->accountService->isEmailAvailable($email)) {
             $this->accountService->sendTokenForPasswordChange($email);
-            throw new DuplicateEmailException($email->toString());
+            return;
         }
 
         $activation = new AccountActivation(
