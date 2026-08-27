@@ -23,11 +23,11 @@ use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescripti
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use ownHackathon\App\Http\Middleware\PaginationMiddleware;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
-use ownHackathon\App\Workspace\Middleware\PaginationMiddleware;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\VisibilityInput;
 
@@ -104,7 +104,6 @@ class ConfigProvider
                 ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
                 PaginationService::class => ConfigAbstractFactory::class,
                 WorkspaceHandler::class => ConfigAbstractFactory::class,
-                PaginationMiddleware::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
                 PaginationTotalPages::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
                 SlugService::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
             ],

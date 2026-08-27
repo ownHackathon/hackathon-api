@@ -7,6 +7,7 @@ use ownHackathon\App\Http\Factory\ErrorResponseFactory;
 use ownHackathon\App\Http\Handler\PingHandler;
 use ownHackathon\App\Http\Handler\SwaggerUIHandler;
 use ownHackathon\App\Http\Middleware\ApiErrorHandlerMiddleware;
+use ownHackathon\App\Http\Middleware\PaginationMiddleware;
 use ownHackathon\App\Http\Middleware\RouteNotFoundMiddleware;
 use Psr\Log\LoggerInterface;
 
@@ -23,6 +24,7 @@ class ConfigProvider
                 'factories' => [
                     ErrorResponseFactory::class => ConfigAbstractFactory::class,
                     ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
+                    PaginationMiddleware::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
                     RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
                 ],
             ],
