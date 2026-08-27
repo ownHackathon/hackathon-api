@@ -17,3 +17,4 @@ coverage.xml
 /public/test.php
 /tmp
 .env
+AGENTS.md
