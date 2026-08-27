@@ -3,7 +3,10 @@
 namespace Tests\Unit;
 
 use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Monolog\Level;
 use ownHackathon\App\Http\Exception\HttpDuplicateEntryException;
+use ownHackathon\App\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\App\Http\Handler\PingHandler;
@@ -24,6 +27,60 @@ test('HTTP exceptions expose status context and message', function (): void {
         ->and($exception->getResponseMessage())->toBe('response')
         ->and((new HttpInvalidArgumentException('a', 'b'))->getHttpStatusCode())->toBe(400)
         ->and((new HttpUnauthorizedException('a', 'b'))->getHttpStatusCode())->toBe(401);
+});
+
+test('duplicate entry exception preserves all constructor data and uses conflict status', function (): void {
+    $previous = new \RuntimeException('database constraint');
+    $exception = new HttpDuplicateEntryException(
+        'Duplicate workspace',
+        'workspace name already in use',
+        ['Workspace:' => 'existing-workspace'],
+        Level::Error,
+        $previous,
+    );
+
+    expect($exception->getMessage())->toBe('Duplicate workspace')
+        ->and($exception->getCode())->toBe(409)
+        ->and($exception->getHttpStatusCode())->toBe(409)
+        ->and($exception->getResponseMessage())->toBe('workspace name already in use')
+        ->and($exception->getContext())->toBe(['Workspace:' => 'existing-workspace'])
+        ->and($exception->getLogLevel())->toBe(Level::Error)
+        ->and($exception->getPrevious())->toBe($previous);
+});
+
+test('duplicate entry exception applies warning log level and empty context by default', function (): void {
+    $exception = new HttpDuplicateEntryException('duplicate log', 'duplicate response');
+
+    expect($exception->getContext())->toBe([])
+        ->and($exception->getLogLevel())->toBe(Level::Warning)
+        ->and($exception->getPrevious())->toBeNull();
+});
+
+test('handled invalid argument exception exposes a successful response status', function (): void {
+    $previous = new \InvalidArgumentException('invalid input was handled');
+    $exception = new HttpHandledInvalidArgumentAsSuccessException(
+        'Invalid account state',
+        'account already activated',
+        ['account' => 'user@example.test'],
+        Level::Info,
+        $previous,
+    );
+
+    expect($exception->getMessage())->toBe('Invalid account state')
+        ->and($exception->getCode())->toBe(200)
+        ->and($exception->getHttpStatusCode())->toBe(200)
+        ->and($exception->getResponseMessage())->toBe('account already activated')
+        ->and($exception->getContext())->toBe(['account' => 'user@example.test'])
+        ->and($exception->getLogLevel())->toBe(Level::Info)
+        ->and($exception->getPrevious())->toBe($previous);
+});
+
+test('handled invalid argument exception uses notice log level by default', function (): void {
+    $exception = new HttpHandledInvalidArgumentAsSuccessException('handled log', 'handled response');
+
+    expect($exception->getLogLevel())->toBe(Level::Notice)
+        ->and($exception->getContext())->toBe([])
+        ->and($exception->getPrevious())->toBeNull();
 });
 
 test('ping handler returns runtime information', function (): void {
@@ -59,5 +116,27 @@ test('swagger handler serves the documentation page', function (): void {
         define('ROOT_DIR', dirname(__DIR__, 2) . '/');
     }
     $response = (new SwaggerUIHandler())->handle(new ServerRequest());
-    expect($response->getStatusCode())->toBe(200)->and($response->getHeaderLine('content-type'))->toContain('text/html');
+    $body = (string) $response->getBody();
+
+    expect($response)->toBeInstanceOf(HtmlResponse::class)
+        ->and($response->getStatusCode())->toBe(200)
+        ->and($response->getHeaderLine('content-type'))->toContain('text/html')
+        ->and($body)->toContain('<title>ownHackathon - SwaggerUI</title>')
+        ->and($body)->toContain('<div id="swagger-ui"></div>')
+        ->and($body)->toContain("url: 'swagger.json'")
+        ->and($body)->toContain('SwaggerUIBundle');
+});
+
+test('swagger handler returns the same documentation for any request method', function (): void {
+    if (!defined('ROOT_DIR')) {
+        define('ROOT_DIR', dirname(__DIR__, 2) . '/');
+    }
+
+    $handler = new SwaggerUIHandler();
+    $getResponse = $handler->handle((new ServerRequest())->withMethod('GET'));
+    $headResponse = $handler->handle((new ServerRequest())->withMethod('HEAD'));
+
+    expect((string) $getResponse->getBody())->toBe((string) $headResponse->getBody())
+        ->and($headResponse->getStatusCode())->toBe(200)
+        ->and($headResponse->getHeaderLine('content-type'))->toContain('text/html');
 });
