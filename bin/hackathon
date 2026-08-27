@@ -168,6 +168,65 @@ generate_openapi() {
     $DOCKER_COMPOSE exec $CONTAINER_PHP composer run openapi
 }
 
+run_tests() {
+    local suite=""
+    local test_target=""
+    local selector="${2:-}"
+    local filter=""
+
+    case "${1:-}" in
+      "unit"|"units")
+        suite="unit"
+        test_target="tests/Unit"
+        shift
+        ;;
+      "integration"|"integrations")
+        suite="integration"
+        test_target="tests/Integration"
+        shift
+        ;;
+      "all")
+        shift
+        ;;
+    esac
+
+    # Support the compact form: unit HttpTest:'test name'
+    if [ -n "$test_target" ] && [[ "$selector" == *:* ]]; then
+        local test_file="${selector%%:*}"
+        filter="${selector#*:}"
+
+        if [[ "$test_file" != *.php ]]; then
+            test_file="${test_file}.php"
+        fi
+        if [[ "$test_file" != */* ]]; then
+            local matching_file
+            matching_file=$(find "$test_target" -type f -name "$test_file" -print -quit)
+            if [ -z "$matching_file" ]; then
+                error "Test file not found in ${test_target}: ${test_file}"
+                return 1
+            fi
+            test_file="$matching_file"
+        elif [[ "$test_file" != "$test_target"/* ]]; then
+            test_file="${test_target}/${test_file}"
+        fi
+
+        test_target="$test_file"
+        shift
+        shift
+
+        if [ "$suite" = "unit" ] || [ "$suite" = "integration" ]; then
+            $DOCKER_COMPOSE exec $CONTAINER_PHP vendor/bin/pest "$test_target" --filter="$filter" "$@"
+            return
+        fi
+    fi
+
+    if [ -n "$test_target" ]; then
+        $DOCKER_COMPOSE exec $CONTAINER_PHP vendor/bin/pest "$test_target" "$@"
+    else
+        $DOCKER_COMPOSE exec $CONTAINER_PHP vendor/bin/pest "$@"
+    fi
+}
+
 build_stack() {
     up
     install_deps "$1"
@@ -214,7 +273,7 @@ case $1 in
     fi
     ;;
   "test")
-    $DOCKER_COMPOSE exec $CONTAINER_PHP vendor/bin/phpunit "${@:2}"
+    run_tests "${@:2}"
     ;;
   "mysql")
     log "Connecting to Database Console..."

@@ -76,6 +76,11 @@ Run the script from the project root directory:
 *   **`logs [svc]`**: Tails logs for all or a specific service (e.g., `./bin/hackathon logs php`).
 *   **`info`**: Displays connectivity info (URLs, Ports, and DB Credentials) for running services.
 *   **`openapi`**: Regenerates the API documentation.
+*   **`test [unit|integration|file] [options]`**: Runs Pest tests selectively in the PHP container. Without arguments, all tests are executed. Examples:
+    *   `./bin/hackathon test unit`: Runs all unit tests.
+    *   `./bin/hackathon test integration`: Runs all integration tests.
+    *   `./bin/hackathon test tests/Unit/HttpTest.php`: Runs one test file.
+    *   `./bin/hackathon test integration WorkspaceCreateTest:'Duplicate workspace'`: Runs a matching test function from a file below `tests/Integration/`.
 
 #### Cleanup & Reset
 *   **`clean {docker|app|all}`**:
@@ -90,7 +95,6 @@ Run the script from the project root directory:
 #### Development & Utility Commands
 *   **`composer [...]`**: Run Composer commands in the PHP container.
 *   **`php [...]`**: Run PHP commands in the PHP container.
-*   **`test [...]`**: Shortcut to run PHPUnit tests (passes arguments to PHPUnit).
 *   **`bash`**: Direct interactive shell access to the PHP container.
 *   **`mysql`**: Direct access to the MariaDB database console.
 *   **`indocker [service] [command]`**: Access any specific container (`php`, `apache`, `database`, `database-testing`, `mailhog`).
