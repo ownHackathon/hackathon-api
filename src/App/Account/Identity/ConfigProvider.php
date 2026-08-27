@@ -6,6 +6,9 @@ use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Handler\AccessTokenHandler;
 use ownHackathon\App\Account\Identity\Handler\AccountActivationHandler;
 use ownHackathon\App\Account\Identity\Handler\AccountPasswordForgottenHandler;
@@ -20,11 +23,8 @@ use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationH
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthTable;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
@@ -68,13 +68,13 @@ use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenDatabaseExist
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenValidationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use ownHackathon\Core\Mailing\Infrastructure\EmailService;
-use ownHackathon\Core\Mailing\Infrastructure\EmailServiceFactory;
-use ownHackathon\Core\Mailing\Infrastructure\Validator\EMailValidator;
-use ownHackathon\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
+use ownHackathon\App\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Mailing\Infrastructure\EmailServiceFactory;
+use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
+use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware;
 use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly class ConfigProvider

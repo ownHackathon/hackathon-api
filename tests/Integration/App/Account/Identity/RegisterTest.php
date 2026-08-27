@@ -6,7 +6,7 @@ use Exception;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Mockery;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
+use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 
 test('Valid email address and activation token sent', function () {

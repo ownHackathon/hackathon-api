@@ -70,7 +70,7 @@ test('Token is invalid', function () {
 
 test('Token has incorrect type', function () {
     $passwordChange = PasswordChangeFactory::create([
-        'tokenType' => \ownHackathon\Core\Shared\Domain\Enum\Token\TokenType::Default->value,
+        'tokenType' => \ownHackathon\App\Token\Domain\Enum\TokenType::Default->value,
     ]);
 
     $request = $this->createJsonPatchRequest(

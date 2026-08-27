@@ -2,10 +2,10 @@
 
 namespace ownHackathon\App\Workspace\DTO;
 
-use ownHackathon\Core\Shared\Domain\Enum\DataType;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
+use ownHackathon\Core\Shared\Domain\Enum\DataType;
 
 #[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
 readonly class WorkspaceResponse

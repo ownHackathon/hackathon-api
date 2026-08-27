@@ -3,12 +3,13 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivation;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
+use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 
 readonly class AccountRegisterService implements AccountRegisterServiceInterface
 {

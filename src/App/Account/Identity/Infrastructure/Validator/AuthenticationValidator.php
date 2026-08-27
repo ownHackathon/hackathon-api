@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
-use ownHackathon\Core\Mailing\Infrastructure\Validator\Input\EmailInput;
+use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
 

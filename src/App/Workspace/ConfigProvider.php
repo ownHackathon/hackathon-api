@@ -3,25 +3,19 @@
 namespace ownHackathon\App\Workspace;
 
 use Envms\FluentPDO\Query;
-use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
-use ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\Middleware\RequireLoginMiddleware;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Helper\UrlHelper;
-use ownHackathon\App\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\App\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\App\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
-use ownHackathon\App\Shared\Middleware\PaginationMiddleware;
-use ownHackathon\App\Shared\Validator\Input\VisibilityInput;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Account\Identity\Middleware\RequireLoginMiddleware;
+use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceCreateHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceHandler;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
+use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
+use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
 use ownHackathon\App\Workspace\Infrastructure\Service\WorkspaceCreator;
@@ -30,6 +24,12 @@ use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsIn
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
+use ownHackathon\Core\Shared\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
+use ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware;
+use ownHackathon\Core\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
+use ownHackathon\Core\Shared\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {

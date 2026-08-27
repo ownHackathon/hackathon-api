@@ -2,8 +2,8 @@
 
 namespace ownHackathon\App\Account\Identity\Domain;
 
-use ownHackathon\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
+use ownHackathon\Core\Shared\Utils\Collection;
 
 use function get_class;
 use function sprintf;

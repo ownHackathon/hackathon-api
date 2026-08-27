@@ -7,7 +7,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
+use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;

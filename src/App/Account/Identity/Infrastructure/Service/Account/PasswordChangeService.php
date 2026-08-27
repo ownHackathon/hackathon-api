@@ -2,16 +2,16 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
-use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
-use ownHackathon\Core\Token\DTO\Token;
 use ownHackathon\App\Account\Identity\Domain\Account;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Token\Domain\Enum\TokenType;
+use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
+use ownHackathon\App\Token\Domain\TokenInterface;
+use ownHackathon\App\Token\DTO\Token;
+use ownHackathon\Core\Shared\Domain\Exception\HttpInvalidArgumentException;
 
 readonly class PasswordChangeService
 {

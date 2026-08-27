@@ -3,11 +3,10 @@
 namespace ownHackathon\App\Event\Domain;
 
 use DateTimeImmutable;
+use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\Core\Shared\Domain\Enum\Visibility;
 use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\Shared\Utils\Collectible;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Shared\Domain\Event\EventInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class Event implements EventInterface, Collectible

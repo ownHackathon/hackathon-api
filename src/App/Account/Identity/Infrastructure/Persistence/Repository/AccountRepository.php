@@ -4,9 +4,10 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repositor
 
 use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
-use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;

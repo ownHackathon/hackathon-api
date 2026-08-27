@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Store;
 
-use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
 
 interface StoreInterface
 {

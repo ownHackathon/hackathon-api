@@ -3,8 +3,6 @@
 namespace ownHackathon\App\Event\Domain;
 
 use InvalidArgumentException;
-use ownHackathon\App\Shared\Domain\Event\EventCollectionInterface;
-use ownHackathon\App\Shared\Domain\Event\EventInterface;
 use ownHackathon\Core\Shared\Utils\Collection;
 
 class EventCollection extends Collection implements EventCollectionInterface

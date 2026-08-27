@@ -5,8 +5,8 @@ namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Store;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
 use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
 use PDOException;
 use ReflectionClass;
 

@@ -3,21 +3,21 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
 use ownHackathon\App\Account\Identity\DTO\Response\AuthenticationResponse;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
 
 readonly class AccountAuthenticationService
 {

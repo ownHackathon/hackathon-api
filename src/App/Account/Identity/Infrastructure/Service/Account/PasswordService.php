@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Monolog\Level;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;

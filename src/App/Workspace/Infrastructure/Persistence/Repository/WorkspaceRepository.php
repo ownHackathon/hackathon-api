@@ -2,15 +2,15 @@
 
 namespace ownHackathon\App\Workspace\Infrastructure\Persistence\Repository;
 
+use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
+use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\App\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
 use PDOException;
 
 readonly class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface

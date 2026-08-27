@@ -3,14 +3,14 @@
 namespace ownHackathon\App\Event;
 
 use Envms\FluentPDO\Query;
-use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use ownHackathon\App\Event\Domain\Repository\EventRepositoryInterface;
 use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
+use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
+use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
-use ownHackathon\App\Shared\Infrastructure\Hydrator\EventHydratorInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
 
 class ConfigProvider
 {
@@ -41,7 +41,7 @@ class ConfigProvider
             'factories' => [
                 EventHydrator::class => ConfigAbstractFactory::class,
                 EventTable::class => ConfigAbstractFactory::class,
-                EventRepositoryInterface::class => ConfigAbstractFactory::class,
+                EventRepository::class => ConfigAbstractFactory::class,
             ],
         ];
     }

@@ -6,7 +6,6 @@ use DateTimeImmutable;
 use ownHackathon\Core\Shared\Domain\Enum\Visibility;
 use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\Shared\Utils\Collectible;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
 use Ramsey\Uuid\UuidInterface;
 
 readonly class Workspace implements WorkspaceInterface, Collectible

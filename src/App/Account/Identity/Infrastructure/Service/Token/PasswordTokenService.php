@@ -2,9 +2,9 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\Core\Mailing\Domain\EmailType;
-use ownHackathon\Core\Mailing\Infrastructure\EmailService;
-use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
+use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Token\Domain\TokenInterface;
 
 use function sprintf;
 

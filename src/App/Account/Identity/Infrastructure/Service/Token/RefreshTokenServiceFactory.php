@@ -2,9 +2,9 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use Psr\Container\ContainerInterface;
 
 readonly class RefreshTokenServiceFactory

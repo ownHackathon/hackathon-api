@@ -4,7 +4,6 @@ namespace ownHackathon\App\Event\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\AbstractTable;
 use PDOException;

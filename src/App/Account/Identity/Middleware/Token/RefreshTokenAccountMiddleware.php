@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Token;
 
-use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
+use Monolog\Level;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
-use Monolog\Level;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

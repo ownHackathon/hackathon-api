@@ -3,9 +3,6 @@
 namespace ownHackathon;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
-use ownHackathon\Core\Mailing;
-use ownHackathon\Core\Shared;
-use ownHackathon\Core\Token;
 
 class ConfigProvider
 {

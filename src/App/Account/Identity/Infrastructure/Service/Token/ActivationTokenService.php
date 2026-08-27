@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\Core\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Mailing\Infrastructure\EmailService;
 
 use function sprintf;
 

@@ -3,16 +3,16 @@
 namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
 use DateTimeImmutable;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
+use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use ownHackathon\App\Workspace\Domain\Workspace;
+use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 use ownHackathon\Core\Shared\Domain\Enum\Visibility;
 use ownHackathon\Core\Shared\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Shared\Infrastructure\Service\SlugService;
 use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Service\WorkspaceCreatorInterface;
-use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 
 readonly class WorkspaceCreator implements WorkspaceCreatorInterface
 {

@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Event\Infrastructure\Persistence\Repository;
 
-use ownHackathon\App\Shared\Domain\Event\EventCollectionInterface;
-use ownHackathon\App\Shared\Domain\Event\EventInterface;
-use ownHackathon\App\Shared\Infrastructure\Hydrator\EventHydratorInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\EventRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Persistence\Table\EventStoreInterface;
+use ownHackathon\App\Event\Domain\EventCollectionInterface;
+use ownHackathon\App\Event\Domain\EventInterface;
+use ownHackathon\App\Event\Domain\Repository\EventRepositoryInterface;
+use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
+use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;

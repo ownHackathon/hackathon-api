@@ -2,10 +2,10 @@
 
 namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
-use ownHackathon\App\Shared\Infrastructure\Persistence\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Shared\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\App\Shared\Infrastructure\ValueObject\Pagination;
+use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\PaginationMeta;
+use ownHackathon\Core\Shared\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\Core\Shared\Infrastructure\ValueObject\Pagination;
 
 readonly class PaginationService
 {

@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
-use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Shared\Domain\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;

@@ -8,17 +8,17 @@ use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use ownHackathon\Core\Mailing\Domain\EmailType;
-use ownHackathon\Core\Shared\Domain\Enum\Token\TokenType;
+use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\App\Token\Domain\Enum\TokenType;
+use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
+use ownHackathon\App\Token\Domain\Token;
+use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\Core\Shared\Domain\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Shared\Domain\Token\TokenInterface;
-use ownHackathon\Core\Shared\Infrastructure\Persistence\Repository\Token\TokenRepositoryInterface;
 use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\Core\Token\Domain\Token;
 
 readonly class AccountService
 {

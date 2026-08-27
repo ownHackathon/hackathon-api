@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Account\Identity\Domain;
 
 use DateTimeImmutable;
-use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Shared\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\Shared\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;

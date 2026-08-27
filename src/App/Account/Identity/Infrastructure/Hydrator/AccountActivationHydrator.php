@@ -7,7 +7,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountActivation;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\Core\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
 use Ramsey\Uuid\UuidFactoryInterface;
 

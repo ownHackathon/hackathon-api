@@ -82,11 +82,10 @@
     "psr-4": {
       "ownHackathon\\App\\Account\\Identity\\": "src/App/Account/Identity/",
       "ownHackathon\\App\\Event\\": "src/App/Event/",
-      "ownHackathon\\App\\Shared\\": "src/App/Shared/",
+      "ownHackathon\\App\\Mailing\\": "src/App/Mailing/",
+      "ownHackathon\\App\\Token\\": "src/App/Token/",
       "ownHackathon\\App\\Workspace\\": "src/App/Workspace/",
-      "ownHackathon\\Core\\Mailing\\": "src/Core/Mailing/",
       "ownHackathon\\Core\\Shared\\": "src/Core/Shared/",
-      "ownHackathon\\Core\\Token\\": "src/Core/Token/",
       "ownHackathon\\App\\": "src/App/",
       "ownHackathon\\Core\\": "src/Core/",
       "ownHackathon\\": "src/"

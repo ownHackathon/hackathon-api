@@ -2,10 +2,8 @@
 
 namespace ownHackathon\App\Workspace\Domain;
 
-use ownHackathon\Core\Shared\Utils\Collection;
 use InvalidArgumentException;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
+use ownHackathon\Core\Shared\Utils\Collection;
 
 use function get_class;
 use function sprintf;

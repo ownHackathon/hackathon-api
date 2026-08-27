@@ -4,14 +4,13 @@ namespace ownHackathon\App\Workspace\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
+use ownHackathon\App\Workspace\Domain\Workspace;
+use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
+use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
+use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Core\Shared\Domain\Enum\DateTimeFormat;
 use ownHackathon\Core\Shared\Domain\Enum\Visibility;
 use ownHackathon\Core\Shared\Utils\UuidFactoryInterface;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceCollectionInterface;
-use ownHackathon\App\Shared\Domain\Workspace\WorkspaceInterface;
-use ownHackathon\App\Shared\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 
 readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
 {

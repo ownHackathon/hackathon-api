@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use ownHackathon\Core\Mailing\Domain\EmailType;
-use ownHackathon\Core\Mailing\DTO\EMail;
-use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountRegisterServiceInterface;
 use Fig\Http\Message\StatusCodeInterface as HTTP;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
+use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\App\Mailing\DTO\EMail;
+use ownHackathon\Core\Shared\Infrastructure\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

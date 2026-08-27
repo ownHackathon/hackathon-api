@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\Core\Mailing\Infrastructure\EmailService;
+use ownHackathon\App\Mailing\Infrastructure\EmailService;
 use Psr\Container\ContainerInterface;
 
 readonly class ActivationTokenServiceFactory

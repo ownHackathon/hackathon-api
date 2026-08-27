@@ -9,9 +9,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
-            Mailing\ConfigProvider::class,
             Shared\ConfigProvider::class,
-            Token\ConfigProvider::class,
         ]);
 
         return $aggregator->getMergedConfig();

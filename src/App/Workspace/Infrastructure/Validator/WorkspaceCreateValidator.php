@@ -3,10 +3,10 @@
 namespace ownHackathon\App\Workspace\Infrastructure\Validator;
 
 use Laminas\InputFilter\InputFilter;
-use ownHackathon\App\Shared\Validator\Input\VisibilityInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
+use ownHackathon\Core\Shared\Validator\Input\VisibilityInput;
 
 class WorkspaceCreateValidator extends InputFilter
 {

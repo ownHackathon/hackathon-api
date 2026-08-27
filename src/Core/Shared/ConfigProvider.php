@@ -5,6 +5,9 @@ namespace ownHackathon\Core\Shared;
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use ownHackathon\Core\Shared\Infrastructure\Service\PaginationTotalPages;
+use ownHackathon\Core\Shared\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Shared\Validator\Input\VisibilityInput;
 use Psr\Log\LoggerInterface;
 
 class ConfigProvider
@@ -21,6 +24,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                VisibilityInput::class,
             ],
             'aliases' => [
             ],
@@ -30,6 +34,8 @@ class ConfigProvider
                 \ownHackathon\Core\Shared\Middleware\RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
                 \ownHackathon\Core\Shared\Infrastructure\Service\SlugService::class => InvokableFactory::class,
                 \ownHackathon\Core\Shared\Middleware\FluentTransactionMiddleware::class => ConfigAbstractFactory::class,
+                PaginationMiddleware::class => InvokableFactory::class,
+                PaginationTotalPages::class => InvokableFactory::class,
             ],
         ];
     }

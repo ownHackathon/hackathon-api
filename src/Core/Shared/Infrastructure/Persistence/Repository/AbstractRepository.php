@@ -2,6 +2,7 @@
 
 namespace ownHackathon\Core\Shared\Infrastructure\Persistence\Repository;
 
+use ownHackathon\Core\Shared\Domain\Repository\RepositoryInterface;
 use ownHackathon\Core\Shared\Infrastructure\Hydrator\HydratorInterface;
 use ownHackathon\Core\Shared\Infrastructure\Persistence\Store\StoreInterface;
 
