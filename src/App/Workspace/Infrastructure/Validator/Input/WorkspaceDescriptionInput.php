@@ -11,7 +11,6 @@ class WorkspaceDescriptionInput extends Input
         parent::__construct('description');
 
         $this->setRequired(false);
-        $this->setFallbackValue('');
         $this->setAllowEmpty(true);
 
         $this->getFilterChain()->attachByName('StringTrim');

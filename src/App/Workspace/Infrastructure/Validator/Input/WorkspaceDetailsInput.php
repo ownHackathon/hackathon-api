@@ -11,7 +11,6 @@ class WorkspaceDetailsInput extends Input
         parent::__construct('details');
 
         $this->setRequired(false);
-        $this->setFallbackValue('');
         $this->setAllowEmpty(true);
 
         $this->getFilterChain()->attachByName('StringTrim');

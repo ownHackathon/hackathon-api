@@ -14,7 +14,6 @@ class VisibilityInput extends Input
         parent::__construct('visibility');
 
         $this->setRequired(true);
-        $this->setFallbackValue(5);
         $this->setAllowEmpty(false);
 
         $this->getFilterChain()->attachByName(StringTrim::class);
