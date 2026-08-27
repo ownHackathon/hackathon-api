@@ -162,6 +162,8 @@ readonly class ConfigProvider
                     RequireLoginMiddleware::class,
                     AccessTokenValidationMiddleware::class,
                     RefreshTokenViaBodyValidationMiddleware::class,
+                    RefreshTokenDatabaseExistenceMiddleware::class,
+                    RefreshTokenMatchClientIdentificationMiddleware::class,
                     LogoutHandler::class,
                 ],
                 'name' => 'api_identity_logout',
