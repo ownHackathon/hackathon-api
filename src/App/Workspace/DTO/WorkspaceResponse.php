@@ -44,7 +44,6 @@ readonly class WorkspaceResponse
             nullable: true
         )]
         public ?string $description,
-
         public int $visibility,
     ) {
     }
