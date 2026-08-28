@@ -84,6 +84,7 @@
       "ownHackathon\\App\\Event\\": "src/App/Event/",
       "ownHackathon\\App\\Http\\": "src/App/Http/",
       "ownHackathon\\App\\Mailing\\": "src/App/Mailing/",
+      "ownHackathon\\App\\Policy\\": "src/App/Policy/",
       "ownHackathon\\App\\Token\\": "src/App/Token/",
       "ownHackathon\\App\\Workspace\\": "src/App/Workspace/",
       "ownHackathon\\Core\\Clock\\": "src/Core/Clock/",

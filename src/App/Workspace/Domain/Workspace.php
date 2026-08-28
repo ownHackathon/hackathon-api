@@ -25,4 +25,9 @@ readonly class Workspace implements WorkspaceInterface, Collectible
         public DateTimeImmutable $updatedAt,
     ) {
     }
+
+    public function getOwnerId(): ?int
+    {
+        return $this->accountId;
+    }
 }

@@ -3,10 +3,11 @@
 namespace ownHackathon\App\Workspace\Domain;
 
 use DateTimeImmutable;
+use ownHackathon\App\Policy\Domain\VisibilityAwareInterface;
 use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
-interface WorkspaceInterface
+interface WorkspaceInterface extends VisibilityAwareInterface
 {
     public ?int $id { get; }
 

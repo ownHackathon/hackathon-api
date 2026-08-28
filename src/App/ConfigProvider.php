@@ -12,6 +12,7 @@ class ConfigProvider
             Account\ConfigProvider::class,
             Http\ConfigProvider::class,
             Mailing\ConfigProvider::class,
+            Policy\ConfigProvider::class,
             Token\ConfigProvider::class,
             Workspace\ConfigProvider::class,
             Event\ConfigProvider::class,

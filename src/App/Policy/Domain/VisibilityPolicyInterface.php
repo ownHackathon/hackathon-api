@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Domain;
+namespace ownHackathon\App\Policy\Domain;
 
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 
-interface WorkspaceVisibilityPolicyInterface
+interface VisibilityPolicyInterface
 {
     public function isAvailableFor(
-        WorkspaceInterface $workspace,
+        VisibilityAwareInterface $element,
         ?AccountInterface $account,
     ): bool;
 }

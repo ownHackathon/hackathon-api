@@ -4,15 +4,13 @@ namespace ownHackathon\App\Workspace;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Middleware\RequireLoginMiddleware;
 use ownHackathon\App\Http\Validator\Input\VisibilityInput;
+use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicy;
-use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Handler\ListOwnWorkspacesHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceCreateHandler;
 use ownHackathon\App\Workspace\Handler\WorkspaceHandler;
@@ -89,7 +87,6 @@ class ConfigProvider
                 WorkspaceRepositoryInterface::class => WorkspaceRepository::class,
                 WorkspaceStoreInterface::class => WorkspaceTable::class,
                 WorkspaceCreatorInterface::class => WorkspaceCreator::class,
-                WorkspaceVisibilityPolicyInterface::class => WorkspaceVisibilityPolicy::class,
             ],
             'invokables' => [
                 WorkspaceNameInput::class,
@@ -97,7 +94,6 @@ class ConfigProvider
                 WorkspaceDetailsInput::class,
             ],
             'factories' => [
-                WorkspaceVisibilityPolicy::class => InvokableFactory::class,
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
@@ -157,7 +153,7 @@ class ConfigProvider
             WorkspaceHandler::class => [
                 WorkspaceRepositoryInterface::class,
                 AccountRepositoryInterface::class,
-                WorkspaceVisibilityPolicyInterface::class,
+                VisibilityPolicyInterface::class,
             ]
         ];
     }

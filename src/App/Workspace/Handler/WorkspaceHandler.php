@@ -7,8 +7,8 @@ use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceVisibilityPolicyInterface;
 use ownHackathon\App\Workspace\DTO\Workspace;
 use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
@@ -21,7 +21,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
     public function __construct(
         private WorkspaceRepositoryInterface $workspaceRepository,
         private AccountRepositoryInterface $accountRepository,
-        private WorkspaceVisibilityPolicyInterface $workspaceVisibilityPolicy,
+        private VisibilityPolicyInterface $visibilityPolicy,
     ) {
     }
 
@@ -110,11 +110,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
         $user = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
         $workspace = $this->workspaceRepository->findOneBySlug($slug);
-        if (
-                ($workspace === null) ||
-                (($workspace->visibility === Visibility::UNLISTED) && ($workspace->accountId !== $user?->id)) ||
-                (($workspace->visibility === Visibility::REGISTERED) && !($user instanceof AccountInterface))
-        ) {
+        if ($workspace === null || !$this->visibilityPolicy->isAvailableFor($workspace, $user)) {
             return new JsonResponse([
                 'statusCode' => Http::STATUS_NOT_FOUND,
                 'message' => 'Workspace not found',
