@@ -44,6 +44,8 @@ readonly class WorkspaceResponse
             nullable: true
         )]
         public ?string $description,
+
+        public int $visibility,
     ) {
     }
 
@@ -55,6 +57,7 @@ readonly class WorkspaceResponse
             name: $workspace->name,
             slug: $workspace->slug,
             description: $workspace->description,
+            visibility: $workspace->visibility->value
         );
     }
 }

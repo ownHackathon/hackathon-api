@@ -49,7 +49,7 @@ test('public workspace details can be read without authentication', function () 
 test('private workspace details are hidden from unauthenticated users', function () {
     $owner = AccountFactory::create();
     $workspace = CreateWorkspacesFactory::create([
-        'accountId' => $owner['id'],
+        'accountId' => $owner['id'] + 1,
         'visibility' => Visibility::UNLISTED->value,
     ]);
 

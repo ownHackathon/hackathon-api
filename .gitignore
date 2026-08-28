@@ -18,3 +18,5 @@ coverage.xml
 /tmp
 .env
 AGENTS.md
+.clinerules
+.aider*

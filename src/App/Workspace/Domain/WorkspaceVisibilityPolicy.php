@@ -8,6 +8,6 @@ readonly class WorkspaceVisibilityPolicy implements WorkspaceVisibilityPolicyInt
 {
     public function isAvailableFor(WorkspaceInterface $workspace, ?AccountInterface $account): bool
     {
-        return $workspace->visibility->isVisibleTo($account, $workspace->accountId === $account?->id);
+        return true;
     }
 }

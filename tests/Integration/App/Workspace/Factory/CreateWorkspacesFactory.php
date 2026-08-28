@@ -5,6 +5,7 @@ namespace Tests\Integration\App\Workspace\Factory;
 use Envms\FluentPDO\Query;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
+use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Tests\Integration\App\Factory\AccountFactory;
 
 class CreateWorkspacesFactory
@@ -32,6 +33,7 @@ class CreateWorkspacesFactory
             'name' => $name,
             'slug' => $slug,
             'description' => $faker->text(50),
+            'visibility' => Visibility::PUBLIC->value,
         ];
 
         $data = array_merge($defaults, $attributes);

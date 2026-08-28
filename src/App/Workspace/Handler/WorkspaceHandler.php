@@ -110,7 +110,11 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
         $user = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
         $workspace = $this->workspaceRepository->findOneBySlug($slug);
-        if ($workspace === null) {
+        if (
+                ($workspace === null) ||
+                (($workspace->visibility === Visibility::UNLISTED) && ($workspace->accountId !== $user?->id)) ||
+                (($workspace->visibility === Visibility::REGISTERED) && !($user instanceof AccountInterface))
+        ) {
             return new JsonResponse([
                 'statusCode' => Http::STATUS_NOT_FOUND,
                 'message' => 'Workspace not found',
@@ -118,10 +122,6 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
         }
 
         $account = $this->accountRepository->findOneById($workspace->accountId);
-
-        if (!$this->workspaceVisibilityPolicy->isAvailableFor($workspace, $user)) {
-            return new JsonResponse(['Workspace not found'], Http::STATUS_NOT_FOUND);
-        }
 
         $response = Workspace::fromArray(
             [

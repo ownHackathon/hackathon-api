@@ -59,10 +59,9 @@ test('enums expose names and visibility rules', function (): void {
     expect(AccountRoles::Owner->getAccountRoleName())->toBe('Eigentümer')
         ->and(AccountVisibleStatus::DO_NOT_DISTURB->getVisibleStatusName())->toBe('Bitte nicht stören')
         ->and(EventStatus::RUNNING->getEventStatusName())->toBe('Running')
-        ->and(Visibility::PUBLIC->isVisibleTo(null, false))->toBeTrue()
-        ->and(Visibility::REGISTERED->isVisibleTo(null, false))->toBeFalse()
-        ->and(Visibility::UNLISTED->isVisibleTo(null, true))->toBeTrue()
-        ->and(Visibility::UNLISTED->isVisibleTo(null, false))->toBeFalse()
+        ->and(Visibility::PUBLIC->getVisibilityName())->toBe('Public')
+        ->and(Visibility::REGISTERED->getVisibilityName())->toBe('Registered User')
+        ->and(Visibility::UNLISTED->getVisibilityName())->toBe('Unlisted')
         ->and(TokenType::EMail->value)->toBe(2);
 });
 

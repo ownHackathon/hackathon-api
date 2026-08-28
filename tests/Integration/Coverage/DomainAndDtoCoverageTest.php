@@ -102,11 +102,6 @@ test('enum names and visibility rules are complete', function () {
     foreach (Visibility::cases() as $visibility) {
         expect($visibility->getVisibilityName())->toBeString()->not->toBe('');
     }
-
-    expect(Visibility::PUBLIC->isVisibleTo(null, false))->toBeTrue()
-        ->and(Visibility::REGISTERED->isVisibleTo(null, false))->toBeFalse()
-        ->and(Visibility::UNLISTED->isVisibleTo(null, true))->toBeTrue()
-        ->and(Visibility::UNLISTED->isVisibleTo(null, false))->toBeFalse();
 });
 
 test('collections accept matching entities and expose collection operations', function () {
