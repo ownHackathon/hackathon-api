@@ -8,7 +8,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenSe
 use Tests\Integration\App\Factory\AccountFactory;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;
 use Tests\Integration\JsonFactory;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 use function array_keys;
 use function expect;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Composition;
 
 use Laminas\Diactoros\ServerRequest;
 use ownHackathon\App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
@@ -12,8 +12,8 @@ use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMi
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
-use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
@@ -28,8 +28,8 @@ use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
-use ownHackathon\App\Http\Validator\Input\VisibilityInput;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;

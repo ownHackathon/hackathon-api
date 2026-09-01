@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\App\Account;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Domain\Account;
@@ -69,11 +69,11 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));
     })
-        ->toThrow(\ownHackathon\App\Http\Exception\HttpUnauthorizedException::class);
+        ->toThrow(\ownHackathon\Core\Http\Exception\HttpUnauthorizedException::class);
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));
     })
-        ->toThrow(\ownHackathon\App\Http\Exception\HttpUnauthorizedException::class);
+        ->toThrow(\ownHackathon\Core\Http\Exception\HttpUnauthorizedException::class);
 });
 
 test('password mismatch exception keeps its email', function (): void {

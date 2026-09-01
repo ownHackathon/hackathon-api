@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Workspace;
+namespace Tests\Integration\App\Workspace;
 
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use PDO;
 use Tests\Integration\JsonFactory;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 use function expect;
 

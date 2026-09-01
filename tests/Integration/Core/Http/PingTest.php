@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tests\Integration\Core\Http;
+
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Psr\Http\Message\ResponseInterface;
 

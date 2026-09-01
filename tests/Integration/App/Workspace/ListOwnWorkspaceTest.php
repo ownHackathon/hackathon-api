@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Workspace;
+namespace Tests\Integration\App\Workspace;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;

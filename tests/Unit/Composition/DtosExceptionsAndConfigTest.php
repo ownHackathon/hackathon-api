@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Composition;
 
 use ownHackathon\App\Account\ConfigProvider as AccountConfigProvider;
 use ownHackathon\App\Account\Identity\ConfigProvider as IdentityConfigProvider;
@@ -12,8 +12,8 @@ use ownHackathon\App\Account\Identity\DTO\Token\AccountPasswordToken;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Event\ConfigProvider as EventConfigProvider;
-use ownHackathon\App\Http\ConfigProvider as HttpConfigProvider;
-use ownHackathon\App\Http\DTO\HttpResponseMessage;
+use ownHackathon\Core\Http\ConfigProvider as HttpConfigProvider;
+use ownHackathon\Core\Http\DTO\HttpResponseMessage;
 use ownHackathon\App\Mailing\ConfigProvider as MailingConfigProvider;
 use ownHackathon\App\Mailing\DTO\EMail;
 use ownHackathon\App\Token\ConfigProvider as TokenConfigProvider;
@@ -43,7 +43,7 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
     expect($config->duration)->toBe(60);
     expect(Workspace::fromArray([
         'name' => 'Team', 'owner' => 'Alice', 'ownerUuid' => 'owner', 'details' => null,
-        'visibility' => \ownHackathon\Core\SharedKernel\Domain\Enum\Visibility::PUBLIC->value, 'createdAt' => 'created', 'updatedAt' => 'updated',
+        'visibility' => \ownHackathon\App\Policy\Domain\Enum\Visibility::PUBLIC->value, 'createdAt' => 'created', 'updatedAt' => 'updated',
     ])->description)->toBe('');
     expect(WorkspaceList::fromArray(['one'])->workspaces)->toBe(['one']);
     expect(AuthenticationResponse::from(new AccessToken('a'), new RefreshToken('r')))

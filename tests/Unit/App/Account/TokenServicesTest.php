@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\App\Account;
 
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
 use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;

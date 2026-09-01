@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\App\Event;
 
 use DateTimeImmutable;
 use ownHackathon\App\Event\Domain\Event;
@@ -9,7 +9,7 @@ use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
 
 use function expect;

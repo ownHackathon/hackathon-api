@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Coverage;
+namespace Tests\Integration\Core\Persistence;
 
 use Envms\FluentPDO\Query;
 use Laminas\Diactoros\ServerRequestFactory;

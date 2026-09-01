@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Coverage;
+namespace Tests\Integration\Composition;
 
 use DateTimeImmutable;
 use InvalidArgumentException;
@@ -21,7 +21,7 @@ use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenCollection;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\DTO\PaginationMeta;

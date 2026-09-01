@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Coverage;
+namespace Tests\Integration\Composition;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
@@ -9,7 +9,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
 use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Mailing\Domain\EmailType;

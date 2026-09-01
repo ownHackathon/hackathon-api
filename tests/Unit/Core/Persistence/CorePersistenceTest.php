@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Core\Persistence;
 
 use Envms\FluentPDO\Query;
 use Envms\FluentPDO\Queries\Delete;

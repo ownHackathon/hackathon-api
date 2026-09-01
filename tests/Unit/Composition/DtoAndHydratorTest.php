@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Composition;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDto;
@@ -14,7 +14,7 @@ use ownHackathon\App\Workspace\DTO\PaginationMeta;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactory;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
 use Psr\Log\LoggerInterface;
 

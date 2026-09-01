@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\App\Policy;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Domain\Account;
 use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Policy\Domain\VisibilityAwareInterface;
 use ownHackathon\App\Policy\Domain\VisibilityPolicy;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
