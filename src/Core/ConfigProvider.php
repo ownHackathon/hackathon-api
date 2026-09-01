@@ -9,6 +9,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         $aggregator = new ConfigAggregator([
+            Http\ConfigProvider::class,
             Persistence\ConfigProvider::class,
         ]);
 

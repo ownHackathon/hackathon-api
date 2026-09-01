@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Middleware;
+namespace ownHackathon\Core\Http\Middleware;
 
-use ownHackathon\App\Http\Factory\ErrorResponseFactory;
+use ownHackathon\Core\Http\Factory\ErrorResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

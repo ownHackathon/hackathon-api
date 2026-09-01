@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Account\Identity\Middleware;
 
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
 use ownHackathon\Core\SharedKernel\Domain\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;

@@ -4,7 +4,7 @@ namespace ownHackathon\App\Workspace\Domain;
 
 use DateTimeImmutable;
 use ownHackathon\App\Policy\Domain\VisibilityAwareInterface;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
 interface WorkspaceInterface extends VisibilityAwareInterface

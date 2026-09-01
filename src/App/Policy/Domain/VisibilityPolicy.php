@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Policy\Domain;
 
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 readonly class VisibilityPolicy implements VisibilityPolicyInterface
 {

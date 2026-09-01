@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Policy\Domain;
 
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 interface VisibilityAwareInterface
 {

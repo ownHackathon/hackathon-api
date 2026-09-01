@@ -8,7 +8,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

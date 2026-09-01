@@ -17,7 +17,7 @@ use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class AccountService

@@ -11,7 +11,7 @@ use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
 use ownHackathon\Core\Serialization\DataType;
-use ownHackathon\App\Http\DTO\HttpResponseMessage;
+use ownHackathon\Core\Http\DTO\HttpResponseMessage;
 use ownHackathon\Core\Persistence\Pagination;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

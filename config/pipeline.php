@@ -17,8 +17,8 @@ use Mezzio\Router\Middleware\RouteMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use ownHackathon\App\Http\Middleware\ApiErrorHandlerMiddleware;
-use ownHackathon\App\Http\Middleware\RouteNotFoundMiddleware;
+use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
+use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
 /**

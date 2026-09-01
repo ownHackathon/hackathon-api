@@ -23,4 +23,7 @@ return [
             'subscribe_delay' => Duration::HALF_MINUTE,
         ],
     ],
+    'swagger_ui' => [
+        'index_file' => __DIR__ . '/../../public/api/docs/index.html',
+    ],
 ];

@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Middleware;
 
-use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;

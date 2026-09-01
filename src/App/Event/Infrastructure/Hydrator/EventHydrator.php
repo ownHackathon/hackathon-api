@@ -10,7 +10,7 @@ use ownHackathon\App\Event\Domain\EventCollection;
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 

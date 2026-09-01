@@ -7,8 +7,8 @@ use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Helper\UrlHelper;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Middleware\RequireLoginMiddleware;
-use ownHackathon\App\Http\Validator\Input\VisibilityInput;
 use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
+use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
 use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\Handler\ListOwnWorkspacesHandler;
@@ -25,7 +25,7 @@ use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescripti
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
-use ownHackathon\App\Http\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;

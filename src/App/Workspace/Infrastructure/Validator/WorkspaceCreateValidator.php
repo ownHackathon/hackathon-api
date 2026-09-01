@@ -6,7 +6,7 @@ use Laminas\InputFilter\InputFilter;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
-use ownHackathon\App\Http\Validator\Input\VisibilityInput;
+use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
 
 class WorkspaceCreateValidator extends InputFilter
 {

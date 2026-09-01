@@ -9,7 +9,7 @@ use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsExcept
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 

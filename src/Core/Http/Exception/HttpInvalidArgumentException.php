@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Exception;
+namespace ownHackathon\Core\Http\Exception;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Monolog\Level;
 use Throwable;
 
-final class HttpDuplicateEntryException extends HttpException
+final class HttpInvalidArgumentException extends HttpException
 {
     public function __construct(
         string $logMessage,
         string $responseMessage,
         array $context = [],
-        Level $loglevel = Level::Warning,
+        Level $loglevel = Level::Notice,
         ?Throwable $previous = null
     ) {
         parent::__construct($logMessage, $responseMessage, $context, $loglevel, $previous);
@@ -20,6 +20,6 @@ final class HttpDuplicateEntryException extends HttpException
 
     public function getHttpStatusCode(): int
     {
-        return StatusCodeInterface::STATUS_CONFLICT;
+        return StatusCodeInterface::STATUS_BAD_REQUEST;
     }
 }

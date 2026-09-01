@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Account\Authentication;
 
-use ownHackathon\App\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;

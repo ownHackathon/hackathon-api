@@ -11,7 +11,7 @@ use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\App\Token\DTO\Token;
-use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 
 readonly class PasswordChangeService
 {

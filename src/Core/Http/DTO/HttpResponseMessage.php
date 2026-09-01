@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\DTO;
+namespace ownHackathon\Core\Http\DTO;
 
 use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;

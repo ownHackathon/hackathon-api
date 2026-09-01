@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\SharedKernel\Domain\Enum;
+namespace ownHackathon\App\Policy\Domain\Enum;
 
 enum Visibility: int
 {

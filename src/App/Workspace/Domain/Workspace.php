@@ -3,7 +3,7 @@
 namespace ownHackathon\App\Workspace\Domain;
 
 use DateTimeImmutable;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;

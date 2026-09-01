@@ -1,15 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http;
+namespace ownHackathon\Core\Http;
 
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\App\Http\Factory\ErrorResponseFactory;
-use ownHackathon\App\Http\Handler\PingHandler;
-use ownHackathon\App\Http\Handler\SwaggerUIHandler;
-use ownHackathon\App\Http\Middleware\ApiErrorHandlerMiddleware;
-use ownHackathon\App\Http\Middleware\PaginationMiddleware;
-use ownHackathon\App\Http\Middleware\RouteNotFoundMiddleware;
-use ownHackathon\App\Http\Validator\Input\VisibilityInput;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use ownHackathon\Core\Http\Factory\ErrorResponseFactory;
+use ownHackathon\Core\Http\Handler\PingHandler;
+use ownHackathon\Core\Http\Handler\SwaggerUIHandler;
+use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
+use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 class ConfigProvider
@@ -20,13 +21,18 @@ class ConfigProvider
             'dependencies' => [
                 'invokables' => [
                     PingHandler::class,
-                    SwaggerUIHandler::class,
-                    VisibilityInput::class,
                 ],
                 'factories' => [
+                    SwaggerUIHandler::class => static function (ContainerInterface $container): SwaggerUIHandler {
+                        $config = $container->get('config');
+
+                        return new SwaggerUIHandler(
+                            $config['swagger_ui']['index_file'] ?? '',
+                        );
+                    },
                     ErrorResponseFactory::class => ConfigAbstractFactory::class,
                     ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
-                    PaginationMiddleware::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                    PaginationMiddleware::class => InvokableFactory::class,
                     RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
                 ],
             ],

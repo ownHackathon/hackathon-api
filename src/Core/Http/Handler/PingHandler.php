@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Handler;
+namespace ownHackathon\Core\Http\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;

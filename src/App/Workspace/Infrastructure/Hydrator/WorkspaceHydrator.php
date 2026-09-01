@@ -9,7 +9,7 @@ use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 

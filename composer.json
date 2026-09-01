@@ -82,12 +82,12 @@
     "psr-4": {
       "ownHackathon\\App\\Account\\Identity\\": "src/App/Account/Identity/",
       "ownHackathon\\App\\Event\\": "src/App/Event/",
-      "ownHackathon\\App\\Http\\": "src/App/Http/",
       "ownHackathon\\App\\Mailing\\": "src/App/Mailing/",
       "ownHackathon\\App\\Policy\\": "src/App/Policy/",
       "ownHackathon\\App\\Token\\": "src/App/Token/",
       "ownHackathon\\App\\Workspace\\": "src/App/Workspace/",
       "ownHackathon\\Core\\Clock\\": "src/Core/Clock/",
+      "ownHackathon\\Core\\Http\\": "src/Core/Http/",
       "ownHackathon\\Core\\Observability\\": "src/Core/Observability/",
       "ownHackathon\\Core\\Persistence\\": "src/Core/Persistence/",
       "ownHackathon\\Core\\Serialization\\": "src/Core/Serialization/",

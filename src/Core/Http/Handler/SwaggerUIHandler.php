@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Handler;
+namespace ownHackathon\Core\Http\Handler;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\HtmlResponse;
@@ -43,12 +43,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 )]
 readonly class SwaggerUIHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private string $indexFile,
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $indexFile = ROOT_DIR . 'public/api/docs/index.html';
-
-        if (file_exists($indexFile)) {
-            return new HtmlResponse(file_get_contents($indexFile));
+        if (file_exists($this->indexFile)) {
+            return new HtmlResponse(file_get_contents($this->indexFile));
         }
 
         return new JsonResponse([], Http::STATUS_NO_CONTENT);

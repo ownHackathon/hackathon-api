@@ -7,7 +7,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Mailing\Exception\InvalidArgumentException;
 use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
-use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

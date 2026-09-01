@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Exception;
+namespace ownHackathon\Core\Http\Exception;
 
 use Monolog\Level;
 use RuntimeException;

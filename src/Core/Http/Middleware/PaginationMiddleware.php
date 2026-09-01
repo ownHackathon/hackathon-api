@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Middleware;
+namespace ownHackathon\Core\Http\Middleware;
 
 use ownHackathon\Core\Persistence\Pagination;
 use Psr\Http\Message\ResponseInterface;

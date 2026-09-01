@@ -13,8 +13,8 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterfa
 use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
-use ownHackathon\App\Http\Exception\HttpDuplicateEntryException;
-use ownHackathon\App\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly class AccountCreatorService

@@ -4,7 +4,7 @@ namespace ownHackathon\App\Event\Domain;
 
 use DateTimeImmutable;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Ramsey\Uuid\UuidInterface;
 
 interface EventInterface

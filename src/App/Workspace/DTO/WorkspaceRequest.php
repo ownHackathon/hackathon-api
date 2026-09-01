@@ -4,7 +4,7 @@ namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 #[OA\Schema(required: ['name', 'visibility'])]
 readonly class WorkspaceRequest

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Enum;
+namespace ownHackathon\Core\Http\Enum;
 
 enum RouteIdent: string
 {

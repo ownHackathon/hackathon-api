@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Http\Validator\Input;
+namespace ownHackathon\App\Policy\Http\Validator\Input;
 
 use Laminas\Filter\Digits;
 use Laminas\Filter\StringTrim;
 use Laminas\InputFilter\Input;
 use Laminas\Validator\NumberComparison;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 class VisibilityInput extends Input
 {

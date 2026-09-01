@@ -11,7 +11,7 @@ use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\Workspace;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Domain\Enum\Visibility;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
