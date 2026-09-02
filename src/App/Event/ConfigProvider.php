@@ -10,8 +10,8 @@ use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
+use ownHackathon\Core\Observability\ChannelLoggerFactory;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
-use Psr\Log\LoggerInterface;
 
 class ConfigProvider
 {
@@ -40,6 +40,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                'logger.event' => ChannelLoggerFactory::class,
                 EventHydrator::class => ConfigAbstractFactory::class,
                 EventTable::class => ConfigAbstractFactory::class,
                 EventRepository::class => ConfigAbstractFactory::class,
@@ -52,7 +53,7 @@ class ConfigProvider
         return [
             EventHydrator::class => [
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.event',
             ],
             EventTable::class => [
                 Query::class,

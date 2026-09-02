@@ -24,6 +24,10 @@ readonly final class MetaDataProcessor implements ProcessorInterface
         $record->extra['Redirect'] = $this->redirect;
         $record->extra['Query'] = $this->query;
 
+        if (CorrelationIdRegistry::has()) {
+            $record->extra['correlation_id'] = CorrelationIdRegistry::get();
+        }
+
         return $record;
     }
 }

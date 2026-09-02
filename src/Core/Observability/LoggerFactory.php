@@ -3,6 +3,8 @@
 namespace ownHackathon\Core\Observability;
 
 use DateTime;
+use Monolog\Formatter\FormatterInterface;
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\FilterHandler;
 use Monolog\Handler\StreamHandler;
@@ -12,17 +14,27 @@ use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
+use function in_array;
 use function is_dir;
 use function mkdir;
 use function rtrim;
 
 readonly final class LoggerFactory
 {
-    public function __invoke(ContainerInterface $container): LoggerInterface
+    public const string DEFAULT_CHANNEL = 'log';
+    public const string FORMAT_JSON = 'json';
+
+    public function build(ContainerInterface $container, string $channel): LoggerInterface
     {
-        /** @var array{logger: array{path: string}} $config */
+        return $this->buildLogger($container, $channel);
+    }
+
+    private function buildLogger(ContainerInterface $container, string $channel): LoggerInterface
+    {
+        /** @var array{logger: array{path: string, format?: string}} $config */
         $config = $container->get('config');
         $path = $config['logger']['path'];
+        $format = $config['logger']['format'] ?? '';
 
         $date = (new DateTime())->format('Y-m-d');
         $path = rtrim($path, '/') . '/' . $date . '/';
@@ -31,13 +43,13 @@ readonly final class LoggerFactory
             mkdir($path, 0775);
         }
 
-        $dateFormat = 'Y-m-d H:i:s';
-        $output = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-        $formatter = new LineFormatter($output, $dateFormat);
+        $formatter = $this->createFormatter($format);
         $stackTraceFormater = clone $formatter;
-        $stackTraceFormater->includeStacktraces(true);
+        if ($stackTraceFormater instanceof LineFormatter) {
+            $stackTraceFormater->includeStacktraces(true);
+        }
 
-        $logger = new Logger('log');
+        $logger = new Logger($channel);
 
         $logger->pushHandler(new StreamHandler($path . 'default.log')->setFormatter($formatter));
 
@@ -46,10 +58,10 @@ readonly final class LoggerFactory
 
         $logger->pushHandler($errorHandler);
 
-        $errorHandler = new StreamHandler($path . 'warning.log', Level::Warning)->setFormatter($formatter);
-        $errorHandler = new FilterHandler($errorHandler, Level::Error, Level::Error);
+        $warningHandler = new StreamHandler($path . 'warning.log', Level::Warning)->setFormatter($formatter);
+        $warningHandler = new FilterHandler($warningHandler, Level::Warning, Level::Error);
 
-        $logger->pushHandler($errorHandler);
+        $logger->pushHandler($warningHandler);
 
         $logger->pushHandler(
             new StreamHandler($path . 'critical.log', Level::Critical)->setFormatter($stackTraceFormater),
@@ -65,5 +77,21 @@ readonly final class LoggerFactory
             ),
         );
         return $logger;
+    }
+
+    private function createFormatter(string $format): FormatterInterface
+    {
+        if (in_array($format, [self::FORMAT_JSON], true)) {
+            return new JsonFormatter();
+        }
+
+        $dateFormat = 'Y-m-d H:i:s';
+        $output = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+        return new LineFormatter($output, $dateFormat);
+    }
+
+    public function __invoke(ContainerInterface $container): LoggerInterface
+    {
+        return $this->buildLogger($container, self::DEFAULT_CHANNEL);
     }
 }

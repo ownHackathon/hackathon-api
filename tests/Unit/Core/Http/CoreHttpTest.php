@@ -15,8 +15,12 @@ use ownHackathon\Core\Http\Factory\ErrorResponseFactory;
 use ownHackathon\Core\Http\Handler\PingHandler;
 use ownHackathon\Core\Http\Handler\SwaggerUIHandler;
 use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
 use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
+use ownHackathon\Core\Observability\CorrelationIdRegistry;
 use ownHackathon\Core\Persistence\Pagination;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -117,6 +121,77 @@ test('route-not-found middleware logs and delegates', function (): void {
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->willReturn($response);
     expect((new RouteNotFoundMiddleware($logger))->process(new ServerRequest(), $handler))->toBe($response);
+});
+
+test('request correlation middleware sets and clears the correlation id', function (): void {
+    $uuidFactory = new \ownHackathon\Core\SharedKernel\Utils\UuidFactory();
+    $response = new \Laminas\Diactoros\Response\EmptyResponse();
+    $handler = $this->createMock(RequestHandlerInterface::class);
+    $handler->expects($this->once())->method('handle')->with(
+        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) !== null)
+    )->willReturn($response);
+    $middleware = new RequestCorrelationMiddleware($uuidFactory);
+
+    CorrelationIdRegistry::clear();
+    $result = $middleware->process(new ServerRequest(), $handler);
+
+    expect($result)->toBe($response)
+        ->and(CorrelationIdRegistry::has())->toBeFalse();
+});
+
+test('request correlation middleware uses an incoming correlation id header', function (): void {
+    $uuidFactory = new \ownHackathon\Core\SharedKernel\Utils\UuidFactory();
+    $response = new \Laminas\Diactoros\Response\EmptyResponse();
+    $handler = $this->createMock(RequestHandlerInterface::class);
+    $handler->expects($this->once())->method('handle')->with(
+        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) === 'trace-123')
+    )->willReturn($response);
+    $middleware = new RequestCorrelationMiddleware($uuidFactory);
+
+    CorrelationIdRegistry::clear();
+    $middleware->process((new ServerRequest())->withHeader(RequestCorrelationMiddleware::HEADER, ' trace-123 '), $handler);
+});
+
+test('request logging middleware logs request details on success', function (): void {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->once())->method('log')->with(
+        Level::Info->value,
+        $this->callback(static fn ($message): bool => str_contains($message, 'GET')),
+        $this->callback(static fn (array $context): bool => ($context['method'] ?? '') === 'GET')
+    );
+    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_OK);
+    $handler = $this->createMock(RequestHandlerInterface::class);
+    $handler->expects($this->once())->method('handle')->willReturn($response);
+
+    expect((new RequestLoggingMiddleware($logger))->process(new ServerRequest(), $handler))->toBe($response);
+});
+
+test('request logging middleware warns on client errors', function (): void {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->once())->method('log')->with(
+        Level::Warning->value,
+        $this->anything(),
+        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_NOT_FOUND)
+    );
+    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_NOT_FOUND);
+    $handler = $this->createMock(RequestHandlerInterface::class);
+    $handler->expects($this->once())->method('handle')->willReturn($response);
+
+    (new RequestLoggingMiddleware($logger))->process(new ServerRequest(), $handler);
+});
+
+test('request logging middleware logs errors on server errors', function (): void {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->once())->method('log')->with(
+        Level::Error->value,
+        $this->anything(),
+        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_INTERNAL_SERVER_ERROR)
+    );
+    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_INTERNAL_SERVER_ERROR);
+    $handler = $this->createMock(RequestHandlerInterface::class);
+    $handler->expects($this->once())->method('handle')->willReturn($response);
+
+    (new RequestLoggingMiddleware($logger))->process(new ServerRequest(), $handler);
 });
 
 test('pagination middleware attaches pagination to the request', function (): void {

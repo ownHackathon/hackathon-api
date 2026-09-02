@@ -29,7 +29,6 @@ use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAc
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthTable;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationTable;
-use Psr\Log\LoggerInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountTable;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
@@ -71,6 +70,7 @@ use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenValidationMid
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
 use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
 use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
+use ownHackathon\Core\Observability\ChannelLoggerFactory;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
@@ -198,6 +198,7 @@ readonly class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                'logger.identity' => ChannelLoggerFactory::class,
                 AccountAccessAuthHydrator::class => InvokableFactory::class,
                 AccountActivationHydrator::class => ConfigAbstractFactory::class,
                 AccountHydrator::class => ConfigAbstractFactory::class,
@@ -258,11 +259,11 @@ readonly class ConfigProvider
         return [
             AccountActivationHydrator::class => [
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.identity',
             ],
             AccountHydrator::class => [
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.identity',
             ],
             AuthenticationValidationMiddleware::class => [
                 AuthenticationValidator::class,
@@ -288,7 +289,7 @@ readonly class ConfigProvider
                 AccessTokenService::class,
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.identity',
             ],
             ClientIdentificationMiddleware::class => [
                 ClientIdentificationService::class,

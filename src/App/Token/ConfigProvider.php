@@ -4,6 +4,7 @@ namespace ownHackathon\App\Token;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use ownHackathon\Core\Observability\ChannelLoggerFactory;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
@@ -11,7 +12,6 @@ use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
 use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenTable;
-use Psr\Log\LoggerInterface;
 
 readonly class ConfigProvider
 {
@@ -41,6 +41,7 @@ readonly class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                'logger.token' => ChannelLoggerFactory::class,
                 TokenHydrator::class => ConfigAbstractFactory::class,
                 TokenRepository::class => ConfigAbstractFactory::class,
                 TokenTable::class => ConfigAbstractFactory::class,
@@ -54,7 +55,7 @@ readonly class ConfigProvider
         return [
             TokenHydrator::class => [
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.token',
             ],
             TokenRepository::class => [
                 TokenStoreInterface::class,

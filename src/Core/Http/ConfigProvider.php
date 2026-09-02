@@ -9,7 +9,10 @@ use ownHackathon\Core\Http\Handler\PingHandler;
 use ownHackathon\Core\Http\Handler\SwaggerUIHandler;
 use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
 use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
 use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
+use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -34,12 +37,16 @@ class ConfigProvider
                     ErrorResponseFactory::class => ConfigAbstractFactory::class,
                     ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
                     PaginationMiddleware::class => InvokableFactory::class,
+                    RequestCorrelationMiddleware::class => ConfigAbstractFactory::class,
+                    RequestLoggingMiddleware::class => ConfigAbstractFactory::class,
                     RouteNotFoundMiddleware::class => ConfigAbstractFactory::class,
                 ],
             ],
             ConfigAbstractFactory::class => [
                 ErrorResponseFactory::class => [LoggerInterface::class],
                 ApiErrorHandlerMiddleware::class => [ErrorResponseFactory::class],
+                RequestCorrelationMiddleware::class => [UuidFactoryInterface::class],
+                RequestLoggingMiddleware::class => [LoggerInterface::class],
                 RouteNotFoundMiddleware::class => [LoggerInterface::class],
             ],
         ];

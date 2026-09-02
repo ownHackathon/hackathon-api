@@ -15,6 +15,7 @@ use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 use function expect;
 use function test;
@@ -52,9 +53,10 @@ function hydratorData(): array
 
 test('all entity hydrators hydrate, extract and handle collections', function () {
     $uuid = $this->container->get(UuidFactoryInterface::class);
+    $logger = $this->container->get(LoggerInterface::class);
     $data = hydratorData();
 
-    $accountHydrator = new AccountHydrator($uuid);
+    $accountHydrator = new AccountHydrator($uuid, $logger);
     $account = $accountHydrator->hydrate($data);
     expect($accountHydrator->extract($account))->toHaveSubset([
         'id' => 1,
@@ -73,25 +75,25 @@ test('all entity hydrators hydrate, extract and handle collections', function ()
         ->and($accessHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($accessHydrator->extractCollection($accessHydrator->hydrateCollection([$data])))->toHaveCount(1);
 
-    $activationHydrator = new AccountActivationHydrator($uuid);
+    $activationHydrator = new AccountActivationHydrator($uuid, $logger);
     $activation = $activationHydrator->hydrate($data);
     expect($activationHydrator->extract($activation))->toHaveSubset(['email' => $data['email']])
         ->and($activationHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($activationHydrator->extractCollection($activationHydrator->hydrateCollection([$data])))->toHaveCount(1);
 
-    $tokenHydrator = new TokenHydrator($uuid);
+    $tokenHydrator = new TokenHydrator($uuid, $logger);
     $token = $tokenHydrator->hydrate($data);
     expect($tokenHydrator->extract($token))->toHaveSubset(['accountId' => 2, 'tokenType' => TokenType::EMail->value])
         ->and($tokenHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($tokenHydrator->extractCollection($tokenHydrator->hydrateCollection([$data])))->toHaveCount(1);
 
-    $workspaceHydrator = new WorkspaceHydrator($uuid);
+    $workspaceHydrator = new WorkspaceHydrator($uuid, $logger);
     $workspace = $workspaceHydrator->hydrate($data);
     expect($workspaceHydrator->extract($workspace))->toHaveSubset(['name' => 'Name', 'visibility' => Visibility::PUBLIC->value])
         ->and($workspaceHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($workspaceHydrator->extractCollection($workspaceHydrator->hydrateCollection([$data])))->toHaveCount(1);
 
-    $eventHydrator = new EventHydrator($uuid);
+    $eventHydrator = new EventHydrator($uuid, $logger);
     $event = $eventHydrator->hydrate($data);
     expect($eventHydrator->extract($event))->toHaveSubset([
         'name' => 'Name',

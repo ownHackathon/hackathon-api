@@ -94,9 +94,10 @@ The `APP_ENV` environment variable selects the active environment:
 | Suffix | Loaded when | Purpose |
 |---|---|---|
 | `*.global.php` | always | Shared defaults for every environment (e.g. `cors`, `dependencies`, `logger`, `migrations`, `project`, `routes`, `token`) |
-| `*.develop.php` | `APP_ENV=develop` | Local development settings. E.g. `database.develop.php` points to the `database` service, `mail.develop.php` to the Mailhog SMTP server |
+| `*.develop.php` | `APP_ENV=develop` | Local development settings. E.g. `database.develop.php` points to the `database` service, `mail.develop.php` to the Mailhog SMTP server, `logger.develop.php` uses human-readable line logs |
 | `*.testing.php` | `APP_ENV=testing` | Test settings. E.g. `database.testing.php` uses the `database-testing` container, `token.testing.php` longer refresh durations |
 | `*.action.php` | `APP_ENV=action` | CI settings. E.g. `database.action.php` connects to `127.0.0.1`, `dependencies.action.php` injects `NullMailer`/`NullLogger` mocks |
+| `*.production.php` | `APP_ENV=production` (or unset) | Production settings. E.g. `logger.production.php` writes JSON-formatted logs for aggregators |
 | `*.local.php` | always | Machine-local overrides (gitignored, see `config/.gitignore`), highest precedence. Use for credentials and local settings |
 | `*.dist` | never | Templates only. Copy the file and remove the `.dist` extension to use it |
 | `config/development.config.php` | always (loaded last) | Development mode: enables `debug` and disables the config cache. Toggled via `./bin/hackathon composer development-enable/-disable` |

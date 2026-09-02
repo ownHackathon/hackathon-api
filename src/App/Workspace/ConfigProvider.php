@@ -29,9 +29,9 @@ use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
 use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
+use ownHackathon\Core\Observability\ChannelLoggerFactory;
 use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
-use Psr\Log\LoggerInterface;
 
 class ConfigProvider
 {
@@ -94,6 +94,7 @@ class ConfigProvider
                 WorkspaceDetailsInput::class,
             ],
             'factories' => [
+                'logger.workspace' => ChannelLoggerFactory::class,
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
@@ -115,7 +116,7 @@ class ConfigProvider
         return [
             WorkspaceHydrator::class => [
                 UuidFactoryInterface::class,
-                LoggerInterface::class,
+                'logger.workspace',
             ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,

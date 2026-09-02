@@ -4,6 +4,7 @@ namespace ownHackathon\App\Token\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
+use ownHackathon\App\Token\Domain\Message\TokenLogMessage;
 use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenCollection;
 use ownHackathon\App\Token\Domain\TokenCollectionInterface;
@@ -16,7 +17,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private ?LoggerInterface $logger = null,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -41,7 +42,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
             try {
                 $collection[] = $this->hydrate($entity);
             } catch (\Throwable $exception) {
-                $this->logger?->warning('Invalid token persistence data skipped.', [
+                $this->logger->warning(TokenLogMessage::TOKEN_DATA_SKIPPED, [
                     'tokenId' => $entity['id'] ?? null,
                     'exception' => $exception,
                 ]);

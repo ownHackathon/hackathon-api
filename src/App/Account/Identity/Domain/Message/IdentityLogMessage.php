@@ -24,6 +24,8 @@ interface IdentityLogMessage extends LogMessage
     public const string AUTHENTICATION_PERSISTENCE_ERROR = 'Authentication could not be stored due to missing persistence data';
     public const string DUPLICATE_SOURCE_LOGIN = 'Login denied: An active session already exists from this source';
     public const string LOGIN_DENIED_AUTH_HEADER_ALREADY_PRESENT = 'Login failed: Authorization header is already present';
+    public const string ACCOUNT_DATA_SKIPPED = 'Invalid account persistence data skipped';
+    public const string ACCOUNT_ACTIVATION_DATA_SKIPPED = 'Invalid account activation persistence data skipped';
 
     // --- 4. Logout Context ---
     public const string LOGOUT_REQUIRES_AUTHENTICATION = 'Logout failed: User is not authenticated';

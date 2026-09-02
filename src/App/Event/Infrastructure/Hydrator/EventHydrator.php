@@ -10,6 +10,7 @@ use ownHackathon\App\Event\Domain\Event;
 use ownHackathon\App\Event\Domain\EventCollection;
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
+use ownHackathon\App\Event\Domain\Message\EventLogMessage;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
@@ -19,7 +20,7 @@ readonly final class EventHydrator implements EventHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private ?LoggerInterface $logger = null,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -35,8 +36,8 @@ readonly final class EventHydrator implements EventHydratorInterface
             : null;
 
         if ($visibility === null) {
-            $this->logger?->warning(
-                'Invalid event visibility; falling back to unlisted.',
+            $this->logger->warning(
+                EventLogMessage::INVALID_EVENT_VISIBILITY,
                 [
                     'eventId' => $data['id'] ?? null,
                     'visibility' => $visibilityValue,
@@ -74,7 +75,7 @@ readonly final class EventHydrator implements EventHydratorInterface
             try {
                 $collection[] = $this->hydrate($entity);
             } catch (\Throwable $exception) {
-                $this->logger?->warning('Invalid event persistence data skipped.', [
+                $this->logger->warning(EventLogMessage::EVENT_DATA_SKIPPED, [
                     'eventId' => $entity['id'] ?? null,
                     'exception' => $exception,
                 ]);

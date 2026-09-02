@@ -7,6 +7,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountActivation;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Clock\DateTimeFormat;
 use Psr\Log\LoggerInterface;
@@ -16,7 +17,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private ?LoggerInterface $logger = null,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -40,7 +41,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
             try {
                 $collection[] = $this->hydrate($entity);
             } catch (\Throwable $exception) {
-                $this->logger?->warning('Invalid account activation persistence data skipped.', [
+                $this->logger->warning(IdentityLogMessage::ACCOUNT_ACTIVATION_DATA_SKIPPED, [
                     'activationId' => $entity['id'] ?? null,
                     'exception' => $exception,
                 ]);

@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
@@ -18,7 +19,7 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private ?LoggerInterface $logger = null,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -34,8 +35,8 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
             : null;
 
         if ($visibility === null) {
-            $this->logger?->warning(
-                'Invalid workspace visibility; falling back to unlisted.',
+            $this->logger->warning(
+                WorkspaceLogMessage::INVALID_WORKSPACE_VISIBILITY,
                 [
                     'workspaceId' => $data['id'] ?? null,
                     'visibility' => $visibilityValue,
@@ -70,7 +71,7 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
             try {
                 $collection[] = $this->hydrate($entity);
             } catch (\Throwable $exception) {
-                $this->logger?->warning('Invalid workspace persistence data skipped.', [
+                $this->logger->warning(WorkspaceLogMessage::WORKSPACE_DATA_SKIPPED, [
                     'workspaceId' => $entity['id'] ?? null,
                     'exception' => $exception,
                 ]);

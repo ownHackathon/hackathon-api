@@ -18,6 +18,8 @@ use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMidd
 use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
 use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
+use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
 use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
@@ -28,6 +30,8 @@ use Psr\Container\ContainerInterface;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->pipe([
         CorsMiddleware::class,
+        RequestCorrelationMiddleware::class,
+        RequestLoggingMiddleware::class,
         ApiErrorHandlerMiddleware::class,
         ServerUrlMiddleware::class,
         BodyParamsMiddleware::class,

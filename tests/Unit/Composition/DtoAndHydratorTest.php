@@ -56,12 +56,13 @@ test('hydrators round trip representative entities', function (): void {
         'token' => TEST_UUID, 'tokenType' => 2,
     ];
     $uuid = new UuidFactory();
-    $workspaceHydrator = new WorkspaceHydrator($uuid);
-    $tokenHydrator = new TokenHydrator($uuid);
-    expect((new AccountHydrator($uuid))->hydrate($data)->lastActionAt)->toBeNull()
+    $logger = new \Psr\Log\NullLogger();
+    $workspaceHydrator = new WorkspaceHydrator($uuid, $logger);
+    $tokenHydrator = new TokenHydrator($uuid, $logger);
+    expect((new AccountHydrator($uuid, $logger))->hydrate($data)->lastActionAt)->toBeNull()
         ->and($workspaceHydrator->extract($workspaceHydrator->hydrate($data))['slug'])->toBe('team')
         ->and($tokenHydrator->extract($tokenHydrator->hydrate($data))['tokenType'])->toBe(2)
-        ->and((new EventHydrator($uuid))->hydrateCollection([$data]))->toHaveCount(1);
+        ->and((new EventHydrator($uuid, $logger))->hydrateCollection([$data]))->toHaveCount(1);
 });
 
 test('workspace hydrator falls back to unlisted for invalid visibility values', function (mixed $invalidVisibility): void {
@@ -78,7 +79,7 @@ test('workspace hydrator falls back to unlisted for invalid visibility values', 
         'updatedAt' => '2024-01-02 10:00:00',
     ];
 
-    $workspace = (new WorkspaceHydrator(new UuidFactory()))->hydrate($data);
+    $workspace = (new WorkspaceHydrator(new UuidFactory(), new \Psr\Log\NullLogger()))->hydrate($data);
 
     expect($workspace->visibility)->toBe(Visibility::UNLISTED);
 })->with([
@@ -100,7 +101,7 @@ test('workspace hydrator falls back to unlisted when visibility is missing', fun
         'updatedAt' => '2024-01-02 10:00:00',
     ];
 
-    $workspace = (new WorkspaceHydrator(new UuidFactory()))->hydrate($data);
+    $workspace = (new WorkspaceHydrator(new UuidFactory(), new \Psr\Log\NullLogger()))->hydrate($data);
 
     expect($workspace->visibility)->toBe(Visibility::UNLISTED);
 });
@@ -122,7 +123,7 @@ test('event hydrator falls back to unlisted for invalid visibility values', func
         'createdAt' => '2024-01-01 10:00:00',
     ];
 
-    $event = (new EventHydrator(new UuidFactory()))->hydrate($data);
+    $event = (new EventHydrator(new UuidFactory(), new \Psr\Log\NullLogger()))->hydrate($data);
 
     expect($event->visibility)->toBe(Visibility::UNLISTED);
 });

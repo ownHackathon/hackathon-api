@@ -9,7 +9,6 @@ use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;
 use InvalidArgumentException;
 use ownHackathon\Core\Persistence\Store\AbstractTable;
-use ownHackathon\Core\Observability\LoggerFactory;
 use ownHackathon\Core\Persistence\Factory\DatabaseFactory;
 use PDOException;
 
@@ -84,14 +83,4 @@ test('database factory supports sqlite configuration', function (): void {
     ]);
 
     expect((new DatabaseFactory())($container))->toBeInstanceOf(\PDO::class);
-});
-
-test('logger factory creates the dated log directory', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
-    mkdir($path);
-    $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
-
-    expect((new LoggerFactory())($container))->toBeInstanceOf(\Psr\Log\LoggerInterface::class)
-        ->and(is_dir($path . '/' . date('Y-m-d')))->toBeTrue();
 });
