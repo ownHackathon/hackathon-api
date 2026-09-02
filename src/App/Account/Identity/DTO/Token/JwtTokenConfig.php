@@ -13,6 +13,9 @@ readonly final class JwtTokenConfig
     ) {
     }
 
+    /**
+     * @param array{iss: string, aud: string, duration: int|string, algorithmus: string, key: string} $config
+     */
     public static function createFromArray(array $config): self
     {
         return new self(

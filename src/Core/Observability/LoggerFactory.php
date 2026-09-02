@@ -20,7 +20,9 @@ readonly final class LoggerFactory
 {
     public function __invoke(ContainerInterface $container): LoggerInterface
     {
-        $path = $container->get('config')['logger']['path'];
+        /** @var array{logger: array{path: string}} $config */
+        $config = $container->get('config');
+        $path = $config['logger']['path'];
 
         $date = (new DateTime())->format('Y-m-d');
         $path = rtrim($path, '/') . '/' . $date . '/';

@@ -23,7 +23,7 @@ readonly final class AccessTokenValidationMiddleware implements MiddlewareInterf
     {
         $accessToken = $request->getHeaderLine('Authorization');
 
-        if (empty($accessToken)) {
+        if ($accessToken === '') {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::ACCESS_TOKEN_MISSING,
                 IdentityStatusMessage::UNAUTHORIZED_ACCESS,

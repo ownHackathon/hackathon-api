@@ -12,9 +12,8 @@ readonly final class ClientIdentificationData
 
     public static function create(?string $ident, string $userAgent): self
     {
-        $data['ident'] = $ident ?: 'unsecure';
-        $data['userAgent'] = $userAgent;
+        $identity = $ident !== null && $ident !== '' ? $ident : 'unsecure';
 
-        return new self(...$data);
+        return new self($identity, $userAgent);
     }
 }

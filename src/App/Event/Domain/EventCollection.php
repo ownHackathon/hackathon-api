@@ -5,6 +5,9 @@ namespace ownHackathon\App\Event\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
+use function get_debug_type;
+use function sprintf;
+
 final class EventCollection extends Collection implements EventCollectionInterface
 {
     public function offsetSet(mixed $offset, mixed $value): void
@@ -13,7 +16,7 @@ final class EventCollection extends Collection implements EventCollectionInterfa
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    $value::class,
+                    get_debug_type($value),
                     EventInterface::class,
                 ),
             );

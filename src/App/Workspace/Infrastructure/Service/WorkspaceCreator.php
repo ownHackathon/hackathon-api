@@ -42,7 +42,7 @@ readonly final class WorkspaceCreator implements WorkspaceCreatorInterface
         try {
             $id = $this->repository->insert($workspace);
         } catch (DuplicateEntryException $e) {
-            throw new WorkspaceNameAlreadyExistsException($e->getMessage(), (int)$e->getCode(), $e);
+            throw new WorkspaceNameAlreadyExistsException($e->getMessage(), $e->getCode(), $e);
         }
 
         return $workspace->with(id: $id);

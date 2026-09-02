@@ -11,6 +11,7 @@ use function array_shift;
 use function count;
 use function is_null;
 use function sprintf;
+use function var_export;
 
 abstract class Collection implements CollectionInterface
 {
@@ -32,7 +33,7 @@ abstract class Collection implements CollectionInterface
     {
         if (!$this->offsetExists($offset)) {
             throw new UndefinedOffsetException(
-                sprintf('Undefined offset: %s in Collection %s on Line %s', $offset, __FILE__, __LINE__),
+                sprintf('Undefined offset: %s in Collection %s on Line %s', var_export($offset, true), __FILE__, __LINE__),
             );
         }
 

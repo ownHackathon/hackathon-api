@@ -10,7 +10,10 @@ readonly final class PasswordTokenServiceFactory
     public function __invoke(ContainerInterface $container): PasswordTokenService
     {
         $emailService = $container->get(MailerInterface::class);
-        $projectUri = $container->get('config')['project']['uri'];
+
+        /** @var array{project: array{uri: string}} $config */
+        $config = $container->get('config');
+        $projectUri = $config['project']['uri'];
 
         return new PasswordTokenService($emailService, $projectUri);
     }

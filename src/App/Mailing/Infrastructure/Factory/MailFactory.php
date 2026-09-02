@@ -11,9 +11,9 @@ final class MailFactory
 {
     public function __invoke(ContainerInterface $container): MailerInterface
     {
-        $settings = $container->get('config');
+        /** @var array{mailer: array{dsn: string}} $config */
+        $config = $container->get('config');
 
-        $settings = $settings['mailer'];
-        return new Mailer(Transport::fromDsn($settings['dsn']));
+        return new Mailer(Transport::fromDsn($config['mailer']['dsn']));
     }
 }

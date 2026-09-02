@@ -32,7 +32,7 @@ final class EmailType implements \ownHackathon\Core\SharedKernel\Type\TypeInterf
 
     public function unserialize(string $data): void
     {
-        $this->__construct($data);
+        $this->value = $this->prepareValue($data);
     }
 
     public function jsonSerialize(): string

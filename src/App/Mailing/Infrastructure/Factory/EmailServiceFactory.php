@@ -12,7 +12,10 @@ readonly final class EmailServiceFactory
     public function __invoke(ContainerInterface $container): EmailService
     {
         $mailer = $container->get(MailerInterface::class);
-        $senderEmail = new EmailType($container->get('config')['project']['senderEmail']);
+
+        /** @var array{project: array{senderEmail: string}} $config */
+        $config = $container->get('config');
+        $senderEmail = new EmailType($config['project']['senderEmail']);
 
         return new EmailService($mailer, $senderEmail);
     }

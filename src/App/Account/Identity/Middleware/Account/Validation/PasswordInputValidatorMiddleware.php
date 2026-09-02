@@ -44,7 +44,10 @@ readonly final class PasswordInputValidatorMiddleware implements MiddlewareInter
                 );
             }
 
-            $password = AccountPassword::fromString($this->validator->getValues()['password']);
+            /** @var array{password: string} $data */
+            $data = $this->validator->getValues();
+
+            $password = AccountPassword::fromString($data['password']);
         } catch (HttpInvalidArgumentException $e) {
             throw $e;
         } catch (Throwable) {

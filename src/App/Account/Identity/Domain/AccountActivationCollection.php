@@ -5,6 +5,7 @@ namespace ownHackathon\App\Account\Identity\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
+use function get_debug_type;
 use function sprintf;
 
 final class AccountActivationCollection extends Collection implements AccountActivationCollectionInterface
@@ -18,7 +19,7 @@ final class AccountActivationCollection extends Collection implements AccountAct
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    $value::class,
+                    get_debug_type($value),
                     AccountActivationInterface::class,
                 ),
             );

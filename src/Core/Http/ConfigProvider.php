@@ -24,6 +24,7 @@ class ConfigProvider
                 ],
                 'factories' => [
                     SwaggerUIHandler::class => static function (ContainerInterface $container): SwaggerUIHandler {
+                        /** @var array{swagger_ui?: array{index_file?: string}} $config */
                         $config = $container->get('config');
 
                         return new SwaggerUIHandler(

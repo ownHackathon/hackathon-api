@@ -80,7 +80,9 @@ abstract class AbstractTable implements StoreInterface
                 ->offset($pagination->offset);
         }
 
-        return $query->fetchAll() ?: [];
+        $result = $query->fetchAll();
+
+        return $result !== false ? $result : [];
     }
 
     /**

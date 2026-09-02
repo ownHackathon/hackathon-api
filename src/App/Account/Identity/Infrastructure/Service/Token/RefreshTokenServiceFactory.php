@@ -14,8 +14,10 @@ readonly final class RefreshTokenServiceFactory
         $accountRepository = $container->get(AccountRepositoryInterface::class);
         $accessAuthRepository = $container->get(AccountAccessAuthRepositoryInterface::class);
         $accessTokenService = $container->get(AccessTokenService::class);
-        $jwtTokenConfig = $container->get('config')['jwt_token']['refresh'];
-        $jwtTokenConfig = JwtTokenConfig::createFromArray($jwtTokenConfig);
+
+        /** @var array{jwt_token: array{refresh: array{iss: string, aud: string, duration: int, algorithmus: string, key: string}}} $config */
+        $config = $container->get('config');
+        $jwtTokenConfig = JwtTokenConfig::createFromArray($config['jwt_token']['refresh']);
 
         return new RefreshTokenService(
             $accountRepository,

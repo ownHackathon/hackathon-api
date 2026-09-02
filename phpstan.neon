@@ -7,13 +7,14 @@ parameters:
 		- identifier: missingType.iterableValue
 		- identifier: missingType.generics
 	checkUninitializedProperties: true
+	checkExplicitMixed: true
+	reportUnmatchedIgnoredErrors: true
 	tips:
 		treatPhpDocTypesAsCertain: false
 	excludePaths:
 		- tests/*
 		- tests
-rules:
-	- PHPStan\Rules\Functions\ReturnNullsafeByRefRule
 includes:
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon

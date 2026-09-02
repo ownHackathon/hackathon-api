@@ -5,6 +5,7 @@ namespace ownHackathon\App\Workspace\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
+use function get_debug_type;
 use function sprintf;
 
 final class WorkspaceCollection extends Collection implements WorkspaceCollectionInterface
@@ -18,7 +19,7 @@ final class WorkspaceCollection extends Collection implements WorkspaceCollectio
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    $value::class,
+                    get_debug_type($value),
                     WorkspaceInterface::class,
                 ),
             );

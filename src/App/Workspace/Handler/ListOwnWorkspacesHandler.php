@@ -85,6 +85,9 @@ readonly final class ListOwnWorkspacesHandler implements RequestHandlerInterface
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
         $pagination = $request->getAttribute(Pagination::class);
 
+        assert($account instanceof AccountInterface);
+        assert($pagination instanceof Pagination);
+
         $metaData = $this->service->getMetaDataByAccountId($pagination, $account->id);
 
         $response = [];

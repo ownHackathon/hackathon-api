@@ -24,9 +24,18 @@ readonly final class RefreshTokenAccountMiddleware implements MiddlewareInterfac
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);
+        if (!$accountAccessAuth instanceof AccountAccessAuthInterface) {
+            throw new HttpUnauthorizedException(
+                IdentityLogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
+                IdentityStatusMessage::TOKEN_INVALID,
+                [],
+                Level::Warning,
+            );
+        }
+
         $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
 
-        if (!$account instanceof AccountAccessAuthInterface) {
+        if (!$account instanceof AccountInterface) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_INVALID,

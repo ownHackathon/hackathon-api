@@ -65,6 +65,9 @@ readonly final class WorkspaceCreateHandler implements RequestHandlerInterface
         $workspace = $request->getAttribute(WorkspaceRequest::class);
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
+        assert($workspace instanceof WorkspaceRequest);
+        assert($account instanceof AccountInterface);
+
         try {
             $workspace = $this->workspaceCreator->create($workspace, $account);
         } catch (WorkspaceNameAlreadyExistsException $exception) {

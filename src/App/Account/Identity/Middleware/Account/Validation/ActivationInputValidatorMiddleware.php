@@ -45,6 +45,7 @@ readonly final class ActivationInputValidatorMiddleware implements MiddlewareInt
                 );
             }
 
+            /** @var array{accountName: string, password: string} $data */
             $data = $this->validator->getValues();
 
             $response = AccountRegistration::fromString($data['accountName'], $data['password']);

@@ -46,7 +46,10 @@ readonly final class EmailInputValidatorMiddleware implements MiddlewareInterfac
                 );
             }
 
-            $email = new EmailType($this->mailValidator->getValues()['email']);
+            /** @var array{email: string} $data */
+            $data = $this->mailValidator->getValues();
+
+            $email = new EmailType($data['email']);
         } catch (InvalidArgumentException | HttpInvalidArgumentException $e) {
             if ($e instanceof HttpInvalidArgumentException) {
                 throw $e;
