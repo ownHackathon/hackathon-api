@@ -37,7 +37,7 @@ The most important variables (see `.env.dist` for the full list):
 | `MAILHOG_SMTP_PORT` / `MAILHOG_WEBUI_PORT` | `1025` / `8025` | Mailhog SMTP and Web UI ports |
 
 ### 4. Application Configuration (Optional)
-Check the configuration files in `config/autoload/`. If changes are needed, copy the desired `.dist` file, remove the extension, and adjust the settings.
+Check the configuration files in `config/autoload/`. If changes are needed, copy the desired `.dist` file, remove the extension, and adjust the settings. See [Configuration & Environments](#configuration--environments) for how the files are loaded and what the suffixes (`global`, `develop`, `testing`, `action`, `local`) control.
 
 ### 5. Quick Setup (Recommended)
 We provide a management script to automate the entire process (infrastructure start, dependency installation, database migrations, and documentation generation).
@@ -67,6 +67,54 @@ docker compose exec php composer run doctrine migrations:migrate
 docker compose exec php composer run openapi
 ```
 </details>
+
+---
+
+## Configuration & Environments
+
+Application configuration lives in `config/autoload/` and is merged by
+`config/config.php` using Laminas ConfigAggregator. It loads all files matching
+the pattern:
+
+```
+config/autoload/{,*.}{global,<APP_ENV>,local}.php
+```
+
+The `APP_ENV` environment variable selects the active environment:
+
+| Environment | Set by | Meaning |
+|---|---|---|
+| `develop` | `.env` (default) | Local development stack |
+| `testing` | `phpunit.xml` / `tests/Pest.php` | Test suite |
+| `action` | GitHub Actions workflows | Continuous integration |
+| `production` | fallback (unset `APP_ENV`) | Production deployment |
+
+### File suffixes / switches
+
+| Suffix | Loaded when | Purpose |
+|---|---|---|
+| `*.global.php` | always | Shared defaults for every environment (e.g. `cors`, `dependencies`, `logger`, `migrations`, `project`, `routes`, `token`) |
+| `*.develop.php` | `APP_ENV=develop` | Local development settings. E.g. `database.develop.php` points to the `database` service, `mail.develop.php` to the Mailhog SMTP server |
+| `*.testing.php` | `APP_ENV=testing` | Test settings. E.g. `database.testing.php` uses the `database-testing` container, `token.testing.php` longer refresh durations |
+| `*.action.php` | `APP_ENV=action` | CI settings. E.g. `database.action.php` connects to `127.0.0.1`, `dependencies.action.php` injects `NullMailer`/`NullLogger` mocks |
+| `*.local.php` | always | Machine-local overrides (gitignored, see `config/.gitignore`), highest precedence. Use for credentials and local settings |
+| `*.dist` | never | Templates only. Copy the file and remove the `.dist` extension to use it |
+| `config/development.config.php` | always (loaded last) | Development mode: enables `debug` and disables the config cache. Toggled via `./bin/hackathon composer development-enable/-disable` |
+
+### Precedence
+
+Later files override earlier ones:
+`*.global.php` → environment files (`<APP_ENV>`) → `*.local.php`.
+
+### Notes
+
+- `bin/migrations.php` selects its database configuration the same way:
+  `config/autoload/database.<APP_ENV>.php`.
+- The merged configuration is cached to `data/cache/config-cache.php`. The
+  cache is disabled in development; enable it via `config/autoload/local.php`
+  and clear it after every deployment with
+  `./bin/hackathon composer clear-config-cache` (see
+  [Production Deployment](#production-deployment)).
 
 ---
 
