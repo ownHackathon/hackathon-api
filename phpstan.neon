@@ -6,8 +6,6 @@ parameters:
 	ignoreErrors:
 		- identifier: missingType.iterableValue
 		- identifier: missingType.generics
-	bootstrapFiles:
-		- constants.php
 	checkUninitializedProperties: true
 	tips:
 		treatPhpDocTypesAsCertain: false

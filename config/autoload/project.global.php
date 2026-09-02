@@ -6,6 +6,7 @@ return [
     'project' => [
         'uri' => 'https:\\dev.ownhackathon.de',
         'senderEmail' => 'no-replay@ownhackathon.de',
+        'version' => 'v0.1.0',
     ],
     'api' => [
         'access' => [
