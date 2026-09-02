@@ -37,7 +37,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneById(int $id): ?AccountActivationInterface
+    public function findOneById(int $id): AccountActivationInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -53,7 +53,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneByToken(string $token): ?AccountActivationInterface
+    public function findOneByToken(string $token): AccountActivationInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
 

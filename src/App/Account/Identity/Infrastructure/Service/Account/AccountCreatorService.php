@@ -5,7 +5,6 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 use DateTimeImmutable;
 use InvalidArgumentException;
 use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
@@ -16,6 +15,7 @@ use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\Core\Observability\EmailHasher;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
@@ -42,9 +42,9 @@ readonly final class AccountCreatorService
             );
         }
 
-        $persistActivationToken = $this->accountActivationRepository->findOneByToken($activationToken);
-
-        if (!$persistActivationToken instanceof AccountActivationInterface) {
+        try {
+            $persistActivationToken = $this->accountActivationRepository->findOneByToken($activationToken);
+        } catch (EmptyResultException) {
             throw new HttpInvalidArgumentException(
                 IdentityLogMessage::ACTIVATION_TOKEN_MISSING,
                 IdentityStatusMessage::TOKEN_INVALID,

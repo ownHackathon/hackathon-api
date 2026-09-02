@@ -12,6 +12,7 @@ use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\Workspace;
 use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -110,7 +111,11 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
         $slug = $request->getAttribute('slug');
         $user = $request->getAttribute(AccountInterface::AUTHENTICATED);
 
-        $workspace = $this->workspaceRepository->findOneBySlug($slug);
+        try {
+            $workspace = $this->workspaceRepository->findOneBySlug($slug);
+        } catch (EmptyResultException) {
+            $workspace = null;
+        }
         if ($workspace === null || !$this->visibilityPolicy->isAvailableFor($workspace, $user)) {
             return new JsonResponse([
                 'statusCode' => Http::STATUS_NOT_FOUND,
@@ -118,7 +123,18 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
             ], Http::STATUS_NOT_FOUND);
         }
 
-        $account = $this->accountRepository->findOneById($workspace->accountId);
+        // TODO(workspace-ownership): Decide how to handle workspaces when their owning
+        // account is deleted. Currently a missing owner treats the workspace as not found (404).
+        // Options to investigate: soft-delete ownership, block account deletion while referenced,
+        // or expose a placeholder owner (e.g. "Deleted account").
+        try {
+            $account = $this->accountRepository->findOneById($workspace->accountId);
+        } catch (EmptyResultException) {
+            return new JsonResponse([
+                'statusCode' => Http::STATUS_NOT_FOUND,
+                'message' => 'Workspace not found',
+            ], Http::STATUS_NOT_FOUND);
+        }
 
         $response = Workspace::fromArray(
             [

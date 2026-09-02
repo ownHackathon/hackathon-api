@@ -13,6 +13,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\PasswordToken
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
@@ -27,7 +28,17 @@ function serviceAccount(): Account
 
 test('account service handles availability, password creation and activity updates', function (): void {
     $accountRepository = $this->createMock(AccountRepositoryInterface::class);
-    $accountRepository->expects($this->exactly(2))->method('findOneByEmail')->willReturnOnConsecutiveCalls(null, serviceAccount());
+    $throws = true;
+    $accountRepository->expects($this->exactly(2))->method('findOneByEmail')->willReturnCallback(
+        static function () use (&$throws): Account {
+            if ($throws) {
+                $throws = false;
+                throw new EmptyResultException();
+            }
+
+            return serviceAccount();
+        },
+    );
     $accountRepository->expects($this->once())->method('update')->with($this->callback(
         static fn (Account $account): bool => $account->lastActionAt instanceof DateTimeImmutable,
     ))->willReturn(true);
@@ -60,7 +71,17 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
         new DateTimeImmutable(),
     );
     $authRepository->expects($this->exactly(2))->method('findOneByRefreshToken')
-        ->willReturnOnConsecutiveCalls(null, $foreignAuth);
+        ->willReturnCallback(
+            static function () use ($foreignAuth): AccountAccessAuth {
+                static $call = 0;
+                $call++;
+                if ($call === 1) {
+                    throw new EmptyResultException();
+                }
+
+                return $foreignAuth;
+            },
+        );
     $service = new AccountService(
         $this->createMock(AccountRepositoryInterface::class),
         $authRepository,

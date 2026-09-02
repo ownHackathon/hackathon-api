@@ -4,7 +4,6 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
 use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -18,6 +17,7 @@ use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
@@ -51,9 +51,13 @@ readonly final class AccountService
 
     public function isEmailAvailable(EmailType $email): bool
     {
-        $account = $this->accountRepository->findOneByEmail($email);
+        try {
+            $this->accountRepository->findOneByEmail($email);
+        } catch (EmptyResultException) {
+            return true;
+        }
 
-        return $account === null;
+        return false;
     }
 
     public function createPasswordChangeTokenForUserId(int $userId): TokenInterface
@@ -81,9 +85,9 @@ readonly final class AccountService
 
     public function logout(AccountInterface $account, RefreshToken $refreshToken): void
     {
-        $accountAccessAuth = $this->authRepository->findOneByRefreshToken($refreshToken->refreshToken);
-
-        if (!($accountAccessAuth instanceof AccountAccessAuthInterface)) {
+        try {
+            $accountAccessAuth = $this->authRepository->findOneByRefreshToken($refreshToken->refreshToken);
+        } catch (EmptyResultException) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::LOGOUT_REFRESH_TOKEN_MISMATCH,
                 IdentityStatusMessage::UNAUTHORIZED_ACCESS,

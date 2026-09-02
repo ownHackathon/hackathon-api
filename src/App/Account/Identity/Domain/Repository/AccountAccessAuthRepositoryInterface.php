@@ -12,19 +12,19 @@ interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 
     public function update(AccountAccessAuthInterface $accountAccessAuth): true;
 
-    public function findOneById(int $id): ?AccountAccessAuthInterface;
+    public function findOneById(int $id): AccountAccessAuthInterface;
 
     public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface;
 
-    public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface;
+    public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): AccountAccessAuthInterface;
 
     public function findByLabel(string $label): AccountAccessAuthCollectionInterface;
 
-    public function findOneByRefreshToken(string $refreshToken): ?AccountAccessAuthInterface;
+    public function findOneByRefreshToken(string $refreshToken): AccountAccessAuthInterface;
 
     public function findByUserAgent(string $userAgent): AccountAccessAuthCollectionInterface;
 
-    public function findOneByClientIdentHash(string $clientIdentHash): ?AccountAccessAuthInterface;
+    public function findOneByClientIdentHash(string $clientIdentHash): AccountAccessAuthInterface;
 
     public function findAll(): AccountAccessAuthCollectionInterface;
 }

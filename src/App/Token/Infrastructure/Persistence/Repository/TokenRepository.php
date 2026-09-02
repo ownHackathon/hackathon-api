@@ -36,7 +36,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
     }
 
     #[\Override]
-    public function findOneById(int $id): ?TokenInterface
+    public function findOneById(int $id): TokenInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -52,7 +52,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
     }
 
     #[\Override]
-    public function findOneByToken(string $token): ?TokenInterface
+    public function findOneByToken(string $token): TokenInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
 

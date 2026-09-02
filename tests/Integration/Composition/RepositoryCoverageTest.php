@@ -28,6 +28,7 @@ use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterfac
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use ownHackathon\Core\Persistence\Pagination;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -53,10 +54,10 @@ test('repositories delegate persistence and queries to their store', function ()
     expect($accountRepo->insert($account))->toBe(1)
         ->and($accountRepo->update($account))->toBeTrue()
         ->and($accountRepo->deleteById(1))->toBeTrue()
-        ->and($accountRepo->findOneById(1))->toBeNull()
-        ->and($accountRepo->findOneByUuid($account->uuid))->toBeNull()
-        ->and($accountRepo->findOneByName('Account'))->toBeNull()
-        ->and($accountRepo->findOneByEmail($account->email))->toBeNull()
+        ->and(fn () => $accountRepo->findOneById(1))->toThrow(EmptyResultException::class)
+        ->and(fn () => $accountRepo->findOneByUuid($account->uuid))->toThrow(EmptyResultException::class)
+        ->and(fn () => $accountRepo->findOneByName('Account'))->toThrow(EmptyResultException::class)
+        ->and(fn () => $accountRepo->findOneByEmail($account->email))->toThrow(EmptyResultException::class)
         ->and($accountRepo->findAll())->toHaveCount(0);
 
     $accessStore = Mockery::mock(AccountAccessAuthStoreInterface::class);
@@ -73,13 +74,13 @@ test('repositories delegate persistence and queries to their store', function ()
     expect($accessRepo->insert($auth))->toBe(1)
         ->and($accessRepo->update($auth))->toBeTrue()
         ->and($accessRepo->deleteById(1))->toBeTrue()
-        ->and($accessRepo->findOneById(1))->toBeNull()
+        ->and(fn () => $accessRepo->findOneById(1))->toThrow(EmptyResultException::class)
         ->and($accessRepo->findByAccountId(1))->toHaveCount(0)
-        ->and($accessRepo->findOneByAccountIdAndClientIdHash(1, 'client'))->toBeNull()
+        ->and(fn () => $accessRepo->findOneByAccountIdAndClientIdHash(1, 'client'))->toThrow(EmptyResultException::class)
         ->and($accessRepo->findByLabel('web'))->toHaveCount(0)
-        ->and($accessRepo->findOneByRefreshToken('refresh'))->toBeNull()
+        ->and(fn () => $accessRepo->findOneByRefreshToken('refresh'))->toThrow(EmptyResultException::class)
         ->and($accessRepo->findByUserAgent('agent'))->toHaveCount(0)
-        ->and($accessRepo->findOneByClientIdentHash('client'))->toBeNull()
+        ->and(fn () => $accessRepo->findOneByClientIdentHash('client'))->toThrow(EmptyResultException::class)
         ->and($accessRepo->findAll())->toHaveCount(0);
 
     $activationStore = Mockery::mock(AccountActivationStoreInterface::class);
@@ -95,9 +96,9 @@ test('repositories delegate persistence and queries to their store', function ()
     $activationRepo = new AccountActivationRepository($activationStore, $activationHydrator);
     expect($activationRepo->insert($activation))->toBe(1)
         ->and($activationRepo->update($activation))->toBeTrue()
-        ->and($activationRepo->findOneById(1))->toBeNull()
+        ->and(fn () => $activationRepo->findOneById(1))->toThrow(EmptyResultException::class)
         ->and($activationRepo->findByEmail($account->email))->toHaveCount(0)
-        ->and($activationRepo->findOneByToken('token'))->toBeNull()
+        ->and(fn () => $activationRepo->findOneByToken('token'))->toThrow(EmptyResultException::class)
         ->and($activationRepo->findAll())->toHaveCount(0)
         ->and($activationRepo->deleteById(1))->toBeTrue()
         ->and($activationRepo->deleteByEmail($account->email))->toBeTrue();
@@ -115,9 +116,9 @@ test('repositories delegate persistence and queries to their store', function ()
     $tokenRepo = new TokenRepository($tokenStore, $tokenHydrator);
     expect($tokenRepo->insert($token))->toBe(1)
         ->and($tokenRepo->update($token))->toBeTrue()
-        ->and($tokenRepo->findOneById(1))->toBeNull()
+        ->and(fn () => $tokenRepo->findOneById(1))->toThrow(EmptyResultException::class)
         ->and($tokenRepo->findByAccountId(1))->toHaveCount(0)
-        ->and($tokenRepo->findOneByToken('token'))->toBeNull()
+        ->and(fn () => $tokenRepo->findOneByToken('token'))->toThrow(EmptyResultException::class)
         ->and($tokenRepo->findAll())->toHaveCount(0)
         ->and($tokenRepo->deleteById(1))->toBeTrue()
         ->and($tokenRepo->deleteByAccountId(1))->toBeTrue();
@@ -137,10 +138,10 @@ test('repositories delegate persistence and queries to their store', function ()
     expect($workspaceRepo->insert($workspace))->toBe(1)
         ->and($workspaceRepo->update($workspace))->toBeTrue()
         ->and($workspaceRepo->deleteById(1))->toBeTrue()
-        ->and($workspaceRepo->findOneById(1))->toBeNull()
+        ->and(fn () => $workspaceRepo->findOneById(1))->toThrow(EmptyResultException::class)
         ->and($workspaceRepo->findByAccountId(1, new Pagination(1, 5, 0)))->toHaveCount(0)
-        ->and($workspaceRepo->findOneByName('Workspace'))->toBeNull()
-        ->and($workspaceRepo->findOneBySlug('workspace'))->toBeNull()
+        ->and(fn () => $workspaceRepo->findOneByName('Workspace'))->toThrow(EmptyResultException::class)
+        ->and(fn () => $workspaceRepo->findOneBySlug('workspace'))->toThrow(EmptyResultException::class)
         ->and($workspaceRepo->findAll())->toHaveCount(0)
         ->and($workspaceRepo->countByAccount(1))->toBe(0);
 });

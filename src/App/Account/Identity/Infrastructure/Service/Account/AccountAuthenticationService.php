@@ -4,7 +4,6 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
@@ -20,6 +19,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenS
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Observability\EmailHasher;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Log\LoggerInterface;
 
 readonly final class AccountAuthenticationService
@@ -43,8 +43,9 @@ readonly final class AccountAuthenticationService
      */
     public function authenticate(AuthenticationRequest $auth, ClientIdentification $clientId): AuthenticationResponse
     {
-        $account = $this->accountRepository->findOneByEmail(EmailType::fromString($auth->email));
-        if (!($account instanceof AccountInterface)) {
+        try {
+            $account = $this->accountRepository->findOneByEmail(EmailType::fromString($auth->email));
+        } catch (EmptyResultException) {
             $this->activityLogger->warning(
                 IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
                 [

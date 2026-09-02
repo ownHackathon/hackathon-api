@@ -4,6 +4,7 @@ namespace ownHackathon\Core\Persistence\Repository;
 
 use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 
 readonly abstract class AbstractRepository implements RepositoryInterface
 {
@@ -20,13 +21,13 @@ readonly abstract class AbstractRepository implements RepositoryInterface
     protected function mapToEntity(mixed $result): mixed
     {
         if (!is_array($result)) {
-            return null;
+            throw new EmptyResultException();
         }
 
         try {
             return $this->getHydrator()->hydrate($result);
         } catch (\Throwable) {
-            return null;
+            throw new EmptyResultException();
         }
     }
 

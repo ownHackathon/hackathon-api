@@ -12,13 +12,13 @@ interface EventRepositoryInterface extends RepositoryInterface
 
     public function update(EventInterface $data): true;
 
-    public function findOneById(int $id): ?EventInterface;
+    public function findOneById(int $id): EventInterface;
 
     public function findByWorkspaceId(int $workspaceId): EventCollectionInterface;
 
-    public function findOneByName(string $name): ?EventInterface;
+    public function findOneByName(string $name): EventInterface;
 
-    public function findOneBySlug(string $slug): ?EventInterface;
+    public function findOneBySlug(string $slug): EventInterface;
 
     public function findeAll(): EventCollectionInterface;
 }

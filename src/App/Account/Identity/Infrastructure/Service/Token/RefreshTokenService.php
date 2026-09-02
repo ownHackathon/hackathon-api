@@ -15,6 +15,7 @@ use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 
 use function time;
 
@@ -72,8 +73,9 @@ readonly class RefreshTokenService
         RefreshToken $refreshToken,
         ClientIdentification $client,
     ): AccountAccessAuthInterface {
-        $accountAccessAuth = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
-        if (!$accountAccessAuth instanceof AccountAccessAuthInterface) {
+        try {
+            $accountAccessAuth = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
+        } catch (EmptyResultException) {
             throw new InvalidRefreshTokenException($refreshToken->refreshToken);
         }
         if ($accountAccessAuth->clientIdentHash !== $client->identificationHash) {
@@ -93,8 +95,9 @@ readonly class RefreshTokenService
      */
     private function findAccountOrThrow(AccountAccessAuthInterface $accountAccessAuth): AccountInterface
     {
-        $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
-        if (!$account instanceof AccountInterface) {
+        try {
+            $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
+        } catch (EmptyResultException) {
             throw new AccountNotFoundException(
                 accountId: $accountAccessAuth->accountId,
                 accessAuthId: $accountAccessAuth->id,

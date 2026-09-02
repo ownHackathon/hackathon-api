@@ -9,6 +9,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -34,9 +35,9 @@ readonly final class RefreshTokenAccountMiddleware implements MiddlewareInterfac
             );
         }
 
-        $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
-
-        if (!$account instanceof AccountInterface) {
+        try {
+            $account = $this->accountRepository->findOneById($accountAccessAuth->accountId);
+        } catch (EmptyResultException) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::REFRESH_TOKEN_ACCOUNT_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_INVALID,

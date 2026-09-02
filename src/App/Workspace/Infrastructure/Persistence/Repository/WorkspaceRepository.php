@@ -47,7 +47,7 @@ readonly final class WorkspaceRepository extends AbstractRepository implements W
     }
 
     #[\Override]
-    public function findOneById(int $id): ?WorkspaceInterface
+    public function findOneById(int $id): WorkspaceInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -63,7 +63,7 @@ readonly final class WorkspaceRepository extends AbstractRepository implements W
     }
 
     #[\Override]
-    public function findOneByName(string $name): ?WorkspaceInterface
+    public function findOneByName(string $name): WorkspaceInterface
     {
         $result = $this->store->fetchOne(['name' => $name]);
 
@@ -71,7 +71,7 @@ readonly final class WorkspaceRepository extends AbstractRepository implements W
     }
 
     #[\Override]
-    public function findOneBySlug(string $slug): ?WorkspaceInterface
+    public function findOneBySlug(string $slug): WorkspaceInterface
     {
         $result = $this->store->fetchOne(['slug' => $slug]);
 

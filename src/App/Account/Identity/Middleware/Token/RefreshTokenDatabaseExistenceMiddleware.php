@@ -9,6 +9,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -27,8 +28,9 @@ readonly final class RefreshTokenDatabaseExistenceMiddleware implements Middlewa
         /** @var RefreshToken $refreshToken */
         $refreshToken = $request->getAttribute(RefreshToken::class);
 
-        $persistToken = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
-        if (!($persistToken instanceof AccountAccessAuthInterface)) {
+        try {
+            $persistToken = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
+        } catch (EmptyResultException) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::REFRESH_TOKEN_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_NOT_PERSISTENT,

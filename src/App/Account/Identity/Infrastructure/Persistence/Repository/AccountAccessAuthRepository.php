@@ -42,7 +42,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneById(int $id): ?AccountAccessAuthInterface
+    public function findOneById(int $id): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -58,7 +58,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): ?AccountAccessAuthInterface
+    public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne([
             'accountId' => $accountId,
@@ -77,7 +77,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneByRefreshToken(string $refreshToken): ?AccountAccessAuthInterface
+    public function findOneByRefreshToken(string $refreshToken): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['refreshToken' => $refreshToken]);
 
@@ -93,7 +93,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
     }
 
     #[\Override]
-    public function findOneByClientIdentHash(string $clientIdentHash): ?AccountAccessAuthInterface
+    public function findOneByClientIdentHash(string $clientIdentHash): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['ClientIdentHash' => $clientIdentHash]);
 

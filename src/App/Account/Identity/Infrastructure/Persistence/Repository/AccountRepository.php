@@ -44,7 +44,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
     }
 
     #[\Override]
-    public function findOneById(int $id): ?AccountInterface
+    public function findOneById(int $id): AccountInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -52,7 +52,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
     }
 
     #[\Override]
-    public function findOneByUuid(UuidInterface $uuid): ?AccountInterface
+    public function findOneByUuid(UuidInterface $uuid): AccountInterface
     {
         $result = $this->store->fetchOne(['uuid' => $uuid]);
 
@@ -60,7 +60,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
     }
 
     #[\Override]
-    public function findOneByName(string $name): ?AccountInterface
+    public function findOneByName(string $name): AccountInterface
     {
         $result = $this->store->fetchOne(['name' => $name]);
 
@@ -68,7 +68,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
     }
 
     #[\Override]
-    public function findOneByEmail(EmailType $email): ?AccountInterface
+    public function findOneByEmail(EmailType $email): AccountInterface
     {
         $result = $this->store->fetchOne(['email' => $email]);
 

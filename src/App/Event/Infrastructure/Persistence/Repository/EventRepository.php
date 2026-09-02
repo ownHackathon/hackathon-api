@@ -36,7 +36,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
     }
 
     #[\Override]
-    public function findOneById(int $id): ?EventInterface
+    public function findOneById(int $id): EventInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
 
@@ -52,7 +52,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
     }
 
     #[\Override]
-    public function findOneByName(string $name): ?EventInterface
+    public function findOneByName(string $name): EventInterface
     {
         $result = $this->store->fetchOne(['name' => $name]);
 
@@ -60,7 +60,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
     }
 
     #[\Override]
-    public function findOneBySlug(string $slug): ?EventInterface
+    public function findOneBySlug(string $slug): EventInterface
     {
         $result = $this->store->fetchOne(['slug' => $slug]);
 

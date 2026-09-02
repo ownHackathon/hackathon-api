@@ -9,6 +9,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -65,8 +66,9 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
                 Level::Warning,
             );
         }
-        $account = $this->accountRepository->findOneByUuid($uuid);
-        if (!($account instanceof AccountInterface)) {
+        try {
+            $account = $this->accountRepository->findOneByUuid($uuid);
+        } catch (EmptyResultException) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_INVALID,

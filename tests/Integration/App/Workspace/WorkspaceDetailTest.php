@@ -46,6 +46,23 @@ test('public workspace details can be read without authentication', function () 
         ->and(JsonFactory::create($response))->toHaveSubset(['name' => $workspace['name']]);
 });
 
+test('workspace with a deleted owner account returns not found instead of a server error', function () {
+    $workspace = CreateWorkspacesFactory::create([
+        'accountId' => 999999,
+        'visibility' => Visibility::PUBLIC->value,
+    ]);
+
+    $response = $this->app->handle(
+        $this->createGetRequest('/api/workspace/' . $workspace['slug'])
+    );
+
+    expect($response->getStatusCode())->toBe(Http::STATUS_NOT_FOUND)
+        ->and(JsonFactory::create($response))->toHaveSubset([
+            'statusCode' => Http::STATUS_NOT_FOUND,
+            'message' => 'Workspace not found',
+        ]);
+});
+
 test('private workspace details are hidden from unauthenticated users', function () {
     $owner = AccountFactory::create();
     $workspace = CreateWorkspacesFactory::create([

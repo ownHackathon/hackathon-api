@@ -10,6 +10,7 @@ use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository
 use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -61,7 +62,7 @@ test('event repository delegates all read and write operations', function (): vo
         ->and($repository->deleteById(1))->toBeTrue();
 });
 
-test('event repository maps empty reads to null and empty collections', function (): void {
+test('event repository maps empty reads to exception and empty collections', function (): void {
     $store = $this->createMock(EventStoreInterface::class);
     $hydrator = $this->createMock(EventHydratorInterface::class);
     $empty = new EventCollection();
@@ -71,7 +72,7 @@ test('event repository maps empty reads to null and empty collections', function
     $hydrator->expects($this->exactly(2))->method('hydrateCollection')->with([])->willReturn($empty);
     $repository = new EventRepository($store, $hydrator);
 
-    expect($repository->findOneById(1))->toBeNull()
+    expect(fn () => $repository->findOneById(1))->toThrow(EmptyResultException::class)
         ->and($repository->findByWorkspaceId(1))->toBe($empty)
         ->and($repository->findeAll())->toBe($empty);
 });
@@ -82,5 +83,5 @@ test('event repository treats an invalid persisted entity as not found', functio
     $store->method('fetchOne')->willReturn(['id' => 1]);
     $hydrator->method('hydrate')->willThrowException(new \UnexpectedValueException('invalid persisted data'));
 
-    expect((new EventRepository($store, $hydrator))->findOneById(1))->toBeNull();
+    expect(fn () => (new EventRepository($store, $hydrator))->findOneById(1))->toThrow(EmptyResultException::class);
 });

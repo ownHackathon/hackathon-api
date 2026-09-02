@@ -12,11 +12,11 @@ interface TokenRepositoryInterface extends RepositoryInterface
 
     public function update(TokenInterface $data): true;
 
-    public function findOneById(int $id): ?TokenInterface;
+    public function findOneById(int $id): TokenInterface;
 
     public function findByAccountId(int $accountId): TokenCollectionInterface;
 
-    public function findOneByToken(string $token): ?TokenInterface;
+    public function findOneByToken(string $token): TokenInterface;
 
     public function findAll(): TokenCollectionInterface;
 

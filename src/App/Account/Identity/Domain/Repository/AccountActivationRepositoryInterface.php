@@ -13,11 +13,11 @@ interface AccountActivationRepositoryInterface extends RepositoryInterface
 
     public function update(AccountActivationInterface $data): true;
 
-    public function findOneById(int $id): ?AccountActivationInterface;
+    public function findOneById(int $id): AccountActivationInterface;
 
     public function findByEmail(EmailType $email): AccountActivationCollectionInterface;
 
-    public function findOneByToken(string $token): ?AccountActivationInterface;
+    public function findOneByToken(string $token): AccountActivationInterface;
 
     public function findAll(): AccountActivationCollectionInterface;
 

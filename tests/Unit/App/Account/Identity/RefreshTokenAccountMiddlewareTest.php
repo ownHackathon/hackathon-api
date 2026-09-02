@@ -12,6 +12,7 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterfa
 use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenAccountMiddleware;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -61,7 +62,8 @@ test('refresh account middleware rejects a missing access auth attribute', funct
 test('refresh account middleware rejects an unknown account', function (): void {
     $auth = refreshAuth();
     $repository = $this->createMock(AccountRepositoryInterface::class);
-    $repository->expects($this->once())->method('findOneById')->with($auth->accountId)->willReturn(null);
+    $repository->expects($this->once())->method('findOneById')->with($auth->accountId)
+        ->willThrowException(new EmptyResultException());
     $handler = $this->createMock(RequestHandlerInterface::class);
     $request = (new ServerRequest())->withAttribute(AccountAccessAuthInterface::class, $auth);
 

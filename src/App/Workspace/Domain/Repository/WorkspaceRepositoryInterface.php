@@ -13,13 +13,13 @@ interface WorkspaceRepositoryInterface extends RepositoryInterface
 
     public function update(WorkspaceInterface $data): true;
 
-    public function findOneById(int $id): ?WorkspaceInterface;
+    public function findOneById(int $id): WorkspaceInterface;
 
     public function findByAccountId(int $accountId, Pagination $pagination): WorkspaceCollectionInterface;
 
-    public function findOneByName(string $name): ?WorkspaceInterface;
+    public function findOneByName(string $name): WorkspaceInterface;
 
-    public function findOneBySlug(string $slug): ?WorkspaceInterface;
+    public function findOneBySlug(string $slug): WorkspaceInterface;
 
     public function findAll(): WorkspaceCollectionInterface;
 

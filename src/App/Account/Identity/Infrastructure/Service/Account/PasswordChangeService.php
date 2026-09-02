@@ -2,16 +2,15 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
-use ownHackathon\App\Account\Identity\Domain\Account;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
 use ownHackathon\App\Token\Domain\Enum\TokenType;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\App\Token\DTO\Token;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Log\LoggerInterface;
 
 readonly final class PasswordChangeService
@@ -30,15 +29,19 @@ readonly final class PasswordChangeService
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token->token);
         }
 
-        $persistedToken = $this->tokenRepository->findOneByToken($token->token);
-
-        if (!($persistedToken instanceof TokenInterface) || $persistedToken->tokenType !== TokenType::EMail) {
+        try {
+            $persistedToken = $this->tokenRepository->findOneByToken($token->token);
+        } catch (EmptyResultException) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token->token);
         }
 
-        $account = $this->accountRepository->findOneById($persistedToken->accountId);
+        if ($persistedToken->tokenType !== TokenType::EMail) {
+            $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token->token);
+        }
 
-        if (!($account instanceof Account)) {
+        try {
+            $account = $this->accountRepository->findOneById($persistedToken->accountId);
+        } catch (EmptyResultException) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_ACCOUNT_NOT_FOUND, $token->token);
         }
 
@@ -57,7 +60,7 @@ readonly final class PasswordChangeService
         );
     }
 
-    private function errorResponse(string $logMessage, ?string $token): void
+    private function errorResponse(string $logMessage, ?string $token): never
     {
         throw new HttpInvalidArgumentException(
             $logMessage,
