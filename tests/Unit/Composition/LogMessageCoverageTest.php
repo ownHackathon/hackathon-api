@@ -54,3 +54,23 @@ test('identity log message constants cover account hydrator cases', function ():
 test('token log message constants are unique and non-empty', function (): void {
     expect(TokenLogMessage::TOKEN_DATA_SKIPPED)->not->toBe('');
 });
+
+test('identity activity log message constants are unique and non-empty', function (): void {
+    $constants = [
+        IdentityLogMessage::ACTIVITY_INTERACTION,
+        IdentityLogMessage::ACTIVITY_INTERACTION_WARNING,
+        IdentityLogMessage::ACTIVITY_INTERACTION_ERROR,
+        IdentityLogMessage::ACTIVITY_LOGIN_SUCCESS,
+        IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
+        IdentityLogMessage::ACTIVITY_REGISTER_REQUESTED,
+        IdentityLogMessage::ACTIVITY_PASSWORD_CHANGE_REQUESTED,
+        IdentityLogMessage::ACTIVITY_PASSWORD_CHANGED,
+        IdentityLogMessage::ACTIVITY_LOGOUT,
+        IdentityLogMessage::ACTIVITY_TOKEN_REFRESHED,
+        IdentityLogMessage::ACTIVITY_ACCOUNT_ACTIVATED,
+        IdentityLogMessage::ACTIVITY_SUSPICIOUS_ACCESS,
+    ];
+
+    expect($constants)->each->not->toBe('')
+        ->and(count($constants))->toBe(count(array_unique($constants)));
+});

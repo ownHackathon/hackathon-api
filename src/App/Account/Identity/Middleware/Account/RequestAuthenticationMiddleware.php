@@ -79,7 +79,8 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
         }
 
         $this->logger->info('Authenticated user call.', [
-            'Account' => $account->name,
+            'accountId' => $account->id,
+            'accountUuid' => $account->uuid->toString(),
             'uri' => (string)$request->getUri(),
         ]);
 

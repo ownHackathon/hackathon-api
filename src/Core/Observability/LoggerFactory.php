@@ -31,10 +31,11 @@ readonly final class LoggerFactory
 
     private function buildLogger(ContainerInterface $container, string $channel): LoggerInterface
     {
-        /** @var array{logger: array{path: string, format?: string}} $config */
+        /** @var array{logger: array{path: string, format?: string, channels?: array<string, array{file?: string, format?: string}>}} $config */
         $config = $container->get('config');
         $path = $config['logger']['path'];
         $format = $config['logger']['format'] ?? '';
+        $channelConfig = $config['logger']['channels'][$channel] ?? [];
 
         $date = (new DateTime())->format('Y-m-d');
         $path = rtrim($path, '/') . '/' . $date . '/';
@@ -43,13 +44,30 @@ readonly final class LoggerFactory
             mkdir($path, 0775);
         }
 
-        $formatter = $this->createFormatter($format);
+        $formatter = $this->createFormatter($channelConfig['format'] ?? $format);
+
+        $logger = new Logger($channel);
+
+        $file = $channelConfig['file'] ?? null;
+        if ($file !== null) {
+            $logger->pushHandler(new StreamHandler($path . $file)->setFormatter($formatter));
+            $logger->pushProcessor(new PsrLogMessageProcessor());
+            $logger->pushProcessor(
+                new MetaDataProcessor(
+                    filter_input(INPUT_SERVER, 'REMOTE_ADDR'),
+                    filter_input(INPUT_SERVER, 'REQUEST_URI'),
+                    filter_input(INPUT_SERVER, 'REQUEST_METHOD'),
+                    filter_input(INPUT_SERVER, 'REDIRECT_URL'),
+                    filter_input_array(INPUT_GET),
+                ),
+            );
+            return $logger;
+        }
+
         $stackTraceFormater = clone $formatter;
         if ($stackTraceFormater instanceof LineFormatter) {
             $stackTraceFormater->includeStacktraces(true);
         }
-
-        $logger = new Logger($channel);
 
         $logger->pushHandler(new StreamHandler($path . 'default.log')->setFormatter($formatter));
 

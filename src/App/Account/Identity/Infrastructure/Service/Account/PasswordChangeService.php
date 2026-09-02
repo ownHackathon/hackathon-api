@@ -12,6 +12,7 @@ use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\App\Token\DTO\Token;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use Psr\Log\LoggerInterface;
 
 readonly final class PasswordChangeService
 {
@@ -19,6 +20,7 @@ readonly final class PasswordChangeService
         private AccountRepositoryInterface $accountRepository,
         private TokenRepositoryInterface $tokenRepository,
         private AccountService $accountService,
+        private LoggerInterface $activityLogger,
     ) {
     }
 
@@ -45,6 +47,14 @@ readonly final class PasswordChangeService
 
         $this->accountRepository->update($account);
         $this->tokenRepository->deleteById($persistedToken->id);
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_PASSWORD_CHANGED,
+            [
+                'accountId' => $account->id,
+                'accountUuid' => $account->uuid->toString(),
+            ],
+        );
     }
 
     private function errorResponse(string $logMessage, ?string $token): void

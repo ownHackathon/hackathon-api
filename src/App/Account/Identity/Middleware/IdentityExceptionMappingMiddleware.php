@@ -14,6 +14,7 @@ use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
+use ownHackathon\Core\Observability\EmailHasher;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -21,6 +22,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInterface
 {
+    public function __construct(
+        private string $emailHashSalt,
+    ) {
+    }
+
     #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -54,7 +60,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                 [
                     'AccessAuth ID:' => $e->accessAuthId,
                     'Account ID:' => $e->accountId,
-                    'E-Mail:' => $e->email,
+                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt),
                 ],
                 Level::Warning,
             );
@@ -63,7 +69,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                 IdentityLogMessage::PASSWORD_INCORRECT,
                 IdentityStatusMessage::INVALID_DATA,
                 [
-                    'E-Mail:' => $e->email,
+                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt),
                 ],
                 Level::Warning,
             );
@@ -72,7 +78,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                 IdentityLogMessage::DUPLICATE_SOURCE_LOGIN,
                 IdentityStatusMessage::INVALID_DATA,
                 [
-                    'Account' => $e->account,
+                    'accountUuid' => $e->account,
                     'ClientID' => $e->clientId,
                     'ErrorMessage' => $e->errorMessage,
                 ],
@@ -81,7 +87,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
             throw new HttpHandledInvalidArgumentAsSuccessException(
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::SUCCESS,
-                ['email:' => $e->email],
+                ['emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt)],
             );
         }
     }

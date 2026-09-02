@@ -14,8 +14,10 @@ use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
 use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\Observability\EmailHasher;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 readonly final class AccountCreatorService
 {
@@ -23,6 +25,8 @@ readonly final class AccountCreatorService
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private AccountRepositoryInterface $accountRepository,
         private UuidFactoryInterface $uuid,
+        private LoggerInterface $activityLogger,
+        private string $emailHashSalt,
     ) {
     }
 
@@ -67,7 +71,7 @@ readonly final class AccountCreatorService
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::INVALID_DATA,
                 [
-                    'E-Mail' => $account->email->toString(),
+                    'emailHash' => EmailHasher::hash($account->email->toString(), $this->emailHashSalt),
                     'Exception Message:' => $e->getMessage(),
                 ],
             );
@@ -80,13 +84,22 @@ readonly final class AccountCreatorService
                 IdentityLogMessage::ACCOUNT_UPDATE_UNKNOWN_ERROR,
                 IdentityStatusMessage::UNKNOWN_ERROR,
                 [
-                    'account' => $account->name,
+                    'accountUuid' => $account->uuid->toString(),
                     'exception' => $exception,
                 ],
             );
         }
 
         $account = $this->accountRepository->findOneById($accountId);
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_ACCOUNT_ACTIVATED,
+            [
+                'accountId' => $account->id,
+                'accountUuid' => $account->uuid->toString(),
+            ],
+        );
+
         return AccountDTO::createFromAccount($account);
     }
 }

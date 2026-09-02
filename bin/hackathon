@@ -267,8 +267,9 @@ case $1 in
         $DOCKER_COMPOSE logs -f
     else
         case $2 in
+          prune)  $DOCKER_COMPOSE exec $CONTAINER_PHP php bin/logs-prune.php ;;
           php|apache|database|database-testing|mailhog) $DOCKER_COMPOSE logs -f "$2" ;;
-          *) list_services; echo -e "Usage: $0 logs {${GREEN}svc${NC}}"; exit 1 ;;
+          *) list_services; echo -e "Usage: $0 logs {prune|${GREEN}svc${NC}}"; exit 1 ;;
         esac
     fi
     ;;

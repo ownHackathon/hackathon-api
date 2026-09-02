@@ -11,6 +11,11 @@ namespace ownHackathon\Core\SharedKernel\Domain\Message;
  * - Fehlerhafte Visibility-Werte über `visibility` plus `{entity}Id`.
  * - HTTP-/Auth-Kontext über `uri`, `ip`, `status`, `method`, `correlation_id`.
  * - Keine sensiblen Daten (Passwörter, Tokens, Sitzungsgeheimnisse) in Nachricht oder Kontext ablegen.
+ *
+ * DSGVO-Konventionen für den Account-Aktivitäts-Kontext:
+ * - Keine E-Mail-Adresse im Klartext; für bestehende Accounts accountId/accountUuid verwenden.
+ * - Für unbekannte Adressen ausschließlich `emailHash` (salted), nie die Adresse selbst.
+ * - `ip` nur maskiert (letztes Oktett), `userAgent` nur als grobes Kurzmerkmal ablegen.
  */
 interface LogMessage
 {

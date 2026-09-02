@@ -16,6 +16,7 @@ use ownHackathon\App\Account\Identity\Handler\AccountPasswordHandler;
 use ownHackathon\App\Account\Identity\Handler\AccountRegisterHandler;
 use ownHackathon\App\Account\Identity\Handler\AuthenticationHandler;
 use ownHackathon\App\Account\Identity\Handler\LogoutHandler;
+use ownHackathon\App\Account\Identity\Infrastructure\Factory\EmailHashSaltFactory;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
@@ -52,6 +53,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Validator\AuthenticationVal
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\PasswordValidator;
+use ownHackathon\App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\Authentication\AuthenticationConditionsMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
@@ -199,6 +201,8 @@ readonly class ConfigProvider
             ],
             'factories' => [
                 'logger.identity' => ChannelLoggerFactory::class,
+                'logger.account-activity' => ChannelLoggerFactory::class,
+                'logger.email_hash_salt' => EmailHashSaltFactory::class,
                 AccountAccessAuthHydrator::class => InvokableFactory::class,
                 AccountActivationHydrator::class => ConfigAbstractFactory::class,
                 AccountHydrator::class => ConfigAbstractFactory::class,
@@ -206,8 +210,10 @@ readonly class ConfigProvider
                 AuthenticationValidationMiddleware::class => ConfigAbstractFactory::class,
                 ActivationInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 EmailInputValidatorMiddleware::class => ConfigAbstractFactory::class,
+                IdentityExceptionMappingMiddleware::class => ConfigAbstractFactory::class,
                 PasswordInputValidatorMiddleware::class => ConfigAbstractFactory::class,
                 LastActivityUpdaterMiddleware::class => ConfigAbstractFactory::class,
+                AccountActivityLoggingMiddleware::class => ConfigAbstractFactory::class,
                 PasswordChangeService::class => ConfigAbstractFactory::class,
                 RequestAuthenticationMiddleware::class => ConfigAbstractFactory::class,
                 ClientIdentificationMiddleware::class => ConfigAbstractFactory::class,
@@ -274,16 +280,23 @@ readonly class ConfigProvider
             EmailInputValidatorMiddleware::class => [
                 EMailValidator::class,
             ],
+            IdentityExceptionMappingMiddleware::class => [
+                'logger.email_hash_salt',
+            ],
             PasswordInputValidatorMiddleware::class => [
                 PasswordValidator::class,
             ],
             LastActivityUpdaterMiddleware::class => [
                 AccountRepositoryInterface::class,
             ],
+            AccountActivityLoggingMiddleware::class => [
+                'logger.account-activity',
+            ],
             PasswordChangeService::class => [
                 AccountRepositoryInterface::class,
                 TokenRepositoryInterface::class,
                 AccountService::class,
+                'logger.account-activity',
             ],
             RequestAuthenticationMiddleware::class => [
                 AccessTokenService::class,
@@ -327,6 +340,7 @@ readonly class ConfigProvider
                 TokenRepositoryInterface::class,
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
+                'logger.account-activity',
             ],
             AccountAccessAuthTable::class => [
                 Query::class,
@@ -364,6 +378,8 @@ readonly class ConfigProvider
                 RefreshTokenService::class,
                 AccessTokenService::class,
                 AccountService::class,
+                'logger.account-activity',
+                'logger.email_hash_salt',
             ],
             AccountRegisterHandler::class => [
                 AccountRegisterService::class,
@@ -373,6 +389,8 @@ readonly class ConfigProvider
                 AccountActivationRepositoryInterface::class,
                 ActivationTokenService::class,
                 UuidFactoryInterface::class,
+                'logger.account-activity',
+                'logger.email_hash_salt',
             ],
             AccountActivationHandler::class => [
                 AccountCreatorService::class,
@@ -382,6 +400,8 @@ readonly class ConfigProvider
                 AccountActivationRepositoryInterface::class,
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
+                'logger.account-activity',
+                'logger.email_hash_salt',
             ],
             AccountPasswordForgottenHandler::class => [
                 PasswordService::class,

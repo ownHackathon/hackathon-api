@@ -19,6 +19,7 @@ use ownHackathon\App\Token\Domain\Token;
 use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 readonly final class AccountService
 {
@@ -28,6 +29,7 @@ readonly final class AccountService
         private TokenRepositoryInterface $tokenRepository,
         private PasswordTokenService $tokenService,
         private UuidFactoryInterface $uuid,
+        private LoggerInterface $activityLogger,
     ) {
     }
 
@@ -37,6 +39,14 @@ readonly final class AccountService
         $token = $this->createPasswordChangeTokenForUserId($account->id);
         $this->tokenRepository->insert($token);
         $this->tokenService->sendEmail($email, $token);
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_PASSWORD_CHANGE_REQUESTED,
+            [
+                'accountId' => $account->id,
+                'accountUuid' => $account->uuid->toString(),
+            ],
+        );
     }
 
     public function isEmailAvailable(EmailType $email): bool
@@ -98,5 +108,13 @@ readonly final class AccountService
         }
 
         $this->authRepository->deleteById($accountAccessAuth->id);
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_LOGOUT,
+            [
+                'accountId' => $account->id,
+                'accountUuid' => $account->uuid->toString(),
+            ],
+        );
     }
 }

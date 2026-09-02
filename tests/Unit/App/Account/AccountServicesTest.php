@@ -14,6 +14,7 @@ use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -36,6 +37,7 @@ test('account service handles availability, password creation and activity updat
         $this->createMock(TokenRepositoryInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
+        $this->createMock(LoggerInterface::class),
     );
     $email = new EmailType('alice@example.com');
 
@@ -65,6 +67,7 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
         $this->createMock(TokenRepositoryInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
+        $this->createMock(LoggerInterface::class),
     );
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));

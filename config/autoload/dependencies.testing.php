@@ -9,6 +9,7 @@ use ownHackathon\Core\Observability\LoggerFactory;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
+use Tests\Integration\Mock\ArrayLogger;
 use Tests\Integration\Mock\NullMailerFactory;
 
 return [
@@ -29,6 +30,7 @@ return [
         // not require arguments to the constructor. Map a service name to the
         // class name.
         'invokables' => [
+            'logger.account-activity' => ArrayLogger::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [

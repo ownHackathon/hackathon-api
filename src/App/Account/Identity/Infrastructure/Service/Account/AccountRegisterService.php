@@ -5,10 +5,13 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
 use ownHackathon\App\Account\Identity\Domain\AccountActivation;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
 use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\Core\Observability\EmailHasher;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 readonly final class AccountRegisterService implements AccountRegisterServiceInterface
 {
@@ -17,6 +20,8 @@ readonly final class AccountRegisterService implements AccountRegisterServiceInt
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private ActivationTokenService $activationTokenService,
         private UuidFactoryInterface $uuid,
+        private LoggerInterface $activityLogger,
+        private string $emailHashSalt,
     ) {
     }
 
@@ -36,6 +41,13 @@ readonly final class AccountRegisterService implements AccountRegisterServiceInt
         );
 
         $this->accountActivationRepository->insert($activation);
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_REGISTER_REQUESTED,
+            [
+                'emailHash' => EmailHasher::hash($email->toString(), $this->emailHashSalt),
+            ],
+        );
 
         $this->activationTokenService->sendEmail($activation);
     }

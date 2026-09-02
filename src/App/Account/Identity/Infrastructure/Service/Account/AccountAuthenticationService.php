@@ -8,6 +8,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
@@ -17,7 +18,9 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\Auth
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use ownHackathon\App\Mailing\Domain\EmailType;
+use ownHackathon\Core\Observability\EmailHasher;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use Psr\Log\LoggerInterface;
 
 readonly final class AccountAuthenticationService
 {
@@ -28,6 +31,8 @@ readonly final class AccountAuthenticationService
         private RefreshTokenService $refreshTokenService,
         private AccessTokenService $accessTokenService,
         private AccountService $accountService,
+        private LoggerInterface $activityLogger,
+        private string $emailHashSalt,
     ) {
     }
 
@@ -40,10 +45,27 @@ readonly final class AccountAuthenticationService
     {
         $account = $this->accountRepository->findOneByEmail(EmailType::fromString($auth->email));
         if (!($account instanceof AccountInterface)) {
+            $this->activityLogger->warning(
+                IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
+                [
+                    'emailHash' => EmailHasher::hash($auth->email, $this->emailHashSalt),
+                    'clientIdentHash' => $clientId->identificationHash,
+                    'reason' => 'account_not_found',
+                ],
+            );
             throw new AccountNotFoundException(email: $auth->email);
         }
 
         if (!$this->authenticationService->isPasswordMatch($auth->password, $account->password)) {
+            $this->activityLogger->warning(
+                IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
+                [
+                    'accountId' => $account->id,
+                    'accountUuid' => $account->uuid->toString(),
+                    'clientIdentHash' => $clientId->identificationHash,
+                    'reason' => 'password_mismatch',
+                ],
+            );
             throw new PasswordMismatchException(email: $auth->email);
         }
 
@@ -64,12 +86,21 @@ readonly final class AccountAuthenticationService
             $this->accountAccessAuthRepository->insert($accountAccessAuth);
         } catch (DuplicateEntryException $e) {
             throw new DuplicateAuthException(
-                account: $account->name,
+                account: $account->uuid->toString(),
                 accountId: $account->id,
                 clientId: $clientId->identificationHash,
                 errorMessage: $e->getMessage(),
             );
         }
+
+        $this->activityLogger->info(
+            IdentityLogMessage::ACTIVITY_LOGIN_SUCCESS,
+            [
+                'accountId' => $account->id,
+                'accountUuid' => $account->uuid->toString(),
+                'clientIdentHash' => $clientId->identificationHash,
+            ],
+        );
 
         $this->accountService->updateLastAction($account);
 

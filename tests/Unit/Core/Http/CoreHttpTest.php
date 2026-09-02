@@ -114,6 +114,33 @@ test('error response factory maps handled and unhandled exceptions', function ()
     expect($handled->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST)->and($unhandled->getStatusCode())->toBe(Http::STATUS_INTERNAL_SERVER_ERROR);
 });
 
+test('error response factory strips clear-text contact fields from the log context', function (): void {
+    $loggedContext = null;
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->method('log')->willReturnCallback(
+        static function ($level, $message, array $context) use (&$loggedContext): void {
+            $loggedContext = $context;
+        }
+    );
+    $factory = new ErrorResponseFactory($logger);
+
+    $factory->createFromThrowable(new HttpInvalidArgumentException(
+        'dup',
+        'bad',
+        [
+            'E-Mail:' => 'max@example.org',
+            'Account' => 'Max Mustermann',
+            'accountUuid' => '11111111-1111-1111-1111-111111111111',
+            'emailHash' => 'hashed',
+        ],
+    ));
+
+    expect($loggedContext)->not->toHaveKey('E-Mail:')
+        ->and($loggedContext)->not->toHaveKey('Account')
+        ->and($loggedContext)->toHaveKey('accountUuid')
+        ->and($loggedContext)->toHaveKey('emailHash');
+});
+
 test('route-not-found middleware logs and delegates', function (): void {
     $logger = $this->createMock(LoggerInterface::class);
     $logger->expects($this->once())->method('notice')->with('Route not found');

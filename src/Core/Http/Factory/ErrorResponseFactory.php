@@ -35,7 +35,7 @@ final readonly class ErrorResponseFactory
             $this->logger->log(
                 $logLevel->value,
                 sprintf('[%d] %s', $statusCode, $e->getMessage()),
-                $logContext,
+                $this->sanitizeContext($logContext),
             );
         } else {
             $this->logger->log(
@@ -47,5 +47,23 @@ final readonly class ErrorResponseFactory
 
         $message = HttpResponseMessage::create($statusCode, $responseMessage);
         return new JsonResponse($message, $message->statusCode);
+    }
+
+    private function sanitizeContext(array $context): array
+    {
+        $sensitiveKeys = ['email', 'e-mail', 'account', 'user', 'benutzer', 'nutzername'];
+        $result = [];
+        foreach ($context as $key => $value) {
+            if (!is_string($key)) {
+                $result[$key] = $value;
+                continue;
+            }
+            $normalized = strtolower(str_replace([' ', ':', '-', '_'], '', trim($key)));
+            if (in_array($normalized, $sensitiveKeys, true)) {
+                continue;
+            }
+            $result[$key] = $value;
+        }
+        return $result;
     }
 }

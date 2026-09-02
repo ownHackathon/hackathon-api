@@ -54,4 +54,18 @@ interface IdentityLogMessage extends LogMessage
     public const string REFRESH_TOKEN_NOT_FOUND = 'The provided refresh token is unrecognized';
     public const string REFRESH_TOKEN_CLIENT_MISMATCH = 'The refresh token was issued to a different client';
     public const string REFRESH_TOKEN_ACCOUNT_NOT_FOUND = 'The account associated with the refresh token was not found';
+
+    // --- 9. Account Activity Log (DSGVO-conscious) ---
+    public const string ACTIVITY_INTERACTION = 'Account interaction recorded';
+    public const string ACTIVITY_INTERACTION_WARNING = 'Account interaction recorded with client error';
+    public const string ACTIVITY_INTERACTION_ERROR = 'Account interaction recorded with server error';
+    public const string ACTIVITY_LOGIN_SUCCESS = 'Account login succeeded';
+    public const string ACTIVITY_LOGIN_FAILED = 'Account login attempt failed';
+    public const string ACTIVITY_REGISTER_REQUESTED = 'Account registration requested';
+    public const string ACTIVITY_PASSWORD_CHANGE_REQUESTED = 'Password change requested';
+    public const string ACTIVITY_PASSWORD_CHANGED = 'Account password changed';
+    public const string ACTIVITY_LOGOUT = 'Account logged out';
+    public const string ACTIVITY_TOKEN_REFRESHED = 'Account refresh token used';
+    public const string ACTIVITY_ACCOUNT_ACTIVATED = 'Account activated';
+    public const string ACTIVITY_SUSPICIOUS_ACCESS = 'Suspicious account access detected';
 }

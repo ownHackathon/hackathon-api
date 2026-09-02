@@ -14,6 +14,7 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
+use ownHackathon\App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
@@ -47,6 +48,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         ClientIdentificationMiddleware::class,
         RequestAuthenticationMiddleware::class,
         LastActivityUpdaterMiddleware::class,
+        AccountActivityLoggingMiddleware::class,
 
         DispatchMiddleware::class,
 

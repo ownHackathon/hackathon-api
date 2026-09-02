@@ -135,6 +135,7 @@ Run the script from the project root directory:
 *   **`setup`**: Complete initial setup (Start, Install, Migrate, OpenAPI, Info).
 *   **`services`**: Lists all available service names used in this project.
 *   **`logs [svc]`**: Tails logs for all or a specific service (e.g., `./bin/hackathon logs php`).
+*   **`logs prune`**: Removes dated log directories older than the configured retention (`logger.retention_days`, default 30) from `data/log`. DSGVO-compliant deletion of account activity logs; the cron scheduling is left to the operator.
 *   **`info`**: Displays connectivity info (URLs, Ports, and DB Credentials) for running services.
 *   **`openapi`**: Regenerates the API documentation.
 *   **`test [unit|integration|file] [options]`**: Runs Pest tests selectively in the PHP container. Without arguments, all tests are executed. Examples:
