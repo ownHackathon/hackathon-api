@@ -21,6 +21,7 @@ readonly final class RefreshTokenDatabaseExistenceMiddleware implements Middlewa
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var RefreshToken $refreshToken */

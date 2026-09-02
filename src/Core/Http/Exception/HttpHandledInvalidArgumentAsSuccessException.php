@@ -18,6 +18,7 @@ final class HttpHandledInvalidArgumentAsSuccessException extends HttpException
         parent::__construct($logMessage, $responseMessage, $context, $loglevel, $previous);
     }
 
+    #[\Override]
     public function getHttpStatusCode(): int
     {
         return StatusCodeInterface::STATUS_OK;

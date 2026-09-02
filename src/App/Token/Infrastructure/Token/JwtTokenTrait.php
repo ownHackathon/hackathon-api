@@ -13,7 +13,7 @@ use UnexpectedValueException;
 
 trait JwtTokenTrait
 {
-    public function isValid(string $token): bool
+    public function isValid(#[\SensitiveParameter] string $token): bool
     {
         try {
             JWT::decode($token, new Key($this->config->key, $this->config->algorithmus));
@@ -31,7 +31,7 @@ trait JwtTokenTrait
         return true;
     }
 
-    public function decode(string $token): object
+    public function decode(#[\SensitiveParameter] string $token): object
     {
         if (!$this->isValid($token)) {
             return throw new InvalidArgumentException();

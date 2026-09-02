@@ -15,6 +15,7 @@ readonly final class RouteNotFoundMiddleware implements MiddlewareInterface
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $this->logger->notice('Route not found');

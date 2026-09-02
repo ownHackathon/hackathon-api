@@ -39,6 +39,7 @@ readonly final class PingHandler implements RequestHandlerInterface
             ),
         ],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new JsonResponse([

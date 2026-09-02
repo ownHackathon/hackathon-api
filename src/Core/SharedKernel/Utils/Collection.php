@@ -21,6 +21,7 @@ abstract class Collection implements CollectionInterface
     protected array $collection = [];
     private int $position = 0;
 
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->collection[$offset]);
@@ -29,6 +30,7 @@ abstract class Collection implements CollectionInterface
     /**
      * @throws UndefinedOffsetException
      */
+    #[\Override]
     public function offsetGet(mixed $offset): mixed
     {
         if (!$this->offsetExists($offset)) {
@@ -40,6 +42,7 @@ abstract class Collection implements CollectionInterface
         return $this->collection[$offset];
     }
 
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         is_null($offset)
@@ -47,36 +50,43 @@ abstract class Collection implements CollectionInterface
             : $this->collection[$offset] = $value;
     }
 
+    #[\Override]
     public function offsetUnset(mixed $offset): void
     {
         unset($this->collection[$offset]);
     }
 
+    #[\Override]
     public function current(): mixed
     {
         return $this->collection[$this->position];
     }
 
+    #[\Override]
     public function next(): void
     {
         $this->position++;
     }
 
+    #[\Override]
     public function key(): int
     {
         return $this->position;
     }
 
+    #[\Override]
     public function valid(): bool
     {
         return $this->offsetExists($this->position);
     }
 
+    #[\Override]
     public function rewind(): void
     {
         $this->position = 0;
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->collection);
@@ -107,6 +117,7 @@ abstract class Collection implements CollectionInterface
         return $this->collection;
     }
 
+    #[\Override]
     public function jsonSerialize(): array
     {
         return $this->getElements();

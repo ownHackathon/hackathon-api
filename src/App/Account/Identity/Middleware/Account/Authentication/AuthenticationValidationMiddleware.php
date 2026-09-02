@@ -20,6 +20,7 @@ readonly final class AuthenticationValidationMiddleware implements MiddlewareInt
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();

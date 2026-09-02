@@ -19,6 +19,7 @@ final class AccountAccessAuthTable extends AbstractTable implements AccountAcces
     /**
      * @throws DuplicateEntryException|PDOException|Exception
      */
+    #[\Override]
     public function persist(array $data): int
     {
         return $this->executePersist($data, [

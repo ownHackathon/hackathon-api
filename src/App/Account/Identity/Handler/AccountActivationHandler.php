@@ -58,6 +58,7 @@ readonly final class AccountActivationHandler implements RequestHandlerInterface
         '3. The chosen account name is already taken.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $activationToken = $request->getAttribute('token');

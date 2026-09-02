@@ -22,7 +22,7 @@ readonly final class AccountRegistration
     ) {
     }
 
-    public static function fromString(string $accountName, string $password): self
+    public static function fromString(string $accountName, #[\SensitiveParameter] string $password): self
     {
         return new self($accountName, $password);
     }

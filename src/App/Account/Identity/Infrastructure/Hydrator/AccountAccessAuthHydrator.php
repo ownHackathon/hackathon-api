@@ -15,6 +15,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrate(array $data): AccountAccessAuthInterface
     {
         return new AccountAccessAuth(
@@ -31,6 +32,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrateCollection(array $data): AccountAccessAuthCollection
     {
         $collection = new AccountAccessAuthCollection();
@@ -42,6 +44,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
         return $collection;
     }
 
+    #[\Override]
     public function extract(AccountAccessAuthInterface $object): array
     {
         return [
@@ -55,6 +58,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
         ];
     }
 
+    #[\Override]
     public function extractCollection(AccountAccessAuthCollectionInterface $collection): array
     {
         $data = [];

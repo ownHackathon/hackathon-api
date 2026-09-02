@@ -10,6 +10,7 @@ use function sprintf;
 
 final class EventCollection extends Collection implements EventCollectionInterface
 {
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof EventInterface)) {

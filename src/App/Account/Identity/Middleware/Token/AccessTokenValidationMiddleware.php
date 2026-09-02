@@ -19,6 +19,7 @@ readonly final class AccessTokenValidationMiddleware implements MiddlewareInterf
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $accessToken = $request->getHeaderLine('Authorization');

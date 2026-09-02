@@ -7,6 +7,7 @@ use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
 readonly final class VisibilityPolicy implements VisibilityPolicyInterface
 {
+    #[\Override]
     public function isAvailableFor(VisibilityAwareInterface $element, ?AccountInterface $account): bool
     {
         return match ($element->visibility) {

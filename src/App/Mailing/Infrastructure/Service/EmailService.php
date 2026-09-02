@@ -15,6 +15,7 @@ readonly final class EmailService implements MailerInterface
     ) {
     }
 
+    #[\Override]
     public function send(EmailType $email, string $plainText, string $html, string $subject): void
     {
         $message = new Email()

@@ -16,6 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly final class RefreshTokenMatchClientIdentificationMiddleware implements MiddlewareInterface
 {
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var AccountAccessAuth $accountAccessAuth */

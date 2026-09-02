@@ -13,6 +13,7 @@ final class AccountActivationCollection extends Collection implements AccountAct
     /**
      * @throws InvalidArgumentException
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof AccountActivationInterface)) {

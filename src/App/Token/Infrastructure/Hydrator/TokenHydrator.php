@@ -20,6 +20,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
     ) {
     }
 
+    #[\Override]
     public function hydrate(array $data): TokenInterface
     {
         return new Token(
@@ -31,6 +32,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
         );
     }
 
+    #[\Override]
     public function hydrateCollection(array $data): TokenCollectionInterface
     {
         $collection = new TokenCollection();
@@ -49,6 +51,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
         return $collection;
     }
 
+    #[\Override]
     public function extract(TokenInterface $object): array
     {
         return [
@@ -60,6 +63,7 @@ readonly final class TokenHydrator implements TokenHydratorInterface
         ];
     }
 
+    #[\Override]
     public function extractCollection(TokenCollectionInterface $collection): array
     {
         $data = [];

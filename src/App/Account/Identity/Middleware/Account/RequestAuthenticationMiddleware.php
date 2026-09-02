@@ -28,6 +28,7 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $authorization = $request->getHeaderLine('Authorization');

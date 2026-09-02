@@ -20,21 +20,25 @@ final class EmailType implements \ownHackathon\Core\SharedKernel\Type\TypeInterf
         return new self($value);
     }
 
+    #[\Override]
     public function toString(): string
     {
         return $this->value;
     }
 
+    #[\Override]
     public function serialize(): string
     {
         return $this->toString();
     }
 
+    #[\Override]
     public function unserialize(string $data): void
     {
         $this->value = $this->prepareValue($data);
     }
 
+    #[\Override]
     public function jsonSerialize(): string
     {
         return $this->toString();

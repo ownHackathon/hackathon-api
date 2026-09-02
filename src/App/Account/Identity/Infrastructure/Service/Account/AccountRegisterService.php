@@ -20,6 +20,7 @@ readonly final class AccountRegisterService implements AccountRegisterServiceInt
     ) {
     }
 
+    #[\Override]
     public function register(EmailType $email): void
     {
         if (!$this->accountService->isEmailAvailable($email)) {

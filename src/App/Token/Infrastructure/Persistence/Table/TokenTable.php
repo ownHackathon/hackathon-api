@@ -19,6 +19,7 @@ final class TokenTable extends AbstractTable implements TokenStoreInterface
     /**
      * @throws DuplicateEntryException|PDOException|Exception
      */
+    #[\Override]
     public function persist(array $data): int
     {
         return $this->executePersist($data, [

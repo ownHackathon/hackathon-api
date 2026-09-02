@@ -12,6 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly final class AuthenticationConditionsMiddleware implements MiddlewareInterface
 {
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if ($request->hasHeader('Authentication') || $request->hasHeader('Authorization')) {

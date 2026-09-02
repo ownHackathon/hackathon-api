@@ -4,6 +4,7 @@ namespace ownHackathon\App\Event\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use ownHackathon\App\Event\Domain\Enum\EventStatus;
 use ownHackathon\App\Event\Domain\Event;
 use ownHackathon\App\Event\Domain\EventCollection;
@@ -25,6 +26,7 @@ readonly final class EventHydrator implements EventHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrate(array $data): EventInterface
     {
         $visibilityValue = $data['visibility'] ?? null;
@@ -63,6 +65,7 @@ readonly final class EventHydrator implements EventHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrateCollection(array $data): EventCollectionInterface
     {
         $collection = new EventCollection();
@@ -81,6 +84,22 @@ readonly final class EventHydrator implements EventHydratorInterface
         return $collection;
     }
 
+    #[\Override]
+    #[ArrayShape([
+        'id' => 'int|null',
+        'uuid' => 'string',
+        'workspaceId' => 'int|null',
+        'topicId' => 'int|null',
+        'name' => 'string',
+        'slug' => 'string',
+        'description' => 'string|null',
+        'details' => 'string|null',
+        'status' => 'int',
+        'visibility' => 'int',
+        'beginsOn' => 'string',
+        'endsOn' => 'string',
+        'createdAt' => 'string',
+    ])]
     public function extract(EventInterface $object): array
     {
         return [
@@ -100,6 +119,7 @@ readonly final class EventHydrator implements EventHydratorInterface
         ];
     }
 
+    #[\Override]
     public function extractCollection(EventCollectionInterface $collection): array
     {
         $data = [];

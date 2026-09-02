@@ -51,6 +51,7 @@ readonly final class AuthenticationHandler implements RequestHandlerInterface
         'Possible reasons: Account is locked, disabled, or the email address has not been verified yet.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getAttribute(AuthenticationRequest::class);

@@ -60,6 +60,7 @@ readonly final class WorkspaceCreateHandler implements RequestHandlerInterface
         description: 'A workspace with this name already exists.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $workspace = $request->getAttribute(WorkspaceRequest::class);

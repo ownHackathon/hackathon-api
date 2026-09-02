@@ -43,6 +43,7 @@ readonly final class AccessTokenHandler implements RequestHandlerInterface
         'revoked, or invalid. The user must perform a full login again.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $refreshToken = $request->getAttribute(RefreshToken::class);

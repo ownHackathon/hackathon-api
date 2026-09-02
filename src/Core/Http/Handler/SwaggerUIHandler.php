@@ -48,6 +48,7 @@ readonly final class SwaggerUIHandler implements RequestHandlerInterface
     ) {
     }
 
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if (file_exists($this->indexFile)) {

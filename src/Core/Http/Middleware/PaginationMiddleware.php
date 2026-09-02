@@ -10,6 +10,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly final class PaginationMiddleware implements MiddlewareInterface
 {
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $params = $request->getQueryParams();

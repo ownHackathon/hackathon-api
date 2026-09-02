@@ -21,6 +21,7 @@ readonly final class LastActivityUpdaterMiddleware implements MiddlewareInterfac
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);

@@ -21,6 +21,7 @@ readonly final class RefreshTokenAccountMiddleware implements MiddlewareInterfac
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);

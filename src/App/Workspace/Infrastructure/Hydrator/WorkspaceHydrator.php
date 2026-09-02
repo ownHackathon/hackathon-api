@@ -4,6 +4,7 @@ namespace ownHackathon\App\Workspace\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
@@ -24,6 +25,7 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrate(array $data): WorkspaceInterface
     {
         $visibilityValue = $data['visibility'] ?? null;
@@ -59,6 +61,7 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrateCollection(array $data): WorkspaceCollectionInterface
     {
         $collection = new WorkspaceCollection();
@@ -77,6 +80,19 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
         return $collection;
     }
 
+    #[\Override]
+    #[ArrayShape([
+        'id' => 'int|null',
+        'uuid' => 'string',
+        'accountId' => 'int',
+        'name' => 'string',
+        'slug' => 'string',
+        'description' => 'string|null',
+        'details' => 'string|null',
+        'visibility' => 'int',
+        'createdAt' => 'string',
+        'updatedAt' => 'string',
+    ])]
     public function extract(WorkspaceInterface $object): array
     {
         return [
@@ -93,6 +109,7 @@ readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
         ];
     }
 
+    #[\Override]
     public function extractCollection(WorkspaceCollectionInterface $collection): array
     {
         $data = [];

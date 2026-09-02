@@ -19,6 +19,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
     ) {
     }
 
+    #[\Override]
     public function insert(TokenInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -26,6 +27,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->store->persist($data);
     }
 
+    #[\Override]
     public function update(TokenInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -33,6 +35,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->store->update($data['id'], $data);
     }
 
+    #[\Override]
     public function findOneById(int $id): ?TokenInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -40,6 +43,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findByAccountId(int $accountId): TokenCollectionInterface
     {
         $result = $this->store->fetchMany(['accountId' => $accountId]);
@@ -47,6 +51,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     public function findOneByToken(string $token): ?TokenInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
@@ -54,6 +59,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findAll(): TokenCollectionInterface
     {
         $result = $this->store->fetchAll();
@@ -61,21 +67,25 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
+    #[\Override]
     public function deleteByAccountId(int $accountId): true
     {
         return $this->store->remove(['accountId' => $accountId]);
     }
 
+    #[\Override]
     protected function getHydrator(): HydratorInterface
     {
         return $this->hydrator;
     }
 
+    #[\Override]
     protected function getStore(): StoreInterface
     {
         return $this->store;

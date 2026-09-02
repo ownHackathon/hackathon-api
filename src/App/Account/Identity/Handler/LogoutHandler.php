@@ -54,6 +54,7 @@ final class LogoutHandler implements RequestHandlerInterface
         description: 'Unauthorized. The access token is missing, expired, or the user could not be identified.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);

@@ -19,6 +19,7 @@ readonly final class RefreshTokenValidationMiddleware implements MiddlewareInter
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $refreshToken = $request->getHeaderLine('Authentication');

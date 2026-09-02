@@ -19,6 +19,7 @@ readonly final class RefreshTokenViaBodyValidationMiddleware implements Middlewa
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $refreshToken = $request->getParsedBody();

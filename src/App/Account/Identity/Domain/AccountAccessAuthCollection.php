@@ -13,6 +13,7 @@ final class AccountAccessAuthCollection extends Collection implements AccountAcc
     /**
      * @throws InvalidArgumentException
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof AccountAccessAuthInterface)) {

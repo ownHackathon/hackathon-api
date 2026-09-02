@@ -17,7 +17,7 @@ readonly final class AccessToken
     ) {
     }
 
-    public static function fromString(string $token): self
+    public static function fromString(#[\SensitiveParameter] string $token): self
     {
         return new self($token);
     }

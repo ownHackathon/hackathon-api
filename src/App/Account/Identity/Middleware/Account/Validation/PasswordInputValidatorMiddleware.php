@@ -20,6 +20,7 @@ readonly final class PasswordInputValidatorMiddleware implements MiddlewareInter
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();

@@ -27,6 +27,7 @@ abstract class AbstractTable implements StoreInterface
         $this->query = $query;
     }
 
+    #[\Override]
     public function getTableName(): string
     {
         return $this->table;
@@ -35,6 +36,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws InvalidArgumentException|Exception
      */
+    #[\Override]
     public function update(int $id, array $data): true
     {
         $result = $this->query->update($this->table, $data, $id)->execute();
@@ -51,6 +53,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function fetchOne(array $condition): ?array
     {
         $query = $this->query->from($this->table);
@@ -67,6 +70,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function fetchMany(array $condition, ?Pagination $pagination = null): array
     {
         $query = $this->query->from($this->table);
@@ -88,6 +92,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function fetchAll(): array
     {
         return $this->query->from($this->table)->fetchAll();
@@ -96,6 +101,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function count(array $condition): int
     {
         $query = $this->query->from($this->table);
@@ -110,6 +116,7 @@ abstract class AbstractTable implements StoreInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function remove(array $condition): true
     {
         $key = array_key_first($condition);

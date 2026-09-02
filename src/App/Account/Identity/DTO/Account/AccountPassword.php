@@ -17,7 +17,7 @@ readonly final class AccountPassword
     ) {
     }
 
-    public static function fromString(string $password): self
+    public static function fromString(#[\SensitiveParameter] string $password): self
     {
         return new self($password);
     }

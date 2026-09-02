@@ -54,6 +54,7 @@ final class AccountPasswordHandler implements RequestHandlerInterface
         '3. The new password does not meet the security requirements (e.g., too short).',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $token = Token::fromString($request->getAttribute('token'));

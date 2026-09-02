@@ -13,6 +13,7 @@ final class TokenCollection extends Collection implements TokenCollectionInterfa
     /**
      * @throws InvalidArgumentException
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof TokenInterface)) {

@@ -20,6 +20,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
     ) {
     }
 
+    #[\Override]
     public function insert(AccountActivationInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -27,6 +28,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->store->persist($data);
     }
 
+    #[\Override]
     public function update(AccountActivationInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -34,6 +36,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->store->update($data['id'], $data);
     }
 
+    #[\Override]
     public function findOneById(int $id): ?AccountActivationInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -41,6 +44,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findByEmail(EmailType $email): AccountActivationCollectionInterface
     {
         $result = $this->store->fetchMany(['email' => $email]);
@@ -48,6 +52,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     public function findOneByToken(string $token): ?AccountActivationInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
@@ -55,6 +60,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findAll(): AccountActivationCollectionInterface
     {
         $result = $this->store->fetchAll();
@@ -62,21 +68,25 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
+    #[\Override]
     public function deleteByEmail(EmailType $email): true
     {
         return $this->store->remove(['email' => $email]);
     }
 
+    #[\Override]
     protected function getHydrator(): HydratorInterface
     {
         return $this->hydrator;
     }
 
+    #[\Override]
     protected function getStore(): StoreInterface
     {
         return $this->store;

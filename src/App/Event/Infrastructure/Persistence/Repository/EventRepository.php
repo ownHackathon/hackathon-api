@@ -19,6 +19,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
     ) {
     }
 
+    #[\Override]
     public function insert(EventInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -26,6 +27,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->store->persist($data);
     }
 
+    #[\Override]
     public function update(EventInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -33,6 +35,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->store->update($data['id'], $data);
     }
 
+    #[\Override]
     public function findOneById(int $id): ?EventInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -40,6 +43,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findByWorkspaceId(int $workspaceId): EventCollectionInterface
     {
         $result = $this->store->fetchMany(['workspaceId' => $workspaceId]);
@@ -47,6 +51,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     public function findOneByName(string $name): ?EventInterface
     {
         $result = $this->store->fetchOne(['name' => $name]);
@@ -54,6 +59,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findOneBySlug(string $slug): ?EventInterface
     {
         $result = $this->store->fetchOne(['slug' => $slug]);
@@ -61,6 +67,7 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToEntity($result);
     }
 
+    #[\Override]
     public function findeAll(): EventCollectionInterface
     {
         $result = $this->store->fetchAll();
@@ -68,11 +75,13 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToCollection($result);
     }
 
+    #[\Override]
     protected function getHydrator(): HydratorInterface
     {
         return $this->hydrator;
     }
 
+    #[\Override]
     protected function getStore(): StoreInterface
     {
         return $this->store;

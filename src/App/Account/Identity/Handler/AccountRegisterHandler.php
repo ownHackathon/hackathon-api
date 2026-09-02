@@ -45,6 +45,7 @@ readonly final class AccountRegisterHandler implements RequestHandlerInterface
         description: 'The provided email address is invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $email = $request->getAttribute(EmailType::class);

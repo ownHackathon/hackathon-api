@@ -17,6 +17,7 @@ readonly final class ClientIdentificationMiddleware implements MiddlewareInterfa
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $clientIdent = $request->getHeaderLine('x-ident');

@@ -19,6 +19,7 @@ final class EventTable extends AbstractTable implements EventStoreInterface
     /**
      * @throws DuplicateEntryException|PDOException|Exception
      */
+    #[\Override]
     public function persist(array $data): int
     {
         return $this->executePersist($data, [

@@ -4,6 +4,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use ownHackathon\App\Account\Identity\Domain\Account;
 use ownHackathon\App\Account\Identity\Domain\AccountCollection;
 use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
@@ -24,6 +25,16 @@ readonly final class AccountHydrator implements AccountHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
+    #[ArrayShape([
+        'id' => 'int|null',
+        'uuid' => 'string',
+        'name' => 'string',
+        'password' => 'string',
+        'email' => 'string',
+        'registeredAt' => 'string',
+        'lastActionAt' => 'string|null',
+    ])]
     public function hydrate(array $data): AccountInterface
     {
         return new Account(
@@ -40,6 +51,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
     /**
      * @throws Exception
      */
+    #[\Override]
     public function hydrateCollection(array $data): AccountCollectionInterface
     {
         $collection = new AccountCollection();
@@ -58,6 +70,16 @@ readonly final class AccountHydrator implements AccountHydratorInterface
         return $collection;
     }
 
+    #[\Override]
+    #[ArrayShape([
+        'id' => 'int|null',
+        'uuid' => 'string',
+        'name' => 'string',
+        'password' => 'string',
+        'email' => 'string',
+        'registeredAt' => 'string',
+        'lastActionAt' => 'string|null',
+    ])]
     public function extract(AccountInterface $object): array
     {
         return [
@@ -71,6 +93,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
         ];
     }
 
+    #[\Override]
     public function extractCollection(AccountCollectionInterface $collection): array
     {
         $data = [];

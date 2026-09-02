@@ -20,6 +20,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
     ) {
     }
 
+    #[\Override]
     public function hydrate(array $data): AccountActivationInterface
     {
         return new AccountActivation(
@@ -30,6 +31,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
         );
     }
 
+    #[\Override]
     public function hydrateCollection(array $data): AccountActivationCollectionInterface
     {
         $collection = new AccountActivationCollection();
@@ -48,6 +50,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
         return $collection;
     }
 
+    #[\Override]
     public function extract(AccountActivationInterface $object): array
     {
         return [
@@ -58,6 +61,7 @@ readonly final class AccountActivationHydrator implements AccountActivationHydra
         ];
     }
 
+    #[\Override]
     public function extractCollection(AccountActivationCollectionInterface $collection): array
     {
         $data = [];

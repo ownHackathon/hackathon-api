@@ -21,6 +21,7 @@ readonly final class EmailInputValidatorMiddleware implements MiddlewareInterfac
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();

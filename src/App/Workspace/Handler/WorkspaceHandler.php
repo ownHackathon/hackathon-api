@@ -104,6 +104,7 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
             type: 'object',
         ),
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $slug = $request->getAttribute('slug');

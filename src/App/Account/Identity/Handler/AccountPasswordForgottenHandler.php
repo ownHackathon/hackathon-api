@@ -44,6 +44,7 @@ readonly final class AccountPasswordForgottenHandler implements RequestHandlerIn
         description: 'The provided email address is invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $email = $request->getAttribute(EmailType::class);

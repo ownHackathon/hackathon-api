@@ -16,6 +16,7 @@ readonly final class FluentTransactionMiddleware implements MiddlewareInterface
     ) {
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (in_array($request->getMethod(), ['GET', 'HEAD'], true)) {

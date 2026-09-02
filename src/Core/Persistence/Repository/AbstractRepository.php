@@ -11,6 +11,7 @@ readonly abstract class AbstractRepository implements RepositoryInterface
 
     abstract protected function getStore(): StoreInterface;
 
+    #[\Override]
     public function deleteById(int $id): true
     {
         return $this->getStore()->remove(['id' => $id]);

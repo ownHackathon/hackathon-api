@@ -13,6 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 readonly final class RequireLoginMiddleware implements MiddlewareInterface
 {
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var AccountInterface|null $account */

@@ -22,6 +22,7 @@ readonly final class WorkspaceCreator implements WorkspaceCreatorInterface
     ) {
     }
 
+    #[\Override]
     public function create(WorkspaceRequest $workspace, AccountInterface $owner): Workspace
     {
         $slug = $this->slugService->getSlugFromString($workspace->name);

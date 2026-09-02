@@ -13,6 +13,7 @@ final class AccountCollection extends Collection implements AccountCollectionInt
     /**
      * @throws InvalidArgumentException
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof AccountInterface)) {

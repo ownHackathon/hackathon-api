@@ -26,6 +26,7 @@ readonly final class Workspace implements WorkspaceInterface, Collectible
     ) {
     }
 
+    #[\Override]
     public function getOwnerId(): int
     {
         return $this->accountId;

@@ -15,6 +15,7 @@ final class DateLessNow extends AbstractValidator
             self::VALID_DATE => 'Date is in the past',
         ];
 
+    #[\Override]
     public function isValid(mixed $value): bool
     {
         $dateNow = new DateTime();

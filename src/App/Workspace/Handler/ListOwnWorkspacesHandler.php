@@ -80,6 +80,7 @@ readonly final class ListOwnWorkspacesHandler implements RequestHandlerInterface
         description: 'Authentication failed. The access token is missing or invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $account = $request->getAttribute(AccountInterface::AUTHENTICATED);

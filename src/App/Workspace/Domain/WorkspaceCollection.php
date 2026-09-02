@@ -13,6 +13,7 @@ final class WorkspaceCollection extends Collection implements WorkspaceCollectio
     /**
      * @throws InvalidArgumentException
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!($value instanceof WorkspaceInterface)) {
