@@ -31,7 +31,7 @@ final class LogsPruner
             return 0;
         }
 
-        $cutoff = (new DateTimeImmutable())->sub(new DateInterval(sprintf('P%dD', $retentionDays)));
+        $cutoff = new DateTimeImmutable()->sub(new DateInterval(sprintf('P%dD', $retentionDays)));
         $removed = 0;
 
         foreach ($entries as $entry) {

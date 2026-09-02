@@ -15,6 +15,6 @@ readonly final class ChannelLoggerFactory
             ? substr($requestedName, strlen(self::PREFIX))
             : LoggerFactory::DEFAULT_CHANNEL;
 
-        return (new LoggerFactory())->build($container, $channel);
+        return new LoggerFactory()->build($container, $channel);
     }
 }
