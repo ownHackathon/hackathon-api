@@ -5,7 +5,7 @@ namespace ownHackathon\App\Workspace\Infrastructure\Validator\Input;
 use Laminas\InputFilter\Input;
 use Laminas\Validator\Regex;
 
-class WorkspaceNameInput extends Input
+final class WorkspaceNameInput extends Input
 {
     public function __construct()
     {
@@ -21,7 +21,7 @@ class WorkspaceNameInput extends Input
                 'encoding' => 'UTF-8',
                 'min' => 3,
                 'max' => 64,
-            ]
+            ],
         );
 
         $this->getValidatorChain()->attachByName(

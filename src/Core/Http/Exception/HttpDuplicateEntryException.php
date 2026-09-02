@@ -13,7 +13,7 @@ final class HttpDuplicateEntryException extends HttpException
         string $responseMessage,
         array $context = [],
         Level $loglevel = Level::Warning,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
         parent::__construct($logMessage, $responseMessage, $context, $loglevel, $previous);
     }

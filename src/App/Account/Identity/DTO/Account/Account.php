@@ -2,47 +2,47 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Account;
 
-use ownHackathon\Core\Serialization\DataType;
-use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Clock\DateTimeFormat;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(
     description: 'Detailed information about a user account',
-    required: ['uuid', 'name', 'email', 'registeredAt', 'lastActionAt']
+    required: ['uuid', 'name', 'email', 'registeredAt', 'lastActionAt'],
 )]
-readonly class Account
+readonly final class Account
 {
     public function __construct(
         #[OA\Property(
             description: 'The unique identifier of the account',
             format: 'uuid',
-            example: '019becbe-f952-7b82-82fa-f41f8ae24599'
+            example: '019becbe-f952-7b82-82fa-f41f8ae24599',
         )]
         public string $uuid,
         #[OA\Property(
             description: 'The display name of the account holder',
-            example: 'Max Mustermann'
+            example: 'Max Mustermann',
         )]
         public string $name,
         #[OA\Property(
             description: 'The email address associated with the account',
             format: 'email',
-            example: 'max.mustermann@example.com'
+            example: 'max.mustermann@example.com',
         )]
         public string $email,
         #[OA\Property(
             description: 'The timestamp when the account was registered',
             type: DataType::STRING->value,
             pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$',
-            example: '2024-01-20 14:30:00'
+            example: '2024-01-20 14:30:00',
         )]
         public string $registeredAt,
         #[OA\Property(
             description: 'The timestamp of the last activity on this account',
             type: DataType::STRING->value,
             pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$',
-            example: '2024-05-15 10:00:00'
+            example: '2024-05-15 10:00:00',
         )]
         public string $lastActionAt,
     ) {

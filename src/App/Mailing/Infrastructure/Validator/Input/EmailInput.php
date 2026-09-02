@@ -5,7 +5,7 @@ namespace ownHackathon\App\Mailing\Infrastructure\Validator\Input;
 use Laminas\InputFilter\Input;
 use Laminas\Validator\Hostname;
 
-class EmailInput extends Input
+final class EmailInput extends Input
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class EmailInput extends Input
             [
                 'hostnameValidator' => new Hostname(),
                 'useMxCheck' => true,
-            ]
+            ],
         );
     }
 }

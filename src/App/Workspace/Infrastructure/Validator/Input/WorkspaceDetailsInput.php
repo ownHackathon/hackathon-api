@@ -4,7 +4,7 @@ namespace ownHackathon\App\Workspace\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
 
-class WorkspaceDetailsInput extends Input
+final class WorkspaceDetailsInput extends Input
 {
     public function __construct()
     {
@@ -19,7 +19,7 @@ class WorkspaceDetailsInput extends Input
             'StringLength',
             [
                 'encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 }

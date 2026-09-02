@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Token;
 
-use ownHackathon\Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['refreshToken'])]
-readonly class RefreshToken
+readonly final class RefreshToken
 {
     public function __construct(
         #[OA\Property(

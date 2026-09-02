@@ -2,18 +2,18 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
 
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
+readonly final class ActivationInputValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountActivationValidator $validator,
@@ -41,7 +41,7 @@ readonly class ActivationInputValidatorMiddleware implements MiddlewareInterface
                     [
                         'Account Name:' => $data['accountName'] ?? null,
                         'Validator-Message:' => $this->validator->getMessages(),
-                    ]
+                    ],
                 );
             }
 

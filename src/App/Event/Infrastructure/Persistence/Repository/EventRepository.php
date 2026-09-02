@@ -11,22 +11,12 @@ use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
 
-readonly class EventRepository extends AbstractRepository implements EventRepositoryInterface
+readonly final class EventRepository extends AbstractRepository implements EventRepositoryInterface
 {
     public function __construct(
         private EventStoreInterface $store,
         private EventHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     public function insert(EventInterface $data): int
@@ -76,5 +66,15 @@ readonly class EventRepository extends AbstractRepository implements EventReposi
         $result = $this->store->fetchAll();
 
         return $this->mapToCollection($result);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

@@ -16,7 +16,7 @@ use function is_dir;
 use function mkdir;
 use function rtrim;
 
-readonly class LoggerFactory
+readonly final class LoggerFactory
 {
     public function __invoke(ContainerInterface $container): LoggerInterface
     {
@@ -50,7 +50,7 @@ readonly class LoggerFactory
         $logger->pushHandler($errorHandler);
 
         $logger->pushHandler(
-            new StreamHandler($path . 'critical.log', Level::Critical)->setFormatter($stackTraceFormater)
+            new StreamHandler($path . 'critical.log', Level::Critical)->setFormatter($stackTraceFormater),
         );
         $logger->pushProcessor(new PsrLogMessageProcessor());
         $logger->pushProcessor(
@@ -59,8 +59,8 @@ readonly class LoggerFactory
                 filter_input(INPUT_SERVER, 'REQUEST_URI'),
                 filter_input(INPUT_SERVER, 'REQUEST_METHOD'),
                 filter_input(INPUT_SERVER, 'REDIRECT_URL'),
-                filter_input_array(INPUT_GET)
-            )
+                filter_input_array(INPUT_GET),
+            ),
         );
         return $logger;
     }

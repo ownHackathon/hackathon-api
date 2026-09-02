@@ -2,18 +2,18 @@
 
 namespace ownHackathon\App\Workspace\Middleware;
 
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
+readonly final class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private WorkspaceCreateValidator $validator,
@@ -40,7 +40,7 @@ readonly class WorkspaceCreateValidatorMiddleware implements MiddlewareInterface
                     WorkspaceStatusMessage::INVALID_WORKSPACE_NAME,
                     [
                         'Validator Message:' => $this->validator->getMessages(),
-                    ]
+                    ],
                 );
             }
 

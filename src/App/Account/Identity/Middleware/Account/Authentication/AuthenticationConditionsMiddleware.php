@@ -2,15 +2,15 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Account\Authentication;
 
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AuthenticationConditionsMiddleware implements MiddlewareInterface
+readonly final class AuthenticationConditionsMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -21,7 +21,7 @@ readonly class AuthenticationConditionsMiddleware implements MiddlewareInterface
                 [
                     'uri' => (string)$request->getUri(),
                     'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
-                ]
+                ],
             );
         }
 

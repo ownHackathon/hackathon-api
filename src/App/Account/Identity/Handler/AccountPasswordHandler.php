@@ -2,18 +2,18 @@
 
 namespace ownHackathon\App\Account\Identity\Handler;
 
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
-use ownHackathon\App\Token\DTO\Token;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
+use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
+use ownHackathon\App\Token\DTO\Token;
+use ownHackathon\Core\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class AccountPasswordHandler implements RequestHandlerInterface
+final class AccountPasswordHandler implements RequestHandlerInterface
 {
     public function __construct(
         private PasswordChangeService $passwordChangeService,
@@ -33,14 +33,14 @@ class AccountPasswordHandler implements RequestHandlerInterface
                 description: 'The secret reset token received via email.',
                 in: 'path',
                 required: true,
-                schema: new OA\Schema(type: 'string')
+                schema: new OA\Schema(type: 'string'),
             ),
         ],
     )]
     #[OA\RequestBody(
         description: 'The new password and its confirmation.',
         required: true,
-        content: new OA\JsonContent(ref: AccountPassword::class)
+        content: new OA\JsonContent(ref: AccountPassword::class),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
@@ -52,7 +52,7 @@ class AccountPasswordHandler implements RequestHandlerInterface
         "1. The reset token is invalid or has already been used.\n" .
         "2. The token has expired.\n" .
         '3. The new password does not meet the security requirements (e.g., too short).',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

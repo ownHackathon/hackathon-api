@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function time;
 
-readonly class PingHandler implements RequestHandlerInterface
+readonly final class PingHandler implements RequestHandlerInterface
 {
     #[OA\Get(
         path: '/ping',
@@ -33,11 +33,11 @@ readonly class PingHandler implements RequestHandlerInterface
                             ),
                             new OA\Property(property: 'message', type: DataType::STRING->value, example: 'pong'),
                             new OA\Property(property: 'php_version', type: DataType::STRING->value, example: '8.4.15'),
-                        ]
+                        ],
                     ),
-                ]
+                ],
             ),
-        ]
+        ],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

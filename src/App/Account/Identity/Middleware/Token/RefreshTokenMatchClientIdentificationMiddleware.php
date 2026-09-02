@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class RefreshTokenMatchClientIdentificationMiddleware implements MiddlewareInterface
+readonly final class RefreshTokenMatchClientIdentificationMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -34,7 +34,7 @@ readonly class RefreshTokenMatchClientIdentificationMiddleware implements Middle
                     'current:' => $clientIdentification->identificationHash,
                     'current UserAgent:' => $clientIdentification->clientIdentificationData->userAgent,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         }
 

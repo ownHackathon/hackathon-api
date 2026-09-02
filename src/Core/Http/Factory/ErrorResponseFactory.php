@@ -35,13 +35,13 @@ final readonly class ErrorResponseFactory
             $this->logger->log(
                 $logLevel->value,
                 sprintf('[%d] %s', $statusCode, $e->getMessage()),
-                $logContext
+                $logContext,
             );
         } else {
             $this->logger->log(
                 Level::Critical,
                 sprintf('[%d] Unhandled exception %s', $statusCode, $e->getMessage()),
-                ['exception' => $e]
+                ['exception' => $e],
             );
         }
 

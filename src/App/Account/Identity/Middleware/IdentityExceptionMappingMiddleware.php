@@ -2,9 +2,6 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware;
 
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use Monolog\Level;
 use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
@@ -14,12 +11,15 @@ use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException
 use ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
+use ownHackathon\Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
+readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -32,7 +32,7 @@ readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
                 [
                     'Refresh Token:' => $e->refreshToken,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         } catch (SecurityBreachException $e) {
             throw new HttpUnauthorizedException(
@@ -44,7 +44,7 @@ readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
                     'current:' => $e->actualClientHash,
                     'current UserAgent:' => $e->actualUserAgent,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         } catch (AccountNotFoundException $e) {
             throw new HttpUnauthorizedException(
@@ -55,7 +55,7 @@ readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
                     'Account ID:' => $e->accountId,
                     'E-Mail:' => $e->email,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         } catch (PasswordMismatchException $e) {
             throw new HttpUnauthorizedException(
@@ -64,7 +64,7 @@ readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
                 [
                     'E-Mail:' => $e->email,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         } catch (DuplicateAuthException $e) {
             throw new HttpDuplicateEntryException(
@@ -80,7 +80,7 @@ readonly class IdentityExceptionMappingMiddleware implements MiddlewareInterface
             throw new HttpHandledInvalidArgumentAsSuccessException(
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::SUCCESS,
-                ['email:' => $e->email]
+                ['email:' => $e->email],
             );
         }
     }

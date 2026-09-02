@@ -18,6 +18,7 @@ use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
 
 use function time;
 
+// phpcs:ignore SlevomatCodingStandard.Classes.RequireAbstractOrFinal.ClassNeitherAbstractNorFinal -- wird in Unit-Tests direkt gemockt
 readonly class RefreshTokenService
 {
     use JwtTokenTrait;
@@ -54,7 +55,7 @@ readonly class RefreshTokenService
      */
     public function refresh(
         RefreshToken $refreshToken,
-        ClientIdentification $client
+        ClientIdentification $client,
     ): AccessToken {
         $accountAccessAuth = $this->validateTokenAndClient($refreshToken, $client);
 
@@ -69,7 +70,7 @@ readonly class RefreshTokenService
      */
     private function validateTokenAndClient(
         RefreshToken $refreshToken,
-        ClientIdentification $client
+        ClientIdentification $client,
     ): AccountAccessAuthInterface {
         $accountAccessAuth = $this->accessAuthRepository->findOneByRefreshToken($refreshToken->refreshToken);
         if (!$accountAccessAuth instanceof AccountAccessAuthInterface) {
@@ -96,7 +97,7 @@ readonly class RefreshTokenService
         if (!$account instanceof AccountInterface) {
             throw new AccountNotFoundException(
                 accountId: $accountAccessAuth->accountId,
-                accessAuthId: $accountAccessAuth->id
+                accessAuthId: $accountAccessAuth->id,
             );
         }
 

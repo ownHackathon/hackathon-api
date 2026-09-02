@@ -37,11 +37,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[OA\OpenApi(
     servers: [
         new OA\Server(
-            url: '/api'
+            url: '/api',
         ),
     ],
 )]
-readonly class SwaggerUIHandler implements RequestHandlerInterface
+readonly final class SwaggerUIHandler implements RequestHandlerInterface
 {
     public function __construct(
         private string $indexFile,

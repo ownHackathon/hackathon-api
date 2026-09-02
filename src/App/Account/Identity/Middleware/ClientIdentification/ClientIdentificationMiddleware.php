@@ -10,10 +10,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class ClientIdentificationMiddleware implements MiddlewareInterface
+readonly final class ClientIdentificationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ClientIdentificationService $clientIdentification
+        private ClientIdentificationService $clientIdentification,
     ) {
     }
 

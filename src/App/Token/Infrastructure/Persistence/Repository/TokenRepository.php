@@ -11,22 +11,12 @@ use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
 
-readonly class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
+readonly final class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
 {
     public function __construct(
         private TokenStoreInterface $store,
         private TokenHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     public function insert(TokenInterface $data): int
@@ -79,5 +69,15 @@ readonly class TokenRepository extends AbstractRepository implements TokenReposi
     public function deleteByAccountId(int $accountId): true
     {
         return $this->store->remove(['accountId' => $accountId]);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

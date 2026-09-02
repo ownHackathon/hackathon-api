@@ -19,7 +19,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenS
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 
-readonly class AccountAuthenticationService
+readonly final class AccountAuthenticationService
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
@@ -57,7 +57,7 @@ readonly class AccountAuthenticationService
             $refreshToken->refreshToken,
             $clientId->clientIdentificationData->userAgent,
             $clientId->identificationHash,
-            new DateTimeImmutable()
+            new DateTimeImmutable(),
         );
 
         try {

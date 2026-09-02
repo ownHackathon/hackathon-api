@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
 
 use ownHackathon\App\Mailing\Domain\EmailType;
 
-readonly class PasswordService
+readonly final class PasswordService
 {
     public function __construct(
         private AccountService $accountService,

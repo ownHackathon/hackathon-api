@@ -10,6 +10,7 @@ use Ramsey\Uuid\UuidInterface;
 
 use function time;
 
+// phpcs:ignore SlevomatCodingStandard.Classes.RequireAbstractOrFinal.ClassNeitherAbstractNorFinal -- wird in Unit-Tests direkt gemockt
 readonly class AccessTokenService
 {
     use JwtTokenTrait;

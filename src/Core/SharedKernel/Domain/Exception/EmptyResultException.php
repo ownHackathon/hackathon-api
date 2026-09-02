@@ -4,6 +4,6 @@ namespace ownHackathon\Core\SharedKernel\Domain\Exception;
 
 use Exception;
 
-class EmptyResultException extends Exception
+final class EmptyResultException extends Exception
 {
 }

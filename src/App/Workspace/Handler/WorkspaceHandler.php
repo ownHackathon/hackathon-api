@@ -7,16 +7,16 @@ use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\Workspace;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class WorkspaceHandler implements RequestHandlerInterface
+readonly final class WorkspaceHandler implements RequestHandlerInterface
 {
     public function __construct(
         private WorkspaceRepositoryInterface $workspaceRepository,
@@ -42,7 +42,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
             type: 'string',
             pattern: '^[a-zA-Z0-9\\-]+$',
             example: 'my-own-workspace',
-        )
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
@@ -80,7 +80,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 new OA\Property(property: 'updatedAt', description: 'The date the workspace was last updated.', type: 'string', example: '2026-08-26 12:00:00'),
             ],
             type: 'object',
-        )
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
@@ -91,7 +91,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 new OA\Property(property: 'message', type: 'string', example: 'Unauthorized access'),
             ],
             type: 'object',
-        )
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_NOT_FOUND,
@@ -102,7 +102,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 new OA\Property(property: 'message', type: 'string', example: 'Workspace not found'),
             ],
             type: 'object',
-        )
+        ),
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -129,7 +129,7 @@ readonly class WorkspaceHandler implements RequestHandlerInterface
                 'visibility' => $workspace->visibility->value,
                 'createdAt' => $workspace->createdAt->format(DateTimeFormat::DEFAULT->value),
                 'updatedAt' => $workspace->updatedAt->format(DateTimeFormat::DEFAULT->value),
-            ]
+            ],
         );
 
         return new JsonResponse($response, Http::STATUS_OK);

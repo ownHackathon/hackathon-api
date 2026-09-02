@@ -7,7 +7,7 @@ use ownHackathon\App\Mailing\Application\Port\MailerInterface;
 
 use function sprintf;
 
-readonly class ActivationTokenService
+readonly final class ActivationTokenService
 {
     public function __construct(
         private MailerInterface $emailService,
@@ -35,7 +35,7 @@ readonly class ActivationTokenService
                     Mit freundlichen Grüßen,
                     Ihr Team von ownHackathon\App',
             $this->projectUri,
-            $activation->token->toString()
+            $activation->token->toString(),
         );
 
         $html = sprintf(
@@ -52,7 +52,7 @@ readonly class ActivationTokenService
                     <p>Mit freundlichen Grüßen,<br>
                     Ihr Team von ownHackathon\App</p>',
             $this->projectUri,
-            $activation->token->toString()
+            $activation->token->toString(),
         );
 
         $this->emailService->send($activation->email, $text, $html, 'Account Aktivierung');

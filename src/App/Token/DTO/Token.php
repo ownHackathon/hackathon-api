@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema()]
-readonly class Token
+readonly final class Token
 {
     public function __construct(
         #[OA\Property(

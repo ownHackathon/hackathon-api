@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\DTO;
 
-readonly class Workspace
+readonly final class Workspace
 {
     public function __construct(
         public string $name,

@@ -12,22 +12,12 @@ use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
 
-readonly class AccountActivationRepository extends AbstractRepository implements AccountActivationRepositoryInterface
+readonly final class AccountActivationRepository extends AbstractRepository implements AccountActivationRepositoryInterface
 {
     public function __construct(
         private AccountActivationStoreInterface $store,
         private AccountActivationHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     public function insert(AccountActivationInterface $data): int
@@ -80,5 +70,15 @@ readonly class AccountActivationRepository extends AbstractRepository implements
     public function deleteByEmail(EmailType $email): true
     {
         return $this->store->remove(['email' => $email]);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

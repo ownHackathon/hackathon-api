@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Token;
 
-use ownHackathon\Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema()]
-readonly class AccountPasswordToken
+readonly final class AccountPasswordToken
 {
     public function __construct(
         #[OA\Property(

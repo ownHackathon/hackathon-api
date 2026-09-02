@@ -7,7 +7,7 @@ use ownHackathon\App\Mailing\Domain\EmailType;
 use Symfony\Component\Mailer\MailerInterface as SymfonyMailerInterface;
 use Symfony\Component\Mime\Email;
 
-readonly class EmailService implements MailerInterface
+readonly final class EmailService implements MailerInterface
 {
     public function __construct(
         private SymfonyMailerInterface $mailer,

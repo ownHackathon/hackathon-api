@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LogoutHandler implements RequestHandlerInterface
+final class LogoutHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccountService $accountService,
@@ -28,7 +28,7 @@ class LogoutHandler implements RequestHandlerInterface
         'in the request body to identify the specific session to be closed.',
         summary: 'Log out the current user and invalidate the session',
         security: [['accessToken' => []]],
-        tags: ['Account']
+        tags: ['Account'],
     )]
     #[OA\RequestBody(
         description: 'The refresh token that should be invalidated.',
@@ -39,11 +39,11 @@ class LogoutHandler implements RequestHandlerInterface
                     property: 'refreshToken',
                     description: 'The full refresh token string',
                     type: 'string',
-                    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+                    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
                 ),
             ],
-            type: 'object'
-        )
+            type: 'object',
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_NO_CONTENT,
@@ -52,7 +52,7 @@ class LogoutHandler implements RequestHandlerInterface
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
         description: 'Unauthorized. The access token is missing, expired, or the user could not be identified.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

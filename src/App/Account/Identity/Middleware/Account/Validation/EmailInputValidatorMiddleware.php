@@ -14,7 +14,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
+readonly final class EmailInputValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private EMailValidator $mailValidator,
@@ -42,7 +42,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
                     [
                         'E-Mail:' => $data['email'] ?? null,
                         'Validator Message:' => $this->mailValidator->getMessages(),
-                    ]
+                    ],
                 );
             }
 
@@ -56,7 +56,7 @@ readonly class EmailInputValidatorMiddleware implements MiddlewareInterface
                 IdentityStatusMessage::INVALID_DATA,
                 [
                     'E-Mail:' => $data['email'] ?? 'unknown',
-                ]
+                ],
             );
         } catch (Throwable) {
             throw new HttpInvalidArgumentException(

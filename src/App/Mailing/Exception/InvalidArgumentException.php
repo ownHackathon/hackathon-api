@@ -2,6 +2,6 @@
 
 namespace ownHackathon\App\Mailing\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException
+final class InvalidArgumentException extends \InvalidArgumentException
 {
 }

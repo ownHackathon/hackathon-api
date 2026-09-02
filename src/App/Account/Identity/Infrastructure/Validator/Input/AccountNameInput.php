@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Validator\Input;
 
 use Laminas\InputFilter\Input;
 
-class AccountNameInput extends Input
+final class AccountNameInput extends Input
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class AccountNameInput extends Input
                 'encoding' => 'UTF-8',
                 'min' => 3,
                 'max' => 64,
-            ]
+            ],
         );
     }
 }

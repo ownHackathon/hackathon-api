@@ -5,14 +5,14 @@ namespace ownHackathon\Core\Observability;
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 
-readonly class MetaDataProcessor implements ProcessorInterface
+readonly final class MetaDataProcessor implements ProcessorInterface
 {
     public function __construct(
         private ?string $remoteAddr,
         private ?string $uri,
         private ?string $method,
         private ?string $redirect,
-        private ?array $query
+        private ?array $query,
     ) {
     }
 

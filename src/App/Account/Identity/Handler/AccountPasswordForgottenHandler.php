@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AccountPasswordForgottenHandler implements RequestHandlerInterface
+readonly final class AccountPasswordForgottenHandler implements RequestHandlerInterface
 {
     public function __construct(
         private PasswordService $passwordService,
@@ -32,7 +32,7 @@ readonly class AccountPasswordForgottenHandler implements RequestHandlerInterfac
     #[OA\RequestBody(
         description: 'The email address associated with the account.',
         required: true,
-        content: new OA\JsonContent(ref: EMail::class)
+        content: new OA\JsonContent(ref: EMail::class),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
@@ -42,7 +42,7 @@ readonly class AccountPasswordForgottenHandler implements RequestHandlerInterfac
     #[OA\Response(
         response: Http::STATUS_BAD_REQUEST,
         description: 'The provided email address is invalid.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

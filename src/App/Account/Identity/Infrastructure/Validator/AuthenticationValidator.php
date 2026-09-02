@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 
-use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
+use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
+use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 
-class AuthenticationValidator extends InputFilter
+final class AuthenticationValidator extends InputFilter
 {
     public function __construct(
         readonly private EmailInput $emailInput,

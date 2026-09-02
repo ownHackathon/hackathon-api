@@ -13,22 +13,12 @@ use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class AccountRepository extends AbstractRepository implements AccountRepositoryInterface
+readonly final class AccountRepository extends AbstractRepository implements AccountRepositoryInterface
 {
     public function __construct(
         private AccountStoreInterface $store,
         private AccountHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     public function insert(AccountInterface $data): int
@@ -83,5 +73,15 @@ readonly class AccountRepository extends AbstractRepository implements AccountRe
         $result = $this->store->fetchAll();
 
         return $this->mapToCollection($result);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

@@ -2,12 +2,12 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Account;
 
-use ownHackathon\Core\Serialization\DataType;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use OpenApi\Attributes as OA;
+use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['account', 'hasWorkspace'])]
-readonly class ApiMe
+readonly final class ApiMe
 {
     public function __construct(
         #[OA\Property(ref: Account::class)]

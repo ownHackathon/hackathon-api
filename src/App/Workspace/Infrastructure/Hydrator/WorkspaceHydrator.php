@@ -4,16 +4,16 @@ namespace ownHackathon\App\Workspace\Infrastructure\Hydrator;
 
 use DateTimeImmutable;
 use Exception;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
 use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
 use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-readonly class WorkspaceHydrator implements WorkspaceHydratorInterface
+readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,

@@ -8,7 +8,7 @@ use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class Token implements TokenInterface, Collectible
+readonly final class Token implements TokenInterface, Collectible
 {
     use CloneReadonlyClassWith;
 

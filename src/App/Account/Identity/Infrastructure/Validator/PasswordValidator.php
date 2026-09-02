@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
 use Laminas\InputFilter\InputFilter;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 
-class PasswordValidator extends InputFilter
+final class PasswordValidator extends InputFilter
 {
     public function __construct(
         private readonly PasswordInput $passwordInput,

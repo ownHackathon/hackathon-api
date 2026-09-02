@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AccountRegisterHandler implements RequestHandlerInterface
+readonly final class AccountRegisterHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccountRegisterServiceInterface $accountRegisterService,
@@ -32,7 +32,7 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     #[OA\RequestBody(
         description: 'The email address for the new account',
         required: true,
-        content: new OA\JsonContent(ref: EMail::class)
+        content: new OA\JsonContent(ref: EMail::class),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
@@ -43,7 +43,7 @@ readonly class AccountRegisterHandler implements RequestHandlerInterface
     #[OA\Response(
         response: Http::STATUS_BAD_REQUEST,
         description: 'The provided email address is invalid.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

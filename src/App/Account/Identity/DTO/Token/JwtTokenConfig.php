@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Token;
 
-readonly class JwtTokenConfig
+readonly final class JwtTokenConfig
 {
     public function __construct(
         public string $iss,

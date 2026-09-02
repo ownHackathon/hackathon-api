@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class RefreshTokenViaBodyValidationMiddleware implements MiddlewareInterface
+readonly final class RefreshTokenViaBodyValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private RefreshTokenService $tokenService,

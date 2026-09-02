@@ -9,10 +9,10 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class FluentTransactionMiddleware implements MiddlewareInterface
+readonly final class FluentTransactionMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private Query $fluentPdo
+        private Query $fluentPdo,
     ) {
     }
 

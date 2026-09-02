@@ -4,6 +4,6 @@ namespace ownHackathon\App\Workspace\Domain\Exception;
 
 use DomainException;
 
-class WorkspaceNameAlreadyExistsException extends DomainException
+final class WorkspaceNameAlreadyExistsException extends DomainException
 {
 }

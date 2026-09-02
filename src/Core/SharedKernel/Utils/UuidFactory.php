@@ -2,6 +2,6 @@
 
 namespace ownHackathon\Core\SharedKernel\Utils;
 
-class UuidFactory extends \Ramsey\Uuid\UuidFactory implements UuidFactoryInterface
+final class UuidFactory extends \Ramsey\Uuid\UuidFactory implements UuidFactoryInterface
 {
 }

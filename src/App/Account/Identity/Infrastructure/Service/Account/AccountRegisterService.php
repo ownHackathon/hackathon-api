@@ -10,7 +10,7 @@ use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTok
 use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
-readonly class AccountRegisterService implements AccountRegisterServiceInterface
+readonly final class AccountRegisterService implements AccountRegisterServiceInterface
 {
     public function __construct(
         private AccountService $accountService,
@@ -31,7 +31,7 @@ readonly class AccountRegisterService implements AccountRegisterServiceInterface
             id: null,
             email: $email,
             token: $this->uuid->uuid7(),
-            createdAt: new DateTimeImmutable()
+            createdAt: new DateTimeImmutable(),
         );
 
         $this->accountActivationRepository->insert($activation);

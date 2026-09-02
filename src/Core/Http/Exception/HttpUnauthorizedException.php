@@ -13,7 +13,7 @@ final class HttpUnauthorizedException extends HttpException
         string $responseMessage,
         array $context = [],
         Level $loglevel = Level::Notice,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
         parent::__construct($logMessage, $responseMessage, $context, $loglevel, $previous);
     }

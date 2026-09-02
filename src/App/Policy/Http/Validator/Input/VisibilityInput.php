@@ -8,7 +8,7 @@ use Laminas\InputFilter\Input;
 use Laminas\Validator\NumberComparison;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
-class VisibilityInput extends Input
+final class VisibilityInput extends Input
 {
     public function __construct()
     {

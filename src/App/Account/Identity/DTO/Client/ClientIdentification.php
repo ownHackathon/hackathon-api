@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Client;
 
-readonly class ClientIdentification
+readonly final class ClientIdentification
 {
     public function __construct(
         public ClientIdentificationData $clientIdentificationData,
-        public string $identificationHash
+        public string $identificationHash,
     ) {
     }
 

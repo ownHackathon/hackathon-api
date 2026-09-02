@@ -18,6 +18,10 @@ namespace Vendor\Package;
 Für die Überprüfung der Einhaltung benutzen wir den [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) eine
 [Konfiguration](./../../phpcs.xml) liegt dem Projekt bei.
 
+Die Konfiguration kombiniert PSR-12 mit Clean-Code-Regeln des [Slevomat Coding Standard](https://github.com/slevomat/coding-standard)
+(z. B. `final`/`abstract` für Klassen, Cognitive Complexity, Early Exit, vollständige Typ-Hints). Automatisch behebbare
+Formatierungsfehler korrigiert `./bin/hackathon composer phpcbf`.
+
 Für die syntaktische Korrektheit nutzen wir zur Prüfung [PHPLint](https://github.com/overtrue/phplint).
 
 Beides wird automatisch auf GitHub geprüft, es ist also vom Vorteil, die beiden Tools vor der Erstellung eines Pull Request
@@ -50,6 +54,10 @@ namespace Vendor\Package;
 ```
 For compliance checking we use the [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) a
 [configuration](./../../phpcs.xml) is included with the project.
+
+The configuration combines PSR-12 with clean-code rules from the [Slevomat Coding Standard](https://github.com/slevomat/coding-standard)
+(e.g. `final`/`abstract` for classes, cognitive complexity, early exit, complete type hints). Automatically fixable
+formatting issues are corrected by `./bin/hackathon composer phpcbf`.
 
 For syntactical correctness we use [PHPLint](https://github.com/overtrue/phplint) for checking.
 

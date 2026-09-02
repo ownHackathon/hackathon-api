@@ -4,7 +4,7 @@ namespace ownHackathon\Core\SharedKernel\Factory;
 
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
-class UuidFactory
+final class UuidFactory
 {
     public function __invoke(): UuidFactoryInterface
     {

@@ -13,7 +13,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
+readonly final class PasswordInputValidatorMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private PasswordValidator $validator,
@@ -40,7 +40,7 @@ readonly class PasswordInputValidatorMiddleware implements MiddlewareInterface
                     IdentityStatusMessage::INVALID_DATA,
                     [
                         'Validator Message:' => $this->validator->getMessages(),
-                    ]
+                    ],
                 );
             }
 

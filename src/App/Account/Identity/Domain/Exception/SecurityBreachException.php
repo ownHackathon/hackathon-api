@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Exception;
 
 use Exception;
 
-class SecurityBreachException extends Exception
+final class SecurityBreachException extends Exception
 {
     public function __construct(
         public string $expectedClientHash,

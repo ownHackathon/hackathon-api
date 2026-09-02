@@ -8,10 +8,10 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-readonly class RouteNotFoundMiddleware implements MiddlewareInterface
+readonly final class RouteNotFoundMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 

@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['statusCode', 'message'])]
-readonly class HttpResponseMessage
+readonly final class HttpResponseMessage
 {
     public function __construct(
         #[OA\Property(

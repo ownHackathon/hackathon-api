@@ -20,7 +20,7 @@ use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
-readonly class AccountService
+readonly final class AccountService
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
@@ -53,7 +53,7 @@ readonly class AccountService
             accountId: $userId,
             tokenType: TokenType::EMail,
             token: $this->uuid->uuid7(),
-            createdAt: new DateTimeImmutable()
+            createdAt: new DateTimeImmutable(),
         );
     }
 
@@ -65,7 +65,7 @@ readonly class AccountService
     public function updateLastAction(AccountInterface $account): void
     {
         $this->accountRepository->update(
-            $account->with(lastActionAt: new DateTimeImmutable())
+            $account->with(lastActionAt: new DateTimeImmutable()),
         );
     }
 
@@ -81,7 +81,7 @@ readonly class AccountService
                     'accountId' => $account->id,
                     'refreshToken' => $refreshToken->refreshToken,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         }
 
@@ -93,7 +93,7 @@ readonly class AccountService
                     'accountId' => $account->id,
                     'refreshToken' => $refreshToken->refreshToken,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         }
 

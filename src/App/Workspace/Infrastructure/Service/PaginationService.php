@@ -6,7 +6,7 @@ use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\DTO\PaginationMeta;
 use ownHackathon\Core\Persistence\Pagination;
 
-readonly class PaginationService
+readonly final class PaginationService
 {
     public function __construct(
         private WorkspaceRepositoryInterface $repository,

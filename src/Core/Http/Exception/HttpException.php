@@ -12,20 +12,20 @@ abstract class HttpException extends RuntimeException
     protected string $responseMessage;
     protected Level $logLevel;
 
+    abstract public function getHttpStatusCode(): int;
+
     public function __construct(
         string $logMessage,
         string $responseMessage,
         array $context = [],
         Level $loglevel = Level::Notice,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
         parent::__construct($logMessage, $this->getHttpStatusCode(), $previous);
         $this->context = $context;
         $this->responseMessage = $responseMessage;
         $this->logLevel = $loglevel;
     }
-
-    abstract public function getHttpStatusCode(): int;
 
     public function getContext(): array
     {

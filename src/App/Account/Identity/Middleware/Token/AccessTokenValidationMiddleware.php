@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
+readonly final class AccessTokenValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccessTokenService $tokenService,
@@ -28,7 +28,7 @@ readonly class AccessTokenValidationMiddleware implements MiddlewareInterface
                 IdentityLogMessage::ACCESS_TOKEN_MISSING,
                 IdentityStatusMessage::UNAUTHORIZED_ACCESS,
                 [],
-                Level::Warning
+                Level::Warning,
             );
         }
 

@@ -4,21 +4,21 @@ namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
 use DateTimeImmutable;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use ownHackathon\App\Workspace\Domain\Workspace;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
-readonly class WorkspaceCreator implements WorkspaceCreatorInterface
+readonly final class WorkspaceCreator implements WorkspaceCreatorInterface
 {
     public function __construct(
         private WorkspaceRepositoryInterface $repository,
         private SlugService $slugService,
-        private UuidFactoryInterface $uuid
+        private UuidFactoryInterface $uuid,
     ) {
     }
 

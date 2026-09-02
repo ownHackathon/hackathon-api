@@ -8,27 +8,17 @@ use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use ownHackathon\Core\Persistence\Pagination;
 use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
-use ownHackathon\Core\Persistence\Pagination;
 use PDOException;
 
-readonly class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface
+readonly final class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface
 {
     public function __construct(
         private WorkspaceStoreInterface $store,
         private WorkspaceHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     /**
@@ -91,5 +81,15 @@ readonly class WorkspaceRepository extends AbstractRepository implements Workspa
     public function countByAccount(int $accountId): int
     {
         return $this->store->count(['accountId' => $accountId]);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

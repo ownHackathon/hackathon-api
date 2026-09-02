@@ -2,11 +2,11 @@
 
 namespace ownHackathon\App\Mailing\DTO;
 
-use ownHackathon\Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['email'])]
-readonly class EMail
+readonly final class EMail
 {
     public function __construct(
         #[OA\Property(

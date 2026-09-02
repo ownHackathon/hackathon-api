@@ -5,7 +5,7 @@ namespace ownHackathon\App\Policy\Domain;
 use ownHackathon\App\Account\Identity\Domain\AccountInterface;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
 
-readonly class VisibilityPolicy implements VisibilityPolicyInterface
+readonly final class VisibilityPolicy implements VisibilityPolicyInterface
 {
     public function isAvailableFor(VisibilityAwareInterface $element, ?AccountInterface $account): bool
     {

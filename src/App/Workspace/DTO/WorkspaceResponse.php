@@ -8,40 +8,40 @@ use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
 use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
-readonly class WorkspaceResponse
+readonly final class WorkspaceResponse
 {
     public function __construct(
         #[OA\Property(
             description: 'The unique identifier of the workspace',
             type: DataType::STRING->value,
             format: 'uuid',
-            example: '019becbe-f952-7b82-82fa-f41f8ae24599'
+            example: '019becbe-f952-7b82-82fa-f41f8ae24599',
         )]
         public string $uuid,
         #[OA\Property(
             description: 'The Uuid from owner for this workspace',
             type: DataType::STRING->value,
             format: 'uuid',
-            example: '019becbe-f952-7b82-82fa-f41f8ae24599'
+            example: '019becbe-f952-7b82-82fa-f41f8ae24599',
         )]
         public string $ownerUuid,
         #[OA\Property(
             description: 'The name from workspace',
             type: DataType::STRING->value,
-            example: 'My own workspace'
+            example: 'My own workspace',
         )]
         public string $name,
         #[OA\Property(
             description: 'The slug for this workspace',
             type: DataType::STRING->value,
-            example: 'my-own-workspace'
+            example: 'my-own-workspace',
         )]
         public string $slug,
         #[OA\Property(
             description: 'The desciption for this workspace',
             type: DataType::STRING->value,
             example: 'My own workspace is wonderfully',
-            nullable: true
+            nullable: true,
         )]
         public ?string $description,
         public int $visibility,
@@ -56,7 +56,7 @@ readonly class WorkspaceResponse
             name: $workspace->name,
             slug: $workspace->slug,
             description: $workspace->description,
-            visibility: $workspace->visibility->value
+            visibility: $workspace->visibility->value,
         );
     }
 }

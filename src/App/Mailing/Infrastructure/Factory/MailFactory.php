@@ -7,7 +7,7 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
 
-class MailFactory
+final class MailFactory
 {
     public function __invoke(ContainerInterface $container): MailerInterface
     {

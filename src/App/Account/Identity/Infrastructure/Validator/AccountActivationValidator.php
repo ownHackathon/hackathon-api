@@ -6,7 +6,7 @@ use Laminas\InputFilter\InputFilter;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 
-class AccountActivationValidator extends InputFilter
+final class AccountActivationValidator extends InputFilter
 {
     public function __construct(
         readonly private AccountNameInput $accountNameInput,

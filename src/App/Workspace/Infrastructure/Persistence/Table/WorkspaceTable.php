@@ -4,11 +4,11 @@ namespace ownHackathon\App\Workspace\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Persistence\Store\AbstractTable;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 
-class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
+final class WorkspaceTable extends AbstractTable implements WorkspaceStoreInterface
 {
     public function __construct(
         protected Query $query,

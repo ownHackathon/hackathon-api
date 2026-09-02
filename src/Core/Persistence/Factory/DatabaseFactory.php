@@ -7,7 +7,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class DatabaseFactory
+final class DatabaseFactory
 {
     /**
      * @throws ContainerExceptionInterface

@@ -2,12 +2,13 @@
 
 namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Mailing\Application\Port\MailerInterface;
+use ownHackathon\App\Mailing\Domain\EmailType;
 use ownHackathon\App\Token\Domain\TokenInterface;
 
 use function sprintf;
 
+// phpcs:ignore SlevomatCodingStandard.Classes.RequireAbstractOrFinal.ClassNeitherAbstractNorFinal -- wird in Unit-Tests direkt gemockt
 readonly class PasswordTokenService
 {
     public function __construct(
@@ -38,7 +39,7 @@ readonly class PasswordTokenService
                     Mit freundlichen Grüßen,
                     Ihr Team von ownHackathon\App',
             $this->projectUri,
-            $token->token->toString()
+            $token->token->toString(),
         );
 
         $html = sprintf(
@@ -56,7 +57,7 @@ readonly class PasswordTokenService
                     <p>Mit freundlichen Grüßen,<br>
                     Ihr Team von ownHackathon\App</p>',
             $this->projectUri,
-            $token->token->toString()
+            $token->token->toString(),
         );
 
         $this->emailService->send($email, $text, $html, 'Passwort zurücksetzen Link');

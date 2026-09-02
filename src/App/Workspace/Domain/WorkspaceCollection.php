@@ -5,10 +5,9 @@ namespace ownHackathon\App\Workspace\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
-use function get_class;
 use function sprintf;
 
-class WorkspaceCollection extends Collection implements WorkspaceCollectionInterface
+final class WorkspaceCollection extends Collection implements WorkspaceCollectionInterface
 {
     /**
      * @throws InvalidArgumentException
@@ -19,9 +18,9 @@ class WorkspaceCollection extends Collection implements WorkspaceCollectionInter
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    get_class($value),
-                    WorkspaceInterface::class
-                )
+                    $value::class,
+                    WorkspaceInterface::class,
+                ),
             );
         }
         parent::offsetSet($offset, $value);

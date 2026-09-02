@@ -4,11 +4,11 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Persistence\Store\AbstractTable;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 
-class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthStoreInterface
+final class AccountAccessAuthTable extends AbstractTable implements AccountAccessAuthStoreInterface
 {
     public function __construct(
         protected Query $query,

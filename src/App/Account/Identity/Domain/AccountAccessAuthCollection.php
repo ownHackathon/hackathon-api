@@ -5,10 +5,9 @@ namespace ownHackathon\App\Account\Identity\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
-use function get_class;
 use function sprintf;
 
-class AccountAccessAuthCollection extends Collection implements AccountAccessAuthCollectionInterface
+final class AccountAccessAuthCollection extends Collection implements AccountAccessAuthCollectionInterface
 {
     /**
      * @throws InvalidArgumentException
@@ -19,9 +18,9 @@ class AccountAccessAuthCollection extends Collection implements AccountAccessAut
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    get_class($value),
-                    AccountAccessAuthInterface::class
-                )
+                    $value::class,
+                    AccountAccessAuthInterface::class,
+                ),
             );
         }
         parent::offsetSet($offset, $value);

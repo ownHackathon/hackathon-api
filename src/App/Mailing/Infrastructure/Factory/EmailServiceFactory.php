@@ -7,7 +7,7 @@ use ownHackathon\App\Mailing\Infrastructure\Service\EmailService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-readonly class EmailServiceFactory
+readonly final class EmailServiceFactory
 {
     public function __invoke(ContainerInterface $container): EmailService
     {

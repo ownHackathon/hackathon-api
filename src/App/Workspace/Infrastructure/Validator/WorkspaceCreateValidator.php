@@ -3,12 +3,12 @@
 namespace ownHackathon\App\Workspace\Infrastructure\Validator;
 
 use Laminas\InputFilter\InputFilter;
+use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
 use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
-use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
 
-class WorkspaceCreateValidator extends InputFilter
+final class WorkspaceCreateValidator extends InputFilter
 {
     public function __construct(
         readonly private WorkspaceNameInput $workspaceNameInput,

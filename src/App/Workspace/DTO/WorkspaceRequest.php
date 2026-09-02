@@ -3,29 +3,29 @@
 namespace ownHackathon\App\Workspace\DTO;
 
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['name', 'visibility'])]
-readonly class WorkspaceRequest
+readonly final class WorkspaceRequest
 {
     public function __construct(
         #[OA\Property(
             description: 'The name from workspace',
             type: DataType::STRING->value,
-            example: 'My own workspace'
+            example: 'My own workspace',
         )]
         public string $name,
         #[OA\Property(
             description: 'The description from workspace',
             type: DataType::STRING->value,
-            example: 'My own workspace is wonderfully'
+            example: 'My own workspace is wonderfully',
         )]
         public ?string $description,
         #[OA\Property(
             description: 'The details from workspace',
             type: DataType::STRING->value,
-            example: 'My own workspace is wonderfully'
+            example: 'My own workspace is wonderfully',
         )]
         public ?string $details,
         #[OA\Property(
@@ -35,9 +35,9 @@ readonly class WorkspaceRequest
                 Visibility::PUBLIC->value . ' = Public.',
             type: DataType::INTEGER->value,
             enum: [Visibility::UNLISTED->value, Visibility::REGISTERED->value, Visibility::PUBLIC->value],
-            example: Visibility::PUBLIC->value
+            example: Visibility::PUBLIC->value,
         )]
-        public int $visibility
+        public int $visibility,
     ) {
     }
 
@@ -47,7 +47,7 @@ readonly class WorkspaceRequest
             name: $workspace['name'],
             description: $workspace['description'] ?? null,
             details: $workspace['details'] ?? null,
-            visibility: (int)$workspace['visibility']
+            visibility: (int)$workspace['visibility'],
         );
     }
 }

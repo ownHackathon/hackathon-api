@@ -4,11 +4,11 @@ namespace ownHackathon\App\Event\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Persistence\Store\AbstractTable;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 
-class EventTable extends AbstractTable implements EventStoreInterface
+final class EventTable extends AbstractTable implements EventStoreInterface
 {
     public function __construct(
         protected Query $query,

@@ -13,13 +13,13 @@ use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
 use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
 use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
 use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Http\DTO\HttpResponseMessage;
+use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class WorkspaceCreateHandler implements RequestHandlerInterface
+readonly final class WorkspaceCreateHandler implements RequestHandlerInterface
 {
     public function __construct(
         private WorkspaceCreatorInterface $workspaceCreator,
@@ -38,27 +38,27 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
     #[OA\RequestBody(
         description: 'The data for the new workspace. At a minimum, a name is required.',
         required: true,
-        content: new OA\JsonContent(ref: WorkspaceRequest::class)
+        content: new OA\JsonContent(ref: WorkspaceRequest::class),
     )]
     #[OA\Response(
         response: Http::STATUS_CREATED,
         description: 'Workspace created successfully. The response contains the details of the newly created workspace.',
-        content: new OA\JsonContent(ref: WorkspaceResponse::class)
+        content: new OA\JsonContent(ref: WorkspaceResponse::class),
     )]
     #[OA\Response(
         response: Http::STATUS_BAD_REQUEST,
         description: 'Invalid input. The provided workspace name may be empty, too long, or contain invalid characters.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. The access token is missing or invalid.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     #[OA\Response(
         response: Http::STATUS_CONFLICT,
         description: 'A workspace with this name already exists.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -73,7 +73,7 @@ readonly class WorkspaceCreateHandler implements RequestHandlerInterface
                 WorkspaceStatusMessage::DUPLICATED_WORKSPACE_NAME,
                 [
                     'Workspace:' => $workspace->name,
-                ]
+                ],
             );
         }
 

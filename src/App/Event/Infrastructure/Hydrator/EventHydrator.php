@@ -9,12 +9,12 @@ use ownHackathon\App\Event\Domain\Event;
 use ownHackathon\App\Event\Domain\EventCollection;
 use ownHackathon\App\Event\Domain\EventCollectionInterface;
 use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use ownHackathon\Core\Clock\DateTimeFormat;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-readonly class EventHydrator implements EventHydratorInterface
+readonly final class EventHydrator implements EventHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,

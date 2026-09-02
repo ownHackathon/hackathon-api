@@ -2,7 +2,7 @@
 
 namespace ownHackathon\Core\Persistence;
 
-readonly class Pagination
+readonly final class Pagination
 {
     public const int MIN_PAGE = 1;
     public const int DEFAULT_LIMIT = 5;
@@ -11,7 +11,7 @@ readonly class Pagination
     public function __construct(
         public int $page,
         public int $limit,
-        public int $offset
+        public int $offset,
     ) {
     }
 

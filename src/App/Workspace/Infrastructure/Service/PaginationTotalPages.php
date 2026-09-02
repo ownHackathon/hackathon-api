@@ -2,7 +2,7 @@
 
 namespace ownHackathon\App\Workspace\Infrastructure\Service;
 
-readonly class PaginationTotalPages
+readonly final class PaginationTotalPages
 {
     public function getTotalPages(int $totalItemCount, int $itemPerPage): int
     {

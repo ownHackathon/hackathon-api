@@ -6,7 +6,7 @@ use DateTime;
 use Exception;
 use Laminas\Validator\AbstractValidator;
 
-class DateLessNow extends AbstractValidator
+final class DateLessNow extends AbstractValidator
 {
     public const string VALID_DATE = 'valid_date';
 
@@ -15,7 +15,7 @@ class DateLessNow extends AbstractValidator
             self::VALID_DATE => 'Date is in the past',
         ];
 
-    public function isValid($value): bool
+    public function isValid(mixed $value): bool
     {
         $dateNow = new DateTime();
 

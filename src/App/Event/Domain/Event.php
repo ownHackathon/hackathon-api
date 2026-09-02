@@ -9,7 +9,7 @@ use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class Event implements EventInterface, Collectible
+readonly final class Event implements EventInterface, Collectible
 {
     use CloneReadonlyClassWith;
 

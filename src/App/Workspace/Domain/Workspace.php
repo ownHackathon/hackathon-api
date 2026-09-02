@@ -8,7 +8,7 @@ use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class Workspace implements WorkspaceInterface, Collectible
+readonly final class Workspace implements WorkspaceInterface, Collectible
 {
     use CloneReadonlyClassWith;
 
@@ -26,7 +26,7 @@ readonly class Workspace implements WorkspaceInterface, Collectible
     ) {
     }
 
-    public function getOwnerId(): ?int
+    public function getOwnerId(): int
     {
         return $this->accountId;
     }

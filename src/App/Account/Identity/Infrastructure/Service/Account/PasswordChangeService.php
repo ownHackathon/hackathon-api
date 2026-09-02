@@ -13,7 +13,7 @@ use ownHackathon\App\Token\Domain\TokenInterface;
 use ownHackathon\App\Token\DTO\Token;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
 
-readonly class PasswordChangeService
+readonly final class PasswordChangeService
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
@@ -54,7 +54,7 @@ readonly class PasswordChangeService
             IdentityStatusMessage::TOKEN_INVALID,
             [
                 'Token:' => $token,
-            ]
+            ],
         );
     }
 }

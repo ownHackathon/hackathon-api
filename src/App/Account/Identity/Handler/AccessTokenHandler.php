@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AccessTokenHandler implements RequestHandlerInterface
+readonly final class AccessTokenHandler implements RequestHandlerInterface
 {
     public function __construct(
         private RefreshTokenService $refreshTokenService,
@@ -30,18 +30,18 @@ readonly class AccessTokenHandler implements RequestHandlerInterface
         'configured security mechanism (e.g., Authorization Header or HTTP-only Cookie).',
         summary: 'Refresh the access token',
         security: [['refreshToken' => []]],
-        tags: ['Account']
+        tags: ['Account'],
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
         description: 'Successfully issued a new access token.',
-        content: [new OA\JsonContent(ref: AccessToken::class)]
+        content: [new OA\JsonContent(ref: AccessToken::class)],
     )]
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. This happens if the refresh token is expired, ' .
         'revoked, or invalid. The user must perform a full login again.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

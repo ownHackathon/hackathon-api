@@ -12,12 +12,12 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationReposit
 use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
 use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
-readonly class AccountCreatorService
+readonly final class AccountCreatorService
 {
     public function __construct(
         private AccountActivationRepositoryInterface $accountActivationRepository,
@@ -34,7 +34,7 @@ readonly class AccountCreatorService
                 IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'Token:' => $activationToken,
-                ]
+                ],
             );
         }
 
@@ -46,7 +46,7 @@ readonly class AccountCreatorService
                 IdentityStatusMessage::TOKEN_INVALID,
                 [
                     'Invalid activation token:' => $activationToken,
-                ]
+                ],
             );
         }
 
@@ -57,7 +57,7 @@ readonly class AccountCreatorService
             password: password_hash($accountRegistration->password, PASSWORD_BCRYPT),
             email: $persistActivationToken->email,
             registeredAt: new DateTimeImmutable(),
-            lastActionAt: new DateTimeImmutable()
+            lastActionAt: new DateTimeImmutable(),
         );
 
         try {
@@ -69,7 +69,7 @@ readonly class AccountCreatorService
                 [
                     'E-Mail' => $account->email->toString(),
                     'Exception Message:' => $e->getMessage(),
-                ]
+                ],
             );
         }
 
@@ -82,7 +82,7 @@ readonly class AccountCreatorService
                 [
                     'account' => $account->name,
                     'exception' => $exception,
-                ]
+                ],
             );
         }
 

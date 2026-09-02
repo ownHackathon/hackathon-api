@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Exception;
 
 use Exception;
 
-class DuplicateEMailException extends Exception
+final class DuplicateEMailException extends Exception
 {
     public function __construct(
         public string $email,

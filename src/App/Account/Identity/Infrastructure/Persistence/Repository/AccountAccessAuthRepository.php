@@ -11,22 +11,12 @@ use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
 use ownHackathon\Core\Persistence\Repository\AbstractRepository;
 use ownHackathon\Core\Persistence\Store\StoreInterface;
 
-readonly class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
+readonly final class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
 {
     public function __construct(
         private AccountAccessAuthStoreInterface $store,
         private AccountAccessAuthHydratorInterface $hydrator,
     ) {
-    }
-
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 
     public function insert(AccountAccessAuthInterface $accountAccessAuth): int
@@ -105,5 +95,15 @@ readonly class AccountAccessAuthRepository extends AbstractRepository implements
         $result = $this->store->fetchAll();
 
         return $this->mapToCollection($result);
+    }
+
+    protected function getHydrator(): HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    protected function getStore(): StoreInterface
+    {
+        return $this->store;
     }
 }

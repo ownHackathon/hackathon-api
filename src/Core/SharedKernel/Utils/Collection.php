@@ -32,7 +32,7 @@ abstract class Collection implements CollectionInterface
     {
         if (!$this->offsetExists($offset)) {
             throw new UndefinedOffsetException(
-                sprintf('Undefined offset: %s in Collection %s on Line %s', $offset, __FILE__, __LINE__)
+                sprintf('Undefined offset: %s in Collection %s on Line %s', $offset, __FILE__, __LINE__),
             );
         }
 

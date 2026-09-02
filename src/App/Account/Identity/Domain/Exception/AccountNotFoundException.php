@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Exception;
 
 use Exception;
 
-class AccountNotFoundException extends Exception
+final class AccountNotFoundException extends Exception
 {
     public function __construct(
         public int $accountId = 0,

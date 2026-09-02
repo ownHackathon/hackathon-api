@@ -8,9 +8,9 @@ use ownHackathon\Core\Persistence\Pagination;
 #[OA\Schema(
     title: 'Pagination Meta',
     description: 'Info about the number of pages and limits',
-    required: ['currentPage', 'totalPages', 'totalItems']
+    required: ['currentPage', 'totalPages', 'totalItems'],
 )]
-readonly class PaginationMeta
+readonly final class PaginationMeta
 {
     public function __construct(
         #[OA\Property(example: Pagination::MIN_PAGE)]

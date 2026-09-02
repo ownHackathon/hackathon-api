@@ -2,18 +2,18 @@
 
 namespace ownHackathon\App\Account\Identity\Middleware\Account\Authentication;
 
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
 use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
 use ownHackathon\App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
+use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
-readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
+readonly final class AuthenticationValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AuthenticationValidator $validator,
@@ -41,7 +41,7 @@ readonly class AuthenticationValidationMiddleware implements MiddlewareInterface
                     [
                         'E-Mail:' => $data['email'] ?? null,
                         'Validator-Message:' => $this->validator->getMessages(),
-                    ]
+                    ],
                 );
             }
 

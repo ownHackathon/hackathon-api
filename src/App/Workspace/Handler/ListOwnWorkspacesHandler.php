@@ -10,14 +10,14 @@ use ownHackathon\App\Workspace\DTO\PaginationMeta;
 use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
 use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
-use ownHackathon\Core\Serialization\DataType;
 use ownHackathon\Core\Http\DTO\HttpResponseMessage;
 use ownHackathon\Core\Persistence\Pagination;
+use ownHackathon\Core\Serialization\DataType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
+readonly final class ListOwnWorkspacesHandler implements RequestHandlerInterface
 {
     public function __construct(
         private WorkspaceRepository $repository,
@@ -41,8 +41,8 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
         schema: new OA\Schema(
             type: 'integer',
             default: Pagination::MIN_PAGE,
-            minimum: Pagination::MIN_PAGE
-        )
+            minimum: Pagination::MIN_PAGE,
+        ),
     )]
     #[OA\Parameter(
         name: 'limit',
@@ -53,8 +53,8 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
             type: 'integer',
             default: Pagination::DEFAULT_LIMIT,
             maximum: Pagination::MAX_LIMIT,
-            minimum: Pagination::MIN_PAGE
-        )
+            minimum: Pagination::MIN_PAGE,
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
@@ -64,21 +64,21 @@ readonly class ListOwnWorkspacesHandler implements RequestHandlerInterface
                 new OA\Property(
                     property: 'workspaces',
                     type: 'array',
-                    items: new OA\Items(ref: WorkspaceResponse::class)
+                    items: new OA\Items(ref: WorkspaceResponse::class),
                 ),
                 new OA\Property(
                     property: 'meta',
                     ref: PaginationMeta::class,
-                    type: DataType::OBJECT->value
+                    type: DataType::OBJECT->value,
                 ),
             ],
-            type: DataType::OBJECT->value
-        )
+            type: DataType::OBJECT->value,
+        ),
     )]
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
         description: 'Authentication failed. The access token is missing or invalid.',
-        content: new OA\JsonContent(ref: HttpResponseMessage::class)
+        content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

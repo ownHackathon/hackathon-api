@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class RefreshTokenDatabaseExistenceMiddleware implements MiddlewareInterface
+readonly final class RefreshTokenDatabaseExistenceMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountAccessAuthRepositoryInterface $accessAuthRepository,
@@ -34,7 +34,7 @@ readonly class RefreshTokenDatabaseExistenceMiddleware implements MiddlewareInte
                 [
                     'Refresh Token:' => $refreshToken,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         }
 

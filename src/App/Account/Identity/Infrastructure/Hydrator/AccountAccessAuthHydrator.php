@@ -10,7 +10,7 @@ use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterfac
 use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
 use ownHackathon\Core\Clock\DateTimeFormat;
 
-readonly class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
+readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
 {
     /**
      * @throws Exception

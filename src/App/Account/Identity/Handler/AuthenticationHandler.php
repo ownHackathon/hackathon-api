@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AuthenticationHandler implements RequestHandlerInterface
+readonly final class AuthenticationHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccountAuthenticationService $authService,
@@ -28,28 +28,28 @@ readonly class AuthenticationHandler implements RequestHandlerInterface
         'On success, it returns a short-lived **AccessToken** (for API authorization) ' .
         'and a long-lived **RefreshToken** (to obtain new access tokens).',
         summary: 'Authenticate user and issue tokens',
-        tags: ['Account']
+        tags: ['Account'],
     )]
     #[OA\RequestBody(
         description: 'User credentials (email and password)',
         required: true,
-        content: new OA\JsonContent(ref: AuthenticationRequest::class)
+        content: new OA\JsonContent(ref: AuthenticationRequest::class),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
         description: 'Authentication successful. The response contains both access and refresh tokens.',
-        content: [new OA\JsonContent(ref: AuthenticationResponse::class)]
+        content: [new OA\JsonContent(ref: AuthenticationResponse::class)],
     )]
     #[OA\Response(
         response: Http::STATUS_UNAUTHORIZED,
         description: 'Invalid credentials. The email or password provided is incorrect.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     #[OA\Response(
         response: Http::STATUS_FORBIDDEN,
         description: 'Access denied. The credentials are correct, but the account is currently restricted. ' .
         'Possible reasons: Account is locked, disabled, or the email address has not been verified yet.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

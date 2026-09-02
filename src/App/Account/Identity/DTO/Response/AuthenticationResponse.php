@@ -2,13 +2,13 @@
 
 namespace ownHackathon\App\Account\Identity\DTO\Response;
 
-use ownHackathon\Core\Serialization\DataType;
+use OpenApi\Attributes as OA;
 use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
 use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use OpenApi\Attributes as OA;
+use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['accessToken', 'refreshToken'])]
-readonly class AuthenticationResponse
+readonly final class AuthenticationResponse
 {
     public function __construct(
         #[OA\Property(

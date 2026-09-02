@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
 
-readonly class AccessTokenServiceFactory
+readonly final class AccessTokenServiceFactory
 {
     public function __invoke(ContainerInterface $container): AccessTokenService
     {

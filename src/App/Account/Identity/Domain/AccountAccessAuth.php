@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 
-readonly class AccountAccessAuth implements AccountAccessAuthInterface, Collectible
+readonly final class AccountAccessAuth implements AccountAccessAuthInterface, Collectible
 {
     use CloneReadonlyClassWith;
 

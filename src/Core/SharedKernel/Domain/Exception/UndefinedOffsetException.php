@@ -4,6 +4,6 @@ namespace ownHackathon\Core\SharedKernel\Domain\Exception;
 
 use Exception;
 
-class UndefinedOffsetException extends Exception
+final class UndefinedOffsetException extends Exception
 {
 }

@@ -7,7 +7,7 @@ use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterfa
 use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
 
-readonly class RefreshTokenServiceFactory
+readonly final class RefreshTokenServiceFactory
 {
     public function __invoke(ContainerInterface $container): RefreshTokenService
     {
@@ -21,7 +21,7 @@ readonly class RefreshTokenServiceFactory
             $accountRepository,
             $accessAuthRepository,
             $accessTokenService,
-            $jwtTokenConfig
+            $jwtTokenConfig,
         );
     }
 }

@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Exception;
 
 use Exception;
 
-class InvalidRefreshTokenException extends Exception
+final class InvalidRefreshTokenException extends Exception
 {
     public function __construct(
         public string $refreshToken,

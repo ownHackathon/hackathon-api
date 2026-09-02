@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['password'])]
-readonly class AccountPassword
+readonly final class AccountPassword
 {
     public function __construct(
         #[OA\Property(

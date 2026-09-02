@@ -8,7 +8,7 @@ use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class Account implements AccountInterface, Collectible
+readonly final class Account implements AccountInterface, Collectible
 {
     use CloneReadonlyClassWith;
 

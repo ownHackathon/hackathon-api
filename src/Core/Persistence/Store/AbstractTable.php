@@ -5,8 +5,8 @@ namespace ownHackathon\Core\Persistence\Store;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Persistence\Pagination;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 use ReflectionClass;
 
@@ -41,7 +41,7 @@ abstract class AbstractTable implements StoreInterface
 
         if ($result === false) {
             throw new InvalidArgumentException(
-                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data['id'])
+                sprintf('Unknown Error while updating %s with id: %s', $this->getTableName(), $data['id']),
             );
         }
 
@@ -118,7 +118,7 @@ abstract class AbstractTable implements StoreInterface
 
         if ($result === false) {
             throw new InvalidArgumentException(
-                sprintf('Failed to delete %s table with %s: `%s`', $this->getTableName(), $key, $value)
+                sprintf('Failed to delete %s table with %s: `%s`', $this->getTableName(), $key, $value),
             );
         }
 

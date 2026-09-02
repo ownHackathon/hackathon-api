@@ -5,7 +5,7 @@ namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
 use ownHackathon\App\Mailing\Application\Port\MailerInterface;
 use Psr\Container\ContainerInterface;
 
-readonly class ActivationTokenServiceFactory
+readonly final class ActivationTokenServiceFactory
 {
     public function __invoke(ContainerInterface $container): ActivationTokenService
     {

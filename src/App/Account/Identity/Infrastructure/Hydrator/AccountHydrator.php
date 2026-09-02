@@ -13,7 +13,7 @@ use ownHackathon\Core\Clock\DateTimeFormat;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
-readonly class AccountHydrator implements AccountHydratorInterface
+readonly final class AccountHydrator implements AccountHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,

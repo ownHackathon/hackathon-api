@@ -4,7 +4,7 @@ namespace ownHackathon\App\Account\Identity\Domain\Exception;
 
 use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 
-class DuplicateAuthException extends DuplicateEntryException
+final class DuplicateAuthException extends DuplicateEntryException
 {
     public function __construct(
         public string $account,

@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 use function strlen;
 
-readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
+readonly final class RequestAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccessTokenService $accessTokenService,
@@ -47,7 +47,7 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
                 [
                     'uri' => (string)$request->getUri(),
                     'ip' => $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
-                ]
+                ],
             );
         }
 
@@ -73,7 +73,7 @@ readonly class RequestAuthenticationMiddleware implements MiddlewareInterface
                     'uri' => (string)$request->getUri(),
                     'uuid' => $authorization->uuid,
                 ],
-                Level::Warning
+                Level::Warning,
             );
         }
 

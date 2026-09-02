@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['accessToken'])]
-readonly class AccessToken
+readonly final class AccessToken
 {
     public function __construct(
         #[OA\Property(

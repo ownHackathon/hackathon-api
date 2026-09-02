@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class AccountActivationHandler implements RequestHandlerInterface
+readonly final class AccountActivationHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccountCreatorService $accountCreator,
@@ -36,19 +36,19 @@ readonly class AccountActivationHandler implements RequestHandlerInterface
                 description: 'The secret activation token received via email.',
                 in: 'path',
                 required: true,
-                schema: new OA\Schema(type: 'string')
+                schema: new OA\Schema(type: 'string'),
             ),
         ],
     )]
     #[OA\RequestBody(
         description: 'The account credentials to be set for the new account.',
         required: true,
-        content: new OA\JsonContent(ref: AccountRegistration::class)
+        content: new OA\JsonContent(ref: AccountRegistration::class),
     )]
     #[OA\Response(
         response: Http::STATUS_CREATED,
         description: 'Account successfully created and activated. The user can now log in.',
-        content: new OA\JsonContent(ref: AccountResponse::class)
+        content: new OA\JsonContent(ref: AccountResponse::class),
     )]
     #[OA\Response(
         response: Http::STATUS_BAD_REQUEST,
@@ -56,7 +56,7 @@ readonly class AccountActivationHandler implements RequestHandlerInterface
         "1. The token is invalid or has expired.\n" .
         "2. The password does not meet the security requirements.\n" .
         '3. The chosen account name is already taken.',
-        content: [new OA\JsonContent(ref: HttpResponseMessage::class)]
+        content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

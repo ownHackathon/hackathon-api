@@ -5,10 +5,9 @@ namespace ownHackathon\App\Token\Domain;
 use InvalidArgumentException;
 use ownHackathon\Core\SharedKernel\Utils\Collection;
 
-use function get_class;
 use function sprintf;
 
-class TokenCollection extends Collection implements TokenCollectionInterface
+final class TokenCollection extends Collection implements TokenCollectionInterface
 {
     /**
      * @throws InvalidArgumentException
@@ -19,9 +18,9 @@ class TokenCollection extends Collection implements TokenCollectionInterface
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be an instance of %s',
-                    get_class($value),
-                    TokenInterface::class
-                )
+                    $value::class,
+                    TokenInterface::class,
+                ),
             );
         }
         parent::offsetSet($offset, $value);

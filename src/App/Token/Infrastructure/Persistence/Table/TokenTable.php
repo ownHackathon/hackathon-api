@@ -4,11 +4,11 @@ namespace ownHackathon\App\Token\Infrastructure\Persistence\Table;
 
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use ownHackathon\Core\Persistence\Store\AbstractTable;
+use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 
-class TokenTable extends AbstractTable implements TokenStoreInterface
+final class TokenTable extends AbstractTable implements TokenStoreInterface
 {
     public function __construct(
         protected Query $query,

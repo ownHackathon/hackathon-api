@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-readonly class LastActivityUpdaterMiddleware implements MiddlewareInterface
+readonly final class LastActivityUpdaterMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
@@ -30,7 +30,7 @@ readonly class LastActivityUpdaterMiddleware implements MiddlewareInterface
 
         try {
             $this->accountRepository->update(
-                $account->with(lastActionAt: new DateTimeImmutable())
+                $account->with(lastActionAt: new DateTimeImmutable()),
             );
         } catch (InvalidArgumentException $exception) {
             throw new HttpInvalidArgumentException(
@@ -39,7 +39,7 @@ readonly class LastActivityUpdaterMiddleware implements MiddlewareInterface
                 [
                     'account' => $account->name,
                     'exception' => $exception,
-                ]
+                ],
             );
         }
 

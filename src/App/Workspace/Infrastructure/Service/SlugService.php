@@ -5,7 +5,7 @@ namespace ownHackathon\App\Workspace\Infrastructure\Service;
 use function str_replace;
 use function strtolower;
 
-readonly class SlugService
+readonly final class SlugService
 {
     public function getSlugFromString(string $data): string
     {
