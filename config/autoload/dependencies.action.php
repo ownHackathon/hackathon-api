@@ -6,6 +6,7 @@ use ownHackathon\Core\SharedKernel\Factory\UuidFactory;
 use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Tests\Integration\Mock\NullLoggerFactory;
 use Tests\Integration\Mock\NullMailerFactory;
+use Tests\Integration\Mock\ArrayLogger;
 
 return [
     'dependencies' => [
@@ -17,6 +18,7 @@ return [
             Symfony\Component\Mailer\MailerInterface::class => 'mailer',
         ],
         'invokables' => [
+            'logger.account-activity' => ArrayLogger::class,
         ],
         'factories' => [
             'database' => DatabaseFactory::class,
