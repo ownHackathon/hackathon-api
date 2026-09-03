@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\DTO\Account;
+namespace App\Account\Identity\DTO\Account;
 
+use App\Account\Identity\Domain\AccountInterface;
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['account', 'hasWorkspace'])]
 readonly final class ApiMe

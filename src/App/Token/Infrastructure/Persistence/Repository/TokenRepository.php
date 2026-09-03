@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Infrastructure\Persistence\Repository;
+namespace App\Token\Infrastructure\Persistence\Repository;
 
-use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\App\Token\Domain\TokenCollectionInterface;
-use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
-use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
-use ownHackathon\Core\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Persistence\Store\StoreInterface;
+use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Token\Domain\TokenCollectionInterface;
+use App\Token\Domain\TokenInterface;
+use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
+use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
+use Core\Persistence\Hydrator\HydratorInterface;
+use Core\Persistence\Repository\AbstractRepository;
+use Core\Persistence\Store\StoreInterface;
 
 readonly final class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
 {

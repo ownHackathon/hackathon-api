@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\DTO\Client;
+namespace App\Account\Identity\DTO\Client;
 
 readonly final class ClientIdentification
 {

@@ -4,10 +4,10 @@ namespace Tests\Unit\App\Account;
 
 use DateTimeImmutable;
 use InvalidArgumentException;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountCollection;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\AccountCollection;
+use App\Mailing\Domain\EmailType;
+use Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;

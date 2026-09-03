@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Domain;
+namespace App\Token\Domain;
 
+use App\Token\Domain\Enum\TokenType;
+use Core\SharedKernel\Trait\CloneReadonlyClassWith;
+use Core\SharedKernel\Utils\Collectible;
 use DateTimeImmutable;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
-use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
 readonly final class Token implements TokenInterface, Collectible

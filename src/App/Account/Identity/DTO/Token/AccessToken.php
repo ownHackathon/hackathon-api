@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\DTO\Token;
+namespace App\Account\Identity\DTO\Token;
 
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['accessToken'])]
 readonly final class AccessToken

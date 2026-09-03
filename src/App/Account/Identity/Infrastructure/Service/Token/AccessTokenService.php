@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
+use App\Account\Identity\DTO\Token\AccessToken;
+use App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Token\Infrastructure\Token\JwtTokenTrait;
 use Firebase\JWT\JWT;
-use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
-use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
 use Ramsey\Uuid\UuidInterface;
 
 use function time;

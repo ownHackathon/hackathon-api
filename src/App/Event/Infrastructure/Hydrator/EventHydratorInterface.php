@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Infrastructure\Hydrator;
+namespace App\Event\Infrastructure\Hydrator;
 
-use ownHackathon\App\Event\Domain\EventCollectionInterface;
-use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use App\Event\Domain\EventCollectionInterface;
+use App\Event\Domain\EventInterface;
+use Core\Persistence\Hydrator\HydratorInterface;
 
 interface EventHydratorInterface extends HydratorInterface
 {

@@ -3,11 +3,11 @@
 namespace Tests\Unit\App\Policy;
 
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Policy\Domain\VisibilityAwareInterface;
-use ownHackathon\App\Policy\Domain\VisibilityPolicy;
+use App\Account\Identity\Domain\Account;
+use App\Mailing\Domain\EmailType;
+use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\VisibilityAwareInterface;
+use App\Policy\Domain\VisibilityPolicy;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -71,7 +71,7 @@ test('unlisted elements are available only for their owner', function (): void {
 });
 
 test('workspace exposes its account as owner', function (): void {
-    $workspace = new \ownHackathon\App\Workspace\Domain\Workspace(
+    $workspace = new \App\Workspace\Domain\Workspace(
         1,
         Uuid::uuid4(),
         42,

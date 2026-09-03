@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Infrastructure\Hydrator;
+namespace App\Event\Infrastructure\Hydrator;
 
+use App\Event\Domain\Enum\EventStatus;
+use App\Event\Domain\Event;
+use App\Event\Domain\EventCollection;
+use App\Event\Domain\EventCollectionInterface;
+use App\Event\Domain\EventInterface;
+use App\Event\Domain\Message\EventLogMessage;
+use App\Policy\Domain\Enum\Visibility;
+use Core\Clock\DateTimeFormat;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Event\Domain\Event;
-use ownHackathon\App\Event\Domain\EventCollection;
-use ownHackathon\App\Event\Domain\EventCollectionInterface;
-use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\App\Event\Domain\Message\EventLogMessage;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly final class EventHydrator implements EventHydratorInterface

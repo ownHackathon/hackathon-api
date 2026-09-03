@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
+namespace App\Account\Identity\Infrastructure\Hydrator;
 
+use App\Account\Identity\Domain\AccountActivation;
+use App\Account\Identity\Domain\AccountActivationCollection;
+use App\Account\Identity\Domain\AccountActivationCollectionInterface;
+use App\Account\Identity\Domain\AccountActivationInterface;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Mailing\Domain\EmailType;
+use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Domain\AccountActivation;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationCollection;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Clock\DateTimeFormat;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 

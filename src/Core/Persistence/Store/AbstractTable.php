@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence\Store;
+namespace Core\Persistence\Store;
 
+use Core\Persistence\Pagination;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use Envms\FluentPDO\Exception;
 use Envms\FluentPDO\Query;
 use InvalidArgumentException;
-use ownHackathon\Core\Persistence\Pagination;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 use ReflectionClass;
 

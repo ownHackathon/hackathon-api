@@ -4,31 +4,31 @@ namespace Tests\Integration\Composition;
 
 use DateTimeImmutable;
 use InvalidArgumentException;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
-use ownHackathon\App\Account\Identity\DTO\Account\ApiMe;
-use ownHackathon\App\Account\Identity\DTO\Token\AccountPasswordToken;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollection;
-use ownHackathon\App\Account\Identity\Domain\AccountActivation;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationCollection;
-use ownHackathon\App\Account\Identity\Domain\AccountCollection;
-use ownHackathon\App\Event\Domain\Event;
-use ownHackathon\App\Event\Domain\EventCollection;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Token\Domain\Token;
-use ownHackathon\App\Token\Domain\TokenCollection;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
-use ownHackathon\App\Workspace\DTO\PaginationMeta;
-use ownHackathon\App\Workspace\DTO\Workspace as WorkspaceDto;
-use ownHackathon\App\Workspace\DTO\WorkspaceList;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
+use App\Account\Identity\DTO\Account\AccountPassword;
+use App\Account\Identity\DTO\Account\AccountRegistration;
+use App\Account\Identity\DTO\Account\ApiMe;
+use App\Account\Identity\DTO\Token\AccountPasswordToken;
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\AccountAccessAuthCollection;
+use App\Account\Identity\Domain\AccountActivation;
+use App\Account\Identity\Domain\AccountActivationCollection;
+use App\Account\Identity\Domain\AccountCollection;
+use App\Event\Domain\Event;
+use App\Event\Domain\EventCollection;
+use App\Event\Domain\Enum\EventStatus;
+use App\Mailing\Domain\EmailType;
+use App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Token;
+use App\Token\Domain\TokenCollection;
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Domain\Workspace;
+use App\Workspace\Domain\WorkspaceCollection;
+use App\Workspace\DTO\PaginationMeta;
+use App\Workspace\DTO\Workspace as WorkspaceDto;
+use App\Workspace\DTO\WorkspaceList;
+use App\Workspace\DTO\WorkspaceRequest;
+use App\Workspace\DTO\WorkspaceResponse;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -169,7 +169,7 @@ test('collection iterator, filtering and missing offsets work', function () {
 
     $collection->offsetUnset(0);
     expect($collection->offsetExists(0))->toBeFalse()
-        ->and(fn() => $collection[99])->toThrow(\ownHackathon\Core\SharedKernel\Domain\Exception\UndefinedOffsetException::class);
+        ->and(fn() => $collection[99])->toThrow(\Core\SharedKernel\Domain\Exception\UndefinedOffsetException::class);
 });
 
 test('readonly domain entities can be cloned with changed values', function () {

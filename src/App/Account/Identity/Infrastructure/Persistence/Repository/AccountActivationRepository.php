@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
+namespace App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
-use ownHackathon\Core\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Persistence\Store\StoreInterface;
+use App\Account\Identity\Domain\AccountActivationCollectionInterface;
+use App\Account\Identity\Domain\AccountActivationInterface;
+use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
+use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
+use App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
+use App\Mailing\Domain\EmailType;
+use Core\Persistence\Hydrator\HydratorInterface;
+use Core\Persistence\Repository\AbstractRepository;
+use Core\Persistence\Store\StoreInterface;
 
 readonly final class AccountActivationRepository extends AbstractRepository implements AccountActivationRepositoryInterface
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
+namespace App\Account\Identity\Middleware\Account\Validation;
 
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\PasswordValidator;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\DTO\Account\AccountPassword;
+use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
+use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

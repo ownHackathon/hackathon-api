@@ -6,20 +6,20 @@ use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\ServerRequest;
 use Monolog\Level;
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Http\Factory\ErrorResponseFactory;
-use ownHackathon\Core\Http\Handler\PingHandler;
-use ownHackathon\Core\Http\Handler\SwaggerUIHandler;
-use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
-use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
-use ownHackathon\Core\Observability\CorrelationIdRegistry;
-use ownHackathon\Core\Persistence\Pagination;
+use Core\Http\DTO\HttpResponseMessage;
+use Core\Http\Exception\HttpDuplicateEntryException;
+use Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use Core\Http\Exception\HttpInvalidArgumentException;
+use Core\Http\Exception\HttpUnauthorizedException;
+use Core\Http\Factory\ErrorResponseFactory;
+use Core\Http\Handler\PingHandler;
+use Core\Http\Handler\SwaggerUIHandler;
+use Core\Http\Middleware\PaginationMiddleware;
+use Core\Http\Middleware\RequestCorrelationMiddleware;
+use Core\Http\Middleware\RequestLoggingMiddleware;
+use Core\Http\Middleware\RouteNotFoundMiddleware;
+use Core\Observability\CorrelationIdRegistry;
+use Core\Persistence\Pagination;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
@@ -151,7 +151,7 @@ test('route-not-found middleware logs and delegates', function (): void {
 });
 
 test('request correlation middleware sets and clears the correlation id', function (): void {
-    $uuidFactory = new \ownHackathon\Core\SharedKernel\Utils\UuidFactory();
+    $uuidFactory = new \Core\SharedKernel\Utils\UuidFactory();
     $response = new \Laminas\Diactoros\Response\EmptyResponse();
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->with(
@@ -167,7 +167,7 @@ test('request correlation middleware sets and clears the correlation id', functi
 });
 
 test('request correlation middleware uses an incoming correlation id header', function (): void {
-    $uuidFactory = new \ownHackathon\Core\SharedKernel\Utils\UuidFactory();
+    $uuidFactory = new \Core\SharedKernel\Utils\UuidFactory();
     $response = new \Laminas\Diactoros\Response\EmptyResponse();
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->with(

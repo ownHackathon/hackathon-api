@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http\Middleware;
+namespace Core\Http\Middleware;
 
-use ownHackathon\Core\Observability\CorrelationIdRegistry;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Core\Observability\CorrelationIdRegistry;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

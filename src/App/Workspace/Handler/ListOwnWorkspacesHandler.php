@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Handler;
+namespace App\Workspace\Handler;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Workspace\DTO\PaginationMeta;
+use App\Workspace\DTO\WorkspaceResponse;
+use App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
+use App\Workspace\Infrastructure\Service\PaginationService;
+use Core\Http\DTO\HttpResponseMessage;
+use Core\Persistence\Pagination;
+use Core\Serialization\DataType;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Workspace\DTO\PaginationMeta;
-use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
-use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
-use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
-use ownHackathon\Core\Persistence\Pagination;
-use ownHackathon\Core\Serialization\DataType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

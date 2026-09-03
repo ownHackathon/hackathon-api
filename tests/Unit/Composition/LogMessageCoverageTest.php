@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Composition;
 
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Event\Domain\Message\EventLogMessage;
-use ownHackathon\App\Token\Domain\Message\TokenLogMessage;
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
-use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Event\Domain\Message\EventLogMessage;
+use App\Token\Domain\Message\TokenLogMessage;
+use App\Workspace\Domain\Message\WorkspaceLogMessage;
+use Core\SharedKernel\Domain\Message\LogMessage;
 
 use function expect;
 use function test;

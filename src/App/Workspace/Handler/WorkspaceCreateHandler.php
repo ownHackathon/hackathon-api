@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Handler;
+namespace App\Workspace\Handler;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
+use App\Workspace\Domain\Message\WorkspaceLogMessage;
+use App\Workspace\Domain\Message\WorkspaceStatusMessage;
+use App\Workspace\DTO\WorkspaceRequest;
+use App\Workspace\DTO\WorkspaceResponse;
+use Core\Http\DTO\HttpResponseMessage;
+use Core\Http\Exception\HttpDuplicateEntryException;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Helper\UrlHelper;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
-use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\App\Workspace\DTO\WorkspaceResponse;
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

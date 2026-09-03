@@ -6,7 +6,7 @@ chdir(__DIR__ . '/../');
 
 require 'vendor/autoload.php';
 
-use ownHackathon\Core\Observability\LogsPruner;
+use Core\Observability\LogsPruner;
 
 $config = include 'config/config.php';
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Domain;
+namespace App\Token\Domain;
 
-use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
+use Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method Token offsetGet(mixed $offset)

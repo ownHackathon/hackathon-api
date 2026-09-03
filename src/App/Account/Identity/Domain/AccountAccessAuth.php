@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain;
+namespace App\Account\Identity\Domain;
 
+use Core\SharedKernel\Trait\CloneReadonlyClassWith;
+use Core\SharedKernel\Utils\Collectible;
 use DateTimeImmutable;
-use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
-use ownHackathon\Core\SharedKernel\Utils\Collectible;
 
 readonly final class AccountAccessAuth implements AccountAccessAuthInterface, Collectible
 {

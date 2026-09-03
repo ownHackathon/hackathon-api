@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account;
+namespace App\Account;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
-use ownHackathon\App\Account;
+use App\Account;
 
 class ConfigProvider
 {

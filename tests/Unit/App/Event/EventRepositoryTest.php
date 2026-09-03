@@ -3,14 +3,14 @@
 namespace Tests\Unit\App\Event;
 
 use DateTimeImmutable;
-use ownHackathon\App\Event\Domain\Event;
-use ownHackathon\App\Event\Domain\EventCollection;
-use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydratorInterface;
-use ownHackathon\App\Event\Infrastructure\Persistence\Repository\EventRepository;
-use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
+use App\Event\Domain\Event;
+use App\Event\Domain\EventCollection;
+use App\Event\Infrastructure\Hydrator\EventHydratorInterface;
+use App\Event\Infrastructure\Persistence\Repository\EventRepository;
+use App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
+use App\Event\Domain\Enum\EventStatus;
+use App\Policy\Domain\Enum\Visibility;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;

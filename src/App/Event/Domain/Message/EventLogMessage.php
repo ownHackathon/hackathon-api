@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Domain\Message;
+namespace App\Event\Domain\Message;
 
-use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
+use Core\SharedKernel\Domain\Message\LogMessage;
 
 interface EventLogMessage extends LogMessage
 {

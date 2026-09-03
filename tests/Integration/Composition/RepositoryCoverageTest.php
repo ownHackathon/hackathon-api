@@ -4,31 +4,31 @@ namespace Tests\Integration\Composition;
 
 use DateTimeImmutable;
 use Mockery;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\AccountActivation;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepository;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Token\Domain\Token;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
-use ownHackathon\App\Token\Infrastructure\Persistence\Repository\TokenRepository;
-use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use ownHackathon\App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
-use ownHackathon\App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use ownHackathon\Core\Persistence\Pagination;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\AccountActivation;
+use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
+use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
+use App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
+use App\Account\Identity\Infrastructure\Persistence\Repository\AccountAccessAuthRepository;
+use App\Account\Identity\Infrastructure\Persistence\Repository\AccountActivationRepository;
+use App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepository;
+use App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
+use App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
+use App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
+use App\Mailing\Domain\EmailType;
+use App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Token;
+use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
+use App\Token\Infrastructure\Persistence\Repository\TokenRepository;
+use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Domain\Workspace;
+use App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
+use App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
+use App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
+use Core\Persistence\Pagination;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -49,7 +49,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $accountStore->shouldReceive('fetchAll')->andReturn([]);
     $accountHydrator = Mockery::mock(AccountHydratorInterface::class);
     $accountHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $accountHydrator->shouldReceive('hydrateCollection')->andReturn(new \ownHackathon\App\Account\Identity\Domain\AccountCollection());
+    $accountHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Account\Identity\Domain\AccountCollection());
     $accountRepo = new AccountRepository($accountStore, $accountHydrator);
     expect($accountRepo->insert($account))->toBe(1)
         ->and($accountRepo->update($account))->toBeTrue()
@@ -69,7 +69,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $accessStore->shouldReceive('fetchAll')->andReturn([]);
     $accessHydrator = Mockery::mock(AccountAccessAuthHydratorInterface::class);
     $accessHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $accessHydrator->shouldReceive('hydrateCollection')->andReturn(new \ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollection());
+    $accessHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Account\Identity\Domain\AccountAccessAuthCollection());
     $accessRepo = new AccountAccessAuthRepository($accessStore, $accessHydrator);
     expect($accessRepo->insert($auth))->toBe(1)
         ->and($accessRepo->update($auth))->toBeTrue()
@@ -92,7 +92,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $activationStore->shouldReceive('fetchAll')->andReturn([]);
     $activationHydrator = Mockery::mock(AccountActivationHydratorInterface::class);
     $activationHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $activationHydrator->shouldReceive('hydrateCollection')->andReturn(new \ownHackathon\App\Account\Identity\Domain\AccountActivationCollection());
+    $activationHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Account\Identity\Domain\AccountActivationCollection());
     $activationRepo = new AccountActivationRepository($activationStore, $activationHydrator);
     expect($activationRepo->insert($activation))->toBe(1)
         ->and($activationRepo->update($activation))->toBeTrue()
@@ -112,7 +112,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $tokenStore->shouldReceive('fetchAll')->andReturn([]);
     $tokenHydrator = Mockery::mock(TokenHydratorInterface::class);
     $tokenHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $tokenHydrator->shouldReceive('hydrateCollection')->andReturn(new \ownHackathon\App\Token\Domain\TokenCollection());
+    $tokenHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Token\Domain\TokenCollection());
     $tokenRepo = new TokenRepository($tokenStore, $tokenHydrator);
     expect($tokenRepo->insert($token))->toBe(1)
         ->and($tokenRepo->update($token))->toBeTrue()
@@ -133,7 +133,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $workspaceStore->shouldReceive('count')->andReturn(0);
     $workspaceHydrator = Mockery::mock(WorkspaceHydratorInterface::class);
     $workspaceHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $workspaceHydrator->shouldReceive('hydrateCollection')->andReturn(new \ownHackathon\App\Workspace\Domain\WorkspaceCollection());
+    $workspaceHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Workspace\Domain\WorkspaceCollection());
     $workspaceRepo = new WorkspaceRepository($workspaceStore, $workspaceHydrator);
     expect($workspaceRepo->insert($workspace))->toBe(1)
         ->and($workspaceRepo->update($workspace))->toBeTrue()

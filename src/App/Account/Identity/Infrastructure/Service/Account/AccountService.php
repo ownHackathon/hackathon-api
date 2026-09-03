@@ -1,24 +1,24 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
+use App\Mailing\Domain\EmailType;
+use App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Token\Domain\Token;
+use App\Token\Domain\TokenInterface;
+use Core\Http\Exception\HttpUnauthorizedException;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\App\Token\Domain\Token;
-use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly final class AccountService

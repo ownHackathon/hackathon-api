@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware\Account;
+namespace App\Account\Identity\Middleware\Account;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\DTO\Client\ClientIdentification;
+use Core\Http\Middleware\RequestCorrelationMiddleware;
+use Core\Observability\IpMasker;
+use Core\Observability\UserAgentSummarizer;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Mezzio\Router\RouteResult;
 use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
-use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
-use ownHackathon\Core\Observability\IpMasker;
-use ownHackathon\Core\Observability\UserAgentSummarizer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

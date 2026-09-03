@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence\Repository;
+namespace Core\Persistence\Repository;
 
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
-use ownHackathon\Core\Persistence\Store\StoreInterface;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
+use Core\Persistence\Hydrator\HydratorInterface;
+use Core\Persistence\Store\StoreInterface;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 
 readonly abstract class AbstractRepository implements RepositoryInterface
 {

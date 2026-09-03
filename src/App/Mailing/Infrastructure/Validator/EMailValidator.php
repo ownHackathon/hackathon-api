@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing\Infrastructure\Validator;
+namespace App\Mailing\Infrastructure\Validator;
 
+use App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Laminas\InputFilter\InputFilter;
-use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
 
 final class EMailValidator extends InputFilter
 {

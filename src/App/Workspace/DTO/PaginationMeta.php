@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\DTO;
+namespace App\Workspace\DTO;
 
+use Core\Persistence\Pagination;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Persistence\Pagination;
 
 #[OA\Schema(
     title: 'Pagination Meta',

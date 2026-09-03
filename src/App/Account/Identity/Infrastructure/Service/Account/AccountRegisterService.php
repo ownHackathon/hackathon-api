@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
+use App\Account\Identity\Domain\AccountActivation;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
+use App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
+use App\Mailing\Domain\EmailType;
+use Core\Observability\EmailHasher;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountActivation;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\ActivationTokenService;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Observability\EmailHasher;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly final class AccountRegisterService implements AccountRegisterServiceInterface

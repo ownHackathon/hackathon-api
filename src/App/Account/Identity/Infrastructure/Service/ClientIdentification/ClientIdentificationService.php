@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\ClientIdentification;
+namespace App\Account\Identity\Infrastructure\Service\ClientIdentification;
 
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\DTO\Client\ClientIdentificationData;
 
 use function hash;
 use function serialize;

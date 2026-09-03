@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Policy\Domain;
+namespace App\Policy\Domain;
 
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\Enum\Visibility;
 
 interface VisibilityAwareInterface
 {

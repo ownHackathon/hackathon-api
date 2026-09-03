@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Domain;
+namespace App\Token\Domain;
 
+use Core\SharedKernel\Utils\Collection;
 use InvalidArgumentException;
-use ownHackathon\Core\SharedKernel\Utils\Collection;
 
 use function get_debug_type;
 use function sprintf;

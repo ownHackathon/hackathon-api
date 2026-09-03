@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
+namespace App\Account\Identity\Infrastructure\Hydrator;
 
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\AccountAccessAuthCollection;
+use App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Exception;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollection;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\Core\Clock\DateTimeFormat;
 
 readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydratorInterface
 {

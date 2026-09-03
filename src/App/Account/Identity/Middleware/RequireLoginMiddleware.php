@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware;
+namespace App\Account\Identity\Middleware;
 
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
-use ownHackathon\Core\SharedKernel\Domain\Message\StatusMessage;
+use App\Account\Identity\Domain\AccountInterface;
+use Core\Http\Exception\HttpUnauthorizedException;
+use Core\SharedKernel\Domain\Message\LogMessage;
+use Core\SharedKernel\Domain\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http\Handler;
+namespace Core\Http\Handler;
 
+use Core\Serialization\DataType;
+use Core\SharedKernel\Domain\Message\StatusMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
-use ownHackathon\Core\SharedKernel\Domain\Message\StatusMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

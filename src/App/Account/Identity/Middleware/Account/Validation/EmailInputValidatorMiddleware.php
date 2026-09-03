@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware\Account\Validation;
+namespace App\Account\Identity\Middleware\Account\Validation;
 
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Mailing\Exception\InvalidArgumentException;
-use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Mailing\Domain\EmailType;
+use App\Mailing\Exception\InvalidArgumentException;
+use App\Mailing\Infrastructure\Validator\EMailValidator;
+use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

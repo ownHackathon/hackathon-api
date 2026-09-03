@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\App\Mailing\Application\Port\MailerInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Domain\TokenInterface;
+use App\Mailing\Application\Port\MailerInterface;
+use App\Mailing\Domain\EmailType;
+use App\Token\Domain\TokenInterface;
 
 use function sprintf;
 
@@ -37,7 +37,7 @@ readonly class PasswordTokenService
                     Ihr Account bleibt weiterhin mit Ihrem bestehenden Passwort geschützt.
 
                     Mit freundlichen Grüßen,
-                    Ihr Team von ownHackathon\App',
+                    Ihr Team von App',
             $this->projectUri,
             $token->token->toString(),
         );
@@ -55,7 +55,7 @@ readonly class PasswordTokenService
                     können Sie diese Nachricht einfach ignorieren. Ihr Account bleibt weiterhin mit 
                     Ihrem bestehenden Passwort geschützt.</p>
                     <p>Mit freundlichen Grüßen,<br>
-                    Ihr Team von ownHackathon\App</p>',
+                    Ihr Team von App</p>',
             $this->projectUri,
             $token->token->toString(),
         );

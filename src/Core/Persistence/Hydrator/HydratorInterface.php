@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence\Hydrator;
+namespace Core\Persistence\Hydrator;
 
 interface HydratorInterface
 {

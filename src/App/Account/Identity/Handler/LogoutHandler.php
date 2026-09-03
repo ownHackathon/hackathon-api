@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Handler;
+namespace App\Account\Identity\Handler;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Account\Identity\Infrastructure\Service\Account\AccountService;
+use Core\Http\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\EmptyResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountService;
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

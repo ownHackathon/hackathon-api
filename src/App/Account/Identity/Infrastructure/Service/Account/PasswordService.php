@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use ownHackathon\App\Mailing\Domain\EmailType;
+use App\Mailing\Domain\EmailType;
 
 readonly final class PasswordService
 {

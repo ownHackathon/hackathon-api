@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain;
+namespace App\Account\Identity\Domain;
 
 interface AccountCreatorInterface
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use ownHackathon\Core\Persistence\Factory\DatabaseFactory;
-use ownHackathon\Core\Persistence\Factory\QueryFactory;
-use ownHackathon\Core\SharedKernel\Factory\UuidFactory;
-use ownHackathon\Core\Observability\LoggerFactory;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Core\Persistence\Factory\DatabaseFactory;
+use Core\Persistence\Factory\QueryFactory;
+use Core\SharedKernel\Factory\UuidFactory;
+use Core\Observability\LoggerFactory;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
 use Tests\Integration\Mock\ArrayLogger;

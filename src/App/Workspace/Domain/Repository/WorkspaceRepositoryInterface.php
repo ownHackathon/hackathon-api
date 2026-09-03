@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Domain\Repository;
+namespace App\Workspace\Domain\Repository;
 
-use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Persistence\Pagination;
-use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use App\Workspace\Domain\WorkspaceCollectionInterface;
+use App\Workspace\Domain\WorkspaceInterface;
+use Core\Persistence\Pagination;
+use Core\Persistence\Repository\RepositoryInterface;
 
 interface WorkspaceRepositoryInterface extends RepositoryInterface
 {

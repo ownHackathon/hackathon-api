@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Domain;
+namespace App\Event\Domain;
 
-use ownHackathon\Core\SharedKernel\Utils\CollectionInterface;
+use Core\SharedKernel\Utils\CollectionInterface;
 
 /**
  * @method EventInterface offsetGet(mixed $offset)

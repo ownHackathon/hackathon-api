@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware\ClientIdentification;
+namespace App\Account\Identity\Middleware\ClientIdentification;
 
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use App\Account\Identity\DTO\Client\ClientIdentification;
+use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

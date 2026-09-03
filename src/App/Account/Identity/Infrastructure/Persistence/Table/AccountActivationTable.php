@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table;
+namespace App\Account\Identity\Infrastructure\Persistence\Table;
 
+use Core\Persistence\Store\AbstractTable;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use Envms\FluentPDO\Query;
 use Exception;
-use ownHackathon\Core\Persistence\Store\AbstractTable;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use PDOException;
 
 final class AccountActivationTable extends AbstractTable implements AccountActivationStoreInterface

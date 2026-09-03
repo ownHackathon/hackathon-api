@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\DTO;
+namespace App\Workspace\DTO;
 
 readonly final class Workspace
 {

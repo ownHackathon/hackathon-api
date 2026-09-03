@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing\DTO;
+namespace App\Mailing\DTO;
 
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['email'])]
 readonly final class EMail

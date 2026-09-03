@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing\Infrastructure\Factory;
+namespace App\Mailing\Infrastructure\Factory;
 
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Mailing\Infrastructure\Service\EmailService;
+use App\Mailing\Domain\EmailType;
+use App\Mailing\Infrastructure\Service\EmailService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 

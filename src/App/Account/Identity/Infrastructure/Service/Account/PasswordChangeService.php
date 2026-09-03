@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\App\Token\DTO\Token;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Account\AccountPassword;
+use App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Token\DTO\Token;
+use Core\Http\Exception\HttpInvalidArgumentException;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Log\LoggerInterface;
 
 readonly final class PasswordChangeService

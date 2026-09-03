@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence\Factory;
+namespace Core\Persistence\Factory;
 
 use Envms\FluentPDO\Query;
 use PDO;

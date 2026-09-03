@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Migrations;
+namespace Migrations;
 
 use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\Enum\Visibility;
 
 final class Version20260121203207_CreateWorkspaceTable extends AbstractMigration
 {

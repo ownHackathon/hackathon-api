@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Hydrator;
+namespace App\Account\Identity\Infrastructure\Hydrator;
 
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\AccountCollection;
+use App\Account\Identity\Domain\AccountCollectionInterface;
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Mailing\Domain\EmailType;
+use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountCollection;
-use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Clock\DateTimeFormat;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 

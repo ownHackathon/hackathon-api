@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token;
+namespace App\Token;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\Core\Observability\ChannelLoggerFactory;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
-use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
-use ownHackathon\App\Token\Infrastructure\Persistence\Repository\TokenRepository;
-use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use ownHackathon\App\Token\Infrastructure\Persistence\Table\TokenTable;
+use Core\Observability\ChannelLoggerFactory;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
+use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Token\Infrastructure\Hydrator\TokenHydrator;
+use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
+use App\Token\Infrastructure\Persistence\Repository\TokenRepository;
+use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
+use App\Token\Infrastructure\Persistence\Table\TokenTable;
 
 readonly class ConfigProvider
 {

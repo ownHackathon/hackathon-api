@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Domain\Enum;
+namespace App\Event\Domain\Enum;
 
 enum EventStatus: int
 {

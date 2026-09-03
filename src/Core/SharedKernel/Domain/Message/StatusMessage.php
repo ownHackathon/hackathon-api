@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\SharedKernel\Domain\Message;
+namespace Core\SharedKernel\Domain\Message;
 
 interface StatusMessage
 {

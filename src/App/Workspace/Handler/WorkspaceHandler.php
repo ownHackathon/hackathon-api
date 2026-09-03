@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Handler;
+namespace App\Workspace\Handler;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\VisibilityPolicyInterface;
+use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use App\Workspace\DTO\Workspace;
+use Core\Clock\DateTimeFormat;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
-use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Workspace\DTO\Workspace;
-use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

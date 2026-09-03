@@ -3,18 +3,18 @@
 namespace Tests\Unit\Composition;
 
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDto;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
-use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
-use ownHackathon\App\Workspace\DTO\PaginationMeta;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactory;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use App\Account\Identity\DTO\Account\Account as AccountDto;
+use App\Account\Identity\DTO\Account\AccountRegistration;
+use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
+use App\Event\Infrastructure\Hydrator\EventHydrator;
+use App\Mailing\Domain\EmailType;
+use App\Token\Infrastructure\Hydrator\TokenHydrator;
+use App\Workspace\DTO\PaginationMeta;
+use App\Workspace\DTO\WorkspaceRequest;
+use App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
+use Core\SharedKernel\Utils\UuidFactory;
+use App\Policy\Domain\Enum\Visibility;
 use Ramsey\Uuid\Uuid;
 use Psr\Log\LoggerInterface;
 
@@ -32,7 +32,7 @@ test('DTO factories map input values', function (): void {
 });
 
 test('account DTO formats domain dates', function (): void {
-    $account = new \ownHackathon\App\Account\Identity\Domain\Account(
+    $account = new \App\Account\Identity\Domain\Account(
         id: 1,
         uuid: Uuid::fromString(TEST_UUID),
         name: 'Alice',

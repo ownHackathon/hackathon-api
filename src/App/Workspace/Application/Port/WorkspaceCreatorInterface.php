@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Application\Port;
+namespace App\Workspace\Application\Port;
 
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
+use App\Account\Identity\Domain\AccountInterface;
+use App\Workspace\Domain\WorkspaceInterface;
+use App\Workspace\DTO\WorkspaceRequest;
 
 interface WorkspaceCreatorInterface
 {

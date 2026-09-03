@@ -1,21 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
+use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
+use App\Account\Identity\Domain\Exception\SecurityBreachException;
+use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Client\ClientIdentification;
+use App\Account\Identity\DTO\Token\AccessToken;
+use App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Token\Infrastructure\Token\JwtTokenTrait;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Firebase\JWT\JWT;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
-use ownHackathon\App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
-use ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
-use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
-use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Token\Infrastructure\Token\JwtTokenTrait;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 
 use function time;
 

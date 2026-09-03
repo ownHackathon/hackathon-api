@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Infrastructure\Persistence\Table;
+namespace App\Event\Infrastructure\Persistence\Table;
 
-use ownHackathon\Core\Persistence\Store\StoreInterface;
+use Core\Persistence\Store\StoreInterface;
 
 interface EventStoreInterface extends StoreInterface
 {

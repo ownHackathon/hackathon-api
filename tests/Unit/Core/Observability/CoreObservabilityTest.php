@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Core\Observability;
 
-use ownHackathon\Core\Observability\ChannelLoggerFactory;
-use ownHackathon\Core\Observability\EmailHasher;
-use ownHackathon\Core\Observability\IpMasker;
-use ownHackathon\Core\Observability\LoggerFactory;
-use ownHackathon\Core\Observability\LogsPruner;
-use ownHackathon\Core\Observability\UserAgentSummarizer;
+use Core\Observability\ChannelLoggerFactory;
+use Core\Observability\EmailHasher;
+use Core\Observability\IpMasker;
+use Core\Observability\LoggerFactory;
+use Core\Observability\LogsPruner;
+use Core\Observability\UserAgentSummarizer;
 use Psr\Log\LoggerInterface;
 
 use function bin2hex;

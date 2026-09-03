@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Observability;
+namespace Core\Observability;
 
 final class CorrelationIdRegistry
 {

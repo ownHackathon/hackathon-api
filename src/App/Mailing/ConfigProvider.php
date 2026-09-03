@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing;
+namespace App\Mailing;
 
-use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\App\Mailing\Infrastructure\Factory\MailFactory;
-use ownHackathon\App\Mailing\Infrastructure\Factory\EmailServiceFactory;
-use ownHackathon\App\Mailing\Infrastructure\Service\EmailService;
-use ownHackathon\App\Mailing\Application\Port\MailerInterface;
+use App\Mailing\Infrastructure\Validator\Input\EmailInput;
+use App\Mailing\Infrastructure\Factory\MailFactory;
+use App\Mailing\Infrastructure\Factory\EmailServiceFactory;
+use App\Mailing\Infrastructure\Service\EmailService;
+use App\Mailing\Application\Port\MailerInterface;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 readonly class ConfigProvider

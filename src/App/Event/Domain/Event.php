@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Domain;
+namespace App\Event\Domain;
 
+use App\Event\Domain\Enum\EventStatus;
+use App\Policy\Domain\Enum\Visibility;
+use Core\SharedKernel\Trait\CloneReadonlyClassWith;
+use Core\SharedKernel\Utils\Collectible;
 use DateTimeImmutable;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
-use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
 readonly final class Event implements EventInterface, Collectible

@@ -33,7 +33,7 @@ $aggregator = new ConfigAggregator([
         return [];
     },
     // Default App module config
-    \ownHackathon\ConfigProvider::class,
+    \HackathonApi\ConfigProvider::class,
 
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):

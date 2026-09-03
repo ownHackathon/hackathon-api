@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\App\Mailing;
 
-use ownHackathon\App\Mailing\Domain\EmailType;
+use App\Mailing\Domain\EmailType;
 
 use function expect;
 use function test;
@@ -13,5 +13,5 @@ test('email type supports factories and serialization', function (): void {
         ->and($email->__serialize())->toBe(['string' => 'person@example.org'])
         ->and($email->jsonSerialize())->toBe('person@example.org')
         ->and(fn (): EmailType => new EmailType('not-an-email'))
-        ->toThrow(\ownHackathon\App\Mailing\Exception\InvalidArgumentException::class);
+        ->toThrow(\App\Mailing\Exception\InvalidArgumentException::class);
 });

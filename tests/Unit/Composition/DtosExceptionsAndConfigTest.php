@@ -2,27 +2,28 @@
 
 namespace Tests\Unit\Composition;
 
-use ownHackathon\App\Account\ConfigProvider as AccountConfigProvider;
-use ownHackathon\App\Account\Identity\ConfigProvider as IdentityConfigProvider;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountPassword;
-use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
-use ownHackathon\App\Account\Identity\DTO\Response\AuthenticationResponse;
-use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
-use ownHackathon\App\Account\Identity\DTO\Token\AccountPasswordToken;
-use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Event\ConfigProvider as EventConfigProvider;
-use ownHackathon\Core\Http\ConfigProvider as HttpConfigProvider;
-use ownHackathon\Core\Http\DTO\HttpResponseMessage;
-use ownHackathon\App\Mailing\ConfigProvider as MailingConfigProvider;
-use ownHackathon\App\Mailing\DTO\EMail;
-use ownHackathon\App\Token\ConfigProvider as TokenConfigProvider;
-use ownHackathon\App\Token\DTO\Token;
-use ownHackathon\App\Workspace\ConfigProvider as WorkspaceConfigProvider;
-use ownHackathon\App\Workspace\DTO\Workspace;
-use ownHackathon\App\Workspace\DTO\WorkspaceList;
-use ownHackathon\Core\ConfigProvider as CoreConfigProvider;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use App\Account\ConfigProvider as AccountConfigProvider;
+use App\Account\Identity\ConfigProvider as IdentityConfigProvider;
+use App\Account\Identity\DTO\Account\AccountPassword;
+use App\Account\Identity\DTO\Account\AuthenticationRequest;
+use App\Account\Identity\DTO\Response\AuthenticationResponse;
+use App\Account\Identity\DTO\Token\AccessToken;
+use App\Account\Identity\DTO\Token\AccountPasswordToken;
+use App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Event\ConfigProvider as EventConfigProvider;
+use Core\Http\ConfigProvider as HttpConfigProvider;
+use Core\Http\DTO\HttpResponseMessage;
+use App\Mailing\ConfigProvider as MailingConfigProvider;
+use App\Mailing\DTO\EMail;
+use App\Token\ConfigProvider as TokenConfigProvider;
+use App\Token\DTO\Token;
+use App\Workspace\ConfigProvider as WorkspaceConfigProvider;
+use App\Workspace\DTO\Workspace;
+use App\Workspace\DTO\WorkspaceList;
+use Core\ConfigProvider as CoreConfigProvider;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use HackathonApi\ConfigProvider as RootConfigProvider;
 
 use function expect;
 use function test;
@@ -43,7 +44,7 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
     expect($config->duration)->toBe(60);
     expect(Workspace::fromArray([
         'name' => 'Team', 'owner' => 'Alice', 'ownerUuid' => 'owner', 'details' => null,
-        'visibility' => \ownHackathon\App\Policy\Domain\Enum\Visibility::PUBLIC->value, 'createdAt' => 'created', 'updatedAt' => 'updated',
+        'visibility' => \App\Policy\Domain\Enum\Visibility::PUBLIC->value, 'createdAt' => 'created', 'updatedAt' => 'updated',
     ])->description)->toBe('');
     expect(WorkspaceList::fromArray(['one'])->workspaces)->toBe(['one']);
     expect(AuthenticationResponse::from(new AccessToken('a'), new RefreshToken('r')))
@@ -51,7 +52,7 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
 });
 
 test('domain exceptions retain their diagnostic values', function (): void {
-    $exception = new \ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException('expected', 'actual', 'browser', 'other');
+    $exception = new \App\Account\Identity\Domain\Exception\SecurityBreachException('expected', 'actual', 'browser', 'other');
     expect($exception->expectedClientHash)->toBe('expected')
         ->and($exception->actualUserAgent)->toBe('other');
 
@@ -63,7 +64,7 @@ test('all module config providers expose their public configuration methods', fu
     $providers = [
         new AccountConfigProvider(), new IdentityConfigProvider(), new EventConfigProvider(),
         new HttpConfigProvider(), new MailingConfigProvider(), new TokenConfigProvider(),
-        new WorkspaceConfigProvider(), new CoreConfigProvider(), new \ownHackathon\ConfigProvider(),
+        new WorkspaceConfigProvider(), new CoreConfigProvider(), new RootConfigProvider(),
     ];
     foreach ($providers as $provider) {
         expect($provider())->toBeArray();

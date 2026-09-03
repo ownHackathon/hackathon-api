@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain\Message;
+namespace App\Account\Identity\Domain\Message;
 
-use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
+use Core\SharedKernel\Domain\Message\LogMessage;
 
 interface IdentityLogMessage extends LogMessage
 {

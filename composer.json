@@ -1,5 +1,5 @@
 {
-  "name": "ownhackathon/hackathon-api",
+  "name": "hackathon-api/hackathon-api",
   "description": "Evaluation project for self-created hackathon",
   "type": "project",
   "license": "BSD-3-Clause",
@@ -7,11 +7,11 @@
     "Hackathon",
     "OpenSource"
   ],
-  "homepage": "https://github.com/ownHackathon",
+  "homepage": "https://github.com/hackathon-api",
   "support": {
-    "docs": "https://github.com/ownHackathon",
-    "issues": "https://github.com/ownHackathon/hackathon-api/issues",
-    "source": "https://github.com/ownHackathon/hackathon-api"
+    "docs": "https://github.com/hackathon-api",
+    "issues": "https://github.com/hackathon-api/hackathon-api/issues",
+    "source": "https://github.com/hackathon-api/hackathon-api"
   },
   "config": {
     "allow-plugins": {
@@ -81,21 +81,21 @@
   },
   "autoload": {
     "psr-4": {
-      "ownHackathon\\App\\Account\\Identity\\": "src/App/Account/Identity/",
-      "ownHackathon\\App\\Event\\": "src/App/Event/",
-      "ownHackathon\\App\\Mailing\\": "src/App/Mailing/",
-      "ownHackathon\\App\\Policy\\": "src/App/Policy/",
-      "ownHackathon\\App\\Token\\": "src/App/Token/",
-      "ownHackathon\\App\\Workspace\\": "src/App/Workspace/",
-      "ownHackathon\\Core\\Clock\\": "src/Core/Clock/",
-      "ownHackathon\\Core\\Http\\": "src/Core/Http/",
-      "ownHackathon\\Core\\Observability\\": "src/Core/Observability/",
-      "ownHackathon\\Core\\Persistence\\": "src/Core/Persistence/",
-      "ownHackathon\\Core\\Serialization\\": "src/Core/Serialization/",
-      "ownHackathon\\Core\\SharedKernel\\": "src/Core/SharedKernel/",
-      "ownHackathon\\App\\": "src/App/",
-      "ownHackathon\\Core\\": "src/Core/",
-      "ownHackathon\\": "src/"
+      "App\\Account\\Identity\\": "src/App/Account/Identity/",
+      "App\\Event\\": "src/App/Event/",
+      "App\\Mailing\\": "src/App/Mailing/",
+      "App\\Policy\\": "src/App/Policy/",
+      "App\\Token\\": "src/App/Token/",
+      "App\\Workspace\\": "src/App/Workspace/",
+      "Core\\Clock\\": "src/Core/Clock/",
+      "Core\\Http\\": "src/Core/Http/",
+      "Core\\Observability\\": "src/Core/Observability/",
+      "Core\\Persistence\\": "src/Core/Persistence/",
+      "Core\\Serialization\\": "src/Core/Serialization/",
+      "Core\\SharedKernel\\": "src/Core/SharedKernel/",
+      "App\\": "src/App/",
+      "Core\\": "src/Core/",
+      "HackathonApi\\": "src/"
     }
   },
   "autoload-dev": {

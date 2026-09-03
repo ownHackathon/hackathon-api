@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Infrastructure\Hydrator;
+namespace App\Token\Infrastructure\Hydrator;
 
-use ownHackathon\App\Token\Domain\TokenCollectionInterface;
-use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
+use App\Token\Domain\TokenCollectionInterface;
+use App\Token\Domain\TokenInterface;
+use Core\Persistence\Hydrator\HydratorInterface;
 
 interface TokenHydratorInterface extends HydratorInterface
 {

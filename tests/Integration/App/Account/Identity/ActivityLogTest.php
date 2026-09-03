@@ -2,8 +2,8 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\Core\Http\Enum\RouteIdent;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use Core\Http\Enum\RouteIdent;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 use Tests\Integration\Mock\ArrayLogger;
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain\Exception;
+namespace App\Account\Identity\Domain\Exception;
 
 use Exception;
 

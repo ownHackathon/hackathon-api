@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\DTO\Account;
+namespace App\Account\Identity\DTO\Account;
 
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['email', 'password'])]
 readonly final class AuthenticationRequest

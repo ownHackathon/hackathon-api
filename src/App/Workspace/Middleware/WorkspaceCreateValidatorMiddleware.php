@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Middleware;
+namespace App\Workspace\Middleware;
 
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceStatusMessage;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
+use App\Workspace\Domain\Message\WorkspaceLogMessage;
+use App\Workspace\Domain\Message\WorkspaceStatusMessage;
+use App\Workspace\DTO\WorkspaceRequest;
+use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

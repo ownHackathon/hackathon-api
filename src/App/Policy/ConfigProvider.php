@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Policy;
+namespace App\Policy;
 
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use ownHackathon\App\Policy\Domain\VisibilityPolicy;
-use ownHackathon\App\Policy\Domain\VisibilityPolicyInterface;
-use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
+use App\Policy\Domain\VisibilityPolicy;
+use App\Policy\Domain\VisibilityPolicyInterface;
+use App\Policy\Http\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {

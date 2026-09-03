@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
+namespace App\Account\Identity\Infrastructure\Validator;
 
+use App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use Laminas\InputFilter\InputFilter;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 
 final class PasswordValidator extends InputFilter
 {

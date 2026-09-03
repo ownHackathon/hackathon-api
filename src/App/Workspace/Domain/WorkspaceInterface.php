@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Domain;
+namespace App\Workspace\Domain;
 
+use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\VisibilityAwareInterface;
 use DateTimeImmutable;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Policy\Domain\VisibilityAwareInterface;
 use Ramsey\Uuid\UuidInterface;
 
 interface WorkspaceInterface extends VisibilityAwareInterface

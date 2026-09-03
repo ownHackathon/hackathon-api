@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence;
+namespace Core\Persistence;
 
 use Envms\FluentPDO\Query;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
+use Core\Persistence\Middleware\FluentTransactionMiddleware;
 
 class ConfigProvider
 {

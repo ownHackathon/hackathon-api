@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware\Token;
+namespace App\Account\Identity\Middleware\Token;
 
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\DTO\Client\ClientIdentification;
+use Core\Http\Exception\HttpUnauthorizedException;
 use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

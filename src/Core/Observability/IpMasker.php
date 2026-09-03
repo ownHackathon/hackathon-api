@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Observability;
+namespace Core\Observability;
 
 use function filter_var;
 use function str_contains;

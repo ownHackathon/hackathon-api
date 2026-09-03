@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Account\Identity\DTO\Token\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
 
 readonly final class AccessTokenServiceFactory

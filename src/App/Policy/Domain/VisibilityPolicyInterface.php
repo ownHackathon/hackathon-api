@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Policy\Domain;
+namespace App\Policy\Domain;
 
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Domain\AccountInterface;
 
 interface VisibilityPolicyInterface
 {

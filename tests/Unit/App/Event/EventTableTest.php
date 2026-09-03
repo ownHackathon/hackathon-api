@@ -4,7 +4,7 @@ namespace Tests\Unit\App\Event;
 
 use Envms\FluentPDO\Query;
 use Envms\FluentPDO\Queries\Insert;
-use ownHackathon\App\Event\Infrastructure\Persistence\Table\EventTable;
+use App\Event\Infrastructure\Persistence\Table\EventTable;
 
 use function expect;
 use function test;

@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Infrastructure\Hydrator;
+namespace App\Token\Infrastructure\Hydrator;
 
+use App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Message\TokenLogMessage;
+use App\Token\Domain\Token;
+use App\Token\Domain\TokenCollection;
+use App\Token\Domain\TokenCollectionInterface;
+use App\Token\Domain\TokenInterface;
+use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Token\Domain\Message\TokenLogMessage;
-use ownHackathon\App\Token\Domain\Token;
-use ownHackathon\App\Token\Domain\TokenCollection;
-use ownHackathon\App\Token\Domain\TokenCollectionInterface;
-use ownHackathon\App\Token\Domain\TokenInterface;
-use ownHackathon\Core\Clock\DateTimeFormat;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 

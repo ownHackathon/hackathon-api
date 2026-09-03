@@ -14,14 +14,14 @@ use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
-use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
-use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
+use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
+use App\Account\Identity\Middleware\Account\LastActivityUpdaterMiddleware;
+use App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use Core\Http\Middleware\ApiErrorHandlerMiddleware;
+use Core\Http\Middleware\RequestCorrelationMiddleware;
+use Core\Http\Middleware\RequestLoggingMiddleware;
+use Core\Http\Middleware\RouteNotFoundMiddleware;
 use Psr\Container\ContainerInterface;
 
 /**

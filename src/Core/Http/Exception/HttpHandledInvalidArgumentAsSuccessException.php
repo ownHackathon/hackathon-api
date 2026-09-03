@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http\Exception;
+namespace Core\Http\Exception;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Monolog\Level;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Domain\Message;
+namespace App\Workspace\Domain\Message;
 
-use ownHackathon\Core\SharedKernel\Domain\Message\StatusMessage;
+use Core\SharedKernel\Domain\Message\StatusMessage;
 
 interface WorkspaceStatusMessage extends StatusMessage
 {

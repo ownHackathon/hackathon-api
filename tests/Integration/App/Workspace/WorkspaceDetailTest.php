@@ -4,11 +4,11 @@ namespace Tests\Integration\App\Workspace;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Ramsey\Uuid\Uuid;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Tests\Integration\App\Factory\AccountFactory;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;
 use Tests\Integration\JsonFactory;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\Enum\Visibility;
 
 use function array_keys;
 use function expect;

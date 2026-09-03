@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http;
+namespace Core\Http;
 
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use ownHackathon\Core\Http\Factory\ErrorResponseFactory;
-use ownHackathon\Core\Http\Handler\PingHandler;
-use ownHackathon\Core\Http\Handler\SwaggerUIHandler;
-use ownHackathon\Core\Http\Middleware\ApiErrorHandlerMiddleware;
-use ownHackathon\Core\Http\Middleware\PaginationMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestCorrelationMiddleware;
-use ownHackathon\Core\Http\Middleware\RequestLoggingMiddleware;
-use ownHackathon\Core\Http\Middleware\RouteNotFoundMiddleware;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Core\Http\Factory\ErrorResponseFactory;
+use Core\Http\Handler\PingHandler;
+use Core\Http\Handler\SwaggerUIHandler;
+use Core\Http\Middleware\ApiErrorHandlerMiddleware;
+use Core\Http\Middleware\PaginationMiddleware;
+use Core\Http\Middleware\RequestCorrelationMiddleware;
+use Core\Http\Middleware\RequestLoggingMiddleware;
+use Core\Http\Middleware\RouteNotFoundMiddleware;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 

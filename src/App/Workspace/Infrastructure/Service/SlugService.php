@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Infrastructure\Service;
+namespace App\Workspace\Infrastructure\Service;
 
 use function str_replace;
 use function strtolower;

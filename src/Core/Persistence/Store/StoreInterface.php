@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Persistence\Store;
+namespace Core\Persistence\Store;
 
-use ownHackathon\Core\Persistence\Pagination;
+use Core\Persistence\Pagination;
 
 interface StoreInterface
 {

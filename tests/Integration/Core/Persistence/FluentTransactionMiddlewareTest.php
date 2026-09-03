@@ -5,7 +5,7 @@ namespace Tests\Integration\Core\Persistence;
 use Envms\FluentPDO\Query;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\Diactoros\Response\EmptyResponse;
-use ownHackathon\Core\Persistence\Middleware\FluentTransactionMiddleware;
+use Core\Persistence\Middleware\FluentTransactionMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

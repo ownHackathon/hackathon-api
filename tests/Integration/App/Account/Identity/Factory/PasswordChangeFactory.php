@@ -4,7 +4,7 @@ namespace Tests\Integration\App\Account\Identity\Factory;
 
 use Envms\FluentPDO\Query;
 use Faker\Factory as Faker;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
+use App\Token\Domain\Enum\TokenType;
 
 readonly class PasswordChangeFactory
 {

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\DTO\Response;
+namespace App\Account\Identity\DTO\Response;
 
+use App\Account\Identity\DTO\Token\AccessToken;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\DTO\Token\AccessToken;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['accessToken', 'refreshToken'])]
 readonly final class AuthenticationResponse

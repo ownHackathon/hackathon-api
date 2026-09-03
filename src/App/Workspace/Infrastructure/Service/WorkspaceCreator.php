@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Infrastructure\Service;
+namespace App\Workspace\Infrastructure\Service;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
+use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use App\Workspace\Domain\Workspace;
+use App\Workspace\DTO\WorkspaceRequest;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Workspace\Application\Port\WorkspaceCreatorInterface;
-use ownHackathon\App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
-use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\DTO\WorkspaceRequest;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 
 readonly final class WorkspaceCreator implements WorkspaceCreatorInterface
 {

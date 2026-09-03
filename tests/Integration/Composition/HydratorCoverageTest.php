@@ -3,18 +3,18 @@
 namespace Tests\Integration\Composition;
 
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
-use ownHackathon\App\Event\Infrastructure\Hydrator\EventHydrator;
-use ownHackathon\App\Token\Infrastructure\Hydrator\TokenHydrator;
-use ownHackathon\App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Event\Domain\Enum\EventStatus;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
+use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
+use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
+use App\Event\Infrastructure\Hydrator\EventHydrator;
+use App\Token\Infrastructure\Hydrator\TokenHydrator;
+use App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
+use App\Policy\Domain\Enum\Visibility;
+use App\Event\Domain\Enum\EventStatus;
+use App\Token\Domain\Enum\TokenType;
+use App\Mailing\Domain\EmailType;
+use Core\Clock\DateTimeFormat;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 use function expect;
@@ -117,5 +117,5 @@ test('email value object supports all serialization forms and rejects invalid va
     $restored = new EmailType('old@example.com');
     $restored->unserialize('new@example.com');
     expect($restored->toString())->toBe('new@example.com');
-    expect(fn() => new EmailType('invalid'))->toThrow(\ownHackathon\App\Mailing\Exception\InvalidArgumentException::class);
+    expect(fn() => new EmailType('invalid'))->toThrow(\App\Mailing\Exception\InvalidArgumentException::class);
 });

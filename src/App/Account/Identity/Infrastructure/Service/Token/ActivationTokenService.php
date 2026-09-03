@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\App\Mailing\Application\Port\MailerInterface;
+use App\Account\Identity\Domain\AccountActivationInterface;
+use App\Mailing\Application\Port\MailerInterface;
 
 use function sprintf;
 
@@ -19,7 +19,7 @@ readonly final class ActivationTokenService
     {
         $text = sprintf(
             'Hallo!
-                    Vielen Dank für Ihr Interesse an ownHackathon\App.
+                    Vielen Dank für Ihr Interesse an App.
 
                     Sie haben eine Registrierung mit dieser E-Mail-Adresse angefordert.
                     Um den Vorgang abzuschließen und Ihr Benutzerkonto zu erstellen,
@@ -33,14 +33,14 @@ readonly final class ActivationTokenService
                     Es wird in diesem Fall kein Konto erstellt und Ihre E-Mail-Adresse wird nicht bei uns gespeichert.
 
                     Mit freundlichen Grüßen,
-                    Ihr Team von ownHackathon\App',
+                    Ihr Team von App',
             $this->projectUri,
             $activation->token->toString(),
         );
 
         $html = sprintf(
             '<p>Hallo!</p>
-                    <p>Vielen Dank für Ihr Interesse an ownHackathon\App.</p>
+                    <p>Vielen Dank für Ihr Interesse an App.</p>
                     <p>Sie haben eine Registrierung mit dieser E-Mail-Adresse angefordert.
                     Um den Vorgang abzuschließen und Ihr Benutzerkonto zu erstellen,
                     bestätigen Sie bitte Ihre E-Mail-Adresse über den folgenden Link:</p>
@@ -50,7 +50,7 @@ readonly final class ActivationTokenService
                     <p>Falls Sie diese Anfrage nicht selbst gestellt haben, können Sie diese Nachricht einfach ignorieren.
                     Es wird in diesem Fall kein Konto erstellt und Ihre E-Mail-Adresse wird nicht dauerhaft bei uns gespeichert.</p>
                     <p>Mit freundlichen Grüßen,<br>
-                    Ihr Team von ownHackathon\App</p>',
+                    Ihr Team von App</p>',
             $this->projectUri,
             $activation->token->toString(),
         );

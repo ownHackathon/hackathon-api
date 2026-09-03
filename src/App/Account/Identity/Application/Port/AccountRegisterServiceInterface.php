@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Application\Port;
+namespace App\Account\Identity\Application\Port;
 
-use ownHackathon\App\Mailing\Domain\EmailType;
+use App\Mailing\Domain\EmailType;
 
 interface AccountRegisterServiceInterface
 {

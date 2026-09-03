@@ -3,18 +3,18 @@
 namespace Tests\Unit\App\Account;
 
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Account\AccountService;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use ownHackathon\App\Account\Identity\DTO\Token\RefreshToken;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\App\Token\Domain\Repository\TokenRepositoryInterface;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Infrastructure\Service\Account\AccountService;
+use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
+use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Mailing\Domain\EmailType;
+use App\Token\Domain\Repository\TokenRepositoryInterface;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -93,11 +93,11 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));
     })
-        ->toThrow(\ownHackathon\Core\Http\Exception\HttpUnauthorizedException::class);
+        ->toThrow(\Core\Http\Exception\HttpUnauthorizedException::class);
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));
     })
-        ->toThrow(\ownHackathon\Core\Http\Exception\HttpUnauthorizedException::class);
+        ->toThrow(\Core\Http\Exception\HttpUnauthorizedException::class);
 });
 
 test('password mismatch exception keeps its email', function (): void {

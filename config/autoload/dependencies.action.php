@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-use ownHackathon\Core\Persistence\Factory\DatabaseFactory;
-use ownHackathon\Core\Persistence\Factory\QueryFactory;
-use ownHackathon\Core\SharedKernel\Factory\UuidFactory;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
+use Core\Persistence\Factory\DatabaseFactory;
+use Core\Persistence\Factory\QueryFactory;
+use Core\SharedKernel\Factory\UuidFactory;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Tests\Integration\Mock\NullLoggerFactory;
 use Tests\Integration\Mock\NullMailerFactory;
 use Tests\Integration\Mock\ArrayLogger;

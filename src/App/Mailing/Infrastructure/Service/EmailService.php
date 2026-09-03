@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing\Infrastructure\Service;
+namespace App\Mailing\Infrastructure\Service;
 
-use ownHackathon\App\Mailing\Application\Port\MailerInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
+use App\Mailing\Application\Port\MailerInterface;
+use App\Mailing\Domain\EmailType;
 use Symfony\Component\Mailer\MailerInterface as SymfonyMailerInterface;
 use Symfony\Component\Mime\Email;
 

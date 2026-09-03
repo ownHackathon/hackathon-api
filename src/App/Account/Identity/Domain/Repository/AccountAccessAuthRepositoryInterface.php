@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain\Repository;
+namespace App\Account\Identity\Domain\Repository;
 
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use Core\Persistence\Repository\RepositoryInterface;
 
 interface AccountAccessAuthRepositoryInterface extends RepositoryInterface
 {

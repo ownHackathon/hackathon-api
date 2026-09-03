@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Middleware;
+namespace App\Account\Identity\Middleware;
 
+use App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use App\Account\Identity\Domain\Exception\DuplicateAuthException;
+use App\Account\Identity\Domain\Exception\DuplicateEMailException;
+use App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
+use App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use App\Account\Identity\Domain\Exception\SecurityBreachException;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use Core\Http\Exception\HttpDuplicateEntryException;
+use Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
+use Core\Http\Exception\HttpUnauthorizedException;
+use Core\Observability\EmailHasher;
 use Monolog\Level;
-use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
-use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
-use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateEMailException;
-use ownHackathon\App\Account\Identity\Domain\Exception\InvalidRefreshTokenException;
-use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
-use ownHackathon\App\Account\Identity\Domain\Exception\SecurityBreachException;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
-use ownHackathon\Core\Observability\EmailHasher;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain;
+namespace App\Account\Identity\Domain;
 
+use App\Mailing\Domain\EmailType;
+use Core\SharedKernel\Trait\CloneReadonlyClassWith;
+use Core\SharedKernel\Utils\Collectible;
 use DateTimeImmutable;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\SharedKernel\Trait\CloneReadonlyClassWith;
-use ownHackathon\Core\SharedKernel\Utils\Collectible;
 use Ramsey\Uuid\UuidInterface;
 
 readonly final class Account implements AccountInterface, Collectible

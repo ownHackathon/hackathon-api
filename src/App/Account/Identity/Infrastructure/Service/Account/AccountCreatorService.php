@@ -1,22 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Account\Account as AccountDTO;
+use App\Account\Identity\DTO\Account\AccountRegistration;
+use Core\Http\Exception\HttpDuplicateEntryException;
+use Core\Http\Exception\HttpInvalidArgumentException;
+use Core\Observability\EmailHasher;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use InvalidArgumentException;
-use ownHackathon\App\Account\Identity\Domain\Account;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\DTO\Account\Account as AccountDTO;
-use ownHackathon\App\Account\Identity\DTO\Account\AccountRegistration;
-use ownHackathon\Core\Http\Exception\HttpDuplicateEntryException;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Observability\EmailHasher;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly final class AccountCreatorService

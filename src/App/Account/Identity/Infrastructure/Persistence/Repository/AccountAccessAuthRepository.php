@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Persistence\Repository;
+namespace App\Account\Identity\Infrastructure\Persistence\Repository;
 
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuthInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
-use ownHackathon\App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
-use ownHackathon\Core\Persistence\Hydrator\HydratorInterface;
-use ownHackathon\Core\Persistence\Repository\AbstractRepository;
-use ownHackathon\Core\Persistence\Store\StoreInterface;
+use App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
+use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
+use App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
+use Core\Persistence\Hydrator\HydratorInterface;
+use Core\Persistence\Repository\AbstractRepository;
+use Core\Persistence\Store\StoreInterface;
 
 readonly final class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
 {

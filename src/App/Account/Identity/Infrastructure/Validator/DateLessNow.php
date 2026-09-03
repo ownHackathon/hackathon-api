@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Validator;
+namespace App\Account\Identity\Infrastructure\Validator;
 
 use DateTime;
 use Exception;

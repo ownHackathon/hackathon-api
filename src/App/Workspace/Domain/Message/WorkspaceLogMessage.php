@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Domain\Message;
+namespace App\Workspace\Domain\Message;
 
-use ownHackathon\Core\SharedKernel\Domain\Message\LogMessage;
+use Core\SharedKernel\Domain\Message\LogMessage;
 
 interface WorkspaceLogMessage extends LogMessage
 {

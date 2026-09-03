@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Factory;
+namespace App\Account\Identity\Infrastructure\Factory;
 
 use Psr\Container\ContainerInterface;
 

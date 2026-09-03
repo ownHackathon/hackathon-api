@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication;
+namespace App\Account\Identity\Infrastructure\Service\Authentication;
 
 readonly final class AuthenticationService
 {

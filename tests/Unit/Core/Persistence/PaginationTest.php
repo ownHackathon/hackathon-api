@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Core\Persistence;
 
-use ownHackathon\Core\Persistence\Pagination;
+use Core\Persistence\Pagination;
 
 use function expect;
 use function test;

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Mailing\Domain;
+namespace App\Mailing\Domain;
 
-use ownHackathon\App\Mailing\Exception\InvalidArgumentException;
+use App\Mailing\Exception\InvalidArgumentException;
 
 use function sprintf;
 
-final class EmailType implements \ownHackathon\Core\SharedKernel\Type\TypeInterface
+final class EmailType implements \Core\SharedKernel\Type\TypeInterface
 {
     private string $value;
 

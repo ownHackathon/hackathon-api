@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Token\Domain;
+namespace App\Token\Domain;
 
+use App\Token\Domain\Enum\TokenType;
 use DateTimeImmutable;
-use ownHackathon\App\Token\Domain\Enum\TokenType;
 use Ramsey\Uuid\UuidInterface;
 
 interface TokenInterface

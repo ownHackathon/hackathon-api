@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\DTO;
+namespace App\Workspace\DTO;
 
+use App\Policy\Domain\Enum\Visibility;
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['name', 'visibility'])]
 readonly final class WorkspaceRequest

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http\DTO;
+namespace Core\Http\DTO;
 
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['statusCode', 'message'])]
 readonly final class HttpResponseMessage

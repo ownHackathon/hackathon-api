@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain\Repository;
+namespace App\Account\Identity\Domain\Repository;
 
-use ownHackathon\App\Account\Identity\Domain\AccountCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use App\Account\Identity\Domain\AccountCollectionInterface;
+use App\Account\Identity\Domain\AccountInterface;
+use App\Mailing\Domain\EmailType;
+use Core\Persistence\Repository\RepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
 interface AccountRepositoryInterface extends RepositoryInterface

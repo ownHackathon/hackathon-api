@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Http\Middleware;
+namespace Core\Http\Middleware;
 
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Monolog\Level;

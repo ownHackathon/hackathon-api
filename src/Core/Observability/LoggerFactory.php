@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Observability;
+namespace Core\Observability;
 
 use DateTime;
 use Monolog\Formatter\FormatterInterface;

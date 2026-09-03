@@ -8,8 +8,8 @@ use Envms\FluentPDO\Queries\Insert;
 use Envms\FluentPDO\Queries\Select;
 use Envms\FluentPDO\Queries\Update;
 use InvalidArgumentException;
-use ownHackathon\Core\Persistence\Store\AbstractTable;
-use ownHackathon\Core\Persistence\Factory\DatabaseFactory;
+use Core\Persistence\Store\AbstractTable;
+use Core\Persistence\Factory\DatabaseFactory;
 use PDOException;
 
 use function expect;

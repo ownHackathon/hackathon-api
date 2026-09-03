@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\Core\Observability;
+namespace Core\Observability;
 
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;

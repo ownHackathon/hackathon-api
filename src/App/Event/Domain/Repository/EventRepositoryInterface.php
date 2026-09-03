@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Event\Domain\Repository;
+namespace App\Event\Domain\Repository;
 
-use ownHackathon\App\Event\Domain\EventCollectionInterface;
-use ownHackathon\App\Event\Domain\EventInterface;
-use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use App\Event\Domain\EventCollectionInterface;
+use App\Event\Domain\EventInterface;
+use Core\Persistence\Repository\RepositoryInterface;
 
 interface EventRepositoryInterface extends RepositoryInterface
 {

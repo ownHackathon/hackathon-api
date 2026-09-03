@@ -3,9 +3,9 @@
 namespace Tests\Integration\App\Workspace\Factory;
 
 use Envms\FluentPDO\Query;
-use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
+use App\Workspace\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
+use App\Policy\Domain\Enum\Visibility;
 use Tests\Integration\App\Factory\AccountFactory;
 
 class CreateWorkspacesFactory

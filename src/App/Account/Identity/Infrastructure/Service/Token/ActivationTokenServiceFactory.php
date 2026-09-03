@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Token;
+namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use ownHackathon\App\Mailing\Application\Port\MailerInterface;
+use App\Mailing\Application\Port\MailerInterface;
 use Psr\Container\ContainerInterface;
 
 readonly final class ActivationTokenServiceFactory

@@ -1,25 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Infrastructure\Service\Account;
+namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Domain\AccountAccessAuth;
+use App\Account\Identity\Domain\Exception\AccountNotFoundException;
+use App\Account\Identity\Domain\Exception\DuplicateAuthException;
+use App\Account\Identity\Domain\Exception\PasswordMismatchException;
+use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Account\AuthenticationRequest;
+use App\Account\Identity\DTO\Client\ClientIdentification;
+use App\Account\Identity\DTO\Response\AuthenticationResponse;
+use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use App\Mailing\Domain\EmailType;
+use Core\Observability\EmailHasher;
+use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
+use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use DateTimeImmutable;
-use ownHackathon\App\Account\Identity\Domain\AccountAccessAuth;
-use ownHackathon\App\Account\Identity\Domain\Exception\AccountNotFoundException;
-use ownHackathon\App\Account\Identity\Domain\Exception\DuplicateAuthException;
-use ownHackathon\App\Account\Identity\Domain\Exception\PasswordMismatchException;
-use ownHackathon\App\Account\Identity\Domain\Message\IdentityLogMessage;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\App\Account\Identity\DTO\Account\AuthenticationRequest;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentification;
-use ownHackathon\App\Account\Identity\DTO\Response\AuthenticationResponse;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Observability\EmailHasher;
-use ownHackathon\Core\SharedKernel\Domain\Exception\DuplicateEntryException;
-use ownHackathon\Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Psr\Log\LoggerInterface;
 
 readonly final class AccountAuthenticationService

@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Infrastructure\Hydrator;
+namespace App\Workspace\Infrastructure\Hydrator;
 
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Domain\Message\WorkspaceLogMessage;
+use App\Workspace\Domain\Workspace;
+use App\Workspace\Domain\WorkspaceCollection;
+use App\Workspace\Domain\WorkspaceCollectionInterface;
+use App\Workspace\Domain\WorkspaceInterface;
+use Core\Clock\DateTimeFormat;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Workspace\Domain\Message\WorkspaceLogMessage;
-use ownHackathon\App\Workspace\Domain\Workspace;
-use ownHackathon\App\Workspace\Domain\WorkspaceCollection;
-use ownHackathon\App\Workspace\Domain\WorkspaceCollectionInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Clock\DateTimeFormat;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface

@@ -3,40 +3,40 @@
 namespace Tests\Unit\Composition;
 
 use Laminas\Diactoros\ServerRequest;
-use ownHackathon\App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\Validation\ActivationInputValidatorMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\Validation\EmailInputValidatorMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\Validation\PasswordInputValidatorMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use ownHackathon\App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use ownHackathon\App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use ownHackathon\Core\Http\Exception\HttpInvalidArgumentException;
-use ownHackathon\Core\Http\Exception\HttpUnauthorizedException;
-use ownHackathon\App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
-use ownHackathon\App\Account\Identity\DTO\Client\ClientIdentificationData;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use ownHackathon\App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\DateLessNow;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
-use ownHackathon\App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
-use ownHackathon\App\Mailing\Infrastructure\Validator\EMailValidator;
-use ownHackathon\App\Mailing\Infrastructure\Validator\Input\EmailInput;
-use ownHackathon\App\Workspace\Infrastructure\Service\PaginationTotalPages;
-use ownHackathon\App\Workspace\Infrastructure\Service\PaginationService;
-use ownHackathon\App\Workspace\Infrastructure\Service\SlugService;
-use ownHackathon\App\Policy\Http\Validator\Input\VisibilityInput;
-use ownHackathon\App\Policy\Domain\Enum\Visibility;
-use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
-use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
-use ownHackathon\App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
-use ownHackathon\App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
-use ownHackathon\Core\Persistence\Pagination;
-use ownHackathon\Core\SharedKernel\Utils\UuidFactory;
-use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
+use App\Account\Identity\Middleware\Account\Validation\ActivationInputValidatorMiddleware;
+use App\Account\Identity\Middleware\Account\Validation\EmailInputValidatorMiddleware;
+use App\Account\Identity\Middleware\Account\Validation\PasswordInputValidatorMiddleware;
+use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
+use App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
+use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use Core\Http\Exception\HttpInvalidArgumentException;
+use Core\Http\Exception\HttpUnauthorizedException;
+use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
+use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use App\Account\Identity\Infrastructure\Validator\DateLessNow;
+use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
+use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
+use App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
+use App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
+use App\Mailing\Infrastructure\Validator\EMailValidator;
+use App\Mailing\Infrastructure\Validator\Input\EmailInput;
+use App\Workspace\Infrastructure\Service\PaginationTotalPages;
+use App\Workspace\Infrastructure\Service\PaginationService;
+use App\Workspace\Infrastructure\Service\SlugService;
+use App\Policy\Http\Validator\Input\VisibilityInput;
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
+use App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
+use App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
+use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use Core\Persistence\Pagination;
+use Core\SharedKernel\Utils\UuidFactory;
+use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 use function expect;
@@ -92,7 +92,7 @@ test('all identity input validators enforce their contracts', function (): void 
     $authentication->setData(['email' => 'invalid', 'password' => 'secret']);
     expect($authentication->isValid())->toBeFalse();
 
-    $password = new \ownHackathon\App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput());
+    $password = new \App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput());
     $password->setData(['password' => 'secret']);
     expect($password->isValid())->toBeTrue();
     $password->setData(['password' => 'x']);
@@ -145,7 +145,7 @@ test('request validation converts malformed field types to controlled HTTP error
     expect(fn () => (new EmailInputValidatorMiddleware(new EMailValidator(new EmailInput())))
         ->process(malformedRequest(['email' => []]), $handler))
         ->toThrow(HttpInvalidArgumentException::class)
-        ->and(fn () => (new PasswordInputValidatorMiddleware(new \ownHackathon\App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput())))
+        ->and(fn () => (new PasswordInputValidatorMiddleware(new \App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput())))
             ->process(malformedRequest(['password' => []]), $handler))
         ->toThrow(HttpInvalidArgumentException::class)
         ->and(fn () => (new ActivationInputValidatorMiddleware(new AccountActivationValidator(new AccountNameInput(), new PasswordInput())))

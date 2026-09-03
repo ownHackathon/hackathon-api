@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\Infrastructure\Service;
+namespace App\Workspace\Infrastructure\Service;
 
-use ownHackathon\App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use ownHackathon\App\Workspace\DTO\PaginationMeta;
-use ownHackathon\Core\Persistence\Pagination;
+use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use App\Workspace\DTO\PaginationMeta;
+use Core\Persistence\Pagination;
 
 readonly final class PaginationService
 {

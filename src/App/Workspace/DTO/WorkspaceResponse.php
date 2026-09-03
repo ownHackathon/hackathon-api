@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Workspace\DTO;
+namespace App\Workspace\DTO;
 
+use App\Account\Identity\Domain\AccountInterface;
+use App\Workspace\Domain\WorkspaceInterface;
+use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
-use ownHackathon\App\Account\Identity\Domain\AccountInterface;
-use ownHackathon\App\Workspace\Domain\WorkspaceInterface;
-use ownHackathon\Core\Serialization\DataType;
 
 #[OA\Schema(required: ['uuid', 'ownerUuid', 'name', 'slug', 'description'])]
 readonly final class WorkspaceResponse

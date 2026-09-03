@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ownHackathon\App\Account\Identity\Domain\Repository;
+namespace App\Account\Identity\Domain\Repository;
 
-use ownHackathon\App\Account\Identity\Domain\AccountActivationCollectionInterface;
-use ownHackathon\App\Account\Identity\Domain\AccountActivationInterface;
-use ownHackathon\App\Mailing\Domain\EmailType;
-use ownHackathon\Core\Persistence\Repository\RepositoryInterface;
+use App\Account\Identity\Domain\AccountActivationCollectionInterface;
+use App\Account\Identity\Domain\AccountActivationInterface;
+use App\Mailing\Domain\EmailType;
+use Core\Persistence\Repository\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface
 {
