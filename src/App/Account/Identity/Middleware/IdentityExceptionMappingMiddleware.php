@@ -83,7 +83,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                     'ErrorMessage' => $e->errorMessage,
                 ],
             );
-        } catch (DuplicateEmailException $e) {
+        } catch (DuplicateEMailException $e) {
             throw new HttpHandledInvalidArgumentAsSuccessException(
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::SUCCESS,

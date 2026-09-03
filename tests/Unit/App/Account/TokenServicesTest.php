@@ -16,7 +16,7 @@ use function expect;
 use function test;
 
 test('access token service generates and validates JWTs', function (): void {
-    $config = new JwtTokenConfig('issuer', 'audience', 300, 'HS256', 'unit-test-secret');
+    $config = new JwtTokenConfig('issuer', 'audience', 300, 'HS256', 'unit-test-secret-0123456789abcdef');
     $service = new AccessTokenService($config);
     $uuid = \Ramsey\Uuid\Uuid::uuid4();
     $token = $service->generate($uuid);
@@ -31,7 +31,7 @@ test('access token service generates and validates JWTs', function (): void {
 });
 
 test('refresh token service generates a client-bound JWT', function (): void {
-    $config = new JwtTokenConfig('issuer', 'audience', 300, 'HS256', 'unit-test-secret');
+    $config = new JwtTokenConfig('issuer', 'audience', 300, 'HS256', 'unit-test-secret-0123456789abcdef');
     $service = new RefreshTokenService(
         $this->createMock(AccountRepositoryInterface::class),
         $this->createMock(AccountAccessAuthRepositoryInterface::class),
