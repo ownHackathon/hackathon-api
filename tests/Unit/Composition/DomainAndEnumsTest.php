@@ -12,8 +12,8 @@ use function expect;
 use function test;
 
 test('enums expose names and visibility rules', function (): void {
-    expect(AccountRoles::Owner->getAccountRoleName())->toBe('Eigentümer')
-        ->and(AccountVisibleStatus::DO_NOT_DISTURB->getVisibleStatusName())->toBe('Bitte nicht stören')
+    expect(AccountRoles::Owner->getAccountRoleName())->toBe('Owner')
+        ->and(AccountVisibleStatus::DO_NOT_DISTURB->getVisibleStatusName())->toBe('do not-disturb')
         ->and(EventStatus::RUNNING->getEventStatusName())->toBe('Running')
         ->and(Visibility::PUBLIC->getVisibilityName())->toBe('Public')
         ->and(Visibility::REGISTERED->getVisibilityName())->toBe('Registered User')

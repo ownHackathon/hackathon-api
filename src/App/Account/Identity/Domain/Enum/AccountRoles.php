@@ -13,11 +13,11 @@ enum AccountRoles: int
     public function getAccountRoleName(): string
     {
         return match ($this) {
-            AccountRoles::Owner => 'Eigentümer',
+            AccountRoles::Owner => 'Owner',
             AccountRoles::Administrator => 'Administrator',
             AccountRoles::Moderator => 'Moderator',
-            AccountRoles::User => 'Benutzer',
-            AccountRoles::Guest => 'Gast'
+            AccountRoles::User => 'User',
+            AccountRoles::Guest => 'Guest'
         };
     }
 }

@@ -14,10 +14,10 @@ enum AccountVisibleStatus: int
     {
         return match ($this) {
             AccountVisibleStatus::ONLINE => 'online',
-            AccountVisibleStatus::NOT_PRESENT => 'Abwesend',
-            AccountVisibleStatus::DO_NOT_DISTURB => 'Bitte nicht stören',
-            AccountVisibleStatus::GHOST => 'unsichtbar',
-            AccountVisibleStatus::PERSONALIZED => 'personalisiert'
+            AccountVisibleStatus::NOT_PRESENT => 'not present',
+            AccountVisibleStatus::DO_NOT_DISTURB => 'do not-disturb',
+            AccountVisibleStatus::GHOST => 'ghost',
+            AccountVisibleStatus::PERSONALIZED => 'personalized',
         };
     }
 }
