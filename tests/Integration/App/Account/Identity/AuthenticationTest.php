@@ -248,12 +248,12 @@ test('Authentication rejects incomplete or incorrectly typed credentials', funct
 
     expect($response->getStatusCode())->toBe(Http::STATUS_UNAUTHORIZED);
 })->with([
-    'missing email' => ['credentials' => ['password' => 'secret']],
-    'missing password' => ['credentials' => ['email' => 'user@example.com']],
-    'null email' => ['credentials' => ['email' => null, 'password' => 'secret']],
-    'null password' => ['credentials' => ['email' => 'user@example.com', 'password' => null]],
-    'array email' => ['credentials' => ['email' => ['user@example.com'], 'password' => 'secret']],
-    'array password' => ['credentials' => ['email' => 'user@example.com', 'password' => ['secret']]],
+    'missing email' => [['password' => 'secret']],
+    'missing password' => [['email' => 'user@example.com']],
+    'null email' => [['email' => null, 'password' => 'secret']],
+    'null password' => [['email' => 'user@example.com', 'password' => null]],
+    'array email' => [['email' => ['user@example.com'], 'password' => 'secret']],
+    'array password' => [['email' => 'user@example.com', 'password' => ['secret']]],
 ]);
 
 test('Authentication accepts the inclusive password boundaries', function (int $length) {

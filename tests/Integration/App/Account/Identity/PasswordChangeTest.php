@@ -146,9 +146,9 @@ test('password change rejects missing, null and incorrectly typed passwords', fu
     expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST)
         ->and('Token')->toHaveRecord(['token' => $passwordChange['token']]);
 })->with([
-    'missing password' => ['payload' => []],
-    'null password' => ['payload' => ['password' => null]],
-    'array password' => ['payload' => ['password' => ['new-password']]],
+    'missing password' => [[]],
+    'null password' => [['password' => null]],
+    'array password' => [['password' => ['new-password']]],
 ]);
 
 test('password change accepts the inclusive password boundaries', function (int $length) {

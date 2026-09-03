@@ -86,9 +86,9 @@ test('registration rejects missing, null and incorrectly typed email values', fu
         ->and($this->getContainer()->get(Query::class)->from('AccountActivation')->fetchAll())
         ->toHaveCount(0);
 })->with([
-    'missing email' => ['payload' => []],
-    'null email' => ['payload' => ['email' => null]],
-    'array email' => ['payload' => ['email' => ['user@example.com']]],
+    'missing email' => [[]],
+    'null email' => [['email' => null]],
+    'array email' => [['email' => ['user@example.com']]],
 ]);
 
 test('registration errors do not reveal the submitted email', function () {

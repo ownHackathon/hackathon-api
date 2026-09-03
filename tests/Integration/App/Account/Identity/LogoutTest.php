@@ -180,8 +180,8 @@ test('logout rejects an empty or null refresh token', function (array $body) {
     expect($response->getStatusCode())->toBe(Http::STATUS_UNAUTHORIZED)
         ->and('AccountAccessAuth')->toHaveRecord(['refreshToken' => $tokens['refreshToken']]);
 })->with([
-    'empty string' => ['body' => ['refreshToken' => '']],
-    'null value' => ['body' => ['refreshToken' => null]],
+    'empty string' => [['refreshToken' => '']],
+    'null value' => [['refreshToken' => null]],
 ]);
 
 test('logout route only accepts POST requests', function () {

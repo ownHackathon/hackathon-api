@@ -85,9 +85,9 @@ test('password reset request rejects missing, null and incorrectly typed email v
     expect($response->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST)
         ->and($this->getContainer()->get(Query::class)->from('Token')->fetchAll())->toHaveCount(0);
 })->with([
-    'missing email' => ['payload' => []],
-    'null email' => ['payload' => ['email' => null]],
-    'array email' => ['payload' => ['email' => ['user@example.com']]],
+    'missing email' => [[]],
+    'null email' => [['email' => null]],
+    'array email' => [['email' => ['user@example.com']]],
 ]);
 
 test('password reset errors do not reveal the submitted email', function () {

@@ -95,12 +95,12 @@ test('returns 400 when an activation field is missing or has the wrong type', fu
         ->and('Account')->toNotHaveRecord(['email' => $accountActivation['email']])
         ->and('AccountActivation')->toHaveRecord(['id' => $accountActivation['id']]);
 })->with([
-    'missing account name' => ['payload' => ['password' => 'secret']],
-    'missing password' => ['payload' => ['accountName' => 'Valid Name']],
-    'null account name' => ['payload' => ['accountName' => null, 'password' => 'secret']],
-    'null password' => ['payload' => ['accountName' => 'Valid Name', 'password' => null]],
-    'array account name' => ['payload' => ['accountName' => ['name'], 'password' => 'secret']],
-    'array password' => ['payload' => ['accountName' => 'Valid Name', 'password' => ['secret']]],
+    'missing account name' => [['password' => 'secret']],
+    'missing password' => [['accountName' => 'Valid Name']],
+    'null account name' => [['accountName' => null, 'password' => 'secret']],
+    'null password' => [['accountName' => 'Valid Name', 'password' => null]],
+    'array account name' => [['accountName' => ['name'], 'password' => 'secret']],
+    'array password' => [['accountName' => 'Valid Name', 'password' => ['secret']]],
 ]);
 
 it('returns 400 when not token was assigned', function () {
