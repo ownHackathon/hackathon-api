@@ -75,7 +75,7 @@ test('abstract table rethrows non-duplicate database errors', function (): void 
 
 test('database factory supports sqlite configuration', function (): void {
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn([
+    $container->expects($this->once())->method('get')->with('config')->willReturn([
         'database' => [
             'driver' => 'sqlite', 'host' => ':memory:', 'user' => '', 'password' => '',
             'error' => \PDO::ERRMODE_EXCEPTION, 'emulate_prepares' => false,

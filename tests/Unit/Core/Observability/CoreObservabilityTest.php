@@ -27,7 +27,7 @@ test('logger factory creates the default channel and dated log directory', funct
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
+    $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
 
     $logger = (new LoggerFactory())($container);
 
@@ -41,7 +41,7 @@ test('channel logger factory builds a logger with the requested channel name', f
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
+    $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
 
     $logger = (new ChannelLoggerFactory())($container, 'logger.identity');
 
@@ -54,7 +54,7 @@ test('channel logger factory falls back to the default channel for unknown names
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
+    $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
 
     $logger = (new ChannelLoggerFactory())($container, 'some-other-service');
 
@@ -67,7 +67,7 @@ test('logger factory writes line formatted output by default', function (): void
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
+    $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
 
     (new LoggerFactory())($container)->info('hello world');
 
@@ -81,7 +81,7 @@ test('logger factory writes json formatted output when configured', function ():
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn([
+    $container->expects($this->once())->method('get')->with('config')->willReturn([
         'logger' => ['path' => $path, 'format' => LoggerFactory::FORMAT_JSON],
     ]);
 
@@ -101,7 +101,7 @@ test('logger factory writes only the configured single file for a channel', func
     $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
-    $container->method('get')->with('config')->willReturn([
+    $container->expects($this->once())->method('get')->with('config')->willReturn([
         'logger' => [
             'path' => $path,
             'channels' => [
