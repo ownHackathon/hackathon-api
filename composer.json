@@ -59,7 +59,7 @@
     "mezzio/mezzio-helpers": "^5.7",
     "monolog/monolog": "^3.9.0",
     "ramsey/uuid": "^4.7",
-    "symfony/mailer": "^7.0",
+    "symfony/mailer": "^8.1",
     "zircote/swagger-php": "^6"
   },
   "require-dev": {
