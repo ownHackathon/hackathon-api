@@ -3,6 +3,7 @@
 namespace App\Account\Identity;
 
 use Envms\FluentPDO\Query;
+use Laminas\InputFilter\Factory;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Mezzio\Helper\UrlHelper;
@@ -50,8 +51,6 @@ use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenServiceFactory;
 use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
-use App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
-use App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
 use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use App\Account\Identity\Middleware\Account\Authentication\AuthenticationConditionsMiddleware;
@@ -71,7 +70,6 @@ use App\Account\Identity\Middleware\Token\RefreshTokenMatchClientIdentificationM
 use App\Account\Identity\Middleware\Token\RefreshTokenValidationMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
 use App\Mailing\Infrastructure\Validator\EMailValidator;
-use App\Mailing\Infrastructure\Validator\Input\EmailInput;
 use Core\Observability\ChannelLoggerFactory;
 use Core\Persistence\Middleware\FluentTransactionMiddleware;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
@@ -237,9 +235,6 @@ readonly class ConfigProvider
                 AccountActivationTable::class => ConfigAbstractFactory::class,
                 AccountTable::class => ConfigAbstractFactory::class,
 
-                EmailInput::class => InvokableFactory::class,
-                PasswordInput::class => InvokableFactory::class,
-                AccountNameInput::class => InvokableFactory::class,
                 AccountActivationValidator::class => ConfigAbstractFactory::class,
                 AuthenticationValidator::class => ConfigAbstractFactory::class,
                 EMailValidator::class => ConfigAbstractFactory::class,
@@ -352,18 +347,16 @@ readonly class ConfigProvider
                 Query::class,
             ],
             AccountActivationValidator::class => [
-                AccountNameInput::class,
-                PasswordInput::class,
+                Factory::class,
             ],
             AuthenticationValidator::class => [
-                EmailInput::class,
-                PasswordInput::class,
+                Factory::class,
             ],
             EMailValidator::class => [
-                EmailInput::class,
+                Factory::class,
             ],
             PasswordValidator::class => [
-                PasswordInput::class,
+                Factory::class,
             ],
             AuthenticationHandler::class => [
                 AccountAuthenticationService::class,

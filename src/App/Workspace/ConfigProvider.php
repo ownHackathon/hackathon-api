@@ -3,12 +3,12 @@
 namespace App\Workspace;
 
 use Envms\FluentPDO\Query;
+use Laminas\InputFilter\Factory;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Mezzio\Helper\UrlHelper;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\Middleware\RequireLoginMiddleware;
 use App\Policy\Domain\VisibilityPolicyInterface;
-use App\Policy\Http\Validator\Input\VisibilityInput;
 use App\Workspace\Application\Port\WorkspaceCreatorInterface;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\Handler\ListOwnWorkspacesHandler;
@@ -21,9 +21,6 @@ use App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use App\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use App\Workspace\Infrastructure\Service\PaginationService;
 use App\Workspace\Infrastructure\Service\WorkspaceCreator;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use Core\Http\Middleware\PaginationMiddleware;
 use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
@@ -88,11 +85,6 @@ class ConfigProvider
                 WorkspaceStoreInterface::class => WorkspaceTable::class,
                 WorkspaceCreatorInterface::class => WorkspaceCreator::class,
             ],
-            'invokables' => [
-                WorkspaceNameInput::class,
-                WorkspaceDescriptionInput::class,
-                WorkspaceDetailsInput::class,
-            ],
             'factories' => [
                 'logger.workspace' => ChannelLoggerFactory::class,
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
@@ -126,10 +118,7 @@ class ConfigProvider
                 Query::class,
             ],
             WorkspaceCreateValidator::class => [
-                WorkspaceNameInput::class,
-                WorkspaceDescriptionInput::class,
-                WorkspaceDetailsInput::class,
-                VisibilityInput::class,
+                Factory::class,
             ],
             WorkspaceCreateValidatorMiddleware::class => [
                 WorkspaceCreateValidator::class,

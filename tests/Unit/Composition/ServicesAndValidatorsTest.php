@@ -21,27 +21,45 @@ use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdent
 use App\Account\Identity\Infrastructure\Validator\DateLessNow;
 use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
-use App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
-use App\Account\Identity\Infrastructure\Validator\Input\AccountNameInput;
 use App\Mailing\Infrastructure\Validator\EMailValidator;
-use App\Mailing\Infrastructure\Validator\Input\EmailInput;
+use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use App\Workspace\Infrastructure\Service\PaginationService;
 use App\Workspace\Infrastructure\Service\SlugService;
-use App\Policy\Http\Validator\Input\VisibilityInput;
 use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
 use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use Core\Persistence\Pagination;
 use Core\SharedKernel\Utils\UuidFactory;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use Laminas\Filter\ConfigProvider as FilterConfigProvider;
+use Laminas\InputFilter\ConfigProvider as InputFilterConfigProvider;
+use Laminas\InputFilter\Factory;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Validator\ConfigProvider as ValidatorConfigProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
 use Psr\Log\LoggerInterface;
 
 use function expect;
 use function password_hash;
 use function test;
+
+/**
+ * Container-loser Zugriff auf die Laminas-Factory für die Validator-Bausteine.
+ * Es werden ausschließlich die fachneutralen Laminas-ConfigProvider geladen, keine
+ * App-Services und keine Datenbank. Dadurch bleibt der Test vom App-Container unabhängig.
+ */
+function createLaminasFactory(): Factory
+{
+    $config = (new ConfigAggregator([
+        new FilterConfigProvider(),
+        new ValidatorConfigProvider(),
+        new InputFilterConfigProvider(),
+    ]))->getMergedConfig();
+
+    $container = new ServiceManager($config['dependencies']);
+
+    return Factory::new($container);
+}
 
 function malformedRequest(array $data): ServerRequest
 {
@@ -66,33 +84,36 @@ test('date validator accepts only future dates', function (): void {
 });
 
 test('password input applies required and length rules', function (): void {
-    $input = new PasswordInput();
-    $input->setValue('secret');
-    expect($input->isValid())->toBeTrue();
-    $input->setValue('x');
-    expect($input->isValid())->toBeFalse();
-    $input->setValue(null);
-    expect($input->isValid())->toBeFalse();
+    $factory = createLaminasFactory();
+    $password = new PasswordValidator($factory);
+    $password->setData(['password' => 'secret']);
+    expect($password->isValid())->toBeTrue();
+    $password->setData(['password' => 'x']);
+    expect($password->isValid())->toBeFalse();
+    $password->setData(['password' => null]);
+    expect($password->isValid())->toBeFalse();
 });
 
 test('all identity input validators enforce their contracts', function (): void {
-    $name = new AccountNameInput();
-    $name->setValue('  Alice  ');
-    expect($name->isValid())->toBeTrue()->and($name->getValue())->toBe('Alice');
-    $name->setValue('x');
+    $factory = createLaminasFactory();
+
+    $name = new AccountActivationValidator($factory);
+    $name->setData(['accountName' => 'x']);
     expect($name->isValid())->toBeFalse();
 
-    $activation = new AccountActivationValidator(new AccountNameInput(), new PasswordInput());
+    $activation = new AccountActivationValidator($factory);
     $activation->setData(['accountName' => 'Alice', 'password' => 'secret']);
     expect($activation->isValid())->toBeTrue();
     $activation->setData(['accountName' => 'x', 'password' => 'x']);
     expect($activation->isValid())->toBeFalse();
 
-    $authentication = new AuthenticationValidator(new EmailInput(), new PasswordInput());
+    $authentication = new AuthenticationValidator($factory);
     $authentication->setData(['email' => 'invalid', 'password' => 'secret']);
     expect($authentication->isValid())->toBeFalse();
+    $authentication->setData(['email' => 'alice@example.com', 'password' => 'secret']);
+    expect($authentication->isValid())->toBeTrue();
 
-    $password = new \App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput());
+    $password = new PasswordValidator($factory);
     $password->setData(['password' => 'secret']);
     expect($password->isValid())->toBeTrue();
     $password->setData(['password' => 'x']);
@@ -100,66 +121,60 @@ test('all identity input validators enforce their contracts', function (): void 
 });
 
 test('workspace input validators cover optional and bounded fields', function (): void {
-    $name = new WorkspaceNameInput();
-    $name->setValue(' Workspace ');
-    expect($name->isValid())->toBeTrue()->and($name->getValue())->toBe('Workspace');
-    $name->setValue('ä');
-    expect($name->isValid())->toBeFalse();
+    $factory = createLaminasFactory();
+    $validator = new WorkspaceCreateValidator($factory);
 
-    $description = new WorkspaceDescriptionInput();
-    $description->setValue('  description  ');
-    expect($description->isValid())->toBeTrue()->and($description->getValue())->toBe('description');
+    $validator->setData(['name' => 'Workspace', 'description' => '', 'details' => '', 'visibility' => (string) Visibility::PUBLIC->value]);
+    expect($validator->isValid())->toBeTrue()
+        ->and($validator->getValues()['name'])->toBe('Workspace');
 
-    $details = new WorkspaceDetailsInput();
-    $details->setValue(null);
-    expect($details->isValid())->toBeTrue();
+    $validator->setData(['name' => 'ä', 'description' => '', 'details' => '', 'visibility' => (string) Visibility::PUBLIC->value]);
+    expect($validator->isValid())->toBeFalse();
 
-    $visibility = new VisibilityInput();
-    $visibility->setValue(' ' . Visibility::PUBLIC->value . ' ');
-    expect($visibility->isValid())->toBeTrue()->and($visibility->getValue())->toBe((string) Visibility::PUBLIC->value);
-    expect($visibility->getName())->toBe('visibility');
+    $validator->setData(['name' => 'Workspace', 'description' => '  description  ', 'details' => null, 'visibility' => (string) Visibility::PUBLIC->value]);
+    expect($validator->isValid())->toBeTrue()
+        ->and($validator->getValues()['description'])->toBe('description');
+
+    $validator->setData(['name' => 'Workspace', 'description' => '', 'details' => '', 'visibility' => (string) (Visibility::PUBLIC->value + 1)]);
+    expect($validator->isValid())->toBeFalse();
 });
 
 test('composed workspace and email validators validate complete payloads', function (): void {
-    $workspace = new WorkspaceCreateValidator(
-        new WorkspaceNameInput(),
-        new WorkspaceDescriptionInput(),
-        new WorkspaceDetailsInput(),
-        new VisibilityInput(),
-    );
+    $factory = createLaminasFactory();
+
+    $workspace = new WorkspaceCreateValidator($factory);
     $workspace->setData(['name' => 'Team', 'description' => '', 'details' => '', 'visibility' => Visibility::PUBLIC->value]);
     expect($workspace->isValid())->toBeTrue();
     $workspace->setData(['name' => 'x', 'description' => str_repeat('x', 256), 'details' => '', 'visibility' => Visibility::PUBLIC->value + 1]);
     expect($workspace->isValid())->toBeFalse();
 
-    $email = new EMailValidator(new EmailInput());
+    $email = new EMailValidator($factory);
     expect($email->has('email'))->toBeTrue();
     $email->setData(['email' => 'invalid']);
     expect($email->isValid())->toBeFalse();
+    $email->setData(['email' => 'alice@example.com']);
+    expect($email->isValid())->toBeTrue();
 });
 
 test('request validation converts malformed field types to controlled HTTP errors', function (): void {
+    $factory = createLaminasFactory();
     $handler = $this->createMock(\Psr\Http\Server\RequestHandlerInterface::class);
     $handler->expects($this->never())->method('handle');
 
-    expect(fn () => (new EmailInputValidatorMiddleware(new EMailValidator(new EmailInput())))
+    expect(fn () => (new EmailInputValidatorMiddleware(new EMailValidator($factory)))
         ->process(malformedRequest(['email' => []]), $handler))
         ->toThrow(HttpInvalidArgumentException::class)
-        ->and(fn () => (new PasswordInputValidatorMiddleware(new \App\Account\Identity\Infrastructure\Validator\PasswordValidator(new PasswordInput())))
+        ->and(fn () => (new PasswordInputValidatorMiddleware(new PasswordValidator($factory)))
             ->process(malformedRequest(['password' => []]), $handler))
         ->toThrow(HttpInvalidArgumentException::class)
-        ->and(fn () => (new ActivationInputValidatorMiddleware(new AccountActivationValidator(new AccountNameInput(), new PasswordInput())))
+        ->and(fn () => (new ActivationInputValidatorMiddleware(new AccountActivationValidator($factory)))
             ->process(malformedRequest(['accountName' => [], 'password' => 'secret']), $handler))
         ->toThrow(HttpInvalidArgumentException::class)
-        ->and(fn () => (new AuthenticationValidationMiddleware(new AuthenticationValidator(new EmailInput(), new PasswordInput())))
+        ->and(fn () => (new AuthenticationValidationMiddleware(new AuthenticationValidator($factory)))
             ->process(malformedRequest(['email' => [], 'password' => 'secret']), $handler))
         ->toThrow(HttpUnauthorizedException::class)
-        ->and(fn () => (new WorkspaceCreateValidatorMiddleware(new WorkspaceCreateValidator(
-            new WorkspaceNameInput(),
-            new WorkspaceDescriptionInput(),
-            new WorkspaceDetailsInput(),
-            new VisibilityInput(),
-        )))->process(malformedRequest(['name' => []]), $handler))
+        ->and(fn () => (new WorkspaceCreateValidatorMiddleware(new WorkspaceCreateValidator($factory)))
+            ->process(malformedRequest(['name' => []]), $handler))
         ->toThrow(HttpInvalidArgumentException::class);
 });
 

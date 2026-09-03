@@ -2,23 +2,87 @@
 
 namespace App\Workspace\Infrastructure\Validator;
 
-use App\Policy\Http\Validator\Input\VisibilityInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDescriptionInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceDetailsInput;
-use App\Workspace\Infrastructure\Validator\Input\WorkspaceNameInput;
+use App\Policy\Domain\Enum\Visibility;
+use Laminas\InputFilter\Factory;
+use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\NumberComparison;
+use Laminas\Validator\Regex;
 
 final class WorkspaceCreateValidator extends InputFilter
 {
-    public function __construct(
-        readonly private WorkspaceNameInput $workspaceNameInput,
-        readonly private WorkspaceDescriptionInput $workspaceDescriptionInput,
-        readonly private WorkspaceDetailsInput $workspaceDetailsInput,
-        readonly private VisibilityInput $visibilityInput,
-    ) {
-        $this->add($this->workspaceNameInput);
-        $this->add($this->workspaceDescriptionInput);
-        $this->add($this->workspaceDetailsInput);
-        $this->add($this->visibilityInput);
+    public function __construct(Factory $factory)
+    {
+        parent::__construct($factory);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'name',
+            'required' => true,
+            'filters' => [['name' => 'StringTrim']],
+            'validators' => [
+                [
+                    'name' => 'StringLength',
+                    'options' => ['encoding' => 'UTF-8', 'min' => 3, 'max' => 64],
+                ],
+                [
+                    'name' => 'Regex',
+                    'options' => [
+                        'pattern' => '/^[\x20-\x7E]+$/',
+                        'messages' => [
+                            Regex::NOT_MATCH => 'Only standard alphanumeric characters and symbols are allowed. Umlauts (ä, ö, ü, ß) are not permitted.',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'description',
+            'required' => false,
+            'allow_empty' => true,
+            'filters' => [['name' => 'StringTrim']],
+            'validators' => [
+                [
+                    'name' => 'StringLength',
+                    'options' => ['encoding' => 'UTF-8', 'max' => 255],
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'details',
+            'required' => false,
+            'allow_empty' => true,
+            'filters' => [['name' => 'StringTrim']],
+            'validators' => [
+                [
+                    'name' => 'StringLength',
+                    'options' => ['encoding' => 'UTF-8'],
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'visibility',
+            'required' => true,
+            'allow_empty' => false,
+            'filters' => [
+                ['name' => 'StringTrim'],
+                ['name' => 'Digits'],
+            ],
+            'validators' => [
+                [
+                    'name' => NumberComparison::class,
+                    'options' => [
+                        'min' => Visibility::UNLISTED->value,
+                        'max' => Visibility::PUBLIC->value,
+                    ],
+                ],
+            ],
+        ]);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Policy;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use App\Policy\Domain\VisibilityPolicy;
 use App\Policy\Domain\VisibilityPolicyInterface;
-use App\Policy\Http\Validator\Input\VisibilityInput;
 
 class ConfigProvider
 {
@@ -15,9 +14,6 @@ class ConfigProvider
             'dependencies' => [
                 'aliases' => [
                     VisibilityPolicyInterface::class => VisibilityPolicy::class,
-                ],
-                'invokables' => [
-                    VisibilityInput::class,
                 ],
                 'factories' => [
                     VisibilityPolicy::class => InvokableFactory::class,

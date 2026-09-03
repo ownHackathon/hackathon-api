@@ -2,17 +2,44 @@
 
 namespace App\Account\Identity\Infrastructure\Validator;
 
-use App\Account\Identity\Infrastructure\Validator\Input\PasswordInput;
-use App\Mailing\Infrastructure\Validator\Input\EmailInput;
+use Laminas\InputFilter\Factory;
+use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\Hostname;
 
 final class AuthenticationValidator extends InputFilter
 {
-    public function __construct(
-        readonly private EmailInput $emailInput,
-        readonly private PasswordInput $passwordInput,
-    ) {
-        $this->add($this->emailInput);
-        $this->add($this->passwordInput);
+    public function __construct(Factory $factory)
+    {
+        parent::__construct($factory);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'email',
+            'required' => true,
+            'filters' => [['name' => 'StringTrim']],
+            'validators' => [
+                [
+                    'name' => 'EmailAddress',
+                    'options' => [
+                        'hostnameValidator' => new Hostname(),
+                        'useMxCheck' => true,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'type' => Input::class,
+            'name' => 'password',
+            'required' => true,
+            'filters' => [['name' => 'StringTrim']],
+            'validators' => [
+                [
+                    'name' => 'StringLength',
+                    'options' => ['encoding' => 'UTF-8', 'min' => 6, 'max' => 255],
+                ],
+            ],
+        ]);
     }
 }

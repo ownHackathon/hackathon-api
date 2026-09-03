@@ -33,19 +33,19 @@ readonly final class WorkspaceCreateValidatorMiddleware implements MiddlewareInt
         }
 
         try {
-            $this->validator->setData($data);
+            $result = $this->validator->validate($data);
 
-            if (!$this->validator->isValid()) {
+            if (!$result->valid()) {
                 throw new HttpInvalidArgumentException(
                     WorkspaceLogMessage::INVALID_WORKSPACE_NAME,
                     WorkspaceStatusMessage::INVALID_WORKSPACE_NAME,
                     [
-                        'Validator Message:' => $this->validator->getMessages(),
+                        'Validator Message:' => $result->getMessages()->toArray(),
                     ],
                 );
             }
 
-            $workspaceName = WorkspaceRequest::fromArray($this->validator->getValues());
+            $workspaceName = WorkspaceRequest::fromArray($result->value());
         } catch (HttpInvalidArgumentException $e) {
             throw $e;
         } catch (Throwable) {

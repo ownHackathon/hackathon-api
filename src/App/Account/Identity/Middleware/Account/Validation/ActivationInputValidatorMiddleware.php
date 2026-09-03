@@ -33,21 +33,21 @@ readonly final class ActivationInputValidatorMiddleware implements MiddlewareInt
         }
 
         try {
-            $this->validator->setData($data);
+            $result = $this->validator->validate($data);
 
-            if (!$this->validator->isValid()) {
+            if (!$result->valid()) {
                 throw new HttpInvalidArgumentException(
                     IdentityLogMessage::ACCOUNT_NAME_INVALID,
                     IdentityStatusMessage::INVALID_DATA,
                     [
                         'Account Name:' => $data['accountName'] ?? null,
-                        'Validator-Message:' => $this->validator->getMessages(),
+                        'Validator-Message:' => $result->getMessages()->toArray(),
                     ],
                 );
             }
 
             /** @var array{accountName: string, password: string} $data */
-            $data = $this->validator->getValues();
+            $data = $result->value();
 
             $response = AccountRegistration::fromString($data['accountName'], $data['password']);
         } catch (HttpInvalidArgumentException $e) {

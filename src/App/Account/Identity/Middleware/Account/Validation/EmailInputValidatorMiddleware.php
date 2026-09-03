@@ -34,21 +34,21 @@ readonly final class EmailInputValidatorMiddleware implements MiddlewareInterfac
         }
 
         try {
-            $this->mailValidator->setData($data);
+            $result = $this->mailValidator->validate($data);
 
-            if (!$this->mailValidator->isValid()) {
+            if (!$result->valid()) {
                 throw new HttpInvalidArgumentException(
                     IdentityLogMessage::EMAIL_INVALID,
                     IdentityStatusMessage::INVALID_DATA,
                     [
                         'E-Mail:' => $data['email'] ?? null,
-                        'Validator Message:' => $this->mailValidator->getMessages(),
+                        'Validator Message:' => $result->getMessages()->toArray(),
                     ],
                 );
             }
 
             /** @var array{email: string} $data */
-            $data = $this->mailValidator->getValues();
+            $data = $result->value();
 
             $email = new EmailType($data['email']);
         } catch (InvalidArgumentException | HttpInvalidArgumentException $e) {
