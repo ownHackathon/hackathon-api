@@ -2,16 +2,17 @@
 
 namespace App\Event;
 
-use Envms\FluentPDO\Query;
-use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use App\Event\Application\Port\EventLoggerInterface;
 use App\Event\Domain\Repository\EventRepositoryInterface;
+use App\Event\Infrastructure\Factory\EventLoggerFactory;
 use App\Event\Infrastructure\Hydrator\EventHydrator;
 use App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use App\Event\Infrastructure\Persistence\Table\EventTable;
-use Core\Observability\ChannelLoggerFactory;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
+use Envms\FluentPDO\Query;
+use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 class ConfigProvider
 {
@@ -40,7 +41,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
-                'logger.event' => ChannelLoggerFactory::class,
+                EventLoggerInterface::class => EventLoggerFactory::class,
                 EventHydrator::class => ConfigAbstractFactory::class,
                 EventTable::class => ConfigAbstractFactory::class,
                 EventRepository::class => ConfigAbstractFactory::class,
@@ -53,7 +54,7 @@ class ConfigProvider
         return [
             EventHydrator::class => [
                 UuidFactoryInterface::class,
-                'logger.event',
+                EventLoggerInterface::class,
             ],
             EventTable::class => [
                 Query::class,

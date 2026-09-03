@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
+use App\Account\Identity\Application\Port\IdentityLoggerInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -15,7 +16,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
 
 use function strlen;
 
@@ -25,7 +25,7 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
         private AccessTokenService $accessTokenService,
         private AccountRepositoryInterface $accountRepository,
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private IdentityLoggerInterface $logger,
     ) {
     }
 

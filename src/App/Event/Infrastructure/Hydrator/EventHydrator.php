@@ -2,6 +2,7 @@
 
 namespace App\Event\Infrastructure\Hydrator;
 
+use App\Event\Application\Port\EventLoggerInterface;
 use App\Event\Domain\Enum\EventStatus;
 use App\Event\Domain\Event;
 use App\Event\Domain\EventCollection;
@@ -14,13 +15,12 @@ use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use Psr\Log\LoggerInterface;
 
 readonly final class EventHydrator implements EventHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private EventLoggerInterface $logger,
     ) {
     }
 

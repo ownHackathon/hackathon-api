@@ -3,6 +3,8 @@
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
 use App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\AccountActivation;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
@@ -11,7 +13,6 @@ use App\Mailing\Domain\EmailType;
 use Core\Observability\EmailHasher;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
-use Psr\Log\LoggerInterface;
 
 readonly final class AccountRegisterService implements AccountRegisterServiceInterface
 {
@@ -20,8 +21,8 @@ readonly final class AccountRegisterService implements AccountRegisterServiceInt
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private ActivationTokenService $activationTokenService,
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $activityLogger,
-        private string $emailHashSalt,
+        private ActivityLoggerInterface $activityLogger,
+        private EmailHashSaltProviderInterface $emailHashSaltProvider,
     ) {
     }
 
@@ -45,7 +46,7 @@ readonly final class AccountRegisterService implements AccountRegisterServiceInt
         $this->activityLogger->info(
             IdentityLogMessage::ACTIVITY_REGISTER_REQUESTED,
             [
-                'emailHash' => EmailHasher::hash($email->toString(), $this->emailHashSalt),
+                'emailHash' => EmailHasher::hash($email->toString(), $this->emailHashSaltProvider->salt()),
             ],
         );
 

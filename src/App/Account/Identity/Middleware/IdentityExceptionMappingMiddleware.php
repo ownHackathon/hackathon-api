@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Middleware;
 
+use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use App\Account\Identity\Domain\Exception\DuplicateEMailException;
@@ -23,7 +24,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private string $emailHashSalt,
+        private EmailHashSaltProviderInterface $emailHashSaltProvider,
     ) {
     }
 
@@ -60,7 +61,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                 [
                     'AccessAuth ID:' => $e->accessAuthId,
                     'Account ID:' => $e->accountId,
-                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt),
+                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSaltProvider->salt()),
                 ],
                 Level::Warning,
             );
@@ -69,7 +70,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
                 IdentityLogMessage::PASSWORD_INCORRECT,
                 IdentityStatusMessage::INVALID_DATA,
                 [
-                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt),
+                    'emailHash' => EmailHasher::hash($e->email, $this->emailHashSaltProvider->salt()),
                 ],
                 Level::Warning,
             );
@@ -87,7 +88,7 @@ readonly final class IdentityExceptionMappingMiddleware implements MiddlewareInt
             throw new HttpHandledInvalidArgumentAsSuccessException(
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::SUCCESS,
-                ['emailHash' => EmailHasher::hash($e->email, $this->emailHashSalt)],
+                ['emailHash' => EmailHasher::hash($e->email, $this->emailHashSaltProvider->salt())],
             );
         }
     }

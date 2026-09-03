@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\DTO\Client\ClientIdentification;
@@ -15,7 +16,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
 
 use function hrtime;
 use function sprintf;
@@ -23,7 +23,7 @@ use function sprintf;
 readonly final class AccountActivityLoggingMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private LoggerInterface $logger,
+        private ActivityLoggerInterface $logger,
     ) {
     }
 

@@ -2,42 +2,43 @@
 
 namespace Tests\Unit\Composition;
 
-use Laminas\Diactoros\ServerRequest;
+use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
+use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
+use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
+use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
+use App\Account\Identity\Infrastructure\Validator\DateLessNow;
+use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
+use App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
 use App\Account\Identity\Middleware\Account\Validation\ActivationInputValidatorMiddleware;
 use App\Account\Identity\Middleware\Account\Validation\EmailInputValidatorMiddleware;
 use App\Account\Identity\Middleware\Account\Validation\PasswordInputValidatorMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
-use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Middleware\Token\AccessTokenValidationMiddleware;
+use App\Mailing\Infrastructure\Validator\EMailValidator;
+use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use App\Workspace\Infrastructure\Service\PaginationService;
+use App\Workspace\Infrastructure\Service\PaginationTotalPages;
+use App\Workspace\Infrastructure\Service\SlugService;
+use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\Http\Exception\HttpUnauthorizedException;
-use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
-use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
-use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
-use App\Account\Identity\Infrastructure\Validator\DateLessNow;
-use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
-use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
-use App\Mailing\Infrastructure\Validator\EMailValidator;
-use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
-use App\Workspace\Infrastructure\Service\PaginationTotalPages;
-use App\Workspace\Infrastructure\Service\PaginationService;
-use App\Workspace\Infrastructure\Service\SlugService;
-use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
 use Core\Persistence\Pagination;
 use Core\SharedKernel\Utils\UuidFactory;
-use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\Diactoros\ServerRequest;
 use Laminas\Filter\ConfigProvider as FilterConfigProvider;
 use Laminas\InputFilter\ConfigProvider as InputFilterConfigProvider;
 use Laminas\InputFilter\Factory;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Validator\ConfigProvider as ValidatorConfigProvider;
-use Laminas\ConfigAggregator\ConfigAggregator;
-use Psr\Log\LoggerInterface;
 
 use function expect;
 use function password_hash;
@@ -200,7 +201,7 @@ test('authentication rejects a validly signed token with an invalid UUID claim',
         $tokenService,
         $accountRepository,
         new UuidFactory(),
-        $this->createMock(LoggerInterface::class),
+        $this->createMock(IdentityLoggerInterface::class),
     ))->process((new ServerRequest())->withHeader('Authorization', 'token'), $handler))
         ->toThrow(HttpUnauthorizedException::class);
 });

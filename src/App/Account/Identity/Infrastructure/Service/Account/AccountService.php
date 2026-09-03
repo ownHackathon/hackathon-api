@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -19,7 +20,6 @@ use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Monolog\Level;
-use Psr\Log\LoggerInterface;
 
 readonly final class AccountService
 {
@@ -29,7 +29,7 @@ readonly final class AccountService
         private TokenRepositoryInterface $tokenRepository,
         private PasswordTokenService $tokenService,
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $activityLogger,
+        private ActivityLoggerInterface $activityLogger,
     ) {
     }
 

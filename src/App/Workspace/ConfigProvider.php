@@ -2,33 +2,35 @@
 
 namespace App\Workspace;
 
-use Envms\FluentPDO\Query;
-use Laminas\InputFilter\Factory;
-use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Mezzio\Helper\UrlHelper;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\Middleware\RequireLoginMiddleware;
 use App\Policy\Domain\VisibilityPolicyInterface;
 use App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use App\Workspace\Application\Port\WorkspaceLoggerInterface;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\Handler\ListOwnWorkspacesHandler;
 use App\Workspace\Handler\WorkspaceCreateHandler;
 use App\Workspace\Handler\WorkspaceHandler;
+use App\Workspace\Infrastructure\Factory\WorkspaceLoggerFactory;
 use App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
 use App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
 use App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
 use App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
 use App\Workspace\Infrastructure\Persistence\Table\WorkspaceTable;
 use App\Workspace\Infrastructure\Service\PaginationService;
-use App\Workspace\Infrastructure\Service\WorkspaceCreator;
-use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
-use Core\Http\Middleware\PaginationMiddleware;
-use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use App\Workspace\Infrastructure\Service\PaginationTotalPages;
 use App\Workspace\Infrastructure\Service\SlugService;
-use Core\Observability\ChannelLoggerFactory;
+use App\Workspace\Infrastructure\Service\WorkspaceCreator;
+use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
+use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
+use Core\Http\Middleware\PaginationMiddleware;
 use Core\Persistence\Middleware\FluentTransactionMiddleware;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
+use Envms\FluentPDO\Query;
+use Laminas\InputFilter\Factory;
+use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Mezzio\Helper\UrlHelper;
 
 class ConfigProvider
 {
@@ -86,7 +88,7 @@ class ConfigProvider
                 WorkspaceCreatorInterface::class => WorkspaceCreator::class,
             ],
             'factories' => [
-                'logger.workspace' => ChannelLoggerFactory::class,
+                WorkspaceLoggerInterface::class => WorkspaceLoggerFactory::class,
                 WorkspaceHydrator::class => ConfigAbstractFactory::class,
                 WorkspaceRepository::class => ConfigAbstractFactory::class,
                 WorkspaceTable::class => ConfigAbstractFactory::class,
@@ -97,8 +99,8 @@ class ConfigProvider
                 ListOwnWorkspacesHandler::class => ConfigAbstractFactory::class,
                 PaginationService::class => ConfigAbstractFactory::class,
                 WorkspaceHandler::class => ConfigAbstractFactory::class,
-                PaginationTotalPages::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
-                SlugService::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+                PaginationTotalPages::class => InvokableFactory::class,
+                SlugService::class => InvokableFactory::class,
             ],
         ];
     }
@@ -108,7 +110,7 @@ class ConfigProvider
         return [
             WorkspaceHydrator::class => [
                 UuidFactoryInterface::class,
-                'logger.workspace',
+                WorkspaceLoggerInterface::class,
             ],
             WorkspaceRepository::class => [
                 WorkspaceStoreInterface::class,

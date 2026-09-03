@@ -2,6 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
@@ -20,7 +22,6 @@ use Core\Observability\EmailHasher;
 use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use DateTimeImmutable;
-use Psr\Log\LoggerInterface;
 
 readonly final class AccountAuthenticationService
 {
@@ -31,8 +32,8 @@ readonly final class AccountAuthenticationService
         private RefreshTokenService $refreshTokenService,
         private AccessTokenService $accessTokenService,
         private AccountService $accountService,
-        private LoggerInterface $activityLogger,
-        private string $emailHashSalt,
+        private ActivityLoggerInterface $activityLogger,
+        private EmailHashSaltProviderInterface $emailHashSaltProvider,
     ) {
     }
 
@@ -49,7 +50,7 @@ readonly final class AccountAuthenticationService
             $this->activityLogger->warning(
                 IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
                 [
-                    'emailHash' => EmailHasher::hash($auth->email, $this->emailHashSalt),
+                    'emailHash' => EmailHasher::hash($auth->email, $this->emailHashSaltProvider->salt()),
                     'clientIdentHash' => $clientId->identificationHash,
                     'reason' => 'account_not_found',
                 ],

@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Hydrator;
 
+use App\Account\Identity\Application\Port\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountCollection;
 use App\Account\Identity\Domain\AccountCollectionInterface;
@@ -12,14 +13,13 @@ use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly final class AccountHydrator implements AccountHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private IdentityLoggerInterface $logger,
     ) {
     }
 

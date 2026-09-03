@@ -2,6 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -17,7 +19,6 @@ use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use InvalidArgumentException;
-use Psr\Log\LoggerInterface;
 
 readonly final class AccountCreatorService
 {
@@ -25,8 +26,8 @@ readonly final class AccountCreatorService
         private AccountActivationRepositoryInterface $accountActivationRepository,
         private AccountRepositoryInterface $accountRepository,
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $activityLogger,
-        private string $emailHashSalt,
+        private ActivityLoggerInterface $activityLogger,
+        private EmailHashSaltProviderInterface $emailHashSaltProvider,
     ) {
     }
 
@@ -71,7 +72,7 @@ readonly final class AccountCreatorService
                 IdentityLogMessage::ACCOUNT_ALREADY_EXISTS,
                 IdentityStatusMessage::INVALID_DATA,
                 [
-                    'emailHash' => EmailHasher::hash($account->email->toString(), $this->emailHashSalt),
+                    'emailHash' => EmailHasher::hash($account->email->toString(), $this->emailHashSaltProvider->salt()),
                     'Exception Message:' => $e->getMessage(),
                 ],
             );

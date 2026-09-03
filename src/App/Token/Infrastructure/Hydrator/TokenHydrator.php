@@ -2,6 +2,7 @@
 
 namespace App\Token\Infrastructure\Hydrator;
 
+use App\Token\Application\Port\TokenLoggerInterface;
 use App\Token\Domain\Enum\TokenType;
 use App\Token\Domain\Message\TokenLogMessage;
 use App\Token\Domain\Token;
@@ -10,14 +11,13 @@ use App\Token\Domain\TokenCollectionInterface;
 use App\Token\Domain\TokenInterface;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
-use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly final class TokenHydrator implements TokenHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private TokenLoggerInterface $logger,
     ) {
     }
 

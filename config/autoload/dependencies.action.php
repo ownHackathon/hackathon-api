@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use Core\Persistence\Factory\DatabaseFactory;
 use Core\Persistence\Factory\QueryFactory;
 use Core\SharedKernel\Factory\UuidFactory;
@@ -18,7 +19,7 @@ return [
             Symfony\Component\Mailer\MailerInterface::class => 'mailer',
         ],
         'invokables' => [
-            'logger.account-activity' => ArrayLogger::class,
+            ActivityLoggerInterface::class => ArrayLogger::class,
         ],
         'factories' => [
             'database' => DatabaseFactory::class,

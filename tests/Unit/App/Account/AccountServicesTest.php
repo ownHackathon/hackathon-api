@@ -2,20 +2,20 @@
 
 namespace Tests\Unit\App\Account;
 
-use DateTimeImmutable;
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\PasswordMismatchException;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Mailing\Domain\EmailType;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
-use Psr\Log\LoggerInterface;
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -48,7 +48,7 @@ test('account service handles availability, password creation and activity updat
         $this->createMock(TokenRepositoryInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
-        $this->createMock(LoggerInterface::class),
+        $this->createMock(ActivityLoggerInterface::class),
     );
     $email = new EmailType('alice@example.com');
 
@@ -88,7 +88,7 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
         $this->createMock(TokenRepositoryInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
-        $this->createMock(LoggerInterface::class),
+        $this->createMock(ActivityLoggerInterface::class),
     );
     expect(function () use ($service, $account): void {
         $service->logout($account, new RefreshToken('refresh'));

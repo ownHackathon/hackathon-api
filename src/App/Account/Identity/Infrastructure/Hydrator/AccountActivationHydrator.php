@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Hydrator;
 
+use App\Account\Identity\Application\Port\IdentityLoggerInterface;
 use App\Account\Identity\Domain\AccountActivation;
 use App\Account\Identity\Domain\AccountActivationCollection;
 use App\Account\Identity\Domain\AccountActivationCollectionInterface;
@@ -10,14 +11,13 @@ use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Mailing\Domain\EmailType;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
-use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidFactoryInterface;
 
 readonly final class AccountActivationHydrator implements AccountActivationHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private IdentityLoggerInterface $logger,
     ) {
     }
 

@@ -17,7 +17,12 @@ use App\Account\Identity\Handler\AccountPasswordHandler;
 use App\Account\Identity\Handler\AccountRegisterHandler;
 use App\Account\Identity\Handler\AuthenticationHandler;
 use App\Account\Identity\Handler\LogoutHandler;
-use App\Account\Identity\Infrastructure\Factory\EmailHashSaltFactory;
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
+use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Infrastructure\Factory\ActivityLoggerFactory;
+use App\Account\Identity\Infrastructure\Factory\EmailHashSaltProviderFactory;
+use App\Account\Identity\Infrastructure\Factory\IdentityLoggerFactory;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
@@ -70,7 +75,6 @@ use App\Account\Identity\Middleware\Token\RefreshTokenMatchClientIdentificationM
 use App\Account\Identity\Middleware\Token\RefreshTokenValidationMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
 use App\Mailing\Infrastructure\Validator\EMailValidator;
-use Core\Observability\ChannelLoggerFactory;
 use Core\Persistence\Middleware\FluentTransactionMiddleware;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
@@ -198,9 +202,9 @@ readonly class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
-                'logger.identity' => ChannelLoggerFactory::class,
-                'logger.account-activity' => ChannelLoggerFactory::class,
-                'logger.email_hash_salt' => EmailHashSaltFactory::class,
+                IdentityLoggerInterface::class => IdentityLoggerFactory::class,
+                ActivityLoggerInterface::class => ActivityLoggerFactory::class,
+                EmailHashSaltProviderInterface::class => EmailHashSaltProviderFactory::class,
                 AccountAccessAuthHydrator::class => InvokableFactory::class,
                 AccountActivationHydrator::class => ConfigAbstractFactory::class,
                 AccountHydrator::class => ConfigAbstractFactory::class,
@@ -260,11 +264,11 @@ readonly class ConfigProvider
         return [
             AccountActivationHydrator::class => [
                 UuidFactoryInterface::class,
-                'logger.identity',
+                IdentityLoggerInterface::class,
             ],
             AccountHydrator::class => [
                 UuidFactoryInterface::class,
-                'logger.identity',
+                IdentityLoggerInterface::class,
             ],
             AuthenticationValidationMiddleware::class => [
                 AuthenticationValidator::class,
@@ -276,7 +280,7 @@ readonly class ConfigProvider
                 EMailValidator::class,
             ],
             IdentityExceptionMappingMiddleware::class => [
-                'logger.email_hash_salt',
+                EmailHashSaltProviderInterface::class,
             ],
             PasswordInputValidatorMiddleware::class => [
                 PasswordValidator::class,
@@ -285,19 +289,19 @@ readonly class ConfigProvider
                 AccountRepositoryInterface::class,
             ],
             AccountActivityLoggingMiddleware::class => [
-                'logger.account-activity',
+                ActivityLoggerInterface::class,
             ],
             PasswordChangeService::class => [
                 AccountRepositoryInterface::class,
                 TokenRepositoryInterface::class,
                 AccountService::class,
-                'logger.account-activity',
+                ActivityLoggerInterface::class,
             ],
             RequestAuthenticationMiddleware::class => [
                 AccessTokenService::class,
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
-                'logger.identity',
+                IdentityLoggerInterface::class,
             ],
             ClientIdentificationMiddleware::class => [
                 ClientIdentificationService::class,
@@ -335,7 +339,7 @@ readonly class ConfigProvider
                 TokenRepositoryInterface::class,
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
-                'logger.account-activity',
+                ActivityLoggerInterface::class,
             ],
             AccountAccessAuthTable::class => [
                 Query::class,
@@ -371,8 +375,8 @@ readonly class ConfigProvider
                 RefreshTokenService::class,
                 AccessTokenService::class,
                 AccountService::class,
-                'logger.account-activity',
-                'logger.email_hash_salt',
+                ActivityLoggerInterface::class,
+                EmailHashSaltProviderInterface::class,
             ],
             AccountRegisterHandler::class => [
                 AccountRegisterService::class,
@@ -382,8 +386,8 @@ readonly class ConfigProvider
                 AccountActivationRepositoryInterface::class,
                 ActivationTokenService::class,
                 UuidFactoryInterface::class,
-                'logger.account-activity',
-                'logger.email_hash_salt',
+                ActivityLoggerInterface::class,
+                EmailHashSaltProviderInterface::class,
             ],
             AccountActivationHandler::class => [
                 AccountCreatorService::class,
@@ -393,8 +397,8 @@ readonly class ConfigProvider
                 AccountActivationRepositoryInterface::class,
                 AccountRepositoryInterface::class,
                 UuidFactoryInterface::class,
-                'logger.account-activity',
-                'logger.email_hash_salt',
+                ActivityLoggerInterface::class,
+                EmailHashSaltProviderInterface::class,
             ],
             AccountPasswordForgottenHandler::class => [
                 PasswordService::class,

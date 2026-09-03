@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use Core\Persistence\Factory\DatabaseFactory;
 use Core\Persistence\Factory\QueryFactory;
 use Core\SharedKernel\Factory\UuidFactory;
@@ -30,7 +31,7 @@ return [
         // not require arguments to the constructor. Map a service name to the
         // class name.
         'invokables' => [
-            'logger.account-activity' => ArrayLogger::class,
+            ActivityLoggerInterface::class => ArrayLogger::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [

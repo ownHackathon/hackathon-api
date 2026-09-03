@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
@@ -11,7 +12,6 @@ use App\Token\Domain\Repository\TokenRepositoryInterface;
 use App\Token\DTO\Token;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
-use Psr\Log\LoggerInterface;
 
 readonly final class PasswordChangeService
 {
@@ -19,7 +19,7 @@ readonly final class PasswordChangeService
         private AccountRepositoryInterface $accountRepository,
         private TokenRepositoryInterface $tokenRepository,
         private AccountService $accountService,
-        private LoggerInterface $activityLogger,
+        private ActivityLoggerInterface $activityLogger,
     ) {
     }
 

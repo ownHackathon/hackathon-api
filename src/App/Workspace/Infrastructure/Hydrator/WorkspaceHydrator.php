@@ -3,6 +3,7 @@
 namespace App\Workspace\Infrastructure\Hydrator;
 
 use App\Policy\Domain\Enum\Visibility;
+use App\Workspace\Application\Port\WorkspaceLoggerInterface;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Workspace;
 use App\Workspace\Domain\WorkspaceCollection;
@@ -13,13 +14,12 @@ use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use Psr\Log\LoggerInterface;
 
 readonly final class WorkspaceHydrator implements WorkspaceHydratorInterface
 {
     public function __construct(
         private UuidFactoryInterface $uuid,
-        private LoggerInterface $logger,
+        private WorkspaceLoggerInterface $logger,
     ) {
     }
 

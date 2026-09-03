@@ -2,16 +2,17 @@
 
 namespace App\Token;
 
-use Envms\FluentPDO\Query;
-use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Core\Observability\ChannelLoggerFactory;
-use Core\SharedKernel\Utils\UuidFactoryInterface;
+use App\Token\Application\Port\TokenLoggerInterface;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Token\Infrastructure\Factory\TokenLoggerFactory;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
 use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
 use App\Token\Infrastructure\Persistence\Table\TokenTable;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
+use Envms\FluentPDO\Query;
+use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 
 readonly class ConfigProvider
 {
@@ -41,7 +42,7 @@ readonly class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
-                'logger.token' => ChannelLoggerFactory::class,
+                TokenLoggerInterface::class => TokenLoggerFactory::class,
                 TokenHydrator::class => ConfigAbstractFactory::class,
                 TokenRepository::class => ConfigAbstractFactory::class,
                 TokenTable::class => ConfigAbstractFactory::class,
@@ -55,7 +56,7 @@ readonly class ConfigProvider
         return [
             TokenHydrator::class => [
                 UuidFactoryInterface::class,
-                'logger.token',
+                TokenLoggerInterface::class,
             ],
             TokenRepository::class => [
                 TokenStoreInterface::class,

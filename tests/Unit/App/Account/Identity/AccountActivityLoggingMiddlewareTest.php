@@ -2,9 +2,7 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use DateTimeImmutable;
-use Laminas\Diactoros\Response\JsonResponse;
-use Laminas\Diactoros\ServerRequest;
+use App\Account\Identity\Application\Port\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
@@ -12,10 +10,12 @@ use App\Account\Identity\DTO\Client\ClientIdentification;
 use App\Account\Identity\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use App\Mailing\Domain\EmailType;
+use DateTimeImmutable;
+use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\ServerRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -23,7 +23,7 @@ use function test;
 
 test('account activity middleware logs a guest interaction with masked context', function (): void {
     $context = null;
-    $logger = $this->createMock(LoggerInterface::class);
+    $logger = $this->createMock(ActivityLoggerInterface::class);
     $logger->expects($this->once())->method('log')
         ->willReturnCallback(
             static function (mixed $level, mixed $message, array $ctx = []) use (&$context): void {
@@ -55,7 +55,7 @@ test('account activity middleware logs a guest interaction with masked context',
 
 test('account activity middleware logs an authenticated interaction with account ids', function (): void {
     $messages = [];
-    $logger = $this->createMock(LoggerInterface::class);
+    $logger = $this->createMock(ActivityLoggerInterface::class);
     $logger->expects($this->once())->method('log')
         ->willReturnCallback(
             static function (mixed $level, mixed $message, array $ctx = []) use (&$messages): void {
