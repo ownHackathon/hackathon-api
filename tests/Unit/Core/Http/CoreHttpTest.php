@@ -2,16 +2,13 @@
 
 namespace Tests\Unit\Core\Http;
 
-use Fig\Http\Message\StatusCodeInterface as Http;
-use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\ServerRequest;
-use Monolog\Level;
 use Core\Http\DTO\HttpResponseMessage;
 use Core\Http\Exception\HttpDuplicateEntryException;
 use Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\Http\Factory\ErrorResponseFactory;
+use Core\Http\Factory\SwaggerUIHandlerFactory;
 use Core\Http\Handler\PingHandler;
 use Core\Http\Handler\SwaggerUIHandler;
 use Core\Http\Middleware\PaginationMiddleware;
@@ -20,9 +17,18 @@ use Core\Http\Middleware\RequestLoggingMiddleware;
 use Core\Http\Middleware\RouteNotFoundMiddleware;
 use Core\Observability\CorrelationIdRegistry;
 use Core\Persistence\Pagination;
-use Psr\Http\Message\ResponseInterface;
+use Core\SharedKernel\Utils\UuidFactory;
+use Fig\Http\Message\StatusCodeInterface as Http;
+use InvalidArgumentException;
+use Laminas\Diactoros\Response\EmptyResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\ServerRequest;
+use Monolog\Level;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
+
+use RuntimeException;
 
 use function expect;
 use function json_decode;
@@ -38,7 +44,7 @@ test('HTTP exceptions expose status context and message', function (): void {
 });
 
 test('duplicate entry exception preserves all constructor data and uses conflict status', function (): void {
-    $previous = new \RuntimeException('database constraint');
+    $previous = new RuntimeException('database constraint');
     $exception = new HttpDuplicateEntryException(
         'Duplicate workspace',
         'workspace name already in use',
@@ -65,7 +71,7 @@ test('duplicate entry exception applies warning log level and empty context by d
 });
 
 test('handled invalid argument exception exposes a successful response status', function (): void {
-    $previous = new \InvalidArgumentException('invalid input was handled');
+    $previous = new InvalidArgumentException('invalid input was handled');
     $exception = new HttpHandledInvalidArgumentAsSuccessException(
         'Invalid account state',
         'account already activated',
@@ -110,7 +116,7 @@ test('error response factory maps handled and unhandled exceptions', function ()
     $factory = new ErrorResponseFactory($logger);
 
     $handled = $factory->createFromThrowable(new HttpInvalidArgumentException('log', 'bad'));
-    $unhandled = $factory->createFromThrowable(new \RuntimeException('failure'));
+    $unhandled = $factory->createFromThrowable(new RuntimeException('failure'));
     expect($handled->getStatusCode())->toBe(Http::STATUS_BAD_REQUEST)->and($unhandled->getStatusCode())->toBe(Http::STATUS_INTERNAL_SERVER_ERROR);
 });
 
@@ -120,7 +126,7 @@ test('error response factory strips clear-text contact fields from the log conte
     $logger->method('log')->willReturnCallback(
         static function ($level, $message, array $context) use (&$loggedContext): void {
             $loggedContext = $context;
-        }
+        },
     );
     $factory = new ErrorResponseFactory($logger);
 
@@ -144,18 +150,18 @@ test('error response factory strips clear-text contact fields from the log conte
 test('route-not-found middleware logs and delegates', function (): void {
     $logger = $this->createMock(LoggerInterface::class);
     $logger->expects($this->once())->method('notice')->with('Route not found');
-    $response = new \Laminas\Diactoros\Response\EmptyResponse();
+    $response = new EmptyResponse();
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->willReturn($response);
     expect((new RouteNotFoundMiddleware($logger))->process(new ServerRequest(), $handler))->toBe($response);
 });
 
 test('request correlation middleware sets and clears the correlation id', function (): void {
-    $uuidFactory = new \Core\SharedKernel\Utils\UuidFactory();
-    $response = new \Laminas\Diactoros\Response\EmptyResponse();
+    $uuidFactory = new UuidFactory();
+    $response = new EmptyResponse();
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->with(
-        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) !== null)
+        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) !== null),
     )->willReturn($response);
     $middleware = new RequestCorrelationMiddleware($uuidFactory);
 
@@ -167,11 +173,11 @@ test('request correlation middleware sets and clears the correlation id', functi
 });
 
 test('request correlation middleware uses an incoming correlation id header', function (): void {
-    $uuidFactory = new \Core\SharedKernel\Utils\UuidFactory();
-    $response = new \Laminas\Diactoros\Response\EmptyResponse();
+    $uuidFactory = new UuidFactory();
+    $response = new EmptyResponse();
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->with(
-        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) === 'trace-123')
+        $this->callback(static fn ($request): bool => $request->getAttribute(RequestCorrelationMiddleware::CORRELATION_ID) === 'trace-123'),
     )->willReturn($response);
     $middleware = new RequestCorrelationMiddleware($uuidFactory);
 
@@ -184,9 +190,9 @@ test('request logging middleware logs request details on success', function (): 
     $logger->expects($this->once())->method('log')->with(
         Level::Info->value,
         $this->callback(static fn ($message): bool => str_contains($message, 'GET')),
-        $this->callback(static fn (array $context): bool => ($context['method'] ?? '') === 'GET')
+        $this->callback(static fn (array $context): bool => ($context['method'] ?? '') === 'GET'),
     );
-    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_OK);
+    $response = new EmptyResponse(Http::STATUS_OK);
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->willReturn($response);
 
@@ -198,9 +204,9 @@ test('request logging middleware warns on client errors', function (): void {
     $logger->expects($this->once())->method('log')->with(
         Level::Warning->value,
         $this->anything(),
-        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_NOT_FOUND)
+        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_NOT_FOUND),
     );
-    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_NOT_FOUND);
+    $response = new EmptyResponse(Http::STATUS_NOT_FOUND);
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->willReturn($response);
 
@@ -212,9 +218,9 @@ test('request logging middleware logs errors on server errors', function (): voi
     $logger->expects($this->once())->method('log')->with(
         Level::Error->value,
         $this->anything(),
-        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_INTERNAL_SERVER_ERROR)
+        $this->callback(static fn (array $context): bool => ($context['status'] ?? 0) === Http::STATUS_INTERNAL_SERVER_ERROR),
     );
-    $response = new \Laminas\Diactoros\Response\EmptyResponse(Http::STATUS_INTERNAL_SERVER_ERROR);
+    $response = new EmptyResponse(Http::STATUS_INTERNAL_SERVER_ERROR);
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->willReturn($response);
 
@@ -224,7 +230,7 @@ test('request logging middleware logs errors on server errors', function (): voi
 test('pagination middleware attaches pagination to the request', function (): void {
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')->with(
-        $this->callback(static fn ($request): bool => $request->getAttribute(Pagination::class) instanceof Pagination)
+        $this->callback(static fn ($request): bool => $request->getAttribute(Pagination::class) instanceof Pagination),
     );
     (new PaginationMiddleware())->process((new ServerRequest())->withQueryParams(['page' => '2', 'limit' => '10']), $handler);
 });
@@ -258,4 +264,45 @@ test('swagger handler returns the same documentation for any request method', fu
 test('swagger handler returns no content when the documentation file is missing', function (): void {
     $response = (new SwaggerUIHandler('/does/not/exist/index.html'))->handle(new ServerRequest());
     expect($response->getStatusCode())->toBe(Http::STATUS_NO_CONTENT);
+});
+
+test('swagger UI handler factory creates handler with config index_file', function (): void {
+    $container = $this->createMock(ContainerInterface::class);
+    $container->method('get')->willReturnCallback(
+        static function ($service): mixed {
+            if ($service === 'config') {
+                return [
+                    'swagger_ui' => [
+                        'index_file' => '/some/path/index.html',
+                    ],
+                ];
+            }
+            throw new InvalidArgumentException("Unknown service: $service");
+        },
+    );
+
+    $factory = new SwaggerUIHandlerFactory();
+    $handler = $factory($container);
+
+    expect($handler)->toBeInstanceOf(SwaggerUIHandler::class)
+        ->and($handler instanceof SwaggerUIHandler);
+});
+
+test('swagger UI handler factory creates handler with default empty index_file', function (): void {
+    $container = $this->createMock(ContainerInterface::class);
+    $container->method('get')->willReturnCallback(
+        static function ($service): mixed {
+            if ($service === 'config') {
+                return [
+                    'swagger_ui' => [],
+                ];
+            }
+            throw new InvalidArgumentException("Unknown service: $service");
+        },
+    );
+
+    $factory = new SwaggerUIHandlerFactory();
+    $handler = $factory($container);
+
+    expect($handler)->toBeInstanceOf(SwaggerUIHandler::class);
 });

@@ -5,6 +5,7 @@ namespace Core\Http;
 use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Core\Http\Factory\ErrorResponseFactory;
+use Core\Http\Factory\SwaggerUIHandlerFactory;
 use Core\Http\Handler\PingHandler;
 use Core\Http\Handler\SwaggerUIHandler;
 use Core\Http\Middleware\ApiErrorHandlerMiddleware;
@@ -26,14 +27,7 @@ class ConfigProvider
                     PingHandler::class,
                 ],
                 'factories' => [
-                    SwaggerUIHandler::class => static function (ContainerInterface $container): SwaggerUIHandler {
-                        /** @var array{swagger_ui?: array{index_file?: string}} $config */
-                        $config = $container->get('config');
-
-                        return new SwaggerUIHandler(
-                            $config['swagger_ui']['index_file'] ?? '',
-                        );
-                    },
+                    SwaggerUIHandler::class => SwaggerUIHandlerFactory::class,
                     ErrorResponseFactory::class => ConfigAbstractFactory::class,
                     ApiErrorHandlerMiddleware::class => ConfigAbstractFactory::class,
                     PaginationMiddleware::class => InvokableFactory::class,
