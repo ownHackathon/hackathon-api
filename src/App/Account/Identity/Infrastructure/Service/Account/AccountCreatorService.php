@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -59,7 +59,7 @@ readonly final class AccountCreatorService
             id: null,
             uuid: $this->uuid->uuid7(),
             name: $accountRegistration->accountName,
-            password: password_hash($accountRegistration->password, PASSWORD_BCRYPT),
+            hashedPassword: password_hash($accountRegistration->password, PASSWORD_BCRYPT),
             email: $persistActivationToken->email,
             registeredAt: new DateTimeImmutable(),
             lastActionAt: new DateTimeImmutable(),

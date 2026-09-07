@@ -6,9 +6,10 @@ use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use Core\Http\Exception\HttpInvalidArgumentException;
-use DateTimeImmutable;
 use InvalidArgumentException;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -18,20 +19,22 @@ readonly final class LastActivityUpdaterMiddleware implements MiddlewareInterfac
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
+        private AccountResolver $resolver,
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
-        if (!($account instanceof AccountInterface)) {
+        $account = $this->resolver->resolveFromRequest($request);
+
+        if (!$account instanceof AccountInterface) {
             return $handler->handle($request);
         }
 
         try {
             $this->accountRepository->update(
-                $account->with(lastActionAt: new DateTimeImmutable()),
+                $account->refreshLastActionAt(),
             );
         } catch (InvalidArgumentException $exception) {
             throw new HttpInvalidArgumentException(

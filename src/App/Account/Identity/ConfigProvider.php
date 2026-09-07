@@ -2,11 +2,10 @@
 
 namespace App\Account\Identity;
 
-use Envms\FluentPDO\Query;
-use Laminas\InputFilter\Factory;
-use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
-use Laminas\ServiceManager\Factory\InvokableFactory;
-use Mezzio\Helper\UrlHelper;
+use App\Account\Identity\Api\AccountRegisterServiceInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
@@ -17,9 +16,6 @@ use App\Account\Identity\Handler\AccountPasswordHandler;
 use App\Account\Identity\Handler\AccountRegisterHandler;
 use App\Account\Identity\Handler\AuthenticationHandler;
 use App\Account\Identity\Handler\LogoutHandler;
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Factory\ActivityLoggerFactory;
 use App\Account\Identity\Infrastructure\Factory\EmailHashSaltProviderFactory;
 use App\Account\Identity\Infrastructure\Factory\IdentityLoggerFactory;
@@ -41,6 +37,7 @@ use App\Account\Identity\Infrastructure\Persistence\Table\AccountTable;
 use App\Account\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
 use App\Account\Identity\Infrastructure\Service\Account\AccountCreatorService;
 use App\Account\Identity\Infrastructure\Service\Account\AccountRegisterService;
+use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
 use App\Account\Identity\Infrastructure\Service\Account\PasswordService;
@@ -56,6 +53,7 @@ use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenServiceFactory;
 use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
+use App\Account\Identity\Infrastructure\Validator\EMailValidator;
 use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use App\Account\Identity\Middleware\Account\Authentication\AuthenticationConditionsMiddleware;
@@ -74,10 +72,14 @@ use App\Account\Identity\Middleware\Token\RefreshTokenDatabaseExistenceMiddlewar
 use App\Account\Identity\Middleware\Token\RefreshTokenMatchClientIdentificationMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenValidationMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use App\Mailing\Infrastructure\Validator\EMailValidator;
+use App\Token\Api\PasswordChangeTokenServiceInterface;
 use Core\Persistence\Middleware\FluentTransactionMiddleware;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
-use App\Token\Domain\Repository\TokenRepositoryInterface;
+use Envms\FluentPDO\Query;
+use Laminas\InputFilter\Factory;
+use Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Mezzio\Helper\UrlHelper;
 
 readonly class ConfigProvider
 {
@@ -191,6 +193,7 @@ readonly class ConfigProvider
                 AccountAccessAuthHydratorInterface::class => AccountAccessAuthHydrator::class,
                 AccountActivationHydratorInterface::class => AccountActivationHydrator::class,
                 AccountHydratorInterface::class => AccountHydrator::class,
+                AccountRegisterServiceInterface::class => AccountRegisterService::class,
 
                 AccountRepositoryInterface::class => AccountRepository::class,
                 AccountActivationRepositoryInterface::class => AccountActivationRepository::class,
@@ -254,6 +257,8 @@ readonly class ConfigProvider
                 PasswordService::class => ConfigAbstractFactory::class,
                 AccountPasswordHandler::class => ConfigAbstractFactory::class,
                 LogoutHandler::class => ConfigAbstractFactory::class,
+                AccountResolver::class => InvokableFactory::class,
+                RequireLoginMiddleware::class => ConfigAbstractFactory::class,
             ],
 
         ];
@@ -287,13 +292,15 @@ readonly class ConfigProvider
             ],
             LastActivityUpdaterMiddleware::class => [
                 AccountRepositoryInterface::class,
+                AccountResolver::class,
             ],
             AccountActivityLoggingMiddleware::class => [
                 ActivityLoggerInterface::class,
+                AccountResolver::class,
             ],
             PasswordChangeService::class => [
                 AccountRepositoryInterface::class,
-                TokenRepositoryInterface::class,
+                PasswordChangeTokenServiceInterface::class,
                 AccountService::class,
                 ActivityLoggerInterface::class,
             ],
@@ -336,7 +343,7 @@ readonly class ConfigProvider
             AccountService::class => [
                 AccountRepositoryInterface::class,
                 AccountAccessAuthRepositoryInterface::class,
-                TokenRepositoryInterface::class,
+                PasswordChangeTokenServiceInterface::class,
                 PasswordTokenService::class,
                 UuidFactoryInterface::class,
                 ActivityLoggerInterface::class,
@@ -411,6 +418,10 @@ readonly class ConfigProvider
             ],
             LogoutHandler::class => [
                 AccountService::class,
+                AccountResolver::class,
+            ],
+            RequireLoginMiddleware::class => [
+                AccountResolver::class,
             ],
         ];
     }

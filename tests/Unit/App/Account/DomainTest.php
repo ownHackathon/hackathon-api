@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\App\Account;
 
-use DateTimeImmutable;
-use InvalidArgumentException;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountCollection;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
+use DateTimeImmutable;
+use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -33,6 +33,6 @@ test('collection throws for unknown offset', function (): void {
 
 test('readonly entities can be copied with changed properties', function (): void {
     $account = new Account(1, Uuid::uuid4(), 'Alice', 'hash', new EmailType('alice@example.com'), new DateTimeImmutable(), null);
-    $changed = $account->with(name: 'Bob');
+    $changed = $account->withName('Bob');
     expect($changed->name)->toBe('Bob')->and($account->name)->toBe('Alice');
 });

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Token\Domain;
+namespace App\Token\Domain\Entity;
 
 use Core\SharedKernel\Utils\Collection;
 use InvalidArgumentException;

@@ -2,8 +2,8 @@
 
 namespace App\Token\Domain\Repository;
 
-use App\Token\Domain\TokenCollectionInterface;
-use App\Token\Domain\TokenInterface;
+use App\Token\Domain\Entity\TokenCollectionInterface;
+use App\Token\Domain\Entity\TokenInterface;
 use Core\Persistence\Repository\RepositoryInterface;
 
 interface TokenRepositoryInterface extends RepositoryInterface

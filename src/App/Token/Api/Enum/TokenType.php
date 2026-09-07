@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Token\Domain\Enum;
+namespace App\Token\Api\Enum;
 
 enum TokenType: int
 {

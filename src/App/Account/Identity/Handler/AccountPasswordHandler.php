@@ -4,7 +4,7 @@ namespace App\Account\Identity\Handler;
 
 use App\Account\Identity\DTO\Account\AccountPassword;
 use App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
-use App\Token\DTO\Token;
+use App\Token\Api\DTO\RawTokenDto;
 use Core\Http\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -57,7 +57,7 @@ final class AccountPasswordHandler implements RequestHandlerInterface
     #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $token = Token::fromString($request->getAttribute('token'));
+        $token = RawTokenDto::fromString($request->getAttribute('token'));
         $password = $request->getAttribute(AccountPassword::class);
 
         $this->passwordChangeService->change($token, $password);

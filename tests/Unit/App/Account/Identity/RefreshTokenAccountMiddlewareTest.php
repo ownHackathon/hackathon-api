@@ -2,17 +2,18 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use DateTimeImmutable;
-use Laminas\Diactoros\ServerRequest;
+use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\AccountAccessAuthInterface;
-use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\Middleware\Token\RefreshTokenAccountMiddleware;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\DTO\RawTokenDto;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use DateTimeImmutable;
+use Laminas\Diactoros\ServerRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -23,7 +24,7 @@ use function test;
 
 function refreshAuth(): AccountAccessAuth
 {
-    return new AccountAccessAuth(1, 7, 'web', 'refresh', 'agent', 'hash', new DateTimeImmutable());
+    return new AccountAccessAuth(1, 7, 'web', RawTokenDto::fromString('refresh'), 'agent', 'hash', new DateTimeImmutable());
 }
 
 function refreshAccount(): Account
@@ -34,6 +35,15 @@ function refreshAccount(): Account
 test('refresh account middleware forwards the resolved account', function (): void {
     $auth = refreshAuth();
     $account = refreshAccount();
+    $authenticatedAccount = new AuthenticatedAccountDto(
+        $account->id,
+        $account->uuid,
+        $account->name,
+        $account->hashedPassword,
+        $account->email,
+        $account->registeredAt,
+        $account->lastActionAt,
+    );
     $repository = $this->createMock(AccountRepositoryInterface::class);
     $repository->expects($this->once())->method('findOneById')->with($auth->accountId)->willReturn($account);
 
@@ -41,7 +51,18 @@ test('refresh account middleware forwards the resolved account', function (): vo
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->expects($this->once())->method('handle')
         ->with($this->callback(
-            static fn (ServerRequestInterface $r): bool => $r->getAttribute(AccountInterface::AUTHENTICATED) === $account,
+            static function (ServerRequestInterface $r) use ($authenticatedAccount): bool {
+                $dto = $r->getAttribute(AuthenticatedAccountDto::class);
+
+                return $dto instanceof AuthenticatedAccountDto
+                    && $dto->id === $authenticatedAccount->id
+                    && $dto->uuid->equals($authenticatedAccount->uuid)
+                    && $dto->name === $authenticatedAccount->name
+                    && $dto->hashedPassword === $authenticatedAccount->hashedPassword
+                    && (string) $dto->email === (string) $authenticatedAccount->email
+                    && $dto->registeredAt == $authenticatedAccount->registeredAt
+                    && $dto->lastActionAt == $authenticatedAccount->lastActionAt;
+            },
         ))
         ->willReturn($this->createMock(ResponseInterface::class));
 

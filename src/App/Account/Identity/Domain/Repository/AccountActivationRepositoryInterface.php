@@ -4,7 +4,7 @@ namespace App\Account\Identity\Domain\Repository;
 
 use App\Account\Identity\Domain\AccountActivationCollectionInterface;
 use App\Account\Identity\Domain\AccountActivationInterface;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use Core\Persistence\Repository\RepositoryInterface;
 
 interface AccountActivationRepositoryInterface extends RepositoryInterface

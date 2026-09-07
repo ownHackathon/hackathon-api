@@ -2,18 +2,20 @@
 
 namespace App\Account\Identity\Infrastructure\Hydrator;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountCollection;
 use App\Account\Identity\Domain\AccountCollectionInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
+use Override;
 use Ramsey\Uuid\UuidFactoryInterface;
+use Throwable;
 
 readonly final class AccountHydrator implements AccountHydratorInterface
 {
@@ -26,7 +28,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
     /**
      * @throws Exception
      */
-    #[\Override]
+    #[Override]
     #[ArrayShape([
         'id' => 'int|null',
         'uuid' => 'string',
@@ -42,7 +44,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
             id: $data['id'],
             uuid: $this->uuid->fromString($data['uuid']),
             name: $data['name'],
-            password: $data['password'],
+            hashedPassword: $data['password'],
             email: new EmailType($data['email']),
             registeredAt: new DateTimeImmutable($data['registeredAt']),
             lastActionAt: $data['lastActionAt'] ? new DateTimeImmutable($data['lastActionAt']) : null,
@@ -52,7 +54,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
     /**
      * @throws Exception
      */
-    #[\Override]
+    #[Override]
     public function hydrateCollection(array $data): AccountCollectionInterface
     {
         $collection = new AccountCollection();
@@ -60,7 +62,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
         foreach ($data as $entity) {
             try {
                 $collection[] = $this->hydrate($entity);
-            } catch (\Throwable $exception) {
+            } catch (Throwable $exception) {
                 $this->logger->warning(IdentityLogMessage::ACCOUNT_DATA_SKIPPED, [
                     'accountId' => $entity['id'] ?? null,
                     'exception' => $exception,
@@ -71,7 +73,7 @@ readonly final class AccountHydrator implements AccountHydratorInterface
         return $collection;
     }
 
-    #[\Override]
+    #[Override]
     #[ArrayShape([
         'id' => 'int|null',
         'uuid' => 'string',
@@ -87,14 +89,14 @@ readonly final class AccountHydrator implements AccountHydratorInterface
             'id' => $object->id,
             'uuid' => $object->uuid->toString(),
             'name' => $object->name,
-            'password' => $object->password,
+            'password' => $object->hashedPassword,
             'email' => $object->email->toString(),
             'registeredAt' => $object->registeredAt->format(DateTimeFormat::DEFAULT->value),
             'lastActionAt' => $object->lastActionAt?->format(DateTimeFormat::DEFAULT->value),
         ];
     }
 
-    #[\Override]
+    #[Override]
     public function extractCollection(AccountCollectionInterface $collection): array
     {
         $data = [];

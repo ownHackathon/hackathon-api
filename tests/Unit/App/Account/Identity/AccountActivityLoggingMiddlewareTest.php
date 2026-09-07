@@ -2,19 +2,18 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
-use App\Account\Identity\Domain\Account;
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\DTO\Client\ClientIdentification;
 use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use DateTimeImmutable;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\ServerRequest;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -42,7 +41,7 @@ test('account activity middleware logs a guest interaction with masked context',
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->method('handle')->willReturn(new JsonResponse(['ok' => true], 200));
 
-    $response = (new AccountActivityLoggingMiddleware($logger))->process($request, $handler);
+    $response = (new AccountActivityLoggingMiddleware($logger, new AccountResolver()))->process($request, $handler);
 
     expect($response)->toBeInstanceOf(ResponseInterface::class);
     expect($context)->not->toBeNull()
@@ -63,7 +62,7 @@ test('account activity middleware logs an authenticated interaction with account
             },
         );
 
-    $account = new Account(
+    $account = new AuthenticatedAccountDto(
         7,
         Uuid::uuid4(),
         'Alice',
@@ -73,17 +72,20 @@ test('account activity middleware logs an authenticated interaction with account
         null,
     );
 
-    $request = (new ServerRequest([], [], 'http://example.test/api/ping', 'POST'))
-        ->withAttribute(AccountInterface::AUTHENTICATED, $account)
-        ->withAttribute(ClientIdentification::class, ClientIdentification::create(
-            new ClientIdentificationData('fingerprint', 'curl/8.0.0'),
-            'client-hash',
-        ));
+    $request = new ServerRequest([], [], 'http://example.test/api/ping', 'POST')
+        ->withAttribute(AuthenticatedAccountDto::class, $account)
+        ->withAttribute(
+            ClientIdentification::class,
+            ClientIdentification::create(
+                new ClientIdentificationData('fingerprint', 'curl/8.0.0'),
+                'client-hash',
+            )
+        );
 
     $handler = $this->createMock(RequestHandlerInterface::class);
     $handler->method('handle')->willReturn(new JsonResponse([], 400));
 
-    (new AccountActivityLoggingMiddleware($logger))->process($request, $handler);
+    (new AccountActivityLoggingMiddleware($logger, new AccountResolver()))->process($request, $handler);
 
     $entry = $messages[0];
     expect($entry['context']['guest'])->toBeFalse()

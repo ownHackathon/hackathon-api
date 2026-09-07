@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Token\DTO;
+namespace App\Token\Api\DTO;
 
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema()]
-readonly final class Token
+readonly final class RawTokenDto
 {
     public function __construct(
         #[OA\Property(

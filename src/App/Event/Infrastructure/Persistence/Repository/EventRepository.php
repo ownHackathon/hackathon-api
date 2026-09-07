@@ -14,8 +14,8 @@ use Core\Persistence\Store\StoreInterface;
 readonly final class EventRepository extends AbstractRepository implements EventRepositoryInterface
 {
     public function __construct(
-        private EventStoreInterface $store,
-        private EventHydratorInterface $hydrator,
+        public EventStoreInterface $store,
+        public EventHydratorInterface $hydrator,
     ) {
     }
 
@@ -75,13 +75,11 @@ readonly final class EventRepository extends AbstractRepository implements Event
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
     protected function getHydrator(): HydratorInterface
     {
         return $this->hydrator;
     }
 
-    #[\Override]
     protected function getStore(): StoreInterface
     {
         return $this->store;

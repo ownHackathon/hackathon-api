@@ -2,8 +2,8 @@
 
 namespace App\Mailing\Infrastructure\Service;
 
-use App\Mailing\Application\Port\MailerInterface;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
+use App\Mailing\Api\MailerInterface;
 use Symfony\Component\Mailer\MailerInterface as SymfonyMailerInterface;
 use Symfony\Component\Mime\Email;
 

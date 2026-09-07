@@ -16,8 +16,8 @@ use PDOException;
 readonly final class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface
 {
     public function __construct(
-        private WorkspaceStoreInterface $store,
-        private WorkspaceHydratorInterface $hydrator,
+        public WorkspaceStoreInterface $store,
+        public WorkspaceHydratorInterface $hydrator,
     ) {
     }
 
@@ -92,13 +92,11 @@ readonly final class WorkspaceRepository extends AbstractRepository implements W
         return $this->store->count(['accountId' => $accountId]);
     }
 
-    #[\Override]
     protected function getHydrator(): HydratorInterface
     {
         return $this->hydrator;
     }
 
-    #[\Override]
     protected function getStore(): StoreInterface
     {
         return $this->store;

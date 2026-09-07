@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
@@ -12,10 +12,12 @@ use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Monolog\Level;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 use function strlen;
 
@@ -29,7 +31,7 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $authorization = $request->getHeaderLine('Authorization');
@@ -56,7 +58,7 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
         $authorization = $this->accessTokenService->decode($authorization);
         try {
             $uuid = $this->uuid->fromString($authorization->uuid);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             throw new HttpUnauthorizedException(
                 IdentityLogMessage::ACCESS_TOKEN_ACCOUNT_NOT_FOUND,
                 IdentityStatusMessage::TOKEN_INVALID,
@@ -86,6 +88,16 @@ readonly final class RequestAuthenticationMiddleware implements MiddlewareInterf
             'uri' => (string)$request->getUri(),
         ]);
 
-        return $handler->handle($request->withAttribute(AccountInterface::AUTHENTICATED, $account));
+        $authenticatedAccount = new AuthenticatedAccountDto(
+            $account->id,
+            $account->uuid,
+            $account->name,
+            $account->hashedPassword,
+            $account->email,
+            $account->registeredAt,
+            $account->lastActionAt,
+        );
+
+        return $handler->handle($request->withAttribute(AuthenticatedAccountDto::class, $authenticatedAccount));
     }
 }

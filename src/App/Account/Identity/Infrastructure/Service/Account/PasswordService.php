@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 
 readonly final class PasswordService
 {

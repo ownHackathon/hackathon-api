@@ -2,13 +2,13 @@
 
 namespace App\Token\Infrastructure\Hydrator;
 
-use App\Token\Application\Port\TokenLoggerInterface;
-use App\Token\Domain\Enum\TokenType;
+use App\Token\Api\Enum\TokenType;
+use App\Token\Api\TokenLoggerInterface;
+use App\Token\Domain\Entity\Token;
+use App\Token\Domain\Entity\TokenCollection;
+use App\Token\Domain\Entity\TokenCollectionInterface;
+use App\Token\Domain\Entity\TokenInterface;
 use App\Token\Domain\Message\TokenLogMessage;
-use App\Token\Domain\Token;
-use App\Token\Domain\TokenCollection;
-use App\Token\Domain\TokenCollectionInterface;
-use App\Token\Domain\TokenInterface;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidFactoryInterface;

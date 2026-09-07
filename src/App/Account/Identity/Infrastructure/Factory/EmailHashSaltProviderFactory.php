@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Factory;
 
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProvider;
 use Psr\Container\ContainerInterface;
 

@@ -2,20 +2,14 @@
 
 namespace Core\Persistence\Repository;
 
-use Core\Persistence\Hydrator\HydratorInterface;
-use Core\Persistence\Store\StoreInterface;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 
 readonly abstract class AbstractRepository implements RepositoryInterface
 {
-    abstract protected function getHydrator(): HydratorInterface;
-
-    abstract protected function getStore(): StoreInterface;
-
     #[\Override]
     public function deleteById(int $id): true
     {
-        return $this->getStore()->remove(['id' => $id]);
+        return $this->store->remove(['id' => $id]);
     }
 
     protected function mapToEntity(mixed $result): mixed
@@ -25,7 +19,7 @@ readonly abstract class AbstractRepository implements RepositoryInterface
         }
 
         try {
-            return $this->getHydrator()->hydrate($result);
+            return $this->hydrator->hydrate($result);
         } catch (\Throwable) {
             throw new EmptyResultException();
         }
@@ -33,6 +27,6 @@ readonly abstract class AbstractRepository implements RepositoryInterface
 
     protected function mapToCollection(mixed $result): mixed
     {
-        return is_array($result) ? $this->getHydrator()->hydrateCollection($result) : $this->getHydrator()->hydrateCollection([]);
+        return is_array($result) ? $this->hydrator->hydrateCollection($result) : $this->hydrator->hydrateCollection([]);
     }
 }

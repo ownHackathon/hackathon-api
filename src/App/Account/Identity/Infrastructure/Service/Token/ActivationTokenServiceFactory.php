@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use App\Mailing\Application\Port\MailerInterface;
+use App\Mailing\Api\MailerInterface;
 use Psr\Container\ContainerInterface;
 
 readonly final class ActivationTokenServiceFactory

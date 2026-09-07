@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\Application\Port;
+namespace App\Account\Identity\Api;
 
 use Psr\Log\LoggerInterface;
 

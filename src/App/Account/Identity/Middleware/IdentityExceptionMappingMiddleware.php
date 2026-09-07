@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Middleware;
 
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use App\Account\Identity\Domain\Exception\DuplicateEMailException;

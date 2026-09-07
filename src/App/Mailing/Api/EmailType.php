@@ -1,12 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace App\Mailing\Domain;
+namespace App\Mailing\Api;
 
 use App\Mailing\Exception\InvalidArgumentException;
+use Core\SharedKernel\Type\TypeInterface;
+use Override;
 
+use function filter_var;
 use function sprintf;
 
-final class EmailType implements \Core\SharedKernel\Type\TypeInterface
+use const FILTER_VALIDATE_EMAIL;
+
+final class EmailType implements TypeInterface
 {
     private string $value;
 
@@ -15,30 +20,30 @@ final class EmailType implements \Core\SharedKernel\Type\TypeInterface
         $this->value = $value instanceof self ? (string)$value : $this->prepareValue($value);
     }
 
-    public static function fromString(string $value): self
+    public static function fromString(string $value): EmailType
     {
         return new self($value);
     }
 
-    #[\Override]
+    #[Override]
     public function toString(): string
     {
         return $this->value;
     }
 
-    #[\Override]
+    #[Override]
     public function serialize(): string
     {
         return $this->toString();
     }
 
-    #[\Override]
+    #[Override]
     public function unserialize(string $data): void
     {
         $this->value = $this->prepareValue($data);
     }
 
-    #[\Override]
+    #[Override]
     public function jsonSerialize(): string
     {
         return $this->toString();

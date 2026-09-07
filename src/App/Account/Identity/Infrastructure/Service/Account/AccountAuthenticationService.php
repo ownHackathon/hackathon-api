@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
@@ -17,7 +17,8 @@ use App\Account\Identity\DTO\Response\AuthenticationResponse;
 use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\DTO\RawTokenDto;
 use Core\Observability\EmailHasher;
 use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
@@ -58,7 +59,7 @@ readonly final class AccountAuthenticationService
             throw new AccountNotFoundException(email: $auth->email);
         }
 
-        if (!$this->authenticationService->isPasswordMatch($auth->password, $account->password)) {
+        if (!$this->authenticationService->isPasswordMatch($auth->password, $account->hashedPassword)) {
             $this->activityLogger->warning(
                 IdentityLogMessage::ACTIVITY_LOGIN_FAILED,
                 [
@@ -78,7 +79,7 @@ readonly final class AccountAuthenticationService
             null,
             $account->id,
             'default',
-            $refreshToken->refreshToken,
+            RawTokenDto::fromString($refreshToken->refreshToken),
             $clientId->clientIdentificationData->userAgent,
             $clientId->identificationHash,
             new DateTimeImmutable(),

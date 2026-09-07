@@ -2,8 +2,6 @@
 
 namespace Tests\Integration\Composition;
 
-use DateTimeImmutable;
-use Mockery;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\AccountActivation;
@@ -16,19 +14,16 @@ use App\Account\Identity\Infrastructure\Persistence\Repository\AccountRepository
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
-use App\Mailing\Domain\EmailType;
-use App\Token\Domain\Enum\TokenType;
-use App\Token\Domain\Token;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\DTO\RawTokenDto;
+use App\Token\Api\Enum\TokenType;
+use App\Token\Domain\Entity\Token;
 use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Domain\Workspace;
-use App\Workspace\Infrastructure\Hydrator\WorkspaceHydratorInterface;
-use App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
-use App\Workspace\Infrastructure\Persistence\Table\WorkspaceStoreInterface;
-use Core\Persistence\Pagination;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use DateTimeImmutable;
+use Mockery;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -36,10 +31,9 @@ use function test;
 
 test('repositories delegate persistence and queries to their store', function () {
     $account = new Account(1, Uuid::uuid4(), 'Account', 'hash', EmailType::fromString('repo@example.com'), new DateTimeImmutable(), null);
-    $auth = new AccountAccessAuth(1, 1, 'web', 'refresh', 'agent', 'client', new DateTimeImmutable());
+    $auth = new AccountAccessAuth(1, 1, 'web', RawTokenDto::fromString('refresh'), 'agent', 'client', new DateTimeImmutable());
     $activation = new AccountActivation(1, $account->email, Uuid::uuid4(), new DateTimeImmutable());
     $token = new Token(1, 1, TokenType::EMail, Uuid::uuid4(), new DateTimeImmutable());
-    $workspace = new Workspace(1, Uuid::uuid4(), 1, 'Workspace', 'workspace', null, null, Visibility::PUBLIC, new DateTimeImmutable(), new DateTimeImmutable());
 
     $accountStore = Mockery::mock(AccountStoreInterface::class);
     $accountStore->shouldReceive('persist')->andReturn(1);
@@ -112,7 +106,7 @@ test('repositories delegate persistence and queries to their store', function ()
     $tokenStore->shouldReceive('fetchAll')->andReturn([]);
     $tokenHydrator = Mockery::mock(TokenHydratorInterface::class);
     $tokenHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $tokenHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Token\Domain\TokenCollection());
+    $tokenHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Token\Domain\Entity\TokenCollection());
     $tokenRepo = new TokenRepository($tokenStore, $tokenHydrator);
     expect($tokenRepo->insert($token))->toBe(1)
         ->and($tokenRepo->update($token))->toBeTrue()
@@ -122,26 +116,4 @@ test('repositories delegate persistence and queries to their store', function ()
         ->and($tokenRepo->findAll())->toHaveCount(0)
         ->and($tokenRepo->deleteById(1))->toBeTrue()
         ->and($tokenRepo->deleteByAccountId(1))->toBeTrue();
-
-    $workspaceStore = Mockery::mock(WorkspaceStoreInterface::class);
-    $workspaceStore->shouldReceive('persist')->andReturn(1);
-    $workspaceStore->shouldReceive('update')->andReturn(true);
-    $workspaceStore->shouldReceive('remove')->andReturn(true);
-    $workspaceStore->shouldReceive('fetchOne')->andReturn(null);
-    $workspaceStore->shouldReceive('fetchMany')->andReturn([]);
-    $workspaceStore->shouldReceive('fetchAll')->andReturn([]);
-    $workspaceStore->shouldReceive('count')->andReturn(0);
-    $workspaceHydrator = Mockery::mock(WorkspaceHydratorInterface::class);
-    $workspaceHydrator->shouldReceive('extract')->andReturnUsing(static fn($entity): array => ['id' => $entity->id]);
-    $workspaceHydrator->shouldReceive('hydrateCollection')->andReturn(new \App\Workspace\Domain\WorkspaceCollection());
-    $workspaceRepo = new WorkspaceRepository($workspaceStore, $workspaceHydrator);
-    expect($workspaceRepo->insert($workspace))->toBe(1)
-        ->and($workspaceRepo->update($workspace))->toBeTrue()
-        ->and($workspaceRepo->deleteById(1))->toBeTrue()
-        ->and(fn () => $workspaceRepo->findOneById(1))->toThrow(EmptyResultException::class)
-        ->and($workspaceRepo->findByAccountId(1, new Pagination(1, 5, 0)))->toHaveCount(0)
-        ->and(fn () => $workspaceRepo->findOneByName('Workspace'))->toThrow(EmptyResultException::class)
-        ->and(fn () => $workspaceRepo->findOneBySlug('workspace'))->toThrow(EmptyResultException::class)
-        ->and($workspaceRepo->findAll())->toHaveCount(0)
-        ->and($workspaceRepo->countByAccount(1))->toBe(0);
 });

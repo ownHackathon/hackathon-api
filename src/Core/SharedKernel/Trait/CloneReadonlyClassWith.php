@@ -7,10 +7,19 @@ namespace Core\SharedKernel\Trait;
  */
 trait CloneReadonlyClassWith
 {
-    public function with(mixed ...$properties): self
+    protected function with(mixed ...$args): self
     {
-        $properties += get_object_vars($this);
+        $constructor = new \ReflectionMethod($this, '__construct');
+        $parameters = [];
 
-        return new self(...$properties);
+        foreach ($constructor->getParameters() as $parameter) {
+            $name = $parameter->getName();
+            $parameters[$name] = array_key_exists($name, $args)
+                ? $args[$name]
+                // @phpstan-ignore property.dynamicName
+                : $this->{$name};
+        }
+
+        return new self(...$parameters);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Token\Infrastructure\Hydrator;
 
-use App\Token\Domain\TokenCollectionInterface;
-use App\Token\Domain\TokenInterface;
+use App\Token\Domain\Entity\TokenCollectionInterface;
+use App\Token\Domain\Entity\TokenInterface;
 use Core\Persistence\Hydrator\HydratorInterface;
 
 interface TokenHydratorInterface extends HydratorInterface

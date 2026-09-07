@@ -31,4 +31,21 @@ readonly final class Workspace implements WorkspaceInterface, Collectible
     {
         return $this->accountId;
     }
+
+    #[\Override]
+    public function with(mixed ...$properties): self
+    {
+        $constructor = new \ReflectionMethod($this, '__construct');
+        $parameters = [];
+
+        foreach ($constructor->getParameters() as $parameter) {
+            $name = $parameter->getName();
+            $parameters[$name] = array_key_exists($name, $properties)
+                ? $properties[$name]
+                // @phpstan-ignore property.dynamicName
+                : $this->{$name};
+        }
+
+        return new self(...$parameters);
+    }
 }

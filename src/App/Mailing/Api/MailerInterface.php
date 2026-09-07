@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Mailing\Application\Port;
-
-use App\Mailing\Domain\EmailType;
+namespace App\Mailing\Api;
 
 interface MailerInterface
 {

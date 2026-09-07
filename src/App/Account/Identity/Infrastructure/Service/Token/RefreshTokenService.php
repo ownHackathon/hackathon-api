@@ -13,7 +13,7 @@ use App\Account\Identity\DTO\Client\ClientIdentification;
 use App\Account\Identity\DTO\Token\AccessToken;
 use App\Account\Identity\DTO\Token\JwtTokenConfig;
 use App\Account\Identity\DTO\Token\RefreshToken;
-use App\Token\Infrastructure\Token\JwtTokenTrait;
+use App\Token\Infrastructure\Trait\JwtTokenTrait;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Firebase\JWT\JWT;
 

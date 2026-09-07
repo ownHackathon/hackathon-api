@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Mailing\Infrastructure\Validator;
+namespace App\Account\Identity\Infrastructure\Validator;
 
 use Laminas\InputFilter\Factory;
 use Laminas\InputFilter\Input;

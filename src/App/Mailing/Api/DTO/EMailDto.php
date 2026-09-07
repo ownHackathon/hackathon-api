@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Mailing\DTO;
+namespace App\Mailing\Api\DTO;
 
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['email'])]
-readonly final class EMail
+readonly final class EMailDto
 {
     public function __construct(
         #[OA\Property(

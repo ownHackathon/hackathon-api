@@ -2,6 +2,7 @@
 
 namespace App\Account\Identity\Domain;
 
+use App\Token\Api\DTO\RawTokenDto;
 use DateTimeImmutable;
 
 interface AccountAccessAuthInterface
@@ -12,7 +13,7 @@ interface AccountAccessAuthInterface
 
     public string $label { get; }
 
-    public string $refreshToken { get; }
+    public RawTokenDto $refreshToken { get; }
 
     public string $userAgent { get; }
 
@@ -20,5 +21,15 @@ interface AccountAccessAuthInterface
 
     public DateTimeImmutable $createdAt { get; }
 
-    public function with(mixed ...$properties): self;
+    public function withId(int $id): self;
+
+    public function withAccountId(int $accountId): self;
+
+    public function withLabel(string $label): self;
+
+    public function withRefreshToken(RawTokenDto $refreshToken): self;
+
+    public function withUserAgent(string $userAgent): self;
+
+    public function withClientIdentHash(string $clientIdentHash): self;
 }

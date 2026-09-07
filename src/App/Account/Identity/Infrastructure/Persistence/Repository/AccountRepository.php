@@ -7,21 +7,20 @@ use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountHydratorInterface;
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountStoreInterface;
-use App\Mailing\Domain\EmailType;
-use Core\Persistence\Hydrator\HydratorInterface;
+use App\Mailing\Api\EmailType;
 use Core\Persistence\Repository\AbstractRepository;
-use Core\Persistence\Store\StoreInterface;
+use Override;
 use Ramsey\Uuid\UuidInterface;
 
 readonly final class AccountRepository extends AbstractRepository implements AccountRepositoryInterface
 {
     public function __construct(
-        private AccountStoreInterface $store,
-        private AccountHydratorInterface $hydrator,
+        public AccountStoreInterface $store,
+        public AccountHydratorInterface $hydrator,
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function insert(AccountInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -29,7 +28,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->store->persist($data);
     }
 
-    #[\Override]
+    #[Override]
     public function update(AccountInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -37,13 +36,13 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->store->update($data['id'], $data);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneById(int $id): AccountInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -51,7 +50,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByUuid(UuidInterface $uuid): AccountInterface
     {
         $result = $this->store->fetchOne(['uuid' => $uuid]);
@@ -59,7 +58,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByName(string $name): AccountInterface
     {
         $result = $this->store->fetchOne(['name' => $name]);
@@ -67,7 +66,7 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByEmail(EmailType $email): AccountInterface
     {
         $result = $this->store->fetchOne(['email' => $email]);
@@ -75,23 +74,11 @@ readonly final class AccountRepository extends AbstractRepository implements Acc
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findAll(): AccountCollectionInterface
     {
         $result = $this->store->fetchAll();
 
         return $this->mapToCollection($result);
-    }
-
-    #[\Override]
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    #[\Override]
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 }

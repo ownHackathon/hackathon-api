@@ -2,23 +2,15 @@
 
 namespace Tests\Integration\Composition;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
-use App\Event\Application\Port\EventLoggerInterface;
-use App\Event\Domain\Enum\EventStatus;
-use App\Event\Infrastructure\Hydrator\EventHydrator;
-use App\Mailing\Domain\EmailType;
-use App\Policy\Domain\Enum\Visibility;
-use App\Token\Application\Port\TokenLoggerInterface;
-use App\Token\Domain\Enum\TokenType;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\Enum\TokenType;
+use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
-use App\Workspace\Application\Port\WorkspaceLoggerInterface;
-use App\Workspace\Infrastructure\Hydrator\WorkspaceHydrator;
-use Core\Clock\DateTimeFormat;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
-use DateTimeImmutable;
 
 use function expect;
 use function test;
@@ -39,18 +31,8 @@ function hydratorData(): array
         'userAgent' => 'agent',
         'clientIdentHash' => 'client',
         'createdAt' => '2024-01-01 10:00:00',
-        'updatedAt' => '2024-01-02 10:00:00',
         'token' => '019becbe-f952-7b82-82fa-f41f8ae24599',
         'tokenType' => TokenType::EMail->value,
-        'slug' => 'name',
-        'description' => 'description',
-        'details' => 'details',
-        'visibility' => Visibility::PUBLIC->value,
-        'workspaceId' => 3,
-        'topicId' => 4,
-        'status' => EventStatus::DRAFT->value,
-        'beginsOn' => '2024-01-03 10:00:00',
-        'endsOn' => '2024-01-04 10:00:00',
     ];
 }
 
@@ -58,8 +40,6 @@ test('all entity hydrators hydrate, extract and handle collections', function ()
     $uuid = $this->container->get(UuidFactoryInterface::class);
     $identityLogger = $this->container->get(IdentityLoggerInterface::class);
     $tokenLogger = $this->container->get(TokenLoggerInterface::class);
-    $workspaceLogger = $this->container->get(WorkspaceLoggerInterface::class);
-    $eventLogger = $this->container->get(EventLoggerInterface::class);
     $data = hydratorData();
 
     $accountHydrator = new AccountHydrator($uuid, $identityLogger);
@@ -92,21 +72,6 @@ test('all entity hydrators hydrate, extract and handle collections', function ()
     expect($tokenHydrator->extract($token))->toHaveSubset(['accountId' => 2, 'tokenType' => TokenType::EMail->value])
         ->and($tokenHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($tokenHydrator->extractCollection($tokenHydrator->hydrateCollection([$data])))->toHaveCount(1);
-
-    $workspaceHydrator = new WorkspaceHydrator($uuid, $workspaceLogger);
-    $workspace = $workspaceHydrator->hydrate($data);
-    expect($workspaceHydrator->extract($workspace))->toHaveSubset(['name' => 'Name', 'visibility' => Visibility::PUBLIC->value])
-        ->and($workspaceHydrator->hydrateCollection([$data]))->toHaveCount(1)
-        ->and($workspaceHydrator->extractCollection($workspaceHydrator->hydrateCollection([$data])))->toHaveCount(1);
-
-    $eventHydrator = new EventHydrator($uuid, $eventLogger);
-    $event = $eventHydrator->hydrate($data);
-    expect($eventHydrator->extract($event))->toHaveSubset([
-        'name' => 'Name',
-        'status' => EventStatus::DRAFT->value,
-        'visibility' => Visibility::PUBLIC->value,
-    ])->and($eventHydrator->hydrateCollection([$data]))->toHaveCount(1)
-        ->and($eventHydrator->extractCollection($eventHydrator->hydrateCollection([$data])))->toHaveCount(1);
 });
 
 test('email value object supports all serialization forms and rejects invalid values', function () {

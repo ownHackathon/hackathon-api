@@ -4,7 +4,7 @@ namespace Tests\Unit\App\Policy;
 
 use DateTimeImmutable;
 use App\Account\Identity\Domain\Account;
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use App\Policy\Domain\Enum\Visibility;
 use App\Policy\Domain\VisibilityAwareInterface;
 use App\Policy\Domain\VisibilityPolicy;

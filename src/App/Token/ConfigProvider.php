@@ -2,7 +2,9 @@
 
 namespace App\Token;
 
-use App\Token\Application\Port\TokenLoggerInterface;
+use App\Token\Api\PasswordChangeTokenServiceInterface;
+use App\Token\Api\TokenLoggerInterface;
+use App\Token\Application\PasswordChangeTokenService;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
 use App\Token\Infrastructure\Factory\TokenLoggerFactory;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
@@ -35,6 +37,7 @@ readonly class ConfigProvider
     {
         return [
             'aliases' => [
+                PasswordChangeTokenServiceInterface::class => PasswordChangeTokenService::class,
                 TokenHydratorInterface::class => TokenHydrator::class,
                 TokenRepositoryInterface::class => TokenRepository::class,
                 TokenStoreInterface::class => TokenTable::class,
@@ -42,6 +45,7 @@ readonly class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                PasswordChangeTokenService::class => ConfigAbstractFactory::class,
                 TokenLoggerInterface::class => TokenLoggerFactory::class,
                 TokenHydrator::class => ConfigAbstractFactory::class,
                 TokenRepository::class => ConfigAbstractFactory::class,
@@ -54,6 +58,9 @@ readonly class ConfigProvider
     public function getAbstractFactoryConfig(): array
     {
         return [
+            PasswordChangeTokenService::class => [
+                TokenRepositoryInterface::class,
+            ],
             TokenHydrator::class => [
                 UuidFactoryInterface::class,
                 TokenLoggerInterface::class,

@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -10,11 +10,10 @@ use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use App\Mailing\Domain\EmailType;
-use App\Token\Domain\Enum\TokenType;
-use App\Token\Domain\Repository\TokenRepositoryInterface;
-use App\Token\Domain\Token;
-use App\Token\Domain\TokenInterface;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\DTO\PasswordChangeTokenDto;
+use App\Token\Api\Enum\TokenType;
+use App\Token\Api\PasswordChangeTokenServiceInterface;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
@@ -26,7 +25,7 @@ readonly final class AccountService
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
         private AccountAccessAuthRepositoryInterface $authRepository,
-        private TokenRepositoryInterface $tokenRepository,
+        private PasswordChangeTokenServiceInterface $changeTokenService,
         private PasswordTokenService $tokenService,
         private UuidFactoryInterface $uuid,
         private ActivityLoggerInterface $activityLogger,
@@ -37,7 +36,7 @@ readonly final class AccountService
     {
         $account = $this->accountRepository->findOneByEmail($email);
         $token = $this->createPasswordChangeTokenForUserId($account->id);
-        $this->tokenRepository->insert($token);
+        $this->changeTokenService->insert($token);
         $this->tokenService->sendEmail($email, $token);
 
         $this->activityLogger->info(
@@ -60,9 +59,9 @@ readonly final class AccountService
         return false;
     }
 
-    public function createPasswordChangeTokenForUserId(int $userId): TokenInterface
+    public function createPasswordChangeTokenForUserId(int $userId): PasswordChangeTokenDto
     {
-        return new Token(
+        return new PasswordChangeTokenDto(
             id: null,
             accountId: $userId,
             tokenType: TokenType::EMail,
@@ -79,7 +78,7 @@ readonly final class AccountService
     public function updateLastAction(AccountInterface $account): void
     {
         $this->accountRepository->update(
-            $account->with(lastActionAt: new DateTimeImmutable()),
+            $account->refreshLastActionAt(),
         );
     }
 

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
-use App\Account\Identity\Application\Port\EmailHashSaltProviderInterface;
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\EmailHashSaltProviderInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Factory\ActivityLoggerFactory;
 use App\Account\Identity\Infrastructure\Factory\EmailHashSaltProviderFactory;
 use App\Account\Identity\Infrastructure\Factory\IdentityLoggerFactory;

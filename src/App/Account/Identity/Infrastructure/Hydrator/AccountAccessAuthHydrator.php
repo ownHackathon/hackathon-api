@@ -6,6 +6,7 @@ use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\AccountAccessAuthCollection;
 use App\Account\Identity\Domain\AccountAccessAuthCollectionInterface;
 use App\Account\Identity\Domain\AccountAccessAuthInterface;
+use App\Token\Api\DTO\RawTokenDto;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;
 use Exception;
@@ -22,7 +23,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
             id: $data['id'],
             accountId: $data['accountId'],
             label: $data['label'],
-            refreshToken: $data['refreshToken'],
+            refreshToken: RawTokenDto::fromString($data['refreshToken']),
             userAgent: $data['userAgent'],
             clientIdentHash: $data['clientIdentHash'],
             createdAt: new DateTimeImmutable($data['createdAt']),
@@ -51,7 +52,7 @@ readonly final class AccountAccessAuthHydrator implements AccountAccessAuthHydra
             'id' => $object->id,
             'accountId' => $object->accountId,
             'label' => $object->label,
-            'refreshToken' => $object->refreshToken,
+            'refreshToken' => $object->refreshToken->token,
             'userAgent' => $object->userAgent,
             'clientIdentHash' => $object->clientIdentHash,
             'createdAt' => $object->createdAt->format(DateTimeFormat::DEFAULT->value),

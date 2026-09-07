@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Logger;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Stringable;

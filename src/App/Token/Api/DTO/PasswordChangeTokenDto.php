@@ -1,17 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Token\Domain;
+namespace App\Token\Api\DTO;
 
-use App\Token\Domain\Enum\TokenType;
-use Core\SharedKernel\Trait\CloneReadonlyClassWith;
-use Core\SharedKernel\Utils\Collectible;
+use App\Token\Api\Enum\TokenType;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
-readonly final class Token implements TokenInterface, Collectible
+readonly final class PasswordChangeTokenDto
 {
-    use CloneReadonlyClassWith;
-
     public function __construct(
         public ?int $id,
         public int $accountId,

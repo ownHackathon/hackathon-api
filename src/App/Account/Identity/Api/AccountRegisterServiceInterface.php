@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\Application\Port;
+namespace App\Account\Identity\Api;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 
 interface AccountRegisterServiceInterface
 {

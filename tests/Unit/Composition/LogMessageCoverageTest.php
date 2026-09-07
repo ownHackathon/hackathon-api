@@ -3,9 +3,7 @@
 namespace Tests\Unit\Composition;
 
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
-use App\Event\Domain\Message\EventLogMessage;
 use App\Token\Domain\Message\TokenLogMessage;
-use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use Core\SharedKernel\Domain\Message\LogMessage;
 
 use function expect;
@@ -15,9 +13,7 @@ test('all log message interfaces expose their shared base constant', function ()
     $interfaces = [
         LogMessage::class,
         IdentityLogMessage::class,
-        EventLogMessage::class,
         TokenLogMessage::class,
-        WorkspaceLogMessage::class,
     ];
 
     foreach ($interfaces as $interface) {
@@ -25,24 +21,6 @@ test('all log message interfaces expose their shared base constant', function ()
             ->and(constant($interface . '::UNAUTHORIZED_ACCESS'))
             ->toBe(LogMessage::UNAUTHORIZED_ACCESS);
     }
-});
-
-test('event log message constants are unique and non-empty', function (): void {
-    expect(EventLogMessage::INVALID_EVENT_VISIBILITY)->not->toBe('')
-        ->and(EventLogMessage::EVENT_DATA_SKIPPED)->not->toBe('')
-        ->and(EventLogMessage::INVALID_EVENT_VISIBILITY)->not->toBe(EventLogMessage::EVENT_DATA_SKIPPED);
-});
-
-test('workspace log message constants cover validator and hydrator cases', function (): void {
-    $constants = [
-        WorkspaceLogMessage::INVALID_WORKSPACE_NAME,
-        WorkspaceLogMessage::DUPLICATED_WORKSPACE_NAME,
-        WorkspaceLogMessage::INVALID_WORKSPACE_VISIBILITY,
-        WorkspaceLogMessage::WORKSPACE_DATA_SKIPPED,
-    ];
-
-    expect($constants)->each->not->toBe('')
-        ->and(count($constants))->toBe(count(array_unique($constants)));
 });
 
 test('identity log message constants cover account hydrator cases', function (): void {

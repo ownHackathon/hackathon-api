@@ -2,9 +2,9 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use App\Mailing\Application\Port\MailerInterface;
-use App\Mailing\Domain\EmailType;
-use App\Token\Domain\TokenInterface;
+use App\Mailing\Api\EmailType;
+use App\Mailing\Api\MailerInterface;
+use App\Token\Api\DTO\PasswordChangeTokenDto;
 
 use function sprintf;
 
@@ -17,7 +17,7 @@ readonly class PasswordTokenService
     ) {
     }
 
-    public function sendEmail(EmailType $email, TokenInterface $token): void
+    public function sendEmail(EmailType $email, PasswordChangeTokenDto $token): void
     {
         $text = sprintf(
             'Hallo!

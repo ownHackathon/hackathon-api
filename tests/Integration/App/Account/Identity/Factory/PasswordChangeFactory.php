@@ -2,9 +2,9 @@
 
 namespace Tests\Integration\App\Account\Identity\Factory;
 
+use App\Token\Api\Enum\TokenType;
 use Envms\FluentPDO\Query;
 use Faker\Factory as Faker;
-use App\Token\Domain\Enum\TokenType;
 
 readonly class PasswordChangeFactory
 {

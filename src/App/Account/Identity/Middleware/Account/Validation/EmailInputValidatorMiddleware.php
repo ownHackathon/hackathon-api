@@ -4,9 +4,9 @@ namespace App\Account\Identity\Middleware\Account\Validation;
 
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use App\Mailing\Domain\EmailType;
+use App\Account\Identity\Infrastructure\Validator\EMailValidator;
+use App\Mailing\Api\EmailType;
 use App\Mailing\Exception\InvalidArgumentException;
-use App\Mailing\Infrastructure\Validator\EMailValidator;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Composition;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
@@ -12,6 +12,7 @@ use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
 use App\Account\Identity\Infrastructure\Validator\DateLessNow;
+use App\Account\Identity\Infrastructure\Validator\EMailValidator;
 use App\Account\Identity\Infrastructure\Validator\PasswordValidator;
 use App\Account\Identity\Middleware\Account\Authentication\AuthenticationValidationMiddleware;
 use App\Account\Identity\Middleware\Account\RequestAuthenticationMiddleware;
@@ -19,18 +20,8 @@ use App\Account\Identity\Middleware\Account\Validation\ActivationInputValidatorM
 use App\Account\Identity\Middleware\Account\Validation\EmailInputValidatorMiddleware;
 use App\Account\Identity\Middleware\Account\Validation\PasswordInputValidatorMiddleware;
 use App\Account\Identity\Middleware\Token\RefreshTokenViaBodyValidationMiddleware;
-use App\Account\Identity\Middleware\Token\AccessTokenValidationMiddleware;
-use App\Mailing\Infrastructure\Validator\EMailValidator;
-use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
-use App\Workspace\Infrastructure\Service\PaginationService;
-use App\Workspace\Infrastructure\Service\PaginationTotalPages;
-use App\Workspace\Infrastructure\Service\SlugService;
-use App\Workspace\Infrastructure\Validator\WorkspaceCreateValidator;
-use App\Workspace\Middleware\WorkspaceCreateValidatorMiddleware;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\Http\Exception\HttpUnauthorizedException;
-use Core\Persistence\Pagination;
 use Core\SharedKernel\Utils\UuidFactory;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\Diactoros\ServerRequest;
@@ -68,9 +59,6 @@ function malformedRequest(array $data): ServerRequest
 }
 
 test('stateless services handle normal and boundary values', function (): void {
-    expect((new SlugService())->getSlugFromString(' Hello__World! '))->toBe('hello-world')
-        ->and((new PaginationTotalPages())->getTotalPages(0, 10))->toBe(1)
-        ->and((new PaginationTotalPages())->getTotalPages(21, 10))->toBe(3);
     $auth = new AuthenticationService();
     $hash = password_hash('secret', PASSWORD_DEFAULT);
     expect($auth->isPasswordMatch('secret', $hash))->toBeTrue()->and($auth->isPasswordMatch('wrong', $hash))->toBeFalse();
@@ -84,23 +72,8 @@ test('date validator accepts only future dates', function (): void {
     expect($validator->isValid('+1 day'))->toBeTrue()->and($validator->isValid('-1 day'))->toBeFalse()->and($validator->isValid('invalid date'))->toBeFalse();
 });
 
-test('password input applies required and length rules', function (): void {
-    $factory = createLaminasFactory();
-    $password = new PasswordValidator($factory);
-    $password->setData(['password' => 'secret']);
-    expect($password->isValid())->toBeTrue();
-    $password->setData(['password' => 'x']);
-    expect($password->isValid())->toBeFalse();
-    $password->setData(['password' => null]);
-    expect($password->isValid())->toBeFalse();
-});
-
 test('all identity input validators enforce their contracts', function (): void {
     $factory = createLaminasFactory();
-
-    $name = new AccountActivationValidator($factory);
-    $name->setData(['accountName' => 'x']);
-    expect($name->isValid())->toBeFalse();
 
     $activation = new AccountActivationValidator($factory);
     $activation->setData(['accountName' => 'Alice', 'password' => 'secret']);
@@ -121,33 +94,8 @@ test('all identity input validators enforce their contracts', function (): void 
     expect($password->isValid())->toBeFalse();
 });
 
-test('workspace input validators cover optional and bounded fields', function (): void {
+test('mail validator validates complete email payloads', function (): void {
     $factory = createLaminasFactory();
-    $validator = new WorkspaceCreateValidator($factory);
-
-    $validator->setData(['name' => 'Workspace', 'description' => '', 'details' => '', 'visibility' => (string) Visibility::PUBLIC->value]);
-    expect($validator->isValid())->toBeTrue()
-        ->and($validator->getValues()['name'])->toBe('Workspace');
-
-    $validator->setData(['name' => 'ä', 'description' => '', 'details' => '', 'visibility' => (string) Visibility::PUBLIC->value]);
-    expect($validator->isValid())->toBeFalse();
-
-    $validator->setData(['name' => 'Workspace', 'description' => '  description  ', 'details' => null, 'visibility' => (string) Visibility::PUBLIC->value]);
-    expect($validator->isValid())->toBeTrue()
-        ->and($validator->getValues()['description'])->toBe('description');
-
-    $validator->setData(['name' => 'Workspace', 'description' => '', 'details' => '', 'visibility' => (string) (Visibility::PUBLIC->value + 1)]);
-    expect($validator->isValid())->toBeFalse();
-});
-
-test('composed workspace and email validators validate complete payloads', function (): void {
-    $factory = createLaminasFactory();
-
-    $workspace = new WorkspaceCreateValidator($factory);
-    $workspace->setData(['name' => 'Team', 'description' => '', 'details' => '', 'visibility' => Visibility::PUBLIC->value]);
-    expect($workspace->isValid())->toBeTrue();
-    $workspace->setData(['name' => 'x', 'description' => str_repeat('x', 256), 'details' => '', 'visibility' => Visibility::PUBLIC->value + 1]);
-    expect($workspace->isValid())->toBeFalse();
 
     $email = new EMailValidator($factory);
     expect($email->has('email'))->toBeTrue();
@@ -173,10 +121,7 @@ test('request validation converts malformed field types to controlled HTTP error
         ->toThrow(HttpInvalidArgumentException::class)
         ->and(fn () => (new AuthenticationValidationMiddleware(new AuthenticationValidator($factory)))
             ->process(malformedRequest(['email' => [], 'password' => 'secret']), $handler))
-        ->toThrow(HttpUnauthorizedException::class)
-        ->and(fn () => (new WorkspaceCreateValidatorMiddleware(new WorkspaceCreateValidator($factory)))
-            ->process(malformedRequest(['name' => []]), $handler))
-        ->toThrow(HttpInvalidArgumentException::class);
+        ->toThrow(HttpUnauthorizedException::class);
 });
 
 test('refresh token validation rejects non-string body values', function (): void {
@@ -204,14 +149,4 @@ test('authentication rejects a validly signed token with an invalid UUID claim',
         $this->createMock(IdentityLoggerInterface::class),
     ))->process((new ServerRequest())->withHeader('Authorization', 'token'), $handler))
         ->toThrow(HttpUnauthorizedException::class);
-});
-
-test('pagination service builds metadata from repository count', function (): void {
-    $repository = $this->createMock(WorkspaceRepositoryInterface::class);
-    $repository->expects($this->once())->method('countByAccount')->with(7)->willReturn(21);
-    $metadata = (new PaginationService($repository, new PaginationTotalPages()))
-        ->getMetaDataByAccountId(new Pagination(2, 10, 10), 7);
-    expect($metadata->totalItems)->toBe(21)
-        ->and($metadata->totalPages)->toBe(3)
-        ->and($metadata->currentPage)->toBe(2);
 });

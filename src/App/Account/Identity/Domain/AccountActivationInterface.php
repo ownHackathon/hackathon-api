@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Domain;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
@@ -16,5 +16,11 @@ interface AccountActivationInterface
 
     public DateTimeImmutable $createdAt { get; }
 
-    public function with(mixed ...$properties): self;
+    public function withId(int $id): AccountActivationInterface;
+
+    public function withEmail(EmailType $email): AccountActivationInterface;
+
+    public function withToken(UuidInterface $token): AccountActivationInterface;
+
+    public function withCreatedAt(DateTimeImmutable $createdAt): AccountActivationInterface;
 }

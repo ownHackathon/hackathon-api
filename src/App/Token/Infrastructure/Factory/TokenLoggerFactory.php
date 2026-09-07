@@ -2,7 +2,7 @@
 
 namespace App\Token\Infrastructure\Factory;
 
-use App\Token\Application\Port\TokenLoggerInterface;
+use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Logger\TokenLogger;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;
@@ -13,7 +13,7 @@ readonly final class TokenLoggerFactory
 
     public function __invoke(ContainerInterface $container): TokenLoggerInterface
     {
-        $logger = (new LoggerFactory())->build($container, self::CHANNEL);
+        $logger = new LoggerFactory()->build($container, self::CHANNEL);
 
         return new TokenLogger($logger);
     }

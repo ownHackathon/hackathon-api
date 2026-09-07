@@ -24,7 +24,7 @@ use function sys_get_temp_dir;
 use function test;
 
 test('logger factory creates the default channel and dated log directory', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
@@ -38,7 +38,7 @@ test('logger factory creates the default channel and dated log directory', funct
 });
 
 test('channel logger factory builds a logger with the requested channel name', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
@@ -51,7 +51,7 @@ test('channel logger factory builds a logger with the requested channel name', f
 });
 
 test('channel logger factory falls back to the default channel for unknown names', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
@@ -64,7 +64,7 @@ test('channel logger factory falls back to the default channel for unknown names
 });
 
 test('logger factory writes line formatted output by default', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn(['logger' => ['path' => $path]]);
@@ -78,7 +78,7 @@ test('logger factory writes line formatted output by default', function (): void
 });
 
 test('logger factory writes json formatted output when configured', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn([
@@ -98,7 +98,7 @@ test('logger factory writes json formatted output when configured', function ():
 });
 
 test('logger factory writes only the configured single file for a channel', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logger-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logger-' . bin2hex(random_bytes(4));
     mkdir($path);
     $container = $this->createMock(\Psr\Container\ContainerInterface::class);
     $container->expects($this->once())->method('get')->with('config')->willReturn([
@@ -143,7 +143,7 @@ test('email hasher produces a stable salted hash without plaintext', function ()
 });
 
 test('logs pruner removes only outdated date directories', function (): void {
-    $path = sys_get_temp_dir() . '/hackathon-unit-logs-' . bin2hex(random_bytes(4));
+    $path = sys_get_temp_dir() . '/stormannsgal-unit-logs-' . bin2hex(random_bytes(4));
     mkdir($path);
 
     $old = $path . '/' . date('Y-m-d', strtotime('-40 days'));

@@ -7,19 +7,19 @@ use App\Account\Identity\Domain\AccountAccessAuthInterface;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydratorInterface;
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountAccessAuthStoreInterface;
-use Core\Persistence\Hydrator\HydratorInterface;
 use Core\Persistence\Repository\AbstractRepository;
-use Core\Persistence\Store\StoreInterface;
+use Override;
 
-readonly final class AccountAccessAuthRepository extends AbstractRepository implements AccountAccessAuthRepositoryInterface
+readonly final class AccountAccessAuthRepository extends AbstractRepository implements
+    AccountAccessAuthRepositoryInterface
 {
     public function __construct(
-        private AccountAccessAuthStoreInterface $store,
-        private AccountAccessAuthHydratorInterface $hydrator,
+        public AccountAccessAuthStoreInterface $store,
+        public AccountAccessAuthHydratorInterface $hydrator,
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function insert(AccountAccessAuthInterface $accountAccessAuth): int
     {
         $data = $this->hydrator->extract($accountAccessAuth);
@@ -27,7 +27,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->store->persist($data);
     }
 
-    #[\Override]
+    #[Override]
     public function update(AccountAccessAuthInterface $accountAccessAuth): true
     {
         $data = $this->hydrator->extract($accountAccessAuth);
@@ -35,13 +35,13 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->store->update($data['id'], $data);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneById(int $id): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -49,7 +49,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findByAccountId(int $accountId): AccountAccessAuthCollectionInterface
     {
         $result = $this->store->fetchMany(['accountId' => $accountId]);
@@ -57,7 +57,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByAccountIdAndClientIdHash(int $accountId, string $clientHash): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne([
@@ -68,7 +68,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findByLabel(string $label): AccountAccessAuthCollectionInterface
     {
         $result = $this->store->fetchMany(['label' => $label]);
@@ -76,7 +76,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByRefreshToken(string $refreshToken): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['refreshToken' => $refreshToken]);
@@ -84,7 +84,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findByUserAgent(string $userAgent): AccountAccessAuthCollectionInterface
     {
         $result = $this->store->fetchMany(['userAgent' => $userAgent]);
@@ -92,7 +92,7 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByClientIdentHash(string $clientIdentHash): AccountAccessAuthInterface
     {
         $result = $this->store->fetchOne(['ClientIdentHash' => $clientIdentHash]);
@@ -100,23 +100,11 @@ readonly final class AccountAccessAuthRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findAll(): AccountAccessAuthCollectionInterface
     {
         $result = $this->store->fetchAll();
 
         return $this->mapToCollection($result);
-    }
-
-    #[\Override]
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    #[\Override]
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 }

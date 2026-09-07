@@ -2,7 +2,7 @@
 
 namespace App\Mailing\Infrastructure\Factory;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 use App\Mailing\Infrastructure\Service\EmailService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;

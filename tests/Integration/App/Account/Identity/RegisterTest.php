@@ -3,7 +3,7 @@
 use Envms\FluentPDO\Query;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
-use App\Account\Identity\Application\Port\AccountRegisterServiceInterface;
+use App\Account\Identity\Api\AccountRegisterServiceInterface;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 use Tests\Integration\JsonFactory;
 

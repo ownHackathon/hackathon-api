@@ -2,7 +2,8 @@
 
 namespace App\Account\Identity\Domain;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
+use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
@@ -16,7 +17,7 @@ interface AccountInterface
 
     public string $name { get; }
 
-    public string $password { get; }
+    public string $hashedPassword { get; }
 
     public EmailType $email { get; }
 
@@ -24,5 +25,17 @@ interface AccountInterface
 
     public ?DateTimeImmutable $lastActionAt { get; }
 
-    public function with(mixed ...$properties): self;
+    public function withId(int $id): self;
+
+    public function withUuid(UuidFactoryInterface $uuid): self;
+
+    public function withName(string $name): self;
+
+    public function withPasswordHash(string $hashedPassword): self;
+
+    public function withEmail(EmailType $email): self;
+
+    public function withRegisteredAt(DateTimeImmutable $registeredAt): self;
+
+    public function refreshLastActionAt(): self;
 }

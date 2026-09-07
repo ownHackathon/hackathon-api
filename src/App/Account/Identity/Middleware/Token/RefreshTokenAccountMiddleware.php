@@ -2,14 +2,15 @@
 
 namespace App\Account\Identity\Middleware\Token;
 
+use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
 use App\Account\Identity\Domain\AccountAccessAuthInterface;
-use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Monolog\Level;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -22,7 +23,7 @@ readonly final class RefreshTokenAccountMiddleware implements MiddlewareInterfac
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $accountAccessAuth = $request->getAttribute(AccountAccessAuthInterface::class);
@@ -49,6 +50,16 @@ readonly final class RefreshTokenAccountMiddleware implements MiddlewareInterfac
             );
         }
 
-        return $handler->handle($request->withAttribute(AccountInterface::AUTHENTICATED, $account));
+        $authenticatedAccount = new AuthenticatedAccountDto(
+            $account->id,
+            $account->uuid,
+            $account->name,
+            $account->hashedPassword,
+            $account->email,
+            $account->registeredAt,
+            $account->lastActionAt,
+        );
+
+        return $handler->handle($request->withAttribute(AuthenticatedAccountDto::class, $authenticatedAccount));
     }
 }

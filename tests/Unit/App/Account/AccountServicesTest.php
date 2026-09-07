@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\App\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\PasswordMismatchException;
@@ -11,8 +11,9 @@ use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
-use App\Mailing\Domain\EmailType;
-use App\Token\Domain\Repository\TokenRepositoryInterface;
+use App\Mailing\Api\EmailType;
+use App\Token\Api\DTO\RawTokenDto;
+use App\Token\Api\PasswordChangeTokenServiceInterface;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;
@@ -45,7 +46,7 @@ test('account service handles availability, password creation and activity updat
     $service = new AccountService(
         $accountRepository,
         $this->createMock(AccountAccessAuthRepositoryInterface::class),
-        $this->createMock(TokenRepositoryInterface::class),
+        $this->createMock(PasswordChangeTokenServiceInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
         $this->createMock(ActivityLoggerInterface::class),
@@ -65,7 +66,7 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
         1,
         99,
         'web',
-        'refresh',
+        RawTokenDto::fromString('refresh'),
         'agent',
         'hash',
         new DateTimeImmutable(),
@@ -85,7 +86,7 @@ test('account service rejects unknown or foreign logout tokens', function (): vo
     $service = new AccountService(
         $this->createMock(AccountRepositoryInterface::class),
         $authRepository,
-        $this->createMock(TokenRepositoryInterface::class),
+        $this->createMock(PasswordChangeTokenServiceInterface::class),
         $this->createMock(PasswordTokenService::class),
         $this->createMock(UuidFactoryInterface::class),
         $this->createMock(ActivityLoggerInterface::class),

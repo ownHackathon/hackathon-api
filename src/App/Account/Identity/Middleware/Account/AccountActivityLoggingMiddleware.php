@@ -2,10 +2,11 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\DTO\Client\ClientIdentification;
+use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use Core\Http\Middleware\RequestCorrelationMiddleware;
 use Core\Observability\IpMasker;
 use Core\Observability\UserAgentSummarizer;
@@ -24,6 +25,7 @@ readonly final class AccountActivityLoggingMiddleware implements MiddlewareInter
 {
     public function __construct(
         private ActivityLoggerInterface $logger,
+        private AccountResolver $resolver,
     ) {
     }
 
@@ -37,7 +39,7 @@ readonly final class AccountActivityLoggingMiddleware implements MiddlewareInter
         $durationSeconds = (hrtime(true) - $startedAt) / 1_000_000_000;
         $statusCode = $response->getStatusCode();
 
-        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        $account = $this->resolver->resolveFromRequest($request);
         $client = $request->getAttribute(ClientIdentification::class);
         $routeResult = $request->getAttribute(RouteResult::class);
 

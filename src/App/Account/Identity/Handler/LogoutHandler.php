@@ -4,11 +4,16 @@ namespace App\Account\Identity\Handler;
 
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use Core\Http\DTO\HttpResponseMessage;
+use Core\Http\Exception\HttpUnauthorizedException;
+use Core\SharedKernel\Domain\Message\LogMessage;
+use Core\SharedKernel\Domain\Message\StatusMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\EmptyResponse;
 use OpenApi\Attributes as OA;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -17,15 +22,16 @@ final class LogoutHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccountService $accountService,
+        private AccountResolver $resolver,
     ) {
     }
 
     #[OA\Post(
         path: '/account/logout',
         operationId: 'logout',
-        description: 'Terminates the user session by invalidating the provided refresh token in the database. ' .
-        'The access token must be provided in the header for authentication, while the refresh token is required ' .
-        'in the request body to identify the specific session to be closed.',
+        description: 'Terminates the user session by invalidating the provided refresh token in the database. '
+        . 'The access token must be provided in the header for authentication, while the refresh token is required '
+        . 'in the request body to identify the specific session to be closed.',
         summary: 'Log out the current user and invalidate the session',
         security: [['accessToken' => []]],
         tags: ['Account'],
@@ -54,10 +60,20 @@ final class LogoutHandler implements RequestHandlerInterface
         description: 'Unauthorized. The access token is missing, expired, or the user could not be identified.',
         content: [new OA\JsonContent(ref: HttpResponseMessage::class)],
     )]
-    #[\Override]
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        /** @var AccountInterface|null $account */
+        $account = $this->resolver->resolveFromRequest($request);
+
+        if (!($account instanceof AccountInterface)) {
+            throw new HttpUnauthorizedException(
+                LogMessage::UNAUTHORIZED_ACCESS,
+                StatusMessage::UNAUTHORIZED_ACCESS,
+                [],
+            );
+        }
+
         $refreshToken = $request->getAttribute(RefreshToken::class);
 
         $this->accountService->logout($account, $refreshToken);

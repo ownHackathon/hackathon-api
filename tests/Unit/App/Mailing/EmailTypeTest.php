@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\App\Mailing;
 
-use App\Mailing\Domain\EmailType;
+use App\Mailing\Api\EmailType;
 
 use function expect;
 use function test;

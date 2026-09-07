@@ -2,14 +2,14 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Account\Identity\Application\Port\ActivityLoggerInterface;
+use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\DTO\Account\AccountPassword;
-use App\Token\Domain\Enum\TokenType;
-use App\Token\Domain\Repository\TokenRepositoryInterface;
-use App\Token\DTO\Token;
+use App\Token\Api\DTO\RawTokenDto;
+use App\Token\Api\Enum\TokenType;
+use App\Token\Api\PasswordChangeTokenServiceInterface;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 
@@ -17,20 +17,20 @@ readonly final class PasswordChangeService
 {
     public function __construct(
         private AccountRepositoryInterface $accountRepository,
-        private TokenRepositoryInterface $tokenRepository,
+        private PasswordChangeTokenServiceInterface $changeTokenService,
         private AccountService $accountService,
         private ActivityLoggerInterface $activityLogger,
     ) {
     }
 
-    public function change(Token $token, AccountPassword $password): void
+    public function change(RawTokenDto $token, AccountPassword $password): void
     {
         if ($token->token === null) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_MISSING, $token->token);
         }
 
         try {
-            $persistedToken = $this->tokenRepository->findOneByToken($token->token);
+            $persistedToken = $this->changeTokenService->findOneByToken($token->token);
         } catch (EmptyResultException) {
             $this->errorResponse(IdentityLogMessage::PASSWORD_CHANGE_TOKEN_INVALID, $token->token);
         }
@@ -46,10 +46,10 @@ readonly final class PasswordChangeService
         }
 
         $hashedPassword = $this->accountService->cryptPassword($password->password);
-        $account = $account->with(password: $hashedPassword);
+        $account = $account->withPasswordHash($hashedPassword);
 
         $this->accountRepository->update($account);
-        $this->tokenRepository->deleteById($persistedToken->id);
+        $this->changeTokenService->deleteById($persistedToken->id);
 
         $this->activityLogger->info(
             IdentityLogMessage::ACTIVITY_PASSWORD_CHANGED,

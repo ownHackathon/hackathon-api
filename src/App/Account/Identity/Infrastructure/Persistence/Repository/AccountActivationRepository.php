@@ -7,20 +7,20 @@ use App\Account\Identity\Domain\AccountActivationInterface;
 use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydratorInterface;
 use App\Account\Identity\Infrastructure\Persistence\Table\AccountActivationStoreInterface;
-use App\Mailing\Domain\EmailType;
-use Core\Persistence\Hydrator\HydratorInterface;
+use App\Mailing\Api\EmailType;
 use Core\Persistence\Repository\AbstractRepository;
-use Core\Persistence\Store\StoreInterface;
+use Override;
 
-readonly final class AccountActivationRepository extends AbstractRepository implements AccountActivationRepositoryInterface
+readonly final class AccountActivationRepository extends AbstractRepository implements
+    AccountActivationRepositoryInterface
 {
     public function __construct(
-        private AccountActivationStoreInterface $store,
-        private AccountActivationHydratorInterface $hydrator,
+        public AccountActivationStoreInterface $store,
+        public AccountActivationHydratorInterface $hydrator,
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function insert(AccountActivationInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -28,7 +28,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->store->persist($data);
     }
 
-    #[\Override]
+    #[Override]
     public function update(AccountActivationInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -36,7 +36,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->store->update($data['id'], $data);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneById(int $id): AccountActivationInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -44,7 +44,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findByEmail(EmailType $email): AccountActivationCollectionInterface
     {
         $result = $this->store->fetchMany(['email' => $email]);
@@ -52,7 +52,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByToken(string $token): AccountActivationInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
@@ -60,7 +60,7 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findAll(): AccountActivationCollectionInterface
     {
         $result = $this->store->fetchAll();
@@ -68,27 +68,15 @@ readonly final class AccountActivationRepository extends AbstractRepository impl
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteByEmail(EmailType $email): true
     {
         return $this->store->remove(['email' => $email]);
-    }
-
-    #[\Override]
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    #[\Override]
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Factory;
 
-use App\Account\Identity\Application\Port\IdentityLoggerInterface;
+use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Logger\IdentityLogger;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;

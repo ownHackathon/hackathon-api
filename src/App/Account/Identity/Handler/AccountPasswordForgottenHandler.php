@@ -3,12 +3,13 @@
 namespace App\Account\Identity\Handler;
 
 use App\Account\Identity\Infrastructure\Service\Account\PasswordService;
-use App\Mailing\Domain\EmailType;
-use App\Mailing\DTO\EMail;
+use App\Mailing\Api\DTO\EMailDto;
+use App\Mailing\Api\EmailType;
 use Core\Http\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -23,28 +24,28 @@ readonly final class AccountPasswordForgottenHandler implements RequestHandlerIn
     #[OA\Post(
         path: '/account/password/forgotten',
         operationId: 'requestPasswordReset',
-        description: "Initiates the password recovery process for the given email address. \n\n" .
-                     '**Security Note:** To prevent user enumeration, this endpoint always returns a 200 OK status. ' .
-                     'An attacker cannot determine whether an account exists for a specific email address by observing the API response.',
+        description: "Initiates the password recovery process for the given email address. \n\n"
+        . '**Security Note:** To prevent user enumeration, this endpoint always returns a 200 OK status. '
+        . 'An attacker cannot determine whether an account exists for a specific email address by observing the API response.',
         summary: 'Request a token for password reset. Sending via E-Mail',
         tags: ['Account'],
     )]
     #[OA\RequestBody(
         description: 'The email address associated with the account.',
         required: true,
-        content: new OA\JsonContent(ref: EMail::class),
+        content: new OA\JsonContent(ref: EMailDto::class),
     )]
     #[OA\Response(
         response: Http::STATUS_OK,
-        description: 'The request was accepted. If an account with the provided email address exists, ' .
-                     'an email containing a password reset link will be sent shortly.',
+        description: 'The request was accepted. If an account with the provided email address exists, '
+        . 'an email containing a password reset link will be sent shortly.',
     )]
     #[OA\Response(
         response: Http::STATUS_BAD_REQUEST,
         description: 'The provided email address is invalid.',
         content: new OA\JsonContent(ref: HttpResponseMessage::class),
     )]
-    #[\Override]
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $email = $request->getAttribute(EmailType::class);

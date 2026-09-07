@@ -2,24 +2,23 @@
 
 namespace App\Token\Infrastructure\Persistence\Repository;
 
+use App\Token\Domain\Entity\TokenCollectionInterface;
+use App\Token\Domain\Entity\TokenInterface;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
-use App\Token\Domain\TokenCollectionInterface;
-use App\Token\Domain\TokenInterface;
 use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
 use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
-use Core\Persistence\Hydrator\HydratorInterface;
 use Core\Persistence\Repository\AbstractRepository;
-use Core\Persistence\Store\StoreInterface;
+use Override;
 
 readonly final class TokenRepository extends AbstractRepository implements TokenRepositoryInterface
 {
     public function __construct(
-        private TokenStoreInterface $store,
-        private TokenHydratorInterface $hydrator,
+        public TokenStoreInterface $store,
+        public TokenHydratorInterface $hydrator,
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function insert(TokenInterface $data): int
     {
         $data = $this->hydrator->extract($data);
@@ -27,7 +26,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->store->persist($data);
     }
 
-    #[\Override]
+    #[Override]
     public function update(TokenInterface $data): true
     {
         $data = $this->hydrator->extract($data);
@@ -35,7 +34,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->store->update($data['id'], $data);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneById(int $id): TokenInterface
     {
         $result = $this->store->fetchOne(['id' => $id]);
@@ -43,7 +42,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findByAccountId(int $accountId): TokenCollectionInterface
     {
         $result = $this->store->fetchMany(['accountId' => $accountId]);
@@ -51,7 +50,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findOneByToken(string $token): TokenInterface
     {
         $result = $this->store->fetchOne(['token' => $token]);
@@ -59,7 +58,7 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToEntity($result);
     }
 
-    #[\Override]
+    #[Override]
     public function findAll(): TokenCollectionInterface
     {
         $result = $this->store->fetchAll();
@@ -67,27 +66,15 @@ readonly final class TokenRepository extends AbstractRepository implements Token
         return $this->mapToCollection($result);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteById(int $id): true
     {
         return $this->store->remove(['id' => $id]);
     }
 
-    #[\Override]
+    #[Override]
     public function deleteByAccountId(int $accountId): true
     {
         return $this->store->remove(['accountId' => $accountId]);
-    }
-
-    #[\Override]
-    protected function getHydrator(): HydratorInterface
-    {
-        return $this->hydrator;
-    }
-
-    #[\Override]
-    protected function getStore(): StoreInterface
-    {
-        return $this->store;
     }
 }
