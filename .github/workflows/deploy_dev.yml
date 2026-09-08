@@ -119,7 +119,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
           severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          description: >-
+          description: |
             Event: ${{ github.event_name }}
             Repo: ${{ github.repository }}
             Ref: ${{ github.ref }}
