@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
+use App\Mailing\Api\EmailSendInterface;
 use App\Mailing\Api\EmailType;
-use App\Mailing\Api\MailerInterface;
 use App\Token\Api\DTO\PasswordChangeTokenDto;
 
 use function sprintf;
@@ -12,7 +12,7 @@ use function sprintf;
 readonly class PasswordTokenService
 {
     public function __construct(
-        private MailerInterface $emailService,
+        private EmailSendInterface $emailService,
         private string $projectUri,
     ) {
     }

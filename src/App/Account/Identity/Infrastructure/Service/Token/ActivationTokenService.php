@@ -3,14 +3,14 @@
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
 use App\Account\Identity\Domain\AccountActivationInterface;
-use App\Mailing\Api\MailerInterface;
+use App\Mailing\Api\EmailSendInterface;
 
 use function sprintf;
 
 readonly final class ActivationTokenService
 {
     public function __construct(
-        private MailerInterface $emailService,
+        private EmailSendInterface $emailService,
         private string $projectUri,
     ) {
     }

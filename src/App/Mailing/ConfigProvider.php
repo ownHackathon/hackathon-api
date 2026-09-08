@@ -2,7 +2,8 @@
 
 namespace App\Mailing;
 
-use App\Mailing\Api\MailerInterface;
+use App\Mailing\Api\EmailSendInterface;
+use App\Mailing\Application\EmailSendService;
 use App\Mailing\Infrastructure\Factory\EmailServiceFactory;
 use App\Mailing\Infrastructure\Factory\MailFactory;
 use App\Mailing\Infrastructure\Service\EmailService;
@@ -23,17 +24,22 @@ readonly class ConfigProvider
         return [
             'aliases' => [
                 \Symfony\Component\Mailer\MailerInterface::class => 'mailer',
-                MailerInterface::class => EmailService::class,
+                EmailSendInterface::class => EmailSendService::class,
             ],
             'factories' => [
                 'mailer' => MailFactory::class,
                 EmailService::class => EmailServiceFactory::class,
+                EmailSendService::class => ConfigAbstractFactory::class,
             ],
         ];
     }
 
     public function getAbstractFactoryConfig(): array
     {
-        return [];
+        return [
+            EmailSendService::class => [
+                EmailService::class,
+            ],
+        ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Mailing\Infrastructure\Service;
 
 use App\Mailing\Api\EmailType;
-use App\Mailing\Api\MailerInterface;
+use Override;
 use Symfony\Component\Mailer\MailerInterface as SymfonyMailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -15,7 +15,7 @@ readonly final class EmailService implements MailerInterface
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function send(EmailType $email, string $plainText, string $html, string $subject): void
     {
         $message = new Email()
