@@ -2,11 +2,11 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
-use Envms\FluentPDO\Query;
-use App\Account\Identity\DTO\Client\ClientIdentification;
+use App\Account\Identity\Api\DTO\Client\ClientIdentification;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
 use App\Account\Identity\Middleware\ClientIdentification\ClientIdentificationMiddleware;
+use Envms\FluentPDO\Query;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;

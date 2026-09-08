@@ -2,9 +2,9 @@
 
 namespace App\Account\Identity\Middleware\Account\Authentication;
 
+use App\Account\Identity\Api\DTO\Account\AuthenticationRequest;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use App\Account\Identity\DTO\Account\AuthenticationRequest;
 use App\Account\Identity\Infrastructure\Validator\AuthenticationValidator;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Psr\Http\Message\ResponseInterface;

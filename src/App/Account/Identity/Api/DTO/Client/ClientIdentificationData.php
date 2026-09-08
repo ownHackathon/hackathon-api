@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\DTO\Client;
+namespace App\Account\Identity\Api\DTO\Client;
 
 readonly final class ClientIdentificationData
 {

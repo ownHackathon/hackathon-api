@@ -2,9 +2,9 @@
 
 namespace App\Account\Identity\Handler;
 
-use App\Account\Identity\DTO\Account\AuthenticationRequest;
-use App\Account\Identity\DTO\Client\ClientIdentification;
-use App\Account\Identity\DTO\Response\AuthenticationResponse;
+use App\Account\Identity\Api\DTO\Account\AuthenticationRequest;
+use App\Account\Identity\Api\DTO\Client\ClientIdentification;
+use App\Account\Identity\Api\DTO\Response\AuthenticationResponse;
 use App\Account\Identity\Infrastructure\Service\Account\AccountAuthenticationService;
 use Core\Http\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;

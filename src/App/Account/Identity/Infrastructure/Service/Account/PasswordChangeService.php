@@ -3,10 +3,10 @@
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
 use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\DTO\Account\AccountPassword;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\DTO\Account\AccountPassword;
 use App\Token\Api\DTO\RawTokenDto;
 use App\Token\Api\Enum\TokenType;
 use App\Token\Api\PasswordChangeTokenServiceInterface;

@@ -3,12 +3,12 @@
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
 use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use App\Mailing\Api\EmailType;
 use App\Token\Api\DTO\PasswordChangeTokenDto;

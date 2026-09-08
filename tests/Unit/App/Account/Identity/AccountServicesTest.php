@@ -3,12 +3,12 @@
 namespace Tests\Unit\App\Account\Identity;
 
 use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\PasswordMismatchException;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use App\Account\Identity\Infrastructure\Service\Token\PasswordTokenService;
 use App\Mailing\Api\EmailType;

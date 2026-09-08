@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
+use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;

@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\DTO\Client\ClientIdentification;
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
-use App\Account\Identity\DTO\Token\JwtTokenConfig;
-use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use App\Account\Identity\Api\DTO\Client\ClientIdentification;
+use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
+use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;
+use App\Token\Api\DTO\JwtTokenConfig;
 use Firebase\JWT\JWT;
 use InvalidArgumentException;
 

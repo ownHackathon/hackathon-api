@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Handler;
 
-use App\Account\Identity\DTO\Account\Account as AccountResponse;
-use App\Account\Identity\DTO\Account\AccountRegistration;
+use App\Account\Identity\Api\DTO\Account\Account as AccountResponse;
+use App\Account\Identity\Api\DTO\Account\AccountRegistration;
 use App\Account\Identity\Infrastructure\Service\Account\AccountCreatorService;
 use Core\Http\DTO\HttpResponseMessage;
 use Fig\Http\Message\StatusCodeInterface as Http;

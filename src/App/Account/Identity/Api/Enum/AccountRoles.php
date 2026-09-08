@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\Domain\Enum;
+namespace App\Account\Identity\Api\Enum;
 
 enum AccountRoles: int
 {

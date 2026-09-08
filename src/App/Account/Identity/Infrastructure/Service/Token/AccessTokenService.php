@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use App\Account\Identity\DTO\Token\AccessToken;
-use App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Account\Identity\Api\DTO\Token\AccessToken;
+use App\Token\Api\DTO\JwtTokenConfig;
 use App\Token\Infrastructure\Trait\JwtTokenTrait;
 use Firebase\JWT\JWT;
 use Ramsey\Uuid\UuidInterface;

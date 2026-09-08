@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\DTO\Token;
+namespace App\Account\Identity\Api\DTO\Token;
 
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;

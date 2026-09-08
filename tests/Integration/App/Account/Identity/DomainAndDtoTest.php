@@ -2,13 +2,13 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
+use App\Account\Identity\Api\DTO\Account\AccountPassword;
+use App\Account\Identity\Api\DTO\Account\AccountRegistration;
+use App\Account\Identity\Api\DTO\Account\ApiMe;
+use App\Account\Identity\Api\DTO\Token\AccountPasswordToken;
 use App\Account\Identity\Domain\Account;
-use App\Account\Identity\DTO\Account\AccountPassword;
-use App\Account\Identity\DTO\Account\AccountRegistration;
-use App\Account\Identity\DTO\Account\ApiMe;
-use App\Account\Identity\DTO\Token\AccountPasswordToken;
-use Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
 use App\Mailing\Api\EmailType;
+use Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 

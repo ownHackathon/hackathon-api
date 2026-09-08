@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Token;
 
-use App\Account\Identity\DTO\Token\JwtTokenConfig;
+use App\Token\Api\DTO\JwtTokenConfig;
 use Psr\Container\ContainerInterface;
 
 readonly final class AccessTokenServiceFactory

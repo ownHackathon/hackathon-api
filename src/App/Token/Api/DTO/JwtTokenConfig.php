@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\DTO\Token;
+namespace App\Token\Api\DTO;
 
 use JetBrains\PhpStorm\ArrayShape;
 

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\DTO\Account\Account as AccountDto;
-use App\Account\Identity\DTO\Account\AccountRegistration;
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Api\DTO\Account\Account as AccountDto;
+use App\Account\Identity\Api\DTO\Account\AccountRegistration;
+use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Mailing\Api\EmailType;
 use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use DateTimeImmutable;

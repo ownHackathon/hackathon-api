@@ -2,9 +2,9 @@
 
 namespace App\Account\Identity\Middleware\Account\Validation;
 
+use App\Account\Identity\Api\DTO\Account\AccountRegistration;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
-use App\Account\Identity\DTO\Account\AccountRegistration;
 use App\Account\Identity\Infrastructure\Validator\AccountActivationValidator;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;

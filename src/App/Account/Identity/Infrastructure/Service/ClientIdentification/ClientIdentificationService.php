@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Infrastructure\Service\ClientIdentification;
 
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 
 use function hash;
 use function serialize;

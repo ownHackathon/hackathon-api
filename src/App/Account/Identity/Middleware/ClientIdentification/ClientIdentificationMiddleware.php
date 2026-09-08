@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Middleware\ClientIdentification;
 
-use App\Account\Identity\DTO\Client\ClientIdentification;
-use App\Account\Identity\DTO\Client\ClientIdentificationData;
+use App\Account\Identity\Api\DTO\Client\ClientIdentification;
+use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Infrastructure\Service\ClientIdentification\ClientIdentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

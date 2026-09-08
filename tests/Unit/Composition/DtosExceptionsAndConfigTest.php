@@ -3,16 +3,16 @@
 namespace Tests\Unit\Composition;
 
 use App\Account\ConfigProvider as AccountConfigProvider;
+use App\Account\Identity\Api\DTO\Account\AccountPassword;
+use App\Account\Identity\Api\DTO\Account\AuthenticationRequest;
+use App\Account\Identity\Api\DTO\Response\AuthenticationResponse;
+use App\Account\Identity\Api\DTO\Token\AccessToken;
+use App\Account\Identity\Api\DTO\Token\AccountPasswordToken;
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use App\Account\Identity\ConfigProvider as IdentityConfigProvider;
-use App\Account\Identity\DTO\Account\AccountPassword;
-use App\Account\Identity\DTO\Account\AuthenticationRequest;
-use App\Account\Identity\DTO\Response\AuthenticationResponse;
-use App\Account\Identity\DTO\Token\AccessToken;
-use App\Account\Identity\DTO\Token\AccountPasswordToken;
-use App\Account\Identity\DTO\Token\JwtTokenConfig;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Mailing\Api\DTO\EMailDto;
 use App\Mailing\ConfigProvider as MailingConfigProvider;
+use App\Token\Api\DTO\JwtTokenConfig;
 use App\Token\Api\DTO\RawTokenDto;
 use App\Token\ConfigProvider as TokenConfigProvider;
 use Core\ConfigProvider as CoreConfigProvider;

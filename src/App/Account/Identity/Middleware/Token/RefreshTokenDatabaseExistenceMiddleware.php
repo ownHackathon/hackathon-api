@@ -2,11 +2,11 @@
 
 namespace App\Account\Identity\Middleware\Token;
 
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use App\Account\Identity\Domain\AccountAccessAuthInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Monolog\Level;

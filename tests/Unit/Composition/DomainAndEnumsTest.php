@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Composition;
 
-use App\Account\Identity\Domain\Enum\AccountRoles;
-use App\Account\Identity\Domain\Enum\AccountVisibleStatus;
+use App\Account\Identity\Api\Enum\AccountRoles;
+use App\Account\Identity\Api\Enum\AccountVisibleStatus;
 use App\Token\Api\Enum\TokenType;
 
 use function expect;

@@ -3,14 +3,14 @@
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
 use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Api\DTO\Account\Account as AccountDTO;
+use App\Account\Identity\Api\DTO\Account\AccountRegistration;
 use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\DTO\Account\Account as AccountDTO;
-use App\Account\Identity\DTO\Account\AccountRegistration;
 use Core\Http\Exception\HttpDuplicateEntryException;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\Observability\EmailHasher;

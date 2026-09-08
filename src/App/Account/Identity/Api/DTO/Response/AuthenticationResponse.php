@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\DTO\Response;
+namespace App\Account\Identity\Api\DTO\Response;
 
-use App\Account\Identity\DTO\Token\AccessToken;
-use App\Account\Identity\DTO\Token\RefreshToken;
+use App\Account\Identity\Api\DTO\Token\AccessToken;
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 

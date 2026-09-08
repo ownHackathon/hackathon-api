@@ -41,6 +41,7 @@
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-pdo": "*",
+    "ext-intl": "*",
     "envms/fluentpdo": "^2.2",
     "firebase/php-jwt": "^7.0",
     "jetbrains/phpstorm-attributes": "^1.0",

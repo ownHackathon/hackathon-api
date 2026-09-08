@@ -16,13 +16,13 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ inputs.php-version }}
-        extensions: pdo, mbstring # hier Standard-Extensions ergänzen
+        extensions: pdo, mbstring, openssl, intl
 
     - name: Cache Composer packages
       uses: actions/cache@v5
       with:
         path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ inputs.php-version }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-php-
 
     - name: Install dependencies

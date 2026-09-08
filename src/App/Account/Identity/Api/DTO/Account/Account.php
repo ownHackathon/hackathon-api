@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Account\Identity\DTO\Account;
+namespace App\Account\Identity\Api\DTO\Account;
 
 use App\Account\Identity\Domain\AccountInterface;
 use Core\Clock\DateTimeFormat;

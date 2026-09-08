@@ -2,7 +2,7 @@
 
 namespace App\Account\Identity\Handler;
 
-use App\Account\Identity\DTO\Account\AccountPassword;
+use App\Account\Identity\Api\DTO\Account\AccountPassword;
 use App\Account\Identity\Infrastructure\Service\Account\PasswordChangeService;
 use App\Token\Api\DTO\RawTokenDto;
 use Core\Http\DTO\HttpResponseMessage;

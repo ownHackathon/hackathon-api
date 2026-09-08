@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Handler;
 
+use App\Account\Identity\Api\DTO\Token\RefreshToken;
 use App\Account\Identity\Domain\AccountInterface;
-use App\Account\Identity\DTO\Token\RefreshToken;
 use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use App\Account\Identity\Infrastructure\Service\Account\AccountService;
 use Core\Http\DTO\HttpResponseMessage;
