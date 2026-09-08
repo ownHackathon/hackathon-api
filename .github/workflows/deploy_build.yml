@@ -119,7 +119,17 @@ jobs:
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
           severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          details: >-
+          description: >-
+            Event: ${{ github.event_name }}
+            Repo: ${{ github.repository }}
+            Ref: ${{ github.ref }}
+            Workflow: ${{ github.workflow }}
+            Author: ${{ github.event.head_commit.author.username }}
+            Committer: ${{ github.event.head_commit.committer.username }}
+            Pusher: ${{ github.actor }}
+            Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+            Commit Message: ${{ github.event.head_commit.message }}
+
             ${{ job.status == 'success' 
                 && '[🚀 Successful deployment to build!](https://build.ownhackathon.de/api/docs)' 
                 || format('[❌ Deployment failed! View Logs](https://github.com/{0}/actions/runs/{1})', github.repository, github.run_id) 
