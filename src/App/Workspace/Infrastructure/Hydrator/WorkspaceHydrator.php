@@ -3,7 +3,7 @@
 namespace App\Workspace\Infrastructure\Hydrator;
 
 use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Application\Port\WorkspaceLoggerInterface;
+use App\Workspace\Api\WorkspaceLoggerInterface;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Workspace;
 use App\Workspace\Domain\WorkspaceCollection;

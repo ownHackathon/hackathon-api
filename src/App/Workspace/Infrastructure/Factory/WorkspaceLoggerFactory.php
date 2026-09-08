@@ -2,7 +2,7 @@
 
 namespace App\Workspace\Infrastructure\Factory;
 
-use App\Workspace\Application\Port\WorkspaceLoggerInterface;
+use App\Workspace\Api\WorkspaceLoggerInterface;
 use App\Workspace\Infrastructure\Logger\WorkspaceLogger;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;

@@ -2,7 +2,7 @@
 
 namespace App\Event\Infrastructure\Hydrator;
 
-use App\Event\Application\Port\EventLoggerInterface;
+use App\Event\Api\EventLoggerInterface;
 use App\Event\Domain\Enum\EventStatus;
 use App\Event\Domain\Event;
 use App\Event\Domain\EventCollection;

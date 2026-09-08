@@ -1,9 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Infrastructure\Service;
+namespace Core\SharedKernel\Utils;
 
+use function preg_replace;
 use function str_replace;
 use function strtolower;
+use function trim;
 
 readonly final class SlugService
 {

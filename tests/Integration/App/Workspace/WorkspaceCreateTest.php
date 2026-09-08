@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\App\Workspace;
 
-use App\Workspace\Infrastructure\Service\SlugService;
+use Core\SharedKernel\Utils\SlugService;
 use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use PDO;

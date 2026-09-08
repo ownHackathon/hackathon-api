@@ -3,7 +3,7 @@
 namespace App\Workspace\Handler;
 
 use App\Account\Identity\Domain\AccountInterface;
-use App\Workspace\Application\Port\WorkspaceCreatorInterface;
+use App\Workspace\Api\WorkspaceCreatorInterface;
 use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Message\WorkspaceStatusMessage;

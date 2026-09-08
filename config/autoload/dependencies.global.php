@@ -6,6 +6,7 @@ use Core\Persistence\Factory\DatabaseFactory;
 use Core\Persistence\Factory\QueryFactory;
 use Core\SharedKernel\Factory\UuidFactory;
 use Core\Observability\LoggerFactory;
+use Core\SharedKernel\Utils\SlugService;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use Mezzio\Application;
 use Mezzio\Container\ApplicationConfigInjectionDelegator;
@@ -27,6 +28,7 @@ return [
         // not require arguments to the constructor. Map a service name to the
         // class name.
         'invokables' => [
+            SlugService::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [

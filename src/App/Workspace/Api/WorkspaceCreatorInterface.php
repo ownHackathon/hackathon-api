@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Workspace\Application\Port;
+namespace App\Workspace\Api;
 
 use App\Account\Identity\Domain\AccountInterface;
 use App\Workspace\Domain\WorkspaceInterface;

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\App\Workspace;
 
-use App\Workspace\Application\Port\WorkspaceLoggerInterface;
+use App\Workspace\Api\WorkspaceLoggerInterface;
 use App\Workspace\Infrastructure\Factory\WorkspaceLoggerFactory;
 use App\Workspace\Infrastructure\Logger\WorkspaceLogger;
 use Psr\Container\ContainerInterface;

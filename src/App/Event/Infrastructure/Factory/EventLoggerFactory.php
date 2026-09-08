@@ -2,7 +2,7 @@
 
 namespace App\Event\Infrastructure\Factory;
 
-use App\Event\Application\Port\EventLoggerInterface;
+use App\Event\Api\EventLoggerInterface;
 use App\Event\Infrastructure\Logger\EventLogger;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;
