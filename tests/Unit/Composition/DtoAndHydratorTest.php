@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Composition;
 
-use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
-use App\Token\Api\TokenLoggerInterface;
+use App\Account\Identity\Infrastructure\Logger\IdentityLoggerInterface;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
+use App\Token\Infrastructure\Logger\TokenLoggerInterface;
 use Core\SharedKernel\Utils\UuidFactory;
 
 use function expect;

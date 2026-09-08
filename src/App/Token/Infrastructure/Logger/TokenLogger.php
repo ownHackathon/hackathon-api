@@ -2,7 +2,6 @@
 
 namespace App\Token\Infrastructure\Logger;
 
-use App\Token\Api\TokenLoggerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Stringable;

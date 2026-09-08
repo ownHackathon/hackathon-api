@@ -2,13 +2,13 @@
 
 namespace App\Event\Infrastructure\Hydrator;
 
-use App\Event\Api\EventLoggerInterface;
 use App\Event\Domain\Enum\EventStatus;
 use App\Event\Domain\Event;
 use App\Event\Domain\EventCollection;
 use App\Event\Domain\EventCollectionInterface;
 use App\Event\Domain\EventInterface;
 use App\Event\Domain\Message\EventLogMessage;
+use App\Event\Infrastructure\Logger\EventLoggerInterface;
 use App\Policy\Domain\Enum\Visibility;
 use Core\Clock\DateTimeFormat;
 use Core\SharedKernel\Utils\UuidFactoryInterface;

@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Mock;
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use Psr\Log\AbstractLogger;
 
 final class ArrayLogger extends AbstractLogger implements ActivityLoggerInterface

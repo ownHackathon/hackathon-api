@@ -3,12 +3,12 @@
 namespace App\Workspace\Infrastructure\Hydrator;
 
 use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Api\WorkspaceLoggerInterface;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Workspace;
 use App\Workspace\Domain\WorkspaceCollection;
 use App\Workspace\Domain\WorkspaceCollectionInterface;
 use App\Workspace\Domain\WorkspaceInterface;
+use App\Workspace\Infrastructure\Logger\WorkspaceLoggerInterface;
 use Core\Clock\DateTimeFormat;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;

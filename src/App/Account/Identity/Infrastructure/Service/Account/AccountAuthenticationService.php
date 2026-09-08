@@ -2,11 +2,9 @@
 
 namespace App\Account\Identity\Infrastructure\Service\Account;
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Api\DTO\Account\AuthenticationRequest;
 use App\Account\Identity\Api\DTO\Client\ClientIdentification;
 use App\Account\Identity\Api\DTO\Response\AuthenticationResponse;
-use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\AccountAccessAuth;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
@@ -14,6 +12,8 @@ use App\Account\Identity\Domain\Exception\PasswordMismatchException;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
+use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProviderInterface;
 use App\Account\Identity\Infrastructure\Service\Authentication\AuthenticationService;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use App\Account\Identity\Infrastructure\Service\Token\RefreshTokenService;

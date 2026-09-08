@@ -2,7 +2,6 @@
 
 namespace App\Workspace\Infrastructure\Logger;
 
-use App\Workspace\Api\WorkspaceLoggerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Stringable;

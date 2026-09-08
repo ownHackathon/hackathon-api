@@ -2,12 +2,12 @@
 
 namespace App\Account\Identity\Infrastructure\Hydrator;
 
-use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Account;
 use App\Account\Identity\Domain\AccountCollection;
 use App\Account\Identity\Domain\AccountCollectionInterface;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Infrastructure\Logger\IdentityLoggerInterface;
 use App\Mailing\Api\EmailType;
 use Core\Clock\DateTimeFormat;
 use DateTimeImmutable;

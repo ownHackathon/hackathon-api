@@ -2,7 +2,6 @@
 
 namespace App\Event\Infrastructure\Logger;
 
-use App\Event\Api\EventLoggerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Stringable;

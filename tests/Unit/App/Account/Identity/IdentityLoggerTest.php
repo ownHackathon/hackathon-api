@@ -2,15 +2,15 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
-use App\Account\Identity\Api\EmailHashSaltProviderInterface;
-use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Factory\ActivityLoggerFactory;
 use App\Account\Identity\Infrastructure\Factory\EmailHashSaltProviderFactory;
 use App\Account\Identity\Infrastructure\Factory\IdentityLoggerFactory;
 use App\Account\Identity\Infrastructure\Logger\ActivityLogger;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use App\Account\Identity\Infrastructure\Logger\IdentityLogger;
+use App\Account\Identity\Infrastructure\Logger\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProvider;
+use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProviderInterface;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;

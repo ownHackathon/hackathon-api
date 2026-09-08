@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\App\Account\Identity;
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
 use App\Account\Identity\Api\DTO\Client\ClientIdentification;
 use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use App\Account\Identity\Middleware\Account\AccountActivityLoggingMiddleware;
 use App\Mailing\Api\EmailType;

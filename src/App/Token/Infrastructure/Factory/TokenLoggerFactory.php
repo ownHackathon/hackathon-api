@@ -2,8 +2,8 @@
 
 namespace App\Token\Infrastructure\Factory;
 
-use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Logger\TokenLogger;
+use App\Token\Infrastructure\Logger\TokenLoggerInterface;
 use Core\Observability\LoggerFactory;
 use Psr\Container\ContainerInterface;
 

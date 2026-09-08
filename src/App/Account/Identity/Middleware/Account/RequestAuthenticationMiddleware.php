@@ -3,10 +3,10 @@
 namespace App\Account\Identity\Middleware\Account;
 
 use App\Account\Identity\Api\DTO\AuthenticatedAccountDto;
-use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
+use App\Account\Identity\Infrastructure\Logger\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Core\Http\Exception\HttpUnauthorizedException;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;

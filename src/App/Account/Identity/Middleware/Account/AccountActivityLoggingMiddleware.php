@@ -2,10 +2,10 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Api\DTO\Client\ClientIdentification;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use App\Account\Identity\Infrastructure\Service\Account\AccountResolver;
 use Core\Http\Middleware\RequestCorrelationMiddleware;
 use Core\Observability\IpMasker;

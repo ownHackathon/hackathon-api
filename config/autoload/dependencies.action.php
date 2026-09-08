@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use App\Account\Identity\Api\ActivityLoggerInterface;
+use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use Core\Persistence\Factory\DatabaseFactory;
 use Core\Persistence\Factory\QueryFactory;
 use Core\SharedKernel\Factory\UuidFactory;

@@ -4,7 +4,6 @@ namespace App\Workspace\Infrastructure\Service;
 
 use App\Account\Identity\Domain\AccountInterface;
 use App\Policy\Domain\Enum\Visibility;
-use App\Workspace\Api\WorkspaceCreatorInterface;
 use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\Domain\Workspace;

@@ -2,8 +2,8 @@
 
 namespace App\Account\Identity\Infrastructure\Factory;
 
-use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProvider;
+use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProviderInterface;
 use Psr\Container\ContainerInterface;
 
 readonly final class EmailHashSaltProviderFactory

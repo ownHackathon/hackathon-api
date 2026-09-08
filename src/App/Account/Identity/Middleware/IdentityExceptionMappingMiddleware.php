@@ -2,7 +2,6 @@
 
 namespace App\Account\Identity\Middleware;
 
-use App\Account\Identity\Api\EmailHashSaltProviderInterface;
 use App\Account\Identity\Domain\Exception\AccountNotFoundException;
 use App\Account\Identity\Domain\Exception\DuplicateAuthException;
 use App\Account\Identity\Domain\Exception\DuplicateEMailException;
@@ -11,6 +10,7 @@ use App\Account\Identity\Domain\Exception\PasswordMismatchException;
 use App\Account\Identity\Domain\Exception\SecurityBreachException;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
+use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProviderInterface;
 use Core\Http\Exception\HttpDuplicateEntryException;
 use Core\Http\Exception\HttpHandledInvalidArgumentAsSuccessException;
 use Core\Http\Exception\HttpUnauthorizedException;

@@ -2,8 +2,6 @@
 
 namespace App\Account\Identity\Infrastructure\Provider;
 
-use App\Account\Identity\Api\EmailHashSaltProviderInterface;
-
 readonly final class EmailHashSaltProvider implements EmailHashSaltProviderInterface
 {
     public function __construct(

@@ -3,12 +3,12 @@
 namespace App\Workspace\Handler;
 
 use App\Account\Identity\Domain\AccountInterface;
-use App\Workspace\Api\WorkspaceCreatorInterface;
 use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Message\WorkspaceStatusMessage;
 use App\Workspace\DTO\WorkspaceRequest;
 use App\Workspace\DTO\WorkspaceResponse;
+use App\Workspace\Infrastructure\Service\WorkspaceCreatorInterface;
 use Core\Http\DTO\HttpResponseMessage;
 use Core\Http\Exception\HttpDuplicateEntryException;
 use Fig\Http\Message\StatusCodeInterface as Http;

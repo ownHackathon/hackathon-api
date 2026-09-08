@@ -3,12 +3,12 @@
 namespace App\Token;
 
 use App\Token\Api\PasswordChangeTokenServiceInterface;
-use App\Token\Api\TokenLoggerInterface;
 use App\Token\Application\PasswordChangeTokenService;
 use App\Token\Domain\Repository\TokenRepositoryInterface;
 use App\Token\Infrastructure\Factory\TokenLoggerFactory;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
 use App\Token\Infrastructure\Hydrator\TokenHydratorInterface;
+use App\Token\Infrastructure\Logger\TokenLoggerInterface;
 use App\Token\Infrastructure\Persistence\Repository\TokenRepository;
 use App\Token\Infrastructure\Persistence\Table\TokenStoreInterface;
 use App\Token\Infrastructure\Persistence\Table\TokenTable;

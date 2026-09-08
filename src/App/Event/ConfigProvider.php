@@ -2,11 +2,11 @@
 
 namespace App\Event;
 
-use App\Event\Api\EventLoggerInterface;
 use App\Event\Domain\Repository\EventRepositoryInterface;
 use App\Event\Infrastructure\Factory\EventLoggerFactory;
 use App\Event\Infrastructure\Hydrator\EventHydrator;
 use App\Event\Infrastructure\Hydrator\EventHydratorInterface;
+use App\Event\Infrastructure\Logger\EventLoggerInterface;
 use App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use App\Event\Infrastructure\Persistence\Table\EventTable;

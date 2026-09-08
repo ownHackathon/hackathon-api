@@ -2,13 +2,13 @@
 
 namespace Tests\Integration\Composition;
 
-use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
+use App\Account\Identity\Infrastructure\Logger\IdentityLoggerInterface;
 use App\Token\Api\Enum\TokenType;
-use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
+use App\Token\Infrastructure\Logger\TokenLoggerInterface;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 
 use function expect;

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\App\Event;
 
-use App\Event\Api\EventLoggerInterface;
 use App\Event\Infrastructure\Factory\EventLoggerFactory;
 use App\Event\Infrastructure\Logger\EventLogger;
+use App\Event\Infrastructure\Logger\EventLoggerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 

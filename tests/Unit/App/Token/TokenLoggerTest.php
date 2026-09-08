@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\App\Token;
 
-use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Factory\TokenLoggerFactory;
 use App\Token\Infrastructure\Logger\TokenLogger;
+use App\Token\Infrastructure\Logger\TokenLoggerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
