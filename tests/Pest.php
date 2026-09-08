@@ -13,11 +13,10 @@ use Tests\TestIntegrationCase;
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
-// 1. APP_ENV Logik: Priorität für GHA (action)
-$appEnv = getenv('APP_ENV') ?: 'testing';
-if ($appEnv !== 'action') {
-    $appEnv = 'testing';
-}
+// 1. APP_ENV Logik: Tests laufen immer gegen die Testing-Konfiguration.
+// In CI erreicht sie die Datenbank über die DB_HOST/DB_PORT-ENV-Variablen
+// (siehe `config/autoload/database.testing.php`).
+$appEnv = 'testing';
 putenv("APP_ENV=$appEnv");
 $_ENV['APP_ENV'] = $appEnv;
 
@@ -26,8 +25,8 @@ if (! array_reduce(
     static fn (bool $hasUnitPath, string $argument): bool => $hasUnitPath || str_contains($argument, 'tests/Unit'),
     false,
 )) {
-    // 1. APP_ENV Logik: Priorität für GHA (action)
-    $appEnv = getenv('APP_ENV') ?: 'testing';
+    // 1. APP_ENV Logik: Tests laufen immer gegen die Testing-Konfiguration.
+    $appEnv = 'testing';
     putenv("APP_ENV=$appEnv");
     $_ENV['APP_ENV'] = $appEnv;
 

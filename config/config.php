@@ -9,7 +9,10 @@ use Laminas\ConfigAggregator\PhpFileProvider;
 // To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
 // `config/autoload/local.php`.
 $cacheConfig = [
-    'config_cache_path' => __DIR__ . '/../data/cache/config-cache.php',
+    // Per-environment cache file so configs of different environments never
+    // overwrite each other (e.g. `action` bootstrap vs. `testing` tests in CI).
+    'config_cache_path' => __DIR__ . '/../data/cache/'
+        . (getenv('APP_ENV') ?: 'production') . '-config-cache.php',
 ];
 
 $aggregator = new ConfigAggregator([

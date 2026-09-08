@@ -3,8 +3,8 @@
 return [
     'database' => [
         'driver' => 'mysql',
-        'host' => 'database-testing',
-        'port' => '3306',
+        'host' => getenv('DB_HOST') ?: 'database-testing',
+        'port' => getenv('DB_PORT') ?: '3306',
         'user' => 'dev',
         'password' => 'dev',
         'dbname' => 'db',

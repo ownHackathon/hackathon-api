@@ -57,12 +57,12 @@ jobs:
           - 3306:3306
         options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
     env:
+      APP_ENV: testing
       DB_DATABASE: db
       DB_USERNAME: dev
       DB_PASSWORD: dev
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
-      APP_ENV: action
     steps:
       - uses: actions/checkout@v6.0.2
 
@@ -72,7 +72,7 @@ jobs:
       - name: Run Tests
         run: ./vendor/bin/pest --configuration=phpunit.xml --compact
         env:
-          APP_ENV: action
+          APP_ENV: testing
           DB_HOST: 127.0.0.1
 
       - name: Notify Failure
