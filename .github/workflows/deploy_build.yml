@@ -114,11 +114,15 @@ jobs:
           passphrase: ${{ secrets.DEPLOY_KEY_PASS }}
           script: rm -rf ${{ secrets.DEPLOY_PATH_API_BUILD }}/data/cache/*
 
-      - name: Deployment Notification
-        if: always()
+      - name: Deployment Successful Notification
+        if: success()
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
-          severity: ${{ job.status == 'success' && 'info' || 'error' }}
+          severity: info
+          color: '#2ecc71'
+          title: Deployment Successful
+          content: |
+            ✅ **Successful deployment to build!**
           description: |
             Event: ${{ github.event_name }}
             Repo: ${{ github.repository }}
@@ -130,8 +134,28 @@ jobs:
             Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
             Commit Message: ${{ github.event.head_commit.message }}
 
-            ${{ job.status == 'success' 
-                && '[🚀 Successful deployment to build!](https://build.ownhackathon.de/api/docs)' 
-                || format('[❌ Deployment failed! View Logs](https://github.com/{0}/actions/runs/{1})', github.repository, github.run_id) 
-            }}
+            [🚀 Open API Docs](https://build.ownhackathon.de/api/docs)
+          webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
+
+      - name: Deployment Failure Notification
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v2.3.0
+        with:
+          severity: error
+          color: '#e74c3c'
+          title: Deployment Failed
+          content: |
+            ❌ **Deployment to build failed!**
+          description: |
+            Event: ${{ github.event_name }}
+            Repo: ${{ github.repository }}
+            Ref: ${{ github.ref }}
+            Workflow: ${{ github.workflow }}
+            Author: ${{ github.event.head_commit.author.username }}
+            Committer: ${{ github.event.head_commit.committer.username }}
+            Pusher: ${{ github.actor }}
+            Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+            Commit Message: ${{ github.event.head_commit.message }}
+          details: |
+            [View Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
