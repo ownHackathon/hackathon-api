@@ -29,6 +29,8 @@ jobs:
         if: failure()
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           details: Static Analysis (Lint/Stan/CS) failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
@@ -74,6 +76,8 @@ jobs:
         if: failure()
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           details: Integration Tests failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
@@ -118,21 +122,21 @@ jobs:
         if: success()
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: info
           color: '#2ecc71'
           title: Deployment Successful
           content: |
             ✅ **Successful deployment to dev!**
           description: |
-            Event: ${{ github.event_name }}
-            Repo: ${{ github.repository }}
-            Ref: ${{ github.ref }}
-            Workflow: ${{ github.workflow }}
-            Author: ${{ github.event.head_commit.author.username }}
-            Committer: ${{ github.event.head_commit.committer.username }}
-            Pusher: ${{ github.actor }}
-            Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
-            Commit Message: ${{ github.event.head_commit.message }}
+            📌 Event: ${{ github.event_name }}
+            📦 Repo: ${{ github.repository }}
+            🌿 Ref: ${{ github.ref }}
+            🔄 Workflow: ${{ github.workflow }}
+            👤 Author: ${{ github.event.head_commit.author.username }} · Committer: ${{ github.event.head_commit.committer.username }} · Pusher: ${{ github.actor }}
+            🔗 Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+            💬 Commit Message: ${{ github.event.head_commit.message }}
 
             [🚀 Open API Docs](https://dev.ownhackathon.de/api/docs)
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
@@ -141,21 +145,21 @@ jobs:
         if: failure()
         uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           color: '#e74c3c'
           title: Deployment Failed
           content: |
             ❌ **Deployment to dev failed!**
           description: |
-            Event: ${{ github.event_name }}
-            Repo: ${{ github.repository }}
-            Ref: ${{ github.ref }}
-            Workflow: ${{ github.workflow }}
-            Author: ${{ github.event.head_commit.author.username }}
-            Committer: ${{ github.event.head_commit.committer.username }}
-            Pusher: ${{ github.actor }}
-            Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
-            Commit Message: ${{ github.event.head_commit.message }}
+            📌 Event: ${{ github.event_name }}
+            📦 Repo: ${{ github.repository }}
+            🌿 Ref: ${{ github.ref }}
+            🔄 Workflow: ${{ github.workflow }}
+            👤 Author: ${{ github.event.head_commit.author.username }} · Committer: ${{ github.event.head_commit.committer.username }} · Pusher: ${{ github.actor }}
+            🔗 Commit URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+            💬 Commit Message: ${{ github.event.head_commit.message }}
           details: |
             [View Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}

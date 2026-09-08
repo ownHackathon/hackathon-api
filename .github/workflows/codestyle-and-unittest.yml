@@ -32,8 +32,10 @@ jobs:
 
       - name: Notify Failure
         if: failure()
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           details: Static Analysis (Lint/Stan/CS) failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
@@ -77,8 +79,10 @@ jobs:
 
       - name: Notify Failure
         if: failure()
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           details: Integration Tests failed.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
@@ -92,16 +96,20 @@ jobs:
     steps:
       - name: Check Info Success
         if: ${{ needs.static-analysis.result == 'success' && needs.tests.result == 'success' }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: info
           details: Checks successfully executed on API.
           webhookUrl: ${{ secrets.WEBHOOK_DISCORD_URL }}
 
       - name: Check Info Failure
         if: ${{ needs.static-analysis.result != 'success' || needs.tests.result != 'success' }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v2.3.0
         with:
+          username: Hackathon CI
+          avatarUrl: https://avatars.githubusercontent.com/u/147101456?s=96&v=4
           severity: error
           details: >-
             ${{ format('❌ Incorrect checks during the API check. [View Logs](https://github.com/{0}/actions/runs/{1})', 
