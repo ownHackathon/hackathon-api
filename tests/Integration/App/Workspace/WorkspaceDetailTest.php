@@ -5,7 +5,7 @@ namespace Tests\Integration\App\Workspace;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use Ramsey\Uuid\Uuid;
 use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
-use Tests\Integration\App\Factory\AccountFactory;
+use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;
 use Tests\Integration\JsonFactory;
 use App\Policy\Domain\Enum\Visibility;

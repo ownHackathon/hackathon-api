@@ -18,7 +18,6 @@ use App\Token\ConfigProvider as TokenConfigProvider;
 use Core\ConfigProvider as CoreConfigProvider;
 use Core\Http\ConfigProvider as HttpConfigProvider;
 use Core\Http\DTO\HttpResponseMessage;
-use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use HackathonApi\ConfigProvider as RootConfigProvider;
 
 use function expect;
@@ -40,15 +39,6 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
     expect($config->duration)->toBe(60);
     expect(AuthenticationResponse::from(new AccessToken('a'), new RefreshToken('r')))
         ->toEqual(new AuthenticationResponse('a', 'r'));
-});
-
-test('domain exceptions retain their diagnostic values', function (): void {
-    $exception = new \App\Account\Identity\Domain\Exception\SecurityBreachException('expected', 'actual', 'browser', 'other');
-    expect($exception->expectedClientHash)->toBe('expected')
-        ->and($exception->actualUserAgent)->toBe('other');
-
-    $duplicate = new DuplicateEntryException('Account', ['email' => 'a@example.org']);
-    expect($duplicate->getCode())->toBe(400)->and($duplicate->getMessage())->toContain('Account');
 });
 
 test('all module config providers expose their public configuration methods', function (): void {

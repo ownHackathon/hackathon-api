@@ -6,7 +6,7 @@ use Envms\FluentPDO\Query;
 use App\Workspace\Infrastructure\Service\SlugService;
 use Faker\Factory as Faker;
 use App\Policy\Domain\Enum\Visibility;
-use Tests\Integration\App\Factory\AccountFactory;
+use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 
 class CreateWorkspacesFactory
 {

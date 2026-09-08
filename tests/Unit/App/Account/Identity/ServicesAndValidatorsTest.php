@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Composition;
+namespace Tests\Unit\App\Account\Identity;
 
 use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
@@ -35,11 +35,6 @@ use function expect;
 use function password_hash;
 use function test;
 
-/**
- * Container-loser Zugriff auf die Laminas-Factory für die Validator-Bausteine.
- * Es werden ausschließlich die fachneutralen Laminas-ConfigProvider geladen, keine
- * App-Services und keine Datenbank. Dadurch bleibt der Test vom App-Container unabhängig.
- */
 function createLaminasFactory(): Factory
 {
     $config = (new ConfigAggregator([

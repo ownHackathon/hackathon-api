@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\App\Account;
+namespace Tests\Unit\App\Account\Identity;
 
 use App\Account\Identity\Api\ActivityLoggerInterface;
 use App\Account\Identity\Domain\Account;

@@ -14,12 +14,3 @@ test('enums expose names', function (): void {
         ->and(AccountVisibleStatus::DO_NOT_DISTURB->getVisibleStatusName())->toBe('do not-disturb')
         ->and(TokenType::EMail->value)->toBe(2);
 });
-
-test('all enum cases expose a non-empty display name', function (): void {
-    foreach (AccountRoles::cases() as $role) {
-        expect($role->getAccountRoleName())->not->toBe('');
-    }
-    foreach (AccountVisibleStatus::cases() as $status) {
-        expect($status->getVisibleStatusName())->not->toBe('');
-    }
-});

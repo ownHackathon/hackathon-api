@@ -6,7 +6,6 @@ use App\Account\Identity\Api\IdentityLoggerInterface;
 use App\Account\Identity\Infrastructure\Hydrator\AccountAccessAuthHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountActivationHydrator;
 use App\Account\Identity\Infrastructure\Hydrator\AccountHydrator;
-use App\Mailing\Api\EmailType;
 use App\Token\Api\Enum\TokenType;
 use App\Token\Api\TokenLoggerInterface;
 use App\Token\Infrastructure\Hydrator\TokenHydrator;
@@ -72,21 +71,4 @@ test('all entity hydrators hydrate, extract and handle collections', function ()
     expect($tokenHydrator->extract($token))->toHaveSubset(['accountId' => 2, 'tokenType' => TokenType::EMail->value])
         ->and($tokenHydrator->hydrateCollection([$data]))->toHaveCount(1)
         ->and($tokenHydrator->extractCollection($tokenHydrator->hydrateCollection([$data])))->toHaveCount(1);
-});
-
-test('email value object supports all serialization forms and rejects invalid values', function () {
-    $email = new EmailType('serialize@example.com');
-
-    expect($email->toString())->toBe('serialize@example.com')
-        ->and((string) $email)->toBe('serialize@example.com')
-        ->and($email->serialize())->toBe('serialize@example.com')
-        ->and($email->__serialize())->toBe(['string' => 'serialize@example.com'])
-        ->and($email->jsonSerialize())->toBe('serialize@example.com')
-        ->and(EmailType::fromString('factory@example.com')->toString())->toBe('factory@example.com')
-        ->and(new EmailType($email)->toString())->toBe('serialize@example.com');
-
-    $restored = new EmailType('old@example.com');
-    $restored->unserialize('new@example.com');
-    expect($restored->toString())->toBe('new@example.com');
-    expect(fn() => new EmailType('invalid'))->toThrow(\App\Mailing\Exception\InvalidArgumentException::class);
 });

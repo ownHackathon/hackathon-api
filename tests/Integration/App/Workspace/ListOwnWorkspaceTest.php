@@ -51,7 +51,7 @@ test('an invalid or refresh token cannot list workspaces', function (string $tok
 
 test('the list only contains workspaces of the authenticated account', function () {
     $account = $this->createAndLoginUser();
-    $otherAccount = \Tests\Integration\App\Factory\AccountFactory::create();
+    $otherAccount = \Tests\Integration\App\Account\Identity\Factory\AccountFactory::create();
     $ownWorkspace = CreateWorkspacesFactory::create(['accountId' => $account['id']]);
     CreateWorkspacesFactory::create(['accountId' => $otherAccount['id']]);
 
