@@ -2,12 +2,11 @@
 
 namespace Tests\Unit\App\Policy;
 
+use App\Account\Identity\Api\DTO\Account\AccountProfile;
+use App\Policy\Api\Enum\Visibility;
+use App\Policy\Api\VisibilityAwareInterface;
+use App\Policy\Application\VisibilityPolicy;
 use DateTimeImmutable;
-use App\Account\Identity\Domain\Account;
-use App\Mailing\Api\EmailType;
-use App\Policy\Domain\Enum\Visibility;
-use App\Policy\Domain\VisibilityAwareInterface;
-use App\Policy\Domain\VisibilityPolicy;
 use Ramsey\Uuid\Uuid;
 
 use function expect;
@@ -29,16 +28,12 @@ readonly class StubVisibilityElement implements VisibilityAwareInterface
 
 class VisibilityStubAccountBuilder
 {
-    public static function build(?int $id): Account
+    public static function build(?int $id): AccountProfile
     {
-        return new Account(
+        return new AccountProfile(
             $id,
             Uuid::uuid4(),
             'Alice',
-            'hash',
-            new EmailType('alice@example.com'),
-            new DateTimeImmutable(),
-            null,
         );
     }
 }

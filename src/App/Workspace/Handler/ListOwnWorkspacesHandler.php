@@ -2,7 +2,7 @@
 
 namespace App\Workspace\Handler;
 
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\AccountProfileInterface;
 use App\Workspace\DTO\PaginationMeta;
 use App\Workspace\DTO\WorkspaceResponse;
 use App\Workspace\Infrastructure\Persistence\Repository\WorkspaceRepository;
@@ -83,10 +83,10 @@ readonly final class ListOwnWorkspacesHandler implements RequestHandlerInterface
     #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        $account = $request->getAttribute(AccountProfileInterface::AUTHENTICATED);
         $pagination = $request->getAttribute(Pagination::class);
 
-        assert($account instanceof AccountInterface);
+        assert($account instanceof AccountProfileInterface);
         assert($pagination instanceof Pagination);
 
         $metaData = $this->service->getMetaDataByAccountId($pagination, $account->id);

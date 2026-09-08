@@ -2,10 +2,10 @@
 
 namespace App\Workspace\Handler;
 
-use App\Account\Identity\Domain\AccountInterface;
-use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Policy\Domain\Enum\Visibility;
-use App\Policy\Domain\VisibilityPolicyInterface;
+use App\Account\Identity\Api\AccountProfileInterface;
+use App\Account\Identity\Api\AccountReaderInterface;
+use App\Policy\Api\Enum\Visibility;
+use App\Policy\Api\VisibilityPolicyInterface;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\DTO\Workspace;
 use Core\Clock\DateTimeFormat;
@@ -21,7 +21,7 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
 {
     public function __construct(
         private WorkspaceRepositoryInterface $workspaceRepository,
-        private AccountRepositoryInterface $accountRepository,
+        private AccountReaderInterface $accountReader,
         private VisibilityPolicyInterface $visibilityPolicy,
     ) {
     }
@@ -109,7 +109,7 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $slug = $request->getAttribute('slug');
-        $user = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        $user = $request->getAttribute(AccountProfileInterface::AUTHENTICATED);
 
         try {
             $workspace = $this->workspaceRepository->findOneBySlug($slug);
@@ -128,7 +128,7 @@ readonly final class WorkspaceHandler implements RequestHandlerInterface
         // Options to investigate: soft-delete ownership, block account deletion while referenced,
         // or expose a placeholder owner (e.g. "Deleted account").
         try {
-            $account = $this->accountRepository->findOneById($workspace->accountId);
+            $account = $this->accountReader->findOneById($workspace->accountId);
         } catch (EmptyResultException) {
             return new JsonResponse([
                 'statusCode' => Http::STATUS_NOT_FOUND,

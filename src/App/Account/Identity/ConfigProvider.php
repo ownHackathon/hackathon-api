@@ -2,6 +2,9 @@
 
 namespace App\Account\Identity;
 
+use App\Account\Identity\Api\AccountReaderInterface;
+use App\Account\Identity\Api\RequireAuthenticatedAccountMiddlewareInterface;
+use App\Account\Identity\Application\AccountReader;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
@@ -201,6 +204,8 @@ readonly class ConfigProvider
                 AccountStoreInterface::class => AccountTable::class,
                 AccountAccessAuthStoreInterface::class => AccountAccessAuthTable::class,
                 AccountActivationStoreInterface::class => AccountActivationTable::class,
+                AccountReaderInterface::class => AccountReader::class,
+                RequireAuthenticatedAccountMiddlewareInterface::class => RequireLoginMiddleware::class,
             ],
             'invokables' => [
             ],
@@ -258,6 +263,7 @@ readonly class ConfigProvider
                 AccountPasswordHandler::class => ConfigAbstractFactory::class,
                 LogoutHandler::class => ConfigAbstractFactory::class,
                 AccountResolver::class => InvokableFactory::class,
+                AccountReader::class => ConfigAbstractFactory::class,
                 RequireLoginMiddleware::class => ConfigAbstractFactory::class,
             ],
 
@@ -419,6 +425,9 @@ readonly class ConfigProvider
             LogoutHandler::class => [
                 AccountService::class,
                 AccountResolver::class,
+            ],
+            AccountReader::class => [
+                AccountRepositoryInterface::class,
             ],
             RequireLoginMiddleware::class => [
                 AccountResolver::class,

@@ -2,9 +2,9 @@
 
 namespace App\Workspace;
 
-use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
-use App\Account\Identity\Middleware\RequireLoginMiddleware;
-use App\Policy\Domain\VisibilityPolicyInterface;
+use App\Account\Identity\Api\AccountReaderInterface;
+use App\Account\Identity\Api\RequireAuthenticatedAccountMiddlewareInterface;
+use App\Policy\Api\VisibilityPolicyInterface;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\Handler\ListOwnWorkspacesHandler;
 use App\Workspace\Handler\WorkspaceCreateHandler;
@@ -50,7 +50,7 @@ class ConfigProvider
                 'path' => '/api/workspace[/]',
                 'allowed_methods' => ['POST'],
                 'middleware' => [
-                    RequireLoginMiddleware::class,
+                    RequireAuthenticatedAccountMiddlewareInterface::class,
                     WorkspaceCreateValidatorMiddleware::class,
                     FluentTransactionMiddleware::class,
                     WorkspaceCreateHandler::class,
@@ -61,7 +61,7 @@ class ConfigProvider
                 'path' => '/api/me/workspaces[/]',
                 'allowed_methods' => ['GET'],
                 'middleware' => [
-                    RequireLoginMiddleware::class,
+                    RequireAuthenticatedAccountMiddlewareInterface::class,
                     PaginationMiddleware::class,
                     ListOwnWorkspacesHandler::class,
                 ],
@@ -143,7 +143,7 @@ class ConfigProvider
             ],
             WorkspaceHandler::class => [
                 WorkspaceRepositoryInterface::class,
-                AccountRepositoryInterface::class,
+                AccountReaderInterface::class,
                 VisibilityPolicyInterface::class,
             ]
         ];

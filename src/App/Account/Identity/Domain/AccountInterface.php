@@ -9,8 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 
 interface AccountInterface
 {
-    public const string AUTHENTICATED = 'account.authenticated.class';
-
     public ?int $id { get; }
 
     public UuidInterface $uuid { get; }

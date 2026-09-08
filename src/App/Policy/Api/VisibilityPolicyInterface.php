@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Policy\Domain;
+namespace App\Policy\Api;
 
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\AccountProfileInterface;
 
 interface VisibilityPolicyInterface
 {
     public function isAvailableFor(
         VisibilityAwareInterface $element,
-        ?AccountInterface $account,
+        ?AccountProfileInterface $account,
     ): bool;
 }

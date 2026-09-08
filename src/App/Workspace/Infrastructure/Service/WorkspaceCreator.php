@@ -2,8 +2,8 @@
 
 namespace App\Workspace\Infrastructure\Service;
 
-use App\Account\Identity\Domain\AccountInterface;
-use App\Policy\Domain\Enum\Visibility;
+use App\Account\Identity\Api\AccountProfileInterface;
+use App\Policy\Api\Enum\Visibility;
 use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use App\Workspace\Domain\Repository\WorkspaceRepositoryInterface;
 use App\Workspace\Domain\Workspace;
@@ -23,7 +23,7 @@ readonly final class WorkspaceCreator implements WorkspaceCreatorInterface
     }
 
     #[\Override]
-    public function create(WorkspaceRequest $workspace, AccountInterface $owner): Workspace
+    public function create(WorkspaceRequest $workspace, AccountProfileInterface $owner): Workspace
     {
         $slug = $this->slugService->getSlugFromString($workspace->name);
 

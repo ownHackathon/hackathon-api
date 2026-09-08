@@ -2,7 +2,7 @@
 
 namespace App\Workspace\Handler;
 
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\AccountProfileInterface;
 use App\Workspace\Domain\Exception\WorkspaceNameAlreadyExistsException;
 use App\Workspace\Domain\Message\WorkspaceLogMessage;
 use App\Workspace\Domain\Message\WorkspaceStatusMessage;
@@ -64,10 +64,10 @@ readonly final class WorkspaceCreateHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $workspace = $request->getAttribute(WorkspaceRequest::class);
-        $account = $request->getAttribute(AccountInterface::AUTHENTICATED);
+        $account = $request->getAttribute(AccountProfileInterface::AUTHENTICATED);
 
         assert($workspace instanceof WorkspaceRequest);
-        assert($account instanceof AccountInterface);
+        assert($account instanceof AccountProfileInterface);
 
         try {
             $workspace = $this->workspaceCreator->create($workspace, $account);

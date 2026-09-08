@@ -2,7 +2,7 @@
 
 namespace App\Workspace\Infrastructure\Validator;
 
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Laminas\InputFilter\Factory;
 use Laminas\InputFilter\Input;
 use Laminas\InputFilter\InputFilter;

@@ -2,8 +2,8 @@
 
 namespace App\Workspace\Domain;
 
-use App\Policy\Domain\Enum\Visibility;
-use App\Policy\Domain\VisibilityAwareInterface;
+use App\Policy\Api\Enum\Visibility;
+use App\Policy\Api\VisibilityAwareInterface;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 

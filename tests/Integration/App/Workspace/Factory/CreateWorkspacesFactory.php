@@ -5,7 +5,7 @@ namespace Tests\Integration\App\Workspace\Factory;
 use Envms\FluentPDO\Query;
 use Core\SharedKernel\Utils\SlugService;
 use Faker\Factory as Faker;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 
 class CreateWorkspacesFactory

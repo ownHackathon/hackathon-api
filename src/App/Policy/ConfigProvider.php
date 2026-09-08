@@ -2,9 +2,9 @@
 
 namespace App\Policy;
 
+use App\Policy\Application\VisibilityPolicy;
+use App\Policy\Api\VisibilityPolicyInterface;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use App\Policy\Domain\VisibilityPolicy;
-use App\Policy\Domain\VisibilityPolicyInterface;
 
 class ConfigProvider
 {

@@ -2,7 +2,7 @@
 
 namespace App\Workspace\DTO;
 
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
 

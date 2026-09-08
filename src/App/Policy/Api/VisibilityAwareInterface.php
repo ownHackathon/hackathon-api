@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Policy\Domain;
+namespace App\Policy\Api;
 
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 
 interface VisibilityAwareInterface
 {

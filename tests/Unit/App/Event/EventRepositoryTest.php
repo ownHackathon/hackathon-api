@@ -9,7 +9,7 @@ use App\Event\Infrastructure\Hydrator\EventHydratorInterface;
 use App\Event\Infrastructure\Persistence\Repository\EventRepository;
 use App\Event\Infrastructure\Persistence\Table\EventStoreInterface;
 use App\Event\Domain\Enum\EventStatus;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
 use Ramsey\Uuid\Uuid;
 

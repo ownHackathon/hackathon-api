@@ -2,7 +2,7 @@
 
 namespace App\Workspace\DTO;
 
-use App\Account\Identity\Domain\AccountInterface;
+use App\Account\Identity\Api\AccountProfileInterface;
 use App\Workspace\Domain\WorkspaceInterface;
 use Core\Serialization\DataType;
 use OpenApi\Attributes as OA;
@@ -48,7 +48,7 @@ readonly final class WorkspaceResponse
     ) {
     }
 
-    public static function fromEntity(WorkspaceInterface $workspace, AccountInterface $account): self
+    public static function fromEntity(WorkspaceInterface $workspace, AccountProfileInterface $account): self
     {
         return new self(
             uuid: $workspace->uuid->toString(),

@@ -9,7 +9,7 @@ use App\Event\Domain\EventCollectionInterface;
 use App\Event\Domain\EventInterface;
 use App\Event\Domain\Message\EventLogMessage;
 use App\Event\Infrastructure\Logger\EventLoggerInterface;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Core\Clock\DateTimeFormat;
 use Core\SharedKernel\Utils\UuidFactoryInterface;
 use DateTimeImmutable;

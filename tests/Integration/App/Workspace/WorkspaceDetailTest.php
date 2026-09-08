@@ -8,7 +8,7 @@ use App\Account\Identity\Infrastructure\Service\Token\AccessTokenService;
 use Tests\Integration\App\Account\Identity\Factory\AccountFactory;
 use Tests\Integration\App\Workspace\Factory\CreateWorkspacesFactory;
 use Tests\Integration\JsonFactory;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 
 use function array_keys;
 use function expect;

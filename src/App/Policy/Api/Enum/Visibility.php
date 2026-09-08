@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Policy\Domain\Enum;
+namespace App\Policy\Api\Enum;
 
 enum Visibility: int
 {

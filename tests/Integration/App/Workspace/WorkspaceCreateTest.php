@@ -7,7 +7,7 @@ use Faker\Factory as Faker;
 use Fig\Http\Message\StatusCodeInterface as Http;
 use PDO;
 use Tests\Integration\JsonFactory;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 
 use function expect;
 

@@ -3,7 +3,7 @@
 namespace App\Event\Domain;
 
 use App\Event\Domain\Enum\EventStatus;
-use App\Policy\Domain\Enum\Visibility;
+use App\Policy\Api\Enum\Visibility;
 use Core\SharedKernel\Trait\CloneReadonlyClassWith;
 use Core\SharedKernel\Utils\Collectible;
 use DateTimeImmutable;

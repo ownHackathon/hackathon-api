@@ -2,6 +2,8 @@
 
 namespace App\Account\Identity\Middleware\Account;
 
+use App\Account\Identity\Api\AccountProfileInterface;
+use App\Account\Identity\Api\DTO\Account\AccountProfile;
 use App\Account\Identity\Domain\AccountInterface;
 use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
@@ -47,6 +49,12 @@ readonly final class LastActivityUpdaterMiddleware implements MiddlewareInterfac
             );
         }
 
-        return $handler->handle($request->withAttribute(AccountInterface::AUTHENTICATED, $account));
+        $profile = new AccountProfile(
+            id: $account->id,
+            uuid: $account->uuid,
+            name: $account->name,
+        );
+
+        return $handler->handle($request->withAttribute(AccountProfileInterface::AUTHENTICATED, $profile));
     }
 }
