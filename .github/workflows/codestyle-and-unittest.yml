@@ -30,6 +30,9 @@ jobs:
       - name: Run PHP Codesniffer
         run: composer run-script phpcs
 
+      - name: Run PHP Deptrac
+        run: composer run-script deptrac
+
       - name: Notify Failure
         if: failure()
         uses: rjstone/discord-webhook-notify@v2.3.0
