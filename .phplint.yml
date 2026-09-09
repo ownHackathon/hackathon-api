@@ -5,5 +5,8 @@ extensions:
   - php
 exclude:
   - vendor
+  - .phpunit.cache
+  - .phpunit.functional.cache
 warning: true
 memory_limit: -1
+noscripts: true
