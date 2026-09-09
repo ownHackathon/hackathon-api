@@ -13,8 +13,8 @@ use App\Account\Identity\Domain\Exception\SecurityBreachException;
 use App\Account\Identity\Domain\Repository\AccountAccessAuthRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Token\Api\DTO\JwtTokenConfig;
-use App\Token\Infrastructure\Trait\JwtTokenTrait;
 use Core\SharedKernel\Domain\Exception\EmptyResultException;
+use Core\SharedKernel\Trait\JwtTokenTrait;
 use Firebase\JWT\JWT;
 
 use function time;

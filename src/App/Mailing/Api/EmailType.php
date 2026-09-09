@@ -2,7 +2,7 @@
 
 namespace App\Mailing\Api;
 
-use App\Mailing\Exception\InvalidArgumentException;
+use App\Mailing\Api\Exception\InvalidArgumentException;
 use Core\SharedKernel\Type\TypeInterface;
 use Override;
 

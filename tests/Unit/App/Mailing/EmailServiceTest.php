@@ -3,7 +3,7 @@
 namespace Tests\Unit\App\Mailing;
 
 use App\Mailing\Api\EmailType;
-use App\Mailing\Exception\InvalidArgumentException;
+use App\Mailing\Api\Exception\InvalidArgumentException;
 use App\Mailing\Infrastructure\Factory\EmailServiceFactory;
 use App\Mailing\Infrastructure\Factory\MailFactory;
 use App\Mailing\Infrastructure\Service\EmailService;

@@ -17,7 +17,7 @@ readonly final class RefreshTokenServiceFactory
 
         /** @var array{jwt_token: array{refresh: array{iss: string, aud: string, duration: int, algorithmus: string, key: string}}} $config */
         $config = $container->get('config');
-        $jwtTokenConfig = JwtTokenConfig::createFromArray($config['jwt_token']['refresh']);
+        $jwtTokenConfig = JwtTokenConfig::fromArray($config['jwt_token']['refresh']);
 
         return new RefreshTokenService(
             $accountRepository,

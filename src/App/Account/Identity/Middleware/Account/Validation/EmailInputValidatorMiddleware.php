@@ -6,7 +6,7 @@ use App\Account\Identity\Domain\Message\IdentityLogMessage;
 use App\Account\Identity\Domain\Message\IdentityStatusMessage;
 use App\Account\Identity\Infrastructure\Validator\EMailValidator;
 use App\Mailing\Api\EmailType;
-use App\Mailing\Exception\InvalidArgumentException;
+use App\Mailing\Api\Exception\InvalidArgumentException;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

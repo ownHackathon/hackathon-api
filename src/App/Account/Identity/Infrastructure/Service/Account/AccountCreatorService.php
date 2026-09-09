@@ -11,6 +11,7 @@ use App\Account\Identity\Domain\Repository\AccountActivationRepositoryInterface;
 use App\Account\Identity\Domain\Repository\AccountRepositoryInterface;
 use App\Account\Identity\Infrastructure\Logger\ActivityLoggerInterface;
 use App\Account\Identity\Infrastructure\Provider\EmailHashSaltProviderInterface;
+use Core\Clock\DateTimeFormat;
 use Core\Http\Exception\HttpDuplicateEntryException;
 use Core\Http\Exception\HttpInvalidArgumentException;
 use Core\Observability\EmailHasher;
@@ -101,6 +102,12 @@ readonly final class AccountCreatorService
             ],
         );
 
-        return AccountDTO::createFromAccount($account);
+        return AccountDTO::fromArray([
+            'uuid' => $account->uuid->toString(),
+            'name' => $account->name,
+            'email' => $account->email->toString(),
+            'registeredAt' => $account->registeredAt->format(DateTimeFormat::DEFAULT->value),
+            'lastActionAt' => $account->lastActionAt->format(DateTimeFormat::DEFAULT->value),
+        ]);
     }
 }

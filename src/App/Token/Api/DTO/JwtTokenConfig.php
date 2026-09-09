@@ -15,10 +15,7 @@ readonly final class JwtTokenConfig
     ) {
     }
 
-    /**
-     * @param array{iss: string, aud: string, duration: int|string, algorithmus: string, key: string} $config
-     */
-    public static function createFromArray(
+    public static function fromArray(
         #[ArrayShape([
             'iss' => 'string',
             'aud' => 'string',
@@ -29,11 +26,11 @@ readonly final class JwtTokenConfig
         array $config,
     ): self {
         return new self(
-            $config['iss'],
-            $config['aud'],
-            (int)$config['duration'],
-            $config['algorithmus'],
-            $config['key'],
+            iss: $config['iss'],
+            aud: $config['aud'],
+            duration: (int)$config['duration'],
+            algorithmus: $config['algorithmus'],
+            key: $config['key'],
         );
     }
 }

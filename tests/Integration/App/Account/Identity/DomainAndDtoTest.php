@@ -2,11 +2,12 @@
 
 namespace Tests\Integration\App\Account\Identity;
 
+use App\Account\Identity\Api\DTO\Account\Account;
 use App\Account\Identity\Api\DTO\Account\AccountPassword;
 use App\Account\Identity\Api\DTO\Account\AccountRegistration;
 use App\Account\Identity\Api\DTO\Account\ApiMe;
 use App\Account\Identity\Api\DTO\Token\AccountPasswordToken;
-use App\Account\Identity\Domain\Account;
+use App\Account\Identity\Domain\Account as DomainAccount;
 use App\Mailing\Api\EmailType;
 use Core\SharedKernel\Domain\Exception\UndefinedOffsetException;
 use DateTimeImmutable;
@@ -15,9 +16,9 @@ use Ramsey\Uuid\Uuid;
 use function expect;
 use function test;
 
-function accountFixture(): Account
+function accountFixture(): DomainAccount
 {
-    return new Account(
+    return new DomainAccount(
         id: 1,
         uuid: Uuid::uuid4(),
         name: 'Test User',
@@ -35,7 +36,13 @@ test('DTO factories create their expected values', function () {
         ->and(AccountPasswordToken::fromString('token')->accountPasswordToken)->toBe('token')
         ->and(AccountRegistration::fromString('User', 'secret'))
         ->toMatchObject(['accountName' => 'User', 'password' => 'secret'])
-        ->and(new ApiMe($account, true))->toMatchObject(['account' => $account, 'hasWorkspace' => true]);
+        ->and(new ApiMe(new Account(
+            uuid: $account->uuid->toString(),
+            name: $account->name,
+            email: $account->email->toString(),
+            registeredAt: $account->registeredAt->format('Y-m-d H:i:s'),
+            lastActionAt: $account->lastActionAt->format('Y-m-d H:i:s'),
+        ), true))->toMatchObject(['hasWorkspace' => true]);
 });
 
 test('collection iterator, filtering and missing offsets work', function () {
@@ -47,7 +54,7 @@ test('collection iterator, filtering and missing offsets work', function () {
 
     expect($collection->offsetExists(0))->toBeTrue()
         ->and($collection[0])->toBe($first)
-        ->and($collection->filter(static fn(Account $account): bool => $account === $second))
+        ->and($collection->filter(static fn(DomainAccount $account): bool => $account === $second))
         ->toHaveCount(1);
 
     $collection->rewind();

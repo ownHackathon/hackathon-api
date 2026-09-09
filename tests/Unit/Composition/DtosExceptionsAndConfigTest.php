@@ -33,7 +33,7 @@ test('token, account, mailing and HTTP DTO factories map all values', function (
         ->and(RawTokenDto::fromString(null)->token)->toBeNull()
         ->and(HttpResponseMessage::create(201, 'created'))->toEqual(new HttpResponseMessage(201, 'created'));
 
-    $config = JwtTokenConfig::createFromArray([
+    $config = JwtTokenConfig::fromArray([
         'iss' => 'issuer', 'aud' => 'audience', 'duration' => '60', 'algorithmus' => 'HS256', 'key' => 'secret',
     ]);
     expect($config->duration)->toBe(60);

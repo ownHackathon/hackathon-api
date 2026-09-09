@@ -4,7 +4,7 @@ namespace App\Account\Identity\Infrastructure\Service\Token;
 
 use App\Account\Identity\Api\DTO\Token\AccessToken;
 use App\Token\Api\DTO\JwtTokenConfig;
-use App\Token\Infrastructure\Trait\JwtTokenTrait;
+use Core\SharedKernel\Trait\JwtTokenTrait;
 use Firebase\JWT\JWT;
 use Ramsey\Uuid\UuidInterface;
 

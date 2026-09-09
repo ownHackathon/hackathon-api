@@ -2,9 +2,8 @@
 
 namespace App\Account\Identity\Api\DTO\Account;
 
-use App\Account\Identity\Domain\AccountInterface;
-use Core\Clock\DateTimeFormat;
 use Core\Serialization\DataType;
+use JetBrains\PhpStorm\ArrayShape;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
@@ -48,14 +47,22 @@ readonly final class Account
     ) {
     }
 
-    public static function createFromAccount(AccountInterface $account): self
-    {
+    public static function fromArray(
+        #[ArrayShape([
+            'uuid' => 'string',
+            'name' => 'string',
+            'email' => 'string',
+            'registeredAt' => 'string',
+            'lastActionAt' => 'string',
+        ])]
+        array $data,
+    ): self {
         return new self(
-            uuid: $account->uuid->toString(),
-            name: $account->name,
-            email: $account->email->toString(),
-            registeredAt: $account->registeredAt->format(DateTimeFormat::DEFAULT->value),
-            lastActionAt: $account->lastActionAt->format(DateTimeFormat::DEFAULT->value),
+            uuid: $data['uuid'] ?? '',
+            name: $data['name'] ?? '',
+            email: $data['email'] ?? '',
+            registeredAt: $data['registeredAt'] ?? '',
+            lastActionAt: $data['lastActionAt'] ?? '',
         );
     }
 }

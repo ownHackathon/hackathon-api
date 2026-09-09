@@ -13,7 +13,7 @@ test('email type supports factories and serialization', function (): void {
         ->and($email->__serialize())->toBe(['string' => 'person@example.org'])
         ->and($email->jsonSerialize())->toBe('person@example.org')
         ->and(fn (): EmailType => new EmailType('not-an-email'))
-        ->toThrow(\App\Mailing\Exception\InvalidArgumentException::class);
+        ->toThrow(\App\Mailing\Api\Exception\InvalidArgumentException::class);
 });
 
 test('email value object supports all serialization forms and rejects invalid values', function (): void {
@@ -30,5 +30,5 @@ test('email value object supports all serialization forms and rejects invalid va
     $restored = new EmailType('old@example.com');
     $restored->unserialize('new@example.com');
     expect($restored->toString())->toBe('new@example.com');
-    expect(fn() => new EmailType('invalid'))->toThrow(\App\Mailing\Exception\InvalidArgumentException::class);
+    expect(fn() => new EmailType('invalid'))->toThrow(\App\Mailing\Api\Exception\InvalidArgumentException::class);
 });

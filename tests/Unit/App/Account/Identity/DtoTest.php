@@ -6,6 +6,7 @@ use App\Account\Identity\Api\DTO\Account\Account as AccountDto;
 use App\Account\Identity\Api\DTO\Account\AccountRegistration;
 use App\Account\Identity\Api\DTO\Client\ClientIdentificationData;
 use App\Mailing\Api\EmailType;
+use Core\Clock\DateTimeFormat;
 use Core\SharedKernel\Domain\Exception\DuplicateEntryException;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
@@ -31,7 +32,13 @@ test('account DTO formats domain dates', function (): void {
         registeredAt: new DateTimeImmutable('2024-01-02 03:04:05'),
         lastActionAt: new DateTimeImmutable('2024-01-03 04:05:06'),
     );
-    $dto = AccountDto::createFromAccount($account);
+    $dto = AccountDTO::fromArray([
+        'uuid' => $account->uuid->toString(),
+        'name' => $account->name,
+        'email' => $account->email->toString(),
+        'registeredAt' => $account->registeredAt->format(DateTimeFormat::DEFAULT->value),
+        'lastActionAt' => $account->lastActionAt->format(DateTimeFormat::DEFAULT->value),
+    ]);
     expect($dto->registeredAt)->toBe('2024-01-02 03:04:05')->and($dto->email)->toBe('alice@example.com');
 });
 

@@ -25,8 +25,8 @@ readonly final class AuthenticationRequest
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['email'] ?? '',
-            $data['password'] ?? '',
+            email: $data['email'] ?? '',
+            password: $data['password'] ?? '',
         );
     }
 }

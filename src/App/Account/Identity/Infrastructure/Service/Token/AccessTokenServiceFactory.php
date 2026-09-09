@@ -12,7 +12,7 @@ readonly final class AccessTokenServiceFactory
         /** @var array{jwt_token: array{access: array{iss: string, aud: string, duration: int, algorithmus: string, key: string}}} $config */
         $config = $container->get('config');
 
-        $jwtTokenConfig = JwtTokenConfig::createFromArray($config['jwt_token']['access']);
+        $jwtTokenConfig = JwtTokenConfig::fromArray($config['jwt_token']['access']);
 
         return new AccessTokenService($jwtTokenConfig);
     }
