@@ -3,6 +3,7 @@
 namespace App\Account\Identity\Api\DTO\Account;
 
 use Core\Serialization\DataType;
+use JetBrains\PhpStorm\ArrayShape;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(required: ['email', 'password'])]
@@ -22,8 +23,13 @@ readonly final class AuthenticationRequest
     ) {
     }
 
-    public static function fromArray(array $data): self
-    {
+    public static function fromArray(
+        #[ArrayShape([
+            'email' => 'string',
+            'password' => 'string',
+        ])]
+        array $data,
+    ): self {
         return new self(
             email: $data['email'] ?? '',
             password: $data['password'] ?? '',
